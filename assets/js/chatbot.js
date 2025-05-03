@@ -1,0 +1,1 @@
+// chatbot.js - placeholder JS
