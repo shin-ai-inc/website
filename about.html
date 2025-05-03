@@ -1,12 +1,706 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- 
+    ==============================================
+    // === component-split: MetaInformation ===
+    COMPONENT: Meta Information & SEO
+    ==============================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <meta name="description" content="ShinAI - 「真の価値を信じ、次世代のために新たな未来を創る」企業理念のもと、7つの「Shin」精神でAI技術を通じた課題解決に取り組むAIソリューション企業です。">
+    <meta name="keywords" content="ShinAI, 会社概要, AI企業, 企業理念, 7つの精神, AI導入, 技術革新, 社会貢献">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ShinAI">
+    <meta name="theme-color" content="#8e33ff">
+    <meta name="msapplication-TileColor" content="#8e33ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ShinAI_JP">
+    <meta name="ps:topic" content="企業理念, AI技術革新, 社会実装, 未来創造">
+    
+    <!-- 
+    ==============================================
+    // === component-split: OGPSettings ===
+    COMPONENT: OGP設定
+    ==============================================
+    -->
+    <meta property="og:title" content="会社紹介 | ShinAI - 真の価値を追求するAI企業">
+    <meta property="og:description" content="ShinAI - 「真の価値を信じ、次世代のために新たな未来を創る」企業理念のもと、7つの「Shin」精神でAI技術を通じた課題解決に取り組むAIソリューション企業です。">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=630">
+    <meta property="og:url" content="https://www.shinai.tech/about">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ShinAI">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ShinAI - チームワークを象徴する画像">
+    
+    <!-- 
+    ==============================================
+    // === component-split: ExternalResources ===
+    COMPONENT: Fonts & External Resources
+    ==============================================
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- 
+    ==============================================
+    // === component-split: StructuredData ===
+    COMPONENT: JSON-LD 構造化データ
+    ==============================================
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.shinai.tech/about"
+      },
+      "headline": "ShinAIの会社紹介",
+      "description": "「真の価値を信じ、次世代のために新たな未来を創る」企業理念のもと、7つの「Shin」精神でAI技術を通じた課題解決に取り組むAIソリューション企業です。",
+      "image": "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=630",
+      "author": {
+        "@type": "Organization",
+        "name": "ShinAI",
+        "url": "https://www.shinai.tech"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ShinAI",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.shinai.tech/assets/images/logo.svg"
+        }
+      },
+      "datePublished": "2025-03-01",
+      "dateModified": "2025-05-01"
+    }
+    </script>
+    
+    <title>会社紹介 | ShinAI - 真の価値を追求するAI企業</title>
+    
+    <!-- スタイルシート -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="apple-touch-icon" href="assets/images/logo.svg">
 </head>
 <body>
-    <h1>About Page</h1>
+    <!-- 
+    ==============================================
+    // === component-split: AccessibilityNav ===
+    COMPONENT: アクセシビリティ向上：スキップナビゲーション
+    ==============================================
+    -->
+    <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
+
+    <!-- 
+    ==============================================
+    // === component-split: TopBanner ===
+    COMPONENT: トップバナー
+    ==============================================
+    -->
+    <div class="top-banner"></div>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Header ===
+    COMPONENT: ヘッダー
+    ==============================================
+    -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
+                    <img src="assets/images/logo.svg" alt="" aria-hidden="true" width="40" height="40">
+                    <span class="en-text">ShinAI</span>
+                </a>
+                
+                <nav aria-label="メインナビゲーション">
+                    <ul class="nav" id="nav">
+                        <li><a href="index.html" class="nav-link">ホーム</a></li>
+                        <li><a href="about.html" class="nav-link active" aria-current="page">会社紹介</a></li>
+                        <li><a href="services.html" class="nav-link">サービス</a></li>
+                        <li><a href="industries.html" class="nav-link">業界別活用</a></li>
+                        <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
+                        <li class="nav-cta"><a href="contact.html" class="btn btn-primary">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+                    </ul>
+                </nav>
+                
+                <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 
+    ==============================================
+    // === component-split: PageHeader ===
+    COMPONENT: ページヘッダー
+    ==============================================
+    -->
+    <div class="page-header">
+        <div class="container">
+            <div class="page-header-inner">
+                <div class="breadcrumb" aria-label="パンくずリスト">
+                    <a href="index.html" class="breadcrumb-item">ホーム</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">会社紹介</span>
+                </div>
+                <h1>ShinAIの会社紹介</h1>
+            </div>
+        </div>
+    </div>
+    
+    <main id="main-content">
+        <!-- 
+        ==============================================
+        // === component-split: CompanySection ===
+        COMPONENT: 会社概要セクション
+        ==============================================
+        -->
+        <section class="section" id="company-info">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">企業情報</span>
+                    <h2 class="heading-lg">ShinAIの<span class="highlight">由来</span>と企業理念</h2>
+                    <p class="section-description">真の価値を信じ、次世代のために新たな未来を創る</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div class="glow-border" style="position: relative; overflow: hidden; border-radius: 16px; box-shadow: var(--shadow-lg); height: 400px;">
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900" 
+                            alt="チームワークを象徴する画像" 
+                            style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); transition: transform 0.7s ease;"
+                            width="1200"
+                            height="900">
+                    </div>
+                    <div>
+                        <div class="glass-card" style="background: rgba(142, 51, 255, 0.05); padding: 1.8rem; border-radius: 16px; margin-bottom: 1.8rem; border-left: 4px solid var(--purple-main); position: relative; overflow: hidden;">
+                            <p style="font-size: 1.2rem; font-style: italic; position: relative; z-index: 2; line-height: 1.8; font-family: var(--font-jp);">ShinAIは、AI技術を通じて社会や人々が本当に必要とする価値を再定義し、誠実さと革新をもって、より良い未来の実現に貢献します。</p>
+                            <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 0; position: relative; z-index: 2; line-height: 1.8; font-family: var(--font-jp);">人と技術が共に生き、調和しながら成長していける社会のために、私たちは挑み続けます。</p>
+                            <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: var(--purple-main); opacity: 0.05; border-radius: 50%;"></div>
+                        </div>
+                        
+                        <h3 class="heading-md text-gradient">「真」に価値あるAIを追求する</h3>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8; font-family: var(--font-jp);">ShinAIという社名には、「真」の価値を追求し、「新」たな未来を創造するという理念が込められています。私たちは最先端のAI技術を駆使して、企業の本質的な課題解決を支援します。</p>
+                        
+                        <h3 class="heading-md text-gradient">AIの力で人の時間を解放する</h3>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8; font-family: var(--font-jp);">私たちの使命は、AI技術を活用して定型業務や複雑な分析作業を自動化し、人々が創造的な仕事や大切な人との時間に集中できる環境を作ることです。</p>
+                    </div>
+                </div>
+                
+                <!-- 会社情報テーブル -->
+                <div class="glass-card" style="margin-top: 4rem; overflow: hidden;">
+                    <h3 class="heading-md text-center" style="margin-bottom: 2rem;">企業概要</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); width: 30%;">会社名</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">株式会社ShinAI（シンアイ）</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">設立</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">2025年1月1日</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">代表取締役</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">山田 真理（やまだ まこと）</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">所在地</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">事業内容</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                                ・AIチャットボット開発・導入支援<br>
+                                ・AI議事録ツール「カイロク」の提供<br>
+                                ・AI導入コンサルティング<br>
+                                ・企業向けAI研修・教育<br>
+                                ・オーダーメイドAIソリューション開発
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">資本金</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">8,000万円</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">従業員数</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">28名（2025年4月現在）</td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05);">連絡先</th>
+                            <td style="padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                                Email: shinai.life@gmail.com<br>
+                                Tel: 03-1234-5678（平日9:00〜18:00）
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: PhilosophySection ===
+        COMPONENT: 企業理念セクション
+        ==============================================
+        -->
+        <section class="section section-bg-light" id="philosophy">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">企業理念</span>
+                    <h2 class="heading-lg">ShinAIの<span class="highlight">7つの"Shin"</span>に込めた精神</h2>
+                    <p class="section-description">ShinAIの名には、時代やテクノロジーの変化に左右されない<strong>7つの価値観</strong>が込められています。これらは私たちの行動指針であり、企業としての"芯"を形成するものです。</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <!-- 心 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-heart" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>心</strong> <span class="en-text">(Heart)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">感性を重んじ、心に触れるAIを創る。技術だけではなく、人の感情や価値観を大切にし、共感を生むソリューションを提供します。</p>
+                    </div>
+                    
+                    <!-- 真 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-check-circle" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>真</strong> <span class="en-text">(Truth)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">本質を見抜き、誠実な技術で価値を届ける。表面的な流行に惑わされず、真に必要とされる解決策を追求し続けます。</p>
+                    </div>
+                    
+                    <!-- 新 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-lightbulb" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>新</strong> <span class="en-text">(New)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">常に変化に挑み、革新で未来を切り拓く。前例にとらわれず、新しい可能性に挑戦し続けることで、未来の扉を開きます。</p>
+                    </div>
+                    
+                    <!-- 芯 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-circle" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>芯</strong> <span class="en-text">(Core)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">ぶれない軸を持ち、未来の中心を担う。時代の変化に左右されない強い理念と技術力を軸に、次世代を支える存在となります。</p>
+                    </div>
+                    
+                    <!-- 伸 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-arrow-up" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>伸</strong> <span class="en-text">(Growth)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">潜在力を引き出し、共に進化し続ける。クライアントの成長を支え、私たち自身も常に学び続けることで、共に未来へ伸びていきます。</p>
+                    </div>
+                    
+                    <!-- 信 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-handshake" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>信</strong> <span class="en-text">(Trust)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">信頼を築き、人と技術の絆を深める。透明性と誠実さを持って関係を構築し、「信じられる技術」を提供し続けます。</p>
+                    </div>
+                    
+                    <!-- 紳 -->
+                    <div class="glass-card" style="transform: translateY(0); border-radius: var(--radius-lg); transition: all 0.4s ease;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.2rem;">
+                            <div style="width: 55px; height: 55px; min-width: 55px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 1rem; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);">
+                                <i class="fas fa-award" style="font-size: 1.3rem;"></i>
+                            </div>
+                            <h4 style="margin: 0; font-size: 1.3rem; font-family: var(--font-jp);"><strong>紳</strong> <span class="en-text">(Integrity)</span></h4>
+                        </div>
+                        <p style="margin: 0; line-height: 1.7; font-family: var(--font-jp);">美しく、敬意あるふるまいで信頼を導く。高い倫理観と品位を持って行動し、社会から尊敬される企業であり続けます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: VisionSection ===
+        COMPONENT: 未来ビジョンセクション
+        ==============================================
+        -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">未来ビジョン</span>
+                    <h2 class="heading-lg">ShinAIが描く<span class="highlight">未来</span></h2>
+                    <p class="section-description">テクノロジーが人間の創造力や優しさと共に歩む未来を目指します</p>
+                </div>
+                
+                <div class="glass-card" style="background: rgba(142, 51, 255, 0.05); padding: 3rem; border-radius: var(--radius-lg); border-left: 4px solid var(--purple-main); position: relative; overflow: hidden; margin-bottom: 3rem;">
+                    <h3 class="heading-md shimmer-text" style="margin-bottom: 1.5rem; font-size: 2rem;">人と技術の共創する社会へ</h3>
+                    <p style="line-height: 1.9; font-size: 1.1rem; font-family: var(--font-jp);">ShinAIは、テクノロジーが人間の創造力や優しさと共に歩む未来を目指します。人の感性、社会の多様性、そして地球の持続性と共鳴するAIを通じて、私たちは「信じられる技術」で課題を解決し、「選ばれる存在」として価値を届け続けます。</p>
+                    <div style="position: absolute; bottom: -80px; right: -80px; width: 200px; height: 200px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); opacity: 0.05; border-radius: 50%;"></div>
+                </div>
+                
+                <!-- 3つのビジョンポイント -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                    <div class="glass-card" style="text-align: center; padding: 2rem;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.3);">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="heading-sm">時間の解放</h3>
+                        <p>AIが定型作業を担い、人間が創造的で充実した時間を過ごせる社会。その実現のために、私たちは常に使いやすく価値あるAIを追求します。</p>
+                    </div>
+                    
+                    <div class="glass-card" style="text-align: center; padding: 2rem;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.3);">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="heading-sm">共感技術</h3>
+                        <p>人間の感情や価値観に共感し、寄り添うAI。技術だけでなく心のあるソリューションを通じて、人と技術の調和した未来を創ります。</p>
+                    </div>
+                    
+                    <div class="glass-card" style="text-align: center; padding: 2rem;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 5px 15px rgba(142, 51, 255, 0.3);">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="heading-sm">社会貢献</h3>
+                        <p>AI技術を通じて社会課題の解決に貢献し、より良い未来を創造します。すべての人が享受できる価値あるテクノロジーで、持続可能な社会を目指します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: TeamSection ===
+        COMPONENT: チームメンバーセクション
+        ==============================================
+        -->
+        <section class="section section-bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">メンバー紹介</span>
+                    <h2 class="heading-lg">ShinAIの<span class="highlight">エキスパートチーム</span></h2>
+                    <p class="section-description">多様なバックグラウンドと専門知識を持つプロフェッショナルが、お客様の課題解決に取り組みます</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
+                    <!-- メンバー1 -->
+                    <div class="glass-card" style="text-align: center; padding: 2rem; overflow: hidden;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--purple-main);">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" alt="山田 真理" width="150" height="150" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 class="heading-sm" style="margin-bottom: 0.5rem;">山田 真理</h3>
+                        <p style="color: var(--purple-main); font-weight: 600; margin-bottom: 1rem;">代表取締役 / CEO</p>
+                        <p style="margin-bottom: 1.5rem;">AIスタートアップの創業と複数のIT企業でのマネジメント経験を持つ。技術と人の融合を重視し、「信じられるAI」の実現に情熱を注ぐ。</p>
+                        <div style="display: flex; justify-content: center; gap: 1rem;">
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- メンバー2 -->
+                    <div class="glass-card" style="text-align: center; padding: 2rem; overflow: hidden;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--purple-main);">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150" alt="佐藤 みどり" width="150" height="150" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 class="heading-sm" style="margin-bottom: 0.5rem;">佐藤 みどり</h3>
+                        <p style="color: var(--purple-main); font-weight: 600; margin-bottom: 1rem;">最高技術責任者 / CTO</p>
+                        <p style="margin-bottom: 1.5rem;">AI研究者としての経歴と、大手テック企業でのエンジニアリング経験を持つ。人間中心設計と技術革新を融合させたAI開発を主導。</p>
+                        <div style="display: flex; justify-content: center; gap: 1rem;">
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- メンバー3 -->
+                    <div class="glass-card" style="text-align: center; padding: 2rem; overflow: hidden;">
+                        <div style="width: 150px; height: 150px; margin: 0 auto 1.5rem; border-radius: 50%; overflow: hidden; border: 3px solid var(--purple-main);">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150" alt="田中 健太" width="150" height="150" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 class="heading-sm" style="margin-bottom: 0.5rem;">田中 健太</h3>
+                        <p style="color: var(--purple-main); font-weight: 600; margin-bottom: 1rem;">最高事業責任者 / COO</p>
+                        <p style="margin-bottom: 1.5rem;">コンサルティングファームと製造業でのビジネス経験を持つ。AIの実用化と業務プロセス改善を得意とし、顧客価値の最大化に尽力。</p>
+                        <div style="display: flex; justify-content: center; gap: 1rem;">
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="btn-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- チーム全体の写真 -->
+                <div class="glow-border" style="margin-top: 4rem; position: relative; overflow: hidden; border-radius: 16px; box-shadow: var(--shadow-lg);">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200&h=550" 
+                        alt="ShinAIチームの集合写真" 
+                        style="width: 100%; height: auto; display: block;"
+                        width="1200"
+                        height="550">
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: CareersSection ===
+        COMPONENT: 採用情報セクション
+        ==============================================
+        -->
+        <section class="section" id="careers">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">採用情報</span>
+                    <h2 class="heading-lg">ShinAIで<span class="highlight">未来を創る</span>仲間を募集</h2>
+                    <p class="section-description">AIの力で社会に価値を届けたい、そんな志を持つ仲間と共に成長していきたいと考えています</p>
+                </div>
+                
+                <div class="glass-card" style="background: rgba(142, 51, 255, 0.05); padding: 3rem; border-radius: var(--radius-lg); position: relative; overflow: hidden; margin-bottom: 3rem;">
+                    <h3 class="heading-md" style="margin-bottom: 1.5rem;">ShinAIで働く魅力</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; min-width: 40px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);">
+                                    <i class="fas fa-rocket" style="font-size: 1rem;"></i>
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.1rem; font-family: var(--font-jp);">最先端技術に触れる機会</h4>
+                            </div>
+                            <p style="margin: 0 0 1.5rem 3.5rem; line-height: 1.7; font-family: var(--font-jp);">常に最新のAI技術にアクセスし、実際のプロジェクトで活用する環境があります。技術力向上のための研修制度も充実。</p>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; min-width: 40px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);">
+                                    <i class="fas fa-lightbulb" style="font-size: 1rem;"></i>
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.1rem; font-family: var(--font-jp);">アイデアを形にする自由</h4>
+                            </div>
+                            <p style="margin: 0 0 1.5rem 3.5rem; line-height: 1.7; font-family: var(--font-jp);">自分のアイデアを提案し、実現できる風土があります。20%ルールを採用し、自己啓発や新規プロジェクトに取り組む時間を確保。</p>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; min-width: 40px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);">
+                                    <i class="fas fa-heart" style="font-size: 1rem;"></i>
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.1rem; font-family: var(--font-jp);">ワークライフバランス</h4>
+                            </div>
+                            <p style="margin: 0 0 1.5rem 3.5rem; line-height: 1.7; font-family: var(--font-jp);">フレックス制度やリモートワークなど、柔軟な働き方を支援。社員の健康と家族の時間を大切にする文化を大切にしています。</p>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; min-width: 40px; background: linear-gradient(135deg, var(--purple-main), var(--blue-mid)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);">
+                                    <i class="fas fa-globe" style="font-size: 1rem;"></i>
+                                </div>
+                                <h4 style="margin: 0; font-size: 1.1rem; font-family: var(--font-jp);">社会的インパクト</h4>
+                            </div>
+                            <p style="margin: 0 0 1.5rem 3.5rem; line-height: 1.7; font-family: var(--font-jp);">自分の仕事が社会課題の解決や人々の生活向上に直接つながる実感を得られます。意義ある仕事に取り組める環境です。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 募集職種 -->
+                <h3 class="heading-md text-center" style="margin-bottom: 2rem;">現在募集中の職種</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="glass-card">
+                        <h4 class="heading-sm" style="color: var(--purple-main);">AIエンジニア</h4>
+                        <p>自然言語処理や機械学習の技術を用いて、実用的なAIソリューションを開発するエンジニアを募集しています。最新技術への好奇心と実装力を持つ方。</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card">
+                        <h4 class="heading-sm" style="color: var(--purple-main);">AIコンサルタント</h4>
+                        <p>お客様のビジネス課題を理解し、最適なAIソリューションを提案・導入支援するコンサルタントを募集。技術知識とビジネス感覚を兼ね備えた方。</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card">
+                        <h4 class="heading-sm" style="color: var(--purple-main);">UX/UIデザイナー</h4>
+                        <p>AIと人間の接点となるインターフェースをデザインし、優れたユーザー体験を創出するデザイナーを募集。人間中心設計の思考を持つ方。</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="contact.html" class="btn btn-primary btn-lg">採用情報に応募する <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: お問い合わせCTA
+        ==============================================
+        -->
+        <section class="section section-bg-light">
+            <div class="container">
+                <div class="glass-card" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(142, 51, 255, 0.05), rgba(66, 100, 223, 0.05));">
+                    <h2 class="heading-lg">ShinAIに<span class="highlight">ご相談</span>ください</h2>
+                    <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                        AI導入についてのご質問や、貴社の課題に最適なソリューションについて、<br>
+                        お気軽にお問い合わせください。専門のコンサルタントが丁寧にご対応いたします。
+                    </p>
+                    <div>
+                        <a href="contact.html" class="btn btn-primary btn-lg btn-glow">お問い合わせ <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- 
+    ==============================================
+    // === component-split: BottomBanner ===
+    COMPONENT: 下部バナー（ミッションステートメント）
+    ==============================================
+    -->
+    <div class="bottom-banner">
+        「真の価値を信じ、次世代のために新たな未来を創る。」
+    </div>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター
+    ==============================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.svg" alt="" aria-hidden="true" width="40" height="40">
+                        <span class="en-text">ShinAI</span>
+                    </div>
+                    <p class="footer-description">
+                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                    </p>
+                    <div class="social-links" aria-label="ソーシャルメディアリンク">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
+                        <li><a href="services.html#decision-support">意思決定支援AI</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">会社情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">会社概要</a></li>
+                        <li><a href="about.html#philosophy">企業理念</a></li>
+                        <li><a href="industries.html">AI活用事例</a></li>
+                        <li><a href="about.html#careers">採用情報</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <ul class="footer-links">
+                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li>shinai.life@gmail.com</li>
+                        <li>平日 9:00〜18:00（土日祝休）</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 
+    ==============================================
+    // === component-split: ChatbotComponent ===
+    COMPONENT: AIチャットボット
+    ==============================================
+    -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
+            <div class="ripple"></div>
+            <i class="fas fa-robot" aria-hidden="true"></i>
+        </button>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+                <div class="message bot-message">
+                    こんにちは！ShinAIアシスタントです。当社の会社情報やAI導入に関するご質問があれば、お気軽にお聞きください。
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
 </body>
 </html>
