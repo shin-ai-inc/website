@@ -2701,4 +2701,108 @@ COMPONENT: モバイル向け最適化
     .footer-grid {
         gap: 2rem;
     }
+    /* 
+    ==============================================
+    COMPONENT: 追加スタイル - ヒーローセクション改善 
+    ==============================================
+    */
+
+    /* 目立つグラデーションテキスト */
+    .highlight-gradient {
+        background: linear-gradient(135deg, #b723ef, #4264df);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        font-weight: 800;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: inline-block;
+        padding: 0 5px;
+    }
+
+    /* 背景が明るい場合に視認性を確保するためのアウトライン */
+    .highlight-gradient::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(135deg, rgba(183, 35, 239, 0.1), rgba(66, 100, 223, 0.1));
+        z-index: -1;
+        border-radius: 4px;
+    }
+
+    /* ヒーロータイトルの調整 */
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.03em;
+        font-family: var(--font-jp);
+        position: relative;
+    }
+
+    /* 無料相談ボタンのコントラスト向上 */
+    .btn-outline {
+        background-color: rgba(255, 255, 255, 0.8);
+        color: var(--purple-main);
+        border: 2px solid var(--purple-main);
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(142, 51, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+        background-color: var(--purple-main);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(142, 51, 255, 0.3);
+    }
+
+    /* スクロールインジケーターの位置調整 */
+    .scroll-down {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--purple-main);
+        font-size: 0.9rem;
+        z-index: 10;
+        animation: floatAnimation 2s ease-in-out infinite;
+    }
+
+    /* サービスカードの画像表示修正 */
+    .card-3d-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+
+    /* AIチャットボットの改善 */
+    .chatbot-toggle {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #8e33ff, #4264df);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        box-shadow: 0 5px 20px rgba(142, 51, 255, 0.35);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1) rotate(15deg);
+        box-shadow: 0 8px 25px rgba(142, 51, 255, 0.5);
+    }
 }
