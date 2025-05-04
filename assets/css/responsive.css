@@ -1,4 +1,3 @@
-/* responsive.css - placeholder CSS */
 /* 
 ==============================================
 // === component-split: ResponsiveStyles ===
@@ -14,6 +13,13 @@ COMPONENT: レスポンシブレイアウト
     
     .hero-content {
         max-width: 650px;
+    }
+    
+    /* ヒーロータイトルを2行に収める - 改善 */
+    .hero-title {
+        font-size: 3.8rem;
+        line-height: 1.1;
+        max-width: 90%;
     }
 }
 
@@ -31,8 +37,11 @@ COMPONENT: レスポンシブレイアウト
         font-size: 2.2rem;
     }
     
+    /* ヒーロータイトルを2行に収める - 改善 */
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
+        line-height: 1.1;
+        max-width: 90%;
     }
     
     .brand-text {
@@ -92,8 +101,10 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.5rem;
     }
     
+    /* ヒーロータイトルを2行に収める - 改善 */
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.8rem;
+        line-height: 1.2;
     }
     
     .hero-description {
@@ -107,6 +118,12 @@ COMPONENT: レスポンシブレイアウト
     
     .brand-tagline {
         font-size: 1.4rem;
+    }
+    
+    /* スクロールダウンインジケーターの位置調整 - 改善 */
+    .scroll-down {
+        bottom: 15px;
+        transform: translateX(-50%);
     }
     
     .services-grid,
@@ -159,6 +176,51 @@ COMPONENT: レスポンシブレイアウト
     .page-header h1 {
         font-size: 2.5rem;
     }
+    
+    /* ボタンのコントラスト向上 - 改善 */
+    .btn-outline {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-width: 2px;
+        font-weight: 700;
+    }
+    
+    /* タイムラインレスポンシブ対応 */
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-right: 0;
+        padding-left: 60px;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+        transform: translateX(0);
+    }
+    
+    .timeline-item:hover .timeline-marker {
+        transform: translateX(0) scale(1.2);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-date,
+    .timeline-item:nth-child(even) .timeline-date {
+        left: 70px;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::after,
+    .timeline-item:nth-child(even) .timeline-content::after {
+        left: -10px;
+        right: auto;
+    }
+    
+    /* チームメンバーグリッド調整 */
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* スマートフォン (767px以下) */
@@ -198,8 +260,11 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.4rem;
     }
     
+    /* ヒーロータイトルを2行に収める - 改善 */
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        line-height: 1.2;
+        max-width: 100%;
     }
     
     .hero-label {
@@ -259,6 +324,11 @@ COMPONENT: レスポンシブレイアウト
     
     .brand-tagline {
         font-size: 1.2rem;
+    }
+    
+    /* スクロールダウンインジケーターの位置調整 - 改善 */
+    .scroll-down {
+        bottom: 10px;
     }
     
     .services-grid,
@@ -413,6 +483,109 @@ COMPONENT: レスポンシブレイアウト
     .page-header h1 {
         font-size: 2rem;
     }
+    
+    /* メニュートグル - 改善 */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: center;
+        z-index: 100;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+    
+    .nav.active {
+        display: flex;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-cta {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+    }
+    
+    .nav-cta .btn {
+        width: 100%;
+    }
+    
+    /* タイムラインレスポンシブ対応 */
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-right: 0;
+        padding-left: 50px;
+    }
+    
+    .timeline-marker {
+        left: 20px;
+        transform: translateX(0);
+        width: 15px;
+        height: 15px;
+    }
+    
+    .timeline-item:hover .timeline-marker {
+        transform: translateX(0) scale(1.2);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-date,
+    .timeline-item:nth-child(even) .timeline-date {
+        left: 50px;
+        right: auto;
+        top: -20px;
+        font-size: 0.8rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::after,
+    .timeline-item:nth-child(even) .timeline-content::after {
+        left: -8px;
+        right: auto;
+        width: 15px;
+        height: 15px;
+    }
+    
+    .timeline-title {
+        font-size: 1.1rem;
+    }
+    
+    /* チームメンバーグリッド調整 */
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-image {
+        height: 250px;
+    }
+    
+    /* ニュースグリッド調整 */
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* スマートフォン小 (480px以下) */
@@ -429,8 +602,10 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.6rem;
     }
     
+    /* ヒーロータイトルを2行に収める - 改善 */
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.3;
     }
     
     .hero-description {
@@ -443,6 +618,11 @@ COMPONENT: レスポンシブレイアウト
     
     .section-header .section-title {
         font-size: 1.7rem;
+    }
+    
+    .section-header .section-subtitle {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.8rem;
     }
     
     .brand-text {
@@ -494,6 +674,37 @@ COMPONENT: レスポンシブレイアウト
     .page-header h1 {
         font-size: 1.8rem;
     }
+    
+    /* スクロールダウンインジケーターの位置調整 - 改善 */
+    .scroll-down {
+        bottom: 5px;
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+    
+    .scroll-down-icon {
+        width: 25px;
+        height: 40px;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* コンタクトフォームの調整 */
+    .form-control {
+        padding: 0.8rem 1rem;
+    }
+    
+    /* タイムラインのさらなる調整 */
+    .timeline-content {
+        padding: 1.2rem;
+    }
+    
+    .timeline-title {
+        font-size: 1rem;
+    }
+    
+    .timeline-desc {
+        font-size: 0.9rem;
+    }
 }
 
 /* 例外処理 - IE11対応 */
@@ -509,6 +720,10 @@ COMPONENT: レスポンシブレイアウト
     .glass-card {
         background: rgba(255, 255, 255, 0.9);
     }
+    
+    .hero-title .highlight {
+        color: var(--purple-main);
+    }
 }
 
 /* プリント用スタイル */
@@ -516,7 +731,8 @@ COMPONENT: レスポンシブレイアウト
     .header, 
     .footer, 
     .chatbot, 
-    .scroll-down {
+    .scroll-down,
+    .particles-container {
         display: none !important;
     }
     
@@ -550,6 +766,11 @@ COMPONENT: レスポンシブレイアウト
     .shimmer-text {
         background: none;
         color: black;
+    }
+    
+    .hero-title .highlight {
+        color: #8e33ff;
+        text-shadow: none;
     }
     
     .card-3d,

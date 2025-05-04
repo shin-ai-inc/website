@@ -1,4 +1,3 @@
-// three-particles.js - placeholder JS
 /**
  * ==============================================
  * // === component-split: ThreeJSParticles ===
@@ -12,6 +11,7 @@ const ThreeJSParticlesModule = {
     particles: null,
     container: null,
     isMobileDevice: false,
+    particleCount: 400, // より繊細なアニメーションのために粒子数を増加
     
     init: function() {
         this.container = document.getElementById('particles');
@@ -51,39 +51,49 @@ const ThreeJSParticlesModule = {
     },
     
     createParticles: function() {
-        const particleCount = 200;
+        const particleCount = this.particleCount;
         const particles = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
         const sizes = new Float32Array(particleCount);
+        const opacities = new Float32Array(particleCount);
         
         // パーティクル位置・色・サイズをランダム設定
         for (let i = 0; i < particleCount; i++) {
-            // 位置
-            positions[i * 3] = (Math.random() - 0.5) * 100;      // x
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 100;  // y
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 100;  // z
+            // 位置 - より広い範囲に分散
+            positions[i * 3] = (Math.random() - 0.5) * 120;      // x
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 120;  // y
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 120;  // z
             
             // 色（紫から青へのグラデーション）
             const ratio = Math.random();
-            colors[i * 3] = 0.5 + ratio * 0.2;     // 赤 (紫~青)
-            colors[i * 3 + 1] = 0.2 + ratio * 0.3; // 緑
+            colors[i * 3] = 0.5 + ratio * 0.3;     // 赤 (紫~青)
+            colors[i * 3 + 1] = 0.2 + ratio * 0.4; // 緑
             colors[i * 3 + 2] = 0.8 + ratio * 0.2; // 青
             
-            // サイズ
-            sizes[i] = Math.random() * 2 + 0.5;
+            // サイズ - よりバリエーションを持たせる
+            sizes[i] = Math.random() * 3 + 0.5;
+            
+            // 透明度 - 繊細さを増す
+            opacities[i] = 0.2 + Math.random() * 0.8;
         }
         
         particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
         particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        particles.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
         
-        // シェーダーマテリアル
+        // 高度なシェーダーマテリアル
         const vertexShader = `
             attribute float size;
+            attribute float opacity;
             varying vec3 vColor;
+            varying float vOpacity;
+            
             void main() {
                 vColor = color;
+                vOpacity = opacity;
+                
                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                 gl_PointSize = size * (300.0 / -mvPosition.z);
                 gl_Position = projectionMatrix * mvPosition;
@@ -92,9 +102,14 @@ const ThreeJSParticlesModule = {
         
         const fragmentShader = `
             varying vec3 vColor;
+            varying float vOpacity;
+            
             void main() {
-                if (length(gl_PointCoord - vec2(0.5, 0.5)) > 0.475) discard;
-                gl_FragColor = vec4(vColor, 1.0);
+                float dist = length(gl_PointCoord - vec2(0.5, 0.5));
+                if (dist > 0.475) discard;
+                
+                float smoothedAlpha = smoothstep(0.475, 0.0, dist);
+                gl_FragColor = vec4(vColor, vOpacity * smoothedAlpha);
             }
         `;
         
@@ -134,6 +149,9 @@ const ThreeJSParticlesModule = {
         
         // 背景グローブオブジェクト追加
         this.addGlowingSpheres();
+        
+        // 接続線の追加
+        this.addConnectionLines();
     },
     
     addGlowingSpheres: function() {
@@ -160,6 +178,63 @@ const ThreeJSParticlesModule = {
         
         const sphere2 = new THREE.Mesh(sphere2Geometry, sphere2Material);
         this.scene.add(sphere2);
+        
+        // 3つ目の小さな球体 - より繊細なエフェクト
+        const sphere3Geometry = new THREE.SphereGeometry(15, 32, 32);
+        const sphere3Material = new THREE.MeshBasicMaterial({
+            color: 0x26d8de,
+            transparent: true,
+            opacity: 0.04,
+            side: THREE.BackSide
+        });
+        
+        const sphere3 = new THREE.Mesh(sphere3Geometry, sphere3Material);
+        this.scene.add(sphere3);
+    },
+    
+    addConnectionLines: function() {
+        // パーティクル間の接続線を作成
+        const lineGeometry = new THREE.BufferGeometry();
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x8e33ff,
+            transparent: true,
+            opacity: 0.1,
+            linewidth: 1
+        });
+        
+        // 近い位置にあるパーティクル同士を線で接続
+        const positions = this.particles.geometry.attributes.position.array;
+        const linePositions = [];
+        const threshold = 20; // 接続する距離の閾値
+        
+        for (let i = 0; i < positions.length; i += 3) {
+            const x1 = positions[i];
+            const y1 = positions[i + 1];
+            const z1 = positions[i + 2];
+            
+            for (let j = i + 3; j < positions.length; j += 3) {
+                const x2 = positions[j];
+                const y2 = positions[j + 1];
+                const z2 = positions[j + 2];
+                
+                // 距離を計算
+                const distance = Math.sqrt(
+                    Math.pow(x2 - x1, 2) +
+                    Math.pow(y2 - y1, 2) +
+                    Math.pow(z2 - z1, 2)
+                );
+                
+                // 閾値以内の場合、線を追加
+                if (distance < threshold && Math.random() > 0.95) { // 95%の確率で間引く
+                    linePositions.push(x1, y1, z1);
+                    linePositions.push(x2, y2, z2);
+                }
+            }
+        }
+        
+        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+        this.scene.add(lines);
     },
     
     onWindowResize: function() {
@@ -206,16 +281,26 @@ const ThreeJSParticlesModule = {
         
         requestAnimationFrame(this.animate.bind(this));
         
-        // パーティクルのアニメーション
+        // パーティクルのアニメーション - より繊細な動き
         if (this.particles) {
-            this.particles.rotation.x += 0.0005;
-            this.particles.rotation.y += 0.0008;
+            this.particles.rotation.x += 0.0003;
+            this.particles.rotation.y += 0.0005;
+            
+            // パーティクルのサイズを時間に応じて変化させる
+            const sizes = this.particles.geometry.attributes.size;
+            const time = Date.now() * 0.0005;
+            
+            for (let i = 0; i < sizes.count; i++) {
+                sizes.array[i] = (Math.sin(i + time) * 0.3 + 1) * (Math.random() * 2 + 0.5);
+            }
+            
+            sizes.needsUpdate = true;
         }
         
         // カメラの位置を少し動かして浮遊感を出す
         if (this.camera) {
-            this.camera.position.x = Math.sin(Date.now() * 0.0001) * 2;
-            this.camera.position.y = Math.cos(Date.now() * 0.0001) * 2;
+            this.camera.position.x = Math.sin(Date.now() * 0.0001) * 3;
+            this.camera.position.y = Math.cos(Date.now() * 0.0001) * 3;
             this.camera.lookAt(this.scene.position);
         }
         
