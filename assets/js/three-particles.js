@@ -12,10 +12,15 @@ const ThreeJSParticlesModule = {
     container: null,
     isMobileDevice: false,
     particleCount: 400, // より繊細なアニメーションのために粒子数を増加
+    connectionLines: [], // 接続線を保持する配列を追加
+    isActive: true,     // アニメーション制御用フラグ
     
     init: function() {
         this.container = document.getElementById('particles');
-        if (!this.container || typeof THREE === 'undefined') return;
+        if (!this.container || typeof THREE === 'undefined') {
+            console.warn('Three.jsの初期化に失敗しました: コンテナが見つからないか、THREE.jsが読み込まれていません');
+            return;
+        }
         
         // モバイル端末のチェック
         this.isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -30,24 +35,55 @@ const ThreeJSParticlesModule = {
             return;
         }
         
-        // シーン、カメラ、レンダラーの設定
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.camera.position.z = 30;
-        
-        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.container.appendChild(this.renderer.domElement);
-        
-        // パーティクルの生成
-        this.createParticles();
-        
+        try {
+            // シーン、カメラ、レンダラーの設定
+            this.scene = new THREE.Scene();
+            this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            this.camera.position.z = 30;
+            
+            this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+            this.container.appendChild(this.renderer.domElement);
+            
+            // パーティクルの生成
+            this.createParticles();
+            
+            // イベントリスナーを設定
+            this.setupEventListeners();
+            
+            // アニメーション開始
+            this.animate();
+        } catch (error) {
+            console.error('Three.jsの初期化エラー:', error);
+            this.showFallback();
+        }
+    },
+    
+    setupEventListeners: function() {
         // リサイズイベント
         window.addEventListener('resize', this.onWindowResize.bind(this));
         
-        // アニメーション開始
-        this.animate();
+        // タブ切り替え時のパフォーマンス最適化
+        document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+    },
+    
+    handleVisibilityChange: function() {
+        // タブがバックグラウンドの場合はアニメーションを停止
+        this.isActive = !document.hidden;
+    },
+    
+    showFallback: function() {
+        // フォールバック要素を表示
+        const fallback = document.querySelector('.particles-fallback');
+        if (fallback) {
+            fallback.style.display = 'block';
+        }
+        
+        // レンダラーが存在すれば非表示に
+        if (this.renderer && this.renderer.domElement) {
+            this.renderer.domElement.style.display = 'none';
+        }
     },
     
     createParticles: function() {
@@ -140,6 +176,7 @@ const ThreeJSParticlesModule = {
             const extension = gl.getExtension('OES_standard_derivatives');
             material = extension ? shaderMaterial : particleMaterial;
         } catch (e) {
+            console.warn('シェーダー拡張機能のチェックに失敗しました:', e);
             material = particleMaterial;
         }
         
@@ -192,33 +229,100 @@ const ThreeJSParticlesModule = {
         this.scene.add(sphere3);
     },
     
+    // 新しく追加した接続線機能
+    addConnectionLines: function() {
+        try {
+            // すでに存在する接続線を削除
+            for (let i = 0; i < this.connectionLines.length; i++) {
+                this.scene.remove(this.connectionLines[i]);
+            }
+            this.connectionLines = [];
+            
+            // パーティクルの位置を取得
+            if (!this.particles || !this.particles.geometry) return;
+            
+            const positions = this.particles.geometry.attributes.position.array;
+            const maxConnections = 100; // パフォーマンスのために制限
+            let connectionCount = 0;
+            const connectionDistance = 30; // 接続する距離の閾値
+            
+            // 近いパーティクル同士を接続
+            for (let i = 0; i < this.particleCount && connectionCount < maxConnections; i++) {
+                const ix = positions[i * 3];
+                const iy = positions[i * 3 + 1];
+                const iz = positions[i * 3 + 2];
+                
+                for (let j = i + 1; j < this.particleCount && connectionCount < maxConnections; j++) {
+                    const jx = positions[j * 3];
+                    const jy = positions[j * 3 + 1];
+                    const jz = positions[j * 3 + 2];
+                    
+                    // 距離計算
+                    const dx = ix - jx;
+                    const dy = iy - jy;
+                    const dz = iz - jz;
+                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                    
+                    // 一定距離以内なら接続
+                    if (distance < connectionDistance) {
+                        // 距離に応じて透明度を調整（遠いほど透明に）
+                        const opacity = (1 - distance / connectionDistance) * 0.15;
+                        
+                        // 線のジオメトリとマテリアル
+                        const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                            new THREE.Vector3(ix, iy, iz),
+                            new THREE.Vector3(jx, jy, jz)
+                        ]);
+                        
+                        const lineMaterial = new THREE.LineBasicMaterial({
+                            color: 0x8e33ff,
+                            transparent: true,
+                            opacity: opacity,
+                            blending: THREE.AdditiveBlending
+                        });
+                        
+                        // 線の作成とシーンへの追加
+                        const line = new THREE.Line(lineGeometry, lineMaterial);
+                        this.scene.add(line);
+                        this.connectionLines.push(line);
+                        connectionCount++;
+                    }
+                }
+            }
+        } catch (error) {
+            console.warn('接続線の生成に失敗しました:', error);
+        }
+    },
+    
     onWindowResize: function() {
         // モバイル端末の再チェック
+        const wasMobile = this.isMobileDevice;
         this.isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        if (this.isMobileDevice) {
-            // モバイル端末の場合はThree.jsを無効化
-            if (this.renderer && this.renderer.domElement) {
-                this.renderer.domElement.style.display = 'none';
-            }
-            
-            // フォールバック要素を表示
-            const fallback = document.querySelector('.particles-fallback');
-            if (fallback) {
-                fallback.style.display = 'block';
-            }
-            
-            return;
-        } else {
-            // デスクトップの場合はThree.jsを表示
-            if (this.renderer && this.renderer.domElement) {
-                this.renderer.domElement.style.display = 'block';
-            }
-            
-            // フォールバック要素を非表示
-            const fallback = document.querySelector('.particles-fallback');
-            if (fallback) {
-                fallback.style.display = 'none';
+        // モバイル状態が変わった場合の処理
+        if (wasMobile !== this.isMobileDevice) {
+            if (this.isMobileDevice) {
+                // モバイル端末の場合はThree.jsを無効化
+                if (this.renderer && this.renderer.domElement) {
+                    this.renderer.domElement.style.display = 'none';
+                }
+                
+                // フォールバック要素を表示
+                const fallback = document.querySelector('.particles-fallback');
+                if (fallback) {
+                    fallback.style.display = 'block';
+                }
+            } else {
+                // デスクトップの場合はThree.jsを表示
+                if (this.renderer && this.renderer.domElement) {
+                    this.renderer.domElement.style.display = 'block';
+                }
+                
+                // フォールバック要素を非表示
+                const fallback = document.querySelector('.particles-fallback');
+                if (fallback) {
+                    fallback.style.display = 'none';
+                }
             }
         }
         
@@ -231,10 +335,11 @@ const ThreeJSParticlesModule = {
     },
     
     animate: function() {
-        // モバイル端末の場合はアニメーションを中止
-        if (this.isMobileDevice) return;
-        
+        // アニメーションループをリクエスト
         requestAnimationFrame(this.animate.bind(this));
+        
+        // アクティブでない場合や、モバイル端末の場合はレンダリングをスキップ
+        if (!this.isActive || this.isMobileDevice) return;
         
         // パーティクルのアニメーション - より繊細な動き
         if (this.particles) {
@@ -259,6 +364,12 @@ const ThreeJSParticlesModule = {
             this.camera.lookAt(this.scene.position);
         }
         
+        // 一定間隔で接続線を更新（視覚効果を向上）
+        if (Date.now() % 7000 < 20) {
+            this.addConnectionLines();
+        }
+        
+        // レンダリング実行
         if (this.renderer && this.scene && this.camera) {
             this.renderer.render(this.scene, this.camera);
         }
@@ -268,4 +379,11 @@ const ThreeJSParticlesModule = {
 // DOMがロードされたら初期化
 document.addEventListener('DOMContentLoaded', function() {
     ThreeJSParticlesModule.init();
+});
+
+// パフォーマンスを考慮して、タブ切り替え時にアニメーションを制御
+document.addEventListener('visibilitychange', function() {
+    if (ThreeJSParticlesModule) {
+        ThreeJSParticlesModule.isActive = !document.hidden;
+    }
 });
