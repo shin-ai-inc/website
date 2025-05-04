@@ -1,271 +1,332 @@
 /**
- * ==============================================
- * // === component-split: ThreeJSParticles ===
- * COMPONENT: Three.jsパーティクルアニメーション
- * ==============================================
+ * Three.js パーティクルアニメーション
+ * ================================================
+ * 
+ * 概要:
+ * Three.jsを使用して、高品質な3Dパーティクルアニメーションを実現します。
+ * 幾何学的なパターンでAIビジネスの先進性と技術力を表現します。
+ * 
+ * 機能:
+ * - WebGLを利用した高パフォーマンスな3Dレンダリング
+ * - マウス操作による視点操作
+ * - スクロールに応じたアニメーション調整
+ * - モバイルデバイスでの最適化とフォールバック
  */
-const ThreeJSParticlesModule = {
-    scene: null,
-    camera: null,
-    renderer: null,
-    particles: null,
-    container: null,
-    isMobileDevice: false,
-    particleCount: 400, // より繊細なアニメーションのために粒子数を増加
+
+// モジュールスコープを作成して変数の衝突を防止
+const ThreeParticles = (function() {
+    // プライベート変数
+    let camera, scene, renderer;
+    let particles, positions, colors;
+    let particleSystem;
+    let raycaster, intersects;
+    let windowHalfX, windowHalfY;
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
     
-    init: function() {
-        this.container = document.getElementById('particles');
-        if (!this.container || typeof THREE === 'undefined') return;
+    // 設定パラメータ
+    const params = {
+        particleCount: 6000,
+        particleSize: 3.5,
+        defaultAnimationSpeed: 0.02,
+        mouseInfluenceDistance: 150,
+        mouseInfluenceStrength: 0.6,
+        connectionDistance: 140,
+        connectionOpacity: 0.15,
+        colorPalette: [
+            { r: 142/255, g: 51/255, b: 255/255 }, // purple-main
+            { r: 66/255, g: 100/255, b: 223/255 }, // blue-mid
+            { r: 38/255, g: 216/255, b: 222/255 }, // cyan-light
+            { r: 183/255, g: 35/255, b: 239/255 }  // purple-bright
+        ],
+        active: true,
+        mobile: {
+            particleCount: 2000,
+            particleSize: 2.5,
+            connectionDistance: 100
+        }
+    };
+    
+    // 初期化関数
+    function init() {
+        // パーティクルコンテナの取得
+        const container = document.getElementById('particles');
         
-        // モバイル端末のチェック
-        this.isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // コンテナがなければ何もしない（他のページでも呼び出せるようにするため）
+        if (!container) return;
         
-        // モバイル端末の場合は静的画像を表示
-        if (this.isMobileDevice) {
-            // フォールバック要素を表示
-            const fallback = document.querySelector('.particles-fallback');
-            if (fallback) {
-                fallback.style.display = 'block';
-            }
-            return;
+        // モバイルデバイスかどうかを判定し、パラメータを調整
+        if (window.innerWidth < 768) {
+            adjustForMobile();
         }
         
-        // シーン、カメラ、レンダラーの設定
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.camera.position.z = 30;
+        // 画面サイズの設定
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
         
-        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.container.appendChild(this.renderer.domElement);
+        // Three.jsの基本セットアップ
+        setupThreeJs(container);
         
-        // パーティクルの生成
-        this.createParticles();
+        // パーティクルシステムの作成
+        createParticleSystem();
         
-        // リサイズイベント
-        window.addEventListener('resize', this.onWindowResize.bind(this));
+        // イベントリスナーの設定
+        setupEventListeners();
         
-        // アニメーション開始
-        this.animate();
-    },
+        // アニメーションスタート
+        animate();
+    }
     
-    createParticles: function() {
-        const particleCount = this.particleCount;
-        const particles = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
-        const sizes = new Float32Array(particleCount);
-        const opacities = new Float32Array(particleCount);
+    // モバイルデバイス用に設定を調整
+    function adjustForMobile() {
+        params.particleCount = params.mobile.particleCount;
+        params.particleSize = params.mobile.particleSize;
+        params.connectionDistance = params.mobile.connectionDistance;
+    }
+    
+    // Three.jsの基本セットアップ
+    function setupThreeJs(container) {
+        // カメラの作成
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 5000);
+        camera.position.z = 1000;
         
-        // パーティクル位置・色・サイズをランダム設定
-        for (let i = 0; i < particleCount; i++) {
-            // 位置 - より広い範囲に分散
-            positions[i * 3] = (Math.random() - 0.5) * 120;      // x
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 120;  // y
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 120;  // z
+        // シーンの作成
+        scene = new THREE.Scene();
+        
+        // レンダラーの作成
+        renderer = new THREE.WebGLRenderer({ 
+            antialias: true,
+            alpha: true 
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        
+        // レイキャスター（マウスピッキング用）
+        raycaster = new THREE.Raycaster();
+        intersects = [];
+    }
+    
+    // パーティクルシステムの作成
+    function createParticleSystem() {
+        // ジオメトリの作成
+        const geometry = new THREE.BufferGeometry();
+        
+        // 位置と色の配列を初期化
+        positions = new Float32Array(params.particleCount * 3);
+        colors = new Float32Array(params.particleCount * 3);
+        
+        // パーティクルの位置と色を設定
+        for (let i = 0; i < params.particleCount; i++) {
+            const i3 = i * 3;
             
-            // 色（紫から青へのグラデーション）
-            const ratio = Math.random();
-            colors[i * 3] = 0.5 + ratio * 0.3;     // 赤 (紫~青)
-            colors[i * 3 + 1] = 0.2 + ratio * 0.4; // 緑
-            colors[i * 3 + 2] = 0.8 + ratio * 0.2; // 青
+            // 分布はやや平らな円柱状に
+            const radius = 700 + Math.random() * 300;
+            const theta = Math.random() * Math.PI * 2;
+            const y = (Math.random() - 0.5) * 2000;
             
-            // サイズ - よりバリエーションを持たせる
-            sizes[i] = Math.random() * 3 + 0.5;
+            positions[i3] = radius * Math.cos(theta);     // x
+            positions[i3 + 1] = y;                        // y
+            positions[i3 + 2] = radius * Math.sin(theta); // z
             
-            // 透明度 - 繊細さを増す
-            opacities[i] = 0.2 + Math.random() * 0.8;
+            // 色をランダムに設定
+            const colorIndex = Math.floor(Math.random() * params.colorPalette.length);
+            const color = params.colorPalette[colorIndex];
+            
+            colors[i3] = color.r;
+            colors[i3 + 1] = color.g;
+            colors[i3 + 2] = color.b;
         }
         
-        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-        particles.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
+        // バッファ属性を設定
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
         
-        // 高度なシェーダーマテリアル
-        const vertexShader = `
-            attribute float size;
-            attribute float opacity;
-            varying vec3 vColor;
-            varying float vOpacity;
-            
-            void main() {
-                vColor = color;
-                vOpacity = opacity;
-                
-                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                gl_PointSize = size * (300.0 / -mvPosition.z);
-                gl_Position = projectionMatrix * mvPosition;
-            }
-        `;
-        
-        const fragmentShader = `
-            varying vec3 vColor;
-            varying float vOpacity;
-            
-            void main() {
-                float dist = length(gl_PointCoord - vec2(0.5, 0.5));
-                if (dist > 0.475) discard;
-                
-                float smoothedAlpha = smoothstep(0.475, 0.0, dist);
-                gl_FragColor = vec4(vColor, vOpacity * smoothedAlpha);
-            }
-        `;
-        
-        // 高度なシェーダーマテリアル
-        const shaderMaterial = new THREE.ShaderMaterial({
-            uniforms: {},
-            vertexShader: vertexShader,
-            fragmentShader: fragmentShader,
-            transparent: true,
+        // マテリアルの作成
+        const material = new THREE.PointsMaterial({
+            size: params.particleSize,
             vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            sizeAttenuation: true,
+            depthWrite: false,
             blending: THREE.AdditiveBlending
         });
         
-        // 通常のポイントマテリアル（フォールバック）
-        const particleMaterial = new THREE.PointsMaterial({
-            size: 1,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.7,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
+        // テクスチャの作成
+        const textureLoader = new THREE.TextureLoader();
+        material.map = textureLoader.load('/assets/images/particle.png', () => {
+            material.needsUpdate = true;
         });
         
-        // WebGLの機能をチェックしてマテリアルを選択
-        let material;
-        try {
-            const gl = this.renderer.getContext();
-            const extension = gl.getExtension('OES_standard_derivatives');
-            material = extension ? shaderMaterial : particleMaterial;
-        } catch (e) {
-            material = particleMaterial;
-        }
-        
-        // メッシュ作成
-        this.particles = new THREE.Points(particles, material);
-        this.scene.add(this.particles);
-        
-        // 背景グローブオブジェクト追加
-        this.addGlowingSpheres();
-        
-        // 接続線の追加
-        this.addConnectionLines();
-    },
+        // パーティクルシステムの作成
+        particleSystem = new THREE.Points(geometry, material);
+        scene.add(particleSystem);
+    }
     
-    addGlowingSpheres: function() {
-        // パーティクルの周りに大きな半透明球体を追加
-        const sphereGeometry = new THREE.SphereGeometry(40, 32, 32);
-        const sphereMaterial = new THREE.MeshBasicMaterial({
-            color: 0x8e33ff,
-            transparent: true,
-            opacity: 0.05,
-            side: THREE.BackSide
-        });
-        
-        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-        this.scene.add(sphere);
-        
-        // 2つ目の球体
-        const sphere2Geometry = new THREE.SphereGeometry(25, 32, 32);
-        const sphere2Material = new THREE.MeshBasicMaterial({
-            color: 0x4264df,
-            transparent: true,
-            opacity: 0.03,
-            side: THREE.BackSide
-        });
-        
-        const sphere2 = new THREE.Mesh(sphere2Geometry, sphere2Material);
-        this.scene.add(sphere2);
-        
-        // 3つ目の小さな球体 - より繊細なエフェクト
-        const sphere3Geometry = new THREE.SphereGeometry(15, 32, 32);
-        const sphere3Material = new THREE.MeshBasicMaterial({
-            color: 0x26d8de,
-            transparent: true,
-            opacity: 0.04,
-            side: THREE.BackSide
-        });
-        
-        const sphere3 = new THREE.Mesh(sphere3Geometry, sphere3Material);
-        this.scene.add(sphere3);
-    },
+    // イベントリスナーの設定
+    function setupEventListeners() {
+        document.addEventListener('mousemove', onDocumentMouseMove);
+        document.addEventListener('touchstart', onDocumentTouchStart);
+        document.addEventListener('touchmove', onDocumentTouchMove);
+        window.addEventListener('resize', onWindowResize);
+    }
     
-    onWindowResize: function() {
-        // モバイル端末の再チェック
-        this.isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        if (this.isMobileDevice) {
-            // モバイル端末の場合はThree.jsを無効化
-            if (this.renderer && this.renderer.domElement) {
-                this.renderer.domElement.style.display = 'none';
-            }
-            
-            // フォールバック要素を表示
-            const fallback = document.querySelector('.particles-fallback');
-            if (fallback) {
-                fallback.style.display = 'block';
-            }
-            
-            return;
-        } else {
-            // デスクトップの場合はThree.jsを表示
-            if (this.renderer && this.renderer.domElement) {
-                this.renderer.domElement.style.display = 'block';
-            }
-            
-            // フォールバック要素を非表示
-            const fallback = document.querySelector('.particles-fallback');
-            if (fallback) {
-                fallback.style.display = 'none';
-            }
-        }
-        
-        // カメラのアスペクト比を更新
-        if (this.camera && this.renderer) {
-            this.camera.aspect = window.innerWidth / window.innerHeight;
-            this.camera.updateProjectionMatrix();
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-    },
+    // マウス移動イベントのハンドラー
+    function onDocumentMouseMove(event) {
+        mouseX = event.clientX - windowHalfX;
+        mouseY = event.clientY - windowHalfY;
+    }
     
-    animate: function() {
-        // モバイル端末の場合はアニメーションを中止
-        if (this.isMobileDevice) return;
-        
-        requestAnimationFrame(this.animate.bind(this));
-        
-        // パーティクルのアニメーション - より繊細な動き
-        if (this.particles) {
-            this.particles.rotation.x += 0.0003;
-            this.particles.rotation.y += 0.0005;
-            
-            // パーティクルのサイズを時間に応じて変化させる
-            const sizes = this.particles.geometry.attributes.size;
-            const time = Date.now() * 0.0005;
-            
-            for (let i = 0; i < sizes.count; i++) {
-                sizes.array[i] = (Math.sin(i + time) * 0.3 + 1) * (Math.random() * 2 + 0.5);
-            }
-            
-            sizes.needsUpdate = true;
-        }
-        
-        // カメラの位置を少し動かして浮遊感を出す
-        if (this.camera) {
-            this.camera.position.x = Math.sin(Date.now() * 0.0001) * 3;
-            this.camera.position.y = Math.cos(Date.now() * 0.0001) * 3;
-            this.camera.lookAt(this.scene.position);
-        }
-        
-        if (this.renderer && this.scene && this.camera) {
-            this.renderer.render(this.scene, this.camera);
+    // タッチ開始イベントのハンドラー
+    function onDocumentTouchStart(event) {
+        if (event.touches.length === 1) {
+            event.preventDefault();
+            mouseX = event.touches[0].pageX - windowHalfX;
+            mouseY = event.touches[0].pageY - windowHalfY;
         }
     }
-};
+    
+    // タッチ移動イベントのハンドラー
+    function onDocumentTouchMove(event) {
+        if (event.touches.length === 1) {
+            event.preventDefault();
+            mouseX = event.touches[0].pageX - windowHalfX;
+            mouseY = event.touches[0].pageY - windowHalfY;
+        }
+    }
+    
+    // ウィンドウリサイズイベントのハンドラー
+    function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+        
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // モバイルデバイスかどうかを再判定
+        if (window.innerWidth < 768) {
+            // すでに作成されているパーティクルシステムは変更しない
+            // （リサイズのたびに再作成すると処理が重くなるため）
+        }
+    }
+    
+    // アニメーションループ
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+    }
+    
+    // レンダリング処理
+    function render() {
+        if (!params.active) return;
+        
+        // マウス位置へ緩やかに追従
+        targetMouseX = mouseX * 0.001;
+        targetMouseY = -mouseY * 0.001;
+        
+        // カメラを回転させる（非常に弱い回転）
+        camera.rotation.x += (targetMouseY - camera.rotation.x) * 0.01;
+        camera.rotation.y += (targetMouseX - camera.rotation.y) * 0.01;
+        
+        // スクロール位置に基づいてパーティクルシステムの回転を調整
+        const scrollY = window.scrollY || window.pageYOffset;
+        const scrollFactor = scrollY / 5000; // スクロール変化係数
+        
+        // パーティクルシステムをゆっくり回転
+        particleSystem.rotation.y += params.defaultAnimationSpeed * 0.1;
+        
+        // スクロールに応じて回転を変更
+        particleSystem.rotation.x = scrollFactor * Math.PI * 0.2;
+        
+        // マウス位置の影響を計算
+        const positionAttribute = particleSystem.geometry.getAttribute('position');
+        const positions = positionAttribute.array;
+        
+        // 各パーティクルを更新
+        for (let i = 0; i < params.particleCount; i++) {
+            const i3 = i * 3;
+            
+            // マウスとの距離に基づく影響を計算
+            const x = positions[i3];
+            const y = positions[i3 + 1];
+            const z = positions[i3 + 2];
+            
+            // 距離を計算
+            const mouseOffset = new THREE.Vector3(mouseX - x, mouseY - y, 0);
+            const distance = mouseOffset.length();
+            
+            // マウスの影響範囲内なら位置を変更
+            if (distance < params.mouseInfluenceDistance) {
+                const influence = (1 - distance / params.mouseInfluenceDistance) * params.mouseInfluenceStrength;
+                positions[i3] += mouseOffset.x * influence * 0.02;
+                positions[i3 + 1] += mouseOffset.y * influence * 0.02;
+                
+                // 少しだけ震えを追加して生き生きとした動きに
+                positions[i3] += (Math.random() - 0.5) * 0.2;
+                positions[i3 + 1] += (Math.random() - 0.5) * 0.2;
+                positions[i3 + 2] += (Math.random() - 0.5) * 0.2;
+            }
+            
+            // 時間経過で徐々に元の位置に戻る（減衰効果）
+            const originalRadius = 700 + (i / params.particleCount) * 300;
+            const originalTheta = (i / params.particleCount) * Math.PI * 2;
+            const originalY = (Math.random() - 0.5) * 2000;
+            
+            const originalX = originalRadius * Math.cos(originalTheta);
+            const originalZ = originalRadius * Math.sin(originalTheta);
+            
+            positions[i3] += (originalX - positions[i3]) * 0.01;
+            positions[i3 + 1] += (originalY - positions[i3 + 1]) * 0.01;
+            positions[i3 + 2] += (originalZ - positions[i3 + 2]) * 0.01;
+        }
+        
+        // 更新フラグを設定
+        positionAttribute.needsUpdate = true;
+        
+        // レンダリング実行
+        renderer.render(scene, camera);
+    }
+    
+    // パーティクルアニメーションの一時停止/再開
+    function toggleActive(isActive) {
+        params.active = isActive;
+    }
+    
+    // インターフェースを公開
+    return {
+        init: init,
+        toggleActive: toggleActive
+    };
+})();
 
-// DOMがロードされたら初期化
+// DOMコンテンツ読み込み完了時に初期化
 document.addEventListener('DOMContentLoaded', function() {
-    ThreeJSParticlesModule.init();
+    // WebGLがサポートされているか確認
+    if (window.WebGLRenderingContext) {
+        try {
+            ThreeParticles.init();
+        } catch (e) {
+            console.warn('WebGLの初期化に失敗しました: ', e);
+            // フォールバック処理
+            const fallback = document.querySelector('.particles-fallback');
+            if (fallback) fallback.style.display = 'block';
+        }
+    } else {
+        console.warn('WebGLがサポートされていません');
+        // フォールバック処理
+        const fallback = document.querySelector('.particles-fallback');
+        if (fallback) fallback.style.display = 'block';
+    }
+});
+
+// パフォーマンスを考慮して、ページが非表示のときはアニメーションを一時停止
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        ThreeParticles.toggleActive(false);
+    } else {
+        ThreeParticles.toggleActive(true);
+    }
 });
