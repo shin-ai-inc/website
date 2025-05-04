@@ -1,4 +1,3 @@
-/* responsive.css - placeholder CSS */
 /* 
 ==============================================
 // === component-split: ResponsiveStyles ===
@@ -94,6 +93,8 @@ COMPONENT: レスポンシブレイアウト
     
     .hero-title {
         font-size: 3rem;
+        /* 2行表示を維持するための調整 */
+        line-height: 1.2;
     }
     
     .hero-description {
@@ -159,6 +160,25 @@ COMPONENT: レスポンシブレイアウト
     .page-header h1 {
         font-size: 2.5rem;
     }
+    
+    /* サービス詳細ページのレスポンシブ対応 */
+    .service-detail-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .service-detail-image {
+        order: -1;
+    }
+    
+    .service-detail-content.reverse .service-detail-image {
+        order: -1;
+    }
+    
+    /* スクロールダウンインジケーターの位置調整 */
+    .scroll-down {
+        bottom: 20px;
+    }
 }
 
 /* スマートフォン (767px以下) */
@@ -181,6 +201,50 @@ COMPONENT: レスポンシブレイアウト
         height: 35px;
     }
     
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: center;
+        z-index: 100;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+    
+    .nav.active {
+        display: flex;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-cta {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+    }
+    
+    .nav-cta .btn {
+        width: 100%;
+    }
+    
     .hero {
         min-height: 500px;
         padding-top: 100px;
@@ -198,8 +262,11 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.4rem;
     }
     
+    /* ヒーロータイトルのレスポンシブ調整 - 2行表示保持 */
     .hero-title {
         font-size: 2.5rem;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
     }
     
     .hero-label {
@@ -325,7 +392,6 @@ COMPONENT: レスポンシブレイアウト
     
     .contact-method {
         margin-bottom: 1.2rem;
-        flex-direction: row;
     }
     
     .contact-icon {
@@ -413,6 +479,75 @@ COMPONENT: レスポンシブレイアウト
     .page-header h1 {
         font-size: 2rem;
     }
+    
+    /* サービス詳細ページのレスポンシブ対応 */
+    .service-detail-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .service-detail-image {
+        order: -1;
+    }
+    
+    .service-detail-content.reverse .service-detail-image {
+        order: -1;
+    }
+    
+    .service-detail-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* カウンターセクションのレスポンシブ対応 */
+    .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* チームセクションのレスポンシブ対応 */
+    .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    /* 企業価値セクションのレスポンシブ対応 */
+    .company-values {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 会社概要詳細セクションのレスポンシブ対応 */
+    .about-detail-content {
+        grid-template-columns: 1fr;
+    }
+    
+    /* スクロールダウンインジケーターの位置調整 */
+    .scroll-down {
+        bottom: 15px;
+    }
+    
+    /* FAQセクションのレスポンシブ対応 */
+    .faq-question {
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+    
+    /* サービスハイライトセクションのレスポンシブ対応 */
+    .service-highlight {
+        padding: 1.5rem;
+    }
+    
+    .service-highlight-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Cookie バナーのレスポンシブ対応 */
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* スマートフォン小 (480px以下) */
@@ -429,8 +564,10 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.6rem;
     }
     
+    /* ヒーロータイトルをさらに小さく調整 - 2行表示維持 */
     .hero-title {
         font-size: 2rem;
+        line-height: 1.25;
     }
     
     .hero-description {
@@ -479,6 +616,27 @@ COMPONENT: レスポンシブレイアウト
         font-size: 1.3rem;
     }
     
+    .service-highlight-title {
+        font-size: 1.5rem;
+    }
+    
+    .service-feature {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .service-feature-icon {
+        margin: 0 auto 1rem;
+    }
+    
+    .counter-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .counter-item {
+        padding: 1.5rem;
+    }
+    
     .chatbot-toggle {
         width: 45px;
         height: 45px;
@@ -492,6 +650,34 @@ COMPONENT: レスポンシブレイアウト
     }
     
     .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    /* フッターのソーシャルリンク調整 */
+    .social-links {
+        justify-content: center;
+    }
+    
+    /* スクロールインジケーターの表示調整 */
+    .scroll-down span {
+        display: none; /* テキストを非表示 */
+    }
+    
+    .scroll-down-icon {
+        margin-bottom: 0;
+    }
+    
+    /* トーストの幅調整 */
+    .toast {
+        min-width: 250px;
+    }
+    
+    /* エラーページ調整 */
+    .error-code {
+        font-size: 7rem;
+    }
+    
+    .error-title {
         font-size: 1.8rem;
     }
 }
@@ -516,7 +702,8 @@ COMPONENT: レスポンシブレイアウト
     .header, 
     .footer, 
     .chatbot, 
-    .scroll-down {
+    .scroll-down,
+    .back-to-top {
         display: none !important;
     }
     
@@ -559,5 +746,26 @@ COMPONENT: レスポンシブレイアウト
     .contact-info {
         box-shadow: none;
         border: 1px solid #ddd;
+    }
+    
+    /* プリント時のブレークポイント */
+    .print-break-before {
+        page-break-before: always;
+    }
+    
+    .print-break-after {
+        page-break-after: always;
+    }
+    
+    /* プリント時のURL表示 */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 90%;
+    }
+    
+    /* 内部リンクのURL表示を非表示 */
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
     }
 }
