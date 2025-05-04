@@ -108,9 +108,9 @@
         },
         {
           "@type": "Offer",
-          "name": "意思決定支援AI",
-          "description": "AI議事録ツール「カイロク」やナレッジ検索AI（RAG技術対応）により、会議の効率化と社内知識の活用を促進。",
-          "url": "https://www.shinai.tech/services.html#decision-support"
+          "name": "企画書資料作成AIツール「アイプロ」",
+          "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。",
+          "url": "https://www.shinai.tech/services.html#aipro"
         },
         {
           "@type": "Offer",
@@ -181,6 +181,59 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
+    
+    <!-- インラインスタイル（修正用） -->
+    <style>
+        /* キャッチコピーを2行に収める */
+        .hero-title {
+            font-size: 3.8rem;
+            line-height: 1.25;
+            max-width: 650px;
+        }
+        
+        /* 「最先端AI」のコントラスト強化 */
+        .hero-title .highlight {
+            color: #8e33ff;
+            font-weight: 900;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+        }
+        
+        /* スクロールダウンインジケーターの位置調整 */
+        .scroll-down {
+            position: absolute;
+            top: calc(100vh - 350px);
+            z-index: 10;
+        }
+        
+        /* 「無料相談する」ボタンの視認性向上 */
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #8e33ff;
+            font-weight: 700;
+            border: 2px solid #8e33ff;
+        }
+        
+        /* カード3Dの調整 */
+        .card-3d {
+            height: 100%;
+        }
+        
+        .card-3d-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-3d-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-3d-footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -293,6 +346,7 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-label">AI導入・業務効率化支援</div>
+                    <!-- キャッチコピーを2行に収め、最先端AIの部分のコントラストを強化 -->
                     <h1 class="hero-title">企業成長を加速する<span class="highlight">最先端AI</span>ソリューション</h1>
                     <p class="hero-description">最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。チャットボット開発から業務効率化まで、包括的なAIサポートを提供。</p>
                     
@@ -347,27 +401,27 @@
                         </div>
                     </div>
                     
-                    <!-- 意思決定支援AI -->
+                    <!-- 企画書資料作成AIツール「アイプロ」（旧 意思決定支援AI） -->
                     <div class="card-3d" id="card2">
                         <div class="card-3d-content">
                             <div class="card-3d-image">
-                                <img src="https://images.unsplash.com/photo-1671269075775-1482f5359180?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AI議事録作成サービスのイメージ" 
+                                <img src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400" 
+                                     alt="企画書資料作成AIツール「アイプロ」のイメージ" 
                                      loading="lazy"
                                      width="600" 
                                      height="400">
                                 <div class="card-3d-icon"><i class="fas fa-file-alt" aria-hidden="true"></i></div>
                             </div>
                             <div class="card-3d-body">
-                                <h3 class="heading-md">意思決定支援AI</h3>
-                                <p>AI議事録ツール「カイロク」やナレッジ検索AI（RAG技術対応）により、会議の効率化と社内知識の活用を促進。スピーディかつ精度の高い意思決定を支援します。</p>
+                                <h3 class="heading-md">企画書資料作成AIツール「アイプロ」</h3>
+                                <p>AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。</p>
                                 <div class="card-3d-tags" aria-label="主な特徴">
-                                    <span class="card-3d-tag">会議効率化</span>
-                                    <span class="card-3d-tag">知識活用</span>
-                                    <span class="card-3d-tag">判断精度向上</span>
+                                    <span class="card-3d-tag">時間短縮</span>
+                                    <span class="card-3d-tag">データ活用</span>
+                                    <span class="card-3d-tag">生産性向上</span>
                                 </div>
                                 <div class="card-3d-footer">
-                                    <a href="services.html#decision-support" class="btn btn-outline">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                                    <a href="services.html#aipro" class="btn btn-outline">詳細を見る <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -619,6 +673,70 @@
         
         <!-- 
         ==============================================
+        // === component-split: NewServiceSection ===
+        COMPONENT: 企画書資料作成AIツール「アイプロ」紹介セクション
+        ==============================================
+        -->
+        <section class="section">
+            <div class="container">
+                <div class="service-highlight">
+                    <h2 class="service-highlight-title">企画書資料作成AIツール「アイプロ」</h2>
+                    <p class="service-highlight-content">
+                        AIが自動でビジネス企画書・プレゼン資料を作成。企画立案から資料作成までの時間を大幅に削減し、企画・マーケティング・営業部門の生産性を向上させます。入力情報をもとにデータドリブンで魅力的な企画を提案します。
+                    </p>
+                    
+                    <div class="service-highlight-features">
+                        <div class="service-feature">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="service-feature-content">
+                                <h4>AI自動作成</h4>
+                                <p>基本情報の入力だけで、AIが自動的に企画書を生成。構成から文章まで一括作成します。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-feature">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="service-feature-content">
+                                <h4>データ活用分析</h4>
+                                <p>市場データや過去実績を分析し、根拠のある企画提案と効果予測を行います。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-feature">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="service-feature-content">
+                                <h4>時間短縮</h4>
+                                <p>企画立案から資料作成までの時間を最大80%削減。創造的な業務に集中できます。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="service-feature">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="service-feature-content">
+                                <h4>デザイン最適化</h4>
+                                <p>視覚的に魅力的で説得力のあるデザインテンプレートを自動適用します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="services.html#aipro" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://ai-business-planner-frontend-dev-843307222266.asia-northeast1.run.app/" class="btn btn-outline" style="margin-left: 1rem;" target="_blank">デモを試す <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
         // === component-split: CTASection ===
         COMPONENT: お問い合わせCTA
         ==============================================
@@ -678,7 +796,7 @@
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
                         <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#decision-support">意思決定支援AI</a></li>
+                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
                         <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
                         <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
                         <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
