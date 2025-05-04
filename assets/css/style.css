@@ -5,10 +5,11 @@ COMPONENT: 変数定義
 ==============================================
 */
 :root {
-    /* カラーパレット */
+    /* カラーパレット - 青色を追加して強化 */
     --purple-bright: #b723ef;   /* 明るい紫 - ロゴに使用 */
     --purple-main: #8e33ff;     /* メインの紫 */
-    --blue-mid: #4264df;        /* 中間のブルー */
+    --blue-mid: #4264df;        /* 中間のブルー - 強調 */
+    --blue-light: #5a8ced;      /* 明るいブルー - アクセント */
     --cyan-light: #26d8de;      /* 水色 */
     
     /* 補助色 */
@@ -17,8 +18,8 @@ COMPONENT: 変数定義
     --light-gray: #F3F4F6;
     --white: #FFFFFF;
     
-    /* グラデーション */
-    --top-gradient: linear-gradient(90deg, var(--purple-main) 0%, var(--blue-mid) 50%, var(--cyan-light) 100%);
+    /* グラデーション - 青色を追加して強化 */
+    --top-gradient: linear-gradient(90deg, var(--blue-light) 0%, var(--purple-main) 50%, var(--cyan-light) 100%);
     --bottom-gradient: linear-gradient(90deg, var(--cyan-light) 0%, var(--blue-mid) 50%, var(--purple-main) 100%);
     --hero-overlay: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
     --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
@@ -267,7 +268,7 @@ body.loaded .hero-cta {
 }
 
 img {
-    max-width: a100%;
+    max-width: 100%;
     height: auto;
     display: block;
 }
@@ -647,14 +648,14 @@ COMPONENT: ボタン
 }
 
 .btn-outline {
-    /* 以下を修正 - コントラスト強化のため背景色を追加 */
-    background-color: rgba(255, 255, 255, 0.8);
+    /* 視認性向上のためのスタイル調整 */
+    background-color: rgba(255, 255, 255, 0.95);
     color: var(--purple-main);
     border: 2px solid var(--purple-main);
     position: relative;
     z-index: 1;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(142, 51, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(142, 51, 255, 0.15);
     font-weight: 700;
 }
 
@@ -871,7 +872,7 @@ COMPONENT: ページヘッダー
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238e33ff' fill-opacity='0.02'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%238e33ff' fill-opacity='0.02'/%3E%3C/svg%3E");
     z-index: 0;
 }
 
@@ -992,7 +993,7 @@ COMPONENT: ヒーローセクション
     animation: shimmer 2s infinite;
 }
 
-/* ヒーロータイトルを修正 - 行数を2行に収めるためのスタイル */
+/* ヒーロータイトルを2行に収めるよう調整 */
 .hero-title {
     font-size: 3.8rem;
     font-weight: 900;
@@ -1002,7 +1003,8 @@ COMPONENT: ヒーローセクション
     font-family: var(--font-jp);
     position: relative;
     display: inline-block;
-    color: var(--dark); /* 背景が白/半透明なのでダークグレーを使用 */
+    color: var(--dark); 
+    max-width: 650px;
 }
 
 /* "最先端AI"の文字色を強調 */
@@ -1236,7 +1238,7 @@ COMPONENT: 3Dカード
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(90deg, var(--blue-light), var(--purple-main));
     z-index: 1;
 }
 
@@ -1313,11 +1315,18 @@ COMPONENT: 3Dカード
     flex-direction: column;
 }
 
+/* サービスカードのタイトル中央揃え */
+.card-3d-body h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
 .card-3d-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
     margin: 1.2rem 0;
+    justify-content: center;
 }
 
 .card-3d-tag {
@@ -1338,9 +1347,10 @@ COMPONENT: 3Dカード
     transform: translateZ(45px);
 }
 
+/* サービスカードのフッター中央揃え */
 .card-3d-footer {
     margin-top: auto;
-    transform: translateZ(25px);
+    text-align: center;
 }
 
 /* 
@@ -2383,19 +2393,19 @@ COMPONENT: スクロールダウンインジケーター
 */
 .scroll-down {
     position: absolute;
-    top: calc(100vh - 350px);
+    bottom: 30px; /* 位置調整：キャッチコピーとの重複を解消 */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
-    z-index: 9999;  /* ← z-index を超大きくする */
-    color: #8a2be2;
+    z-index: 10; /* 優先表示 */
+    color: var(--purple-main);
     text-shadow: none;
     padding: 0.3rem 0.6rem;
     border-radius: 10px;
-    pointer-events: auto;  /* ← クリックも可能に */
+    pointer-events: auto;
 }
 
 .scroll-down-icon {
@@ -2572,10 +2582,10 @@ COMPONENT: 企画書資料作成AIツール「アイプロ」セクション
 ==============================================
 */
 .service-highlight {
-    background: linear-gradient(135deg, rgba(142, 51, 255, 0.05), rgba(66, 100, 223, 0.05));
+    background: linear-gradient(135deg, rgba(142, 51, 255, 0.05), rgba(66, 100,223, 0.05));
     padding: 3rem;
     border-radius: var(--radius-lg);
-    border-left: 5px solid var(--purple-main);
+    border-left: 5px solid var(--blue-mid); /* 青色を強調 */
     box-shadow: var(--shadow-lg);
     margin: 3rem 0;
     position: relative;
@@ -2597,21 +2607,24 @@ COMPONENT: 企画書資料作成AIツール「アイプロ」セクション
 .service-highlight-title {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    color: var(--purple-main);
+    color: var(--blue-mid);
     font-weight: 700;
     font-family: var(--font-jp);
     position: relative;
     display: inline-block;
+    text-align: center;
+    width: 100%;
 }
 
 .service-highlight-title::after {
     content: '';
     position: absolute;
-    left: 0;
+    left: 50%;
     bottom: -5px;
-    width: 60px;
+    transform: translateX(-50%);
+    width: 120px;
     height: 3px;
-    background: var(--purple-main);
+    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
     border-radius: var(--radius-full);
 }
 
@@ -2619,6 +2632,10 @@ COMPONENT: 企画書資料作成AIツール「アイプロ」セクション
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 2rem;
+    text-align: center;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .service-highlight-features {
@@ -3043,7 +3060,7 @@ COMPONENT: 各ページ固有のスタイル
     bottom: -8px;
     width: 60px;
     height: 3px;
-    background: var(--purple-main);
+    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
     border-radius: var(--radius-full);
 }
 
@@ -3801,4 +3818,84 @@ COMPONENT: パンくずリストスタイル
     background: linear-gradient(135deg, rgba(183, 35, 239, 0.1), rgba(66, 100, 223, 0.1));
     z-index: -1;
     border-radius: 4px;
+}
+
+/* 料金プランカードのスタイル改善 */
+.pricing-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    border: 1px solid rgba(142, 51, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* おすすめバッジのスタイル改善 */
+.recommended-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transform: translate(35%, -35%) rotate(45deg) translateX(30%);
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);
+}
+
+/* サービスカードのタイトル中央揃え強制 */
+.ai-service-title {
+    text-align: center !important;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+/* 詳細を見るボタンの中央揃え */
+.center-button {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* AI導入戦略ソリューションの下線修正 */
+.solution-title-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.solution-title-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+    border-radius: var(--radius-full);
+}
+
+/* 最先端AIソリューションのレイアウト改善 */
+.ai-solution-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .ai-solution-layout {
+        grid-template-columns: 1fr;
+    }
 }
