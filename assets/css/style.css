@@ -2393,20 +2393,21 @@ COMPONENT: スクロールダウンインジケーター
 */
 .scroll-down {
     position: absolute;
-    bottom: 30px; /* 位置調整：キャッチコピーとの重複を解消 */
+    top: calc(100vh - 350px);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
-    z-index: 10; /* 優先表示 */
-    color: var(--purple-main);
+    z-index: 9999;  /* ← z-index を超大きくする */
+    color: #8a2be2;
     text-shadow: none;
     padding: 0.3rem 0.6rem;
     border-radius: 10px;
-    pointer-events: auto;
+    pointer-events: auto;  /* ← クリックも可能に */
 }
+
 
 .scroll-down-icon {
     width: 35px;
