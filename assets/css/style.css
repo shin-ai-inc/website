@@ -2383,21 +2383,18 @@ COMPONENT: スクロールダウンインジケーター
 */
 .scroll-down {
     position: absolute;
-    bottom: -80px;
+    bottom: 50px;  /* ← 境界から上方向に持ち上げ */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
-    z-index: 10;
-    animation: floatAnimation 2s ease-in-out infinite;
-    font-family: var(--font-jp);
-    letter-spacing: 0.5px;
-
-    color: #6a0dad; /* 主張のある紫 */
-    text-shadow: 0 0 2px white, 0 0 3px rgba(0, 0, 0, 0.3);  /* 可読性UP */
+    z-index: 100;  /* ← 前面に */
+    color: #6a0dad;
+    text-shadow: 0 0 2px white, 0 0 3px rgba(0, 0, 0, 0.3);
 }
+
 
 .scroll-down-icon {
     width: 35px;
