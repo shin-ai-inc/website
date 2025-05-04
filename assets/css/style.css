@@ -2539,8 +2539,18 @@ COMPONENT: Three.jsパーティクルアニメーション
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -1;         /* ← 背面 */
     opacity: 0.4;
+    pointer-events: none; /* ← 背景なのでクリック無効 */
+}
+
+.particles-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;         /* ← canvas も一緒に背面 */
 }
 
 .particles-fallback {
