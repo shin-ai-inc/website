@@ -2383,18 +2383,19 @@ COMPONENT: スクロールダウンインジケーター
 */
 .scroll-down {
     position: absolute;
-    bottom: 85px;  /* ← ページ最下部に近づける */
+    top: calc(100vh - 120px);  /* ← ★画面の高さから120px上に配置（境界線の位置に調整） */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
-    z-index: 1000;  /* 前面に */
-    color: #8a2be2;  /* 明るめの紫 */
-    text-shadow: none;  /* シャドウ完全削除 */
+    z-index: 1000;
+    color: #8a2be2;
+    text-shadow: none;
+    background: rgba(255, 255, 255, 0.7);
     padding: 0.3rem 0.6rem;
-    border-radius: 10px;  /* 角丸で柔らかく */
+    border-radius: 10px;
 }
 
 
