@@ -127,6 +127,368 @@
     ==============================================
     -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Page specific styles -->
+    <style>
+        /* 
+        ==============================================
+        // === component-split: ContactPageStyles ===
+        COMPONENT: お問い合わせページ固有のスタイル
+        ==============================================
+        */
+        
+        /* ページヒーロー見出し改善 */
+        .page-hero-title .highlight-accent {
+            color: var(--accent);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-hero-title .highlight-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 138, 0, 0.2);
+            z-index: -1;
+            border-radius: var(--radius-full);
+        }
+        
+        /* 無料相談ボタン改善 */
+        .btn-icon-bounce {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+        
+        .btn-icon-bounce span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-icon-bounce i {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-icon-bounce:hover i {
+            transform: translateX(5px);
+            animation: btnIconBounce 0.8s ease infinite;
+        }
+        
+        @keyframes btnIconBounce {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+        
+        .btn-icon-bounce::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.7s ease;
+            z-index: 1;
+        }
+        
+        .btn-icon-bounce:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.35);
+        }
+        
+        .btn-icon-bounce:hover::before {
+            left: 100%;
+        }
+        
+        /* よくあるご質問セクション改善 */
+        .section-faq {
+            background-color: rgba(249, 250, 252, 0.8);
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .section-faq::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .faq-question {
+            background: var(--white);
+            color: var(--dark);
+            font-weight: 600;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: var(--purple-main);
+        }
+        
+        .faq-question i {
+            color: var(--purple-main);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            border-bottom: none;
+            color: var(--purple-main);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(-180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: rgba(249, 250, 252, 0.7);
+            border-top: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem 2rem;
+            max-height: 1000px;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        /* チェックボックスのカスタマイズ */
+        .form-check {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-check-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .form-check-label {
+            position: relative;
+            cursor: pointer;
+            padding-left: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .form-check-label::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgba(58, 95, 235, 0.3);
+            border-radius: 4px;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .form-check-input:checked + .form-check-label::before {
+            background-color: var(--purple-main);
+            border-color: var(--purple-main);
+        }
+        
+        .form-check-input:checked + .form-check-label::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -1.85rem;
+            top: 0;
+            color: var(--white);
+            font-size: 14px;
+        }
+        
+        .form-check-input:focus + .form-check-label::before {
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
+        }
+        
+        .form-check-label:hover::before {
+            border-color: var(--purple-main);
+        }
+        
+        /* ハンバーガーメニューのPC非表示 */
+        @media (min-width: 992px) {
+            .menu-toggle {
+                display: none !important;
+            }
+        }
+        
+        /* アニメーション追加 */
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        /* CTA強調 */
+        .cta-main-btn {
+            position: relative;
+            overflow: visible;
+            box-shadow: 0 8px 20px rgba(255, 138, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cta-main-btn:hover {
+            box-shadow: 0 12px 30px rgba(255, 138, 0, 0.4);
+            transform: translateY(-5px) scale(1.05);
+        }
+        
+        /* お問い合わせフォーム改善 */
+        .contact-form {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+            z-index: 2;
+        }
+        
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .textarea-wrapper .input-icon {
+            top: 1.5rem;
+            transform: none;
+        }
+        
+        .form-control {
+            padding: 0.9rem 1rem 0.9rem 2.5rem;
+            border: 1px solid rgba(94, 108, 132, 0.15);
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+            color: var(--dark);
+            background-color: var(--white);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--purple-main);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.15);
+        }
+        
+        .form-control:focus + .input-icon {
+            color: var(--purple-main);
+        }
+        
+        .form-submit {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        /* メッセージ成功表示 */
+        .message-success {
+            background: rgba(0, 201, 167, 0.1);
+            border-left: 4px solid var(--blue-mid);
+            padding: 1.2rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .message-success i {
+            color: var(--blue-mid);
+            font-size: 1.5rem;
+        }
+        
+        .message-success p {
+            color: var(--dark);
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .message-success.show {
+            display: flex;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -304,7 +666,7 @@
                         <h3 class="heading-md">無料相談フォーム</h3>
                         <p class="form-intro">まずは無料でご相談ください。AI導入に関する課題やお悩みをお聞かせください。</p>
                         
-                        <form id="contact-form" aria-label="お問い合わせフォーム">
+                        <form id="contact-form-element" aria-label="お問い合わせフォーム">
                             <div class="form-group">
                                 <label for="name" class="form-label">お名前<span class="required">*</span></label>
                                 <div class="input-wrapper">
@@ -528,7 +890,7 @@
                     <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn btn-cta-white btn-lg btn-icon-bounce">
+                        <a href="#contact-form" class="btn btn-cta-white btn-lg btn-icon-bounce cta-main-btn">
                             <span>無料相談を申し込む</span>
                             <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -677,5 +1039,154 @@
     ==============================================
     -->
     <script src="assets/js/main.js"></script>
+    
+    <!-- ページ特有のJavaScript -->
+    <script>
+        // FAQアコーディオン機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // 現在のアクティブなアイテムを取得
+                    const currentActive = document.querySelector('.faq-item.active');
+                    
+                    // クリックされたアイテムが既にアクティブでない場合
+                    if (!item.classList.contains('active')) {
+                        // 他のアクティブなアイテムがあれば非アクティブにする
+                        if (currentActive) {
+                            currentActive.classList.remove('active');
+                            currentActive.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        }
+                        
+                        // クリックされたアイテムをアクティブにする
+                        item.classList.add('active');
+                        question.setAttribute('aria-expanded', 'true');
+                    } else {
+                        // 既にアクティブならば非アクティブにする（トグル動作）
+                        item.classList.remove('active');
+                        question.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+            
+            // フォーム送信処理
+            const contactForm = document.getElementById('contact-form-element');
+            const successMessage = document.getElementById('message-success');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // フォームバリデーションなどの処理をここに追加
+                    
+                    // 成功メッセージを表示（実際の実装では非同期通信後に表示）
+                    setTimeout(() => {
+                        successMessage.classList.add('show');
+                        contactForm.reset();
+                        
+                        // 5秒後にメッセージを非表示
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                        }, 5000);
+                    }, 1000);
+                });
+            }
+            
+            // 現在の年を取得して著作権表示を更新
+            const currentYearElement = document.getElementById('current-year');
+            if (currentYearElement) {
+                currentYearElement.textContent = new Date().getFullYear();
+            }
+            
+            // スムーススクロール機能
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // ハンバーガーメニュー（モバイル用）
+            const menuToggle = document.getElementById('menu-toggle');
+            const nav = document.getElementById('nav');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                    
+                    // アクセシビリティ対応
+                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    menuToggle.setAttribute('aria-expanded', !isExpanded);
+                    menuToggle.setAttribute('aria-label', isExpanded ? 'メニューを開く' : 'メニューを閉じる');
+                    menuToggle.innerHTML = isExpanded ? '<i class="fas fa-bars" aria-hidden="true"></i>' : '<i class="fas fa-times" aria-hidden="true"></i>';
+                });
+            }
+            
+            // スクロール時のヘッダー変更
+            const header = document.getElementById('header');
+            
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 10) {
+                        header.classList.add('header-scrolled');
+                    } else {
+                        header.classList.remove('header-scrolled');
+                    }
+                });
+            }
+            
+            // トップに戻るボタン
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('active');
+                    } else {
+                        backToTopButton.classList.remove('active');
+                    }
+                });
+                
+                backToTopButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // チャットボット操作
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            
+            if (chatbotToggle && chatbotContainer && chatbotClose) {
+                chatbotToggle.addEventListener('click', function() {
+                    chatbotContainer.classList.toggle('active');
+                    chatbotToggle.setAttribute('aria-expanded', chatbotContainer.classList.contains('active'));
+                });
+                
+                chatbotClose.addEventListener('click', function() {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
