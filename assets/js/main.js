@@ -1,9 +1,6 @@
-// main.js - placeholder JS
 /**
- * ==============================================
- * // === component-split: Main ===
- * COMPONENT: メインJavaScriptモジュール
- * ==============================================
+ * @module Main
+ * @description サイト全体の初期化と設定
  */
 document.addEventListener('DOMContentLoaded', function() {
     // 現在年の自動更新
@@ -11,318 +8,97 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // モジュールの初期化
     NavModule.init();
-    HeroSlideshow.init();
-    AnimationModule.init();
+    ChatbotModule.init();
     FormModule.init();
+    FAQModule.init();
+    AnimationModule.init();
+    BackToTopModule.init();
     
-    // 初期ロード時のアニメーション
-    setTimeout(function() {
-        document.body.classList.add('loaded');
-    }, 500);
+    // ヘッダースクロール検知
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+    });
 });
 
 /**
- * ==============================================
- * // === component-split: Nav ===
- * COMPONENT: ナビゲーション関連の機能
- * ==============================================
+ * @module NavModule
+ * @description ナビゲーション関連の機能
  */
 const NavModule = {
-    header: null,
-    menuToggle: null,
-    nav: null,
-    
     init: function() {
-        this.header = document.getElementById('header');
-        this.menuToggle = document.getElementById('menu-toggle');
-        this.nav = document.getElementById('nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
         
-        // メニュートグル機能
-        if (this.menuToggle && this.nav) {
-            this.menuToggle.addEventListener('click', this.toggleMenu.bind(this));
+        if (menuToggle && nav) {
+            menuToggle.addEventListener('click', function() {
+                const isExpanded = nav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('active');
+                
+                if (isExpanded) {
+                    menuToggle.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                    menuToggle.setAttribute('aria-label', 'メニューを閉じる');
+                } else {
+                    menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    menuToggle.setAttribute('aria-label', 'メニューを開く');
+                }
+            });
         }
-        
-        // スクロール検知
-        window.addEventListener('scroll', this.handleScroll.bind(this));
         
         // スムーススクロール
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', this.smoothScroll.bind(this));
-        });
-        
-        // 現在のページをアクティブに
-        this.setActivePage();
-    },
-    
-    toggleMenu: function() {
-        const isExpanded = this.nav.classList.toggle('active');
-        this.menuToggle.setAttribute('aria-expanded', isExpanded);
-        this.menuToggle.classList.toggle('active');
-        
-        if (isExpanded) {
-            this.menuToggle.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-            this.menuToggle.setAttribute('aria-label', 'メニューを閉じる');
-        } else {
-            this.menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-            this.menuToggle.setAttribute('aria-label', 'メニューを開く');
-        }
-    },
-    
-    handleScroll: function() {
-        if (window.scrollY > 50) {
-            this.header.classList.add('header-scrolled');
-        } else {
-            this.header.classList.remove('header-scrolled');
-        }
-    },
-    
-    smoothScroll: function(e) {
-        const targetId = e.currentTarget.getAttribute('href');
-        
-        // セクションへのリンク
-        if (targetId.startsWith('#')) {
-            e.preventDefault();
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerOffset = this.header.offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerOffset;
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
                 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-            
-            // モバイルメニューを閉じる
-            if (this.nav.classList.contains('active')) {
-                this.toggleMenu();
+                // セクションへのリンク
+                if (targetId.startsWith('#') && targetId !== '#') {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // モバイルメニューを閉じる
+                    if (nav.classList.contains('active') && menuToggle) {
+                        menuToggle.click();
+                    }
+                }
+            });
+        });
+        
+        // PC版でのハンバーガーメニュー表示制御
+        function checkWindowSize() {
+            if (window.innerWidth >= 1024) {
+                if (menuToggle) menuToggle.style.display = 'none';
+                if (nav) nav.style.display = 'flex';
+                if (nav) nav.classList.remove('active');
+            } else {
+                if (menuToggle) menuToggle.style.display = 'flex';
+                if (nav) nav.style.display = nav.classList.contains('active') ? 'flex' : 'none';
             }
         }
-    },
-    
-    setActivePage: function() {
-        // 現在のページパスを取得
-        const currentPath = window.location.pathname;
         
-        // ナビゲーションリンクをループして現在のページを確認
-        document.querySelectorAll('.nav-link').forEach(link => {
-            const href = link.getAttribute('href');
-            
-            // インデックスページ（ホーム）の場合
-            if (currentPath === '/' || currentPath === '/index.html') {
-                if (href === 'index.html' || href === './index.html' || href === '/') {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                }
-            } 
-            // 他のページの場合
-            else if (href.includes(currentPath) || currentPath.includes(href)) {
-                link.classList.add('active');
-                link.setAttribute('aria-current', 'page');
-            }
-        });
+        // 初期ロード時とリサイズ時にチェック
+        checkWindowSize();
+        window.addEventListener('resize', checkWindowSize);
     }
 };
 
 /**
- * ==============================================
- * // === component-split: HeroSlideshow ===
- * COMPONENT: ヒーロー背景画像の自動切り替え
- * ==============================================
- */
-const HeroSlideshow = {
-    images: [],
-    currentIndex: 0,
-    
-    init: function() {
-        this.images = document.querySelectorAll('.hero-bg');
-        if (!this.images.length) return;
-        
-        // 初期表示は最初の画像のみ
-        this.images[0].classList.add('active');
-        
-        // 5秒ごとに画像を切り替え
-        setInterval(() => {
-            this.nextImage();
-        }, 5000);
-    },
-    
-    nextImage: function() {
-        // 現在の画像を非表示
-        this.images[this.currentIndex].classList.remove('active');
-        
-        // 次の画像インデックスを計算
-        this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        
-        // 次の画像を表示
-        this.images[this.currentIndex].classList.add('active');
-    }
-};
-
-/**
- * ==============================================
- * // === component-split: Animation ===
- * COMPONENT: GSAPを使用した高度なアニメーション
- * ==============================================
- */
-const AnimationModule = {
-    init: function() {
-        if (typeof gsap === 'undefined') return;
-        
-        // スクロールトリガーの設定
-        if (typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-        }
-        
-        // ヘッダーフェードイン
-        gsap.from('.header', {
-            opacity: 0,
-            y: -50,
-            duration: 1,
-            ease: 'power3.out'
-        });
-        
-        // ヒーローセクションのアニメーション
-        this.animateHero();
-        
-        // セクションのアニメーション
-        this.animateSections();
-        
-        // カードのアニメーション
-        this.animateCards();
-    },
-    
-    animateHero: function() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-        
-        // テキスト要素のアニメーション
-        gsap.from('.hero-label', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.2,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-title', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.4,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-description', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.6,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-quote', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 0.8,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-cta', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 1,
-            ease: 'power3.out'
-        });
-    },
-    
-    animateSections: function() {
-        // セクションタイトルのアニメーション
-        gsap.utils.toArray('.section-title').forEach(title => {
-            gsap.from(title, {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: title,
-                    start: 'top bottom-=100',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-        
-        // サブタイトルのアニメーション
-        gsap.utils.toArray('.subtitle, .section-description').forEach(subtitle => {
-            gsap.from(subtitle, {
-                opacity: 0,
-                y: 30,
-                duration: 1,
-                delay: 0.3,
-                scrollTrigger: {
-                    trigger: subtitle,
-                    start: 'top bottom-=100',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-    },
-    
-    animateCards: function() {
-        // 3Dカードのアニメーション
-        gsap.utils.toArray('.card-3d').forEach((card, index) => {
-            gsap.from(card, {
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                delay: index * 0.2,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top bottom-=50',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-        
-        // フィーチャーブロックのアニメーション
-        gsap.utils.toArray('.feature').forEach((feature, index) => {
-            gsap.from(feature, {
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                delay: index * 0.2,
-                scrollTrigger: {
-                    trigger: feature,
-                    start: 'top bottom-=50',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-        
-        // 業界カードのアニメーション
-        gsap.utils.toArray('.industry-card').forEach((card, index) => {
-            gsap.from(card, {
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                delay: index * 0.15,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top bottom-=50',
-                    toggleActions: 'play none none none'
-                }
-            });
-        });
-    }
-};
-
-/**
- * ==============================================
- * // === component-split: FormModule ===
- * COMPONENT: お問い合わせフォーム機能
- * ==============================================
+ * @module FormModule
+ * @description お問い合わせフォーム機能
  */
 const FormModule = {
     form: null,
@@ -348,6 +124,11 @@ const FormModule = {
             if (label) {
                 label.style.color = 'var(--purple-main)';
             }
+            
+            const icon = formGroup.querySelector('.input-icon');
+            if (icon) {
+                icon.style.color = 'var(--purple-main)';
+            }
         }
     },
     
@@ -357,6 +138,11 @@ const FormModule = {
             const label = formGroup.querySelector('.form-label');
             if (label) {
                 label.style.color = '';
+            }
+            
+            const icon = formGroup.querySelector('.input-icon');
+            if (icon) {
+                icon.style.color = '';
             }
         }
     },
@@ -388,13 +174,13 @@ const FormModule = {
         // 送信ボタンを変更し、送信中状態に
         const submitBtn = this.form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> <span>送信中...</span>';
         submitBtn.disabled = true;
         
         // 送信成功の模擬（実際にはAPIを呼び出し）
         setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> 送信完了';
-            submitBtn.style.backgroundColor = '#10B981';
+            submitBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> <span>送信完了</span>';
+            submitBtn.style.backgroundImage = 'linear-gradient(135deg, #10B981, #4264DF)';
             
             this.showFormMessage();
             this.form.reset();
@@ -402,7 +188,7 @@ const FormModule = {
             // ボタンを元に戻す
             setTimeout(() => {
                 submitBtn.innerHTML = originalText;
-                submitBtn.style.backgroundColor = '';
+                submitBtn.style.backgroundImage = '';
                 submitBtn.disabled = false;
             }, 3000);
         }, 2000);
@@ -436,39 +222,44 @@ const FormModule = {
         // 既存のエラーを削除
         this.clearFieldError(field);
         
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'field-error';
-        errorMessage.style.color = '#EF4444';
-        errorMessage.style.fontSize = '0.85rem';
-        errorMessage.style.marginTop = '0.25rem';
-        errorMessage.textContent = message;
+        field.classList.add('error');
         
-        field.parentNode.appendChild(errorMessage);
+        const errorId = field.id + '-error';
+        const errorElement = document.getElementById(errorId);
+        
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.add('active');
+        }
+        
         field.setAttribute('aria-invalid', 'true');
         
-        // エラー時の視覚的フィードバック
-        field.style.borderColor = '#EF4444';
-        
         // 最初のエラーフィールドにフォーカス
-        if (document.querySelectorAll('.field-error').length === 1) {
+        if (!document.querySelector('.form-control.error:focus')) {
             field.focus();
         }
     },
     
     clearFieldError: function(field) {
-        const errorMessage = field.parentNode.querySelector('.field-error');
-        if (errorMessage) {
-            errorMessage.remove();
+        field.classList.remove('error');
+        
+        const errorId = field.id + '-error';
+        const errorElement = document.getElementById(errorId);
+        
+        if (errorElement) {
+            errorElement.classList.remove('active');
         }
         
         field.removeAttribute('aria-invalid');
-        field.style.borderColor = '';
     },
     
     showFormMessage: function() {
         const messageSuccess = document.getElementById('message-success');
         if (messageSuccess) {
             messageSuccess.classList.add('active');
+            
+            // スクロールして成功メッセージを表示
+            messageSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
             // 一定時間後に消える
             setTimeout(() => {
@@ -479,76 +270,333 @@ const FormModule = {
 };
 
 /**
- * ==============================================
- * // === component-split: Card3D ===
- * COMPONENT: 3Dカードのチルトエフェクト
- * ==============================================
+ * @module FAQModule
+ * @description よくある質問機能
  */
-const Card3DModule = {
-    cards: null,
-    
+const FAQModule = {
     init: function() {
-        this.cards = document.querySelectorAll('.card-3d');
+        const faqItems = document.querySelectorAll('.faq-item');
         
-        if (!this.cards.length) return;
+        if (!faqItems.length) return;
         
-        this.cards.forEach(card => {
-            const content = card.querySelector('.card-3d-content');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
             
-            // マウス移動イベント
-            card.addEventListener('mousemove', e => this.handleMouseMove(e, card, content));
-            
-            // マウスが離れた時のリセット
-            card.addEventListener('mouseleave', () => this.resetTilt(content));
-            
-            // タッチデバイス対応
-            card.addEventListener('touchmove', e => this.handleTouchMove(e, card, content));
-            card.addEventListener('touchend', () => this.resetTilt(content));
+            question.addEventListener('click', () => {
+                // 他のアイテムを閉じる
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                // 現在のアイテムのアクティブ状態を切り替え
+                const isExpanded = item.classList.toggle('active');
+                question.setAttribute('aria-expanded', isExpanded);
+                
+                // GSAP がある場合はアニメーション
+                if (typeof gsap !== 'undefined') {
+                    const answer = item.querySelector('.faq-answer');
+                    
+                    if (isExpanded) {
+                        gsap.fromTo(answer, 
+                            { height: 0, opacity: 0 }, 
+                            { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+                        );
+                    } else {
+                        gsap.to(answer, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+                    }
+                }
+            });
         });
-    },
-    
-    handleMouseMove: function(e, card, content) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // カードの中心からの距離を計算
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (centerY - y) / 20;
-        const rotateY = (x - centerX) / 20;
-        
-        content.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    },
-    
-    handleTouchMove: function(e, card, content) {
-        // シングルタッチのみ
-        if (e.touches.length !== 1) return;
-        
-        const touch = e.touches[0];
-        const rect = card.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
-        
-        // カードの中心からの距離を計算
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (centerY - y) / 30; // タッチ用に感度調整
-        const rotateY = (x - centerX) / 30;
-        
-        content.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    },
-    
-    resetTilt: function(content) {
-        content.style.transform = 'rotateX(0deg) rotateY(0deg)';
     }
 };
 
-// reCAPTCHA検証コールバック
+/**
+ * @module ChatbotModule
+ * @description インタラクティブAIチャットボット
+ */
+const ChatbotModule = {
+    toggle: null,
+    container: null,
+    closeBtn: null,
+    messages: null,
+    input: null,
+    submitBtn: null,
+    isTyping: false,
+    defaultResponses: [
+        "AI導入についての詳細は、お問い合わせフォームよりお気軽にご連絡ください。",
+        "AI導入についてのご相談は、専門のコンサルタントが対応いたします。無料相談フォームからお問い合わせください。",
+        "AIソリューションについて詳しく知りたい場合は、資料をご用意しております。お気軽にお問い合わせください。",
+        "ご質問ありがとうございます。より詳細なご提案をご希望の場合は、お問い合わせフォームよりご連絡ください。",
+        "ShinAIのAIソリューションは、お客様のビジネスに合わせてカスタマイズ可能です。詳細はお問い合わせください。",
+        "無料相談では、お客様の課題をヒアリングした上で、最適なAIソリューションをご提案いたします。ぜひお問い合わせください。"
+    ],
+    
+    init: function() {
+        this.toggle = document.getElementById('chatbot-toggle');
+        this.container = document.getElementById('chatbot-container');
+        this.closeBtn = document.getElementById('chatbot-close');
+        this.messages = document.getElementById('chatbot-messages');
+        this.input = document.getElementById('chatbot-input-text');
+        this.submitBtn = document.getElementById('chatbot-submit');
+        
+        if (!this.toggle || !this.container) return;
+        
+        this.toggle.addEventListener('click', this.toggleChat.bind(this));
+        this.closeBtn.addEventListener('click', this.closeChat.bind(this));
+        this.submitBtn.addEventListener('click', this.sendMessage.bind(this));
+        this.input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.sendMessage();
+        });
+        
+        // トグルボタンをアニメーション
+        this.animateToggleButton();
+    },
+    
+    toggleChat: function() {
+        const isOpen = this.container.classList.toggle('active');
+        this.toggle.setAttribute('aria-expanded', isOpen);
+        
+        if (isOpen) {
+            this.input.focus();
+        }
+    },
+    
+    closeChat: function() {
+        this.container.classList.remove('active');
+        this.toggle.setAttribute('aria-expanded', false);
+    },
+    
+    sendMessage: function() {
+        const text = this.input.value.trim();
+        if (!text || this.isTyping) return;
+        
+        // ユーザーメッセージを追加
+        this.addMessage(text, 'user');
+        this.input.value = '';
+        
+        // 入力中表示
+        this.showTypingIndicator();
+        
+        // AIレスポンス（模擬）
+        setTimeout(() => {
+            this.hideTypingIndicator();
+            
+            // キーワードに基づく応答
+            let response = this.getResponseBasedOnKeywords(text);
+            this.addMessage(response, 'bot');
+        }, 1500);
+    },
+    
+    getResponseBasedOnKeywords: function(text) {
+        const lowerText = text.toLowerCase();
+        
+        // 基本的なキーワード検出
+        if (lowerText.includes('無料相談') || lowerText.includes('相談')) {
+            return "無料相談は、お問い合わせフォームからお申し込みいただけます。AI導入に関するお悩みやご質問をお聞かせください。専門のコンサルタントが対応いたします。";
+        } else if (lowerText.includes('費用') || lowerText.includes('料金')) {
+            return "AIソリューションの費用は、導入規模や要件により異なります。基本的なプランは初期費用30万円〜、月額10万円〜となります。お客様のビジネスに最適なプランをご提案いたしますので、まずは無料相談からお気軽にお問い合わせください。";
+        } else if (lowerText.includes('導入期間') || lowerText.includes('どのくらいかかる')) {
+            return "AI導入の期間は、一般的なチャットボット導入なら1〜2ヶ月程度、業務プロセス全体に関わる大規模なシステムなら3〜6ヶ月程度が目安です。詳細は無料相談でお気軽にお問い合わせください。";
+        } else if (lowerText.includes('メリット') || lowerText.includes('効果')) {
+            return "AI導入の主なメリットには、業務効率化（作業の自動化による人的リソースの最適化）、コスト削減（24時間稼働による人件費削減）、データ分析による高度な意思決定支援、顧客体験の向上などがあります。貴社に最適なAI活用方法をご提案いたします。";
+        } else if (lowerText.includes('会社概要') || lowerText.includes('shinai')) {
+            return "ShinAIは「真の価値を信じ、次世代のために新たな未来を創る」という理念のもと、最先端のAI技術で企業の課題解決と成長支援を行っています。技術だけでなく使う人の視点を大切にした「人間中心AI設計」に力を入れているのが特徴です。";
+        } else {
+            // デフォルトレスポンス（ランダム）
+            return this.defaultResponses[Math.floor(Math.random() * this.defaultResponses.length)];
+        }
+    },
+    
+    addMessage: function(text, type) {
+        const message = document.createElement('div');
+        message.classList.add('message', `${type}-message`);
+        message.textContent = text;
+        
+        if (type === 'bot') {
+            message.setAttribute('role', 'status');
+        }
+        
+        this.messages.appendChild(message);
+        this.messages.scrollTop = this.messages.scrollHeight;
+    },
+    
+    showTypingIndicator: function() {
+        this.isTyping = true;
+        
+        const typingIndicator = document.createElement('div');
+        typingIndicator.classList.add('bot-typing');
+        typingIndicator.id = 'bot-typing';
+        
+        // 3つのドットを追加
+        for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('typing-dot');
+            typingIndicator.appendChild(dot);
+        }
+        
+        this.messages.appendChild(typingIndicator);
+        this.messages.scrollTop = this.messages.scrollHeight;
+    },
+    
+    hideTypingIndicator: function() {
+        this.isTyping = false;
+        
+        const typingIndicator = document.getElementById('bot-typing');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    },
+    
+    animateToggleButton: function() {
+        // 定期的に注目を集めるアニメーション
+        setInterval(() => {
+            if (!this.container.classList.contains('active')) {
+                this.toggle.classList.add('attention');
+                
+                setTimeout(() => {
+                    this.toggle.classList.remove('attention');
+                }, 1000);
+            }
+        }, 20000); // 20秒ごと
+    }
+};
+
+/**
+ * @module AnimationModule
+ * @description GSAPを使用した高度なアニメーション
+ */
+const AnimationModule = {
+    init: function() {
+        if (typeof gsap === 'undefined') return;
+        
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // フォームの入場アニメーション
+            gsap.from('.contact-form', {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.contact-grid',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            // お問い合わせ情報の入場アニメーション
+            gsap.from('.contact-info', {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.contact-grid',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            // 地図の入場アニメーション
+            gsap.from('.contact-map', {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.contact-map',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            // FAQアイテムの連続アニメーション
+            gsap.from('.faq-item', {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.faq-container',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            // CTAセクションのアニメーション
+            gsap.from('.cta-title', {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section-cta',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            gsap.from('.cta-description', {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section-cta',
+                    start: 'top bottom-=100'
+                }
+            });
+            
+            gsap.from('.cta-buttons', {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.4,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section-cta',
+                    start: 'top bottom-=100'
+                }
+            });
+        }
+    }
+};
+
+/**
+ * @module BackToTopModule
+ * @description トップへ戻るボタン機能
+ */
+const BackToTopModule = {
+    init: function() {
+        const backToTop = document.getElementById('back-to-top');
+        if (!backToTop) return;
+        
+        // スクロール時の表示制御
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // クリックイベント
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+};
+
+/**
+ * reCAPTCHA検証コールバック
+ */
 function onRecaptchaVerified(token) {
-    // トークンを使用して検証処理を実行
-    console.log('reCAPTCHA verified with token:', token);
-    // 実際の実装では、このトークンをサーバーに送信して検証します
+    console.log('reCAPTCHA token:', token);
+    // 実際にはこのトークンをサーバーサイドで検証します
 }
