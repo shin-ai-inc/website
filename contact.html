@@ -13,8 +13,8 @@
     <meta name="keywords" content="AI, 人工知能, お問い合わせ, AI導入相談, 無料相談, AI活用, 業務効率化相談, DX相談">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
-    <meta name="theme-color" content="#7E3FF2">
-    <meta name="msapplication-TileColor" content="#7E3FF2">
+    <meta name="theme-color" content="#8e33ff">
+    <meta name="msapplication-TileColor" content="#8e33ff">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="twitter:card" content="summary_large_image">
@@ -126,7 +126,2160 @@
     COMPONENT: スタイルシート
     ==============================================
     -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* 
+        ----------------------------------------------
+        COMPONENT: 変数定義
+        ----------------------------------------------
+        */
+        :root {
+            /* カラーパレット */
+            --purple-bright: #b723ef;   /* 明るい紫 - ロゴに使用 */
+            --purple-main: #8e33ff;     /* メインの紫 */
+            --blue-mid: #4264df;        /* 中間のブルー */
+            --cyan-light: #26d8de;      /* 水色 */
+            --accent: #FF8A00;          /* アクセントカラー - 注目ポイントに */
+            
+            /* 補助色 */
+            --dark: #111827;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --error: #EF4444;
+            
+            /* グラデーション */
+            --top-gradient: linear-gradient(90deg, var(--purple-main) 0%, var(--blue-mid) 50%, var(--cyan-light) 100%);
+            --bottom-gradient: linear-gradient(90deg, var(--cyan-light) 0%, var(--blue-mid) 50%, var(--purple-main) 100%);
+            --hero-overlay: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
+            --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+            --glass-effect: rgba(255, 255, 255, 0.25);
+            --btn-gradient: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            --btn-hover-gradient: linear-gradient(135deg, var(--purple-bright), var(--blue-mid));
+            
+            /* フォント */
+            --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-en: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* エフェクト */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 0 15px rgba(142, 51, 255, 0.3);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --transition: all 0.3s ease;
+            --bezier-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* レイアウト */
+            --container: 1280px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: アニメーション定義
+        ----------------------------------------------
+        */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes floatAnimation {
+            0%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.05;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.1;
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes typingDot {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scrollAnim {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(142, 51, 255, 0.3), 0 0 15px rgba(142, 51, 255, 0);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(142, 51, 255, 0.6), 0 0 30px rgba(142, 51, 255, 0.3);
+            }
+        }
+        
+        @keyframes rotateClockwise {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes rotateCounterClockwise {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: リセット & ベーススタイル
+        ----------------------------------------------
+        */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-jp);
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            color: var(--purple-main);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--purple-bright);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        button {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        /* キーボード操作のフォーカス表示 */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--purple-main);
+            outline-offset: 2px;
+        }
+        
+        /* スキップナビゲーション */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--purple-main);
+            color: var(--white);
+            padding: 10px;
+            z-index: 9999;
+            transition: top 0.3s;
+        }
+        
+        .skip-nav:focus {
+            top: 0;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: レイアウトユーティリティ
+        ----------------------------------------------
+        */
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .shimmer-text {
+            position: relative;
+            background: linear-gradient(90deg, 
+                          var(--purple-main) 0%, 
+                          var(--blue-mid) 20%, 
+                          var(--purple-bright) 40%, 
+                          var(--blue-mid) 60%, 
+                          var(--purple-main) 80%, 
+                          var(--purple-main) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(142, 51, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn-icon:hover {
+            transform: translateY(-3px) rotate(15deg);
+            box-shadow: 0 8px 20px rgba(142, 51, 255, 0.3);
+        }
+        
+        .btn-icon:hover::before {
+            left: 100%;
+        }
+        
+        .glass-card {
+            background: var(--card-gradient);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing);
+            transition: var(--transition);
+        }
+        
+        .glass-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+        
+        .glow-border {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--purple-main), var(--blue-mid), var(--cyan-light), var(--purple-bright));
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+            border-radius: calc(var(--radius) + 2px);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: バナー
+        ----------------------------------------------
+        */
+        .top-banner {
+            background: var(--top-gradient);
+            height: 5px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .bottom-banner {
+            background: var(--bottom-gradient);
+            padding: 2rem 0;
+            color: var(--white);
+            text-align: center;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: var(--font-jp);
+            font-weight: 500;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: タイポグラフィ
+        ----------------------------------------------
+        */
+        .heading-xl {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: var(--spacing);
+            letter-spacing: -0.02em;
+            font-family: var(--font-jp);
+        }
+        
+        .heading-lg {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.01em;
+            font-family: var(--font-jp);
+        }
+        
+        .heading-md {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-jp);
+        }
+        
+        .heading-sm {
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-jp);
+        }
+        
+        .subtitle {
+            font-size: 1.35rem;
+            color: var(--gray);
+            margin-bottom: var(--spacing);
+            line-height: 1.5;
+            font-weight: 400;
+            font-family: var(--font-jp);
+        }
+        
+        .en-text {
+            font-family: var(--font-en);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--purple-main);
+            border-radius: var(--radius-full);
+        }
+        
+        .highlight {
+            color: var(--purple-main);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(142, 51, 255, 0.15);
+            z-index: -1;
+            border-radius: var(--radius-full);
+        }
+        
+        .highlight-accent {
+            color: var(--accent);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 138, 0, 0.15);
+            z-index: -1;
+            border-radius: var(--radius-full);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(45deg, var(--purple-main), var(--blue-mid));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: ボタン
+        ----------------------------------------------
+        */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: var(--font-jp);
+            letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-lg {
+            padding: 1.1rem 2.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--purple-main);
+            background-image: var(--btn-gradient);
+            background-size: 200% auto;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(142, 51, 255, 0.25);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.1));
+            z-index: -2;
+        }
+        
+        .btn-primary:hover {
+            background-position: right center;
+            color: var(--white);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(142, 51, 255, 0.35);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-glow {
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--purple-main);
+            border: 2px solid var(--purple-main);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(142, 51, 255, 0.1);
+        }
+        
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--purple-main);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-outline:hover {
+            color: var(--white);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(142, 51, 255, 0.2);
+        }
+        
+        .btn-outline:hover::before {
+            width: 100%;
+        }
+        
+        .btn-secondary {
+            background-color: rgba(142, 51, 255, 0.1);
+            color: var(--purple-main);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(142, 51, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-icon-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-icon-right i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-icon-right:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: ヘッダー
+        ----------------------------------------------
+        */
+        .header {
+            position: fixed;
+            top: 5px;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .header-scrolled {
+            box-shadow: var(--shadow);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--dark);
+            font-family: var(--font-en);
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 2px 5px rgba(142, 51, 255, 0.2));
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover img {
+            transform: rotate(15deg);
+            filter: drop-shadow(0 3px 8px rgba(142, 51, 255, 0.3));
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            font-family: var(--font-jp);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--purple-main);
+            transition: width 0.3s ease;
+            border-radius: var(--radius-full);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--purple-main);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            margin-left: 1.5rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(142, 51, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            background: rgba(142, 51, 255, 0.2);
+            color: var(--purple-main);
+        }
+        
+        .menu-toggle.active {
+            background: var(--purple-main);
+            color: var(--white);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: ページヒーロー
+        ----------------------------------------------
+        */
+        .page-hero {
+            position: relative;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+        
+        .page-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8;
+        }
+        
+        .page-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--hero-overlay);
+            z-index: 1;
+        }
+        
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .page-hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid), var(--purple-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            letter-spacing: -0.03em;
+            font-family: var(--font-jp);
+            line-height: 1.2;
+        }
+        
+        .page-hero-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            color: var(--dark);
+            font-weight: 400;
+            font-family: var(--font-jp);
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            justify-content: center;
+        }
+        
+        .breadcrumb a {
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--purple-main);
+        }
+        
+        .breadcrumb-separator {
+            color: var(--gray);
+            margin: 0 0.25rem;
+        }
+        
+        .breadcrumb-current {
+            color: var(--purple-main);
+            font-weight: 500;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: メインコンテンツエリア
+        ----------------------------------------------
+        */
+        .main-content {
+            padding: 5rem 0;
+        }
+        
+        .section {
+            margin-bottom: 6rem;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: お問い合わせセクション
+        ----------------------------------------------
+        */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            color: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(142, 51, 255, 0.15);
+            z-index: 1;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .contact-info::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+        }
+        
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+            font-family: var(--font-jp);
+        }
+        
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--white);
+            border-radius: var(--radius-full);
+        }
+        
+        .contact-method {
+            display: flex;
+            margin-bottom: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .contact-method:hover {
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .contact-method:hover .contact-icon {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(-15deg);
+        }
+        
+        .contact-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            font-family: var(--font-jp);
+        }
+        
+        .contact-details a,
+        .contact-details p {
+            color: rgba(255, 255, 255, 0.9);
+            transition: opacity 0.3s ease, text-decoration 0.3s ease;
+            font-family: var(--font-jp);
+            font-size: 0.95rem;
+        }
+        
+        .contact-details a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            height: 100%;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            z-index: 1;
+        }
+        
+        .contact-form::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(142, 51, 255, 0.05);
+            border-radius: 50%;
+            bottom: -75px;
+            right: -75px;
+            z-index: -1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-family: var(--font-jp);
+            font-size: 0.95rem;
+        }
+        
+        .form-group:focus-within .form-label {
+            color: var(--purple-main);
+        }
+        
+        .required {
+            color: var(--error);
+            margin-left: 0.25rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: var(--light-gray);
+            border: 1px solid transparent;
+            border-radius: var(--radius);
+            font-family: var(--font-jp);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--purple-main);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(142, 51, 255, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.9rem;
+        }
+        
+        /* カスタムチェックボックススタイル */
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            position: relative;
+        }
+        
+        .form-check:hover {
+            background-color: rgba(142, 51, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .form-check-input {
+            /* デフォルトのチェックボックスを非表示に */
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        /* カスタムチェックボックス */
+        .form-check-input + .form-check-label::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-color: var(--white);
+            border: 2px solid rgba(142, 51, 255, 0.3);
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+        
+        /* ホバー時のスタイル */
+        .form-check:hover .form-check-input + .form-check-label::before {
+            border-color: var(--purple-main);
+            box-shadow: 0 0 0 2px rgba(142, 51, 255, 0.1);
+        }
+        
+        /* チェック時のスタイル */
+        .form-check-input:checked + .form-check-label::before {
+            background-color: var(--purple-main);
+            border-color: var(--purple-main);
+        }
+        
+        /* チェックマーク */
+        .form-check-input:checked + .form-check-label::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+        }
+        
+        .form-check-label {
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: var(--font-jp);
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 1.8rem;
+        }
+        
+        .form-submit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .form-submit button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-family: var(--font-jp);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+            transition: all 0.5s ease;
+        }
+        
+        .form-submit button i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .form-submit button:hover i {
+            transform: translateX(5px);
+        }
+        
+        .form-submit button:hover {
+            background-position: right center;
+        }
+        
+        .message-success {
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--success);
+            margin-bottom: 1.5rem;
+            color: #047857;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            display: none;
+            font-family: var(--font-jp);
+        }
+        
+        .message-success.active {
+            display: block;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .field-error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .field-error.active {
+            display: block;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+        
+        .form-control.error {
+            border-color: var(--error);
+        }
+        
+        .contact-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 450px;
+            box-shadow: var(--shadow-lg);
+            border: 5px solid var(--white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-map:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: FAQセクション
+        ----------------------------------------------
+        */
+        .faq-section {
+            padding: 5rem 0;
+            background-color: #f5f7ff; /* 薄い青色の背景に変更 */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: none; /* 白いボーダーを削除 */
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-jp);
+            border-radius: var(--radius-lg);
+            background-color: var(--white);
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            background-color: rgba(142, 51, 255, 0.05);
+            color: var(--purple-main);
+        }
+        
+        .faq-question i {
+            color: var(--purple-main);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--dark); /* 答えのテキスト色を濃くして読みやすく */
+            background-color: var(--white);
+            line-height: 1.7; /* 行間を広げる */
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: CTAセクション
+        ----------------------------------------------
+        */
+        .cta-section {
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            padding: 5rem 0;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-white {
+            background: var(--white);
+            color: var(--purple-main);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-white:hover {
+            background: var(--white);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-outline-white {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        
+        .btn-outline-white:hover::before {
+            background-color: var(--white);
+        }
+        
+        .btn-outline-white:hover {
+            color: var(--purple-main);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: 装飾要素
+        ----------------------------------------------
+        */
+        .animated-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            top: -200px;
+            left: -200px;
+            animation: pulse 15s infinite;
+        }
+        
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            right: -150px;
+            animation: pulse 18s infinite reverse;
+        }
+        
+        .circle-3 {
+            width: 200px;
+            height: 200px;
+            top: 40%;
+            right: 10%;
+            animation: pulse 12s infinite;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(142, 51, 255, 0.1), rgba(66, 100, 223, 0.1));
+            border-radius: var(--radius-lg);
+            z-index: 0;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        }
+        
+        .shape-1 {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 10%;
+            animation: floatAnimation 10s ease-in-out infinite;
+            transform: rotate(15deg);
+        }
+        
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 15%;
+            left: 20%;
+            animation: floatAnimation 8s ease-in-out infinite 1s;
+            transform: rotate(-10deg);
+        }
+        
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 15%;
+            animation: floatAnimation 12s ease-in-out infinite 0.5s;
+            transform: rotate(20deg);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: フッター
+        ----------------------------------------------
+        */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-jp);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--top-gradient);
+        }
+        
+        .footer::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(142, 51, 255, 0.05);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1.2rem;
+            font-family: var(--font-en);
+        }
+        
+        .footer-logo img {
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(142, 51, 255, 0.3));
+            width: 40px;
+            height: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-logo:hover img {
+            transform: rotate(15deg);
+        }
+        
+        .footer-description {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 1.8rem;
+            line-height: 1.7;
+            font-family: var(--font-jp);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0);
+            color: var(--white);
+            transform: translateY(-5px) rotateY(10deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-link:hover::before {
+            opacity: 1;
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            position: relative;
+            font-family: var(--font-jp);
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--purple-main);
+            border-radius: var(--radius-full);
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(8px);
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
+            font-family: var(--font-jp);
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--white);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-family: var(--font-jp);
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+            font-family: var(--font-jp);
+        }
+        
+        .footer-bottom-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--white);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: チャットボット
+        ----------------------------------------------
+        */
+        .chatbot {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99;
+        }
+        
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            box-shadow: 0 5px 20px rgba(142, 51, 255, 0.35);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .chatbot-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.7s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            background: linear-gradient(135deg, var(--purple-bright), var(--blue-mid));
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(142, 51, 255, 0.5);
+        }
+        
+        .chatbot-toggle:hover::before {
+            left: 100%;
+        }
+        
+        .chatbot-toggle .ripple {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--purple-main);
+            border-radius: 50%;
+            transform: scale(0.8);
+            opacity: 0;
+            animation: ripple 2s infinite;
+        }
+        
+        .chatbot-container {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 550px;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform-origin: bottom right;
+            transform: scale(0);
+            opacity: 0;
+            transition: 0.4s var(--bezier-bounce);
+            z-index: 1;
+            border: 1px solid rgba(142, 51, 255, 0.1);
+        }
+        
+        .chatbot-container.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+            color: var(--white);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chatbot-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-jp);
+        }
+        
+        .chatbot-title i {
+            font-size: 1.3rem;
+        }
+        
+        .chatbot-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: rgba(243, 244, 246, 0.5);
+            scroll-behavior: smooth;
+            position: relative;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-lg);
+            animation: messageIn 0.3s ease forwards;
+            line-height: 1.5;
+            position: relative;
+            font-family: var(--font-jp);
+            font-size: 0.95rem;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background: var(--white);
+            border-bottom-left-radius: 2px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid var(--purple-main);
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background: var(--purple-main);
+            color: var(--white);
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 3px 8px rgba(142, 51, 255, 0.15);
+        }
+        
+        .bot-typing {
+            align-self: flex-start;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border-bottom-left-radius: 2px;
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid var(--purple-main);
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gray);
+            border-radius: 50%;
+            display: inline-block;
+            animation: typingDot 1s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1.2rem;
+            border-top: 1px solid var(--light-gray);
+            background: var(--white);
+            position: relative;
+        }
+        
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 0.9rem 1.2rem;
+            padding-right: 3rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-full);
+            font-family: var(--font-jp);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .chatbot-input input:focus {
+            outline: none;
+            border-color: var(--purple-main);
+            box-shadow: 0 0 0 3px rgba(142, 51, 255, 0.1);
+        }
+        
+        .chatbot-submit {
+            position: absolute;
+            right: 1.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--purple-main);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 3px 8px rgba(142, 51, 255, 0.2);
+        }
+        
+        .chatbot-submit:hover {
+            background: var(--purple-bright);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 5px 15px rgba(142, 51, 255, 0.3);
+        }
+        
+        /* 
+        ----------------------------------------------
+        COMPONENT: モバイル向け最適化
+        ----------------------------------------------
+        */
+        @media (max-width: 1280px) {
+            .page-hero-title {
+                font-size: 3rem;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .page-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .contact-grid {
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --spacing-lg: 3rem;
+                --spacing: 1.5rem;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 1.5rem;
+                box-shadow: var(--shadow);
+                flex-direction: column;
+                align-items: center;
+                z-index: 100;
+                border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            }
+            
+            .nav.active {
+                display: flex;
+            }
+            
+            .nav-link {
+                padding: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-cta {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+            }
+            
+            .nav-cta .btn {
+                width: 100%;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            
+            .chatbot-container {
+                width: calc(100% - 50px);
+                max-width: 380px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            :root {
+                --spacing-sm: 0.75rem;
+                --spacing: 1.25rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .page-hero-title {
+                font-size: 2rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+            }
+            
+            .chatbot-toggle {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            
+            .chatbot-container {
+                height: 500px;
+                width: calc(100% - 30px);
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -155,7 +2308,7 @@
         <div class="container">
             <div class="header-inner">
                 <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
-                    <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23b723ef'/%3E%3Cpath d='M100 40c-33.1 0-60 26.9-60 60s26.9 60 60 60 60-26.9 60-60-26.9-60-60-60zm-8 90c-16.5 0-30-13.5-30-30s13.5-30 30-30c8.3 0 15.8 3.4 21.2 8.8-5.4 5.4-8.8 12.9-8.8 21.2 0 8.3 3.4 15.8 8.8 21.2-5.4 5.4-12.9 8.8-21.2 8.8z' fill='white'/%3E%3C/svg%3E" alt="" aria-hidden="true">
                     <span class="en-text">ShinAI</span>
                 </a>
                 
@@ -184,10 +2337,11 @@
     ==============================================
     -->
     <section class="page-hero">
-        <div class="page-hero-bg-container">
-            <div class="page-hero-bg-gradient"></div>
-            <div class="page-hero-bg-pattern"></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000" 
+             alt="チームミーティングのイメージ" 
+             class="page-hero-bg" 
+             loading="eager">
+        <div class="page-hero-overlay"></div>
         
         <div class="container">
             <div class="page-hero-content">
@@ -197,27 +2351,16 @@
                     <span class="breadcrumb-current">お問い合わせ</span>
                 </div>
                 
-                <h1 class="page-hero-title" id="main-content">
-                    <span class="gradient-title">お問い合わせ</span>・<span class="highlight-accent">無料相談</span>
-                </h1>
-                
-                <p class="page-hero-description">
-                    AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。まずは無料相談から、AI導入の可能性を探ってみませんか？
-                </p>
-                
-                <a href="#contact-form" class="btn btn-cta btn-lg btn-icon-bounce">
-                    <span>無料相談を申し込む</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
+                <h1 class="page-hero-title" id="main-content">お問い合わせ・<span class="highlight-accent">無料相談</span></h1>
+                <p class="page-hero-description">AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。まずは無料相談から、AI導入の可能性を探ってみませんか？</p>
             </div>
         </div>
         
         <!-- 装飾要素 -->
-        <div class="floating-elements">
-            <div class="floating-circle"></div>
-            <div class="floating-square"></div>
-            <div class="floating-dots"></div>
-        </div>
+        <div class="animated-circle circle-1"></div>
+        <div class="animated-circle circle-2"></div>
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-3"></div>
     </section>
     
     <!-- 
@@ -228,10 +2371,9 @@
     -->
     <main class="main-content">
         <!-- お問い合わせフォームセクション -->
-        <section class="section section-contact" id="contact-form">
+        <section class="section" id="contact-form">
             <div class="container">
                 <div class="section-title text-center">
-                    <span class="section-tag">Contact Us</span>
                     <h2 class="heading-lg"><span class="highlight">無料相談</span>・お問い合わせ</h2>
                     <p class="subtitle">最先端AIソリューションの導入について、ご不明点やご相談があればお気軽にお問い合わせください</p>
                 </div>
@@ -244,7 +2386,6 @@
                     ==============================================
                     -->
                     <div class="contact-info">
-                        <div class="contact-info-pattern"></div>
                         <h3 class="contact-title">お問い合わせ先</h3>
                         <p>下記の連絡先からご連絡いただくか、フォームよりお問い合わせください。AI導入のプロフェッショナルが対応いたします。</p>
                         
@@ -296,57 +2437,37 @@
                     ==============================================
                     -->
                     <div class="contact-form">
-                        <div class="message-success" id="message-success">
-                            <i class="fas fa-check-circle" aria-hidden="true"></i>
-                            <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
-                        </div>
+                        <div class="message-success" id="message-success">お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</div>
                         
                         <h3 class="heading-md">無料相談フォーム</h3>
-                        <p class="form-intro">まずは無料でご相談ください。AI導入に関する課題やお悩みをお聞かせください。</p>
+                        <p>まずは無料でご相談ください。AI導入に関する課題やお悩みをお聞かせください。</p>
                         
                         <form id="contact-form" aria-label="お問い合わせフォーム">
                             <div class="form-group">
                                 <label for="name" class="form-label">お名前<span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input type="text" id="name" class="form-control" placeholder="山田 太郎" required aria-required="true">
-                                </div>
+                                <input type="text" id="name" class="form-control" placeholder="山田 太郎" required aria-required="true">
                                 <div class="field-error" id="name-error">この項目は必須です</div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email" class="form-label">メールアドレス<span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                    <input type="email" id="email" class="form-control" placeholder="example@email.com" required aria-required="true">
-                                </div>
+                                <input type="email" id="email" class="form-control" placeholder="example@email.com" required aria-required="true">
                                 <div class="field-error" id="email-error">有効なメールアドレスを入力してください</div>
                             </div>
                             
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="company" class="form-label">会社名</label>
-                                    <div class="input-wrapper">
-                                        <i class="fas fa-building input-icon" aria-hidden="true"></i>
-                                        <input type="text" id="company" class="form-control" placeholder="株式会社〇〇">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">電話番号</label>
-                                    <div class="input-wrapper">
-                                        <i class="fas fa-phone input-icon" aria-hidden="true"></i>
-                                        <input type="tel" id="phone" class="form-control" placeholder="03-1234-5678">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="company" class="form-label">会社名</label>
+                                <input type="text" id="company" class="form-control" placeholder="株式会社〇〇">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">電話番号</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="03-1234-5678">
                             </div>
                             
                             <div class="form-group">
                                 <label for="message" class="form-label">お問い合わせ内容<span class="required">*</span></label>
-                                <div class="input-wrapper textarea-wrapper">
-                                    <i class="fas fa-comment input-icon" aria-hidden="true"></i>
-                                    <textarea id="message" class="form-control" placeholder="お問い合わせ内容をご記入ください" rows="5" required aria-required="true"></textarea>
-                                </div>
+                                <textarea id="message" class="form-control" placeholder="お問い合わせ内容をご記入ください" rows="5" required aria-required="true"></textarea>
                                 <div class="field-error" id="message-error">この項目は必須です</div>
                             </div>
                             
@@ -384,14 +2505,13 @@
                             
                             <!-- reCAPTCHA v3実装 -->
                             <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key" data-callback="onRecaptchaVerified" data-action="contact"></div>
-                            <div class="form-group recaptcha-note">
+                            <div class="form-group" style="margin-top: 1rem; font-size: 0.85rem; color: var(--gray);">
                                 <p>このサイトはreCAPTCHAによって保護されており、Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。</p>
                             </div>
                             
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon-bounce">
-                                    <span>無料相談を申し込む</span>
-                                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                <button type="submit" class="btn btn-primary btn-icon-right">
+                                    無料相談を申し込む <i class="fas fa-paper-plane" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </form>
@@ -406,38 +2526,29 @@
         COMPONENT: 地図セクション
         ==============================================
         -->
-        <section class="section section-map">
+        <section class="section">
             <div class="container">
                 <div class="section-title text-center">
-                    <span class="section-tag">Location</span>
                     <h2 class="heading-lg">アクセス<span class="highlight">マップ</span></h2>
                     <p class="subtitle">ShinAI本社へのアクセス方法</p>
                 </div>
                 
-                <div class="map-container">
-                    <div class="contact-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8278534072873!2d139.76382087622055!3d35.68124237258734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf97912d08d%3A0xd8a42bdb6ff39839!2z5pel5pys44CB44CSMTAwLTAwMDUg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy656We55Sw77yT5LiB55uu77yY4oiS77yT!5e0!3m2!1sja!2sjp!4v1715112385701!5m2!1sja!2sjp" 
-                            width="600" 
-                            height="450" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="ShinAI本社の地図"
-                            aria-label="ShinAI本社の地図">
-                        </iframe>
-                    </div>
-                    
-                    <div class="map-info">
-                        <div class="map-address">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <p>〒100-0001 東京都千代田区丸の内3-8-3<br>Tokyo Innovation Base</p>
-                        </div>
-                        <div class="map-access">
-                            <i class="fas fa-train" aria-hidden="true"></i>
-                            <p>東京駅 丸の内口から徒歩8分<br>大手町駅 A5出口から徒歩5分</p>
-                        </div>
-                    </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8278534072873!2d139.76382087622055!3d35.68124237258734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf97912d08d%3A0xd8a42bdb6ff39839!2z5pel5pys44CB44CSMTAwLTAwMDUg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy656We55Sw77yT5LiB55uu77yY4oiS77yT!5e0!3m2!1sja!2sjp!4v1715112385701!5m2!1sja!2sjp" 
+                        width="600" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="ShinAI本社の地図"
+                        aria-label="ShinAI本社の地図">
+                    </iframe>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base<br>
+                       東京駅 丸の内口から徒歩8分 / 大手町駅 A5出口から徒歩5分</p>
                 </div>
             </div>
         </section>
@@ -448,10 +2559,9 @@
         COMPONENT: よくある質問セクション
         ==============================================
         -->
-        <section class="section section-faq">
+        <section class="faq-section">
             <div class="container">
                 <div class="section-title text-center">
-                    <span class="section-tag">FAQ</span>
                     <h2 class="heading-lg">よくある<span class="highlight">ご質問</span></h2>
                     <p class="subtitle">AI導入に関するよくあるご質問にお答えします</p>
                 </div>
@@ -516,30 +2626,16 @@
         COMPONENT: CTAセクション
         ==============================================
         -->
-        <section class="section section-cta">
-            <div class="cta-bg">
-                <div class="cta-bg-gradient"></div>
-                <div class="cta-bg-pattern"></div>
-            </div>
-            
+        <section class="cta-section">
             <div class="container">
                 <div class="cta-content">
                     <h2 class="cta-title">最先端AIで<br>ビジネスを次のステージへ</h2>
                     <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn btn-cta-white btn-lg btn-icon-bounce">
-                            <span>無料相談を申し込む</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        <a href="#contact-form" class="btn btn-lg btn-white btn-icon-right">無料相談を申し込む <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="cta-shapes">
-                <div class="cta-shape-1"></div>
-                <div class="cta-shape-2"></div>
-                <div class="cta-shape-3"></div>
             </div>
         </section>
     </main>
@@ -551,9 +2647,7 @@
     ==============================================
     -->
     <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            「真の価値を信じ、次世代のために新たな未来を創る。」
-        </div>
+        「真の価値を信じ、次世代のために新たな未来を創る。」
     </div>
     
     <!-- 
@@ -565,9 +2659,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
+                <div>
                     <div class="footer-logo">
-                        <img src="assets/images/logo-white.svg" alt="ShinAI" width="40" height="40">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23b723ef'/%3E%3Cpath d='M100 40c-33.1 0-60 26.9-60 60s26.9 60 60 60 60-26.9 60-60-26.9-60-60-60zm-8 90c-16.5 0-30-13.5-30-30s13.5-30 30-30c8.3 0 15.8 3.4 21.2 8.8-5.4 5.4-8.8 12.9-8.8 21.2 0 8.3 3.4 15.8 8.8 21.2-5.4 5.4-12.9 8.8-21.2 8.8z' fill='white'/%3E%3C/svg%3E" alt="" aria-hidden="true" width="40" height="40">
                         <span class="en-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
@@ -581,7 +2675,7 @@
                     </div>
                 </div>
                 
-                <div class="footer-nav">
+                <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
                         <li><a href="services.html#automation">業務自動化ソリューション</a></li>
@@ -592,7 +2686,7 @@
                     </ul>
                 </div>
                 
-                <div class="footer-nav">
+                <div>
                     <h4 class="footer-heading">業界別AI活用</h4>
                     <ul class="footer-links">
                         <li><a href="industries.html#manufacturing">製造業</a></li>
@@ -604,13 +2698,13 @@
                     </ul>
                 </div>
                 
-                <div class="footer-contact">
+                <div>
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
-                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
-                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
+                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li><a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
+                        <li>平日 9:00〜18:00（土日祝休）</li>
+                        <li><a href="#contact-form">お問い合わせフォーム</a></li>
                     </ul>
                 </div>
             </div>
@@ -662,20 +2756,529 @@
     
     <!-- 
     ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップに戻るボタン
-    ==============================================
-    -->
-    <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
-        <i class="fas fa-chevron-up" aria-hidden="true"></i>
-    </a>
-    
-    <!-- 
-    ==============================================
     // === component-split: JavaScript ===
     COMPONENT: JavaScript
     ==============================================
     -->
-    <script src="assets/js/main.js"></script>
+    <script>
+        /**
+         * @module Main
+         * @description サイト全体の初期化と設定
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            // 現在年の自動更新
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // モジュールの初期化
+            NavModule.init();
+            ChatbotModule.init();
+            FormModule.init();
+            FAQModule.init();
+            AnimationModule.init();
+            
+            // ヘッダースクロール検知
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        });
+        
+        /**
+         * @module NavModule
+         * @description ナビゲーション関連の機能
+         */
+        const NavModule = {
+            init: function() {
+                const menuToggle = document.getElementById('menu-toggle');
+                const nav = document.getElementById('nav');
+                
+                if (menuToggle && nav) {
+                    menuToggle.addEventListener('click', function() {
+                        const isExpanded = nav.classList.toggle('active');
+                        menuToggle.setAttribute('aria-expanded', isExpanded);
+                        menuToggle.classList.toggle('active');
+                        
+                        if (isExpanded) {
+                            menuToggle.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                            menuToggle.setAttribute('aria-label', 'メニューを閉じる');
+                        } else {
+                            menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                            menuToggle.setAttribute('aria-label', 'メニューを開く');
+                        }
+                    });
+                }
+                
+                // スムーススクロール
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        const targetId = this.getAttribute('href');
+                        
+                        // セクションへのリンク
+                        if (targetId.startsWith('#')) {
+                            e.preventDefault();
+                            
+                            const targetElement = document.querySelector(targetId);
+                            if (targetElement) {
+                                const headerOffset = document.getElementById('header').offsetHeight;
+                                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+                                
+                                window.scrollTo({
+                                    top: targetPosition,
+                                    behavior: 'smooth'
+                                });
+                            }
+                            
+                            // モバイルメニューを閉じる
+                            if (nav.classList.contains('active') && menuToggle) {
+                                menuToggle.click();
+                            }
+                        }
+                    });
+                });
+                
+                // PC版でのハンバーガーメニュー表示制御
+                function checkWindowSize() {
+                    if (window.innerWidth >= 1024) {
+                        menuToggle.style.display = 'none';
+                        nav.style.display = 'flex';
+                        nav.classList.remove('active');
+                    } else {
+                        menuToggle.style.display = 'flex';
+                        nav.style.display = nav.classList.contains('active') ? 'flex' : 'none';
+                    }
+                }
+                
+                // 初期ロード時とリサイズ時にチェック
+                checkWindowSize();
+                window.addEventListener('resize', checkWindowSize);
+            }
+        };
+        
+        /**
+         * @module FormModule
+         * @description お問い合わせフォーム機能
+         */
+        const FormModule = {
+            form: null,
+            
+            init: function() {
+                this.form = document.getElementById('contact-form');
+                if (!this.form) return;
+                
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+                
+                // 入力フィールドのマイクロインタラクション
+                const formControls = this.form.querySelectorAll('.form-control');
+                formControls.forEach(control => {
+                    control.addEventListener('focus', () => this.handleFocus(control));
+                    control.addEventListener('blur', () => this.handleBlur(control));
+                });
+            },
+            
+            handleFocus: function(control) {
+                const formGroup = control.closest('.form-group');
+                if (formGroup) {
+                    const label = formGroup.querySelector('.form-label');
+                    if (label) {
+                        label.style.color = 'var(--purple-main)';
+                    }
+                }
+            },
+            
+            handleBlur: function(control) {
+                const formGroup = control.closest('.form-group');
+                if (formGroup) {
+                    const label = formGroup.querySelector('.form-label');
+                    if (label) {
+                        label.style.color = '';
+                    }
+                }
+            },
+            
+            handleSubmit: function(e) {
+                e.preventDefault();
+                
+                // バリデーション
+                if (!this.validateForm()) return;
+                
+                // reCAPTCHA検証
+                // 実際の実装では、以下のようにreCAPTCHAのトークンを取得してサーバーに送信します
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute('your-recaptcha-site-key', {action: 'contact'})
+                        .then(token => {
+                            // トークンをサーバーに送信する処理
+                            // ここではデモとしてそのまま成功処理に進みます
+                            this.submitFormSuccess();
+                        });
+                    });
+                } else {
+                    // reCAPTCHAが読み込まれていない場合も、デモとして成功処理
+                    this.submitFormSuccess();
+                }
+            },
+            
+            submitFormSuccess: function() {
+                // 送信ボタンを変更し、送信中状態に
+                const submitBtn = this.form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
+                submitBtn.disabled = true;
+                
+                // 送信成功の模擬（実際にはAPIを呼び出し）
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> 送信完了';
+                    submitBtn.style.backgroundColor = 'var(--success)';
+                    
+                    this.showFormMessage();
+                    this.form.reset();
+                    
+                    // ボタンを元に戻す
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.backgroundColor = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, 2000);
+            },
+            
+            validateForm: function() {
+                const requiredFields = this.form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        this.showFieldError(field, 'この項目は必須です');
+                        isValid = false;
+                    } else if (field.type === 'email' && !this.isValidEmail(field.value)) {
+                        this.showFieldError(field, '有効なメールアドレスを入力してください');
+                        isValid = false;
+                    } else {
+                        this.clearFieldError(field);
+                    }
+                });
+                
+                return isValid;
+            },
+            
+            isValidEmail: function(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            },
+            
+            showFieldError: function(field, message) {
+                // 既存のエラーを削除
+                this.clearFieldError(field);
+                
+                field.classList.add('error');
+                
+                const errorId = field.id + '-error';
+                const errorElement = document.getElementById(errorId);
+                
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('active');
+                }
+                
+                field.setAttribute('aria-invalid', 'true');
+                
+                // 最初のエラーフィールドにフォーカス
+                if (!document.querySelector('.form-control.error:focus')) {
+                    field.focus();
+                }
+            },
+            
+            clearFieldError: function(field) {
+                field.classList.remove('error');
+                
+                const errorId = field.id + '-error';
+                const errorElement = document.getElementById(errorId);
+                
+                if (errorElement) {
+                    errorElement.classList.remove('active');
+                }
+                
+                field.removeAttribute('aria-invalid');
+            },
+            
+            showFormMessage: function() {
+                const messageSuccess = document.getElementById('message-success');
+                if (messageSuccess) {
+                    messageSuccess.classList.add('active');
+                    
+                    // スクロールして成功メッセージを表示
+                    messageSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // 一定時間後に消える
+                    setTimeout(() => {
+                        messageSuccess.classList.remove('active');
+                    }, 5000);
+                }
+            }
+        };
+        
+        /**
+         * @module FAQModule
+         * @description よくある質問機能
+         */
+        const FAQModule = {
+            init: function() {
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                if (!faqItems.length) return;
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    
+                    question.addEventListener('click', () => {
+                        // 現在のアイテムのアクティブ状態を切り替え
+                        const isExpanded = item.classList.toggle('active');
+                        question.setAttribute('aria-expanded', isExpanded);
+                        
+                        // GSAP がある場合はアニメーション
+                        if (typeof gsap !== 'undefined') {
+                            const answer = item.querySelector('.faq-answer');
+                            
+                            if (isExpanded) {
+                                gsap.fromTo(answer, 
+                                    { height: 0, opacity: 0 }, 
+                                    { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+                                );
+                            } else {
+                                gsap.to(answer, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+                            }
+                        }
+                    });
+                });
+            }
+        };
+        
+        /**
+         * @module ChatbotModule
+         * @description インタラクティブAIチャットボット
+         */
+        const ChatbotModule = {
+            toggle: null,
+            container: null,
+            closeBtn: null,
+            messages: null,
+            input: null,
+            submitBtn: null,
+            isTyping: false,
+            defaultResponses: [
+                "AI導入についての詳細は、お問い合わせフォームよりお気軽にご連絡ください。",
+                "AI導入についてのご相談は、専門のコンサルタントが対応いたします。無料相談フォームからお問い合わせください。",
+                "AIソリューションについて詳しく知りたい場合は、資料をご用意しております。お気軽にお問い合わせください。",
+                "ご質問ありがとうございます。より詳細なご提案をご希望の場合は、お問い合わせフォームよりご連絡ください。",
+                "ShinAIのAIソリューションは、お客様のビジネスに合わせてカスタマイズ可能です。詳細はお問い合わせください。",
+                "無料相談では、お客様の課題をヒアリングした上で、最適なAIソリューションをご提案いたします。ぜひお問い合わせください。"
+            ],
+            
+            init: function() {
+                this.toggle = document.getElementById('chatbot-toggle');
+                this.container = document.getElementById('chatbot-container');
+                this.closeBtn = document.getElementById('chatbot-close');
+                this.messages = document.getElementById('chatbot-messages');
+                this.input = document.getElementById('chatbot-input-text');
+                this.submitBtn = document.getElementById('chatbot-submit');
+                
+                if (!this.toggle || !this.container) return;
+                
+                this.toggle.addEventListener('click', this.toggleChat.bind(this));
+                this.closeBtn.addEventListener('click', this.closeChat.bind(this));
+                this.submitBtn.addEventListener('click', this.sendMessage.bind(this));
+                this.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+                
+                // トグルボタンをアニメーション
+                this.animateToggleButton();
+            },
+            
+            toggleChat: function() {
+                const isOpen = this.container.classList.toggle('active');
+                this.toggle.setAttribute('aria-expanded', isOpen);
+                
+                if (isOpen) {
+                    this.input.focus();
+                }
+            },
+            
+            closeChat: function() {
+                this.container.classList.remove('active');
+                this.toggle.setAttribute('aria-expanded', false);
+            },
+            
+            sendMessage: function() {
+                const text = this.input.value.trim();
+                if (!text || this.isTyping) return;
+                
+                // ユーザーメッセージを追加
+                this.addMessage(text, 'user');
+                this.input.value = '';
+                
+                // 入力中表示
+                this.showTypingIndicator();
+                
+                // AIレスポンス（模擬）
+                setTimeout(() => {
+                    this.hideTypingIndicator();
+                    
+                    // キーワードに基づく応答
+                    let response = this.getResponseBasedOnKeywords(text);
+                    this.addMessage(response, 'bot');
+                }, 1500);
+            },
+            
+            getResponseBasedOnKeywords: function(text) {
+                const lowerText = text.toLowerCase();
+                
+                // 基本的なキーワード検出
+                if (lowerText.includes('無料相談') || lowerText.includes('相談')) {
+                    return "無料相談は、お問い合わせフォームからお申し込みいただけます。AI導入に関するお悩みやご質問をお聞かせください。専門のコンサルタントが対応いたします。";
+                } else if (lowerText.includes('費用') || lowerText.includes('料金')) {
+                    return "AIソリューションの費用は、導入規模や要件により異なります。基本的なプランは初期費用30万円〜、月額10万円〜となります。お客様のビジネスに最適なプランをご提案いたしますので、まずは無料相談からお気軽にお問い合わせください。";
+                } else if (lowerText.includes('導入期間') || lowerText.includes('どのくらいかかる')) {
+                    return "AI導入の期間は、一般的なチャットボット導入なら1〜2ヶ月程度、業務プロセス全体に関わる大規模なシステムなら3〜6ヶ月程度が目安です。詳細は無料相談でお気軽にお問い合わせください。";
+                } else if (lowerText.includes('メリット') || lowerText.includes('効果')) {
+                    return "AI導入の主なメリットには、業務効率化（作業の自動化による人的リソースの最適化）、コスト削減（24時間稼働による人件費削減）、データ分析による高度な意思決定支援、顧客体験の向上などがあります。貴社に最適なAI活用方法をご提案いたします。";
+                } else if (lowerText.includes('会社概要') || lowerText.includes('shinai')) {
+                    return "ShinAIは「真の価値を信じ、次世代のために新たな未来を創る」という理念のもと、最先端のAI技術で企業の課題解決と成長支援を行っています。技術だけでなく使う人の視点を大切にした「人間中心AI設計」に力を入れているのが特徴です。";
+                } else {
+                    // デフォルトレスポンス（ランダム）
+                    return this.defaultResponses[Math.floor(Math.random() * this.defaultResponses.length)];
+                }
+            },
+            
+            addMessage: function(text, type) {
+                const message = document.createElement('div');
+                message.classList.add('message', `${type}-message`);
+                message.textContent = text;
+                
+                if (type === 'bot') {
+                    message.setAttribute('role', 'status');
+                }
+                
+                this.messages.appendChild(message);
+                this.messages.scrollTop = this.messages.scrollHeight;
+            },
+            
+            showTypingIndicator: function() {
+                this.isTyping = true;
+                
+                const typingIndicator = document.createElement('div');
+                typingIndicator.classList.add('bot-typing');
+                typingIndicator.id = 'bot-typing';
+                
+                // 3つのドットを追加
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('typing-dot');
+                    typingIndicator.appendChild(dot);
+                }
+                
+                this.messages.appendChild(typingIndicator);
+                this.messages.scrollTop = this.messages.scrollHeight;
+            },
+            
+            hideTypingIndicator: function() {
+                this.isTyping = false;
+                
+                const typingIndicator = document.getElementById('bot-typing');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            },
+            
+            animateToggleButton: function() {
+                // 定期的に注目を集めるアニメーション
+                setInterval(() => {
+                    if (!this.container.classList.contains('active')) {
+                        this.toggle.classList.add('attention');
+                        
+                        setTimeout(() => {
+                            this.toggle.classList.remove('attention');
+                        }, 1000);
+                    }
+                }, 20000); // 20秒ごと
+            }
+        };
+        
+        /**
+         * @module AnimationModule
+         * @description GSAPを使用した高度なアニメーション
+         */
+        const AnimationModule = {
+            init: function() {
+                if (typeof gsap === 'undefined') return;
+                
+                if (typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    // フォームの入場アニメーション
+                    gsap.from('.contact-form', {
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: '.contact-grid',
+                            start: 'top bottom-=100'
+                        }
+                    });
+                    
+                    // お問い合わせ情報の入場アニメーション
+                    gsap.from('.contact-info', {
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        delay: 0.2,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: '.contact-grid',
+                            start: 'top bottom-=100'
+                        }
+                    });
+                    
+                    // 地図の入場アニメーション
+                    gsap.from('.contact-map', {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: '.contact-map',
+                            start: 'top bottom-=100'
+                        }
+                    });
+                    
+                    // FAQアイテムの連続アニメーション
+                    gsap.from('.faq-item', {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.6,
+                        stagger: 0.2,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: '.faq-container',
+                            start: 'top bottom-=100'
+                        }
+                    });
+                }
+            }
+        };
+        
+        /**
+         * reCAPTCHA検証コールバック
+         */
+        function onRecaptchaVerified(token) {
+            console.log('reCAPTCHA token:', token);
+            // 実際にはこのトークンをサーバーサイドで検証します
+        }
+    </script>
 </body>
 </html>
