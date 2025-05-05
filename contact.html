@@ -138,6 +138,7 @@
             --purple-main: #8e33ff;     /* メインの紫 */
             --blue-mid: #4264df;        /* 中間のブルー */
             --cyan-light: #26d8de;      /* 水色 */
+            --accent: #FF8A00;          /* アクセントカラー - 注目ポイントに */
             
             /* 補助色 */
             --dark: #111827;
@@ -153,6 +154,8 @@
             --hero-overlay: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
             --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
             --glass-effect: rgba(255, 255, 255, 0.25);
+            --btn-gradient: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+            --btn-hover-gradient: linear-gradient(135deg, var(--purple-bright), var(--blue-mid));
             
             /* フォント */
             --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -325,6 +328,18 @@
             }
             to {
                 transform: rotate(-360deg);
+            }
+        }
+        
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
             }
         }
         
@@ -645,6 +660,25 @@
             border-radius: var(--radius-full);
         }
         
+        .highlight-accent {
+            color: var(--accent);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 138, 0, 0.15);
+            z-index: -1;
+            border-radius: var(--radius-full);
+        }
+        
         .text-gradient {
             background: linear-gradient(45deg, var(--purple-main), var(--blue-mid));
             -webkit-background-clip: text;
@@ -682,6 +716,8 @@
         
         .btn-primary {
             background-color: var(--purple-main);
+            background-image: var(--btn-gradient);
+            background-size: 200% auto;
             color: var(--white);
             position: relative;
             overflow: hidden;
@@ -712,9 +748,9 @@
         }
         
         .btn-primary:hover {
-            background-color: var(--purple-bright);
+            background-position: right center;
             color: var(--white);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 20px rgba(142, 51, 255, 0.35);
         }
         
@@ -750,7 +786,7 @@
         
         .btn-outline:hover {
             color: var(--white);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 20px rgba(142, 51, 255, 0.2);
         }
         
@@ -783,7 +819,7 @@
         }
         
         .btn-icon-right:hover i {
-            transform: translateX(3px);
+            transform: translateX(5px);
         }
         
         /* 
@@ -1218,29 +1254,79 @@
             margin-top: 0.9rem;
         }
         
+        /* カスタムチェックボックススタイル */
         .form-check {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             transition: transform 0.3s ease;
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            position: relative;
         }
         
         .form-check:hover {
+            background-color: rgba(142, 51, 255, 0.05);
             transform: translateX(5px);
         }
         
         .form-check-input {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--purple-main);
-            cursor: pointer;
+            /* デフォルトのチェックボックスを非表示に */
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        /* カスタムチェックボックス */
+        .form-check-input + .form-check-label::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-color: var(--white);
+            border: 2px solid rgba(142, 51, 255, 0.3);
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+        
+        /* ホバー時のスタイル */
+        .form-check:hover .form-check-input + .form-check-label::before {
+            border-color: var(--purple-main);
+            box-shadow: 0 0 0 2px rgba(142, 51, 255, 0.1);
+        }
+        
+        /* チェック時のスタイル */
+        .form-check-input:checked + .form-check-label::before {
+            background-color: var(--purple-main);
+            border-color: var(--purple-main);
+        }
+        
+        /* チェックマーク */
+        .form-check-input:checked + .form-check-label::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
         }
         
         .form-check-label {
             font-size: 0.9rem;
             cursor: pointer;
             font-family: var(--font-jp);
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 1.8rem;
         }
         
         .form-submit {
@@ -1260,6 +1346,8 @@
             letter-spacing: 0.5px;
             position: relative;
             overflow: hidden;
+            background-size: 200% auto;
+            transition: all 0.5s ease;
         }
         
         .form-submit button i {
@@ -1268,7 +1356,11 @@
         }
         
         .form-submit button:hover i {
-            transform: translateX(3px);
+            transform: translateX(5px);
+        }
+        
+        .form-submit button:hover {
+            background-position: right center;
         }
         
         .message-success {
@@ -1330,7 +1422,7 @@
         */
         .faq-section {
             padding: 5rem 0;
-            background-color: #f9f9f9;
+            background-color: #f5f7ff; /* 薄い青色の背景に変更 */
             position: relative;
             overflow: hidden;
         }
@@ -1347,6 +1439,7 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             transition: var(--transition);
+            border: none; /* 白いボーダーを削除 */
         }
         
         .faq-item:hover {
@@ -1364,6 +1457,15 @@
             justify-content: space-between;
             align-items: center;
             font-family: var(--font-jp);
+            border-radius: var(--radius-lg);
+            background-color: var(--white);
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            background-color: rgba(142, 51, 255, 0.05);
+            color: var(--purple-main);
         }
         
         .faq-question i {
@@ -1381,7 +1483,9 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
-            color: var(--gray);
+            color: var(--dark); /* 答えのテキスト色を濃くして読みやすく */
+            background-color: var(--white);
+            line-height: 1.7; /* 行間を広げる */
         }
         
         .faq-item.active .faq-answer {
@@ -1449,7 +1553,7 @@
         
         .btn-white:hover {
             background: var(--white);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
@@ -2215,7 +2319,7 @@
                         <li><a href="services.html" class="nav-link">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
                         <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
-                        <li class="nav-cta"><a href="#contact-form" class="btn btn-primary">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+                        <li class="nav-cta"><a href="#contact-form" class="btn btn-primary btn-icon-right">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
                     </ul>
                 </nav>
                 
@@ -2247,7 +2351,7 @@
                     <span class="breadcrumb-current">お問い合わせ</span>
                 </div>
                 
-                <h1 class="page-hero-title" id="main-content">お問い合わせ・<span class="highlight">無料相談</span></h1>
+                <h1 class="page-hero-title" id="main-content">お問い合わせ・<span class="highlight-accent">無料相談</span></h1>
                 <p class="page-hero-description">AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。まずは無料相談から、AI導入の可能性を探ってみませんか？</p>
             </div>
         </div>
@@ -2406,7 +2510,7 @@
                             </div>
                             
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary btn-icon-right">
                                     無料相談を申し込む <i class="fas fa-paper-plane" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -2529,8 +2633,7 @@
                     <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn btn-lg btn-white">無料相談を申し込む</a>
-                        <a href="services.html" class="btn btn-lg btn-outline-white">サービス詳細を見る</a>
+                        <a href="#contact-form" class="btn btn-lg btn-white btn-icon-right">無料相談を申し込む <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -2736,6 +2839,22 @@
                         }
                     });
                 });
+                
+                // PC版でのハンバーガーメニュー表示制御
+                function checkWindowSize() {
+                    if (window.innerWidth >= 1024) {
+                        menuToggle.style.display = 'none';
+                        nav.style.display = 'flex';
+                        nav.classList.remove('active');
+                    } else {
+                        menuToggle.style.display = 'flex';
+                        nav.style.display = nav.classList.contains('active') ? 'flex' : 'none';
+                    }
+                }
+                
+                // 初期ロード時とリサイズ時にチェック
+                checkWindowSize();
+                window.addEventListener('resize', checkWindowSize);
             }
         };
         
