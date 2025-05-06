@@ -5,7 +5,7 @@ COMPONENT: 変数定義 - UX向上のための配色・間隔調整版
 ==============================================
 */
 :root {
-    /* カラーパレット - ShinAIブランドカラーと調和 */
+    /* カラーパレット - ブランドカラーと調和 */
     --primary: #3A5FEB;     /* メインカラー - 鮮やかなブルー */
     --primary-light: #4671FF;   /* 明るい色 - ホバー状態など */
     --secondary: #00C9A7;        /* セカンダリ - アクセントに */
@@ -17,19 +17,16 @@ COMPONENT: 変数定義 - UX向上のための配色・間隔調整版
     --white: #FFFFFF;           /* 白 - 基本背景 */
     --error: #FF3B3B;           /* エラー表示用 */
     --success: #00C48C;         /* 成功表示用 */
-    --purple-main: #8e33ff;     /* 紫 - アクセント要素用 */
-    --blue-mid: #4264df;        /* 中間ブルー - グラデーション用 */
     
     /* グラデーション - 魅力的な効果 */
     --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
     --gradient-hover: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
     --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
     --gradient-light: linear-gradient(135deg, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
-    --gradient-purple: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
     
     /* フォント */
     --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-en: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-en: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     
     /* エフェクト - 視覚的な深みを追加 */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -250,18 +247,6 @@ COMPONENT: 洗練されたアニメーション
 @keyframes formFocusLine {
     to {
         width: 100%;
-    }
-}
-
-@keyframes float {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    50% {
-        transform: translate(30px, 20px) rotate(5deg);
-    }
-    100% {
-        transform: translate(-20px, 40px) rotate(-5deg);
     }
 }
 
@@ -952,27 +937,6 @@ COMPONENT: ボタン - UX改善とクリック率向上
     opacity: 1;
 }
 
-/* アイコンボタン - ソーシャルリンク等 */
-.btn-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(58, 95, 235, 0.1);
-    color: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-    box-shadow: 0 2px 6px rgba(58, 95, 235, 0.15);
-}
-
-.btn-icon:hover {
-    background: var(--primary);
-    color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.25);
-}
-
 /* 
 ==============================================
 // === component-split: Header ===
@@ -1005,11 +969,11 @@ COMPONENT: ヘッダー - 視認性と操作性向上
     transition: opacity 0.3s ease;
 }
 
-.header.scrolled {
+.header-scrolled {
     box-shadow: var(--shadow);
 }
 
-.header.scrolled::after {
+.header-scrolled::after {
     opacity: 1;
 }
 
@@ -1242,16 +1206,15 @@ COMPONENT: ヒーロー - 印象的なファーストビュー
 
 .hero-label {
     display: inline-block;
-    background: linear-gradient(120deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
-    padding: 0.6rem 1.8rem;
+    background: rgba(58, 95, 235, 0.15);
+    padding: 0.5rem 1.5rem;
     border-radius: 50px;
     color: var(--primary);
     font-weight: 700;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(58, 95, 235, 0.12);
 }
 
 .hero-label::before {
@@ -1262,33 +1225,27 @@ COMPONENT: ヒーロー - 印象的なファーストビュー
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    animation: shimmer 3s infinite;
+    animation: shimmer 2s infinite;
 }
 
 .hero-title {
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     line-height: 1.2;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
     color: var(--dark);
-    max-width: 100%;
+    max-width: 800px; /* 幅広げる */
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
     position: relative;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .hero-title .highlight {
+    color: var(--primary);
     position: relative;
     display: inline-block;
-    color: var(--primary);
-    background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     font-weight: 900;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .hero-title .highlight::after {
@@ -1297,172 +1254,62 @@ COMPONENT: ヒーロー - 印象的なファーストビュー
     bottom: 0.1em;
     left: 0;
     width: 100%;
-    height: 0.2em;
-    background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
-    z-index: -1;
+    height: 0.3em;
+    background: rgba(58, 95, 235, 0.2);
+    z-index: var(--z-back);
     border-radius: 5px;
 }
 
 .hero-description {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     line-height: 1.8;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     max-width: 800px;
     margin-left: auto; /* 中央揃え */
     margin-right: auto; /* 中央揃え */
-    color: rgba(26, 31, 54, 0.9);
+    color: rgba(26, 31, 54, 0.85);
 }
 
 .hero-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.2rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
     justify-content: center; /* 中央揃え */
 }
 
 .hero-cta .btn {
-    min-width: 200px;
-    border-radius: 50px;
-    padding: 1rem 2rem;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.hero-cta .btn-primary {
-    background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-    color: white;
-    box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
-}
-
-.hero-cta .btn-primary:hover {
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(58, 95, 235, 0.4);
-}
-
-.hero-cta .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.6s ease;
-    z-index: -1;
-}
-
-.hero-cta .btn-primary:hover::before {
-    left: 100%;
-}
-
-.hero-cta .btn-consultation {
-    background: white;
-    color: var(--primary);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    border: 2px solid var(--primary);
-}
-
-.hero-cta .btn-consultation:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(58, 95, 235, 0.25);
+    min-width: 180px;
 }
 
 .hero-tagline {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-style: italic;
-    color: var(--primary);
-    opacity: 0.9;
-    margin-top: 1rem;
-    display: inline-block;
-}
-
-.hero-tagline p {
-    position: relative;
-    display: inline-block;
-}
-
-.hero-tagline p::before, .hero-tagline p::after {
-    content: '"';
-    color: var(--primary);
-    font-size: 1.8rem;
-    opacity: 0.6;
-}
-
-/* 浮遊エレメントアニメーション */
-.floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.floating-element {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
-    opacity: 0.5;
-    animation: float 15s infinite alternate ease-in-out;
-}
-
-.floating-element:nth-child(1) {
-    width: 100px;
-    height: 100px;
-    top: 15%;
-    left: 10%;
-    animation-duration: 20s;
-}
-
-.floating-element:nth-child(2) {
-    width: 150px;
-    height: 150px;
-    top: 60%;
-    left: 15%;
-    animation-delay: 2s;
-    animation-duration: 18s;
-}
-
-.floating-element:nth-child(3) {
-    width: 80px;
-    height: 80px;
-    top: 25%;
-    right: 15%;
-    animation-delay: 1s;
-    animation-duration: 22s;
-}
-
-.floating-element:nth-child(4) {
-    width: 120px;
-    height: 120px;
-    bottom: 20%;
-    right: 10%;
-    animation-delay: 3s;
-    animation-duration: 25s;
+    color: var(--dark);
+    opacity: 0.75;
+    margin-top: 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--primary);
+    display: inline-block; /* インライン要素に */
+    text-align: left; /* 左揃え */
 }
 
 .brand-logo {
-    margin-bottom: 1.5rem;
-    transform: scale(1);
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .hero-content:hover .brand-logo {
-    transform: scale(1.1) rotate(10deg);
+    opacity: 1;
+    transform: rotate(15deg);
 }
 
 .brand-icon {
-    width: 90px;
-    height: 90px;
-    filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.25));
+    max-width: 60px;
+    height: auto;
 }
 
 /* 
@@ -1575,10 +1422,10 @@ COMPONENT: 会社概要セクション - 信頼性の演出
 .about-message::after {
     content: '';
     position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 120px;
-    height: 120px;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
     background: var(--primary);
     opacity: 0.05;
     border-radius: 50%;
@@ -1598,134 +1445,96 @@ COMPONENT: 導入メリットセクション - 説得力のある数値表現
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin-top: 4rem;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
 }
 
 .benefit-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-    padding: 2.5rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    padding: 2rem;
     height: 100%;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    position: relative;
-    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
 .benefit-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 50px rgba(58, 95, 235, 0.2);
-    border-color: rgba(58, 95, 235, 0.15);
-}
-
-.benefit-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    z-index: 1;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
+    border-color: rgba(58, 95, 235, 0.1);
 }
 
 .benefit-icon {
-    width: 90px;
-    height: 90px;
-    background: white;
-    border-radius: 20px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 2rem;
-    font-size: 2.2rem;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
     position: relative;
-    z-index: 1;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+    z-index: var(--z-normal);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
 }
 
-/* カード別スタイル */
-.benefit-card:nth-child(1) .benefit-icon {
-    color: #3A5FEB;
-    box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
-}
-
-.benefit-card:nth-child(2) .benefit-icon {
-    color: #00C9A7;
-    box-shadow: 0 10px 30px rgba(0, 201, 167, 0.2);
-}
-
-.benefit-card:nth-child(3) .benefit-icon {
-    color: #FF8A00;
-    box-shadow: 0 10px 30px rgba(255, 138, 0, 0.2);
+.icon-bg-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 16px;
+    filter: blur(10px);
+    opacity: 0.3;
+    z-index: var(--z-back);
+    animation: pulse 3s infinite;
 }
 
 .benefit-card:hover .benefit-icon {
-    transform: scale(1.1) rotate(10deg);
-}
-
-.benefit-card:nth-child(1):hover .benefit-icon {
-    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.3);
-}
-
-.benefit-card:nth-child(2):hover .benefit-icon {
-    box-shadow: 0 15px 40px rgba(0, 201, 167, 0.3);
-}
-
-.benefit-card:nth-child(3):hover .benefit-icon {
-    box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
+    transform: rotate(15deg);
+    box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
 }
 
 .benefit-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    text-align: center;
 }
 
 .benefit-content h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     color: var(--dark);
+    text-align: center;
 }
 
 .benefit-content p {
     color: var(--gray);
-    line-height: 1.8;
-    margin-bottom: 1.8rem;
-    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
 }
 
 .benefit-stats {
     display: flex;
     justify-content: space-around;
     margin: 1.5rem 0;
-    background: rgba(58, 95, 235, 0.06);
-    padding: 1.5rem;
-    border-radius: 15px;
+    background: rgba(58, 95, 235, 0.05);
+    padding: 1.2rem;
+    border-radius: 10px;
     transition: all 0.3s ease;
 }
 
-.benefit-card:nth-child(1) .benefit-stats {
-    background: rgba(58, 95, 235, 0.06);
-}
-
-.benefit-card:nth-child(2) .benefit-stats {
-    background: rgba(0, 201, 167, 0.06);
-}
-
-.benefit-card:nth-child(3) .benefit-stats {
-    background: rgba(255, 138, 0, 0.06);
-}
-
 .benefit-card:hover .benefit-stats {
-    transform: scale(1.05);
+    background: rgba(58, 95, 235, 0.08);
 }
 
 .benefit-stat {
@@ -1733,38 +1542,24 @@ COMPONENT: 導入メリットセクション - 説得力のある数値表現
 }
 
 .stat-value {
-    font-size: 2.8rem;
-    font-weight: 800;
+    font-size: 2.5rem;
+    font-weight: 700;
     color: var(--primary);
     display: inline-block;
     line-height: 1;
 }
 
-.benefit-card:nth-child(1) .stat-value, 
-.benefit-card:nth-child(1) .stat-percent {
-    color: #3A5FEB;
-}
-
-.benefit-card:nth-child(2) .stat-value, 
-.benefit-card:nth-child(2) .stat-percent {
-    color: #00C9A7;
-}
-
-.benefit-card:nth-child(3) .stat-value, 
-.benefit-card:nth-child(3) .stat-percent {
-    color: #FF8A00;
-}
-
 .stat-percent {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
+    color: var(--primary);
 }
 
 .stat-label {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--gray);
     font-weight: 500;
-    margin-top: 0.4rem;
+    margin-top: 0.25rem;
     display: block;
 }
 
@@ -2031,63 +1826,6 @@ COMPONENT: 業界別活用セクション - スライダー対応
 
 .swiper-pagination-bullet-active {
     background: var(--primary);
-}
-
-/* 
-==============================================
-// === component-split: VisionSection ===
-COMPONENT: ビジョンセクション
-==============================================
-*/
-.vision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.vision-card {
-    text-align: center;
-    padding: 2.5rem 2rem;
-    background: rgba(255, 255, 255, 0.9);
-    transition: all 0.4s ease;
-}
-
-.vision-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.1);
-}
-
-.vision-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 20px rgba(58, 95, 235, 0.2);
-}
-
-.vision-card:hover .vision-icon {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 15px 30px rgba(58, 95, 235, 0.3);
-}
-
-.vision-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--dark);
-}
-
-.vision-card p {
-    color: var(--gray);
-    line-height: 1.7;
 }
 
 /* 
