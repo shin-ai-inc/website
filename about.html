@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- component-split: MetaInformation -->
+    <!-- Meta Information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - 「真の価値を信じ、次世代のために新たな未来を創る」企業理念のもと、7つの「Shin」精神でAI技術を通じた課題解決に取り組むAIソリューション企業です。">
@@ -16,7 +16,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="ps:topic" content="企業理念, AI技術革新, 社会実装, 未来創造">
     
-    <!-- component-split: OGPSettings -->
+    <!-- OGP Settings -->
     <meta property="og:title" content="会社紹介 | ShinAI - 真の価値を追求するAI企業">
     <meta property="og:description" content="ShinAI - 「真の価値を信じ、次世代のために新たな未来を創る」企業理念のもと、7つの「Shin」精神でAI技術を通じた課題解決に取り組むAIソリューション企業です。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -29,11 +29,11 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - チームワークを象徴する画像">
     
-    <!-- component-split: ExternalResources -->
+    <!-- External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -41,9 +41,8 @@
     <!-- GSAP for advanced animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
-    <!-- component-split: StructuredData -->
+    
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -82,521 +81,15 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
-
-    <!-- component-split: PageSpecificStyles -->
-    <style>
-    /* 会社紹介ページの特別スタイル */
-    .section {
-        padding: 5rem 0;
-    }
-    
-    .company-about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: center;
-    }
-    
-    .company-image {
-        position: relative;
-        overflow: hidden;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-lg);
-        height: 400px;
-    }
-    
-    .company-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.05);
-        transition: transform 0.7s ease;
-    }
-    
-    .company-image:hover img {
-        transform: scale(1.1);
-    }
-    
-    .company-message {
-        background: rgba(58, 95, 235, 0.05);
-        padding: 1.8rem;
-        border-radius: var(--radius-lg);
-        margin-bottom: 1.8rem;
-        border-left: 4px solid var(--primary);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .company-message p {
-        font-size: 1.2rem;
-        font-style: italic;
-        position: relative;
-        z-index: 2;
-        line-height: 1.8;
-    }
-    
-    .company-message::after {
-        content: '';
-        position: absolute;
-        top: -30px;
-        right: -30px;
-        width: 120px;
-        height: 120px;
-        background: var(--primary);
-        opacity: 0.05;
-        border-radius: 50%;
-        z-index: 1;
-    }
-
-    /* 企業情報テーブル */
-    .company-info-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 2rem;
-    }
-    
-    .company-info-table th,
-    .company-info-table td {
-        padding: 1rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .company-info-table th {
-        text-align: left;
-        width: 30%;
-        font-weight: 600;
-        color: var(--dark);
-    }
-    
-    .company-info-table td {
-        color: var(--gray);
-    }
-
-    /* 7つのShin精神のカード - 視認性改善版 */
-    .shin-values-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-    
-    .shin-value-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-        padding: 2rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(0, 0, 0, 0.03);
-        text-align: center;
-        height: 100%;
-    }
-    
-    .shin-value-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .shin-value-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1.5rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
-        transition: all 0.4s ease;
-    }
-    
-    .shin-value-card:hover .shin-value-icon {
-        transform: rotate(15deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
-    }
-    
-    .shin-value-title {
-        margin-bottom: 1rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--dark);
-    }
-    
-    .shin-value-description {
-        color: var(--gray);
-        line-height: 1.7;
-    }
-
-    /* ビジョンセクション */
-    .vision-statement {
-        background: rgba(58, 95, 235, 0.05);
-        padding: 3rem;
-        border-radius: var(--radius-lg);
-        border-left: 4px solid var(--primary);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 3rem;
-    }
-    
-    .vision-statement h3 {
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    .vision-statement p {
-        line-height: 1.9;
-        font-size: 1.1rem;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .vision-statement::after {
-        content: '';
-        position: absolute;
-        bottom: -80px;
-        right: -80px;
-        width: 200px;
-        height: 200px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        opacity: 0.05;
-        border-radius: 50%;
-        z-index: 1;
-    }
-
-    /* ビジョンポイント */
-    .vision-points {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-    
-    .vision-point {
-        text-align: center;
-        padding: 2rem;
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-        transition: all 0.4s ease;
-        border: 1px solid rgba(0, 0, 0, 0.03);
-    }
-    
-    .vision-point:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .vision-point-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 1.5rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
-        transition: all 0.4s ease;
-    }
-    
-    .vision-point:hover .vision-point-icon {
-        transform: rotate(15deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
-    }
-
-    /* チームメンバーセクション */
-    .team-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2.5rem;
-    }
-    
-    .team-member {
-        text-align: center;
-        padding: 2rem;
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-        transition: all 0.4s ease;
-        border: 1px solid rgba(0, 0, 0, 0.03);
-        overflow: hidden;
-    }
-    
-    .team-member:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .team-member-photo {
-        width: 150px;
-        height: 150px;
-        margin: 0 auto 1.5rem;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 3px solid var(--primary);
-    }
-    
-    .team-member-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-    
-    .team-member:hover .team-member-photo img {
-        transform: scale(1.1);
-    }
-    
-    .team-member-name {
-        margin-bottom: 0.5rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--dark);
-    }
-    
-    .team-member-position {
-        color: var(--primary);
-        font-weight: 600;
-        margin-bottom: 1rem;
-    }
-    
-    .team-member-bio {
-        margin-bottom: 1.5rem;
-        color: var(--gray);
-        line-height: 1.7;
-    }
-    
-    .team-social-links {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-    }
-    
-    .team-social-link {
-        width: 36px;
-        height: 36px;
-        background: rgba(58, 95, 235, 0.1);
-        color: var(--primary);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-    
-    .team-social-link:hover {
-        background: var(--primary);
-        color: var(--white);
-        transform: translateY(-3px);
-    }
-
-    /* チーム全体の写真 */
-    .team-photo {
-        margin-top: 4rem;
-        position: relative;
-        overflow: hidden;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .team-photo img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: transform 0.7s ease;
-    }
-    
-    .team-photo:hover img {
-        transform: scale(1.05);
-    }
-
-    /* 採用情報セクション */
-    .careers-benefits {
-        background: rgba(58, 95, 235, 0.05);
-        padding: 3rem;
-        border-radius: var(--radius-lg);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 3rem;
-    }
-    
-    .careers-benefits-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-    }
-    
-    .careers-benefit-item {
-        margin-bottom: 1.5rem;
-    }
-    
-    .careers-benefit-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-    
-    .careers-benefit-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .careers-benefit-header:hover .careers-benefit-icon {
-        transform: rotate(15deg);
-    }
-    
-    .careers-benefit-title {
-        margin: 0;
-        font-size: 1.1rem;
-        font-weight: 600;
-    }
-    
-    .careers-benefit-description {
-        margin: 0 0 1.5rem 3.5rem;
-        line-height: 1.7;
-        color: var(--gray);
-    }
-
-    /* 募集職種 */
-    .job-positions {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-    
-    .job-position {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-        padding: 2rem;
-        transition: all 0.4s ease;
-        border: 1px solid rgba(0, 0, 0, 0.03);
-    }
-    
-    .job-position:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .job-position-title {
-        margin-bottom: 1rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--primary);
-    }
-    
-    .job-position-description {
-        margin-bottom: 1.5rem;
-        color: var(--gray);
-        line-height: 1.7;
-    }
-
-    /* レスポンシブ対応 */
-    @media (max-width: 992px) {
-        .company-about-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        .vision-points {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .team-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .vision-points {
-            grid-template-columns: 1fr;
-        }
-        
-        .team-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .shin-values-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .vision-statement,
-        .careers-benefits {
-            padding: 2rem;
-        }
-        
-        .careers-benefits-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .company-image {
-            height: 300px;
-        }
-        
-        .company-message p {
-            font-size: 1rem;
-        }
-        
-        .company-info-table th,
-        .company-info-table td {
-            display: block;
-            width: 100%;
-        }
-        
-        .company-info-table th {
-            padding-bottom: 0.5rem;
-        }
-        
-        .company-info-table td {
-            padding-top: 0.5rem;
-        }
-        
-        .shin-value-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.8rem;
-        }
-        
-        .vision-point-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.8rem;
-        }
-    }
-    </style>
 </head>
 <body>
-    <!-- component-split: AccessibilityNav -->
+    <!-- Accessibility Navigation -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- component-split: TopBanner -->
+    <!-- Top Banner -->
     <div class="top-banner"></div>
     
-    <!-- component-split: Header -->
+    <!-- Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -628,8 +121,8 @@
         </div>
     </header>
     
-    <!-- component-split: PageHero -->
-    <div class="page-hero">
+    <!-- Page Hero -->
+    <section class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
             <div class="page-hero-bg-pattern"></div>
@@ -642,49 +135,50 @@
                     <span class="breadcrumb-current">会社紹介</span>
                 </div>
                 <h1 class="page-hero-title">ShinAIの会社紹介</h1>
-                <p class="page-hero-description">
-                    「真の価値を信じ、次世代のために新たな未来を創る」<br>
-                    ShinAIの企業理念と7つの「Shin」精神をご紹介します
-                </p>
+                <p class="page-hero-description">「真の価値を信じ、次世代のために新たな未来を創る」<br>私たちの理念と取り組みをご紹介します</p>
             </div>
         </div>
-    </div>
+    </section>
     
     <main id="main-content">
-        <!-- component-split: CompanySection -->
+        <!-- Company Info Section -->
         <section class="section" id="company-info">
             <div class="container">
-                <div class="section-header animate-on-scroll">
+                <div class="section-header">
                     <span class="section-subtitle">企業情報</span>
                     <h2 class="heading-lg">ShinAIの<span class="highlight">由来</span>と企業理念</h2>
                     <p class="section-description">真の価値を信じ、次世代のために新たな未来を創る</p>
                 </div>
                 
-                <div class="company-about-grid animate-on-scroll">
-                    <div class="company-image">
+                <div class="about-grid">
+                    <div class="about-image glow-border">
                         <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900" 
                             alt="チームワークを象徴する画像" 
                             width="1200"
-                            height="900">
+                            height="900"
+                            loading="lazy">
                     </div>
-                    <div>
-                        <div class="company-message">
-                            <p>ShinAIは、AI技術を通じて社会や人々が本当に必要とする価値を再定義し、誠実さと革新をもって、より良い未来の実現に貢献します。</p>
-                            <p>人と技術が共に生き、調和しながら成長していける社会のために、私たちは挑み続けます。</p>
+                    <div class="about-content">
+                        <div class="about-message">
+                            <p>ShinAIは、AI技術を通じて社会や人々が本当に必要とする価値を再定義し、誠実さと革新をもって、より良い未来の実現に貢献します。人と技術が共に生き、調和しながら成長していける社会のために、私たちは挑み続けます。</p>
                         </div>
                         
-                        <h3 class="heading-md text-gradient">「真」に価値あるAIを追求する</h3>
+                        <h3>「真」に価値あるAIを追求する</h3>
                         <p>ShinAIという社名には、「真」の価値を追求し、「新」たな未来を創造するという理念が込められています。私たちは最先端のAI技術を駆使して、企業の本質的な課題解決を支援します。</p>
                         
-                        <h3 class="heading-md text-gradient">AIの力で人の時間を解放する</h3>
+                        <h3>AIの力で人の時間を解放する</h3>
                         <p>私たちの使命は、AI技術を活用して定型業務や複雑な分析作業を自動化し、人々が創造的な仕事や大切な人との時間に集中できる環境を作ることです。テクノロジーは人間の可能性を広げるために存在すると考えています。</p>
+                        
+                        <div class="about-buttons">
+                            <a href="#philosophy" class="btn btn-primary btn-icon-bounce">企業理念を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 会社情報テーブル -->
-                <div class="glass-card animate-on-scroll" style="margin-top: 4rem;">
+                <div class="glass-card" style="margin-top: 4rem;">
                     <h3 class="heading-md text-center" style="margin-bottom: 2rem;">企業概要</h3>
-                    <table class="company-info-table">
+                    <table class="company-table">
                         <tr>
                             <th>会社名</th>
                             <td>屋号：ShinAI（シンアイ）</td>
@@ -712,7 +206,7 @@
                         <tr>
                             <th>連絡先</th>
                             <td>
-                                Email: shinai.life@gmail.com<br>
+                                Email: shinai.life@gmail.com
                             </td>
                         </tr>
                     </table>
@@ -720,274 +214,287 @@
             </div>
         </section>
         
-        <!-- component-split: PhilosophySection -->
+        <!-- Philosophy Section -->
         <section class="section section-bg-light" id="philosophy">
             <div class="container">
-                <div class="section-header animate-on-scroll">
+                <div class="section-header">
                     <span class="section-subtitle">企業理念</span>
                     <h2 class="heading-lg">ShinAIの<span class="highlight">7つの"Shin"</span>に込めた精神</h2>
                     <p class="section-description">ShinAIの名には、時代やテクノロジーの変化に左右されない<strong>7つの価値観</strong>が込められています。これらは私たちの行動指針であり、企業としての"芯"を形成するものです。</p>
                 </div>
                 
-                <div class="shin-values-grid animate-on-scroll">
-                    <!-- 心 (Heart) -->
-                    <div class="shin-value-card">
+                <div class="shin-values-grid">
+                    <!-- 心 -->
+                    <div class="shin-value-card" data-value="心">
                         <div class="shin-value-icon">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <h3 class="shin-value-title">心 <span class="en-text">(Heart)</span></h3>
-                        <p class="shin-value-description">感性を重んじ、心に触れるAIを創る。技術だけではなく、人の感情や価値観を大切にし、共感を生むソリューションを提供します。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">心</span> <span class="en-text">(Heart)</span></h4>
+                            <p>感性を重んじ、心に触れるAIを創る。技術だけではなく、人の感情や価値観を大切にし、共感を生むソリューションを提供します。</p>
+                        </div>
                     </div>
                     
-                    <!-- 真 (Truth) -->
-                    <div class="shin-value-card">
+                    <!-- 真 -->
+                    <div class="shin-value-card" data-value="真">
                         <div class="shin-value-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
-                        <h3 class="shin-value-title">真 <span class="en-text">(Truth)</span></h3>
-                        <p class="shin-value-description">本質を見抜き、誠実な技術で価値を届ける。表面的な流行に惑わされず、真に必要とされる解決策を追求し続けます。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">真</span> <span class="en-text">(Truth)</span></h4>
+                            <p>本質を見抜き、誠実な技術で価値を届ける。表面的な流行に惑わされず、真に必要とされる解決策を追求し続けます。</p>
+                        </div>
                     </div>
                     
-                    <!-- 新 (New) -->
-                    <div class="shin-value-card">
+                    <!-- 新 -->
+                    <div class="shin-value-card" data-value="新">
                         <div class="shin-value-icon">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h3 class="shin-value-title">新 <span class="en-text">(New)</span></h3>
-                        <p class="shin-value-description">常に変化に挑み、革新で未来を切り拓く。前例にとらわれず、新しい可能性に挑戦し続けることで、未来の扉を開きます。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">新</span> <span class="en-text">(New)</span></h4>
+                            <p>常に変化に挑み、革新で未来を切り拓く。前例にとらわれず、新しい可能性に挑戦し続けることで、未来の扉を開きます。</p>
+                        </div>
                     </div>
                     
-                    <!-- 芯 (Core) -->
-                    <div class="shin-value-card">
+                    <!-- 芯 -->
+                    <div class="shin-value-card" data-value="芯">
                         <div class="shin-value-icon">
                             <i class="fas fa-circle"></i>
                         </div>
-                        <h3 class="shin-value-title">芯 <span class="en-text">(Core)</span></h3>
-                        <p class="shin-value-description">ぶれない軸を持ち、未来の中心を担う。時代の変化に左右されない強い理念と技術力を軸に、次世代を支える存在となります。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">芯</span> <span class="en-text">(Core)</span></h4>
+                            <p>ぶれない軸を持ち、未来の中心を担う。時代の変化に左右されない強い理念と技術力を軸に、次世代を支える存在となります。</p>
+                        </div>
                     </div>
                     
-                    <!-- 伸 (Growth) -->
-                    <div class="shin-value-card">
+                    <!-- 伸 -->
+                    <div class="shin-value-card" data-value="伸">
                         <div class="shin-value-icon">
                             <i class="fas fa-arrow-up"></i>
                         </div>
-                        <h3 class="shin-value-title">伸 <span class="en-text">(Growth)</span></h3>
-                        <p class="shin-value-description">潜在力を引き出し、共に進化し続ける。クライアントの成長を支え、私たち自身も常に学び続けることで、共に未来へ伸びていきます。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">伸</span> <span class="en-text">(Growth)</span></h4>
+                            <p>潜在力を引き出し、共に進化し続ける。クライアントの成長を支え、私たち自身も常に学び続けることで、共に未来へ伸びていきます。</p>
+                        </div>
                     </div>
                     
-                    <!-- 信 (Trust) -->
-                    <div class="shin-value-card">
+                    <!-- 信 -->
+                    <div class="shin-value-card" data-value="信">
                         <div class="shin-value-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <h3 class="shin-value-title">信 <span class="en-text">(Trust)</span></h3>
-                        <p class="shin-value-description">信頼を築き、人と技術の絆を深める。透明性と誠実さを持って関係を構築し、「信じられる技術」を提供し続けます。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">信</span> <span class="en-text">(Trust)</span></h4>
+                            <p>信頼を築き、人と技術の絆を深める。透明性と誠実さを持って関係を構築し、「信じられる技術」を提供し続けます。</p>
+                        </div>
                     </div>
                     
-                    <!-- 紳 (Integrity) - 中央揃えに修正 -->
-                    <div class="shin-value-card">
+                    <!-- 紳 -->
+                    <div class="shin-value-card" data-value="紳">
                         <div class="shin-value-icon">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3 class="shin-value-title">紳 <span class="en-text">(Integrity)</span></h3>
-                        <p class="shin-value-description">美しく、敬意あるふるまいで信頼を導く。高い倫理観と品位を持って行動し、社会から尊敬される企業であり続けます。</p>
+                        <div class="shin-value-content">
+                            <h4><span class="shin-value-kanji">紳</span> <span class="en-text">(Integrity)</span></h4>
+                            <p>美しく、敬意あるふるまいで信頼を導く。高い倫理観と品位を持って行動し、社会から尊敬される企業であり続けます。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- component-split: VisionSection -->
-        <section class="section" id="vision">
+        <!-- Vision Section -->
+        <section class="section">
             <div class="container">
-                <div class="section-header animate-on-scroll">
+                <div class="section-header">
                     <span class="section-subtitle">未来ビジョン</span>
                     <h2 class="heading-lg">ShinAIが描く<span class="highlight">未来</span></h2>
                     <p class="section-description">テクノロジーが人間の創造力や優しさと共に歩む未来を目指します</p>
                 </div>
                 
-                <div class="vision-statement animate-on-scroll">
+                <div class="vision-message glass-card">
                     <h3 class="shimmer-text">人と技術の共創する社会へ</h3>
                     <p>ShinAIは、テクノロジーが人間の創造力や優しさと共に歩む未来を目指します。人の感性、社会の多様性、そして地球の持続性と共鳴するAIを通じて、私たちは「信じられる技術」で課題を解決し、「選ばれる存在」として価値を届け続けます。</p>
                 </div>
                 
                 <!-- 3つのビジョンポイント -->
-                <div class="vision-points animate-on-scroll">
-                    <div class="vision-point">
-                        <div class="vision-point-icon">
-                            <i class="fas fa-clock"></i>
+                <div class="vision-grid">
+                    <div class="vision-card glass-card">
+                        <div class="vision-icon">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
                         </div>
-                        <h3 class="heading-sm">時間の解放</h3>
-                        <p>AIによる定型業務の自動化で、創造的な仕事や大切な人との時間に集中できる環境を作ります。真に人間にしかできない価値創造に集中できる環境を目指します。</p>
+                        <h3>時間の解放</h3>
+                        <p>AIが定型作業を担い、人間が創造的で充実した時間を過ごせる社会。その実現のために、私たちは常に使いやすく価値あるAIを追求します。</p>
                     </div>
                     
-                    <div class="vision-point">
-                        <div class="vision-point-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="vision-card glass-card">
+                        <div class="vision-icon">
+                            <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
-                        <h3 class="heading-sm">共感技術</h3>
+                        <h3>共感技術</h3>
                         <p>人間の感情や価値観に共感し、寄り添うAI。技術だけでなく心のあるソリューションを通じて、人と技術の調和した未来を創ります。</p>
                     </div>
                     
-                    <div class="vision-point">
-                        <div class="vision-point-icon">
-                            <i class="fas fa-globe"></i>
+                    <div class="vision-card glass-card">
+                        <div class="vision-icon">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
                         </div>
-                        <h3 class="heading-sm">社会貢献</h3>
+                        <h3>社会貢献</h3>
                         <p>AI技術を通じて社会課題の解決に貢献し、より良い未来を創造します。すべての人が享受できる価値あるテクノロジーで、持続可能な社会を目指します。</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- component-split: TeamSection -->
+        <!-- Team Section -->
         <section class="section section-bg-light" id="team">
             <div class="container">
-                <div class="section-header animate-on-scroll">
+                <div class="section-header">
                     <span class="section-subtitle">メンバー紹介</span>
                     <h2 class="heading-lg">ShinAIの<span class="highlight">エキスパートチーム</span></h2>
                     <p class="section-description">専門知識と実績を持つプロフェッショナルが、お客様の課題解決に取り組みます</p>
                 </div>
                 
-                <div class="team-grid animate-on-scroll">
+                <div class="team-grid">
                     <!-- 柴田 昌国（代表取締役） -->
-                    <div class="team-member">
-                        <div class="team-member-photo">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" 
-                                alt="柴田 昌国" 
-                                width="150" 
-                                height="150">
+                    <div class="team-member-card">
+                        <div class="team-member-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300&h=300" alt="柴田 昌国" width="300" height="300" loading="lazy">
                         </div>
-                        <h3 class="team-member-name">柴田 昌国</h3>
-                        <p class="team-member-position">代表 / CEO</p>
-                        <p class="team-member-bio">AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。</p>
-                        <div class="team-social-links">
-                            <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="team-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <div class="team-member-info">
+                            <h3>柴田 昌国</h3>
+                            <p class="team-member-position">代表 / CEO</p>
+                            <p class="team-member-bio">AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。</p>
+                            <div class="team-member-social">
+                                <a href="#" class="btn-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="btn-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Y氏（CTO） -->
-                    <div class="team-member">
-                        <div class="team-member-photo">
-                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=150&h=150" 
-                                alt="Y氏" 
-                                width="150" 
-                                height="150">
+                    <div class="team-member-card">
+                        <div class="team-member-image">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=300&h=300" alt="Y氏" width="300" height="300" loading="lazy">
                         </div>
-                        <h3 class="team-member-name">Y氏</h3>
-                        <p class="team-member-position">最高技術責任者 / CTO</p>
-                        <p class="team-member-bio">大手半導体メーカー技術者としての経験とAIスタートアップ企業でのエンジニアリング経験を持つ。最先端技術と実用性を兼ね備えたAI開発を主導。</p>
-                        <div class="team-social-links">
-                            <a href="#" class="team-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="team-social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <div class="team-member-info">
+                            <h3>Y氏</h3>
+                            <p class="team-member-position">最高技術責任者 / CTO</p>
+                            <p class="team-member-bio">大手半導体メーカー技術者としての経験とAIスタートアップ企業でのエンジニアリング経験を持つ。最先端技術と実用性を兼ね備えたAI開発を主導。</p>
+                            <div class="team-member-social">
+                                <a href="#" class="btn-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="btn-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
       
                 <!-- チーム全体の写真 -->
-                <div class="team-photo animate-on-scroll">
+                <div class="team-image glow-border">
                     <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200&h=550" 
                         alt="ShinAIチームの集合写真" 
                         width="1200"
-                        height="550">
+                        height="550"
+                        loading="lazy">
                 </div>
             </div>
         </section>
         
-        <!-- component-split: CareersSection -->
+        <!-- Careers Section -->
         <section class="section" id="careers">
             <div class="container">
-                <div class="section-header animate-on-scroll">
+                <div class="section-header">
                     <span class="section-subtitle">採用情報</span>
                     <h2 class="heading-lg">ShinAIで<span class="highlight">未来を創る</span>仲間を募集</h2>
                     <p class="section-description">AIの力で社会に価値を届けたい、そんな志を持つ仲間と共に成長していきたいと考えています</p>
                 </div>
                 
-                <div class="careers-benefits animate-on-scroll">
-                    <h3 class="heading-md" style="margin-bottom: 2rem;">ShinAIで働く魅力</h3>
+                <div class="careers-features glass-card">
+                    <h3 class="heading-md">ShinAIで働く魅力</h3>
                     
-                    <div class="careers-benefits-grid">
-                        <div class="careers-benefit-item">
-                            <div class="careers-benefit-header">
-                                <div class="careers-benefit-icon">
-                                    <i class="fas fa-rocket"></i>
-                                </div>
-                                <h4 class="careers-benefit-title">最先端技術に触れる機会</h4>
+                    <div class="careers-features-grid">
+                        <div class="career-feature">
+                            <div class="career-feature-icon">
+                                <i class="fas fa-rocket"></i>
                             </div>
-                            <p class="careers-benefit-description">常に最新のAI技術にアクセスし、実際のプロジェクトで活用する環境があります。技術力向上のための研修制度も充実。</p>
+                            <div class="career-feature-content">
+                                <h4>最先端技術に触れる機会</h4>
+                                <p>常に最新のAI技術にアクセスし、実際のプロジェクトで活用する環境があります。技術力向上のための研修制度も充実。</p>
+                            </div>
                         </div>
                         
-                        <div class="careers-benefit-item">
-                            <div class="careers-benefit-header">
-                                <div class="careers-benefit-icon">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <h4 class="careers-benefit-title">アイデアを形にする自由</h4>
+                        <div class="career-feature">
+                            <div class="career-feature-icon">
+                                <i class="fas fa-lightbulb"></i>
                             </div>
-                            <p class="careers-benefit-description">自分のアイデアを提案し、実現できる風土があります。20%ルールを採用し、自己啓発や新規プロジェクトに取り組む時間を確保。</p>
+                            <div class="career-feature-content">
+                                <h4>アイデアを形にする自由</h4>
+                                <p>自分のアイデアを提案し、実現できる風土があります。20%ルールを採用し、自己啓発や新規プロジェクトに取り組む時間を確保。</p>
+                            </div>
                         </div>
                         
-                        <div class="careers-benefit-item">
-                            <div class="careers-benefit-header">
-                                <div class="careers-benefit-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <h4 class="careers-benefit-title">ワークライフバランス</h4>
+                        <div class="career-feature">
+                            <div class="career-feature-icon">
+                                <i class="fas fa-heart"></i>
                             </div>
-                            <p class="careers-benefit-description">フレックス制度やリモートワークなど、柔軟な働き方を支援。社員の健康と家族の時間を大切にする文化を大切にしています。</p>
+                            <div class="career-feature-content">
+                                <h4>ワークライフバランス</h4>
+                                <p>フレックス制度やリモートワークなど、柔軟な働き方を支援。社員の健康と家族の時間を大切にする文化を大切にしています。</p>
+                            </div>
                         </div>
                         
-                        <div class="careers-benefit-item">
-                            <div class="careers-benefit-header">
-                                <div class="careers-benefit-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <h4 class="careers-benefit-title">社会的インパクト</h4>
+                        <div class="career-feature">
+                            <div class="career-feature-icon">
+                                <i class="fas fa-globe"></i>
                             </div>
-                            <p class="careers-benefit-description">自分の仕事が社会課題の解決や人々の生活向上に直接つながる実感を得られます。意義ある仕事に取り組める環境です。</p>
+                            <div class="career-feature-content">
+                                <h4>社会的インパクト</h4>
+                                <p>自分の仕事が社会課題の解決や人々の生活向上に直接つながる実感を得られます。意義ある仕事に取り組める環境です。</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 募集職種 -->
-                <h3 class="heading-md text-center animate-on-scroll" style="margin-bottom: 2rem;">現在募集中の職種</h3>
+                <h3 class="heading-md text-center" style="margin: 3rem 0 2rem;">現在募集中の職種</h3>
                 
-                <div class="job-positions animate-on-scroll">
-                    <div class="job-position">
-                        <h4 class="job-position-title">AIエンジニア</h4>
-                        <p class="job-position-description">自然言語処理や機械学習の技術を用いて、実用的なAIソリューションを開発するエンジニアを募集しています。最新技術への好奇心と実装力を持つ方。</p>
-                        <div>
-                            <a href="contact.html" class="btn btn-outline btn-icon-bounce">応募する <i class="fas fa-arrow-right"></i></a>
+                <div class="job-positions-grid">
+                    <div class="job-position-card glass-card">
+                        <h4>AIエンジニア</h4>
+                        <p>自然言語処理や機械学習の技術を用いて、実用的なAIソリューションを開発するエンジニアを募集しています。最新技術への好奇心と実装力を持つ方。</p>
+                        <div class="job-position-footer">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
-                    <div class="job-position">
-                        <h4 class="job-position-title">AIコンサルタント</h4>
-                        <p class="job-position-description">お客様のビジネス課題を理解し、最適なAIソリューションを提案・導入支援するコンサルタントを募集。技術知識とビジネス感覚を兼ね備えた方。</p>
-                        <div>
-                            <a href="contact.html" class="btn btn-outline btn-icon-bounce">応募する <i class="fas fa-arrow-right"></i></a>
+                    <div class="job-position-card glass-card">
+                        <h4>AIコンサルタント</h4>
+                        <p>お客様のビジネス課題を理解し、最適なAIソリューションを提案・導入支援するコンサルタントを募集。技術知識とビジネス感覚を兼ね備えた方。</p>
+                        <div class="job-position-footer">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                     
-                    <div class="job-position">
-                        <h4 class="job-position-title">UX/UIデザイナー</h4>
-                        <p class="job-position-description">AIと人間の接点となるインターフェースをデザインし、優れたユーザー体験を創出するデザイナーを募集。人間中心設計の思考を持つ方。</p>
-                        <div>
-                            <a href="contact.html" class="btn btn-outline btn-icon-bounce">応募する <i class="fas fa-arrow-right"></i></a>
+                    <div class="job-position-card glass-card">
+                        <h4>UX/UIデザイナー</h4>
+                        <p>AIと人間の接点となるインターフェースをデザインし、優れたユーザー体験を創出するデザイナーを募集。人間中心設計の思考を持つ方。</p>
+                        <div class="job-position-footer">
+                            <a href="contact.html" class="btn btn-outline">応募する <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="text-center animate-on-scroll" style="margin-top: 3rem;">
-                    <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">採用情報に応募する <i class="fas fa-arrow-right"></i></a>
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">採用情報に応募する <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
         
-        <!-- component-split: CTASection -->
+        <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
-                <div class="cta-container animate-on-scroll">
+                <div class="cta-container">
                     <div class="cta-bg-animation"></div>
                     <div class="cta-shapes">
                         <div class="cta-shape-1"></div>
@@ -999,15 +506,14 @@
                             <h2>ShinAIに<span class="text-gradient">ご相談</span>ください</h2>
                         </div>
                         <div class="cta-description">
-                            <p>AI導入についてのご質問や、貴社の課題に最適なソリューションについて、<br>
-                            お気軽にお問い合わせください。専門のコンサルタントが丁寧にご対応いたします。</p>
+                            <p>AI導入についてのご質問や、貴社の課題に最適なソリューションについて、<br>お気軽にお問い合わせください。専門のコンサルタントが丁寧にご対応いたします。</p>
                         </div>
                         <div class="cta-buttons">
                             <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
                                 <span>無料相談する</span>
                                 <span class="btn-consultation-message">個別でじっくり相談できます</span>
                             </a>
-                            <a href="#" class="btn-download btn-lg">資料をダウンロード <i class="fas fa-file-download"></i></a>
+                            <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1015,14 +521,14 @@
         </section>
     </main>
     
-    <!-- component-split: BottomBanner -->
+    <!-- Bottom Banner -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- component-split: Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1084,7 +590,7 @@
         </div>
     </footer>
     
-    <!-- component-split: ChatbotComponent -->
+    <!-- Chatbot Component -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1112,21 +618,34 @@
             </div>
         </div>
     </div>
-
-    <!-- component-split: BackToTop -->
+    
+    <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- component-split: JavaScript -->
+    <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
     
-    <!-- component-split: PageSpecificScripts -->
+    <!-- Page Specific Scripts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Shin値カードのアニメーション
+        const shinValueCards = document.querySelectorAll('.shin-value-card');
+        shinValueCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const value = this.getAttribute('data-value');
+                const icon = this.querySelector('.shin-value-icon');
+                icon.classList.add('animated');
+                setTimeout(() => {
+                    icon.classList.remove('animated');
+                }, 1000);
+            });
+        });
         
         // スクロールアニメーション
         const observerOptions = {
@@ -1142,11 +661,12 @@
             });
         }, observerOptions);
         
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        document.querySelectorAll('.about-grid, .shin-values-grid, .vision-message, .vision-grid, .team-grid, .team-image, .careers-features, .job-positions-grid').forEach(el => {
+            el.classList.add('animate-on-scroll');
             observer.observe(el);
         });
         
-        // ヘッダースクロール効果
+        // ヘッダーのスクロール効果
         const header = document.getElementById('header');
         
         window.addEventListener('scroll', function() {
@@ -1157,7 +677,7 @@
             }
         });
         
-        // Back to Topボタン
+        // Back to Topボタンの表示制御
         const backToTopButton = document.getElementById('back-to-top');
         
         window.addEventListener('scroll', function() {
@@ -1174,20 +694,347 @@
                 behavior: 'smooth'
             });
         });
-        
-        // Shin Value カードホバーエフェクト強化
-        const shinValueCards = document.querySelectorAll('.shin-value-card');
-        
-        shinValueCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
     });
     </script>
+    
+    <style>
+    /* Page Specific Styles */
+    .company-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .company-table th, .company-table td {
+        padding: 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .company-table th {
+        width: 30%;
+        font-weight: 600;
+        color: var(--dark);
+    }
+    
+    .company-table td {
+        color: var(--gray);
+    }
+    
+    /* Shin Values Grid */
+    .shin-values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .shin-value-card {
+        display: flex;
+        align-items: flex-start;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .shin-value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .shin-value-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        font-size: 1.5rem;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+    }
+    
+    .shin-value-card:hover .shin-value-icon {
+        transform: rotate(15deg);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+    }
+    
+    .shin-value-content h4 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .shin-value-kanji {
+        font-weight: 900;
+        font-size: 1.6rem;
+        color: var(--primary);
+    }
+    
+    .shin-value-content p {
+        color: var(--gray);
+        margin: 0;
+        line-height: 1.7;
+    }
+    
+    /* Vision Message */
+    .vision-message {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+        padding: 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid var(--primary);
+    }
+    
+    .vision-message h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+    }
+    
+    .vision-message p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        max-width: 900px;
+        margin: 0 auto;
+        color: var(--gray);
+    }
+    
+    .vision-message::after {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: var(--primary);
+        opacity: 0.05;
+        border-radius: 50%;
+    }
+    
+    /* Team Grid */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .team-member-card {
+        display: flex;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .team-member-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .team-member-image {
+        width: 40%;
+        overflow: hidden;
+    }
+    
+    .team-member-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+    
+    .team-member-card:hover .team-member-image img {
+        transform: scale(1.05);
+    }
+    
+    .team-member-info {
+        padding: 2rem;
+        width: 60%;
+    }
+    
+    .team-member-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+    
+    .team-member-position {
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .team-member-bio {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+    }
+    
+    .team-member-social {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .team-image {
+        margin-top: 3rem;
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .team-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.8s ease;
+    }
+    
+    .team-image:hover img {
+        transform: scale(1.02);
+    }
+    
+    /* Careers Features */
+    .careers-features {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+        margin-bottom: 3rem;
+    }
+    
+    .careers-features h3 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .careers-features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+    
+    .career-feature {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .career-feature-icon {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.2rem;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+    }
+    
+    .career-feature:hover .career-feature-icon {
+        transform: rotate(15deg);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.3);
+    }
+    
+    .career-feature-content h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+        color: var(--dark);
+    }
+    
+    .career-feature-content p {
+        color: var(--gray);
+        margin: 0;
+        line-height: 1.7;
+    }
+    
+    /* Job Positions */
+    .job-positions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+    
+    .job-position-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .job-position-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .job-position-card h4 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--primary);
+    }
+    
+    .job-position-card p {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        flex-grow: 1;
+    }
+    
+    .job-position-footer {
+        margin-top: auto;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .team-member-card {
+            flex-direction: column;
+        }
+        
+        .team-member-image {
+            width: 100%;
+            height: 300px;
+        }
+        
+        .team-member-info {
+            width: 100%;
+        }
+        
+        .shin-values-grid,
+        .careers-features-grid,
+        .job-positions-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
 </body>
 </html>
