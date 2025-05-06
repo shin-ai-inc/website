@@ -1,26 +1,26 @@
 /* 
 ==============================================
 // === component-split: Variables ===
-COMPONENT: 変数定義（改良版）
+COMPONENT: 変数定義 - UX向上のための配色・間隔調整版
 ==============================================
 */
 :root {
-    /* カラーパレット - ブランドカラーを統一 */
-    --purple-main: #3A5FEB;     /* メインカラー */
-    --purple-bright: #4671FF;   /* 明るい色 - ホバー状態など */
-    --blue-mid: #00C9A7;        /* 中間の色 - アクセントに */
-    --cyan-light: #00E6C3;      /* 水色 - ポイントカラー */
+    /* カラーパレット - ブランドカラーと調和 */
+    --primary: #3A5FEB;     /* メインカラー - 鮮やかなブルー */
+    --primary-light: #4671FF;   /* 明るい色 - ホバー状態など */
+    --secondary: #00C9A7;        /* セカンダリ - アクセントに */
+    --secondary-light: #00E6C3;      /* 明るいセカンダリ - ポイントカラー */
     --accent: #FF8A00;          /* アクセント - 注目させたい要素 */
-    --dark: #1A1F36;            /* 暗い色 - ベーステキスト */
+    --dark: #1A1F36;            /* ダークカラー - ベーステキスト */
     --gray: #5E6C84;            /* グレー - サブテキスト */
     --light-gray: #F9FAFC;      /* 薄いグレー - 背景など */
     --white: #FFFFFF;           /* 白 - 基本背景 */
     --error: #FF3B3B;           /* エラー表示用 */
     --success: #00C48C;         /* 成功表示用 */
     
-    /* グラデーション - 鮮やかな効果を維持 */
-    --gradient-primary: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
-    --gradient-hover: linear-gradient(135deg, var(--purple-bright), var(--cyan-light));
+    /* グラデーション - 魅力的な効果 */
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-hover: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
     --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
     --gradient-light: linear-gradient(135deg, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
     
@@ -61,7 +61,7 @@ COMPONENT: 変数定義（改良版）
 /* 
 ==============================================
 // === component-split: Animations ===
-COMPONENT: アニメーション定義（強化版）
+COMPONENT: 洗練されたアニメーション
 ==============================================
 */
 @keyframes fadeInUp {
@@ -253,7 +253,7 @@ COMPONENT: アニメーション定義（強化版）
 /* 
 ==============================================
 // === component-split: Reset ===
-COMPONENT: リセット & ベーススタイル（強化版）
+COMPONENT: リセット & スタイル原則
 ==============================================
 */
 *, *::before, *::after {
@@ -307,13 +307,13 @@ img {
 }
 
 a {
-    color: var(--purple-main);
+    color: var(--primary);
     text-decoration: none;
     transition: var(--transition);
 }
 
 a:hover {
-    color: var(--purple-bright);
+    color: var(--primary-light);
 }
 
 ul {
@@ -333,7 +333,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-    outline: 3px solid var(--purple-main);
+    outline: 3px solid var(--primary);
     outline-offset: 3px;
     box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.3);
 }
@@ -343,7 +343,7 @@ select:focus-visible {
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
     padding: 10px;
     z-index: var(--z-top);
@@ -498,7 +498,7 @@ COMPONENT: レイアウトユーティリティ（強化版）
 /* 
 ==============================================
 // === component-split: Banner ===
-COMPONENT: バナー（強化版）
+COMPONENT: バナーコンポーネント
 ==============================================
 */
 .top-banner {
@@ -511,7 +511,7 @@ COMPONENT: バナー（強化版）
 }
 
 .bottom-banner {
-    background: linear-gradient(90deg, var(--cyan-light), var(--blue-mid), var(--purple-main));
+    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
     padding: 2rem 0;
     color: var(--white);
     text-align: center;
@@ -543,7 +543,7 @@ COMPONENT: バナー（強化版）
 /* 
 ==============================================
 // === component-split: Typography ===
-COMPONENT: タイポグラフィ（強化版）
+COMPONENT: タイポグラフィ - 読みやすさと表現力を強化
 ==============================================
 */
 .heading-xl {
@@ -606,7 +606,7 @@ COMPONENT: タイポグラフィ（強化版）
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: var(--purple-main);
+    background: var(--primary);
     border-radius: var(--radius-full);
 }
 
@@ -617,7 +617,7 @@ COMPONENT: タイポグラフィ（強化版）
     border-radius: var(--radius-full);
     font-size: 0.95rem;
     margin-bottom: 1rem;
-    color: var(--purple-main);
+    color: var(--primary);
     font-weight: 600;
     letter-spacing: 0.5px;
 }
@@ -630,7 +630,7 @@ COMPONENT: タイポグラフィ（強化版）
 }
 
 .highlight {
-    color: var(--purple-main);
+    color: var(--primary);
     font-weight: 700;
     position: relative;
     display: inline-block;
@@ -668,7 +668,7 @@ COMPONENT: タイポグラフィ（強化版）
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -678,7 +678,7 @@ COMPONENT: タイポグラフィ（強化版）
 /* 
 ==============================================
 // === component-split: Buttons ===
-COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
+COMPONENT: ボタン - UX改善とクリック率向上
 ==============================================
 */
 .btn {
@@ -717,6 +717,7 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
     background: var(--gradient-primary);
     color: var(--white);
     box-shadow: var(--shadow-button);
+    font-weight: 700;
 }
 
 .btn-primary::before {
@@ -734,6 +735,7 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: var(--shadow-button-hover);
+    color: var(--white); /* コントラストを維持 */
 }
 
 .btn-primary:hover::before {
@@ -743,14 +745,14 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 /* アウトラインボタン - セカンダリーCTA用 */
 .btn-outline {
     background: rgba(255, 255, 255, 0.95); /* 背景色を明るく */
-    color: var(--purple-main);
-    border: 2px solid var(--purple-main);
+    color: var(--primary);
+    border: 2px solid var(--primary);
     box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
     font-weight: 600;
 }
 
 .btn-outline:hover {
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
@@ -776,10 +778,11 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
     border-color: var(--gray);
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    color: var(--primary);
 }
 
 .btn-download i {
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 /* アイコン付きボタン - バウンス効果 */
@@ -865,7 +868,7 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 
 .btn-cta-white {
     background: var(--white);
-    color: var(--purple-main);
+    color: var(--primary);
     border: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -902,6 +905,7 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 .btn-consultation:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 10px 25px rgba(58, 95, 235, 0.4);
+    color: var(--white); /* コントラスト維持 */
 }
 
 .btn-consultation::before {
@@ -936,12 +940,12 @@ COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 /* 
 ==============================================
 // === component-split: Header ===
-COMPONENT: ヘッダー（強化版）
+COMPONENT: ヘッダー - 視認性と操作性向上
 ==============================================
 */
 .header {
     position: fixed;
-    top: 5px;
+    top: 5px; /* トップバナーの高さ分下げる */
     left: 0;
     width: 100%;
     z-index: var(--z-header);
@@ -1005,6 +1009,7 @@ COMPONENT: ヘッダー（強化版）
 .nav {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-link {
@@ -1022,14 +1027,14 @@ COMPONENT: ヘッダー（強化版）
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--purple-main);
+    background: var(--primary);
     transition: width 0.3s ease;
     border-radius: var(--radius-full);
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 .nav-link:hover::after,
@@ -1058,16 +1063,16 @@ COMPONENT: ヘッダー（強化版）
 
 .menu-toggle:hover {
     background: rgba(58, 95, 235, 0.2);
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 .menu-toggle.active {
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
 }
 
 .page-header {
-    padding-top: 120px;
+    padding-top: 120px; /* ヘッダーの高さを考慮 */
     padding-bottom: 60px;
     background: var(--gradient-light);
     position: relative;
@@ -1096,14 +1101,14 @@ COMPONENT: ヘッダー（強化版）
 }
 
 .breadcrumb-current {
-    color: var(--purple-main);
+    color: var(--primary);
     font-weight: 500;
 }
 
 /* 
 ==============================================
 // === component-split: ParticlesContainer ===
-COMPONENT: Three.jsパーティクルアニメーション（強化版）
+COMPONENT: 背景エフェクト
 ==============================================
 */
 .particles-container {
@@ -1141,7 +1146,7 @@ COMPONENT: Three.jsパーティクルアニメーション（強化版）
 /* 
 ==============================================
 // === component-split: Hero ===
-COMPONENT: ヒーローセクション（強化版）
+COMPONENT: ヒーロー - 印象的なファーストビュー
 ==============================================
 */
 .hero {
@@ -1150,8 +1155,8 @@ COMPONENT: ヒーローセクション（強化版）
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding-top: 80px;
-    text-align: center; /* 中央揃えに変更 */
+    padding-top: 80px; /* ヘッダー重なり防止 */
+    text-align: center; /* 中央揃え */
 }
 
 .hero-bg-container {
@@ -1204,7 +1209,7 @@ COMPONENT: ヒーローセクション（強化版）
     background: rgba(58, 95, 235, 0.15);
     padding: 0.5rem 1.5rem;
     border-radius: 50px;
-    color: var(--purple-main);
+    color: var(--primary);
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: 0.5px;
@@ -1236,7 +1241,7 @@ COMPONENT: ヒーローセクション（強化版）
 }
 
 .hero-title .highlight {
-    color: var(--purple-main);
+    color: var(--primary);
     position: relative;
     display: inline-block;
     font-weight: 900;
@@ -1284,7 +1289,7 @@ COMPONENT: ヒーローセクション（強化版）
     opacity: 0.75;
     margin-top: 1.5rem;
     padding-left: 1rem;
-    border-left: 3px solid var(--purple-main);
+    border-left: 3px solid var(--primary);
     display: inline-block; /* インライン要素に */
     text-align: left; /* 左揃え */
 }
@@ -1310,7 +1315,7 @@ COMPONENT: ヒーローセクション（強化版）
 /* 
 ==============================================
 // === component-split: Section ===
-COMPONENT: セクション共通（強化版）
+COMPONENT: セクション共通 - リズム感のあるレイアウト
 ==============================================
 */
 .section {
@@ -1335,7 +1340,7 @@ COMPONENT: セクション共通（強化版）
 /* 
 ==============================================
 // === component-split: AboutSection ===
-COMPONENT: 会社概要セクション（強化版）
+COMPONENT: 会社概要セクション - 信頼性の演出
 ==============================================
 */
 .about-grid {
@@ -1391,7 +1396,7 @@ COMPONENT: 会社概要セクション（強化版）
     bottom: -5px;
     width: 60px;
     height: 3px;
-    background: var(--purple-main);
+    background: var(--primary);
     border-radius: var(--radius-full);
 }
 
@@ -1403,7 +1408,7 @@ COMPONENT: 会社概要セクション（強化版）
 
 .about-message {
     margin-bottom: 2rem;
-    border-left: 4px solid var(--purple-main);
+    border-left: 4px solid var(--primary);
     padding: 1.5rem;
     background: rgba(58, 95, 235, 0.05);
     border-radius: 0 var(--radius) var(--radius) 0;
@@ -1421,7 +1426,7 @@ COMPONENT: 会社概要セクション（強化版）
     right: -20px;
     width: 100px;
     height: 100px;
-    background: var(--purple-main);
+    background: var(--primary);
     opacity: 0.05;
     border-radius: 50%;
     z-index: var(--z-back);
@@ -1434,7 +1439,7 @@ COMPONENT: 会社概要セクション（強化版）
 /* 
 ==============================================
 // === component-split: BenefitsSection ===
-COMPONENT: 導入メリットセクション（強化版）
+COMPONENT: 導入メリットセクション - 説得力のある数値表現
 ==============================================
 */
 .benefits-grid {
@@ -1467,7 +1472,7 @@ COMPONENT: 導入メリットセクション（強化版）
 .benefit-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     border-radius: 16px;
     display: flex;
@@ -1485,7 +1490,7 @@ COMPONENT: 導入メリットセクション（強化版）
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--purple-main);
+    background: var(--primary);
     border-radius: 16px;
     filter: blur(10px);
     opacity: 0.3;
@@ -1539,7 +1544,7 @@ COMPONENT: 導入メリットセクション（強化版）
 .stat-value {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--purple-main);
+    color: var(--primary);
     display: inline-block;
     line-height: 1;
 }
@@ -1547,7 +1552,7 @@ COMPONENT: 導入メリットセクション（強化版）
 .stat-percent {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 .stat-label {
@@ -1561,7 +1566,7 @@ COMPONENT: 導入メリットセクション（強化版）
 /* 
 ==============================================
 // === component-split: ServicesSection ===
-COMPONENT: サービスセクション（強化版）
+COMPONENT: サービスセクション - 明確な価値提案
 ==============================================
 */
 .services-grid {
@@ -1594,7 +1599,7 @@ COMPONENT: サービスセクション（強化版）
     position: absolute;
     top: 15px;
     right: -35px;
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 5px 40px;
     transform: rotate(45deg);
@@ -1616,7 +1621,7 @@ COMPONENT: サービスセクション（強化版）
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     z-index: var(--z-normal);
 }
 
@@ -1643,7 +1648,7 @@ COMPONENT: サービスセクション（強化版）
     right: 25px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1690,7 +1695,7 @@ COMPONENT: サービスセクション（強化版）
 
 .service-tag {
     background: rgba(58, 95, 235, 0.1);
-    color: var(--purple-main);
+    color: var(--primary);
     padding: 0.3rem 0.8rem;
     border-radius: 50px;
     font-size: 0.8rem;
@@ -1704,7 +1709,7 @@ COMPONENT: サービスセクション（強化版）
 /* 
 ==============================================
 // === component-split: IndustriesSection ===
-COMPONENT: 業界別活用セクション（強化版）- スライダー対応
+COMPONENT: 業界別活用セクション - スライダー対応
 ==============================================
 */
 .industry-slider {
@@ -1742,7 +1747,7 @@ COMPONENT: 業界別活用セクション（強化版）- スライダー対応
     width: 60px;
     height: 60px;
     min-width: 60px;
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     border-radius: 12px;
     display: flex;
@@ -1791,13 +1796,13 @@ COMPONENT: 業界別活用セクション（強化版）- スライダー対応
 }
 
 .industry-feature i {
-    color: var(--purple-main);
+    color: var(--primary);
     margin-right: 0.7rem;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--purple-main);
+    color: var(--primary);
     background: var(--white);
     width: 44px;
     height: 44px;
@@ -1820,13 +1825,13 @@ COMPONENT: 業界別活用セクション（強化版）- スライダー対応
 }
 
 .swiper-pagination-bullet-active {
-    background: var(--purple-main);
+    background: var(--primary);
 }
 
 /* 
 ==============================================
 // === component-split: CTASection ===
-COMPONENT: お問い合わせCTA（強化版）- コントラスト向上
+COMPONENT: お問い合わせCTA - 高コンバージョン設計
 ==============================================
 */
 .cta-section {
@@ -1867,7 +1872,7 @@ COMPONENT: お問い合わせCTA（強化版）- コントラスト向上
     left: 0;
     width: 100%;
     height: 8px;
-    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     z-index: var(--z-normal);
 }
 
@@ -1984,7 +1989,7 @@ COMPONENT: お問い合わせCTA（強化版）- コントラスト向上
 /* 
 ==============================================
 // === component-split: Footer ===
-COMPONENT: フッター（強化版）
+COMPONENT: フッター - 豊富な関連リンクとブランディング強化
 ==============================================
 */
 .footer {
@@ -2003,7 +2008,7 @@ COMPONENT: フッター（強化版）
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, var(--cyan-light), var(--blue-mid), var(--purple-main));
+    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
 }
 
 .footer-grid {
@@ -2061,7 +2066,7 @@ COMPONENT: フッター（強化版）
 }
 
 .social-link:hover {
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -2082,7 +2087,7 @@ COMPONENT: フッター（強化版）
     left: 0;
     width: 40px;
     height: 3px;
-    background: var(--purple-main);
+    background: var(--primary);
     border-radius: var(--radius-full);
 }
 
@@ -2171,7 +2176,7 @@ COMPONENT: フッター（強化版）
 /* 
 ==============================================
 // === component-split: ContactSection ===
-COMPONENT: お問い合わせフォーム（改良版）
+COMPONENT: お問い合わせフォーム - ユーザビリティ向上
 ==============================================
 */
 .section-contact {
@@ -2187,7 +2192,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .contact-info {
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
@@ -2307,7 +2312,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 
 .form-control:focus {
     outline: none;
-    border-color: var(--purple-main);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
 }
 
@@ -2386,8 +2391,8 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .form-check-input:checked + .form-check-label::before {
-    background-color: var(--purple-main);
-    border-color: var(--purple-main);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 .form-check-input:checked + .form-check-label::after {
@@ -2407,7 +2412,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .form-check-label:hover::before {
-    border-color: var(--purple-main);
+    border-color: var(--primary);
 }
 
 .field-error {
@@ -2437,7 +2442,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .recaptcha-note a {
-    color: var(--purple-main);
+    color: var(--primary);
     text-decoration: underline;
 }
 
@@ -2477,7 +2482,7 @@ COMPONENT: お問い合わせフォーム（改良版）
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background: var(--purple-main);
+    background: var(--primary);
     animation: formFocusLine 0.3s ease forwards;
 }
 
@@ -2543,7 +2548,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .map-address i, .map-access i {
-    color: var(--purple-main);
+    color: var(--primary);
     font-size: 1.2rem;
     margin-top: 0.2rem;
 }
@@ -2607,17 +2612,17 @@ COMPONENT: お問い合わせフォーム（改良版）
 }
 
 .faq-question:hover {
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 .faq-question i {
-    color: var(--purple-main);
+    color: var(--primary);
     transition: transform 0.3s ease;
 }
 
 .faq-item.active .faq-question {
     border-bottom: none;
-    color: var(--purple-main);
+    color: var(--primary);
 }
 
 .faq-item.active .faq-question i {
@@ -2647,7 +2652,7 @@ COMPONENT: お問い合わせフォーム（改良版）
 /* 
 ==============================================
 // === component-split: ChatbotComponent ===
-COMPONENT: AIチャットボット（強化版）
+COMPONENT: AIチャットボット - 使いやすさと親しみやすさを追求
 ==============================================
 */
 .chatbot {
@@ -2661,7 +2666,7 @@ COMPONENT: AIチャットボット（強化版）
     width: 65px;
     height: 65px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     display: flex;
     align-items: center;
@@ -2699,7 +2704,7 @@ COMPONENT: AIチャットボット（強化版）
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--purple-main);
+    background: var(--primary);
     border-radius: 50%;
     transform: scale(0.8);
     opacity: 0;
@@ -2732,7 +2737,7 @@ COMPONENT: AIチャットボット（強化版）
 }
 
 .chatbot-header {
-    background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
     color: var(--white);
     padding: 1.2rem;
     display: flex;
@@ -2818,12 +2823,12 @@ COMPONENT: AIチャットボット（強化版）
     background: var(--white);
     border-bottom-left-radius: 2px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    border-left: 3px solid var(--purple-main);
+    border-left: 3px solid var(--primary);
 }
 
 .user-message {
     align-self: flex-end;
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
     border-bottom-right-radius: 2px;
     box-shadow: 0 3px 8px rgba(58, 95, 235, 0.15);
@@ -2838,7 +2843,7 @@ COMPONENT: AIチャットボット（強化版）
     display: flex;
     gap: 4px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    border-left: 3px solid var(--purple-main);
+    border-left: 3px solid var(--primary);
 }
 
 .typing-dot {
@@ -2879,7 +2884,7 @@ COMPONENT: AIチャットボット（強化版）
 
 .chatbot-input input:focus {
     outline: none;
-    border-color: var(--purple-main);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
 }
 
@@ -2888,7 +2893,7 @@ COMPONENT: AIチャットボット（強化版）
     right: 1.8rem;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
     width: 40px;
     height: 40px;
@@ -2901,7 +2906,7 @@ COMPONENT: AIチャットボット（強化版）
 }
 
 .chatbot-submit:hover {
-    background: var(--purple-bright);
+    background: var(--primary-light);
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
 }
@@ -2909,7 +2914,7 @@ COMPONENT: AIチャットボット（強化版）
 /* 
 ==============================================
 // === component-split: BackToTop ===
-COMPONENT: トップへ戻るボタン（強化版）
+COMPONENT: トップへ戻るボタン - アクセシビリティ向上
 ==============================================
 */
 .back-to-top {
@@ -2918,7 +2923,7 @@ COMPONENT: トップへ戻るボタン（強化版）
     left: 25px;
     width: 50px;
     height: 50px;
-    background: var(--purple-main);
+    background: var(--primary);
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -2940,7 +2945,7 @@ COMPONENT: トップへ戻るボタン（強化版）
 }
 
 .back-to-top:hover {
-    background: var(--purple-bright);
+    background: var(--primary-light);
     box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
     transform: translateY(-5px);
 }
@@ -2948,7 +2953,7 @@ COMPONENT: トップへ戻るボタン（強化版）
 /* 
 ==============================================
 // === component-split: AnimationClasses ===
-COMPONENT: アニメーション用クラス（強化版）
+COMPONENT: アニメーション用クラス - UX向上
 ==============================================
 */
 .animate-on-scroll {
@@ -3030,7 +3035,7 @@ COMPONENT: アニメーション用クラス（強化版）
 /* 
 ==============================================
 // === component-split: Utilities ===
-COMPONENT: 追加ユーティリティクラス（強化版）
+COMPONENT: 追加ユーティリティクラス - 効率的な開発
 ==============================================
 */
 .glass-card {
@@ -3062,7 +3067,7 @@ COMPONENT: 追加ユーティリティクラス（強化版）
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, var(--purple-main), var(--blue-mid), var(--cyan-light), var(--purple-bright));
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--secondary-light), var(--primary-light));
     z-index: var(--z-back);
     animation: borderGlow 3s ease-in-out infinite;
     border-radius: calc(var(--radius) + 2px);
@@ -3084,7 +3089,7 @@ COMPONENT: 追加ユーティリティクラス（強化版）
 
 /* テキストユーティリティ */
 .text-gradient {
-    background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -3107,17 +3112,15 @@ COMPONENT: 追加ユーティリティクラス（強化版）
 .font-bold { font-weight: 700; }
 .font-black { font-weight: 900; }
 
-.text-purple { color: var(--purple-main); }
-.text-blue { color: var(--blue-mid); }
-.text-cyan { color: var(--cyan-light); }
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
 .text-dark { color: var(--dark); }
 .text-gray { color: var(--gray); }
 .text-white { color: var(--white); }
 .text-accent { color: var(--accent); }
 
-.bg-purple { background-color: var(--purple-main); }
-.bg-blue { background-color: var(--blue-mid); }
-.bg-cyan { background-color: var(--cyan-light); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
 .bg-dark { background-color: var(--dark); }
 .bg-gray { background-color: var(--gray); }
 .bg-light-gray { background-color: var(--light-gray); }
@@ -3165,7 +3168,7 @@ COMPONENT: 追加ユーティリティクラス（強化版）
 .divider {
     width: 60px;
     height: 3px;
-    background: var(--purple-main);
+    background: var(--primary);
     margin: 1.5rem auto;
     border-radius: var(--radius-full);
 }
@@ -3177,7 +3180,7 @@ COMPONENT: 追加ユーティリティクラス（強化版）
 .tag {
     display: inline-block;
     background: rgba(58, 95, 235, 0.1);
-    color: var(--purple-main);
+    color: var(--primary);
     padding: 0.3rem 0.8rem;
     border-radius: var(--radius-full);
     font-size: 0.8rem;
@@ -3205,7 +3208,7 @@ COMPONENT: 追加ユーティリティクラス（強化版）
 /* 
 ==============================================
 // === component-split: PageHero ===
-COMPONENT: ページヒーロー（新規追加）
+COMPONENT: ページヒーロー - 各ページの個性を表現
 ==============================================
 */
 .page-hero {
@@ -3257,7 +3260,7 @@ COMPONENT: ページヒーロー（新規追加）
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--purple-main) 30%, var(--blue-mid) 70%);
+    background: linear-gradient(135deg, var(--primary) 30%, var(--secondary) 70%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -3265,7 +3268,7 @@ COMPONENT: ページヒーロー（新規追加）
 }
 
 .gradient-title {
-    background: linear-gradient(135deg, var(--purple-main) 30%, var(--blue-mid) 70%);
+    background: linear-gradient(135deg, var(--primary) 30%, var(--secondary) 70%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -3300,7 +3303,7 @@ COMPONENT: ページヒーロー（新規追加）
 /* 
 ==============================================
 // === component-split: MediaQueryBase ===
-COMPONENT: メディアクエリ基本設定
+COMPONENT: レスポンシブデザイン - 多デバイス対応
 ==============================================
 */
 /* デスクトップ大 (1200px以上) */
@@ -3344,17 +3347,17 @@ COMPONENT: メディアクエリ基本設定
     
     .btn-outline {
         background-color: rgba(255, 255, 255, 0.95);
-        color: var(--purple-main);
+        color: var(--primary);
         font-weight: 700;
-        border: 2px solid var(--purple-main);
-        box-shadow: 0 4px 10px rgba(142, 51, 255, 0.15);
+        border: 2px solid var(--primary);
+        box-shadow: 0 4px 10px rgba(58, 95, 235, 0.15);
     }
     
     .btn-outline:hover {
-        background-color: var(--purple-main);
+        background-color: var(--primary);
         color: var(--white);
         transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(142, 51, 255, 0.3);
+        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.3);
     }
 }
 
@@ -3382,7 +3385,7 @@ COMPONENT: メディアクエリ基本設定
     }
     
     .hero-title .highlight {
-        color: var(--purple-bright);
+        color: var(--primary-light);
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
         font-weight: 900;
     }
@@ -3423,17 +3426,17 @@ COMPONENT: メディアクエリ基本設定
     
     .btn-outline {
         background-color: rgba(255, 255, 255, 0.95);
-        color: var(--purple-main);
+        color: var(--primary);
         font-weight: 700;
-        border: 2px solid var(--purple-main);
-        box-shadow: 0 4px 12px rgba(142, 51, 255, 0.15);
+        border: 2px solid var(--primary);
+        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.15);
     }
     
     .btn-outline:hover {
-        background-color: var(--purple-main);
+        background-color: var(--primary);
         color: var(--white);
         transform: translateY(-3px);
-        box-shadow: 0 8px 15px rgba(142, 51, 255, 0.2);
+        box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
     }
     
     .hero-cta .btn {
@@ -3546,7 +3549,7 @@ COMPONENT: メディアクエリ基本設定
     }
     
     .hero-title .highlight {
-        color: var(--purple-bright);
+        color: var(--primary-light);
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
         font-weight: 900;
     }
@@ -3814,7 +3817,7 @@ COMPONENT: メディアクエリ基本設定
     }
     
     .hero-title .highlight {
-        color: var(--purple-bright);
+        color: var(--primary-light);
         font-size: 110%;
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
     }
@@ -3950,11 +3953,11 @@ COMPONENT: メディアクエリ基本設定
     /* iPhoneでのボタンの視認性向上 */
     .btn-outline {
         background-color: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 3px 10px rgba(142, 51, 255, 0.2);
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.2);
     }
     
     .btn-primary {
-        box-shadow: 0 3px 10px rgba(142, 51, 255, 0.3);
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.3);
     }
     
     /* iPhoneでのフッターのレイアウト調整 */
