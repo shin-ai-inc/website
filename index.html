@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 
-    ==============================================
-    // === component-split: MetaInformation ===
-    COMPONENT: Meta Information & SEO
-    ==============================================
-    -->
+    <!-- component-split: MetaInformation -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - AI導入・業務効率化・生産性向上を実現する最先端AIソリューション。チャットボット開発、AI議事録作成、DX推進をサポート。">
@@ -21,12 +16,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="ps:topic" content="AI導入支援, 生成AI活用, 業務効率化, DX推進">
     
-    <!-- 
-    ==============================================
-    // === component-split: OGPSettings ===
-    COMPONENT: OGP設定
-    ==============================================
-    -->
+    <!-- component-split: OGPSettings -->
     <meta property="og:title" content="ShinAI - 企業成長を加速する最先端AIソリューション">
     <meta property="og:description" content="最先端のAI技術で企業の課題を解決し、新たな価値を創造。チャットボット開発からDX推進まで。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -39,12 +29,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - 革新的なAIソリューション">
     
-    <!-- 
-    ==============================================
-    // === component-split: ExternalResources ===
-    COMPONENT: Fonts & External Resources
-    ==============================================
-    -->
+    <!-- component-split: ExternalResources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -62,12 +47,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     
-    <!-- 
-    ==============================================
-    // === component-split: StructuredData ===
-    COMPONENT: JSON-LD 構造化データ
-    ==============================================
-    -->
+    <!-- component-split: StructuredData -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -179,30 +159,356 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
+
+    <!-- component-split: PageSpecificStyles -->
+    <style>
+    /* ヘッダー重なり問題を解消する修正 */
+    .hero {
+        min-height: 650px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding-top: 120px; /* ヘッダー高さを考慮して増加 */
+        text-align: center;
+        margin-top: 5px; /* トップバナーの高さを考慮 */
+        z-index: 1; /* 適切なz-index設定 */
+    }
+
+    .hero-content {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        z-index: 10; /* z-indexを上げて確実に表示 */
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-label {
+        display: inline-block;
+        background: rgba(58, 95, 235, 0.15);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        z-index: 2; /* 上に表示するために追加 */
+    }
+
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0; /* 背景は一番下に */
+        opacity: 0;
+        transition: opacity 2s ease-in-out, transform 10s ease-in-out;
+        transform: scale(1.1);
+        animation: heroImageFade 20s infinite alternate; /* 新しいアニメーション */
+    }
+
+    .hero-bg.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* 背景の動きを追加 */
+    @keyframes heroImageFade {
+        0% {
+            transform: scale(1);
+            filter: brightness(1);
+        }
+        50% {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        100% {
+            transform: scale(1);
+            filter: brightness(1);
+        }
+    }
+
+    /* ヒーロータイトルのスタイル強化 */
+    .hero-title {
+        font-size: 3.8rem;
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.1); /* テキストの視認性向上 */
+    }
+
+    /* ホバー効果の強化 */
+    .hero-cta .btn-primary:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: var(--shadow-button-hover);
+    }
+
+    .hero-cta .btn-consultation:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.5);
+    }
+
+    /* 3つの価値セクションの改善 */
+    .section {
+        padding: 5rem 0;
+        position: relative;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem; /* カード間の間隔を増加 */
+        margin-top: 3.5rem;
+    }
+
+    .benefit-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* シャドウ調整 */
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.18);
+        border-color: rgba(58, 95, 235, 0.12);
+    }
+
+    .benefit-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        position: relative;
+        z-index: var(--z-normal);
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25); /* シャドウ強化 */
+        margin-bottom: 2rem; /* 下部の余白増加 */
+    }
+
+    /* アイコン別カラー設定 */
+    .benefit-card:nth-child(1) .benefit-icon {
+        background: linear-gradient(135deg, #3A5FEB, #4671FF);
+    }
+
+    .benefit-card:nth-child(2) .benefit-icon {
+        background: linear-gradient(135deg, #00C9A7, #00E6C3);
+    }
+
+    .benefit-card:nth-child(3) .benefit-icon {
+        background: linear-gradient(135deg, #FF8A00, #FFA53B);
+    }
+
+    .icon-bg-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--primary);
+        border-radius: 16px;
+        filter: blur(10px);
+        opacity: 0.3;
+        z-index: var(--z-back);
+        animation: pulse 3s infinite;
+    }
+
+    /* アイコン別グロー効果 */
+    .benefit-card:nth-child(1) .icon-bg-glow {
+        background: var(--primary);
+    }
+
+    .benefit-card:nth-child(2) .icon-bg-glow {
+        background: var(--secondary);
+    }
+
+    .benefit-card:nth-child(3) .icon-bg-glow {
+        background: var(--accent);
+    }
+
+    .benefit-card:hover .benefit-icon {
+        transform: rotate(15deg);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+
+    .benefit-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .benefit-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark);
+        text-align: center;
+    }
+
+    .benefit-content p {
+        color: var(--gray);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .benefit-stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 1.5rem 0;
+        background: rgba(58, 95, 235, 0.06);
+        padding: 1.2rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    /* カード別統計背景カラー */
+    .benefit-card:nth-child(1) .benefit-stats {
+        background: rgba(58, 95, 235, 0.06);
+    }
+
+    .benefit-card:nth-child(2) .benefit-stats {
+        background: rgba(0, 201, 167, 0.06);
+    }
+
+    .benefit-card:nth-child(3) .benefit-stats {
+        background: rgba(255, 138, 0, 0.06);
+    }
+
+    .benefit-card:hover .benefit-stats {
+        background: rgba(58, 95, 235, 0.09);
+    }
+
+    .benefit-stat {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        display: inline-block;
+        line-height: 1;
+    }
+
+    /* カード別の統計数値カラー */
+    .benefit-card:nth-child(1) .stat-value, 
+    .benefit-card:nth-child(1) .stat-percent {
+        color: var(--primary);
+    }
+
+    .benefit-card:nth-child(2) .stat-value, 
+    .benefit-card:nth-child(2) .stat-percent {
+        color: var(--secondary);
+    }
+
+    .benefit-card:nth-child(3) .stat-value, 
+    .benefit-card:nth-child(3) .stat-percent {
+        color: var(--accent);
+    }
+
+    .stat-percent {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--gray);
+        font-weight: 500;
+        margin-top: 0.25rem;
+        display: block;
+    }
+
+    /* レスポンシブ調整 */
+    @media (max-width: 992px) {
+        .benefits-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .heading-lg {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            min-height: 580px;
+            padding-top: 100px;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero {
+            min-height: 520px;
+            padding-top: 90px;
+        }
+        
+        .hero-title {
+            font-size: 2rem;
+        }
+        
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 1.7rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .benefits-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
 </head>
 <body>
-    <!-- 
-    ==============================================
-    // === component-split: AccessibilityNav ===
-    COMPONENT: アクセシビリティ向上：スキップナビゲーション
-    ==============================================
-    -->
+    <!-- component-split: AccessibilityNav -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- 
-    ==============================================
-    // === component-split: TopBanner ===
-    COMPONENT: トップバナー
-    ==============================================
-    -->
+    <!-- component-split: TopBanner -->
     <div class="top-banner"></div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Header ===
-    COMPONENT: ヘッダー
-    ==============================================
-    -->
+    <!-- component-split: Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -234,23 +540,13 @@
         </div>
     </header>
     
-    <!-- 
-    ==============================================
-    // === component-split: ThreeJSParticles ===
-    COMPONENT: Three.jsパーティクルアニメーション
-    ==============================================
-    -->
+    <!-- component-split: ThreeJSParticles -->
     <div class="particles-container" id="particles"></div>
     <!-- モバイル端末向け静的フォールバック -->
     <div class="particles-fallback"></div>
     
     <main id="main-content">
-        <!-- 
-        ==============================================
-        // === component-split: HeroSection ===
-        COMPONENT: ヒーローセクション
-        ==============================================
-        -->
+        <!-- component-split: Hero -->
         <section class="hero">
             <div class="hero-bg-container">
                 <picture>
@@ -302,12 +598,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: AboutSection ===
-        COMPONENT: 会社概要簡易セクション
-        ==============================================
-        -->
+        <!-- component-split: AboutSection -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -344,12 +635,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: BenefitsSection ===
-        COMPONENT: 導入メリットセクション
-        ==============================================
-        -->
+        <!-- component-split: BenefitsSection -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -428,12 +714,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: ServicesSection ===
-        COMPONENT: サービスセクション
-        ==============================================
-        -->
+        <!-- component-split: ServicesSection -->
         <section class="section section-bg-light" id="services">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -540,12 +821,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: IndustriesSection ===
-        COMPONENT: 業界別活用セクション - スライダー形式に変更
-        ==============================================
-        -->
+        <!-- component-split: IndustriesSection -->
         <section class="section" id="industries-preview">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -704,12 +980,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: ValueSection ===
-        COMPONENT: 価値観・ビジョンセクション（新規追加）
-        ==============================================
-        -->
+        <!-- component-split: ValueSection -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -750,12 +1021,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: CTASection ===
-        COMPONENT: お問い合わせCTA
-        ==============================================
-        -->
+        <!-- component-split: CTASection -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -785,24 +1051,14 @@
         </section>
     </main>
     
-    <!-- 
-    ==============================================
-    // === component-split: BottomBanner ===
-    COMPONENT: 下部バナー（ミッションステートメント）
-    ==============================================
-    -->
+    <!-- component-split: BottomBanner -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Footer ===
-    COMPONENT: フッター
-    ==============================================
-    -->
+    <!-- component-split: Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -864,12 +1120,7 @@
         </div>
     </footer>
     
-    <!-- 
-    ==============================================
-    // === component-split: ChatbotComponent ===
-    COMPONENT: AIチャットボット
-    ==============================================
-    -->
+    <!-- component-split: ChatbotComponent -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -898,22 +1149,17 @@
         </div>
     </div>
 
-    <!-- 
-    ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップへ戻るボタン
-    ==============================================
-    -->
+    <!-- component-split: BackToTop -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- JavaScript -->
+    <!-- component-split: JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/three-particles.js"></script>
     <script src="assets/js/chatbot.js"></script>
     
-    <!-- ページ固有のJavaScript -->
+    <!-- component-split: PageSpecificScripts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
