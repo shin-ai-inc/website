@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 
-    ==============================================
-    // === component-split: MetaInformation ===
-    COMPONENT: Meta Information & SEO
-    ==============================================
-    -->
+    <!-- component-split: MetaInformation -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - 業界別AI活用事例。福祉・介護、教育・研修、建設業、製造業など各業界に合わせた最適なAIソリューションをご紹介します。">
@@ -21,12 +16,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="ps:topic" content="業界別AI活用, 導入事例, AI課題解決, 業界特化型AI, 生成AI活用">
     
-    <!-- 
-    ==============================================
-    // === component-split: OGPSettings ===
-    COMPONENT: OGP設定
-    ==============================================
-    -->
+    <!-- component-split: OGPSettings -->
     <meta property="og:title" content="業界別活用 | ShinAI - 各業界に最適なAIソリューション">
     <meta property="og:description" content="ShinAI - 福祉・介護、教育・研修、建設業など、業界ごとの課題に最適化したAIソリューション事例をご紹介します。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -39,12 +29,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - 業界別AI活用事例">
     
-    <!-- 
-    ==============================================
-    // === component-split: ExternalResources ===
-    COMPONENT: Fonts & External Resources
-    ==============================================
-    -->
+    <!-- component-split: ExternalResources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -57,12 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     
-    <!-- 
-    ==============================================
-    // === component-split: StructuredData ===
-    COMPONENT: JSON-LD 構造化データ
-    ==============================================
-    -->
+    <!-- component-split: StructuredData -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -166,30 +146,553 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
+
+    <!-- component-split: PageSpecificStyles -->
+    <style>
+    /* 業界別活用ページの改善 */
+    .section {
+        padding: 5rem 0;
+        position: relative;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .brand-catchphrase {
+        font-style: italic;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+        border-left: 3px solid var(--accent);
+        padding-left: 1rem;
+        display: inline-block;
+        background: rgba(255, 138, 0, 0.05);
+        padding: 0.75rem 1.5rem;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        text-align: left;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-subtitle {
+        display: inline-block;
+        background: rgba(58, 95, 235, 0.12);
+        padding: 0.4rem 1.2rem;
+        border-radius: var(--radius-full);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .heading-lg {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -0.01em;
+        font-family: var(--font-jp);
+        color: #1A1F36; /* コントラスト比を向上 */
+    }
+
+    .section-description {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        color: #5E6C84; /* より暗い色で視認性向上 */
+    }
+
+    .use-case {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        padding: 2rem;
+        margin: 2rem 0; /* 余白確保 */
+        border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .use-case:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
+    }
+
+    .use-case::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary), var(--secondary));
+        z-index: 1;
+    }
+
+    /* 業界別カラー */
+    #welfare-case::before {
+        background: linear-gradient(180deg, #3A5FEB, #4671FF);
+    }
+
+    #manufacturing-case::before {
+        background: linear-gradient(180deg, #00C9A7, #00E6C3);
+    }
+
+    #education-case::before {
+        background: linear-gradient(180deg, #FF8A00, #FFA53B);
+    }
+
+    .use-case-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .use-case-icon {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        /* アクセントカラーに変更 */
+        background: var(--accent);
+        color: var(--white);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        box-shadow: 0 8px 20px rgba(255, 138, 0, 0.25);
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    /* 業界別アイコンカラー */
+    #welfare-case .use-case-icon {
+        background: var(--primary);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+    }
+
+    #manufacturing-case .use-case-icon {
+        background: var(--secondary);
+        box-shadow: 0 8px 20px rgba(0, 201, 167, 0.25);
+    }
+
+    #education-case .use-case-icon {
+        background: var(--accent);
+        box-shadow: 0 8px 20px rgba(255, 138, 0, 0.25);
+    }
+
+    .use-case:hover .use-case-icon {
+        transform: rotate(15deg);
+    }
+
+    .use-case-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        color: #1A1F36; /* コントラスト比アップ */
+    }
+
+    .use-case-content {
+        padding-left: 1rem;
+    }
+
+    .use-case-section {
+        margin-bottom: 2rem;
+    }
+
+    .use-case-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .use-case-section h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1A1F36; /* コントラスト比アップ */
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* 見出しアイコンのカラー設定 */
+    .use-case-section h4 i {
+        color: var(--accent);
+    }
+
+    #welfare-case .use-case-section h4 i {
+        color: var(--primary);
+    }
+
+    #manufacturing-case .use-case-section h4 i {
+        color: var(--secondary);
+    }
+
+    #education-case .use-case-section h4 i {
+        color: var(--accent);
+    }
+
+    .use-case-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .use-case-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #5E6C84; /* コントラスト比アップ */
+        line-height: 1.6;
+    }
+
+    .use-case-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.6rem;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+    }
+
+    /* 業界別リストマーカーカラー */
+    #welfare-case .use-case-list li::before {
+        background: var(--primary);
+    }
+
+    #manufacturing-case .use-case-list li::before {
+        background: var(--secondary);
+    }
+
+    #education-case .use-case-list li::before {
+        background: var(--accent);
+    }
+
+    .use-case-list li strong {
+        color: #1A1F36; /* コントラスト比アップ */
+        font-weight: 600;
+    }
+
+    /* スライダー用のコントロール */
+    .use-cases-slider {
+        position: relative;
+    }
+
+    .slider-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .slider-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--white);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .slider-button:hover {
+        background: var(--primary);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+    }
+
+    .slider-pagination {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .slider-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--light-gray);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .slider-dot.active {
+        background: var(--primary);
+        transform: scale(1.2);
+    }
+
+    /* スライダーアニメーション */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .use-case.active {
+        animation: slideIn 0.6s ease forwards;
+    }
+
+    /* 業界タブナビゲーション */
+    .industry-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .industry-tab {
+        padding: 0.75rem 1.5rem;
+        background: var(--white);
+        color: var(--gray);
+        border-radius: var(--radius-full);
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .industry-tab:hover {
+        background: var(--light-gray);
+        color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.1);
+    }
+
+    .industry-tab.active {
+        background: var(--primary);
+        color: var(--white);
+    }
+
+    .industries-grid {
+        margin-top: 3rem;
+    }
+
+    /* メリット概要カード */
+    .benefit-overview {
+        margin: 3rem 0;
+        padding: 2.5rem;
+    }
+
+    .benefit-overview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .benefit-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        background: var(--accent);
+        color: var(--white);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 138, 0, 0.2);
+    }
+
+    /* メリットアイコン別カラー */
+    .benefit-item:nth-child(1) .benefit-icon {
+        background: var(--primary);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+    }
+
+    .benefit-item:nth-child(2) .benefit-icon {
+        background: var(--secondary);
+        box-shadow: 0 5px 15px rgba(0, 201, 167, 0.2);
+    }
+
+    .benefit-item:nth-child(3) .benefit-icon {
+        background: var(--accent);
+        box-shadow: 0 5px 15px rgba(255, 138, 0, 0.2);
+    }
+
+    .benefit-item:hover .benefit-icon {
+        transform: rotate(15deg);
+    }
+
+    .benefit-content h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+
+    .benefit-content p {
+        margin: 0;
+        color: var(--gray);
+    }
+
+    /* AI導入ステップ */
+    .implementation-steps {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .implementation-steps::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 40px;
+        width: 4px;
+        background: linear-gradient(180deg, var(--primary), var(--secondary));
+        border-radius: var(--radius-full);
+    }
+
+    .step {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .step:last-child {
+        margin-bottom: 0;
+    }
+
+    .step-number {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+        position: relative;
+        z-index: 1;
+    }
+
+    .step-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .step-description {
+        color: var(--gray);
+        margin: 0;
+    }
+
+    /* レスポンシブ調整 */
+    @media (max-width: 992px) {
+        .heading-lg {
+            font-size: 2.2rem;
+        }
+        
+        .benefit-overview-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .implementation-steps::before {
+            left: 30px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .use-case {
+            padding: 1.5rem;
+        }
+        
+        .use-case-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .use-case-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .use-case-title {
+            font-size: 1.5rem;
+        }
+        
+        .heading-lg {
+            font-size: 1.8rem;
+        }
+        
+        .brand-catchphrase {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .benefit-overview-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .industry-tabs {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .industry-tab {
+            scroll-snap-align: start;
+            white-space: nowrap;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+    </style>
 </head>
 <body>
-    <!-- 
-    ==============================================
-    // === component-split: AccessibilityNav ===
-    COMPONENT: アクセシビリティ向上：スキップナビゲーション
-    ==============================================
-    -->
+    <!-- component-split: AccessibilityNav -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- 
-    ==============================================
-    // === component-split: TopBanner ===
-    COMPONENT: トップバナー
-    ==============================================
-    -->
+    <!-- component-split: TopBanner -->
     <div class="top-banner"></div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Header ===
-    COMPONENT: ヘッダー
-    ==============================================
-    -->
+    <!-- component-split: Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -221,12 +724,7 @@
         </div>
     </header>
     
-    <!-- 
-    ==============================================
-    // === component-split: PageHero ===
-    COMPONENT: ページヘッダー
-    ==============================================
-    -->
+    <!-- component-split: PageHero -->
     <div class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
@@ -249,15 +747,11 @@
     </div>
     
     <main id="main-content">
-        <!-- 
-        ==============================================
-        // === component-split: IntroSection ===
-        COMPONENT: 業界別活用紹介セクション
-        ==============================================
-        -->
+        <!-- component-split: IntroSection -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
+                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
                     <span class="section-subtitle">業界別AI活用</span>
                     <h2 class="heading-lg">各業界の課題に合わせた<span class="highlight">AIソリューション</span></h2>
                     <p class="section-description">AI技術は業界特有の課題を解決し、新たな価値を創造します</p>
@@ -308,12 +802,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: IndustryNavigation ===
-        COMPONENT: 業界ナビゲーション
-        ==============================================
-        -->
+        <!-- component-split: IndustryNavigation -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -562,160 +1051,153 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: UseCases ===
-        COMPONENT: 活用事例セクション
-        ==============================================
-        -->
+        <!-- component-split: IndustryCase -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
+                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
                     <span class="section-subtitle">AI活用例</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
                 </div>
                 
-                <!-- 福祉・介護の活用例 -->
-                <div class="use-case animate-on-scroll" id="welfare-case">
-                    <div class="use-case-header">
-                        <div class="use-case-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
+                <div class="use-cases-slider">
+                    <!-- 福祉・介護の活用例 -->
+                    <div class="use-case animate-on-scroll" id="welfare-case">
+                        <div class="use-case-header">
+                            <div class="use-case-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <div>
+                                <h3 class="use-case-title">福祉・介護分野でのAI活用</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="use-case-title">福祉・介護分野でのAI活用</h3>
+                        
+                        <div class="use-case-content">
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
+                                <ul class="use-case-list">
+                                    <li>深刻な人手不足と高齢化する介護スタッフ</li>
+                                    <li>介護記録作成や書類業務の負担増加</li>
+                                    <li>見守りや事故防止の体制強化の必要性</li>
+                                    <li>介護技術・知識の継承と標準化の難しさ</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
+                                <ul class="use-case-list">
+                                    <li><strong>音声入力による記録自動化</strong>：スタッフの音声を認識し、介護記録を自動作成。入力時間を大幅削減し、記録精度を向上。</li>
+                                    <li><strong>高齢者向け会話支援AI</strong>：高齢者に寄り添うAI対話システム。孤独感軽減、認知機能維持、異常の早期発見に貢献。</li>
+                                    <li><strong>バイタルモニタリングAI</strong>：センサーとAIによる健康状態モニタリング。異常を自動検知し、早期対応を実現。</li>
+                                    <li><strong>ケアプラン作成支援AI</strong>：過去事例と最新研究を基に、個別最適なケアプラン策定を支援。</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
+                                <ul class="use-case-list">
+                                    <li>記録業務の時間を60〜70%削減、入居者との対話時間が増加</li>
+                                    <li>24時間体制の見守りが可能になり、事故発生率が30〜40%低減</li>
+                                    <li>スタッフの業務負担軽減により離職率が20〜30%低下</li>
+                                    <li>高齢者の孤独感軽減と認知機能維持による生活の質向上</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="use-case-content">
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
-                            <ul class="use-case-list">
-                                <li>深刻な人手不足と高齢化する介護スタッフ</li>
-                                <li>介護記録作成や書類業務の負担増加</li>
-                                <li>見守りや事故防止の体制強化の必要性</li>
-                                <li>介護技術・知識の継承と標準化の難しさ</li>
-                            </ul>
+                    <!-- 製造業の活用例 -->
+                    <div class="use-case animate-on-scroll" id="manufacturing-case">
+                        <div class="use-case-header">
+                            <div class="use-case-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <div>
+                                <h3 class="use-case-title">製造業分野でのAI活用</h3>
+                            </div>
                         </div>
                         
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
-                            <ul class="use-case-list">
-                                <li><strong>音声入力による記録自動化</strong>：スタッフの音声を認識し、介護記録を自動作成。入力時間を大幅削減し、記録精度を向上。</li>
-                                <li><strong>高齢者向け会話支援AI</strong>：高齢者に寄り添うAI対話システム。孤独感軽減、認知機能維持、異常の早期発見に貢献。</li>
-                                <li><strong>バイタルモニタリングAI</strong>：センサーとAIによる健康状態モニタリング。異常を自動検知し、早期対応を実現。</li>
-                                <li><strong>ケアプラン作成支援AI</strong>：過去事例と最新研究を基に、個別最適なケアプラン策定を支援。</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
-                            <ul class="use-case-list">
-                                <li>記録業務の時間を60〜70%削減、入居者との対話時間が増加</li>
-                                <li>24時間体制の見守りが可能になり、事故発生率が30〜40%低減</li>
-                                <li>スタッフの業務負担軽減により離職率が20〜30%低下</li>
-                                <li>高齢者の孤独感軽減と認知機能維持による生活の質向上</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 製造業の活用例 -->
-                <div class="use-case animate-on-scroll" id="manufacturing-case">
-                    <div class="use-case-header">
-                        <div class="use-case-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <div>
-                            <h3 class="use-case-title">製造業分野でのAI活用</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-content">
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
-                            <ul class="use-case-list">
-                                <li>品質検査の精度と効率の両立</li>
-                                <li>設備の突発的故障による生産ライン停止</li>
-                                <li>熟練技術者の高齢化と技術伝承の必要性</li>
-                                <li>複雑化する生産計画の最適化</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
-                            <ul class="use-case-list">
-                                <li><strong>画像認識による品質検査AI</strong>：高解像度カメラとディープラーニングによる自動外観検査。人間の目では見逃す微細な不良も検出。</li>
-                                <li><strong>設備予知保全システム</strong>：センサーデータを分析し、故障の前兆を検知。計画的なメンテナンスで突発停止を防止。</li>
-                                <li><strong>デジタルツイン技術</strong>：生産設備や工場全体をデジタル空間に再現。シミュレーションによる最適な生産計画立案を支援。</li>
-                                <li><strong>熟練技術者のノウハウAI化</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
-                            <ul class="use-case-list">
-                                <li>検査精度が95%以上に向上し、不良品流出が80%以上減少</li>
-                                <li>設備故障による計画外停止時間が60〜70%減少</li>
-                                <li>生産計画の最適化により生産効率が15〜20%向上</li>
-                                <li>新人作業者の習熟期間が50%短縮、技術標準化が促進</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 教育・研修の活用例 -->
-                <div class="use-case animate-on-scroll" id="education-case">
-                    <div class="use-case-header">
-                        <div class="use-case-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div>
-                            <h3 class="use-case-title">教育・研修分野でのAI活用</h3>
+                        <div class="use-case-content">
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
+                                <ul class="use-case-list">
+                                    <li>品質検査の精度と効率の両立</li>
+                                    <li>設備の突発的故障による生産ライン停止</li>
+                                    <li>熟練技術者の高齢化と技術伝承の必要性</li>
+                                    <li>複雑化する生産計画の最適化</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
+                                <ul class="use-case-list">
+                                    <li><strong>画像認識による品質検査AI</strong>：高解像度カメラとディープラーニングによる自動外観検査。人間の目では見逃す微細な不良も検出。</li>
+                                    <li><strong>設備予知保全システム</strong>：センサーデータを分析し、故障の前兆を検知。計画的なメンテナンスで突発停止を防止。</li>
+                                    <li><strong>デジタルツイン技術</strong>：生産設備や工場全体をデジタル空間に再現。シミュレーションによる最適な生産計画立案を支援。</li>
+                                    <li><strong>熟練技術者のノウハウAI化</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
+                                <ul class="use-case-list">
+                                    <li>検査精度が95%以上に向上し、不良品流出が80%以上減少</li>
+                                    <li>設備故障による計画外停止時間が60〜70%減少</li>
+                                    <li>生産計画の最適化により生産効率が15〜20%向上</li>
+                                    <li>新人作業者の習熟期間が50%短縮、技術標準化が促進</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="use-case-content">
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
-                            <ul class="use-case-list">
-                                <li>一律の教育による学習者の個人差への対応不足</li>
-                                <li>教材作成や採点業務に教員の時間が割かれる</li>
-                                <li>学習データの分析・活用が十分に行われていない</li>
-                                <li>オンライン学習における学習者のモチベーション維持</li>
-                            </ul>
+                    <!-- 教育・研修の活用例 -->
+                    <div class="use-case animate-on-scroll" id="education-case">
+                        <div class="use-case-header">
+                            <div class="use-case-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h3 class="use-case-title">教育・研修分野でのAI活用</h3>
+                            </div>
                         </div>
                         
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
-                            <ul class="use-case-list">
-                                <li><strong>適応型学習システム</strong>：学習者の理解度に応じて難易度と内容を自動調整。一人ひとりに最適な学習パスを提供。</li>
-                                <li><strong>AI採点・フィードバックシステム</strong>：課題やテストの自動採点と、詳細なフィードバック生成。教員の業務負担を軽減。</li>
-                                <li><strong>学習分析ダッシュボード</strong>：学習データをリアルタイム分析し、学習パターンや課題を可視化。早期介入や支援につなげる。</li>
-                                <li><strong>インタラクティブ教材生成AI</strong>：テキスト入力から多様な形式の教材を自動生成。魅力的で効果的な教材作成を支援。</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
-                            <ul class="use-case-list">
-                                <li>個別最適化学習により、学習成果が15〜25%向上</li>
-                                <li>教員の業務時間が週あたり約8〜12時間削減</li>
-                                <li>学習者の学習継続率が30%向上、中退率が15〜20%低下</li>
-                                <li>学習データ分析による教育手法の継続的改善と効果最大化</li>
-                            </ul>
+                        <div class="use-case-content">
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
+                                <ul class="use-case-list">
+                                    <li>一律の教育による学習者の個人差への対応不足</li>
+                                    <li>教材作成や採点業務に教員の時間が割かれる</li>
+                                    <li>学習データの分析・活用が十分に行われていない</li>
+                                    <li>オンライン学習における学習者のモチベーション維持</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
+                                <ul class="use-case-list">
+                                    <li><strong>適応型学習システム</strong>：学習者の理解度に応じて難易度と内容を自動調整。一人ひとりに最適な学習パスを提供。</li>
+                                    <li><strong>AI採点・フィードバックシステム</strong>：課題やテストの自動採点と、詳細なフィードバック生成。教員の業務負担を軽減。</li>
+                                    <li><strong>学習分析ダッシュボード</strong>：学習データをリアルタイム分析し、学習パターンや課題を可視化。早期介入や支援につなげる。</li>
+                                    <li><strong>インタラクティブ教材生成AI</strong>：テキスト入力から多様な形式の教材を自動生成。魅力的で効果的な教材作成を支援。</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case-section">
+                                <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
+                                <ul class="use-case-list">
+                                    <li>個別最適化学習により、学習成果が15〜25%向上</li>
+                                    <li>教員の業務時間が週あたり約8〜12時間削減</li>
+                                    <li>学習者の学習継続率が30%向上、中退率が15〜20%低下</li>
+                                    <li>学習データ分析による教育手法の継続的改善と効果最大化</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: ImplementationSection ===
-        COMPONENT: AI導入プロセスセクション
-        ==============================================
-        -->
+        <!-- component-split: ImplementationSection -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -727,43 +1209,48 @@
                 <div class="implementation-steps animate-on-scroll">
                     <div class="step">
                         <div class="step-number">1</div>
-                        <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
-                        <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。</p>
+                        <div class="step-content">
+                            <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
+                            <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。</p>
+                        </div>
                     </div>
                     
                     <div class="step">
                         <div class="step-number">2</div>
-                        <h4 class="step-title">PoC（実証実験）の実施</h4>
-                        <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。</p>
+                        <div class="step-content">
+                            <h4 class="step-title">PoC（実証実験）の実施</h4>
+                            <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。</p>
+                        </div>
                     </div>
                     
                     <div class="step">
                         <div class="step-number">3</div>
-                        <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
-                        <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含みます。</p>
+                        <div class="step-content">
+                            <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
+                            <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含みます。</p>
+                        </div>
                     </div>
                     
                     <div class="step">
                         <div class="step-number">4</div>
-                        <h4 class="step-title">組織への展開と変革管理</h4>
-                        <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。</p>
+                        <div class="step-content">
+                            <h4 class="step-title">組織への展開と変革管理</h4>
+                            <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。</p>
+                        </div>
                     </div>
                     
                     <div class="step">
                         <div class="step-number">5</div>
-                        <h4 class="step-title">継続的な改善と内製化支援</h4>
-                        <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。</p>
+                        <div class="step-content">
+                            <h4 class="step-title">継続的な改善と内製化支援</h4>
+                            <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: FAQSection ===
-        COMPONENT: よくある質問セクション
-        ==============================================
-        -->
+        <!-- component-split: FAQSection -->
         <section class="section section-faq">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -826,12 +1313,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: IndustryConsultingCTA ===
-        COMPONENT: 業界別コンサルティングCTA
-        ==============================================
-        -->
+        <!-- component-split: IndustryConsultingCTA -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -862,24 +1344,14 @@
         </section>
     </main>
     
-    <!-- 
-    ==============================================
-    // === component-split: BottomBanner ===
-    COMPONENT: 下部バナー（ミッションステートメント）
-    ==============================================
-    -->
+    <!-- component-split: BottomBanner -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Footer ===
-    COMPONENT: フッター
-    ==============================================
-    -->
+    <!-- component-split: Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -941,12 +1413,7 @@
         </div>
     </footer>
     
-    <!-- 
-    ==============================================
-    // === component-split: ChatbotComponent ===
-    COMPONENT: AIチャットボット
-    ==============================================
-    -->
+    <!-- component-split: ChatbotComponent -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -975,21 +1442,16 @@
         </div>
     </div>
     
-    <!-- 
-    ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップへ戻るボタン
-    ==============================================
-    -->
+    <!-- component-split: BackToTop -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- JavaScript -->
+    <!-- component-split: JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
     
-    <!-- FAQアコーディオン用JavaScript -->
+    <!-- component-split: PageSpecificScripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // カレントイヤーの更新
@@ -1075,6 +1537,116 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+            
+            // 業界事例カードの配列
+            const useCases = document.querySelectorAll('.use-case');
+            
+            // 初期状態で最初のカードだけを表示
+            useCases.forEach((useCase, index) => {
+                if (index === 0) {
+                    useCase.classList.add('active');
+                } else {
+                    useCase.style.display = 'none';
+                }
+            });
+            
+            // スライダーコントロールの作成
+            const sliderControls = document.createElement('div');
+            sliderControls.className = 'slider-controls';
+            
+            // 前へボタン
+            const prevButton = document.createElement('div');
+            prevButton.className = 'slider-button prev-button';
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            
+            // 次へボタン
+            const nextButton = document.createElement('div');
+            nextButton.className = 'slider-button next-button';
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            
+            // ページネーション
+            const pagination = document.createElement('div');
+            pagination.className = 'slider-pagination';
+            
+            // ページネーションドットの作成
+            useCases.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot';
+                if (index === 0) {
+                    dot.classList.add('active');
+                }
+                dot.dataset.index = index;
+                pagination.appendChild(dot);
+            });
+            
+            // スライダーコントロールの組み立て
+            sliderControls.appendChild(prevButton);
+            sliderControls.appendChild(pagination);
+            sliderControls.appendChild(nextButton);
+            
+            // DOMへの追加
+            const useCasesSlider = document.querySelector('.use-cases-slider');
+            useCasesSlider.appendChild(sliderControls);
+            
+            // 現在のスライド番号
+            let currentSlide = 0;
+            
+            // スライド切り替え関数
+            function showSlide(index) {
+                // 範囲チェック
+                if (index < 0) {
+                    index = useCases.length - 1;
+                } else if (index >= useCases.length) {
+                    index = 0;
+                }
+                
+                // 現在のスライドを非表示に
+                useCases[currentSlide].classList.remove('active');
+                useCases[currentSlide].style.display = 'none';
+                document.querySelectorAll('.slider-dot')[currentSlide].classList.remove('active');
+                
+                // 新しいスライドを表示
+                useCases[index].style.display = 'block';
+                setTimeout(() => {
+                    useCases[index].classList.add('active');
+                }, 10);
+                document.querySelectorAll('.slider-dot')[index].classList.add('active');
+                
+                // 現在のスライド番号を更新
+                currentSlide = index;
+            }
+            
+            // イベントリスナーの設定
+            prevButton.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+            
+            nextButton.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+            
+            // ページネーションドットのイベントリスナー
+            document.querySelectorAll('.slider-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index));
+                });
+            });
+            
+            // 自動スライド（オプション）
+            let slideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 8000); // 8秒ごとに切り替え
+            
+            // マウスホバーで自動スライドを一時停止
+            useCasesSlider.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            useCasesSlider.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, 8000);
             });
         });
     </script>
