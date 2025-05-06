@@ -4,8 +4,8 @@
     <!-- component-split: MetaInformation -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShinAI - AI導入・業務効率化・生産性向上を実現する最先端AIソリューション。チャットボット開発、AI議事録作成、DX推進をサポート。">
-    <meta name="keywords" content="AI, 人工知能, ビジネスAI, 業務効率化, AI導入, チャットボット, AI議事録, DX推進, RAG, 生成AI">
+    <meta name="description" content="ShinAI - 企業の課題解決と成長を支援する最先端AIソリューション。チャットボット開発、AI資料作成、DX推進をサポートし、大切な人と過ごす時間を創出します。">
+    <meta name="keywords" content="AI, 人工知能, ビジネスAI, 業務効率化, AI導入, チャットボット, AI資料作成, DX推進, RAG, 生成AI">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
@@ -18,7 +18,7 @@
     
     <!-- component-split: OGPSettings -->
     <meta property="og:title" content="ShinAI - サービス | 企業成長を加速する最先端AIソリューション">
-    <meta property="og:description" content="最先端のAI技術で企業の課題を解決し、新たな価値を創造するShinAIの提供サービス一覧。">
+    <meta property="og:description" content="真の価値を追求するAI技術で企業の課題を解決し、人間らしい時間を取り戻す。ShinAIの革新的サービスをご紹介します。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
     <meta property="og:url" content="https://www.shinai.tech/services.html">
     <meta property="og:type" content="website">
@@ -149,364 +149,613 @@
 
     <!-- component-split: PageSpecificStyles -->
     <style>
-    /* サービスセクションの改善 */
+    /* サービスページ向け特殊スタイル */
     .section {
         padding: 5rem 0;
-        position: relative;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
     }
-
+    
+    .section-bg-gradient {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+    }
+    
     .brand-catchphrase {
         font-style: italic;
         color: var(--primary);
-        margin-bottom: 1.5rem;
         font-weight: 500;
-        border-left: 3px solid var(--primary);
-        padding-left: 1rem;
         display: inline-block;
         background: rgba(58, 95, 235, 0.05);
         padding: 0.75rem 1.5rem;
         border-radius: 0 var(--radius) var(--radius) 0;
+        border-left: 3px solid var(--primary);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
+        transform: translateY(0);
+        transition: all 0.3s ease;
+    }
+    
+    .section-header:hover .brand-catchphrase {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
     }
 
-    .section-header {
-        text-align: center;
-        margin-bottom: 4rem;
-    }
-
-    .section-subtitle {
-        display: inline-block;
-        background: rgba(58, 95, 235, 0.12);
-        padding: 0.4rem 1.2rem;
-        border-radius: var(--radius-full);
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-        color: var(--primary);
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
-    .heading-lg {
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 1rem;
-        letter-spacing: -0.01em;
-        font-family: var(--font-jp);
-        color: #1A1F36; /* コントラスト比を向上 */
-    }
-
-    .highlight {
-        color: var(--primary);
-        font-weight: 700;
-        position: relative;
-        display: inline-block;
-    }
-
-    .highlight::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 5px;
-        background: rgba(58, 95, 235, 0.18); /* 不透明度を上げて視認性向上 */
-        z-index: var(--z-back);
-        border-radius: var(--radius-full);
-    }
-
-    .section-description {
-        max-width: 800px;
-        margin: 0 auto;
-        font-size: 1.1rem;
-        color: #5E6C84; /* より暗い色で視認性向上 */
-    }
-
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2.5rem;
-        margin: 3rem 0;
-    }
-
+    /* サービスカード強化 */
     .service-card {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         overflow: hidden;
-        transition: all 0.4s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         height: 100%;
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.04);
         position: relative;
-        padding: 0; /* 初期パディングなし */
-        margin-bottom: 1.5rem; /* マージン追加 */
+        margin-bottom: 2rem;
     }
-
+    
     .service-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 5px;
-        /* グラデーション修正 - 白化しないよう不透明度を上げる */
+        height: 6px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: var(--z-normal);
     }
-
+    
     .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
+        transform: translateY(-15px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
+        border-color: rgba(58, 95, 235, 0.12);
     }
-
+    
     .service-image {
-        height: 220px;
+        height: 240px;
         position: relative;
         overflow: hidden;
     }
-
+    
     .service-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.8s ease;
+        transition: transform 1s ease;
     }
-
+    
     .service-card:hover .service-image img {
-        transform: scale(1.1);
+        transform: scale(1.08);
     }
-
+    
     .service-icon {
         position: absolute;
         bottom: -25px;
         right: 25px;
-        width: 60px;
-        height: 60px;
-        /* グラデーション修正 - 白化しないよう不透明度を上げる */
+        width: 65px;
+        height: 65px;
         background: linear-gradient(135deg, var(--primary), var(--secondary));
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--white);
-        font-size: 1.4rem;
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+        font-size: 1.5rem;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         z-index: var(--z-normal);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-
+    
     .service-card:hover .service-icon {
-        transform: rotate(15deg);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
     }
-
+    
     .service-content {
-        padding: 1.5rem; /* パディング追加 */
+        padding: 2rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
     }
-
+    
     .service-title {
-        font-size: 1.35rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 1rem;
-        color: #1A1F36; /* コントラスト比を向上 */
+        margin-bottom: 1.2rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
     }
-
+    
+    .service-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: var(--radius-full);
+        transition: width 0.3s ease;
+    }
+    
+    .service-card:hover .service-title::after {
+        width: 100%;
+    }
+    
     .service-description {
-        color: #5E6C84; /* より暗い色で視認性向上 */
-        margin-bottom: 1.5rem;
+        color: var(--gray);
+        margin-bottom: 1.8rem;
         flex-grow: 1;
         line-height: 1.7;
     }
-
+    
     .service-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
+        gap: 0.7rem;
+        margin-bottom: 2rem;
     }
-
+    
     .service-tag {
-        background: rgba(58, 95, 235, 0.1);
+        background: rgba(58, 95, 235, 0.08);
         color: var(--primary);
-        padding: 0.3rem 0.8rem;
+        padding: 0.4rem 1rem;
         border-radius: 50px;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         font-weight: 600;
+        transition: all 0.3s ease;
     }
-
+    
+    .service-tag:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
+        background: rgba(58, 95, 235, 0.12);
+    }
+    
     .service-footer {
         margin-top: auto;
     }
-
-    /* CTAボタンのホバーエフェクト強化 */
-    .btn-outline {
-        background: rgba(255, 255, 255, 0.95);
-        color: var(--primary);
-        border: 2px solid var(--primary);
-        box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .btn-outline:hover {
-        background: var(--primary);
-        color: var(--white);
-        transform: translateY(-3px) scale(1.05); /* ホバー時の拡大効果 */
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25); /* シャドウ強化 */
-    }
-
-    .btn-icon-bounce:hover i,
-    .btn-icon-bounce:focus i {
-        animation: btnIconBounce 0.8s ease infinite;
-    }
-
-    .section-footer {
-        margin-top: 3rem;
-        text-align: center;
-    }
-
-    .section-footer .btn-primary {
-        transition: all 0.3s ease;
-    }
-
-    .section-footer .btn-primary:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.35);
-    }
-
-    /* サービス詳細ページのスタイル */
-    .service-detail {
-        padding: 3rem 0;
-    }
-
-    .service-detail-header {
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-
-    .service-detail-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--dark);
-        margin-bottom: 1rem;
-    }
-
-    .service-detail-subtitle {
-        font-size: 1.2rem;
-        color: var(--gray);
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .service-detail-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: center;
-    }
-
-    .service-detail-image {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow-lg);
-    }
-
-    .service-detail-image img {
+    
+    .service-footer .btn {
         width: 100%;
-        height: auto;
-        display: block;
+        justify-content: center;
+        padding: 1rem;
     }
 
-    .service-detail-text h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        color: var(--dark);
+    /* 特徴カード強化 */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-top: 3rem;
     }
-
-    .service-detail-text p {
-        margin-bottom: 1.5rem;
-        line-height: 1.7;
-        color: var(--gray);
-    }
-
-    .service-features {
-        margin: 1.5rem 0;
-    }
-
-    .service-feature-item {
+    
+    .feature-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        padding: 2.5rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
         display: flex;
-        align-items: flex-start;
-        margin-bottom: 1rem;
+        flex-direction: column;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2rem;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.3);
+    }
+    
+    .feature-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        color: var(--dark);
+        text-align: center;
+    }
+    
+    .feature-card p {
+        color: var(--gray);
+        line-height: 1.8;
+        text-align: center;
     }
 
-    .service-feature-icon {
-        width: 24px;
-        min-width: 24px;
-        height: 24px;
-        background: var(--primary);
+    /* プロセスタイムライン強化 */
+    .process-timeline {
+        position: relative;
+        max-width: 900px;
+        margin: 4rem auto 0;
+        padding: 0 2rem;
+    }
+    
+    .process-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(2rem + 20px);
+        width: 4px;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        border-radius: var(--radius-full);
+        z-index: 1;
+    }
+    
+    .process-step {
+        display: flex;
+        position: relative;
+        margin-bottom: 3.5rem;
+        z-index: 2;
+    }
+    
+    .process-step:last-child {
+        margin-bottom: 0;
+    }
+    
+    .process-step-number {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--white);
-        margin-right: 1rem;
-        margin-top: 0.25rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-right: 2.5rem;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
     }
-
-    .service-feature-text {
+    
+    .process-step:hover .process-step-number {
+        transform: scale(1.1);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+    }
+    
+    .process-step-content {
         flex: 1;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 1.8rem 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        position: relative;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .process-step:hover .process-step-content {
+        transform: translateX(15px);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .process-step-content::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background: var(--white);
+        transform: rotate(45deg);
+        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.03);
+        border-left: 1px solid rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .process-step-content h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        color: var(--dark);
+    }
+    
+    .process-step-content p {
+        color: var(--gray);
+        margin-bottom: 0;
+        line-height: 1.7;
     }
 
-    .service-detail-cta {
-        margin-top: 2rem;
+    /* FAQ強化 */
+    .faq-container {
+        max-width: 900px;
+        margin: 4rem auto 0;
+    }
+    
+    .faq-item {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .faq-item.active,
+    .faq-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .faq-question {
+        background: var(--white);
+        color: var(--dark);
+        font-weight: 600;
+        padding: 1.8rem 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover,
+    .faq-item.active .faq-question {
+        color: var(--primary);
+    }
+    
+    .faq-question h4 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    
+    .faq-question i {
+        color: var(--primary);
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question i {
+        transform: rotate(-180deg);
+    }
+    
+    .faq-answer {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: rgba(249, 250, 252, 0.7);
+        border-top: 1px solid rgba(58, 95, 235, 0.08);
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 1.8rem 2rem;
+        max-height: 1000px;
+    }
+    
+    .faq-answer p {
+        color: var(--gray);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* CTA強化 */
+    .cta-container {
+        background: var(--white);
+        border-radius: 24px;
+        padding: 4rem 3rem;
+        box-shadow: 0 25px 60px rgba(58, 95, 235, 0.15);
+        position: relative;
+        overflow: hidden;
+        z-index: var(--z-normal);
+        border: 1px solid rgba(58, 95, 235, 0.1);
+        text-align: center;
+    }
+    
+    .cta-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: var(--z-normal);
+    }
+    
+    .cta-bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03), rgba(58, 95, 235, 0.03));
+        background-size: 200% 200%;
+        animation: gradientBG 15s ease infinite;
+        z-index: var(--z-back);
+    }
+    
+    .cta-title {
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-title h2 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--dark);
+        line-height: 1.3;
+        margin-bottom: 0;
+    }
+    
+    .cta-description {
+        font-size: 1.2rem;
+        color: var(--gray);
+        max-width: 800px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.8;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .cta-buttons .btn {
+        min-width: 220px;
+    }
+    
+    .btn-glow {
+        position: relative;
+    }
+    
+    .btn-glow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50px;
+        z-index: var(--z-back);
+        animation: pulseGlow 2s infinite;
     }
 
     /* レスポンシブ調整 */
     @media (max-width: 992px) {
-        .services-grid {
+        .features-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
         }
         
-        .heading-lg {
-            font-size: 2.2rem;
+        .cta-title h2 {
+            font-size: 2.4rem;
         }
         
-        .service-detail-content {
+        .process-timeline::before {
+            left: calc(2rem + 15px);
+        }
+        
+        .process-step-number {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            margin-right: 2rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .features-grid {
             grid-template-columns: 1fr;
             gap: 2rem;
         }
         
-        .service-detail-image {
-            order: -1;
+        .cta-title h2 {
+            font-size: 2rem;
+        }
+        
+        .cta-description {
+            font-size: 1.1rem;
+        }
+        
+        .process-timeline {
+            padding: 0 1rem;
+        }
+        
+        .process-timeline::before {
+            left: calc(1rem + 15px);
+        }
+        
+        .process-step-number {
+            margin-right: 1.5rem;
+        }
+        
+        .process-step-content {
+            padding: 1.5rem;
+        }
+        
+        .process-step-content h3 {
+            font-size: 1.2rem;
+        }
+        
+        .cta-container {
+            padding: 3rem 2rem;
         }
     }
-
-    @media (max-width: 768px) {
-        .services-grid {
-            grid-template-columns: 1fr;
+    
+    @media (max-width: 576px) {
+        .service-image {
+            height: 200px;
         }
         
-        .service-card {
-            margin-bottom: 2rem;
+        .service-content {
+            padding: 1.5rem;
         }
         
-        .heading-lg {
+        .service-icon {
+            width: 55px;
+            height: 55px;
+            font-size: 1.3rem;
+            right: 20px;
+        }
+        
+        .feature-card {
+            padding: 1.8rem;
+        }
+        
+        .cta-title h2 {
             font-size: 1.8rem;
         }
         
-        .brand-catchphrase {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
+        .cta-buttons {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cta-container {
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .process-timeline::before {
+            display: none;
+        }
+        
+        .process-step {
+            flex-direction: column;
+        }
+        
+        .process-step-number {
+            margin-bottom: 1rem;
+            margin-right: 0;
+            align-self: flex-start;
+        }
+        
+        .process-step-content::before {
+            display: none;
         }
     }
     </style>
@@ -742,7 +991,7 @@
         </section>
         
         <!-- component-split: ServiceFeatures -->
-        <section class="section section-bg-light">
+        <section class="section section-bg-gradient">
             <div class="container">
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">サービスの特徴</span>
@@ -830,13 +1079,13 @@
                 </div>
                 
                 <div class="section-footer animate-on-scroll">
-                    <a href="contact.html" class="btn btn-primary btn-lg">まずは無料相談する <i class="fas fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">まずは無料相談する <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
         
         <!-- component-split: FAQ -->
-        <section class="section section-faq">
+        <section class="section section-bg-gradient">
             <div class="container">
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">よくある質問</span>
@@ -882,6 +1131,16 @@
                         </div>
                         <div class="faq-answer">
                             <p>AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>既存システムとの連携は可能ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。</p>
                         </div>
                     </div>
                 </div>
@@ -1039,7 +1298,7 @@
                 const faqItem = this.parentElement;
                 faqItem.classList.toggle('active');
                 
-                // 他のアコーディオンを閉じる（オプション）
+                // 他のアコーディオンを閉じる
                 document.querySelectorAll('.faq-item').forEach(item => {
                     if (item !== faqItem) {
                         item.classList.remove('active');
@@ -1066,6 +1325,17 @@
             observer.observe(el);
         });
         
+        // ヘッダースクロール効果
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
         // Back to Topボタン
         const backToTopButton = document.getElementById('back-to-top');
         
@@ -1081,6 +1351,19 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
+            });
+        });
+        
+        // サービスカードホバーエフェクト強化
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
             });
         });
     });
