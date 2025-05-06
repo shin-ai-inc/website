@@ -179,341 +179,6 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
-    
-    <!-- インラインスタイル（最適化用） -->
-    <style>
-        :root {
-            /* メインカラー更新 */
-            --purple-main: #3A5FEB;
-            --purple-bright: #4671FF;
-            --blue-mid: #00C9A7;
-            --cyan-light: #00E6C3;
-            --accent: #FF8A00;
-            --dark: #1A1F36;
-            --gray: #5E6C84;
-            --light-gray: #F9FAFC;
-            --white: #FFFFFF;
-            
-            /* フォント更新 */
-            --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-en: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
-        /* ヒーローセクション最適化 */
-        .hero {
-            min-height: 650px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            max-width: 100%;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            font-family: var(--font-jp);
-            font-weight: 800;
-            color: var(--dark);
-        }
-        
-        .hero-title .highlight {
-            color: var(--purple-main);
-            font-weight: 900;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .hero-description {
-            font-size: 1.25rem;
-            max-width: 90%;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            color: var(--gray);
-        }
-        
-        /* CTA強化 */
-        .hero-cta {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-        
-        .btn-primary {
-            background: var(--purple-main);
-            color: var(--white);
-            box-shadow: 0 8px 15px rgba(58, 95, 235, 0.25);
-            border: none;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            background: var(--purple-bright);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 20px rgba(58, 95, 235, 0.35);
-        }
-        
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--purple-main);
-            border: 2px solid var(--purple-main);
-            box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline:hover {
-            background: var(--purple-main);
-            color: var(--white);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
-        }
-        
-        /* 資料ダウンロードボタン */
-        .btn-download {
-            background: var(--light-gray);
-            color: var(--dark);
-            border: 2px solid var(--light-gray);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .btn-download:hover {
-            background: var(--white);
-            border-color: var(--gray);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-download i {
-            color: var(--purple-main);
-        }
-        
-        /* 業界別カードスライダー */
-        .industry-slider {
-            overflow: hidden;
-            padding: 2rem 0;
-            position: relative;
-        }
-        
-        .swiper-slide {
-            height: auto;
-        }
-        
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: var(--purple-main);
-            background: var(--white);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
-        
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        
-        .swiper-button-next:after,
-        .swiper-button-prev:after {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        
-        /* サービス紹介カード強化 */
-        .service-card {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-            border-color: rgba(58, 95, 235, 0.1);
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
-            z-index: 1;
-        }
-        
-        .service-image {
-            height: 200px;
-            position: relative;
-        }
-        
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        
-        .service-card:hover .service-image img {
-            transform: scale(1.1);
-        }
-        
-        .service-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .service-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .service-description {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-        
-        .service-footer {
-            margin-top: auto;
-        }
-        
-        /* メインCTAセクション強化 */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-container {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 20px 50px rgba(58, 95, 235, 0.1);
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            border: 1px solid rgba(58, 95, 235, 0.1);
-        }
-        
-        .cta-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, var(--purple-main), var(--blue-mid));
-            z-index: 1;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            text-align: center;
-        }
-        
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            text-align: center;
-            line-height: 1.8;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cta-buttons .btn {
-            min-width: 200px;
-            min-height: 54px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* パフォーマンス最適化 */
-        .hero-bg,
-        .service-image img,
-        .industry-image img {
-            will-change: transform;
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-        
-        /* コントラスト強化 - アクセシビリティ対応 */
-        .section-subtitle {
-            background: rgba(58, 95, 235, 0.12);
-            color: var(--purple-main);
-            font-weight: 600;
-        }
-        
-        .highlight::after {
-            background: rgba(58, 95, 235, 0.15);
-        }
-        
-        /* ボタンのタップ領域確保 - アクセシビリティ対応 */
-        .btn,
-        button,
-        a {
-            min-height: 44px;
-            min-width: 44px;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        /* フォーカス表示の強化 - アクセシビリティ対応 */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 3px solid var(--purple-main);
-            outline-offset: 2px;
-        }
-    </style>
 </head>
 <body>
     <!-- 
@@ -553,7 +218,12 @@
                         <li><a href="services.html" class="nav-link">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
-                        <li class="nav-cta"><a href="contact.html" class="btn btn-primary">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+                        <li class="nav-cta">
+                            <a href="contact.html" class="btn btn-consultation">
+                                <span>無料相談</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 
@@ -597,21 +267,35 @@
             <div class="hero-overlay"></div>
             
             <div class="container">
-                <div class="hero-content">
+                <div class="hero-content animate-fadeIn">
                     <div class="brand-logo">
                         <img src="assets/images/logo.svg" alt="ShinAI Logo" class="brand-icon" width="80" height="80">
                     </div>
-                    <div class="hero-label">AI導入・業務効率化支援</div>
-                    <h1 class="hero-title">企業成長を加速する<span class="highlight">最先端AI</span>ソリューション</h1>
-                    <p class="hero-description">最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。チャットボット開発から業務効率化まで、包括的なAIサポートを提供します。</p>
+                    <div class="hero-label animate-fadeIn animate-delay-1">AI導入・業務効率化支援</div>
+                    <h1 class="hero-title animate-fadeIn animate-delay-2">
+                        企業成長を加速する<span class="highlight">最先端AI</span>ソリューション
+                    </h1>
+                    <p class="hero-description animate-fadeIn animate-delay-3">
+                        最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。
+                        チャットボット開発から業務効率化まで、包括的なAIサポートを提供します。
+                    </p>
                     
-                    <div class="hero-cta">
-                        <a href="services.html" class="btn btn-primary btn-lg">サービスを見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        <a href="contact.html" class="btn btn-outline btn-lg">無料相談する <i class="fas fa-headset" aria-hidden="true"></i></a>
-                        <a href="#" class="btn-download">資料ダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                    <div class="hero-cta animate-fadeIn animate-delay-4">
+                        <a href="services.html" class="btn btn-primary btn-lg btn-icon-bounce">
+                            <span>サービスを見る</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-consultation btn-lg">
+                            <span>無料相談する</span>
+                            <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                        </a>
+                        <a href="#" class="btn-download">
+                            資料ダウンロード
+                            <i class="fas fa-file-download" aria-hidden="true"></i>
+                        </a>
                     </div>
 
-                    <div class="hero-tagline">
+                    <div class="hero-tagline animate-fadeIn animate-delay-5">
                         <p>「真の価値を信じ、次世代のために新たな未来を創る」</p>
                     </div>
                 </div>
@@ -626,13 +310,13 @@
         -->
         <section class="section section-bg-light">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">ShinAIについて</span>
                     <h2 class="heading-lg">「真」の価値を追求する<span class="highlight">AI企業</span></h2>
                     <p class="section-description">ShinAIは「真の価値を信じ、次世代のために新たな未来を創る」という理念のもと、最先端のAI技術で企業の課題解決を支援しています</p>
                 </div>
                 
-                <div class="about-grid">
+                <div class="about-grid animate-on-scroll">
                     <div class="about-image">
                         <picture>
                             <source srcset="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900&fm=webp" type="image/webp">
@@ -653,7 +337,7 @@
                         <p>私たちの使命は、AI技術を活用して定型業務や複雑な分析作業を自動化し、人々が創造的な仕事や大切な人との時間に集中できる環境を作ることです。</p>
                         
                         <div class="about-buttons">
-                            <a href="about.html" class="btn btn-primary">会社概要を見る <i class="fas fa-arrow-right"></i></a>
+                            <a href="about.html" class="btn btn-primary btn-icon-bounce">会社概要を見る <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -668,7 +352,7 @@
         -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">AI導入のメリット</span>
                     <h2 class="heading-lg">AIがもたらす<span class="highlight">3つの価値</span></h2>
                     <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
@@ -676,8 +360,9 @@
                 
                 <div class="benefits-grid">
                     <!-- 業務効率化 -->
-                    <div class="benefit-card">
+                    <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
+                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-bolt" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -685,11 +370,11 @@
                             <p>AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
                             <div class="benefit-stats">
                                 <div class="benefit-stat">
-                                    <span class="stat-value">35%</span>
+                                    <span class="stat-value">35</span><span class="stat-percent">%</span>
                                     <span class="stat-label">効率化</span>
                                 </div>
                                 <div class="benefit-stat">
-                                    <span class="stat-value">60%</span>
+                                    <span class="stat-value">60</span><span class="stat-percent">%</span>
                                     <span class="stat-label">時間削減</span>
                                 </div>
                             </div>
@@ -697,8 +382,9 @@
                     </div>
                     
                     <!-- コスト削減 -->
-                    <div class="benefit-card">
+                    <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
+                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -706,11 +392,11 @@
                             <p>AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
                             <div class="benefit-stats">
                                 <div class="benefit-stat">
-                                    <span class="stat-value">40%</span>
+                                    <span class="stat-value">40</span><span class="stat-percent">%</span>
                                     <span class="stat-label">コスト削減</span>
                                 </div>
                                 <div class="benefit-stat">
-                                    <span class="stat-value">30%</span>
+                                    <span class="stat-value">30</span><span class="stat-percent">%</span>
                                     <span class="stat-label">利益向上</span>
                                 </div>
                             </div>
@@ -718,8 +404,9 @@
                     </div>
                     
                     <!-- データ分析 -->
-                    <div class="benefit-card">
+                    <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
+                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -727,11 +414,11 @@
                             <p>大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
                             <div class="benefit-stats">
                                 <div class="benefit-stat">
-                                    <span class="stat-value">90%</span>
+                                    <span class="stat-value">90</span><span class="stat-percent">%</span>
                                     <span class="stat-label">データ活用</span>
                                 </div>
                                 <div class="benefit-stat">
-                                    <span class="stat-value">25%</span>
+                                    <span class="stat-value">25</span><span class="stat-percent">%</span>
                                     <span class="stat-label">売上増加</span>
                                 </div>
                             </div>
@@ -749,7 +436,7 @@
         -->
         <section class="section section-bg-light" id="services">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">ShinAIのソリューション</span>
                     <h2 class="heading-lg">ビジネスの課題を解決する<span class="highlight">AIソリューション</span></h2>
                     <p class="section-description">ShinAIは、AI技術で企業の変革・成長・共感を支援する<strong>実装型パートナー</strong>です</p>
@@ -757,7 +444,7 @@
                 
                 <div class="services-grid">
                     <!-- 業務自動化ソリューション -->
-                    <div class="service-card">
+                    <div class="service-card animate-on-scroll">
                         <div class="service-image">
                             <picture>
                                 <source srcset="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
@@ -781,13 +468,13 @@
                                 <span class="service-tag">顧客満足度向上</span>
                             </div>
                             <div class="service-footer">
-                                <a href="services.html#automation" class="btn btn-outline">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                                <a href="services.html#automation" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     
                     <!-- 企画書資料作成AIツール「アイプロ」 -->
-                    <div class="service-card">
+                    <div class="service-card animate-on-scroll">
                         <div class="service-image">
                             <picture>
                                 <source srcset="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
@@ -811,13 +498,13 @@
                                 <span class="service-tag">生産性向上</span>
                             </div>
                             <div class="service-footer">
-                                <a href="services.html#aipro" class="btn btn-outline">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                                <a href="services.html#aipro" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                     
                     <!-- AI戦略 -->
-                    <div class="service-card">
+                    <div class="service-card animate-on-scroll">
                         <div class="service-image">
                             <picture>
                                 <source srcset="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
@@ -841,14 +528,14 @@
                                 <span class="service-tag">成果定着</span>
                             </div>
                             <div class="service-footer">
-                                <a href="services.html#consulting" class="btn btn-outline">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                                <a href="services.html#consulting" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="section-footer">
-                    <a href="services.html" class="btn btn-primary btn-lg">すべてのサービスを見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <div class="section-footer animate-on-scroll">
+                    <a href="services.html" class="btn btn-primary btn-lg btn-icon-bounce">すべてのサービスを見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
@@ -861,13 +548,13 @@
         -->
         <section class="section" id="industries-preview">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">業界別AI活用</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用</span>のメリット</h2>
                     <p class="section-description">ShinAIは「AI導入に課題と可能性が共存する産業」に特化し、個別最適な支援を提供</p>
                 </div>
                 
-                <div class="industry-slider">
+                <div class="industry-slider animate-on-scroll">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <!-- 業界カード: 福祉・介護 -->
@@ -1011,8 +698,8 @@
                     </div>
                 </div>
                 
-                <div class="section-footer">
-                    <a href="industries.html" class="btn btn-primary btn-lg">すべての業界別事例を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <div class="section-footer animate-on-scroll">
+                    <a href="industries.html" class="btn btn-primary btn-lg btn-icon-bounce">すべての業界別事例を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
@@ -1025,16 +712,27 @@
         -->
         <section class="cta-section">
             <div class="container">
-                <div class="cta-container">
-                    <div class="cta-title">
-                        <h2>AIによる業務効率化を<br>今すぐ始めませんか？</h2>
+                <div class="cta-container animate-on-scroll">
+                    <div class="cta-bg-animation"></div>
+                    <div class="cta-shapes">
+                        <div class="cta-shape-1"></div>
+                        <div class="cta-shape-2"></div>
+                        <div class="cta-shape-3"></div>
                     </div>
-                    <div class="cta-description">
-                        <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から。AI導入の第一歩を踏み出しましょう。</p>
-                    </div>
-                    <div class="cta-buttons">
-                        <a href="contact.html" class="btn btn-primary btn-lg">無料相談する <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                    <div class="cta-content">
+                        <div class="cta-title">
+                            <h2>AIによる業務効率化を<br>今すぐ始めませんか？</h2>
+                        </div>
+                        <div class="cta-description">
+                            <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から。AI導入の第一歩を踏み出しましょう。</p>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
+                                <span>無料相談する</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                            <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1048,7 +746,9 @@
     ==============================================
     -->
     <div class="bottom-banner">
-        「真の価値を信じ、次世代のために新たな未来を創る。」
+        <div class="bottom-banner-content">
+            「真の価値を信じ、次世代のために新たな未来を創る。」
+        </div>
     </div>
     
     <!-- 
@@ -1226,7 +926,7 @@
             }, 1000);
         }
         
-        // 5秒ごとに画像を切り替え
+        // 10秒ごとに画像を切り替え
         const imageInterval = setInterval(rotateHeroImage, 10000);
         
         // Back to Topボタンの表示制御
@@ -1252,21 +952,21 @@
             document.body.classList.add('loaded');
         }, 300);
         
-        // 要素が画面内に入ったときのアニメーション
+        // スクロールアニメーション
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
         
-        document.querySelectorAll('.benefit-card, .service-card, .industry-card, .about-grid').forEach(el => {
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
     });
