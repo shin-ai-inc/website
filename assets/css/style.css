@@ -5,7 +5,7 @@ COMPONENT: 変数定義（改良版）
 ==============================================
 */
 :root {
-    /* カラーパレット */
+    /* カラーパレット - ブランドカラーを統一 */
     --purple-main: #3A5FEB;     /* メインカラー */
     --purple-bright: #4671FF;   /* 明るい色 - ホバー状態など */
     --blue-mid: #00C9A7;        /* 中間の色 - アクセントに */
@@ -18,7 +18,7 @@ COMPONENT: 変数定義（改良版）
     --error: #FF3B3B;           /* エラー表示用 */
     --success: #00C48C;         /* 成功表示用 */
     
-    /* グラデーション */
+    /* グラデーション - 鮮やかな効果を維持 */
     --gradient-primary: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
     --gradient-hover: linear-gradient(135deg, var(--purple-bright), var(--cyan-light));
     --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
@@ -28,7 +28,7 @@ COMPONENT: 変数定義（改良版）
     --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-en: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     
-    /* エフェクト */
+    /* エフェクト - 視覚的な深みを追加 */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -327,7 +327,7 @@ button {
     font-family: inherit;
 }
 
-/* キーボード操作のフォーカス表示 */
+/* キーボード操作のフォーカス表示 - アクセシビリティ向上 */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -338,7 +338,7 @@ select:focus-visible {
     box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.3);
 }
 
-/* スキップナビゲーション */
+/* スキップナビゲーション - アクセシビリティ向上 */
 .skip-nav {
     position: absolute;
     top: -40px;
@@ -678,7 +678,7 @@ COMPONENT: タイポグラフィ（強化版）
 /* 
 ==============================================
 // === component-split: Buttons ===
-COMPONENT: ボタン（強化版）
+COMPONENT: ボタン（強化版）- 視認性とユーザビリティを向上
 ==============================================
 */
 .btn {
@@ -696,7 +696,9 @@ COMPONENT: ボタン（強化版）
     position: relative;
     overflow: hidden;
     z-index: var(--z-normal);
-    min-height: 44px;
+    min-height: 48px; /* タップ領域拡大 */
+    border: none; /* ボーダーを一貫して除去 */
+    text-align: center;
 }
 
 .btn-lg {
@@ -710,10 +712,10 @@ COMPONENT: ボタン（強化版）
     min-width: 250px;
 }
 
+/* プライマリーボタン - メインCTA用 */
 .btn-primary {
     background: var(--gradient-primary);
     color: var(--white);
-    border: none;
     box-shadow: var(--shadow-button);
 }
 
@@ -738,8 +740,9 @@ COMPONENT: ボタン（強化版）
     left: 100%;
 }
 
+/* アウトラインボタン - セカンダリーCTA用 */
 .btn-outline {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95); /* 背景色を明るく */
     color: var(--purple-main);
     border: 2px solid var(--purple-main);
     box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
@@ -753,6 +756,7 @@ COMPONENT: ボタン（強化版）
     box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
 }
 
+/* ダウンロードボタン */
 .btn-download {
     background: var(--light-gray);
     color: var(--dark);
@@ -778,6 +782,7 @@ COMPONENT: ボタン（強化版）
     color: var(--purple-main);
 }
 
+/* アイコン付きボタン - バウンス効果 */
 .btn-icon-bounce {
     position: relative;
     overflow: hidden;
@@ -834,6 +839,7 @@ COMPONENT: ボタン（強化版）
     width: 100%;
 }
 
+/* グロー効果付きボタン - 注目効果 */
 .btn-glow {
     position: relative;
 }
@@ -989,6 +995,7 @@ COMPONENT: ヘッダー（強化版）
     margin-left: 1.5rem;
 }
 
+/* ハンバーガーメニュー - モバイル用 */
 .menu-toggle {
     display: none;
     font-size: 1.5rem;
@@ -1098,6 +1105,7 @@ COMPONENT: ヒーローセクション（強化版）
     align-items: center;
     overflow: hidden;
     padding-top: 80px;
+    text-align: center; /* 中央揃えに変更 */
 }
 
 .hero-bg-container {
@@ -1139,7 +1147,8 @@ COMPONENT: ヒーローセクション（強化版）
 
 .hero-content {
     position: relative;
-    max-width: 650px;
+    max-width: 800px; /* 幅を広げて中央揃えに対応 */
+    margin: 0 auto; /* 中央揃え */
     z-index: var(--z-normal);
     animation: fadeInUp 0.8s ease-out;
 }
@@ -1174,7 +1183,9 @@ COMPONENT: ヒーローセクション（強化版）
     line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--dark);
-    max-width: 650px;
+    max-width: 800px; /* 幅広げる */
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
     position: relative;
 }
 
@@ -1202,7 +1213,9 @@ COMPONENT: ヒーローセクション（強化版）
     font-size: 1.25rem;
     line-height: 1.8;
     margin-bottom: 2rem;
-    max-width: 600px;
+    max-width: 800px;
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
     color: rgba(26, 31, 54, 0.85);
 }
 
@@ -1211,6 +1224,7 @@ COMPONENT: ヒーローセクション（強化版）
     flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2.5rem;
+    justify-content: center; /* 中央揃え */
 }
 
 .hero-cta .btn {
@@ -1225,6 +1239,8 @@ COMPONENT: ヒーローセクション（強化版）
     margin-top: 1.5rem;
     padding-left: 1rem;
     border-left: 3px solid var(--purple-main);
+    display: inline-block; /* インライン要素に */
+    text-align: left; /* 左揃え */
 }
 
 .brand-logo {
@@ -1642,7 +1658,7 @@ COMPONENT: サービスセクション（強化版）
 /* 
 ==============================================
 // === component-split: IndustriesSection ===
-COMPONENT: 業界別活用セクション（強化版）
+COMPONENT: 業界別活用セクション（強化版）- スライダー対応
 ==============================================
 */
 .industry-slider {
@@ -1764,11 +1780,11 @@ COMPONENT: 業界別活用セクション（強化版）
 /* 
 ==============================================
 // === component-split: CTASection ===
-COMPONENT: お問い合わせCTA（強化版）
+COMPONENT: お問い合わせCTA（強化版）- コントラスト向上
 ==============================================
 */
 .cta-section {
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05)); /* 背景色を少し濃く */
     padding: 5rem 0;
     position: relative;
     overflow: hidden;
@@ -1778,11 +1794,11 @@ COMPONENT: お問い合わせCTA（強化版）
     background: var(--white);
     border-radius: 24px;
     padding: 3.5rem;
-    box-shadow: 0 20px 50px rgba(58, 95, 235, 0.1);
+    box-shadow: 0 20px 50px rgba(58, 95, 235, 0.15); /* シャドウを強く */
     position: relative;
     overflow: hidden;
     z-index: var(--z-normal);
-    border: 1px solid rgba(58, 95, 235, 0.1);
+    border: 1px solid rgba(58, 95, 235, 0.15); /* ボーダーを少し濃く */
     text-align: center;
 }
 
@@ -1792,7 +1808,7 @@ COMPONENT: お問い合わせCTA（強化版）
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03), rgba(58, 95, 235, 0.03));
+    background: linear-gradient(45deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05), rgba(58, 95, 235, 0.05));
     background-size: 200% 200%;
     animation: gradientBG 15s ease infinite;
     z-index: var(--z-back);
@@ -1851,7 +1867,7 @@ COMPONENT: お問い合わせCTA（強化版）
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06)); /* 背景を濃く */
     z-index: var(--z-back);
 }
 
@@ -1861,9 +1877,9 @@ COMPONENT: お問い合わせCTA（強化版）
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E"); /* パターンを濃く */
     z-index: var(--z-back);
-    opacity: 0.5;
+    opacity: 0.8; /* 不透明度上げる */
 }
 
 .cta-content {
@@ -2109,7 +2125,7 @@ COMPONENT: フッター（強化版）
 /* 
 ==============================================
 // === component-split: ContactSection ===
-COMPONENT: お問い合わせフォーム（新規追加）
+COMPONENT: お問い合わせフォーム（改良版）
 ==============================================
 */
 .section-contact {
@@ -2172,7 +2188,7 @@ COMPONENT: お問い合わせフォーム（新規追加）
     width: 50px;
     height: 50px;
     min-width: 50px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15); /* 背景色を少し濃く */
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -2184,7 +2200,7 @@ COMPONENT: お問い合わせフォーム（新規追加）
 }
 
 .contact-method:hover .contact-icon {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25); /* ホバー時の背景色を調整 */
     transform: scale(1.1);
 }
 
@@ -2285,6 +2301,7 @@ COMPONENT: お問い合わせフォーム（新規追加）
     margin-top: 1rem;
 }
 
+/* カスタムチェックボックス - アクセシビリティと視認性向上 */
 .form-check {
     position: relative;
     padding-left: 2rem;
@@ -2314,9 +2331,9 @@ COMPONENT: お問い合わせフォーム（新規追加）
     position: absolute;
     left: -2rem;
     top: 0;
-    width: 22px;
-    height: 22px;
-    border: 2px solid rgba(58, 95, 235, 0.3);
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(58, 95, 235, 0.4); /* 境界線を明確に */
     border-radius: 4px;
     background-color: var(--white);
     transition: all 0.3s ease;
@@ -2485,7 +2502,7 @@ COMPONENT: お問い合わせフォーム（新規追加）
     margin-top: 0.2rem;
 }
 
-/* FAQ セクション */
+/* FAQ セクション - 視認性向上 */
 .section-faq {
     background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
     padding: 5rem 0;
@@ -2500,7 +2517,7 @@ COMPONENT: お問い合わせフォーム（新規追加）
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
     z-index: var(--z-back);
     opacity: 0.5;
 }
@@ -3247,13 +3264,12 @@ COMPONENT: メディアクエリ基本設定
     }
     
     .hero-content {
-        max-width: 650px;
+        max-width: 800px;
     }
     
     .hero-title {
         font-size: 3.8rem;
         line-height: 1.2;
-        max-width: 650px;
     }
 }
 
@@ -3274,12 +3290,10 @@ COMPONENT: メディアクエリ基本設定
     .hero-title {
         font-size: 3.2rem;
         line-height: 1.2;
-        max-width: 600px;
     }
     
     .hero-description {
         font-size: 1.15rem;
-        max-width: 90%;
     }
     
     .btn-outline {
@@ -3318,7 +3332,6 @@ COMPONENT: メディアクエリ基本設定
     .hero-title {
         font-size: 2.8rem;
         line-height: 1.2;
-        max-width: 550px;
     }
     
     .hero-title .highlight {
@@ -3329,7 +3342,6 @@ COMPONENT: メディアクエリ基本設定
     
     .hero-description {
         font-size: 1.1rem;
-        max-width: 100%;
     }
     
     .services-grid,
@@ -3482,7 +3494,6 @@ COMPONENT: メディアクエリ基本設定
         font-size: 2.3rem;
         line-height: 1.25;
         letter-spacing: -0.02em;
-        max-width: 100%;
         margin-bottom: 1.2rem;
     }
     
@@ -3504,7 +3515,6 @@ COMPONENT: メディアクエリ基本設定
     
     .hero-description {
         font-size: 1rem;
-        max-width: 100%;
         margin-bottom: 1.5rem;
     }
     
@@ -3722,6 +3732,16 @@ COMPONENT: メディアクエリ基本設定
     .cta-description {
         font-size: 1rem;
     }
+    
+    /* 中央揃え対応 - iPhoneでの表示対応 */
+    .hero-content, .hero-title, .hero-description {
+        max-width: 100%;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 /* スマートフォン小 (480px以下) */
@@ -3743,7 +3763,6 @@ COMPONENT: メディアクエリ基本設定
         font-size: 1.8rem;
         line-height: 1.25;
         letter-spacing: -0.01em;
-        max-width: 100%;
     }
     
     .hero-title .highlight {
