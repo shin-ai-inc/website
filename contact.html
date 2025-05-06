@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 
-    ==============================================
-    // === component-split: MetaInformation ===
-    COMPONENT: Meta Information & SEO
-    ==============================================
-    -->
+    <!-- Meta Information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - お問い合わせ・無料相談。AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
@@ -21,12 +16,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="ps:topic" content="AI導入相談, 無料AI相談, AI業務効率化相談, DX推進相談">
     
-    <!-- 
-    ==============================================
-    // === component-split: OGPSettings ===
-    COMPONENT: OGP設定
-    ==============================================
-    -->
+    <!-- OGP Settings -->
     <meta property="og:title" content="ShinAI - お問い合わせ・無料相談">
     <meta property="og:description" content="AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -39,12 +29,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - お問い合わせと無料AI相談">
     
-    <!-- 
-    ==============================================
-    // === component-split: ExternalResources ===
-    COMPONENT: Fonts & External Resources
-    ==============================================
-    -->
+    <!-- External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -53,23 +38,18 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for advanced animations - Defer loading for better performance -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
     <!-- Lottie Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
     
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
-    <!-- 
-    ==============================================
-    // === component-split: StructuredData ===
-    COMPONENT: JSON-LD 構造化データ
-    ==============================================
-    -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -112,7 +92,7 @@
           "addressRegion": "東京都",
           "postalCode": "100-0001",
           "streetAddress": "丸の内3-8-3 Tokyo Innovation Base",
-          "addressCountry": "JP"
+            "addressCountry": "JP"
         }
       }
     }
@@ -120,20 +100,15 @@
     
     <title>お問い合わせ・無料相談 | ShinAI - 最先端AIソリューション</title>
     
-    <!-- 
-    ==============================================
-    // === component-split: Styles ===
-    COMPONENT: スタイルシート
-    ==============================================
-    -->
+    <!-- スタイルシート -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     
-    <!-- 
-    ==============================================
-    // === component-split: ContactPageStyles ===
-    COMPONENT: お問い合わせページ固有のスタイル
-    ==============================================
-    -->
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="apple-touch-icon" href="assets/images/logo.svg">
+
+    <!-- Page Specific Styles -->
     <style>
         /* アニメーションの追加 */
         @keyframes btnIconBounce {
@@ -168,12 +143,13 @@
             }
         }
 
-        /* ページヒーロー見出し改善 */
+        /* ページヒーロー見出し改善 - 無料相談の視認性向上 */
         .page-hero-title .highlight-accent {
             color: var(--accent);
             font-weight: 700;
             position: relative;
             display: inline-block;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
         
         .page-hero-title .highlight-accent::after {
@@ -182,8 +158,8 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 5px;
-            background: rgba(255, 138, 0, 0.2);
+            height: 6px;
+            background: rgba(255, 138, 0, 0.3);
             z-index: -1;
             border-radius: var(--radius-full);
         }
@@ -317,17 +293,17 @@
         }
         
         .faq-question:hover {
-            color: var(--purple-main);
+            color: var(--primary);
         }
         
         .faq-question i {
-            color: var(--purple-main);
+            color: var(--primary);
             transition: transform 0.3s ease;
         }
         
         .faq-item.active .faq-question {
             border-bottom: none;
-            color: var(--purple-main);
+            color: var(--primary);
         }
         
         .faq-item.active .faq-question i {
@@ -354,11 +330,12 @@
             margin: 0;
         }
         
-        /* チェックボックスのカスタマイズ */
+        /* チェックボックスのカスタマイズ - クリック問題修正 */
         .form-check {
             position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            margin-bottom: 1.2rem;
+            cursor: pointer;
         }
         
         .form-check-input {
@@ -367,6 +344,7 @@
             cursor: pointer;
             height: 0;
             width: 0;
+            z-index: 3;
         }
         
         .form-check-label {
@@ -377,24 +355,26 @@
             font-weight: 500;
             transition: all 0.3s ease;
             line-height: 1.5;
+            display: inline-block;
         }
         
         .form-check-label::before {
             content: '';
             position: absolute;
-            left: -2rem;
+            left: -2.5rem;
             top: 0;
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             border: 2px solid rgba(58, 95, 235, 0.3);
             border-radius: 4px;
             background-color: var(--white);
             transition: all 0.3s ease;
+            z-index: 1;
         }
         
         .form-check-input:checked + .form-check-label::before {
-            background-color: var(--purple-main);
-            border-color: var(--purple-main);
+            background-color: var(--primary);
+            border-color: var(--primary);
         }
         
         .form-check-input:checked + .form-check-label::after {
@@ -402,11 +382,12 @@
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
             position: absolute;
-            left: -1.85rem;
+            left: -2.35rem;
             top: 1px;
             color: var(--white);
             font-size: 15px;
             animation: checkmark 0.3s ease forwards;
+            z-index: 2;
         }
         
         .form-check-input:focus + .form-check-label::before {
@@ -414,7 +395,16 @@
         }
         
         .form-check-label:hover::before {
-            border-color: var(--purple-main);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+        }
+        
+        /* Checkbox group layout */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         /* フォーム入力エラー状態の視覚強化 */
@@ -487,7 +477,7 @@
             transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: var(--purple-main);
+            background: var(--primary);
             animation: formFocusLine 0.3s ease forwards;
         }
         
@@ -578,6 +568,33 @@
             animation: rotateSlowly 60s linear infinite;
         }
         
+        @keyframes floatingUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes floatingDown {
+            0%, 100% {
+                transform: translateY(0) rotate(15deg);
+            }
+            50% {
+                transform: translateY(20px) rotate(20deg);
+            }
+        }
+        
+        @keyframes rotateSlowly {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
         /* ヘッダー下部の装飾ライン */
         .header::after {
             content: '';
@@ -610,24 +627,43 @@
         }
         
         .focus-visible:focus {
-            outline: 2px solid var(--purple-main);
+            outline: 2px solid var(--primary);
             outline-offset: 2px;
         }
         
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
+        /* 強調見出しスタイルの強化 */
+        .heading-highlight-container {
+            display: inline-block;
+            position: relative;
         }
         
-        /* ハイコントラストモード対応 */
-        @media (forced-colors: active) {
-            .btn, .nav-link, .footer-link, .form-check-label::before, .form-check-input:checked + .form-check-label::before {
-                forced-color-adjust: none;
-            }
+        .heading-highlight {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .heading-highlight-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(255, 138, 0, 0.2));
+            z-index: 1;
+            border-radius: 4px;
+        }
+        
+        /* 無料相談の強調表示 - 視認性向上 */
+        .free-consultation-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 138, 0, 0.2));
+            color: var(--accent);
+            font-weight: 700;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent);
+            margin: 0 0.2em;
+            box-shadow: 0 2px 5px rgba(255, 138, 0, 0.1);
         }
         
         /* モバイル対応 */
@@ -666,28 +702,13 @@
     </style>
 </head>
 <body data-current-year="2025">
-    <!-- 
-    ==============================================
-    // === component-split: AccessibilityNav ===
-    COMPONENT: アクセシビリティ向上：スキップナビゲーション
-    ==============================================
-    -->
+    <!-- アクセシビリティ向上：スキップナビゲーション -->
     <a href="#main-content" class="skip-nav focus-visible">メインコンテンツへスキップ</a>
 
-    <!-- 
-    ==============================================
-    // === component-split: TopBanner ===
-    COMPONENT: トップバナー
-    ==============================================
-    -->
+    <!-- トップバナー -->
     <div class="top-banner"></div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Header ===
-    COMPONENT: ヘッダー
-    ==============================================
-    -->
+    <!-- ヘッダー -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -714,12 +735,7 @@
         </div>
     </header>
     
-    <!-- 
-    ==============================================
-    // === component-split: PageHero ===
-    COMPONENT: ページヒーローセクション
-    ==============================================
-    -->
+    <!-- ページヒーローセクション -->
     <section class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
@@ -741,7 +757,7 @@
                 </div>
                 
                 <h1 class="page-hero-title" id="main-content">
-                    <span class="gradient-title">お問い合わせ</span>・<span class="highlight-accent">無料相談</span>
+                    <span class="gradient-title">お問い合わせ</span>・<span class="free-consultation-highlight">無料相談</span>
                 </h1>
                 
                 <p class="page-hero-description">
@@ -756,29 +772,24 @@
         </div>
     </section>
     
-    <!-- 
-    ==============================================
-    // === component-split: MainContent ===
-    COMPONENT: メインコンテンツエリア
-    ==============================================
-    -->
+    <!-- メインコンテンツエリア -->
     <main class="main-content">
         <!-- お問い合わせフォームセクション -->
         <section class="section section-contact" id="contact-form">
             <div class="container">
                 <div class="section-title text-center">
                     <span class="section-tag">Contact Us</span>
-                    <h2 class="heading-lg"><span class="highlight">無料相談</span>・お問い合わせ</h2>
+                    <h2 class="heading-lg">
+                        <div class="heading-highlight-container">
+                            <span class="heading-highlight-bg"></span>
+                            <span class="heading-highlight">無料相談</span>
+                        </div>・お問い合わせ
+                    </h2>
                     <p class="subtitle">最先端AIソリューションの導入について、ご不明点やご相談があればお気軽にお問い合わせください</p>
                 </div>
                 
                 <div class="contact-grid">
-                    <!-- 
-                    ==============================================
-                    // === component-split: ContactInfo ===
-                    COMPONENT: お問い合わせ情報
-                    ==============================================
-                    -->
+                    <!-- お問い合わせ情報 -->
                     <div class="contact-info animate-on-scroll">
                         <div class="contact-info-pattern"></div>
                         <h3 class="contact-title">お問い合わせ先</h3>
@@ -825,12 +836,7 @@
                         </div>
                     </div>
                     
-                    <!-- 
-                    ==============================================
-                    // === component-split: ContactForm ===
-                    COMPONENT: お問い合わせフォーム
-                    ==============================================
-                    -->
+                    <!-- お問い合わせフォーム -->
                     <div class="contact-form animate-on-scroll">
                         <div class="message-success" id="message-success" role="alert" aria-live="polite">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
@@ -936,12 +942,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: MapSection ===
-        COMPONENT: 地図セクション
-        ==============================================
-        -->
+        <!-- 地図セクション -->
         <section class="section section-map">
             <div class="container">
                 <div class="section-title text-center">
@@ -978,12 +979,7 @@
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: FAQSection ===
-        COMPONENT: よくある質問セクション
-        ==============================================
-        -->
+        <!-- よくある質問セクション -->
         <section class="section section-faq">
             <div class="container">
                 <div class="section-title text-center">
@@ -1035,24 +1031,19 @@
                     
                     <div class="faq-item" id="faq5">
                         <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq5-answer">
-                            他社との違いは何ですか？
+                            AIの倫理的な問題にはどう対応していますか？
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq5-answer" role="region" aria-labelledby="faq5">
-                            <p>ShinAIの強みは、「技術偏重ではなく、課題解決を重視したアプローチ」です。最先端技術の導入自体が目的ではなく、お客様の課題解決と成長支援を最優先に考えています。また、「やりっぱなしにしないAI導入」をモットーに、導入後のサポートや社内AI人材の育成まで一貫してサポートする点が特徴です。特に、AIと人間が共存する「人間中心AI設計」に力を入れており、技術だけでなく使う人の視点を大切にしています。</p>
+                            <p>ShinAIでは、AI倫理を重視し、「人間中心のAI」を開発理念としています。バイアスの検出と軽減、プライバシー保護、透明性の確保、公平性の担保などを考慮したAI開発を推進しています。お客様のニーズに合わせて、AI導入における倫理的な観点からのアドバイスも提供しています。</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- 
-        ==============================================
-        // === component-split: CTASection ===
-        COMPONENT: CTAセクション
-        ==============================================
-        -->
-        <section class="section section-cta">
+        <!-- CTAセクション -->
+        <section class="cta-section">
             <div class="cta-bg">
                 <div class="cta-bg-gradient"></div>
                 <div class="cta-bg-pattern"></div>
@@ -1080,24 +1071,14 @@
         </section>
     </main>
     
-    <!-- 
-    ==============================================
-    // === component-split: BottomBanner ===
-    COMPONENT: 下部バナー（ミッションステートメント）
-    ==============================================
-    -->
+    <!-- 下部バナー（ミッションステートメント） -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- 
-    ==============================================
-    // === component-split: Footer ===
-    COMPONENT: フッター
-    ==============================================
-    -->
+    <!-- フッター -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1162,12 +1143,7 @@
         </div>
     </footer>
     
-    <!-- 
-    ==============================================
-    // === component-split: ChatbotComponent ===
-    COMPONENT: AIチャットボット
-    ==============================================
-    -->
+    <!-- AIチャットボット -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1196,22 +1172,12 @@
         </div>
     </div>
     
-    <!-- 
-    ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップに戻るボタン
-    ==============================================
-    -->
+    <!-- トップに戻るボタン -->
     <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </a>
     
-    <!-- 
-    ==============================================
-    // === component-split: JavaScript ===
-    COMPONENT: JavaScript
-    ==============================================
-    -->
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 現在の年を取得してフッターに表示
@@ -1384,6 +1350,33 @@
                     });
                 });
                 
+                // チェックボックスのアクセシビリティと視覚的改善
+                const checkboxes = contactForm.querySelectorAll('.form-check-input');
+                
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        // チェックボックス状態に応じてラベルスタイルを変更
+                        const label = this.nextElementSibling;
+                        if (this.checked) {
+                            label.classList.add('checked');
+                        } else {
+                            label.classList.remove('checked');
+                        }
+                    });
+                    
+                    // キーボードアクセシビリティ
+                    checkbox.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.checked = !this.checked;
+                            
+                            // チェンジイベントを手動で発火
+                            const event = new Event('change');
+                            this.dispatchEvent(event);
+                        }
+                    });
+                });
+                
                 // フォーム送信イベント
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1501,6 +1494,24 @@
                 // reCAPTCHA検証後の処理
                 console.log('reCAPTCHA verified:', token);
             };
+            
+            // ページ読み込み完了時の処理
+            window.addEventListener('load', function() {
+                document.body.classList.add('loaded');
+                
+                // ハッシュリンクの処理
+                if (location.hash) {
+                    const targetElement = document.querySelector(location.hash);
+                    if (targetElement) {
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }, 500);
+                    }
+                }
+            });
         });
     </script>
 </body>
