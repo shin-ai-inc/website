@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- component-split: MetaInformation -->
+    <!-- Meta Information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - AI導入・業務効率化・生産性向上を実現する最先端AIソリューション。チャットボット開発、AI議事録作成、DX推進をサポート。">
@@ -16,7 +16,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="ps:topic" content="AI導入支援, 生成AI活用, 業務効率化, DX推進">
     
-    <!-- component-split: OGPSettings -->
+    <!-- OGP Settings -->
     <meta property="og:title" content="ShinAI - 企業成長を加速する最先端AIソリューション">
     <meta property="og:description" content="最先端のAI技術で企業の課題を解決し、新たな価値を創造。チャットボット開発からDX推進まで。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -29,7 +29,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - 革新的なAIソリューション">
     
-    <!-- component-split: ExternalResources -->
+    <!-- External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     
-    <!-- component-split: StructuredData -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -150,7 +150,7 @@
     }
     </script>
     
-    <title>ShinAI - 最先端AIソリューション | 革新的な企業向けAIサービス</title>
+    <title>ShinAI - 最先端AIソリューション | AI技術で人間らしい時間を取り戻す</title>
     
     <!-- スタイルシート -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -160,41 +160,27 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
 
-    <!-- component-split: PageSpecificStyles -->
+    <!-- Page Specific Styles -->
     <style>
-    /* ヘッダー重なり問題を解消する修正 */
+    /* 革新的なヒーローセクションスタイル */
     .hero {
-        min-height: 650px;
+        min-height: 100vh;
         position: relative;
         display: flex;
         align-items: center;
         overflow: hidden;
-        padding-top: 120px; /* ヘッダー高さを考慮して増加 */
+        padding-top: 100px;
         text-align: center;
-        margin-top: 5px; /* トップバナーの高さを考慮 */
-        z-index: 1; /* 適切なz-index設定 */
+        z-index: 1;
     }
 
-    .hero-content {
-        position: relative;
-        max-width: 800px;
-        margin: 0 auto;
-        z-index: 10; /* z-indexを上げて確実に表示 */
-        animation: fadeInUp 0.8s ease-out;
-    }
-
-    .hero-label {
-        display: inline-block;
-        background: rgba(58, 95, 235, 0.15);
-        padding: 0.5rem 1.5rem;
-        border-radius: 50px;
-        color: var(--primary);
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        letter-spacing: 0.5px;
-        position: relative;
-        overflow: hidden;
-        z-index: 2; /* 上に表示するために追加 */
+    .hero-bg-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
     }
 
     .hero-bg {
@@ -204,11 +190,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: 0; /* 背景は一番下に */
         opacity: 0;
-        transition: opacity 2s ease-in-out, transform 10s ease-in-out;
         transform: scale(1.1);
-        animation: heroImageFade 20s infinite alternate; /* 新しいアニメーション */
+        transition: opacity 2s ease-in-out, transform 10s ease-in-out;
     }
 
     .hero-bg.active {
@@ -216,163 +200,418 @@
         transform: scale(1);
     }
 
-    /* 背景の動きを追加 */
-    @keyframes heroImageFade {
-        0% {
-            transform: scale(1);
-            filter: brightness(1);
-        }
-        50% {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-        100% {
-            transform: scale(1);
-            filter: brightness(1);
-        }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+        z-index: 0;
     }
 
-    /* ヒーロータイトルのスタイル強化 */
+    .hero-content {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        z-index: 10;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .brand-logo {
+        margin-bottom: 1.5rem;
+        transform: scale(1);
+        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .hero-content:hover .brand-logo {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    .brand-icon {
+        width: 90px;
+        height: 90px;
+        filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.25));
+    }
+
+    .hero-label {
+        display: inline-block;
+        background: linear-gradient(120deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
+        padding: 0.6rem 1.8rem;
+        border-radius: 50px;
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 1.8rem;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(58, 95, 235, 0.12);
+    }
+
+    .hero-label::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        animation: shimmer 3s infinite;
+    }
+
     .hero-title {
-        font-size: 3.8rem;
+        font-size: 4.2rem;
         font-weight: 900;
         line-height: 1.2;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
         color: var(--dark);
+        max-width: 100%;
+        position: relative;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-title .highlight {
+        position: relative;
+        display: inline-block;
+        color: var(--primary);
+        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 900;
+    }
+
+    .hero-title .highlight::after {
+        content: '';
+        position: absolute;
+        bottom: 0.1em;
+        left: 0;
+        width: 100%;
+        height: 0.2em;
+        background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+        z-index: -1;
+        border-radius: 5px;
+    }
+
+    .hero-description {
+        font-size: 1.35rem;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
-        position: relative;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.1); /* テキストの視認性向上 */
+        color: rgba(26, 31, 54, 0.9);
     }
 
-    /* ホバー効果の強化 */
+    .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        margin-bottom: 3rem;
+        justify-content: center;
+    }
+
+    .hero-cta .btn {
+        min-width: 200px;
+        border-radius: 50px;
+        padding: 1rem 2rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .hero-cta .btn-primary {
+        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        color: white;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+    }
+
     .hero-cta .btn-primary:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: var(--shadow-button-hover);
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.4);
+    }
+
+    .hero-cta .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: all 0.6s ease;
+        z-index: -1;
+    }
+
+    .hero-cta .btn-primary:hover::before {
+        left: 100%;
+    }
+
+    .hero-cta .btn-consultation {
+        background: white;
+        color: var(--primary);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border: 2px solid var(--primary);
     }
 
     .hero-cta .btn-consultation:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.5);
+        background: var(--primary);
+        color: white;
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.25);
     }
 
-    /* 3つの価値セクションの改善 */
-    .section {
-        padding: 5rem 0;
+    .btn-consultation-message {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 400;
+        margin-top: 0.3rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+
+    .btn-consultation:hover .btn-consultation-message {
+        opacity: 1;
+        color: white;
+    }
+
+    .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        color: var(--primary);
+        font-weight: 600;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid rgba(58, 95, 235, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .btn-download:hover {
+        background: rgba(58, 95, 235, 0.05);
+        border-color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    .btn-icon-bounce i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-icon-bounce:hover i {
+        animation: btnIconBounce 0.8s ease infinite;
+    }
+
+    @keyframes btnIconBounce {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(5px);
+        }
+    }
+
+    .hero-tagline {
+        font-size: 1.25rem;
+        font-style: italic;
+        color: var(--primary);
+        opacity: 0.9;
+        margin-top: 1rem;
+        display: inline-block;
+    }
+
+    .hero-tagline p {
         position: relative;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        display: inline-block;
     }
 
+    .hero-tagline p::before, .hero-tagline p::after {
+        content: '"';
+        color: var(--primary);
+        font-size: 1.8rem;
+        opacity: 0.6;
+    }
+
+    /* 浮遊エレメントアニメーション */
+    .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
+        opacity: 0.5;
+        animation: float 15s infinite alternate ease-in-out;
+    }
+
+    .floating-element:nth-child(1) {
+        width: 100px;
+        height: 100px;
+        top: 15%;
+        left: 10%;
+        animation-duration: 20s;
+    }
+
+    .floating-element:nth-child(2) {
+        width: 150px;
+        height: 150px;
+        top: 60%;
+        left: 15%;
+        animation-delay: 2s;
+        animation-duration: 18s;
+    }
+
+    .floating-element:nth-child(3) {
+        width: 80px;
+        height: 80px;
+        top: 25%;
+        right: 15%;
+        animation-delay: 1s;
+        animation-duration: 22s;
+    }
+
+    .floating-element:nth-child(4) {
+        width: 120px;
+        height: 120px;
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 3s;
+        animation-duration: 25s;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+            transform: translate(30px, 20px) rotate(5deg);
+        }
+        100% {
+            transform: translate(-20px, 40px) rotate(-5deg);
+        }
+    }
+
+    /* 3つの価値セクション改善 */
     .benefits-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem; /* カード間の間隔を増加 */
-        margin-top: 3.5rem;
+        gap: 3rem;
+        margin-top: 4rem;
     }
 
     .benefit-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* シャドウ調整 */
-        padding: 2rem;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        padding: 2.5rem;
         height: 100%;
-        transition: all 0.4s ease;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 1px solid rgba(0, 0, 0, 0.04);
-        display: flex;
-        flex-direction: column;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
     .benefit-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.18);
-        border-color: rgba(58, 95, 235, 0.12);
+        transform: translateY(-15px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.2);
+        border-color: rgba(58, 95, 235, 0.15);
+    }
+
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: 1;
     }
 
     .benefit-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 16px;
+        width: 90px;
+        height: 90px;
+        background: white;
+        color: var(--primary);
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1.5rem;
-        font-size: 2rem;
+        margin: 0 auto 2rem;
+        font-size: 2.2rem;
         position: relative;
-        z-index: var(--z-normal);
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25); /* シャドウ強化 */
-        margin-bottom: 2rem; /* 下部の余白増加 */
+        z-index: 1;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
     }
 
-    /* アイコン別カラー設定 */
+    /* カード別スタイル */
     .benefit-card:nth-child(1) .benefit-icon {
-        background: linear-gradient(135deg, #3A5FEB, #4671FF);
+        color: #3A5FEB;
+        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
     }
 
     .benefit-card:nth-child(2) .benefit-icon {
-        background: linear-gradient(135deg, #00C9A7, #00E6C3);
+        color: #00C9A7;
+        box-shadow: 0 10px 30px rgba(0, 201, 167, 0.2);
     }
 
     .benefit-card:nth-child(3) .benefit-icon {
-        background: linear-gradient(135deg, #FF8A00, #FFA53B);
-    }
-
-    .icon-bg-glow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: var(--primary);
-        border-radius: 16px;
-        filter: blur(10px);
-        opacity: 0.3;
-        z-index: var(--z-back);
-        animation: pulse 3s infinite;
-    }
-
-    /* アイコン別グロー効果 */
-    .benefit-card:nth-child(1) .icon-bg-glow {
-        background: var(--primary);
-    }
-
-    .benefit-card:nth-child(2) .icon-bg-glow {
-        background: var(--secondary);
-    }
-
-    .benefit-card:nth-child(3) .icon-bg-glow {
-        background: var(--accent);
+        color: #FF8A00;
+        box-shadow: 0 10px 30px rgba(255, 138, 0, 0.2);
     }
 
     .benefit-card:hover .benefit-icon {
-        transform: rotate(15deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    .benefit-card:nth-child(1):hover .benefit-icon {
+        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.3);
+    }
+
+    .benefit-card:nth-child(2):hover .benefit-icon {
+        box-shadow: 0 15px 40px rgba(0, 201, 167, 0.3);
+    }
+
+    .benefit-card:nth-child(3):hover .benefit-icon {
+        box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
     }
 
     .benefit-content {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        text-align: center;
     }
 
     .benefit-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         color: var(--dark);
-        text-align: center;
     }
 
     .benefit-content p {
         color: var(--gray);
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        margin-bottom: 1.8rem;
+        font-size: 1.05rem;
     }
 
     .benefit-stats {
@@ -380,12 +619,11 @@
         justify-content: space-around;
         margin: 1.5rem 0;
         background: rgba(58, 95, 235, 0.06);
-        padding: 1.2rem;
-        border-radius: 10px;
+        padding: 1.5rem;
+        border-radius: 15px;
         transition: all 0.3s ease;
     }
 
-    /* カード別統計背景カラー */
     .benefit-card:nth-child(1) .benefit-stats {
         background: rgba(58, 95, 235, 0.06);
     }
@@ -399,7 +637,7 @@
     }
 
     .benefit-card:hover .benefit-stats {
-        background: rgba(58, 95, 235, 0.09);
+        transform: scale(1.05);
     }
 
     .benefit-stat {
@@ -407,108 +645,341 @@
     }
 
     .stat-value {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 2.8rem;
+        font-weight: 800;
         color: var(--primary);
         display: inline-block;
         line-height: 1;
     }
 
-    /* カード別の統計数値カラー */
     .benefit-card:nth-child(1) .stat-value, 
     .benefit-card:nth-child(1) .stat-percent {
-        color: var(--primary);
+        color: #3A5FEB;
     }
 
     .benefit-card:nth-child(2) .stat-value, 
     .benefit-card:nth-child(2) .stat-percent {
-        color: var(--secondary);
+        color: #00C9A7;
     }
 
     .benefit-card:nth-child(3) .stat-value, 
     .benefit-card:nth-child(3) .stat-percent {
-        color: var(--accent);
+        color: #FF8A00;
     }
 
     .stat-percent {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        color: var(--primary);
     }
 
     .stat-label {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: var(--gray);
         font-weight: 500;
-        margin-top: 0.25rem;
+        margin-top: 0.4rem;
         display: block;
     }
 
-    /* レスポンシブ調整 */
+    /* ヘッダー固定化とエフェクト */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+    }
+
+    .header.scrolled {
+        padding: 0.5rem 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--dark);
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover img {
+        transform: rotate(15deg);
+        filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
+    }
+
+    .nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: var(--dark);
+        font-weight: 600;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: width 0.3s ease;
+        border-radius: 50px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--primary);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+
+    .nav-cta {
+        margin-left: 1.5rem;
+    }
+
+    /* CTAセクション改善 */
+    .cta-section {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-container {
+        background: white;
+        border-radius: 30px;
+        padding: 4rem;
+        box-shadow: 0 25px 60px rgba(58, 95, 235, 0.15);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        border: 1px solid rgba(58, 95, 235, 0.1);
+        text-align: center;
+    }
+
+    .cta-bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03), rgba(58, 95, 235, 0.03));
+        background-size: 200% 200%;
+        animation: gradientBG 15s ease infinite;
+        z-index: -1;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .cta-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: 1;
+    }
+
+    .cta-title {
+        margin-bottom: 1.5rem;
+    }
+
+    .cta-title h2 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--dark);
+        line-height: 1.3;
+        background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .cta-description {
+        font-size: 1.2rem;
+        color: var(--gray);
+        max-width: 800px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.8;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-glow {
+        position: relative;
+    }
+
+    .btn-glow::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50px;
+        z-index: -1;
+        animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
+        }
+    }
+
+    /* レスポンシブ対応 */
     @media (max-width: 992px) {
+        .hero-title {
+            font-size: 3.5rem;
+        }
+        
         .benefits-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
         
-        .heading-lg {
-            font-size: 2.2rem;
+        .benefit-card {
+            padding: 2rem;
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        
+        .cta-container {
+            padding: 3rem;
+        }
+        
+        .cta-title h2 {
+            font-size: 2.4rem;
         }
     }
 
     @media (max-width: 768px) {
-        .hero {
-            min-height: 580px;
-            padding-top: 100px;
+        .hero-title {
+            font-size: 2.8rem;
         }
         
-        .hero-title {
-            font-size: 2.5rem;
+        .hero-description {
+            font-size: 1.1rem;
         }
         
         .benefits-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
-    }
-
-    @media (max-width: 576px) {
-        .hero {
-            min-height: 520px;
-            padding-top: 90px;
+        
+        .benefit-stats {
+            flex-direction: column;
+            gap: 1rem;
         }
         
-        .hero-title {
+        .cta-title h2 {
             font-size: 2rem;
         }
         
-        .benefits-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        .benefit-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.7rem;
+        .cta-description {
+            font-size: 1.1rem;
         }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        
+        .hero-cta {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .hero-cta .btn {
+            width: 100%;
+        }
+        
         .benefits-grid {
             grid-template-columns: 1fr;
+        }
+        
+        .cta-container {
+            padding: 2rem;
+        }
+        
+        .cta-title h2 {
+            font-size: 1.8rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .cta-buttons .btn {
+            width: 100%;
         }
     }
     </style>
 </head>
 <body>
-    <!-- component-split: AccessibilityNav -->
+    <!-- Accessibility Navigation -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- component-split: TopBanner -->
+    <!-- Top Banner -->
     <div class="top-banner"></div>
     
-    <!-- component-split: Header -->
+    <!-- Header - 固定化とエフェクト強化 -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -540,14 +1011,21 @@
         </div>
     </header>
     
-    <!-- component-split: ThreeJSParticles -->
+    <!-- Particles Container -->
     <div class="particles-container" id="particles"></div>
-    <!-- モバイル端末向け静的フォールバック -->
     <div class="particles-fallback"></div>
     
     <main id="main-content">
-        <!-- component-split: Hero -->
+        <!-- Hero Section - 革新的なデザイン -->
         <section class="hero">
+            <!-- 浮遊エレメント -->
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            
             <div class="hero-bg-container">
                 <picture>
                     <source srcset="https://images.unsplash.com/photo-1675483052107-bca0ce10114b?auto=format&fit=crop&q=80&w=2000&h=1200&fm=webp" type="image/webp">
@@ -565,15 +1043,15 @@
             <div class="container">
                 <div class="hero-content animate-fadeIn">
                     <div class="brand-logo">
-                        <img src="assets/images/logo.svg" alt="ShinAI Logo" class="brand-icon" width="80" height="80">
+                        <img src="assets/images/logo.svg" alt="ShinAI Logo" class="brand-icon" width="90" height="90">
                     </div>
                     <div class="hero-label animate-fadeIn animate-delay-1">AI導入・業務効率化支援</div>
                     <h1 class="hero-title animate-fadeIn animate-delay-2">
-                        企業成長を加速する<span class="highlight">最先端AI</span>ソリューション
+                        AIの力で<span class="highlight">人間らしい時間</span>を<br>取り戻す
                     </h1>
                     <p class="hero-description animate-fadeIn animate-delay-3">
                         最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。<br>
-                        チャットボット開発から業務効率化まで、包括的なAIサポートを提供します。
+                        人々が大切な人との時間や創造的な仕事に集中できる社会を実現します。
                     </p>
                     
                     <div class="hero-cta animate-fadeIn animate-delay-4">
@@ -592,13 +1070,13 @@
                     </div>
 
                     <div class="hero-tagline animate-fadeIn animate-delay-5">
-                        <p>「真の価値を信じ、次世代のために新たな未来を創る」</p>
+                        <p>真の価値を信じ、次世代のために新たな未来を創る</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- component-split: AboutSection -->
+        <!-- About Section -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -635,7 +1113,7 @@
             </div>
         </section>
         
-        <!-- component-split: BenefitsSection -->
+        <!-- Benefits Section - 3つの価値セクション改善 -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -648,7 +1126,6 @@
                     <!-- 業務効率化 -->
                     <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
-                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-bolt" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -670,7 +1147,6 @@
                     <!-- コスト削減 -->
                     <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
-                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -692,7 +1168,6 @@
                     <!-- データ分析 -->
                     <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
-                            <div class="icon-bg-glow"></div>
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </div>
                         <div class="benefit-content">
@@ -714,7 +1189,7 @@
             </div>
         </section>
         
-        <!-- component-split: ServicesSection -->
+        <!-- Services Section -->
         <section class="section section-bg-light" id="services">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -821,7 +1296,7 @@
             </div>
         </section>
         
-        <!-- component-split: IndustriesSection -->
+        <!-- Industries Section -->
         <section class="section" id="industries-preview">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -980,7 +1455,7 @@
             </div>
         </section>
         
-        <!-- component-split: ValueSection -->
+        <!-- Value Section -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -1021,7 +1496,7 @@
             </div>
         </section>
         
-        <!-- component-split: CTASection -->
+        <!-- CTA Section - 改善 -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -1033,7 +1508,7 @@
                     </div>
                     <div class="cta-content">
                         <div class="cta-title">
-                            <h2>AIによる業務効率化を<br>今すぐ始めませんか？</h2>
+                            <h2>AIによる<span class="text-gradient">業務効率化</span>を<br>今すぐ始めませんか？</h2>
                         </div>
                         <div class="cta-description">
                             <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から。AI導入の第一歩を踏み出しましょう。</p>
@@ -1051,14 +1526,14 @@
         </section>
     </main>
     
-    <!-- component-split: BottomBanner -->
+    <!-- Bottom Banner -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- component-split: Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1120,7 +1595,7 @@
         </div>
     </footer>
     
-    <!-- component-split: ChatbotComponent -->
+    <!-- Chatbot Component -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1149,17 +1624,17 @@
         </div>
     </div>
 
-    <!-- component-split: BackToTop -->
+    <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- component-split: JavaScript -->
+    <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/three-particles.js"></script>
     <script src="assets/js/chatbot.js"></script>
     
-    <!-- component-split: PageSpecificScripts -->
+    <!-- Page Specific Scripts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
@@ -1220,6 +1695,17 @@
         
         // 10秒ごとに画像を切り替え
         const imageInterval = setInterval(rotateHeroImage, 10000);
+        
+        // ヘッダーのスクロール効果
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         
         // Back to Topボタンの表示制御
         const backToTopButton = document.getElementById('back-to-top');
