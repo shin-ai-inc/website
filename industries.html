@@ -13,8 +13,8 @@
     <meta name="keywords" content="AI活用事例, 業界別AI, 福祉AI, 教育AI, 建設AI, 製造業AI, 医療AI, 小売AI, 金融AI, AI導入事例, ビジネスAI, 業務効率化">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
-    <meta name="theme-color" content="#8e33ff">
-    <meta name="msapplication-TileColor" content="#8e33ff">
+    <meta name="theme-color" content="#3A5FEB">
+    <meta name="msapplication-TileColor" content="#3A5FEB">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="twitter:card" content="summary_large_image">
@@ -47,15 +47,15 @@
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     
     <!-- 
     ==============================================
@@ -166,355 +166,6 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
-    
-    <!-- インラインスタイル（修正用） -->
-    <style>
-        /* コントラスト強化と視認性向上のための修正 */
-        .btn-outline {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #8e33ff;
-            font-weight: 700;
-            border: 2px solid #8e33ff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-outline:hover {
-            color: #fff;
-            background-color: #8e33ff;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(142, 51, 255, 0.3);
-        }
-        
-        /* 業界カードの視認性向上 */
-        .industry-card {
-            background: rgba(255, 255, 255, 0.98);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(142, 51, 255, 0.1);
-        }
-        
-        .industry-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(142, 51, 255, 0.15);
-            border-color: rgba(142, 51, 255, 0.3);
-        }
-        
-        .industry-card:hover::before {
-            opacity: 0.98;
-        }
-        
-        .industry-card .industry-title {
-            font-weight: 700;
-            color: #111827;
-        }
-        
-        .industry-card .industry-description {
-            color: #4B5563;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .industry-card .industry-feature {
-            color: #4B5563;
-        }
-        
-        .industry-card .industry-feature i {
-            color: #8e33ff;
-        }
-        
-        .industry-card:hover .industry-title,
-        .industry-card:hover .industry-description,
-        .industry-card:hover .industry-feature {
-            color: white;
-        }
-        
-        .industry-card:hover .industry-feature i {
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* 活用例セクションのスタイル */
-        .use-case {
-            padding: 2.5rem;
-            border-radius: var(--radius-lg);
-            background: var(--white);
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 2.5rem;
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--purple-main);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .use-case:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .use-case::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
-            opacity: 0.05;
-            border-radius: 0 0 0 100%;
-            z-index: 0;
-        }
-        
-        .use-case-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .use-case-icon {
-            width: 70px;
-            height: 70px;
-            min-width: 70px;
-            background: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .use-case:hover .use-case-icon {
-            transform: rotate(15deg);
-        }
-        
-        .use-case-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.3rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-        
-        .use-case-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .use-case-section {
-            margin-bottom: 1.5rem;
-        }
-        
-        .use-case-section h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            color: var(--purple-main);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .use-case-section h4 i {
-            font-size: 1rem;
-        }
-        
-        .use-case-list {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        
-        .use-case-list li {
-            position: relative;
-            padding-left: 1.8rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.5;
-        }
-        
-        .use-case-list li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .use-case-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            background: var(--purple-main);
-            border-radius: 50%;
-        }
-        
-        .benefit-item {
-            background: rgba(142, 51, 255, 0.05);
-            padding: 1.2rem;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .benefit-item:hover {
-            transform: translateX(5px);
-            background: rgba(142, 51, 255, 0.08);
-        }
-        
-        .benefit-icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            background: var(--purple-main);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-        
-        .benefit-content h4 {
-            margin: 0 0 0.3rem;
-            font-size: 1.1rem;
-        }
-        
-        .benefit-content p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: var(--gray);
-        }
-        
-        /* 業界別ナビゲーションタブ */
-        .industry-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 3rem;
-        }
-        
-        .industry-tab {
-            padding: 0.8rem 1.5rem;
-            background: var(--white);
-            border: 1px solid rgba(142, 51, 255, 0.2);
-            border-radius: var(--radius-full);
-            color: var(--dark);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .industry-tab:hover, .industry-tab.active {
-            background: var(--purple-main);
-            color: var(--white);
-            border-color: var(--purple-main);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(142, 51, 255, 0.2);
-        }
-        
-        /* 実装手順ステップ */
-        .implementation-steps {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 3rem;
-        }
-        
-        .implementation-steps::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background: rgba(142, 51, 255, 0.2);
-        }
-        
-        .step {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .step:last-child {
-            margin-bottom: 0;
-        }
-        
-        .step::before {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: white;
-            border: 2px solid var(--purple-main);
-            border-radius: 50%;
-            left: -40px;
-            top: 0;
-            z-index: 1;
-            box-shadow: 0 0 0 4px rgba(142, 51, 255, 0.1);
-        }
-        
-        .step-number {
-            position: absolute;
-            left: -40px;
-            top: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--purple-main);
-            font-weight: 700;
-            font-size: 0.9rem;
-            z-index: 2;
-        }
-        
-        .step-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .step-description {
-            font-size: 0.95rem;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-        
-        /* レスポンシブ調整 */
-        @media (max-width: 767px) {
-            .use-case {
-                padding: 1.5rem;
-            }
-            
-            .use-case-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .use-case-icon {
-                margin: 0 auto;
-            }
-            
-            .implementation-steps {
-                padding-left: 30px;
-            }
-            
-            .step::before, .step-number {
-                left: -30px;
-                width: 24px;
-                height: 24px;
-            }
-            
-            .step-number {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- 
@@ -543,7 +194,7 @@
         <div class="container">
             <div class="header-inner">
                 <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
-                    <img src="assets/images/logo.svg" alt="" aria-hidden="true" width="40" height="40">
+                    <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
                     <span class="en-text">ShinAI</span>
                 </a>
                 
@@ -554,7 +205,12 @@
                         <li><a href="services.html" class="nav-link">サービス</a></li>
                         <li><a href="industries.html" class="nav-link active" aria-current="page">業界別活用</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
-                        <li class="nav-cta"><a href="contact.html" class="btn btn-primary">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+                        <li class="nav-cta">
+                            <a href="contact.html" class="btn btn-consultation">
+                                <span>無料相談</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 
@@ -567,19 +223,27 @@
     
     <!-- 
     ==============================================
-    // === component-split: PageHeader ===
+    // === component-split: PageHero ===
     COMPONENT: ページヘッダー
     ==============================================
     -->
-    <div class="page-header">
+    <div class="page-hero">
+        <div class="page-hero-bg-container">
+            <div class="page-hero-bg-gradient"></div>
+            <div class="page-hero-bg-pattern"></div>
+        </div>
         <div class="container">
-            <div class="page-header-inner">
+            <div class="page-hero-content">
                 <div class="breadcrumb" aria-label="パンくずリスト">
                     <a href="index.html" class="breadcrumb-item">ホーム</a>
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-current">業界別活用</span>
                 </div>
-                <h1>業界別AI活用ガイド</h1>
+                <h1 class="page-hero-title">業界別AI活用ガイド</h1>
+                <p class="page-hero-description">
+                    AIが持つ可能性を最大限に引き出し、あらゆる業界の課題解決と成長を支援する<br>
+                    ShinAIの業界特化型AIソリューションをご紹介します
+                </p>
             </div>
         </div>
     </div>
@@ -587,29 +251,29 @@
     <main id="main-content">
         <!-- 
         ==============================================
-        // === component-split: IndustriesIntro ===
+        // === component-split: IntroSection ===
         COMPONENT: 業界別活用紹介セクション
         ==============================================
         -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">業界別AI活用</span>
                     <h2 class="heading-lg">各業界の課題に合わせた<span class="highlight">AIソリューション</span></h2>
                     <p class="section-description">AI技術は業界特有の課題を解決し、新たな価値を創造します</p>
                 </div>
                 
-                <div style="max-width: 900px; margin: 0 auto 3rem; text-align: center; line-height: 1.8; font-size: 1.1rem;">
+                <div class="section-content max-width-800 text-center animate-on-scroll">
                     <p>AI技術は、あらゆる業界に革新をもたらす可能性を秘めています。しかし、業界ごとに抱える課題や規制、ワークフローは大きく異なります。</p>
-                    <p>このページでは、各業界でAIがどのように活用され、どのような価値を創出できるのかを詳しくご紹介します。<br>
-                    AIが持つ可能性を最大限に引き出し、ビジネスの成長と社会課題の解決に貢献しましょう。</p>
+                    <p>このページでは、各業界でAIがどのように活用され、どのような価値を創出できるのかを詳しくご紹介します。</p>
+                    <p class="text-highlight mb-5">AIが持つ可能性を最大限に引き出し、ビジネスの成長と社会課題の解決に貢献しましょう。</p>
                 </div>
                 
                 <!-- AI導入のメリット -->
-                <div class="glass-card" style="margin-bottom: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(142, 51, 255, 0.05), rgba(255, 255, 255, 0.9), rgba(142, 51, 255, 0.05));">
-                    <h3 class="heading-md text-center" style="margin-bottom: 2rem;">AI導入がもたらす<span class="highlight">主な3つのメリット</span></h3>
+                <div class="glass-card benefit-overview animate-on-scroll">
+                    <h3 class="heading-md text-center mb-4">AI導入がもたらす<span class="highlight">主な3つのメリット</span></h3>
                     
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div class="benefit-overview-grid">
                         <div class="benefit-item">
                             <div class="benefit-icon">
                                 <i class="fas fa-bolt"></i>
@@ -641,9 +305,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: IndustryNavigation ===
+        COMPONENT: 業界ナビゲーション
+        ==============================================
+        -->
+        <section class="section section-bg-light">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">対応業界</span>
+                    <h2 class="heading-lg">ShinAIが支援する<span class="highlight">各業界</span></h2>
+                    <p class="section-description">業界ごとの特性を理解し、最適なAIソリューションを提供します</p>
+                </div>
                 
                 <!-- 業界ナビゲーション -->
-                <div class="industry-tabs" role="tablist">
+                <div class="industry-tabs animate-on-scroll" role="tablist">
                     <a href="#welfare" class="industry-tab" role="tab">福祉・介護</a>
                     <a href="#education" class="industry-tab" role="tab">教育・研修</a>
                     <a href="#construction" class="industry-tab" role="tab">建設業</a>
@@ -654,7 +334,7 @@
                 </div>
                 
                 <!-- 業界カードグリッド -->
-                <div class="industries-grid">
+                <div class="industries-grid animate-on-scroll">
                     <!-- 福祉・介護 -->
                     <div class="industry-card" id="welfare">
                         <div class="industry-header">
@@ -682,6 +362,9 @@
                                 異常検知・予測システム：事故予防と早期対応
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#welfare-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 教育・研修 -->
@@ -711,6 +394,9 @@
                                 教材作成支援：カリキュラム設計と教材開発の効率化
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#education-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 建設業 -->
@@ -740,6 +426,9 @@
                                 技術伝承支援：熟練技術者のノウハウ継承
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#construction-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 製造業 -->
@@ -769,6 +458,9 @@
                                 技術文書管理：製造ノウハウのデジタル化と活用
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#manufacturing-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 医療・ヘルスケア -->
@@ -798,6 +490,9 @@
                                 医療研究支援：論文分析と仮説生成
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#healthcare-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 小売・EC -->
@@ -827,6 +522,9 @@
                                 価格最適化：競合分析に基づく価格戦略
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#retail-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                     
                     <!-- 金融・保険 -->
@@ -856,6 +554,9 @@
                                 保険金査定自動化：迅速かつ正確な支払い判断
                             </li>
                         </ul>
+                        <div class="industry-footer">
+                            <a href="#finance-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -863,20 +564,20 @@
         
         <!-- 
         ==============================================
-        // === component-split: UseCase ===
-        COMPONENT: 活用例セクション
+        // === component-split: UseCases ===
+        COMPONENT: 活用事例セクション
         ==============================================
         -->
-        <section class="section section-bg-light">
+        <section class="section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">AI活用例</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
                 </div>
                 
                 <!-- 福祉・介護の活用例 -->
-                <div class="use-case" id="welfare-use-case">
+                <div class="use-case animate-on-scroll" id="welfare-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
                             <i class="fas fa-hand-holding-heart"></i>
@@ -920,7 +621,7 @@
                 </div>
                 
                 <!-- 製造業の活用例 -->
-                <div class="use-case" id="manufacturing-use-case">
+                <div class="use-case animate-on-scroll" id="manufacturing-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
                             <i class="fas fa-industry"></i>
@@ -964,7 +665,7 @@
                 </div>
                 
                 <!-- 教育・研修の活用例 -->
-                <div class="use-case" id="education-use-case">
+                <div class="use-case animate-on-scroll" id="education-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
                             <i class="fas fa-graduation-cap"></i>
@@ -1015,81 +716,110 @@
         COMPONENT: AI導入プロセスセクション
         ==============================================
         -->
-        <section class="section">
+        <section class="section section-bg-light">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">AI導入ステップ</span>
                     <h2 class="heading-lg">AI導入の<span class="highlight">5つのステップ</span></h2>
                     <p class="section-description">成功するAI導入のための体系的なアプローチをご紹介します</p>
                 </div>
                 
-                <div class="glass-card" style="padding: 3rem; margin-bottom: 3rem;">
-                    <div class="implementation-steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
-                            <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。</p>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <h4 class="step-title">PoC（実証実験）の実施</h4>
-                            <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。</p>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
-                            <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含みます。</p>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <h4 class="step-title">組織への展開と変革管理</h4>
-                            <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。</p>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">5</div>
-                            <h4 class="step-title">継続的な改善と内製化支援</h4>
-                            <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。</p>
-                        </div>
+                <div class="implementation-steps animate-on-scroll">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
+                        <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4 class="step-title">PoC（実証実験）の実施</h4>
+                        <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
+                        <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含みます。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4 class="step-title">組織への展開と変革管理</h4>
+                        <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <h4 class="step-title">継続的な改善と内製化支援</h4>
+                        <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。</p>
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: よくある質問セクション
+        ==============================================
+        -->
+        <section class="section section-faq">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">よくある質問</span>
+                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
+                    <p class="section-description">AI導入を検討する際によくいただく質問にお答えします</p>
+                </div>
                 
-                <!-- FAQ セクション -->
-                <div style="max-width: 800px; margin: 0 auto;">
-                    <h3 class="heading-md text-center" style="margin-bottom: 2rem;">よくある質問</h3>
+                <div class="faq-container animate-on-scroll">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの導入は中小企業でも可能ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。</p>
+                        </div>
+                    </div>
                     
-                    <div class="accordion" id="faq-accordion">
-                        <div class="glass-card" style="margin-bottom: 1rem; padding: 0; overflow: hidden;">
-                            <div class="accordion-header" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                                <h4 style="margin: 0; font-size: 1.1rem;">AIの導入は中小企業でも可能ですか？</h4>
-                                <i class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
-                            </div>
-                            <div class="accordion-body" style="padding: 0 1.5rem 1.5rem; display: none;">
-                                <p style="margin: 0; color: var(--gray);">はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。</p>
-                            </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI導入にはどのくらいの期間がかかりますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        
-                        <div class="glass-card" style="margin-bottom: 1rem; padding: 0; overflow: hidden;">
-                            <div class="accordion-header" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                                <h4 style="margin: 0; font-size: 1.1rem;">AI導入にはどのくらいの期間がかかりますか？</h4>
-                                <i class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
-                            </div>
-                            <div class="accordion-body" style="padding: 0 1.5rem 1.5rem; display: none;">
-                                <p style="margin: 0; color: var(--gray);">導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。事前の要件定義やデータ準備の段階が重要です。</p>
-                            </div>
+                        <div class="faq-answer">
+                            <p>導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。事前の要件定義やデータ準備の段階が重要です。</p>
                         </div>
-                        
-                        <div class="glass-card" style="margin-bottom: 1rem; padding: 0; overflow: hidden;">
-                            <div class="accordion-header" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                                <h4 style="margin: 0; font-size: 1.1rem;">AIを導入する際の一般的なコストはどれくらいですか？</h4>
-                                <i class="fas fa-chevron-down" style="transition: transform 0.3s ease;"></i>
-                            </div>
-                            <div class="accordion-body" style="padding: 0 1.5rem 1.5rem; display: none;">
-                                <p style="margin: 0; color: var(--gray);">AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。まずは小規模な実証実験（PoC）から始めることをおすすめします。</p>
-                            </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入する際の一般的なコストはどれくらいですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。まずは小規模な実証実験（PoC）から始めることをおすすめします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI導入に必要なデータ量はどのくらいですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>必要なデータ量はAIモデルの種類や用途、求める精度によって異なります。最近の大規模言語モデル（LLM）などは事前学習済みのモデルを活用することで、少ないデータでも高いパフォーマンスを実現できるようになっています。データが少ない場合でも、業界知識と組み合わせたプロンプトエンジニアリングやファインチューニングによって効果的なソリューションを構築できます。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの倫理的な問題にはどう対応していますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>ShinAIでは、AI倫理を重視し、「人間中心のAI」を開発理念としています。バイアスの検出と軽減、プライバシー保護、透明性の確保、公平性の担保などを考慮したAI開発を行っています。また、導入企業向けにAI倫理ガイドラインの作成支援やAI倫理委員会の設置サポートも行っており、持続可能で信頼性の高いAI活用を推進しています。</p>
                         </div>
                     </div>
                 </div>
@@ -1102,17 +832,30 @@
         COMPONENT: 業界別コンサルティングCTA
         ==============================================
         -->
-        <section class="section section-bg-light">
+        <section class="cta-section">
             <div class="container">
-                <div class="glass-card" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(142, 51, 255, 0.05), rgba(66, 100, 223, 0.05));">
-                    <h2 class="heading-lg">貴社の業界に最適な<span class="highlight">AIソリューション</span>をご提案します</h2>
-                    <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
-                        AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
-                        ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。
-                    </p>
-                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="contact.html" class="btn btn-primary btn-lg btn-glow">無料相談する <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        <a href="services.html" class="btn btn-outline btn-lg">サービス詳細を見る <i class="fas fa-file-alt" aria-hidden="true"></i></a>
+                <div class="cta-container animate-on-scroll">
+                    <div class="cta-bg-animation"></div>
+                    <div class="cta-shapes">
+                        <div class="cta-shape-1"></div>
+                        <div class="cta-shape-2"></div>
+                        <div class="cta-shape-3"></div>
+                    </div>
+                    <div class="cta-content">
+                        <div class="cta-title">
+                            <h2>貴社の業界に最適な<span class="text-gradient">AIソリューション</span>をご提案します</h2>
+                        </div>
+                        <div class="cta-description">
+                            <p>AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
+                            ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。</p>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
+                                <span>無料相談する</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                            <a href="services.html" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1126,7 +869,9 @@
     ==============================================
     -->
     <div class="bottom-banner">
-        「真の価値を信じ、次世代のために新たな未来を創る。」
+        <div class="bottom-banner-content">
+            「真の価値を信じ、次世代のために新たな未来を創る。」
+        </div>
     </div>
     
     <!-- 
@@ -1140,7 +885,7 @@
             <div class="footer-grid">
                 <div>
                     <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="" aria-hidden="true" width="40" height="40">
+                        <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
                         <span class="en-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
@@ -1236,27 +981,36 @@
     COMPONENT: トップへ戻るボタン
     ==============================================
     -->
-    <div class="back-to-top" id="back-to-top" aria-label="トップへ戻る">
+    <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </div>
+    </button>
     
     <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- FAQアコーディオン用JavaScript -->
     <script>
-        // アコーディオン機能の実装
         document.addEventListener('DOMContentLoaded', function() {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            // カレントイヤーの更新
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // アコーディオン機能の実装
+            const accordionHeaders = document.querySelectorAll('.faq-question');
             
             accordionHeaders.forEach(header => {
                 header.addEventListener('click', function() {
-                    const body = this.nextElementSibling;
-                    const icon = this.querySelector('.fa-chevron-down');
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
                     
-                    if (body.style.display === 'block') {
-                        body.style.display = 'none';
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        body.style.display = 'block';
-                        icon.style.transform = 'rotate(180deg)';
+                    // すべてのアイテムを閉じる
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // クリックされたアイテムが閉じていた場合は開く
+                    if (!isActive) {
+                        faqItem.classList.add('active');
                     }
                 });
             });
@@ -1286,9 +1040,43 @@
                     }
                 });
             });
+            
+            // スクロールアニメーション
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Back to Topボタンの表示制御
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/chatbot.js"></script>
 </body>
 </html>
