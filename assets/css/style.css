@@ -1,5 +1,3180 @@
 /* 
 ==============================================
+// === component-split: Variables ===
+COMPONENT: 変数定義 - UX向上のための配色・間隔調整版
+==============================================
+*/
+:root {
+    /* カラーパレット - ShinAIブランドカラーと調和 */
+    --primary: #3A5FEB;     /* メインカラー - 鮮やかなブルー */
+    --primary-light: #4671FF;   /* 明るい色 - ホバー状態など */
+    --secondary: #00C9A7;        /* セカンダリ - アクセントに */
+    --secondary-light: #00E6C3;      /* 明るいセカンダリ - ポイントカラー */
+    --accent: #FF8A00;          /* アクセント - 注目させたい要素 */
+    --dark: #1A1F36;            /* ダークカラー - ベーステキスト */
+    --gray: #5E6C84;            /* グレー - サブテキスト */
+    --light-gray: #F9FAFC;      /* 薄いグレー - 背景など */
+    --white: #FFFFFF;           /* 白 - 基本背景 */
+    --error: #FF3B3B;           /* エラー表示用 */
+    --success: #00C48C;         /* 成功表示用 */
+    --purple-main: #8e33ff;     /* 紫 - アクセント要素用 */
+    --blue-mid: #4264df;        /* 中間ブルー - グラデーション用 */
+    
+    /* グラデーション - 魅力的な効果 */
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-hover: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+    --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+    --gradient-light: linear-gradient(135deg, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
+    --gradient-purple: linear-gradient(135deg, var(--purple-main), var(--blue-mid));
+    
+    /* フォント */
+    --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-en: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* エフェクト - 視覚的な深みを追加 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 15px rgba(58, 95, 235, 0.3);
+    --shadow-button: 0 5px 15px rgba(58, 95, 235, 0.25);
+    --shadow-button-hover: 0 8px 20px rgba(58, 95, 235, 0.35);
+    --transition: all 0.3s ease;
+    --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* レイアウト */
+    --container: 1280px;
+    --radius-sm: 4px;
+    --radius: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    
+    /* Z-index管理 */
+    --z-back: -1;
+    --z-normal: 1;
+    --z-header: 100;
+    --z-dropdown: 200;
+    --z-tooltip: 300;
+    --z-fixed: 400;
+    --z-modal: 500;
+    --z-top: 1000;
+}
+
+/* 
+==============================================
+// === component-split: Animations ===
+COMPONENT: 洗練されたアニメーション
+==============================================
+*/
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.7;
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(58, 95, 235, 0.3), 0 0 15px rgba(58, 95, 235, 0);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(58, 95, 235, 0.6), 0 0 30px rgba(58, 95, 235, 0.3);
+    }
+}
+
+@keyframes typingDot {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollAnim {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatingUp {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes floatingDown {
+    0%, 100% {
+        transform: translateY(0) rotate(15deg);
+    }
+    50% {
+        transform: translateY(15px) rotate(15deg);
+    }
+}
+
+@keyframes rotateSlowly {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes btnIconBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(58, 95, 235, 0);
+    }
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes formFocusLine {
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(30px, 20px) rotate(5deg);
+    }
+    100% {
+        transform: translate(-20px, 40px) rotate(-5deg);
+    }
+}
+
+/* 
+==============================================
+// === component-split: Reset ===
+COMPONENT: リセット & スタイル原則
+==============================================
+*/
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-jp);
+    color: var(--dark);
+    background-color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+body.loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+body.loaded .page-intro .brand-logo {
+    animation: fadeInUp 1.5s ease forwards;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+
+/* キーボード操作のフォーカス表示 - アクセシビリティ向上 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.3);
+}
+
+/* スキップナビゲーション - アクセシビリティ向上 */
+.skip-nav {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: var(--white);
+    padding: 10px;
+    z-index: var(--z-top);
+    transition: top 0.3s;
+}
+
+.skip-nav:focus {
+    top: 0;
+}
+
+/* 
+==============================================
+// === component-split: LayoutUtilities ===
+COMPONENT: レイアウトユーティリティ（強化版）
+==============================================
+*/
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.shimmer-text {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2rem; }
+.mt-6 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2rem; }
+.mb-6 { margin-bottom: 3rem; }
+
+.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
+.my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+.my-5 { margin-top: 2rem; margin-bottom: 2rem; }
+.my-6 { margin-top: 3rem; margin-bottom: 3rem; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 2rem; }
+.p-6 { padding: 3rem; }
+
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-5 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-6 { padding-top: 3rem; padding-bottom: 3rem; }
+
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-3 { padding-left: 1rem; padding-right: 1rem; }
+.px-4 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-5 { padding-left: 2rem; padding-right: 2rem; }
+.px-6 { padding-left: 3rem; padding-right: 3rem; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.mw-full { max-width: 100%; }
+
+.d-block { display: block; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+.d-grid { display: grid; }
+.d-none { display: none; }
+
+.flex-row { flex-direction: row; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-1 { flex: 1; }
+.flex-grow-1 { flex-grow: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+.gap-4 { gap: 1.5rem; }
+.gap-5 { gap: 2rem; }
+.gap-6 { gap: 3rem; }
+
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-fixed { position: fixed; }
+
+/* 
+==============================================
+// === component-split: Banner ===
+COMPONENT: バナーコンポーネント
+==============================================
+*/
+.top-banner {
+    background: var(--gradient-primary);
+    height: 5px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: var(--z-fixed);
+}
+
+.bottom-banner {
+    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
+    padding: 2rem 0;
+    color: var(--white);
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-family: var(--font-jp);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.bottom-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
+    z-index: var(--z-back);
+}
+
+.bottom-banner-content {
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+/* 
+==============================================
+// === component-split: Typography ===
+COMPONENT: タイポグラフィ - 読みやすさと表現力を強化
+==============================================
+*/
+.heading-xl {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    font-family: var(--font-jp);
+}
+
+.heading-lg {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    font-family: var(--font-jp);
+}
+
+.heading-md {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    font-family: var(--font-jp);
+}
+
+.heading-sm {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    font-family: var(--font-jp);
+}
+
+.subtitle {
+    font-size: 1.35rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: var(--font-jp);
+}
+
+.en-text {
+    font-family: var(--font-en);
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.section-subtitle {
+    display: inline-block;
+    background: rgba(58, 95, 235, 0.12);
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.section-description {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--gray);
+}
+
+.highlight {
+    color: var(--primary);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(58, 95, 235, 0.15);
+    z-index: var(--z-back);
+    border-radius: var(--radius-full);
+}
+
+.highlight-accent {
+    color: var(--accent);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight-accent::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 138, 0, 0.2);
+    z-index: var(--z-back);
+    border-radius: var(--radius-full);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* 
+==============================================
+// === component-split: Buttons ===
+COMPONENT: ボタン - UX改善とクリック率向上
+==============================================
+*/
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+    font-family: var(--font-jp);
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+    z-index: var(--z-normal);
+    min-height: 48px; /* タップ領域拡大 */
+    border: none; /* ボーダーを一貫して除去 */
+    text-align: center;
+}
+
+.btn-lg {
+    padding: 1.1rem 2.2rem;
+    font-size: 1.1rem;
+}
+
+.btn-xl {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    min-width: 250px;
+}
+
+/* プライマリーボタン - メインCTA用 */
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-button);
+    font-weight: 700;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.7s ease;
+    z-index: var(--z-back);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-button-hover);
+    color: var(--white); /* コントラストを維持 */
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* アウトラインボタン - セカンダリーCTA用 */
+.btn-outline {
+    background: rgba(255, 255, 255, 0.95); /* 背景色を明るく */
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
+    font-weight: 600;
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
+}
+
+/* ダウンロードボタン */
+.btn-download {
+    background: var(--light-gray);
+    color: var(--dark);
+    border: 2px solid var(--light-gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.btn-download:hover {
+    background: var(--white);
+    border-color: var(--gray);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    color: var(--primary);
+}
+
+.btn-download i {
+    color: var(--primary);
+}
+
+/* アイコン付きボタン - バウンス効果 */
+.btn-icon-bounce {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: var(--z-normal);
+}
+
+.btn-icon-bounce span {
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.btn-icon-bounce i {
+    position: relative;
+    z-index: var(--z-normal);
+    transition: transform 0.3s ease;
+}
+
+.btn-icon-bounce:hover i,
+.btn-icon-bounce:focus i {
+    animation: btnIconBounce 0.8s ease infinite;
+}
+
+.btn-icon-bounce::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.7s ease;
+    z-index: var(--z-back);
+}
+
+.btn-icon-bounce:hover,
+.btn-icon-bounce:focus {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(58, 95, 235, 0.35);
+}
+
+.btn-icon-bounce:hover::before,
+.btn-icon-bounce:focus::before {
+    left: 100%;
+}
+
+.btn-icon-bounce:active {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* グロー効果付きボタン - 注目効果 */
+.btn-glow {
+    position: relative;
+}
+
+.btn-glow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    z-index: var(--z-back);
+    animation: pulseGlow 2s infinite;
+}
+
+.btn-cta {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+    box-shadow: var(--shadow-button);
+}
+
+.btn-cta-white {
+    background: var(--white);
+    color: var(--primary);
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-main-btn {
+    position: relative;
+    overflow: visible;
+}
+
+.cta-main-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    z-index: var(--z-back);
+    animation: pulseGlow 2s infinite;
+}
+
+/* 無料相談ボタン専用のデザイン強化 */
+.btn-consultation {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: var(--shadow-button);
+    position: relative;
+    overflow: hidden;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    min-width: 220px;
+}
+
+.btn-consultation:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(58, 95, 235, 0.4);
+    color: var(--white); /* コントラスト維持 */
+}
+
+.btn-consultation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.7s ease;
+    z-index: var(--z-back);
+}
+
+.btn-consultation:hover::before {
+    left: 100%;
+}
+
+.btn-consultation-message {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+    transition: var(--transition);
+}
+
+.btn-consultation:hover .btn-consultation-message {
+    opacity: 1;
+}
+
+/* アイコンボタン - ソーシャルリンク等 */
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(58, 95, 235, 0.1);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 2px 6px rgba(58, 95, 235, 0.15);
+}
+
+.btn-icon:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.25);
+}
+
+/* 
+==============================================
+// === component-split: Header ===
+COMPONENT: ヘッダー - 視認性と操作性向上
+==============================================
+*/
+.header {
+    position: fixed;
+    top: 5px; /* トップバナーの高さ分下げる */
+    left: 0;
+    width: 100%;
+    z-index: var(--z-header);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, rgba(58, 95, 235, 0), rgba(58, 95, 235, 0.5), rgba(0, 201, 167, 0.5), rgba(0, 201, 167, 0));
+    z-index: var(--z-normal);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.header.scrolled {
+    box-shadow: var(--shadow);
+}
+
+.header.scrolled::after {
+    opacity: 1;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--dark);
+    font-family: var(--font-en);
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
+    transition: all 0.3s ease;
+}
+
+.logo:hover img {
+    transform: rotate(15deg);
+    filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--dark);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    font-family: var(--font-jp);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+    border-radius: var(--radius-full);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-cta {
+    margin-left: 1.5rem;
+}
+
+/* ハンバーガーメニュー - モバイル用 */
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--dark);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(58, 95, 235, 0.1);
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: rgba(58, 95, 235, 0.2);
+    color: var(--primary);
+}
+
+.menu-toggle.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.page-header {
+    padding-top: 120px; /* ヘッダーの高さを考慮 */
+    padding-bottom: 60px;
+    background: var(--gradient-light);
+    position: relative;
+}
+
+.page-header-inner {
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+    color: var(--gray);
+}
+
+.breadcrumb-separator {
+    margin: 0 0.5rem;
+    color: var(--gray);
+}
+
+.breadcrumb-current {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* 
+==============================================
+// === component-split: ParticlesContainer ===
+COMPONENT: 背景エフェクト
+==============================================
+*/
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-back);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.particles-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-back);
+}
+
+.particles-fallback {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
+    z-index: var(--z-back);
+    opacity: 0.5;
+}
+
+/* 
+==============================================
+// === component-split: Hero ===
+COMPONENT: ヒーロー - 印象的なファーストビュー
+==============================================
+*/
+.hero {
+    min-height: 650px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 80px; /* ヘッダー重なり防止 */
+    text-align: center; /* 中央揃え */
+}
+
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-back);
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: var(--z-back);
+    opacity: 0;
+    transition: opacity 2s ease-in-out, transform 10s ease-in-out;
+    transform: scale(1.1);
+}
+
+.hero-bg.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
+    z-index: var(--z-back);
+}
+
+.hero-content {
+    position: relative;
+    max-width: 800px; /* 幅を広げて中央揃えに対応 */
+    margin: 0 auto; /* 中央揃え */
+    z-index: var(--z-normal);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-label {
+    display: inline-block;
+    background: linear-gradient(120deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
+    padding: 0.6rem 1.8rem;
+    border-radius: 50px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(58, 95, 235, 0.12);
+}
+
+.hero-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.hero-title {
+    font-size: 4.2rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+    color: var(--dark);
+    max-width: 100%;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-title .highlight {
+    position: relative;
+    display: inline-block;
+    color: var(--primary);
+    background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+}
+
+.hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1em;
+    left: 0;
+    width: 100%;
+    height: 0.2em;
+    background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.hero-description {
+    font-size: 1.35rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 800px;
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
+    color: rgba(26, 31, 54, 0.9);
+}
+
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+    justify-content: center; /* 中央揃え */
+}
+
+.hero-cta .btn {
+    min-width: 200px;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-cta .btn-primary {
+    background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+    color: white;
+    box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+}
+
+.hero-cta .btn-primary:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(58, 95, 235, 0.4);
+}
+
+.hero-cta .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+
+.hero-cta .btn-primary:hover::before {
+    left: 100%;
+}
+
+.hero-cta .btn-consultation {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--primary);
+}
+
+.hero-cta .btn-consultation:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(58, 95, 235, 0.25);
+}
+
+.hero-tagline {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--primary);
+    opacity: 0.9;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.hero-tagline p {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-tagline p::before, .hero-tagline p::after {
+    content: '"';
+    color: var(--primary);
+    font-size: 1.8rem;
+    opacity: 0.6;
+}
+
+/* 浮遊エレメントアニメーション */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
+    opacity: 0.5;
+    animation: float 15s infinite alternate ease-in-out;
+}
+
+.floating-element:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    top: 15%;
+    left: 10%;
+    animation-duration: 20s;
+}
+
+.floating-element:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    left: 15%;
+    animation-delay: 2s;
+    animation-duration: 18s;
+}
+
+.floating-element:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    top: 25%;
+    right: 15%;
+    animation-delay: 1s;
+    animation-duration: 22s;
+}
+
+.floating-element:nth-child(4) {
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 3s;
+    animation-duration: 25s;
+}
+
+.brand-logo {
+    margin-bottom: 1.5rem;
+    transform: scale(1);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hero-content:hover .brand-logo {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.brand-icon {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.25));
+}
+
+/* 
+==============================================
+// === component-split: Section ===
+COMPONENT: セクション共通 - リズム感のあるレイアウト
+==============================================
+*/
+.section {
+    padding: 5rem 0;
+    position: relative;
+}
+
+.section-bg-light {
+    background-color: rgba(58, 95, 235, 0.02);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-footer {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+/* 
+==============================================
+// === component-split: AboutSection ===
+COMPONENT: 会社概要セクション - 信頼性の演出
+==============================================
+*/
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.about-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(58, 95, 235, 0.1), transparent);
+    z-index: var(--z-normal);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.about-image:hover::before {
+    opacity: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.8s ease;
+}
+
+.about-grid:hover .about-image img {
+    transform: scale(1.05);
+}
+
+.about-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    position: relative;
+    display: inline-block;
+}
+
+.about-content h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.about-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: var(--gray);
+}
+
+.about-message {
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    background: rgba(58, 95, 235, 0.05);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 1.1rem;
+    color: var(--dark);
+    line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-message::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: var(--primary);
+    opacity: 0.05;
+    border-radius: 50%;
+    z-index: var(--z-back);
+}
+
+.about-buttons {
+    margin-top: 2rem;
+}
+
+/* 
+==============================================
+// === component-split: BenefitsSection ===
+COMPONENT: 導入メリットセクション - 説得力のある数値表現
+==============================================
+*/
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.benefit-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    height: 100%;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(58, 95, 235, 0.2);
+    border-color: rgba(58, 95, 235, 0.15);
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 1;
+}
+
+.benefit-icon {
+    width: 90px;
+    height: 90px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2.2rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+}
+
+/* カード別スタイル */
+.benefit-card:nth-child(1) .benefit-icon {
+    color: #3A5FEB;
+    box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+}
+
+.benefit-card:nth-child(2) .benefit-icon {
+    color: #00C9A7;
+    box-shadow: 0 10px 30px rgba(0, 201, 167, 0.2);
+}
+
+.benefit-card:nth-child(3) .benefit-icon {
+    color: #FF8A00;
+    box-shadow: 0 10px 30px rgba(255, 138, 0, 0.2);
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.benefit-card:nth-child(1):hover .benefit-icon {
+    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.3);
+}
+
+.benefit-card:nth-child(2):hover .benefit-icon {
+    box-shadow: 0 15px 40px rgba(0, 201, 167, 0.3);
+}
+
+.benefit-card:nth-child(3):hover .benefit-icon {
+    box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
+}
+
+.benefit-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.benefit-content h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: var(--dark);
+}
+
+.benefit-content p {
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+    font-size: 1.05rem;
+}
+
+.benefit-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+    background: rgba(58, 95, 235, 0.06);
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:nth-child(1) .benefit-stats {
+    background: rgba(58, 95, 235, 0.06);
+}
+
+.benefit-card:nth-child(2) .benefit-stats {
+    background: rgba(0, 201, 167, 0.06);
+}
+
+.benefit-card:nth-child(3) .benefit-stats {
+    background: rgba(255, 138, 0, 0.06);
+}
+
+.benefit-card:hover .benefit-stats {
+    transform: scale(1.05);
+}
+
+.benefit-stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: inline-block;
+    line-height: 1;
+}
+
+.benefit-card:nth-child(1) .stat-value, 
+.benefit-card:nth-child(1) .stat-percent {
+    color: #3A5FEB;
+}
+
+.benefit-card:nth-child(2) .stat-value, 
+.benefit-card:nth-child(2) .stat-percent {
+    color: #00C9A7;
+}
+
+.benefit-card:nth-child(3) .stat-value, 
+.benefit-card:nth-child(3) .stat-percent {
+    color: #FF8A00;
+}
+
+.stat-percent {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: var(--gray);
+    font-weight: 500;
+    margin-top: 0.4rem;
+    display: block;
+}
+
+/* 
+==============================================
+// === component-split: ServicesSection ===
+COMPONENT: サービスセクション - 明確な価値提案
+==============================================
+*/
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin: 3rem 0;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.service-card-featured {
+    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
+    border: 2px solid rgba(58, 95, 235, 0.1);
+    transform: translateY(-10px);
+}
+
+.featured-label {
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: var(--z-normal);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
+    border-color: rgba(58, 95, 235, 0.1);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: var(--z-normal);
+}
+
+.service-image {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.1);
+}
+
+.service-icon {
+    position: absolute;
+    bottom: -25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.4rem;
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+    z-index: var(--z-normal);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: rotate(15deg);
+    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
+}
+
+.service-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.service-description {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.7;
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-tag {
+    background: rgba(58, 95, 235, 0.1);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.service-footer {
+    margin-top: auto;
+}
+
+/* 
+==============================================
+// === component-split: IndustriesSection ===
+COMPONENT: 業界別活用セクション - スライダー対応
+==============================================
+*/
+.industry-slider {
+    padding: 3rem 0;
+    position: relative;
+}
+
+.swiper-slide {
+    height: auto;
+}
+
+.industry-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.industry-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
+    border-color: rgba(58, 95, 235, 0.1);
+}
+
+.industry-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.industry-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+}
+
+.industry-card:hover .industry-icon {
+    transform: rotate(15deg);
+    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.3);
+}
+
+.industry-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0;
+}
+
+.industry-description {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.industry-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.industry-feature {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.industry-feature:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.industry-feature i {
+    color: var(--primary);
+    margin-right: 0.7rem;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary);
+    background: var(--white);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary);
+}
+
+/* 
+==============================================
+// === component-split: VisionSection ===
+COMPONENT: ビジョンセクション
+==============================================
+*/
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.vision-card {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.4s ease;
+}
+
+.vision-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.1);
+}
+
+.vision-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(58, 95, 235, 0.2);
+}
+
+.vision-card:hover .vision-icon {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 15px 30px rgba(58, 95, 235, 0.3);
+}
+
+.vision-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.vision-card p {
+    color: var(--gray);
+    line-height: 1.7;
+}
+
+/* 
+==============================================
+// === component-split: CTASection ===
+COMPONENT: お問い合わせCTA - 高コンバージョン設計
+==============================================
+*/
+.cta-section {
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05)); /* 背景色を少し濃く */
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-container {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 3.5rem;
+    box-shadow: 0 20px 50px rgba(58, 95, 235, 0.15); /* シャドウを強く */
+    position: relative;
+    overflow: hidden;
+    z-index: var(--z-normal);
+    border: 1px solid rgba(58, 95, 235, 0.15); /* ボーダーを少し濃く */
+    text-align: center;
+}
+
+.cta-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05), rgba(58, 95, 235, 0.05));
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+    z-index: var(--z-back);
+}
+
+.cta-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: var(--z-normal);
+}
+
+.cta-title {
+    margin-bottom: 1.5rem;
+}
+
+.cta-title h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.3;
+}
+
+.cta-description {
+    font-size: 1.2rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.cta-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-back);
+}
+
+.cta-bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06)); /* 背景を濃く */
+    z-index: var(--z-back);
+}
+
+.cta-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E"); /* パターンを濃く */
+    z-index: var(--z-back);
+    opacity: 0.8; /* 不透明度上げる */
+}
+
+.cta-content {
+    position: relative;
+    z-index: var(--z-normal);
+    text-align: center;
+}
+
+.cta-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-back);
+    pointer-events: none;
+}
+
+.cta-shape-1 {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+    border-radius: 50%;
+    animation: floatingUp 6s ease-in-out infinite;
+    opacity: 0.5;
+}
+
+.cta-shape-2 {
+    position: absolute;
+    bottom: 15%;
+    left: 5%;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+    border-radius: 30%;
+    transform: rotate(45deg);
+    animation: floatingDown 8s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+.cta-shape-3 {
+    position: absolute;
+    bottom: 30%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation: floatingUp 7s ease-in-out infinite;
+    opacity: 0.2;
+}
+
+/* 
+==============================================
+// === component-split: Footer ===
+COMPONENT: フッター - 豊富な関連リンクとブランディング強化
+==============================================
+*/
+.footer {
+    background: var(--dark);
+    color: var(--white);
+    padding: 5rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-jp);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    font-family: var(--font-en);
+}
+
+.footer-logo img {
+    filter: brightness(0) invert(1);
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.footer-logo:hover img {
+    transform: rotate(15deg);
+}
+
+.footer-description {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-bottom: 1.8rem;
+    line-height: 1.7;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: var(--transition);
+    font-size: 1.1rem;
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.8rem;
+    padding-bottom: 0.8rem;
+    position: relative;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.footer-links li {
+    margin-bottom: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-links li:hover {
+    transform: translateX(8px);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--white);
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer-bottom-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--white);
+    transition: width 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--white);
+}
+
+.footer-bottom-links a:hover::after {
+    width: 100%;
+}
+
+/* 
+==============================================
+// === component-split: ContactSection ===
+COMPONENT: お問い合わせフォーム - ユーザビリティ向上
+==============================================
+*/
+.section-contact {
+    background-color: var(--white);
+    position: relative;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.contact-info {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-info-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.2;
+    z-index: var(--z-back);
+}
+
+.contact-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.contact-info p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.7;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.contact-method {
+    display: flex;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    background: rgba(255, 255, 255, 0.15); /* 背景色を少し濃く */
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.contact-method:hover .contact-icon {
+    background: rgba(255, 255, 255, 0.25); /* ホバー時の背景色を調整 */
+    transform: scale(1.1);
+}
+
+.contact-details h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.contact-details p, .contact-details a {
+    color: rgba(255, 255, 255, 0.9);
+    transition: var(--transition);
+}
+
+.contact-details a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.contact-form {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-intro {
+    margin-bottom: 2rem;
+    color: var(--gray);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-label .required {
+    color: var(--error);
+    margin-left: 0.25rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius);
+    font-family: var(--font-jp);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.2rem;
+    transform: translateY(-50%);
+    color: var(--gray);
+    pointer-events: none;
+}
+
+.input-wrapper input,
+.textarea-wrapper textarea {
+    padding-left: 3rem;
+}
+
+.textarea-wrapper .input-icon {
+    top: 1.2rem;
+    transform: none;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* カスタムチェックボックス - アクセシビリティと視認性向上 */
+.form-check {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.form-check-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.form-check-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 0.5rem;
+    color: var(--dark);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    line-height: 1.5;
+}
+
+.form-check-label::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(58, 95, 235, 0.4); /* 境界線を明確に */
+    border-radius: 4px;
+    background-color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked + .form-check-label::before {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-check-input:checked + .form-check-label::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: -1.85rem;
+    top: 1px;
+    color: var(--white);
+    font-size: 15px;
+    animation: checkmark 0.3s ease forwards;
+}
+
+.form-check-input:focus + .form-check-label::before {
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
+}
+
+.form-check-label:hover::before {
+    border-color: var(--primary);
+}
+
+.field-error {
+    display: none;
+    color: var(--error);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.field-error.active {
+    display: block;
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.form-submit {
+    margin-top: 2rem;
+}
+
+.form-submit button {
+    width: 100%;
+}
+
+.recaptcha-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.recaptcha-note a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.message-success {
+    background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
+    border-left: 4px solid var(--success);
+    padding: 1.2rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    display: none;
+}
+
+.message-success i {
+    color: var(--success);
+    font-size: 1.5rem;
+}
+
+.message-success p {
+    color: var(--dark);
+    margin: 0;
+    font-weight: 500;
+}
+
+.message-success.show {
+    display: flex;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.input-wrapper.focused::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    animation: formFocusLine 0.3s ease forwards;
+}
+
+/* マップセクション */
+.section-map {
+    background: var(--light-gray);
+}
+
+.map-container {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: var(--white);
+    transition: all 0.3s ease;
+}
+
+.map-container:hover {
+    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
+    transform: translateY(-5px);
+}
+
+.contact-map {
+    height: 450px;
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    max-width: 350px;
+    z-index: var(--z-normal);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
+
+.map-info:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+}
+
+.map-address, .map-access {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.map-address:last-child, .map-access:last-child {
+    margin-bottom: 0;
+}
+
+.map-address i, .map-access i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+
+/* FAQ セクション - 視認性向上 */
+.section-faq {
+    background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-faq::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
+    z-index: var(--z-back);
+    opacity: 0.5;
+}
+
+.faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
+    transform: translateY(-3px);
+}
+
+.faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.faq-question {
+    background: var(--white);
+    color: var(--dark);
+    font-weight: 600;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    color: var(--primary);
+}
+
+.faq-question i {
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question {
+    border-bottom: none;
+    color: var(--primary);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(-180deg);
+}
+
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(249, 250, 252, 0.7);
+    border-top: 1px solid rgba(58, 95, 235, 0.08);
+}
+
+.faq-item.active .faq-answer {
+    padding: 1.5rem 2rem;
+    max-height: 1000px;
+}
+
+.faq-answer p {
+    color: var(--gray);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* 
+==============================================
+// === component-split: ChatbotComponent ===
+COMPONENT: AIチャットボット - 使いやすさと親しみやすさを追求
+==============================================
+*/
+.chatbot {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: var(--z-fixed);
+}
+
+.chatbot-toggle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    box-shadow: 0 5px 20px rgba(58, 95, 235, 0.35);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    z-index: var(--z-normal);
+    overflow: hidden;
+}
+
+.chatbot-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.7s ease;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.5);
+}
+
+.chatbot-toggle:hover::before {
+    left: 100%;
+}
+
+.chatbot-toggle .ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: ripple 2s infinite;
+}
+
+.chatbot-container {
+    position: absolute;
+    bottom: 85px;
+    right: 0;
+    width: 380px;
+    height: 550px;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform-origin: bottom right;
+    transform: scale(0);
+    opacity: 0;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: var(--z-fixed);
+    border: 1px solid rgba(58, 95, 235, 0.1);
+}
+
+.chatbot-container.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.chatbot-header {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: var(--white);
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.chatbot-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.2;
+    z-index: var(--z-back);
+}
+
+.chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.chatbot-title i {
+    font-size: 1.3rem;
+}
+
+.chatbot-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: var(--z-normal);
+}
+
+.chatbot-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: rgba(243, 244, 246, 0.5);
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+.message {
+    max-width: 80%;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-lg);
+    animation: messageIn 0.3s ease forwards;
+    line-height: 1.5;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: var(--white);
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid var(--primary);
+}
+
+.user-message {
+    align-self: flex-end;
+    background: var(--primary);
+    color: var(--white);
+    border-bottom-right-radius: 2px;
+    box-shadow: 0 3px 8px rgba(58, 95, 235, 0.15);
+}
+
+.bot-typing {
+    align-self: flex-start;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border-bottom-left-radius: 2px;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid var(--primary);
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gray);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typingDot 1s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1.2rem;
+    border-top: 1px solid var(--light-gray);
+    background: var(--white);
+    position: relative;
+}
+
+.chatbot-input input {
+    flex-grow: 1;
+    padding: 0.9rem 1.2rem;
+    padding-right: 3rem;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-full);
+    font-family: var(--font-jp);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.chatbot-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+}
+
+.chatbot-submit {
+    position: absolute;
+    right: 1.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 3px 8px rgba(58, 95, 235, 0.2);
+}
+
+.chatbot-submit:hover {
+    background: var(--primary-light);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+}
+
+/* 
+==============================================
 // === component-split: BackToTop ===
 COMPONENT: トップへ戻るボタン - アクセシビリティ向上
 ==============================================
@@ -1129,2915 +4304,4 @@ COMPONENT: レスポンシブデザイン - 多デバイス対応
     a[href^="javascript:"]:after {
         content: "";
     }
-}/* 
-==============================================
-// === component-split: Variables ===
-COMPONENT: 変数定義 - UX向上のための配色・間隔調整版
-==============================================
-*/
-:root {
-    /* カラーパレット - ブランドカラーと調和 */
-    --primary: #3A5FEB;     /* メインカラー - 鮮やかなブルー */
-    --primary-light: #4671FF;   /* 明るい色 - ホバー状態など */
-    --secondary: #00C9A7;        /* セカンダリ - アクセントに */
-    --secondary-light: #00E6C3;      /* 明るいセカンダリ - ポイントカラー */
-    --accent: #FF8A00;          /* アクセント - 注目させたい要素 */
-    --dark: #1A1F36;            /* ダークカラー - ベーステキスト */
-    --gray: #5E6C84;            /* グレー - サブテキスト */
-    --light-gray: #F9FAFC;      /* 薄いグレー - 背景など */
-    --white: #FFFFFF;           /* 白 - 基本背景 */
-    --error: #FF3B3B;           /* エラー表示用 */
-    --success: #00C48C;         /* 成功表示用 */
-    
-    /* グラデーション - 魅力的な効果 */
-    --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
-    --gradient-hover: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
-    --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-    --gradient-light: linear-gradient(135deg, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
-    
-    /* フォント */
-    --font-jp: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-en: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-    
-    /* エフェクト - 視覚的な深みを追加 */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
-    --shadow-glow: 0 0 15px rgba(58, 95, 235, 0.3);
-    --shadow-button: 0 5px 15px rgba(58, 95, 235, 0.25);
-    --shadow-button-hover: 0 8px 20px rgba(58, 95, 235, 0.35);
-    --transition: all 0.3s ease;
-    --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
-    /* レイアウト */
-    --container: 1280px;
-    --radius-sm: 4px;
-    --radius: 8px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    --radius-full: 9999px;
-    
-    /* Z-index管理 */
-    --z-back: -1;
-    --z-normal: 1;
-    --z-header: 100;
-    --z-dropdown: 200;
-    --z-tooltip: 300;
-    --z-fixed: 400;
-    --z-modal: 500;
-    --z-top: 1000;
-}
-
-/* 
-==============================================
-// === component-split: Animations ===
-COMPONENT: 洗練されたアニメーション
-==============================================
-*/
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.7;
-    }
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0.8);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes borderGlow {
-    0%, 100% {
-        box-shadow: 0 0 5px rgba(58, 95, 235, 0.3), 0 0 15px rgba(58, 95, 235, 0);
-    }
-    50% {
-        box-shadow: 0 0 15px rgba(58, 95, 235, 0.6), 0 0 30px rgba(58, 95, 235, 0.3);
-    }
-}
-
-@keyframes typingDot {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-@keyframes messageIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scrollAnim {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-}
-
-@keyframes floatingUp {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-@keyframes floatingDown {
-    0%, 100% {
-        transform: translateY(0) rotate(15deg);
-    }
-    50% {
-        transform: translateY(15px) rotate(15deg);
-    }
-}
-
-@keyframes rotateSlowly {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes btnIconBounce {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(5px);
-    }
-}
-
-@keyframes pulseGlow {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 10px rgba(58, 95, 235, 0);
-    }
-}
-
-@keyframes checkmark {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes formFocusLine {
-    to {
-        width: 100%;
-    }
-}
-
-/* 
-==============================================
-// === component-split: Reset ===
-COMPONENT: リセット & スタイル原則
-==============================================
-*/
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-}
-
-body {
-    font-family: var(--font-jp);
-    color: var(--dark);
-    background-color: var(--white);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-body.no-scroll {
-    overflow: hidden;
-}
-
-body.loaded {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-body.loaded .page-intro .brand-logo {
-    animation: fadeInUp 1.5s ease forwards;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    vertical-align: middle;
-}
-
-a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-a:hover {
-    color: var(--primary-light);
-}
-
-ul {
-    list-style: none;
-}
-
-button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: inherit;
-}
-
-/* キーボード操作のフォーカス表示 - アクセシビリティ向上 */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-    outline: 3px solid var(--primary);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.3);
-}
-
-/* スキップナビゲーション - アクセシビリティ向上 */
-.skip-nav {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--primary);
-    color: var(--white);
-    padding: 10px;
-    z-index: var(--z-top);
-    transition: top 0.3s;
-}
-
-.skip-nav:focus {
-    top: 0;
-}
-
-/* 
-==============================================
-// === component-split: LayoutUtilities ===
-COMPONENT: レイアウトユーティリティ（強化版）
-==============================================
-*/
-.container {
-    width: 100%;
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    display: inline-block;
-}
-
-.shimmer-text {
-    position: relative;
-    overflow: hidden;
-}
-
-.shimmer-text::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    animation: shimmer 3s infinite;
-}
-
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 2rem; }
-.mt-6 { margin-top: 3rem; }
-
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 2rem; }
-.mb-6 { margin-bottom: 3rem; }
-
-.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
-.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
-.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
-.my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
-.my-5 { margin-top: 2rem; margin-bottom: 2rem; }
-.my-6 { margin-top: 3rem; margin-bottom: 3rem; }
-
-.mx-auto { margin-left: auto; margin-right: auto; }
-.ml-auto { margin-left: auto; }
-.mr-auto { margin-right: auto; }
-
-.p-1 { padding: 0.25rem; }
-.p-2 { padding: 0.5rem; }
-.p-3 { padding: 1rem; }
-.p-4 { padding: 1.5rem; }
-.p-5 { padding: 2rem; }
-.p-6 { padding: 3rem; }
-
-.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
-.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.py-5 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-6 { padding-top: 3rem; padding-bottom: 3rem; }
-
-.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
-.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-.px-3 { padding-left: 1rem; padding-right: 1rem; }
-.px-4 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.px-5 { padding-left: 2rem; padding-right: 2rem; }
-.px-6 { padding-left: 3rem; padding-right: 3rem; }
-
-.w-full { width: 100%; }
-.h-full { height: 100%; }
-.mw-full { max-width: 100%; }
-
-.d-block { display: block; }
-.d-inline-block { display: inline-block; }
-.d-flex { display: flex; }
-.d-inline-flex { display: inline-flex; }
-.d-grid { display: grid; }
-.d-none { display: none; }
-
-.flex-row { flex-direction: row; }
-.flex-column { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-nowrap { flex-wrap: nowrap; }
-.flex-1 { flex: 1; }
-.flex-grow-1 { flex-grow: 1; }
-.flex-shrink-0 { flex-shrink: 0; }
-
-.justify-start { justify-content: flex-start; }
-.justify-end { justify-content: flex-end; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-around { justify-content: space-around; }
-.justify-evenly { justify-content: space-evenly; }
-
-.items-start { align-items: flex-start; }
-.items-end { align-items: flex-end; }
-.items-center { align-items: center; }
-.items-baseline { align-items: baseline; }
-.items-stretch { align-items: stretch; }
-
-.gap-1 { gap: 0.25rem; }
-.gap-2 { gap: 0.5rem; }
-.gap-3 { gap: 1rem; }
-.gap-4 { gap: 1.5rem; }
-.gap-5 { gap: 2rem; }
-.gap-6 { gap: 3rem; }
-
-.position-relative { position: relative; }
-.position-absolute { position: absolute; }
-.position-fixed { position: fixed; }
-
-/* 
-==============================================
-// === component-split: Banner ===
-COMPONENT: バナーコンポーネント
-==============================================
-*/
-.top-banner {
-    background: var(--gradient-primary);
-    height: 5px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: var(--z-fixed);
-}
-
-.bottom-banner {
-    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
-    padding: 2rem 0;
-    color: var(--white);
-    text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    font-family: var(--font-jp);
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-}
-
-.bottom-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
-    z-index: var(--z-back);
-}
-
-.bottom-banner-content {
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-/* 
-==============================================
-// === component-split: Typography ===
-COMPONENT: タイポグラフィ - 読みやすさと表現力を強化
-==============================================
-*/
-.heading-xl {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    letter-spacing: -0.02em;
-    font-family: var(--font-jp);
-}
-
-.heading-lg {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
-    font-family: var(--font-jp);
-}
-
-.heading-md {
-    font-size: 1.75rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 1rem;
-    font-family: var(--font-jp);
-}
-
-.heading-sm {
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 1rem;
-    font-family: var(--font-jp);
-}
-
-.subtitle {
-    font-size: 1.35rem;
-    color: var(--gray);
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    font-weight: 400;
-    font-family: var(--font-jp);
-}
-
-.en-text {
-    font-family: var(--font-en);
-}
-
-.section-title {
-    position: relative;
-    margin-bottom: 4rem;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -15px;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: var(--radius-full);
-}
-
-.section-subtitle {
-    display: inline-block;
-    background: rgba(58, 95, 235, 0.12);
-    padding: 0.4rem 1.2rem;
-    border-radius: var(--radius-full);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    color: var(--primary);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.section-description {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: var(--gray);
-}
-
-.highlight {
-    color: var(--primary);
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-}
-
-.highlight::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(58, 95, 235, 0.15);
-    z-index: var(--z-back);
-    border-radius: var(--radius-full);
-}
-
-.highlight-accent {
-    color: var(--accent);
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-}
-
-.highlight-accent::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(255, 138, 0, 0.2);
-    z-index: var(--z-back);
-    border-radius: var(--radius-full);
-}
-
-.text-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-}
-
-/* 
-==============================================
-// === component-split: Buttons ===
-COMPONENT: ボタン - UX改善とクリック率向上
-==============================================
-*/
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.75rem;
-    border-radius: var(--radius-full);
-    font-weight: 600;
-    transition: var(--transition);
-    cursor: pointer;
-    font-family: var(--font-jp);
-    letter-spacing: 0.02em;
-    position: relative;
-    overflow: hidden;
-    z-index: var(--z-normal);
-    min-height: 48px; /* タップ領域拡大 */
-    border: none; /* ボーダーを一貫して除去 */
-    text-align: center;
-}
-
-.btn-lg {
-    padding: 1.1rem 2.2rem;
-    font-size: 1.1rem;
-}
-
-.btn-xl {
-    padding: 1.2rem 2.5rem;
-    font-size: 1.2rem;
-    min-width: 250px;
-}
-
-/* プライマリーボタン - メインCTA用 */
-.btn-primary {
-    background: var(--gradient-primary);
-    color: var(--white);
-    box-shadow: var(--shadow-button);
-    font-weight: 700;
-}
-
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: all 0.7s ease;
-    z-index: var(--z-back);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: var(--shadow-button-hover);
-    color: var(--white); /* コントラストを維持 */
-}
-
-.btn-primary:hover::before {
-    left: 100%;
-}
-
-/* アウトラインボタン - セカンダリーCTA用 */
-.btn-outline {
-    background: rgba(255, 255, 255, 0.95); /* 背景色を明るく */
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    box-shadow: 0 4px 10px rgba(58, 95, 235, 0.1);
-    font-weight: 600;
-}
-
-.btn-outline:hover {
-    background: var(--primary);
-    color: var(--white);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 15px rgba(58, 95, 235, 0.2);
-}
-
-/* ダウンロードボタン */
-.btn-download {
-    background: var(--light-gray);
-    color: var(--dark);
-    border: 2px solid var(--light-gray);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.75rem;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: var(--transition);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.btn-download:hover {
-    background: var(--white);
-    border-color: var(--gray);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    color: var(--primary);
-}
-
-.btn-download i {
-    color: var(--primary);
-}
-
-/* アイコン付きボタン - バウンス効果 */
-.btn-icon-bounce {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: var(--z-normal);
-}
-
-.btn-icon-bounce span {
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.btn-icon-bounce i {
-    position: relative;
-    z-index: var(--z-normal);
-    transition: transform 0.3s ease;
-}
-
-.btn-icon-bounce:hover i,
-.btn-icon-bounce:focus i {
-    animation: btnIconBounce 0.8s ease infinite;
-}
-
-.btn-icon-bounce::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: all 0.7s ease;
-    z-index: var(--z-back);
-}
-
-.btn-icon-bounce:hover,
-.btn-icon-bounce:focus {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(58, 95, 235, 0.35);
-}
-
-.btn-icon-bounce:hover::before,
-.btn-icon-bounce:focus::before {
-    left: 100%;
-}
-
-.btn-icon-bounce:active {
-    transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-}
-
-.btn-block {
-    display: block;
-    width: 100%;
-}
-
-/* グロー効果付きボタン - 注目効果 */
-.btn-glow {
-    position: relative;
-}
-
-.btn-glow::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50px;
-    z-index: var(--z-back);
-    animation: pulseGlow 2s infinite;
-}
-
-.btn-cta {
-    background: var(--gradient-primary);
-    color: var(--white);
-    border: none;
-    box-shadow: var(--shadow-button);
-}
-
-.btn-cta-white {
-    background: var(--white);
-    color: var(--primary);
-    border: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.cta-main-btn {
-    position: relative;
-    overflow: visible;
-}
-
-.cta-main-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50px;
-    z-index: var(--z-back);
-    animation: pulseGlow 2s infinite;
-}
-
-/* 無料相談ボタン専用のデザイン強化 */
-.btn-consultation {
-    background: var(--gradient-primary);
-    color: var(--white);
-    box-shadow: var(--shadow-button);
-    position: relative;
-    overflow: hidden;
-    font-weight: 700;
-    padding: 1rem 2rem;
-    min-width: 220px;
-}
-
-.btn-consultation:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(58, 95, 235, 0.4);
-    color: var(--white); /* コントラスト維持 */
-}
-
-.btn-consultation::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.7s ease;
-    z-index: var(--z-back);
-}
-
-.btn-consultation:hover::before {
-    left: 100%;
-}
-
-.btn-consultation-message {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-top: 0.25rem;
-    transition: var(--transition);
-}
-
-.btn-consultation:hover .btn-consultation-message {
-    opacity: 1;
-}
-
-/* 
-==============================================
-// === component-split: Header ===
-COMPONENT: ヘッダー - 視認性と操作性向上
-==============================================
-*/
-.header {
-    position: fixed;
-    top: 5px; /* トップバナーの高さ分下げる */
-    left: 0;
-    width: 100%;
-    z-index: var(--z-header);
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: var(--transition);
-}
-
-.header::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, rgba(58, 95, 235, 0), rgba(58, 95, 235, 0.5), rgba(0, 201, 167, 0.5), rgba(0, 201, 167, 0));
-    z-index: var(--z-normal);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.header.scrolled {
-    box-shadow: var(--shadow);
-}
-
-.header.scrolled::after {
-    opacity: 1;
-}
-
-.header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--dark);
-    font-family: var(--font-en);
-}
-
-.logo img {
-    width: 40px;
-    height: 40px;
-    filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
-    transition: all 0.3s ease;
-}
-
-.logo:hover img {
-    transform: rotate(15deg);
-    filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
-}
-
-.nav {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-
-.nav-link {
-    color: var(--dark);
-    font-weight: 500;
-    position: relative;
-    padding: 0.5rem 0;
-    font-family: var(--font-jp);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: width 0.3s ease;
-    border-radius: var(--radius-full);
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--primary);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
-}
-
-.nav-cta {
-    margin-left: 1.5rem;
-}
-
-/* ハンバーガーメニュー - モバイル用 */
-.menu-toggle {
-    display: none;
-    font-size: 1.5rem;
-    color: var(--dark);
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(58, 95, 235, 0.1);
-    transition: all 0.3s ease;
-}
-
-.menu-toggle:hover {
-    background: rgba(58, 95, 235, 0.2);
-    color: var(--primary);
-}
-
-.menu-toggle.active {
-    background: var(--primary);
-    color: var(--white);
-}
-
-.page-header {
-    padding-top: 120px; /* ヘッダーの高さを考慮 */
-    padding-bottom: 60px;
-    background: var(--gradient-light);
-    position: relative;
-}
-
-.page-header-inner {
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.breadcrumb-item {
-    color: var(--gray);
-}
-
-.breadcrumb-separator {
-    margin: 0 0.5rem;
-    color: var(--gray);
-}
-
-.breadcrumb-current {
-    color: var(--primary);
-    font-weight: 500;
-}
-
-/* 
-==============================================
-// === component-split: ParticlesContainer ===
-COMPONENT: 背景エフェクト
-==============================================
-*/
-.particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: var(--z-back);
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-.particles-container canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: var(--z-back);
-}
-
-.particles-fallback {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
-    z-index: var(--z-back);
-    opacity: 0.5;
-}
-
-/* 
-==============================================
-// === component-split: Hero ===
-COMPONENT: ヒーロー - 印象的なファーストビュー
-==============================================
-*/
-.hero {
-    min-height: 650px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    padding-top: 80px; /* ヘッダー重なり防止 */
-    text-align: center; /* 中央揃え */
-}
-
-.hero-bg-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: var(--z-back);
-}
-
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: var(--z-back);
-    opacity: 0;
-    transition: opacity 2s ease-in-out, transform 10s ease-in-out;
-    transform: scale(1.1);
-}
-
-.hero-bg.active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
-    z-index: var(--z-back);
-}
-
-.hero-content {
-    position: relative;
-    max-width: 800px; /* 幅を広げて中央揃えに対応 */
-    margin: 0 auto; /* 中央揃え */
-    z-index: var(--z-normal);
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.hero-label {
-    display: inline-block;
-    background: rgba(58, 95, 235, 0.15);
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    color: var(--primary);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-label::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    animation: shimmer 2s infinite;
-}
-
-.hero-title {
-    font-size: 3.8rem;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    color: var(--dark);
-    max-width: 800px; /* 幅広げる */
-    margin-left: auto; /* 中央揃え */
-    margin-right: auto; /* 中央揃え */
-    position: relative;
-}
-
-.hero-title .highlight {
-    color: var(--primary);
-    position: relative;
-    display: inline-block;
-    font-weight: 900;
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.hero-title .highlight::after {
-    content: '';
-    position: absolute;
-    bottom: 0.1em;
-    left: 0;
-    width: 100%;
-    height: 0.3em;
-    background: rgba(58, 95, 235, 0.2);
-    z-index: var(--z-back);
-    border-radius: 5px;
-}
-
-.hero-description {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    max-width: 800px;
-    margin-left: auto; /* 中央揃え */
-    margin-right: auto; /* 中央揃え */
-    color: rgba(26, 31, 54, 0.85);
-}
-
-.hero-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-    justify-content: center; /* 中央揃え */
-}
-
-.hero-cta .btn {
-    min-width: 180px;
-}
-
-.hero-tagline {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--dark);
-    opacity: 0.75;
-    margin-top: 1.5rem;
-    padding-left: 1rem;
-    border-left: 3px solid var(--primary);
-    display: inline-block; /* インライン要素に */
-    text-align: left; /* 左揃え */
-}
-
-.brand-logo {
-    position: absolute;
-    bottom: 20px;
-    right: 0;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-}
-
-.hero-content:hover .brand-logo {
-    opacity: 1;
-    transform: rotate(15deg);
-}
-
-.brand-icon {
-    max-width: 60px;
-    height: auto;
-}
-
-/* 
-==============================================
-// === component-split: Section ===
-COMPONENT: セクション共通 - リズム感のあるレイアウト
-==============================================
-*/
-.section {
-    padding: 5rem 0;
-    position: relative;
-}
-
-.section-bg-light {
-    background-color: rgba(58, 95, 235, 0.02);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-footer {
-    margin-top: 3rem;
-    text-align: center;
-}
-
-/* 
-==============================================
-// === component-split: AboutSection ===
-COMPONENT: 会社概要セクション - 信頼性の演出
-==============================================
-*/
-.about-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-    align-items: center;
-}
-
-.about-image {
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-}
-
-.about-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(58, 95, 235, 0.1), transparent);
-    z-index: var(--z-normal);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.about-image:hover::before {
-    opacity: 1;
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.8s ease;
-}
-
-.about-grid:hover .about-image img {
-    transform: scale(1.05);
-}
-
-.about-content h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--dark);
-    position: relative;
-    display: inline-block;
-}
-
-.about-content h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 60px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: var(--radius-full);
-}
-
-.about-content p {
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
-    color: var(--gray);
-}
-
-.about-message {
-    margin-bottom: 2rem;
-    border-left: 4px solid var(--primary);
-    padding: 1.5rem;
-    background: rgba(58, 95, 235, 0.05);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    font-size: 1.1rem;
-    color: var(--dark);
-    line-height: 1.8;
-    position: relative;
-    overflow: hidden;
-}
-
-.about-message::after {
-    content: '';
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 100px;
-    height: 100px;
-    background: var(--primary);
-    opacity: 0.05;
-    border-radius: 50%;
-    z-index: var(--z-back);
-}
-
-.about-buttons {
-    margin-top: 2rem;
-}
-
-/* 
-==============================================
-// === component-split: BenefitsSection ===
-COMPONENT: 導入メリットセクション - 説得力のある数値表現
-==============================================
-*/
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 3.5rem;
-}
-
-.benefit-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    padding: 2rem;
-    height: 100%;
-    transition: all 0.4s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-}
-
-.benefit-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-    border-color: rgba(58, 95, 235, 0.1);
-}
-
-.benefit-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    font-size: 2rem;
-    position: relative;
-    z-index: var(--z-normal);
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
-}
-
-.icon-bg-glow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--primary);
-    border-radius: 16px;
-    filter: blur(10px);
-    opacity: 0.3;
-    z-index: var(--z-back);
-    animation: pulse 3s infinite;
-}
-
-.benefit-card:hover .benefit-icon {
-    transform: rotate(15deg);
-    box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
-}
-
-.benefit-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.benefit-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--dark);
-    text-align: center;
-}
-
-.benefit-content p {
-    color: var(--gray);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.benefit-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 1.5rem 0;
-    background: rgba(58, 95, 235, 0.05);
-    padding: 1.2rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.benefit-card:hover .benefit-stats {
-    background: rgba(58, 95, 235, 0.08);
-}
-
-.benefit-stat {
-    text-align: center;
-}
-
-.stat-value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    display: inline-block;
-    line-height: 1;
-}
-
-.stat-percent {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: var(--gray);
-    font-weight: 500;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-/* 
-==============================================
-// === component-split: ServicesSection ===
-COMPONENT: サービスセクション - 明確な価値提案
-==============================================
-*/
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    margin: 3rem 0;
-}
-
-.service-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    overflow: hidden;
-    transition: all 0.4s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    position: relative;
-}
-
-.service-card-featured {
-    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
-    border: 2px solid rgba(58, 95, 235, 0.1);
-    transform: translateY(-10px);
-}
-
-.featured-label {
-    position: absolute;
-    top: 15px;
-    right: -35px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    padding: 5px 40px;
-    transform: rotate(45deg);
-    font-size: 0.8rem;
-    font-weight: 600;
-    z-index: var(--z-normal);
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-    border-color: rgba(58, 95, 235, 0.1);
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    z-index: var(--z-normal);
-}
-
-.service-image {
-    height: 220px;
-    position: relative;
-    overflow: hidden;
-}
-
-.service-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-}
-
-.service-card:hover .service-image img {
-    transform: scale(1.1);
-}
-
-.service-icon {
-    position: absolute;
-    bottom: -25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 1.4rem;
-    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-    z-index: var(--z-normal);
-    transition: all 0.3s ease;
-}
-
-.service-card:hover .service-icon {
-    transform: rotate(15deg);
-    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
-}
-
-.service-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.service-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--dark);
-}
-
-.service-description {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
-    line-height: 1.7;
-}
-
-.service-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.service-tag {
-    background: rgba(58, 95, 235, 0.1);
-    color: var(--primary);
-    padding: 0.3rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.service-footer {
-    margin-top: auto;
-}
-
-/* 
-==============================================
-// === component-split: IndustriesSection ===
-COMPONENT: 業界別活用セクション - スライダー対応
-==============================================
-*/
-.industry-slider {
-    padding: 3rem 0;
-    position: relative;
-}
-
-.swiper-slide {
-    height: auto;
-}
-
-.industry-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    height: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-.industry-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(58, 95, 235, 0.15);
-    border-color: rgba(58, 95, 235, 0.1);
-}
-
-.industry-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.industry-icon {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
-}
-
-.industry-card:hover .industry-icon {
-    transform: rotate(15deg);
-    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.3);
-}
-
-.industry-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin: 0;
-}
-
-.industry-description {
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-}
-
-.industry-features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.industry-feature {
-    padding: 0.7rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-}
-
-.industry-feature:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.industry-feature i {
-    color: var(--primary);
-    margin-right: 0.7rem;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--primary);
-    background: var(--white);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.swiper-pagination-bullet-active {
-    background: var(--primary);
-}
-
-/* 
-==============================================
-// === component-split: CTASection ===
-COMPONENT: お問い合わせCTA - 高コンバージョン設計
-==============================================
-*/
-.cta-section {
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05)); /* 背景色を少し濃く */
-    padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-container {
-    background: var(--white);
-    border-radius: 24px;
-    padding: 3.5rem;
-    box-shadow: 0 20px 50px rgba(58, 95, 235, 0.15); /* シャドウを強く */
-    position: relative;
-    overflow: hidden;
-    z-index: var(--z-normal);
-    border: 1px solid rgba(58, 95, 235, 0.15); /* ボーダーを少し濃く */
-    text-align: center;
-}
-
-.cta-bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05), rgba(58, 95, 235, 0.05));
-    background-size: 200% 200%;
-    animation: gradientBG 15s ease infinite;
-    z-index: var(--z-back);
-}
-
-.cta-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    z-index: var(--z-normal);
-}
-
-.cta-title {
-    margin-bottom: 1.5rem;
-}
-
-.cta-title h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--dark);
-    line-height: 1.3;
-}
-
-.cta-description {
-    font-size: 1.2rem;
-    color: var(--gray);
-    max-width: 800px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.8;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-}
-
-.cta-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: var(--z-back);
-}
-
-.cta-bg-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06)); /* 背景を濃く */
-    z-index: var(--z-back);
-}
-
-.cta-bg-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E"); /* パターンを濃く */
-    z-index: var(--z-back);
-    opacity: 0.8; /* 不透明度上げる */
-}
-
-.cta-content {
-    position: relative;
-    z-index: var(--z-normal);
-    text-align: center;
-}
-
-.cta-shapes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: var(--z-back);
-    pointer-events: none;
-}
-
-.cta-shape-1 {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-    border-radius: 50%;
-    animation: floatingUp 6s ease-in-out infinite;
-    opacity: 0.5;
-}
-
-.cta-shape-2 {
-    position: absolute;
-    bottom: 15%;
-    left: 5%;
-    width: 150px;
-    height: 150px;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-    border-radius: 30%;
-    transform: rotate(45deg);
-    animation: floatingDown 8s ease-in-out infinite;
-    opacity: 0.3;
-}
-
-.cta-shape-3 {
-    position: absolute;
-    bottom: 30%;
-    right: 15%;
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    animation: floatingUp 7s ease-in-out infinite;
-    opacity: 0.2;
-}
-
-/* 
-==============================================
-// === component-split: Footer ===
-COMPONENT: フッター - 豊富な関連リンクとブランディング強化
-==============================================
-*/
-.footer {
-    background: var(--dark);
-    color: var(--white);
-    padding: 5rem 0 2rem;
-    position: relative;
-    overflow: hidden;
-    font-family: var(--font-jp);
-}
-
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, var(--secondary-light), var(--secondary), var(--primary));
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--white);
-    margin-bottom: 1.2rem;
-    font-family: var(--font-en);
-}
-
-.footer-logo img {
-    filter: brightness(0) invert(1);
-    width: 40px;
-    height: 40px;
-    transition: all 0.3s ease;
-}
-
-.footer-logo:hover img {
-    transform: rotate(15deg);
-}
-
-.footer-description {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    margin-bottom: 1.8rem;
-    line-height: 1.7;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-link {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    transition: var(--transition);
-    font-size: 1.1rem;
-}
-
-.social-link:hover {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.footer-heading {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1.8rem;
-    padding-bottom: 0.8rem;
-    position: relative;
-}
-
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: var(--radius-full);
-}
-
-.footer-links li {
-    margin-bottom: 0.9rem;
-    transition: transform 0.3s ease;
-}
-
-.footer-links li:hover {
-    transform: translateX(8px);
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.95rem;
-    transition: var(--transition);
-    position: relative;
-    display: inline-block;
-}
-
-.footer-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--white);
-    transition: width 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--white);
-}
-
-.footer-links a:hover::after {
-    width: 100%;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-.copyright {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-.footer-bottom-links {
-    display: flex;
-    gap: 2.5rem;
-}
-
-.footer-bottom-links a {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-    position: relative;
-}
-
-.footer-bottom-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--white);
-    transition: width 0.3s ease;
-}
-
-.footer-bottom-links a:hover {
-    color: var(--white);
-}
-
-.footer-bottom-links a:hover::after {
-    width: 100%;
-}
-
-/* 
-==============================================
-// === component-split: ContactSection ===
-COMPONENT: お問い合わせフォーム - ユーザビリティ向上
-==============================================
-*/
-.section-contact {
-    background-color: var(--white);
-    position: relative;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.contact-info {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    padding: 2.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-info-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.1'/%3E%3C/svg%3E");
-    opacity: 0.2;
-    z-index: var(--z-back);
-}
-
-.contact-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.contact-info p {
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    line-height: 1.7;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.contact-method {
-    display: flex;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.contact-icon {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    background: rgba(255, 255, 255, 0.15); /* 背景色を少し濃く */
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.contact-method:hover .contact-icon {
-    background: rgba(255, 255, 255, 0.25); /* ホバー時の背景色を調整 */
-    transform: scale(1.1);
-}
-
-.contact-details h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.contact-details p, .contact-details a {
-    color: rgba(255, 255, 255, 0.9);
-    transition: var(--transition);
-}
-
-.contact-details a:hover {
-    color: var(--white);
-    text-decoration: underline;
-}
-
-.contact-form {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.form-intro {
-    margin-bottom: 2rem;
-    color: var(--gray);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--dark);
-}
-
-.form-label .required {
-    color: var(--error);
-    margin-left: 0.25rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.9rem 1.2rem;
-    border: 1px solid var(--light-gray);
-    border-radius: var(--radius);
-    font-family: var(--font-jp);
-    font-size: 1rem;
-    transition: var(--transition);
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
-
-.input-wrapper {
-    position: relative;
-}
-
-.input-icon {
-    position: absolute;
-    top: 50%;
-    left: 1.2rem;
-    transform: translateY(-50%);
-    color: var(--gray);
-    pointer-events: none;
-}
-
-.input-wrapper input,
-.textarea-wrapper textarea {
-    padding-left: 3rem;
-}
-
-.textarea-wrapper .input-icon {
-    top: 1.2rem;
-    transform: none;
-}
-
-.checkbox-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-/* カスタムチェックボックス - アクセシビリティと視認性向上 */
-.form-check {
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-}
-
-.form-check-input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.form-check-label {
-    position: relative;
-    cursor: pointer;
-    padding-left: 0.5rem;
-    color: var(--dark);
-    font-weight: 500;
-    transition: all 0.3s ease;
-    line-height: 1.5;
-}
-
-.form-check-label::before {
-    content: '';
-    position: absolute;
-    left: -2rem;
-    top: 0;
-    width: 24px;
-    height: 24px;
-    border: 2px solid rgba(58, 95, 235, 0.4); /* 境界線を明確に */
-    border-radius: 4px;
-    background-color: var(--white);
-    transition: all 0.3s ease;
-}
-
-.form-check-input:checked + .form-check-label::before {
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-.form-check-input:checked + .form-check-label::after {
-    content: '\f00c';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    position: absolute;
-    left: -1.85rem;
-    top: 1px;
-    color: var(--white);
-    font-size: 15px;
-    animation: checkmark 0.3s ease forwards;
-}
-
-.form-check-input:focus + .form-check-label::before {
-    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
-}
-
-.form-check-label:hover::before {
-    border-color: var(--primary);
-}
-
-.field-error {
-    display: none;
-    color: var(--error);
-    font-size: 0.85rem;
-    margin-top: 0.3rem;
-}
-
-.field-error.active {
-    display: block;
-    animation: fadeInUp 0.3s ease forwards;
-}
-
-.form-submit {
-    margin-top: 2rem;
-}
-
-.form-submit button {
-    width: 100%;
-}
-
-.recaptcha-note {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: var(--gray);
-}
-
-.recaptcha-note a {
-    color: var(--primary);
-    text-decoration: underline;
-}
-
-.message-success {
-    background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
-    border-left: 4px solid var(--success);
-    padding: 1.2rem;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    display: none;
-}
-
-.message-success i {
-    color: var(--success);
-    font-size: 1.5rem;
-}
-
-.message-success p {
-    color: var(--dark);
-    margin: 0;
-    font-weight: 500;
-}
-
-.message-success.show {
-    display: flex;
-    animation: fadeInUp 0.5s ease forwards;
-}
-
-.input-wrapper.focused::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    animation: formFocusLine 0.3s ease forwards;
-}
-
-/* マップセクション */
-.section-map {
-    background: var(--light-gray);
-}
-
-.map-container {
-    overflow: hidden;
-    border-radius: var(--radius-xl);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    background: var(--white);
-    transition: all 0.3s ease;
-}
-
-.map-container:hover {
-    box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
-    transform: translateY(-5px);
-}
-
-.contact-map {
-    height: 450px;
-}
-
-.contact-map iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.map-info {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    background: var(--white);
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    max-width: 350px;
-    z-index: var(--z-normal);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: all 0.3s ease;
-}
-
-.map-info:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-3px);
-}
-
-.map-address, .map-access {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.map-address:last-child, .map-access:last-child {
-    margin-bottom: 0;
-}
-
-.map-address i, .map-access i {
-    color: var(--primary);
-    font-size: 1.2rem;
-    margin-top: 0.2rem;
-}
-
-/* FAQ セクション - 視認性向上 */
-.section-faq {
-    background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
-    padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.section-faq::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
-    z-index: var(--z-back);
-    opacity: 0.5;
-}
-
-.faq-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.faq-item {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.faq-item:hover {
-    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
-    transform: translateY(-3px);
-}
-
-.faq-item:last-child {
-    margin-bottom: 0;
-}
-
-.faq-question {
-    background: var(--white);
-    color: var(--dark);
-    font-weight: 600;
-    padding: 1.5rem 2rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    transition: all 0.3s ease;
-}
-
-.faq-question:hover {
-    color: var(--primary);
-}
-
-.faq-question i {
-    color: var(--primary);
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-question {
-    border-bottom: none;
-    color: var(--primary);
-}
-
-.faq-item.active .faq-question i {
-    transform: rotate(-180deg);
-}
-
-.faq-answer {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: rgba(249, 250, 252, 0.7);
-    border-top: 1px solid rgba(58, 95, 235, 0.08);
-}
-
-.faq-item.active .faq-answer {
-    padding: 1.5rem 2rem;
-    max-height: 1000px;
-}
-
-.faq-answer p {
-    color: var(--gray);
-    line-height: 1.7;
-    margin: 0;
-}
-
-/* 
-==============================================
-// === component-split: ChatbotComponent ===
-COMPONENT: AIチャットボット - 使いやすさと親しみやすさを追求
-==============================================
-*/
-.chatbot {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    z-index: var(--z-fixed);
-}
-
-.chatbot-toggle {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.7rem;
-    box-shadow: 0 5px 20px rgba(58, 95, 235, 0.35);
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    z-index: var(--z-normal);
-    overflow: hidden;
-}
-
-.chatbot-toggle::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: all 0.7s ease;
-}
-
-.chatbot-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    box-shadow: 0 8px 25px rgba(58, 95, 235, 0.5);
-}
-
-.chatbot-toggle:hover::before {
-    left: 100%;
-}
-
-.chatbot-toggle .ripple {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--primary);
-    border-radius: 50%;
-    transform: scale(0.8);
-    opacity: 0;
-    animation: ripple 2s infinite;
-}
-
-.chatbot-container {
-    position: absolute;
-    bottom: 85px;
-    right: 0;
-    width: 380px;
-    height: 550px;
-    background: var(--white);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transform-origin: bottom right;
-    transform: scale(0);
-    opacity: 0;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: var(--z-fixed);
-    border: 1px solid rgba(58, 95, 235, 0.1);
-}
-
-.chatbot-container.active {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.chatbot-header {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    color: var(--white);
-    padding: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.chatbot-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.05'/%3E%3C/svg%3E");
-    opacity: 0.2;
-    z-index: var(--z-back);
-}
-
-.chatbot-title {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.chatbot-title i {
-    font-size: 1.3rem;
-}
-
-.chatbot-close {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: var(--white);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: var(--z-normal);
-}
-
-.chatbot-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(90deg);
-}
-
-.chatbot-messages {
-    flex-grow: 1;
-    padding: 1.5rem;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: rgba(243, 244, 246, 0.5);
-    scroll-behavior: smooth;
-    position: relative;
-}
-
-.message {
-    max-width: 80%;
-    padding: 1rem 1.2rem;
-    border-radius: var(--radius-lg);
-    animation: messageIn 0.3s ease forwards;
-    line-height: 1.5;
-    position: relative;
-    font-size: 0.95rem;
-}
-
-.bot-message {
-    align-self: flex-start;
-    background: var(--white);
-    border-bottom-left-radius: 2px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    border-left: 3px solid var(--primary);
-}
-
-.user-message {
-    align-self: flex-end;
-    background: var(--primary);
-    color: var(--white);
-    border-bottom-right-radius: 2px;
-    box-shadow: 0 3px 8px rgba(58, 95, 235, 0.15);
-}
-
-.bot-typing {
-    align-self: flex-start;
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border-bottom-left-radius: 2px;
-    padding: 0.8rem 1.2rem;
-    display: flex;
-    gap: 4px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    border-left: 3px solid var(--primary);
-}
-
-.typing-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--gray);
-    border-radius: 50%;
-    display: inline-block;
-    animation: typingDot 1s infinite;
-}
-
-.typing-dot:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.typing-dot:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-.chatbot-input {
-    display: flex;
-    padding: 1.2rem;
-    border-top: 1px solid var(--light-gray);
-    background: var(--white);
-    position: relative;
-}
-
-.chatbot-input input {
-    flex-grow: 1;
-    padding: 0.9rem 1.2rem;
-    padding-right: 3rem;
-    border: 1px solid var(--light-gray);
-    border-radius: var(--radius-full);
-    font-family: var(--font-jp);
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-
-.chatbot-input input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
-}
-
-.chatbot-submit {
-    position: absolute;
-    right: 1.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--primary);
-    color: var(--white);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-    box-shadow: 0 3px 8px rgba(58, 95, 235, 0.2);
-}
-
-.chatbot-submit:hover {
-    background: var(--primary-light);
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
 }
