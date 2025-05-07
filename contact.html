@@ -361,6 +361,11 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .form-check:hover {
+            transform: translateX(4px);
         }
         
         .form-check-input {
@@ -399,6 +404,7 @@
         .form-check:hover .checkmark {
             border-color: var(--primary);
             transform: scale(1.05);
+            box-shadow: 0 3px 8px rgba(58, 95, 235, 0.25);
         }
         
         .form-check-input:checked ~ .checkmark {
@@ -1064,6 +1070,74 @@
         .cta-main-btn:hover .animated-arrow {
             animation: arrowWave 1.5s ease infinite;
         }
+
+        /* 
+        ==============================================
+        // === component-split: ConsultationButtonStyles ===
+        COMPONENT: 無料相談ボタン - 視認性向上
+        ==============================================
+        */
+        .btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            color: white;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 50px;
+            padding: 1.1rem 2.2rem;
+            min-width: 220px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.3);
+            color: white;
+        }
+
+        .btn-cta:hover::before {
+            left: 100%;
+        }
+
+        .btn-cta:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        }
+
+        .btn-icon-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-icon-right i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-icon-right:hover i {
+            transform: translateX(5px);
+        }
         
         /* 
         ==============================================
@@ -1110,6 +1184,46 @@
             
             .floating-elements {
                 display: none;
+            }
+        }
+
+        /* iPhone専用の調整 - フォームエレメントタップ領域最適化 */
+        @media screen and (max-width: 390px) {
+            .form-check {
+                padding-left: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .checkmark {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .form-control {
+                padding: 1rem 1rem 1rem 2.8rem;
+                font-size: 16px; /* iOS自動ズーム防止 */
+            }
+            
+            .input-icon {
+                left: 1.2rem;
+            }
+            
+            .btn {
+                padding: 1rem 2rem;
+                min-height: 50px; /* タップ領域拡大 */
+            }
+            
+            .form-check-label {
+                font-size: 1.05rem;
+                padding-left: 0.8rem;
+            }
+            
+            .checkmark:after {
+                left: 11px;
+                top: 6px;
+                width: 8px;
+                height: 14px;
+                border-width: 0 3px 3px 0;
             }
         }
     </style>
@@ -1162,7 +1276,7 @@
                         <li><a href="services.html" class="nav-link">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
                         <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
-                        <li class="nav-cta"><a href="#contact-form" class="btn btn-primary btn-icon-right">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
+                        <li class="nav-cta"><a href="#contact-form" class="btn btn-cta btn-icon-right">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
                     </ul>
                 </nav>
                 
@@ -1541,7 +1655,7 @@
                     
                     <!-- 最終CTAボタン - モーションエフェクト強化 -->
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn btn-cta-white btn-lg btn-icon-bounce cta-main-btn">
+                        <a href="#contact-form" class="btn btn-cta btn-lg btn-icon-bounce cta-main-btn">
                             <span>無料相談を申し込む</span>
                             <i class="fas fa-arrow-right animated-arrow" aria-hidden="true"></i>
                         </a>
