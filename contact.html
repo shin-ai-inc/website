@@ -324,15 +324,15 @@
         ==============================================
         */
         .page-hero-title .highlight-accent {
-            color: #FF8A00; /* アクセントカラー */
+            color: var(--accent);
             font-weight: 700;
             position: relative;
             display: inline-block;
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(0, 0, 0, 0.2); /* 背景から浮き出たように見せる */
-            background: rgba(255, 255, 255, 0.25); /* 薄い背景を追加 */
-            padding: 0.1em 0.5em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 138, 0, 0.1);
+            padding: 0.15em 0.5em;
             border-radius: 6px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 光るような効果 */
+            box-shadow: 0 4px 10px rgba(255, 138, 0, 0.2);
             transition: all 0.3s ease;
         }
         
@@ -343,7 +343,7 @@
             bottom: -2px;
             width: 100%;
             height: 6px;
-            background: rgba(255, 138, 0, 0.5);
+            background: rgba(255, 138, 0, 0.2);
             z-index: -1;
             border-radius: var(--radius-full);
         }
@@ -512,13 +512,14 @@
         }
         
         .contact-info {
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            background: linear-gradient(135deg, #3A5FEB, #216ECF);
             border-radius: var(--radius-xl);
             padding: 2.5rem;
             position: relative;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(58, 95, 235, 0.08);
+            box-shadow: 0 15px 50px rgba(58, 95, 235, 0.2);
+            border: 1px solid rgba(58, 95, 235, 0.1);
             overflow: hidden;
+            color: var(--white);
         }
         
         .contact-info-pattern {
@@ -527,9 +528,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.06'/%3E%3C/svg%3E");
             z-index: -1;
             opacity: 0.8;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            position: relative;
+        }
+
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 2rem;
         }
         
         /* 
@@ -554,38 +569,44 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.3rem;
-            box-shadow: 0 6px 15px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover .contact-icon {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
         
         .contact-details h4 {
             font-size: 1.15rem;
             margin: 0 0 0.3rem;
-            color: var(--dark);
+            color: var(--white);
             font-weight: 600;
         }
         
         .contact-details p {
             margin: 0;
-            color: var(--gray);
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.6;
         }
         
         .contact-details a {
-            color: var(--primary);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
         }
         
         .contact-details a:hover {
-            color: var(--secondary);
+            color: var(--white);
             text-decoration: underline;
         }
         
@@ -1337,7 +1358,7 @@
                 </div>
                 
                 <h1 class="page-hero-title" id="main-content">
-                    <span class="gradient-title">お問い合わせ</span>・<span class="highlight-accent">無料相談</span>
+                    お問い合わせ・<span class="highlight-accent">無料相談</span>
                 </h1>
                 
                 <p class="page-hero-description">
