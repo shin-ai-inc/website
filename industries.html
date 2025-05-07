@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Meta Information -->
+    <!-- 
+    ==============================================
+    // === component-split: Meta ===
+    COMPONENT: メタ情報 - SEO対策
+    ==============================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - 業界別AI活用事例。福祉・介護、教育・研修、建設業、製造業など各業界に合わせた最適なAIソリューションをご紹介します。">
@@ -10,7 +15,12 @@
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
     
-    <!-- プリロード/プリコネクト - パフォーマンス改善 -->
+    <!-- 
+    ==============================================
+    // === component-split: Resources ===
+    COMPONENT: リソース読み込み - パフォーマンス最適化
+    ==============================================
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -18,7 +28,12 @@
     <link rel="preload" href="assets/css/responsive.css" as="style">
     <link rel="preload" href="assets/images/logo.svg" as="image">
     
-    <!-- OGP Settings -->
+    <!-- 
+    ==============================================
+    // === component-split: OGP ===
+    COMPONENT: OGP設定 - SNS共有最適化
+    ==============================================
+    -->
     <meta property="og:title" content="業界別活用 | ShinAI - 各業界に最適なAIソリューション">
     <meta property="og:description" content="ShinAI - 福祉・介護、教育・研修、建設業など、業界ごとの課題に最適化したAIソリューション事例をご紹介します。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -27,17 +42,23 @@
     <meta property="og:site_name" content="ShinAI">
     <meta property="og:locale" content="ja_JP">
     
-    <!-- External Resources - 遅延読み込みと最適化 -->
+    <!-- 
+    ==============================================
+    // === component-split: ExternalResources ===
+    COMPONENT: 外部リソース - 遅延読み込み最適化
+    ==============================================
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'" rel="stylesheet">
-    
-    <!-- Font Awesome - SVGアイコンのみ読み込みに最適化 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
-    
-    <!-- GSAP - 必要な場合のみ遅延読み込み -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     
-    <!-- JSON-LD - 構造化データ最適化 -->
+    <!-- 
+    ==============================================
+    // === component-split: StructuredData ===
+    COMPONENT: 構造化データ - 検索エンジン対応
+    ==============================================
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -84,7 +105,12 @@
     
     <title>業界別活用 | ShinAI - 各業界に最適なAIソリューション</title>
     
-    <!-- スタイルシート -->
+    <!-- 
+    ==============================================
+    // === component-split: StyleSheets ===
+    COMPONENT: スタイルシート - デザイン適用
+    ==============================================
+    -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     
@@ -92,9 +118,127 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
 
-    <!-- PageSpecificStyles - 業界別活用ページの最適化されたスタイル -->
+    <!-- 
+    ==============================================
+    // === component-split: PageSpecificStyles ===
+    COMPONENT: ページ固有スタイル - カスタムデザイン
+    ==============================================
+    -->
     <style>
-    /* 業界別活用ページの改善スタイル */
+    /* 
+    ==============================================
+    // === component-split: GlobalStyles ===
+    COMPONENT: グローバルスタイル - 基本設定
+    ==============================================
+    */
+    :root {
+        --primary: #3A5FEB;
+        --primary-light: #4671FF;
+        --secondary: #00C9A7;
+        --secondary-light: #00E6C3;
+        --accent: #FF8A00;
+        --dark: #1A1F36;
+        --gray: #5E6C84;
+        --light-gray: #F9FAFC;
+        --white: #FFFFFF;
+        
+        /* グラデーション強化 */
+        --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
+        --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
+        --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+    }
+
+    /* 
+    ==============================================
+    // === component-split: Animations ===
+    COMPONENT: アニメーション - ユーザー体験向上
+    ==============================================
+    */
+    @keyframes btnIconBounce {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(5px);
+        }
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
+        }
+    }
+
+    @keyframes checkmark {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @keyframes floatingUp {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-30px);
+        }
+    }
+
+    @keyframes floatingDown {
+        0%, 100% {
+            transform: translateY(0) rotate(15deg);
+        }
+        50% {
+            transform: translateY(30px) rotate(-5deg);
+        }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    /* 
+    ==============================================
+    // === component-split: SectionStyles ===
+    COMPONENT: セクションスタイル - レイアウト管理
+    ==============================================
+    */
     .section {
         padding: 5rem 0;
         position: relative;
@@ -149,7 +293,140 @@
         color: #5E6C84; /* より暗い色で視認性向上 */
     }
 
-    /* 業界カードのコンテナ - グリッド最適化 */
+    /* 
+    ==============================================
+    // === component-split: BenefitsSection ===
+    COMPONENT: AI導入メリットセクション - 視覚的強化
+    ==============================================
+    */
+    .benefits-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .benefit-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.1);
+        padding: 2.5rem;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        border: 1px solid rgba(58, 95, 235, 0.08);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary), var(--secondary));
+        z-index: 1;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 45px rgba(58, 95, 235, 0.15);
+    }
+
+    .benefit-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        color: var(--white);
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+        transition: all 0.4s ease;
+    }
+
+    .benefit-card:hover .benefit-icon {
+        transform: rotate(10deg) scale(1.05);
+    }
+
+    .icon-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary);
+        border-radius: 20px;
+        filter: blur(15px);
+        opacity: 0.3;
+        z-index: -1;
+        transition: all 0.4s ease;
+    }
+
+    .benefit-card:hover .icon-glow {
+        opacity: 0.5;
+        filter: blur(20px);
+    }
+
+    .benefit-content h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .benefit-content p {
+        color: var(--gray);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .benefit-stat {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-percent {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--gray);
+        margin-top: 0.5rem;
+    }
+
+    /* 
+    ==============================================
+    // === component-split: IndustriesGrid ===
+    COMPONENT: 業界カードのコンテナ - グリッド最適化
+    ==============================================
+    */
     .industries-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -157,7 +434,12 @@
         margin-top: 3rem;
     }
 
-    /* 業界カードデザイン改善 */
+    /* 
+    ==============================================
+    // === component-split: IndustryCard ===
+    COMPONENT: 業界カードデザイン - 視覚的強化
+    ==============================================
+    */
     .industry-card {
         background: var(--white);
         border-radius: var(--radius-lg);
@@ -242,39 +524,39 @@
         transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     }
 
-    /* 業界別アイコンカラー */
+    /* 業界別アイコンカラー改善 */
     .industry-card[id="welfare"] .industry-icon {
-        background: #3A5FEB;
+        background: linear-gradient(135deg, #3A5FEB, #4671FF);
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
     }
 
     .industry-card[id="education"] .industry-icon {
-        background: #FF8A00;
+        background: linear-gradient(135deg, #FF8A00, #FFA53B);
         box-shadow: 0 8px 20px rgba(255, 138, 0, 0.25);
     }
 
     .industry-card[id="construction"] .industry-icon {
-        background: #32A852;
+        background: linear-gradient(135deg, #32A852, #41C866);
         box-shadow: 0 8px 20px rgba(50, 168, 82, 0.25);
     }
 
     .industry-card[id="manufacturing"] .industry-icon {
-        background: #00C9A7;
+        background: linear-gradient(135deg, #00C9A7, #00E6C3);
         box-shadow: 0 8px 20px rgba(0, 201, 167, 0.25);
     }
 
     .industry-card[id="healthcare"] .industry-icon {
-        background: #8C52FF;
+        background: linear-gradient(135deg, #8C52FF, #A67FFF);
         box-shadow: 0 8px 20px rgba(140, 82, 255, 0.25);
     }
 
     .industry-card[id="retail"] .industry-icon {
-        background: #FF5757;
+        background: linear-gradient(135deg, #FF5757, #FF7E7E);
         box-shadow: 0 8px 20px rgba(255, 87, 87, 0.25);
     }
 
     .industry-card[id="finance"] .industry-icon {
-        background: #FFBA00;
+        background: linear-gradient(135deg, #FFBA00, #FFD056);
         box-shadow: 0 8px 20px rgba(255, 186, 0, 0.25);
     }
 
@@ -297,7 +579,12 @@
         flex-grow: 1; /* 説明文が短くても下部を揃える */
     }
 
-    /* 機能リストの改善 */
+    /* 
+    ==============================================
+    // === component-split: IndustryFeatures ===
+    COMPONENT: 機能リスト - 視覚強化
+    ==============================================
+    */
     .industry-features {
         list-style: none;
         padding: 0;
@@ -349,12 +636,22 @@
         color: #FFBA00;
     }
 
-    /* カードフッター */
+    /* 
+    ==============================================
+    // === component-split: CardFooter ===
+    COMPONENT: カードフッター - ボタン配置
+    ==============================================
+    */
     .industry-footer {
         margin-top: auto; /* 下部を揃える */
     }
 
-    /* ボタンホバーエフェクト改善 */
+    /* 
+    ==============================================
+    // === component-split: Button ===
+    COMPONENT: ボタンホバーエフェクト - UX向上
+    ==============================================
+    */
     .btn-outline {
         display: inline-flex;
         align-items: center;
@@ -402,16 +699,12 @@
         animation: btnIconBounce 0.8s ease infinite;
     }
 
-    @keyframes btnIconBounce {
-        0%, 100% {
-            transform: translateX(0);
-        }
-        50% {
-            transform: translateX(5px);
-        }
-    }
-
-    /* 業界別タブナビゲーション改善 */
+    /* 
+    ==============================================
+    // === component-split: IndustryTabs ===
+    COMPONENT: 業界別タブナビゲーション - UX改善
+    ==============================================
+    */
     .industry-tabs {
         display: flex;
         flex-wrap: wrap;
@@ -448,156 +741,12 @@
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
     }
 
-    /* AI導入ステップ改善 */
-    .implementation-steps {
-        max-width: 900px;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    .implementation-steps::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 40px;
-        width: 4px;
-        background: linear-gradient(180deg, var(--primary), var(--secondary));
-        border-radius: var(--radius-full);
-    }
-
-    .step {
-        display: flex;
-        gap: 2.5rem;
-        margin-bottom: 3.5rem;
-        position: relative;
-    }
-
-    .step:last-child {
-        margin-bottom: 0;
-    }
-
-    .step-number {
-        width: 80px;
-        height: 80px;
-        min-width: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        font-weight: 700;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
-        position: relative;
-        z-index: 1;
-        transition: all 0.3s ease;
-    }
-
-    .step:hover .step-number {
-        transform: scale(1.05) rotate(5deg);
-    }
-
-    .step-content {
-        flex: 1;
-    }
-
-    .step-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--dark);
-    }
-
-    .step-description {
-        color: var(--gray);
-        margin: 0;
-        line-height: 1.7;
-    }
-
-    /* FAQセクション改善 */
-    .faq-container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .faq-item {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-        margin-bottom: 1.5rem;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .faq-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.15);
-    }
-
-    .faq-question {
-        padding: 1.5rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        color: var(--dark);
-    }
-
-    .faq-question i {
-        transition: transform 0.3s ease;
-        color: var(--primary);
-    }
-
-    .faq-item.active .faq-question i {
-        transform: rotate(180deg);
-    }
-
-    .faq-answer {
-        padding: 0 1.5rem;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .faq-item.active .faq-answer {
-        padding: 0 1.5rem 1.5rem;
-        max-height: 500px;
-    }
-
-    /* アニメーション改善 */
-    .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(25px);
-        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .animate-in {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* 業界カード強調背景エフェクト */
-    .industry-card::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05) 0%, rgba(0, 201, 167, 0.05) 100%);
-        opacity: 0;
-        z-index: -1;
-        transition: opacity 0.4s ease;
-    }
-
-    .industry-card:hover::after {
-        opacity: 1;
-    }
-
-    /* 活用事例セクション改善 */
+    /* 
+    ==============================================
+    // === component-split: UseCaseSection ===
+    COMPONENT: 活用事例セクション - コンテンツ強化
+    ==============================================
+    */
     .use-case {
         background: var(--white);
         border-radius: var(--radius-lg);
@@ -717,7 +866,12 @@
         font-weight: 600;
     }
 
-    /* CTA改善 */
+    /* 
+    ==============================================
+    // === component-split: CTASection ===
+    COMPONENT: CTA強調セクション - 成約率向上
+    ==============================================
+    */
     .cta-section {
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         padding: 6rem 0;
@@ -793,16 +947,46 @@
         animation: pulseGlow 2s infinite;
     }
 
-    @keyframes pulseGlow {
-        0%, 100% {
-            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
-        }
-        50% {
-            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
-        }
+    /* 
+    ==============================================
+    // === component-split: Preloader ===
+    COMPONENT: プリローダー - UX向上
+    ==============================================
+    */
+    .preload-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    /* レスポンシブ調整 - パフォーマンス最適化 */
+    .preload-container.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .preload-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(58, 95, 235, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s linear infinite;
+    }
+
+    /* 
+    ==============================================
+    // === component-split: ResponsiveStyles ===
+    COMPONENT: レスポンシブ調整 - デバイス対応
+    ==============================================
+    */
     @media (max-width: 992px) {
         .heading-lg {
             font-size: 2.2rem;
@@ -833,6 +1017,10 @@
 
         .use-case-content {
             grid-template-columns: 1fr;
+        }
+        
+        .benefits-container {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -874,56 +1062,46 @@
         .step {
             gap: 1.5rem;
         }
-    }
-
-    /* パフォーマンス最適化用プリロード */
-    .preload-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    .preload-container.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-    .preload-spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid rgba(58, 95, 235, 0.1);
-        border-radius: 50%;
-        border-top-color: var(--primary);
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        
+        .benefits-container {
+            grid-template-columns: 1fr;
+        }
     }
     </style>
 </head>
 <body>
-    <!-- パフォーマンス最適化: プリロード画面 -->
+    <!-- 
+    ==============================================
+    // === component-split: Preloader ===
+    COMPONENT: プリローダー - 読み込み体験向上
+    ==============================================
+    -->
     <div class="preload-container" id="preload-container">
         <div class="preload-spinner"></div>
     </div>
 
-    <!-- アクセシビリティナビゲーション -->
+    <!-- 
+    ==============================================
+    // === component-split: Accessibility ===
+    COMPONENT: アクセシビリティナビ - ウェブ標準対応
+    ==============================================
+    -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- トップバナー -->
+    <!-- 
+    ==============================================
+    // === component-split: TopBanner ===
+    COMPONENT: トップバナー - ブランド強調
+    ==============================================
+    -->
     <div class="top-banner"></div>
     
-    <!-- ヘッダー - 固定化とエフェクト強化 -->
+    <!-- 
+    ==============================================
+    // === component-split: Header ===
+    COMPONENT: ヘッダー - ナビゲーション
+    ==============================================
+    -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -955,12 +1133,18 @@
         </div>
     </header>
     
-    <!-- ページヒーロー -->
+    <!-- 
+    ==============================================
+    // === component-split: PageHero ===
+    COMPONENT: ページヒーロー - 第一印象強化
+    ==============================================
+    -->
     <div class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
             <div class="page-hero-bg-pattern"></div>
         </div>
+        
         <div class="container">
             <div class="page-hero-content">
                 <div class="breadcrumb" aria-label="パンくずリスト">
@@ -968,7 +1152,7 @@
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-current">業界別活用</span>
                 </div>
-                <h1 class="page-hero-title">業界別AI活用ガイド</h1>
+                <h1 class="page-hero-title" id="main-content">業界別AI活用ガイド</h1>
                 <p class="page-hero-description">
                     AIが持つ可能性を最大限に引き出し、あらゆる業界の課題解決と成長を支援する<br>
                     ShinAIの業界特化型AIソリューションをご紹介します
@@ -978,7 +1162,12 @@
     </div>
     
     <main id="main-content">
-        <!-- 導入セクション -->
+        <!-- 
+        ==============================================
+        // === component-split: IntroSection ===
+        COMPONENT: 導入セクション - コンセプト説明
+        ==============================================
+        -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -996,38 +1185,58 @@
                     <p class="text-highlight mb-5">ShinAIは、お客様のビジネスの成長と社会課題の解決に貢献するAIソリューションを提供します。</p>
                 </div>
                 
-                <!-- AI導入のメリット - カード表示に改善 -->
+                <!-- 
+                ==============================================
+                // === component-split: BenefitsOverview ===
+                COMPONENT: AI導入のメリット - カード表示改善
+                ==============================================
+                -->
                 <div class="glass-card benefit-overview animate-on-scroll">
                     <h3 class="heading-md text-center mb-4">AI導入がもたらす<span class="highlight">主な3つのメリット</span></h3>
                     
-                    <div class="benefit-overview-grid">
-                        <div class="benefit-item">
+                    <div class="benefits-container">
+                        <div class="benefit-card">
                             <div class="benefit-icon">
+                                <div class="icon-glow"></div>
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <div class="benefit-content">
                                 <h4>業務効率化・自動化</h4>
                                 <p>定型業務の自動化や意思決定の迅速化により、人的リソースを創造的な業務に集中させることができます。作業時間の短縮と人為的ミスの削減を実現します。</p>
+                                <div class="benefit-stat">
+                                    <span class="stat-value">70</span><span class="stat-percent">%</span>
+                                    <span class="stat-label">業務時間削減</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="benefit-item">
+                        <div class="benefit-card">
                             <div class="benefit-icon">
+                                <div class="icon-glow"></div>
                                 <i class="fas fa-lightbulb"></i>
                             </div>
                             <div class="benefit-content">
                                 <h4>データ分析・予測精度向上</h4>
                                 <p>大量のデータから有益な情報とパターンを抽出し、より正確な予測と意思決定を可能にします。ビジネス戦略の最適化や新たな機会の発見に貢献します。</p>
+                                <div class="benefit-stat">
+                                    <span class="stat-value">85</span><span class="stat-percent">%</span>
+                                    <span class="stat-label">予測精度向上</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="benefit-item">
+                        <div class="benefit-card">
                             <div class="benefit-icon">
+                                <div class="icon-glow"></div>
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="benefit-content">
                                 <h4>顧客体験・サービス品質向上</h4>
                                 <p>パーソナライズされたサービス提供や24時間対応の自動化により、顧客満足度を高めます。人間とAIの協働により、サービス品質の向上と対応力の強化を実現します。</p>
+                                <div class="benefit-stat">
+                                    <span class="stat-value">90</span><span class="stat-percent">%</span>
+                                    <span class="stat-label">顧客満足度</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1035,7 +1244,12 @@
             </div>
         </section>
         
-        <!-- 業界ナビゲーション -->
+        <!-- 
+        ==============================================
+        // === component-split: IndustriesNavigation ===
+        COMPONENT: 業界ナビゲーション - カテゴリ分類
+        ==============================================
+        -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -1044,7 +1258,12 @@
                     <p class="section-description">業界ごとの特性を理解し、最適なAIソリューションを提供します</p>
                 </div>
                 
-                <!-- 業界タブナビゲーション - スクロール機能付き -->
+                <!-- 
+                ==============================================
+                // === component-split: IndustryTabs ===
+                COMPONENT: 業界タブナビゲーション - スクロール機能
+                ==============================================
+                -->
                 <div class="industry-tabs animate-on-scroll" role="tablist">
                     <a href="#welfare" class="industry-tab active" role="tab">福祉・介護</a>
                     <a href="#education" class="industry-tab" role="tab">教育・研修</a>
@@ -1055,7 +1274,12 @@
                     <a href="#finance" class="industry-tab" role="tab">金融・保険</a>
                 </div>
                 
-                <!-- 業界カードグリッド - 改善 -->
+                <!-- 
+                ==============================================
+                // === component-split: IndustriesGrid ===
+                COMPONENT: 業界カードグリッド - 情報整理
+                ==============================================
+                -->
                 <div class="industries-grid animate-on-scroll">
                     <!-- 福祉・介護 -->
                     <div class="industry-card" id="welfare">
@@ -1284,7 +1508,12 @@
             </div>
         </section>
         
-        <!-- 業界別導入事例 -->
+        <!-- 
+        ==============================================
+        // === component-split: UseCasesSection ===
+        COMPONENT: 業界別導入事例 - 具体例提示
+        ==============================================
+        -->
         <section class="section">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -1294,7 +1523,12 @@
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
                 </div>
                 
-                <!-- 福祉・介護の活用例 -->
+                <!-- 
+                ==============================================
+                // === component-split: WelfareUseCase ===
+                COMPONENT: 福祉・介護の活用例 - 分野別情報
+                ==============================================
+                -->
                 <div class="use-case animate-on-scroll" id="welfare-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
@@ -1338,7 +1572,12 @@
                     </div>
                 </div>
                 
-                <!-- 教育・研修の活用例 -->
+                <!-- 
+                ==============================================
+                // === component-split: EducationUseCase ===
+                COMPONENT: 教育・研修の活用例 - 分野別情報
+                ==============================================
+                -->
                 <div class="use-case animate-on-scroll" id="education-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
@@ -1382,7 +1621,12 @@
                     </div>
                 </div>
                 
-                <!-- 製造業の活用例 -->
+                <!-- 
+                ==============================================
+                // === component-split: ManufacturingUseCase ===
+                COMPONENT: 製造業の活用例 - 分野別情報
+                ==============================================
+                -->
                 <div class="use-case animate-on-scroll" id="manufacturing-case">
                     <div class="use-case-header">
                         <div class="use-case-icon">
@@ -1426,10 +1670,15 @@
                     </div>
                 </div>
 
-                <!-- 建設業の活用例 -->
+                <!-- 
+                ==============================================
+                // === component-split: ConstructionUseCase ===
+                COMPONENT: 建設業の活用例 - 分野別情報
+                ==============================================
+                -->
                 <div class="use-case animate-on-scroll" id="construction-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon" style="background: #32A852; box-shadow: 0 8px 20px rgba(50, 168, 82, 0.25);">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, #32A852, #41C866); box-shadow: 0 8px 20px rgba(50, 168, 82, 0.25);">
                             <i class="fas fa-hard-hat"></i>
                         </div>
                         <div>
@@ -1472,7 +1721,12 @@
             </div>
         </section>
         
-        <!-- AI導入ステップ -->
+        <!-- 
+        ==============================================
+        // === component-split: ImplementationSteps ===
+        COMPONENT: AI導入ステップ - プロセス説明
+        ==============================================
+        -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -1525,7 +1779,12 @@
             </div>
         </section>
         
-        <!-- よくある質問 -->
+        <!-- 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: よくある質問 - 不安解消
+        ==============================================
+        -->
         <section class="section section-faq">
             <div class="container">
                 <div class="section-header animate-on-scroll">
@@ -1588,7 +1847,12 @@
             </div>
         </section>
         
-        <!-- CTA -->
+        <!-- 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: CTA - 行動喚起セクション
+        ==============================================
+        -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -1619,14 +1883,24 @@
         </section>
     </main>
     
-    <!-- ボトムバナー -->
+    <!-- 
+    ==============================================
+    // === component-split: BottomBanner ===
+    COMPONENT: ボトムバナー - ブランドメッセージ強調
+    ==============================================
+    -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- フッター -->
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター - サイト全体ナビゲーション
+    ==============================================
+    -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1688,7 +1962,12 @@
         </div>
     </footer>
     
-    <!-- ChatbotComponent -->
+    <!-- 
+    ==============================================
+    // === component-split: Chatbot ===
+    COMPONENT: チャットボット - インタラクティブサポート
+    ==============================================
+    -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1717,12 +1996,22 @@
         </div>
     </div>
     
-    <!-- トップに戻るボタン -->
+    <!-- 
+    ==============================================
+    // === component-split: BackToTop ===
+    COMPONENT: トップに戻るボタン - ナビゲーション補助
+    ==============================================
+    -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- JavaScript - 最適化・遅延読み込み -->
+    <!-- 
+    ==============================================
+    // === component-split: JavaScript ===
+    COMPONENT: JavaScript - インタラクション制御
+    ==============================================
+    -->
     <script>
         // プリロード画面の制御
         window.addEventListener('load', function() {
