@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- === コンポーネント: Meta情報 === -->
+    <!-- Meta Information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - お問い合わせ・無料相談。AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- === コンポーネント: プリロード/プリコネクト - パフォーマンス最適化 === -->
+    <!-- プリロード/プリコネクト - パフォーマンス最適化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -22,7 +22,7 @@
     <link rel="preload" href="assets/images/logo.svg" as="image">
     <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" crossorigin>
     
-    <!-- === コンポーネント: OGP設定 === -->
+    <!-- OGP Settings -->
     <meta property="og:title" content="ShinAI - お問い合わせ・無料相談">
     <meta property="og:description" content="AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -35,7 +35,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - お問い合わせと無料AI相談">
     
-    <!-- === コンポーネント: 外部リソース読み込み (最適化) === -->
+    <!-- External Resources - 最適化 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" rel="stylesheet">
     
     <!-- Font Awesome - アイコン -->
@@ -48,7 +48,7 @@
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
-    <!-- === コンポーネント: 構造化データ (JSON-LD) === -->
+    <!-- JSON-LD - 構造化データ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -99,13 +99,17 @@
     
     <title>お問い合わせ・無料相談 | ShinAI - 最先端AIソリューション</title>
     
-    <!-- === コンポーネント: 共通スタイルシート === -->
+    <!-- スタイルシート -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     
-    <!-- === コンポーネント: お問い合わせページ固有のスタイル === -->
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="apple-touch-icon" href="assets/images/logo.svg">
+
+    <!-- お問い合わせページ固有のスタイル -->
     <style>
-        /* === プリロードスピナー コンポーネント === */
+        /* プリロードスピナー */
         .preload-container {
             position: fixed;
             top: 0;
@@ -139,7 +143,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* === グローバルアニメーション === */
+        /* グローバルアニメーション */
         @keyframes btnIconBounce {
             0%, 100% {
                 transform: translateX(0);
@@ -183,41 +187,7 @@
             }
         }
 
-        @keyframes floatingUp {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
-        }
-        
-        @keyframes floatingDown {
-            0%, 100% {
-                transform: translateY(0) rotate(15deg);
-            }
-            50% {
-                transform: translateY(30px) rotate(-5deg);
-            }
-        }
-        
-        @keyframes rotateSlowly {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes formFocusLine {
-            to {
-                width: 100%;
-            }
-        }
-
-        /* === ヒーローセクション コンポーネント === */
-        /* 無料相談テキスト視認性向上 - 背景との同化問題解決 */
+        /* ヒーローセクション - 無料相談テキスト視認性向上 */
         .page-hero-title .highlight-accent {
             color: #FF8A00; /* アクセントカラー */
             font-weight: 700;
@@ -242,175 +212,8 @@
             z-index: -1;
             border-radius: var(--radius-full);
         }
-        
-        /* === ボタン コンポーネント === */
-        .btn-icon-bounce {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1;
-        }
-        
-        .btn-icon-bounce span {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .btn-icon-bounce i {
-            position: relative;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-        
-        .btn-icon-bounce:hover i,
-        .btn-icon-bounce:focus i {
-            animation: btnIconBounce 0.8s ease infinite;
-        }
-        
-        .btn-icon-bounce::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.7s ease;
-            z-index: 1;
-        }
-        
-        .btn-icon-bounce:hover,
-        .btn-icon-bounce:focus {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.35);
-        }
-        
-        .btn-icon-bounce:hover::before,
-        .btn-icon-bounce:focus::before {
-            left: 100%;
-        }
-        
-        .btn-icon-bounce:active {
-            transform: translateY(-1px) scale(1.02);
-            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-        }
-        
-        /* CTA強調ボタン */
-        .cta-main-btn {
-            position: relative;
-            overflow: visible;
-        }
-        
-        .cta-main-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            z-index: -1;
-            animation: pulseGlow 2s infinite;
-        }
-        
-        /* === FAQ コンポーネント === */
-        .section-faq {
-            background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-faq::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
-            z-index: -1;
-            opacity: 0.5;
-        }
-        
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
-            transform: translateY(-3px);
-        }
-        
-        .faq-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .faq-question {
-            background: var(--white);
-            color: var(--dark);
-            font-weight: 600;
-            padding: 1.5rem 2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            color: var(--primary);
-        }
-        
-        .faq-question i {
-            color: var(--primary);
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-item.active .faq-question {
-            border-bottom: none;
-            color: var(--primary);
-        }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(-180deg);
-        }
-        
-        .faq-answer {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(249, 250, 252, 0.7);
-            border-top: 1px solid rgba(58, 95, 235, 0.08);
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 1.5rem 2rem;
-            max-height: 1000px;
-        }
-        
-        .faq-answer p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin: 0;
-        }
-        
-        /* === チェックボックス コンポーネント === */
-        /* クリック時の視覚的フィードバック追加 */
+
+        /* カスタムチェックボックス - 機能改善 */
         .form-check {
             position: relative;
             padding-left: 2.8rem;
@@ -498,63 +301,7 @@
             margin-top: 1rem;
         }
         
-        /* === フォームバリデーション コンポーネント === */
-        .form-control.error {
-            border-color: var(--error);
-            background-color: rgba(255, 59, 59, 0.03);
-        }
-        
-        .form-control.error:focus {
-            box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
-        }
-        
-        .form-control.valid {
-            border-color: var(--success);
-            background-color: rgba(0, 196, 140, 0.03);
-        }
-        
-        .form-control.valid:focus {
-            box-shadow: 0 0 0 3px rgba(0, 196, 140, 0.15);
-        }
-        
-        .field-error.active {
-            color: var(--error);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: block;
-            animation: fadeInUp 0.3s ease forwards;
-        }
-        
-        /* === 成功メッセージ コンポーネント === */
-        .message-success {
-            background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
-            border-left: 4px solid var(--success);
-            padding: 1.2rem;
-            border-radius: 0 var(--radius) var(--radius) 0;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            display: none;
-        }
-        
-        .message-success i {
-            color: var(--success);
-            font-size: 1.5rem;
-        }
-        
-        .message-success p {
-            color: var(--dark);
-            margin: 0;
-            font-weight: 500;
-        }
-        
-        .message-success.show {
-            display: flex;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        
-        /* === フォーム入力フォーカス コンポーネント === */
+        /* フォーム入力フォーカス効果 */
         .input-wrapper {
             position: relative;
             transition: all 0.3s ease;
@@ -572,7 +319,13 @@
             animation: formFocusLine 0.3s ease forwards;
         }
         
-        /* === 見出し強調 コンポーネント === */
+        @keyframes formFocusLine {
+            to {
+                width: 100%;
+            }
+        }
+        
+        /* 見出し強調 */
         .heading-lg .highlight {
             color: var(--primary);
             background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
@@ -595,7 +348,7 @@
             z-index: -1;
         }
         
-        /* === コンタクトグリッド コンポーネント === */
+        /* コンタクトグリッド */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -672,7 +425,7 @@
             text-decoration: underline;
         }
         
-        /* === フォーム コンポーネント === */
+        /* お問い合わせフォーム */
         .contact-form {
             background: white;
             border-radius: var(--radius-xl);
@@ -772,7 +525,63 @@
             text-decoration: underline;
         }
         
-        /* === 地図 コンポーネント === */
+        /* バリデーション */
+        .form-control.error {
+            border-color: var(--error);
+            background-color: rgba(255, 59, 59, 0.03);
+        }
+        
+        .form-control.error:focus {
+            box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
+        }
+        
+        .form-control.valid {
+            border-color: var(--success);
+            background-color: rgba(0, 196, 140, 0.03);
+        }
+        
+        .form-control.valid:focus {
+            box-shadow: 0 0 0 3px rgba(0, 196, 140, 0.15);
+        }
+        
+        .field-error.active {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: block;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+        
+        /* 送信成功メッセージ */
+        .message-success {
+            background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .message-success i {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+        
+        .message-success p {
+            color: var(--dark);
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .message-success.show {
+            display: flex;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        /* 地図関連 */
         .map-container {
             overflow: hidden;
             border-radius: var(--radius-xl);
@@ -788,8 +597,6 @@
         }
         
         .contact-map {
-            position: relative;
-            width: 100%;
             height: 450px;
         }
         
@@ -844,7 +651,103 @@
             line-height: 1.6;
         }
         
-        /* === 装飾要素 コンポーネント === */
+        /* FAQセクション */
+        .section-faq {
+            background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-faq::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.03'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-question {
+            background: var(--white);
+            color: var(--dark);
+            font-weight: 600;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            border-bottom: none;
+            color: var(--primary);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(-180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(249, 250, 252, 0.7);
+            border-top: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem 2rem;
+            max-height: 1000px;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        /* 装飾要素 */
         .floating-elements {
             position: absolute;
             top: 0;
@@ -889,7 +792,70 @@
             animation: rotateSlowly 60s linear infinite;
         }
         
-        /* === モバイル対応 コンポーネント === */
+        @keyframes floatingUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+        
+        @keyframes floatingDown {
+            0%, 100% {
+                transform: translateY(0) rotate(15deg);
+            }
+            50% {
+                transform: translateY(30px) rotate(-5deg);
+            }
+        }
+        
+        @keyframes rotateSlowly {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* CTAセクション */
+        .section-cta {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cta-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06));
+            z-index: -1;
+        }
+        
+        .cta-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        /* レスポンシブ対応 */
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -934,18 +900,18 @@
     </style>
 </head>
 <body data-current-year="2025">
-    <!-- === コンポーネント: プリローダー === -->
+    <!-- プリローダー -->
     <div class="preload-container" id="preload-container">
         <div class="preload-spinner"></div>
     </div>
 
-    <!-- === コンポーネント: アクセシビリティナビゲーション === -->
+    <!-- アクセシビリティナビゲーション -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- === コンポーネント: トップバナー === -->
+    <!-- トップバナー -->
     <div class="top-banner"></div>
     
-    <!-- === コンポーネント: ヘッダー === -->
+    <!-- ヘッダー -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -972,7 +938,7 @@
         </div>
     </header>
     
-    <!-- === コンポーネント: ページヒーロー === -->
+    <!-- ページヒーロー -->
     <section class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
@@ -1009,9 +975,9 @@
         </div>
     </section>
     
-    <!-- === メインコンテンツ === -->
+    <!-- メインコンテンツ -->
     <main class="main-content">
-        <!-- === コンポーネント: お問い合わせフォーム === -->
+        <!-- お問い合わせフォーム -->
         <section class="section section-contact" id="contact-form">
             <div class="container">
                 <div class="section-title text-center">
@@ -1021,7 +987,7 @@
                 </div>
                 
                 <div class="contact-grid">
-                    <!-- === コンポーネント: お問い合わせ情報 === -->
+                    <!-- お問い合わせ情報 -->
                     <div class="contact-info animate-on-scroll">
                         <div class="contact-info-pattern"></div>
                         <h3 class="contact-title">お問い合わせ先</h3>
@@ -1068,7 +1034,7 @@
                         </div>
                     </div>
                     
-                    <!-- === コンポーネント: お問い合わせフォーム === -->
+                    <!-- お問い合わせフォーム -->
                     <div class="contact-form animate-on-scroll">
                         <div class="message-success" id="message-success" role="alert" aria-live="polite">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
@@ -1186,7 +1152,7 @@
             </div>
         </section>
         
-        <!-- === コンポーネント: 地図セクション === -->
+        <!-- 地図セクション -->
         <section class="section section-map">
             <div class="container">
                 <div class="section-title text-center">
@@ -1223,7 +1189,7 @@
             </div>
         </section>
         
-        <!-- === コンポーネント: よくある質問セクション === -->
+        <!-- よくある質問セクション -->
         <section class="section section-faq">
             <div class="container">
                 <div class="section-title text-center">
@@ -1286,7 +1252,7 @@
             </div>
         </section>
         
-        <!-- === コンポーネント: CTAセクション === -->
+        <!-- CTAセクション -->
         <section class="section section-cta">
             <div class="cta-bg">
                 <div class="cta-bg-gradient"></div>
@@ -1315,14 +1281,14 @@
         </section>
     </main>
     
-    <!-- === コンポーネント: 下部バナー === -->
+    <!-- 下部バナー -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- === コンポーネント: フッター === -->
+    <!-- フッター -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1360,8 +1326,8 @@
                         <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
                         <li><a href="industries.html#finance">金融・保険</a></li>
                         <li><a href="industries.html#retail">小売・Eコマース</a></li>
-                        <li><a href="industries.html#agriculture">農業・食品</a></li>
                         <li><a href="industries.html#education">教育・研修</a></li>
+                        <li><a href="industries.html#welfare">福祉・介護</a></li>
                     </ul>
                 </div>
                 
@@ -1387,7 +1353,7 @@
         </div>
     </footer>
     
-    <!-- === コンポーネント: AIチャットボット === -->
+    <!-- AIチャットボット -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1416,14 +1382,14 @@
         </div>
     </div>
     
-    <!-- === コンポーネント: トップに戻るボタン === -->
+    <!-- トップに戻るボタン -->
     <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </a>
     
-    <!-- === コンポーネント: JavaScriptロジック === -->
+    <!-- JavaScriptロジック -->
     <script>
-        // === コンポーネント: プリローダー制御 ===
+        // プリローダー制御
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preload-container');
             if (preloader) {
@@ -1437,7 +1403,7 @@
         });
         
         document.addEventListener('DOMContentLoaded', function() {
-            // === コンポーネント: 現在年表示 ===
+            // 現在年表示
             const currentYearElement = document.getElementById('current-year');
             if (currentYearElement) {
                 const currentYear = new Date().getFullYear();
@@ -1445,7 +1411,7 @@
                 document.body.setAttribute('data-current-year', currentYear);
             }
             
-            // === コンポーネント: ヘッダースクロール効果 ===
+            // ヘッダースクロール効果
             const header = document.getElementById('header');
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 10) {
@@ -1455,7 +1421,7 @@
                 }
             });
             
-            // === コンポーネント: トップに戻るボタン ===
+            // トップに戻るボタン
             const backToTopButton = document.getElementById('back-to-top');
             let lastScrollTime = 0;
             
@@ -1479,7 +1445,7 @@
                 });
             });
             
-            // === コンポーネント: ハンバーガーメニュー ===
+            // ハンバーガーメニュー
             const menuToggle = document.getElementById('menu-toggle');
             const nav = document.getElementById('nav');
             
@@ -1496,7 +1462,7 @@
                 });
             }
             
-            // === コンポーネント: スムーススクロール ===
+            // スムーススクロール
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1517,7 +1483,7 @@
                 });
             });
             
-            // === コンポーネント: チャットボット ===
+            // チャットボット
             const chatbotToggle = document.getElementById('chatbot-toggle');
             const chatbotContainer = document.getElementById('chatbot-container');
             const chatbotClose = document.getElementById('chatbot-close');
@@ -1580,7 +1546,7 @@
                 }
             }
             
-            // === コンポーネント: FAQアコーディオン ===
+            // FAQアコーディオン
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
@@ -1611,7 +1577,7 @@
                 });
             });
             
-            // === コンポーネント: アニメーションスクロール検出 ===
+            // アニメーションスクロール検出
             const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
             
             const observerOptions = {
@@ -1632,7 +1598,7 @@
                 observer.observe(el);
             });
             
-            // === コンポーネント: フォームバリデーション ===
+            // フォームバリデーション
             const contactForm = document.getElementById('contact-form-element');
             const successMessage = document.getElementById('message-success');
             
@@ -1697,7 +1663,7 @@
                     }
                 });
                 
-                // === コンポーネント: フィールドバリデーション関数 ===
+                // フィールドバリデーション関数
                 function validateField(field) {
                     const fieldType = field.getAttribute('type');
                     const fieldId = field.getAttribute('id');
@@ -1751,7 +1717,7 @@
                     return true;
                 }
                 
-                // === コンポーネント: フォーム送信シミュレーション ===
+                // フォーム送信シミュレーション
                 function simulateFormSubmission() {
                     const submitButton = contactForm.querySelector('button[type="submit"]');
                     const originalText = submitButton.innerHTML;
@@ -1796,7 +1762,7 @@
                 }
             }
             
-            // === コンポーネント: reCAPTCHA コールバック ===
+            // reCAPTCHA コールバック
             window.onRecaptchaVerified = function(token) {
                 // reCAPTCHA検証後の処理
                 console.log('reCAPTCHA検証完了:', token);
