@@ -169,12 +169,12 @@
         --finance-primary: #FFBA00;
         --finance-secondary: #FFD056;
         
-        /* AI導入ステップカラー - プロフェッショナルな統一感 */
-        --step-1-color: var(--primary);
-        --step-2-color: #4186F4;
-        --step-3-color: #52A6F7;
-        --step-4-color: #64C9F9;
-        --step-5-color: var(--secondary);
+        /* AI導入ステップカラー - 洗練されたブルーからティールへのグラデーション */
+        --step-1-color: #3A5FEB;
+        --step-2-color: #3A7FD9;
+        --step-3-color: #3A9FC8;
+        --step-4-color: #39BCBA;
+        --step-5-color: #38DCAC;
     }
 
     /* 
@@ -481,6 +481,13 @@
         justify-content: center;
     }
     
+    /* 6項目の場合のグリッドレイアウト - 2×3配置 */
+    @media (min-width: 992px) {
+        .industries-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
     /* 
     ==============================================
     // === component-split: IndustryCard ===
@@ -733,10 +740,18 @@
         animation: btnIconBounce 0.8s ease infinite;
     }
 
-    /* 業界別のボタンカラー - 統一感ある配色 */
+    /* 業界別ボタンのカスタマイズ */
     .industry-card[id="welfare"] .btn-outline {
         color: var(--welfare-primary);
         border-color: rgba(58, 95, 235, 0.25);
+    }
+
+    .industry-card[id="welfare"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(58, 95, 235, 0.1), rgba(70, 113, 255, 0.1));
+    }
+
+    .industry-card[id="welfare"] .btn-outline:hover {
+        border-color: var(--welfare-primary);
     }
 
     .industry-card[id="education"] .btn-outline {
@@ -744,9 +759,25 @@
         border-color: rgba(255, 138, 0, 0.25);
     }
 
+    .industry-card[id="education"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 138, 0, 0.1), rgba(255, 165, 59, 0.1));
+    }
+
+    .industry-card[id="education"] .btn-outline:hover {
+        border-color: var(--education-primary);
+    }
+
     .industry-card[id="construction"] .btn-outline {
         color: var(--construction-primary);
         border-color: rgba(50, 168, 82, 0.25);
+    }
+
+    .industry-card[id="construction"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(50, 168, 82, 0.1), rgba(65, 200, 102, 0.1));
+    }
+
+    .industry-card[id="construction"] .btn-outline:hover {
+        border-color: var(--construction-primary);
     }
 
     .industry-card[id="manufacturing"] .btn-outline {
@@ -754,9 +785,25 @@
         border-color: rgba(0, 201, 167, 0.25);
     }
 
+    .industry-card[id="manufacturing"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(0, 201, 167, 0.1), rgba(0, 230, 195, 0.1));
+    }
+
+    .industry-card[id="manufacturing"] .btn-outline:hover {
+        border-color: var(--manufacturing-primary);
+    }
+
     .industry-card[id="retail"] .btn-outline {
         color: var(--retail-primary);
         border-color: rgba(255, 87, 87, 0.25);
+    }
+
+    .industry-card[id="retail"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 87, 87, 0.1), rgba(255, 126, 126, 0.1));
+    }
+
+    .industry-card[id="retail"] .btn-outline:hover {
+        border-color: var(--retail-primary);
     }
 
     .industry-card[id="finance"] .btn-outline {
@@ -764,24 +811,8 @@
         border-color: rgba(255, 186, 0, 0.25);
     }
 
-    .industry-card[id="welfare"] .btn-outline:hover {
-        border-color: var(--welfare-primary);
-    }
-
-    .industry-card[id="education"] .btn-outline:hover {
-        border-color: var(--education-primary);
-    }
-
-    .industry-card[id="construction"] .btn-outline:hover {
-        border-color: var(--construction-primary);
-    }
-
-    .industry-card[id="manufacturing"] .btn-outline:hover {
-        border-color: var(--manufacturing-primary);
-    }
-
-    .industry-card[id="retail"] .btn-outline:hover {
-        border-color: var(--retail-primary);
+    .industry-card[id="finance"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 186, 0, 0.1), rgba(255, 208, 86, 0.1));
     }
 
     .industry-card[id="finance"] .btn-outline:hover {
@@ -830,6 +861,31 @@
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
     }
 
+    /* 業界別タブカラーカスタマイズ */
+    .industry-tab[href="#welfare"].active {
+        background: var(--welfare-primary);
+    }
+
+    .industry-tab[href="#education"].active {
+        background: var(--education-primary);
+    }
+
+    .industry-tab[href="#construction"].active {
+        background: var(--construction-primary);
+    }
+
+    .industry-tab[href="#manufacturing"].active {
+        background: var(--manufacturing-primary);
+    }
+
+    .industry-tab[href="#retail"].active {
+        background: var(--retail-primary);
+    }
+
+    .industry-tab[href="#finance"].active {
+        background: var(--finance-primary);
+    }
+
     /* 
     ==============================================
     // === component-split: UseCaseSection ===
@@ -864,7 +920,7 @@
         z-index: 1;
     }
 
-    /* 活用事例の色分け - 業界別セクションに合わせる */
+    /* 業界別の活用事例カードの左ラインカラー */
     #welfare-case::before {
         background: linear-gradient(180deg, var(--welfare-primary), var(--welfare-secondary));
     }
@@ -900,14 +956,14 @@
         width: 75px;
         height: 75px;
         min-width: 75px;
-        background: var(--primary);
+        background: var(--accent);
         color: var(--white);
         border-radius: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 2rem;
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.25);
+        box-shadow: 0 8px 25px rgba(255, 138, 0, 0.25);
         position: relative;
         z-index: 1;
         transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
@@ -947,7 +1003,7 @@
         font-size: 1.1rem;
     }
 
-    /* 活用事例のセクションヘッダー色分け */
+    /* 活用事例のh4見出しカラーカスタマイズ */
     #welfare-case .use-case-section h4 {
         color: var(--welfare-primary);
     }
@@ -1000,7 +1056,7 @@
         font-weight: bold;
     }
 
-    /* 活用事例のリストマーカー色分け */
+    /* 業界別のリストマーカーカラー */
     #welfare-case .use-case-list li::before {
         color: var(--welfare-primary);
     }
@@ -1051,7 +1107,7 @@
         left: 50px;
         width: 4px;
         height: 100%;
-        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        background: linear-gradient(to bottom, var(--step-1-color), var(--step-5-color));
         border-radius: 4px;
         z-index: 0;
         opacity: 0.5;
@@ -1073,7 +1129,6 @@
         width: 70px;
         height: 70px;
         min-width: 70px;
-        background: var(--primary);
         color: white;
         border-radius: 50%;
         display: flex;
@@ -1081,37 +1136,39 @@
         justify-content: center;
         font-size: 1.8rem;
         font-weight: 700;
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.25);
         position: relative;
         z-index: 2;
         transition: all 0.3s ease;
-        background: linear-gradient(135deg, var(--primary), var(--primary-light));
     }
     
-    /* ステップ番号ごとに異なる洗練されたグラデーション - プロフェッショナルな印象 */
+    /* ステップ番号ごとに洗練されたブルーからティールへのグラデーション */
     .step:nth-child(1) .step-number {
-        background: linear-gradient(135deg, var(--step-1-color), #4671FF);
+        background: var(--step-1-color);
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.25);
     }
     
     .step:nth-child(2) .step-number {
-        background: linear-gradient(135deg, var(--step-2-color), #52A6F7);
+        background: var(--step-2-color);
+        box-shadow: 0 8px 25px rgba(58, 127, 217, 0.25);
     }
     
     .step:nth-child(3) .step-number {
-        background: linear-gradient(135deg, var(--step-3-color), #64C9F9);
+        background: var(--step-3-color);
+        box-shadow: 0 8px 25px rgba(58, 159, 200, 0.25);
     }
     
     .step:nth-child(4) .step-number {
-        background: linear-gradient(135deg, var(--step-4-color), #79E8FA);
+        background: var(--step-4-color);
+        box-shadow: 0 8px 25px rgba(57, 188, 186, 0.25);
     }
     
     .step:nth-child(5) .step-number {
-        background: linear-gradient(135deg, var(--step-5-color), var(--secondary-light));
+        background: var(--step-5-color);
+        box-shadow: 0 8px 25px rgba(56, 220, 172, 0.25);
     }
     
     .step:hover .step-number {
         transform: scale(1.1) rotate(10deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
     }
     
     .step-content {
@@ -1226,7 +1283,7 @@
     
     .faq-question i {
         color: var(--primary);
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     .faq-item.active .faq-question {
@@ -1238,33 +1295,34 @@
         transform: rotate(180deg);
     }
     
-    /* 改善されたスムーズなアコーディオン機能 */
+    /* スムーズなアコーディオン動作の改善 */
     .faq-answer {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1), padding 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: max-height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    padding 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    opacity 0.3s ease;
         background-color: white;
         padding: 0 2rem;
         border-top: 1px solid rgba(58, 95, 235, 0.1);
+        opacity: 0;
     }
     
     .faq-item.active .faq-answer {
-        max-height: 500px;
+        max-height: 1000px;
         padding: 1.5rem 2rem;
+        opacity: 1;
     }
     
     .faq-answer p {
         margin: 0;
         color: var(--gray);
         line-height: 1.7;
-        opacity: 0;
         transform: translateY(10px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        transition-delay: 0.2s;
+        transition: transform 0.4s ease 0.1s;
     }
     
     .faq-item.active .faq-answer p {
-        opacity: 1;
         transform: translateY(0);
     }
 
@@ -2157,10 +2215,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
                             <ul class="use-case-list">
-                                <li><strong>データ分析による品質検査AI</strong>：センサーデータを分析し、製品の品質異常を検出。人間の目では見逃す微細な不良も検出。</li>
+                                <li><strong>品質検査AI</strong>：画像認識技術を活用した外観検査の自動化。人間の目では見逃す微細な不良も検出し、品質の安定化を実現。</li>
                                 <li><strong>設備予知保全システム</strong>：センサーデータを分析し、故障の前兆を検知。計画的なメンテナンスで突発停止を防止。</li>
-                                <li><strong>知能型生産計画システム</strong>：需要予測と生産能力を考慮した最適な生産計画を立案。シミュレーションによる生産効率化を実現。</li>
-                                <li><strong>熟練技術者のノウハウAI化</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
+                                <li><strong>生産スケジューリングAI</strong>：需要予測と生産能力を考慮した最適な生産計画を立案。シミュレーションによる生産効率化を実現。</li>
+                                <li><strong>技術ナレッジマネジメント</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
                             </ul>
                         </div>
                         
@@ -2175,7 +2233,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 
                 ==============================================
                 // === component-split: RetailUseCase ===
@@ -2273,167 +2331,167 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- 
-                ==============================================
-                // === component-split: ImplementationSteps ===
-                COMPONENT: AI導入ステップ - プロセス説明
-                ==============================================
-                -->
-                <section class="section section-bg-light">
-                    <div class="container">
-                        <div class="section-header animate-on-scroll">
-                            <span class="section-subtitle">AI導入ステップ</span>
-                            <h2 class="heading-lg">AI導入の<span class="highlight">5つのステップ</span></h2>
-                            <p class="section-description">成功するAI導入のための体系的なアプローチをご紹介します</p>
-                        </div>
-                        
-                        <div class="implementation-steps animate-on-scroll">
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
-                                    <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。ShinAIの専門家が、お客様と共に最適な要件を定義します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4 class="step-title">PoC（実証実験）の実施</h4>
-                                    <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。この段階で、投資対効果を明確にし、本格導入へのロードマップを策定します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
-                                    <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含め、お客様の業務プロセスに最適化したソリューションを構築します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step">
-                                <div class="step-number">4</div>
-                                <div class="step-content">
-                                    <h4 class="step-title">組織への展開と変革管理</h4>
-                                    <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。ShinAIは導入後のサポートも含め、組織全体でのAI活用を支援します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="step">
-                                <div class="step-number">5</div>
-                                <div class="step-content">
-                                    <h4 class="step-title">継続的な改善と内製化支援</h4>
-                                    <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。ビジネス環境の変化に応じたアップデートと拡張を継続して提供します。</p>
-                                </div>
-                            </div>
+        <!-- 
+        ==============================================
+        // === component-split: ImplementationSteps ===
+        COMPONENT: AI導入ステップ - プロセス説明
+        ==============================================
+        -->
+        <section class="section section-bg-light">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">AI導入ステップ</span>
+                    <h2 class="heading-lg">AI導入の<span class="highlight">5つのステップ</span></h2>
+                    <p class="section-description">成功するAI導入のための体系的なアプローチをご紹介します</p>
+                </div>
+                
+                <div class="implementation-steps animate-on-scroll">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
+                            <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。ShinAIの専門家が、お客様と共に最適な要件を定義します。</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- 
-                ==============================================
-                // === component-split: FAQSection ===
-                COMPONENT: よくある質問 - 不安解消
-                ==============================================
-                -->
-                <section class="section section-faq">
-                    <div class="container">
-                        <div class="section-header animate-on-scroll">
-                            <span class="section-subtitle">よくある質問</span>
-                            <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
-                            <p class="section-description">AI導入を検討する際によくいただく質問にお答えします</p>
-                        </div>
-                        
-                        <div class="faq-container animate-on-scroll">
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h4>AIの導入は中小企業でも可能ですか？</h4>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    <p>はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。ShinAIでは企業規模や予算に合わせた最適なプランをご提案いたします。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h4>AI導入にはどのくらいの期間がかかりますか？</h4>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    <p>導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。ShinAIでは、迅速に効果を実感いただけるよう、段階的な導入アプローチを推奨しています。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h4>AIを導入する際の一般的なコストはどれくらいですか？</h4>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    <p>AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。ShinAIでは投資対効果を重視し、まずは小規模な実証実験（PoC）から始めることをおすすめしています。具体的なお見積りについては、お気軽にご相談ください。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h4>AI倫理に関する考え方について</h4>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-question">
-                                    <h4>AIを導入するための社内体制や準備について教えてください</h4>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
-                                </div>
-                            </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 class="step-title">PoC（実証実験）の実施</h4>
+                            <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。この段階で、投資対効果を明確にし、本格導入へのロードマップを策定します。</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- 
-                ==============================================
-                // === component-split: CTASection ===
-                COMPONENT: CTA - 行動喚起セクション
-                ==============================================
-                -->
-                <section class="cta-section">
-                    <div class="container">
-                        <div class="cta-container animate-on-scroll">
-                            <div class="cta-bg-animation"></div>
-                            <div class="cta-shapes">
-                                <div class="cta-shape-1"></div>
-                                <div class="cta-shape-2"></div>
-                                <div class="cta-shape-3"></div>
-                            </div>
-                            <div class="cta-content">
-                                <div class="cta-title">
-                                    <h2>貴社の業界に最適な<span class="text-gradient">AIソリューション</span>をご提案します</h2>
-                                </div>
-                                <div class="cta-description">
-                                    <p>AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
-                                    ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。</p>
-                                </div>
-                                <div class="cta-buttons">
-                                    <a href="contact.html" class="btn-consultation btn-lg btn-glow">
-                                        <span>無料相談する</span>
-                                        <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                                    </a>
-                                    <a href="services.html" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
+                            <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含め、お客様の業務プロセスに最適化したソリューションを構築します。</p>
                         </div>
                     </div>
-                </section>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4 class="step-title">組織への展開と変革管理</h4>
+                            <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。ShinAIは導入後のサポートも含め、組織全体での活用を支援します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4 class="step-title">継続的な改善と内製化支援</h4>
+                            <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。ビジネス環境の変化に応じたアップデートと拡張を継続して提供します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: よくある質問 - 不安解消
+        ==============================================
+        -->
+        <section class="section section-faq">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">よくある質問</span>
+                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
+                    <p class="section-description">AI導入を検討する際によくいただく質問にお答えします</p>
+                </div>
+                
+                <div class="faq-container animate-on-scroll">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの導入は中小企業でも可能ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。ShinAIでは企業規模や予算に合わせた最適なプランをご提案いたします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI導入にはどのくらいの期間がかかりますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。ShinAIでは、迅速に効果を実感いただけるよう、段階的な導入アプローチを推奨しています。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入する際の一般的なコストはどれくらいですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。ShinAIでは投資対効果を重視し、まずは小規模な実証実験（PoC）から始めることをおすすめしています。具体的なお見積りについては、お気軽にご相談ください。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI倫理に関する考え方について</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入するための社内体制や準備について教えてください</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: CTA - 行動喚起セクション
+        ==============================================
+        -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-container animate-on-scroll">
+                    <div class="cta-bg-animation"></div>
+                    <div class="cta-shapes">
+                        <div class="cta-shape-1"></div>
+                        <div class="cta-shape-2"></div>
+                        <div class="cta-shape-3"></div>
+                    </div>
+                    <div class="cta-content">
+                        <div class="cta-title">
+                            <h2>貴社の業界に最適な<span class="text-gradient">AIソリューション</span>をご提案します</h2>
+                        </div>
+                        <div class="cta-description">
+                            <p>AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
+                            ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。</p>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="contact.html" class="btn-consultation btn-lg btn-glow">
+                                <span>無料相談する</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                            <a href="services.html" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -2568,213 +2626,198 @@
     ==============================================
     -->
     <script>
-        // プリロード画面の制御
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preload-container');
-            if (preloader) {
+    // プリロード画面の制御
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preload-container');
+        if (preloader) {
+            setTimeout(function() {
+                preloader.classList.add('hidden');
                 setTimeout(function() {
-                    preloader.classList.add('hidden');
-                    setTimeout(function() {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 300);
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 300);
+        }
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // カレントイヤーの更新
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // アコーディオン機能の実装 - スムーズなアニメーション
+        const accordionHeaders = document.querySelectorAll('.faq-question');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // アニメーションの開始のために、まずopacityだけを変更
+                if (!isActive) {
+                    document.querySelectorAll('.faq-item.active .faq-answer p').forEach(p => {
+                        p.style.opacity = '0';
+                        p.style.transform = 'translateY(10px)';
+                    });
+                }
+                
+                // 少し遅延させてからクラスを変更
+                setTimeout(() => {
+                    // すべてのアイテムを閉じる
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // クリックされたアイテムが閉じていた場合は開く
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                }, 100);
+            });
+        });
+        
+        // 業界タブのアクティブ状態管理
+        const tabs = document.querySelectorAll('.industry-tab');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // すべてのタブから active クラスを削除
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // クリックされたタブに active クラスを追加
+                this.classList.add('active');
+                
+                // スクロール処理
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // スクロールアニメーション - パフォーマンス改善
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target); // 一度表示されたら監視を解除
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Back to Topボタンの表示制御 - スロットル処理追加
+        const backToTopButton = document.getElementById('back-to-top');
+        let lastScrollTime = 0;
+        
+        window.addEventListener('scroll', function() {
+            const now = Date.now();
+            if (now - lastScrollTime > 100) { // 100ミリ秒ごとに処理
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+                lastScrollTime = now;
             }
         });
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // カレントイヤーの更新
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // 改善されたアコーディオン機能の実装 - スムーズな動作
-            const accordionHeaders = document.querySelectorAll('.faq-question');
-            
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    const faqItem = this.parentElement;
-                    const isActive = faqItem.classList.contains('active');
-                    
-                    // アニメーションを滑らかにするためにタイミングを調整
-                    if (isActive) {
-                        // 閉じる場合はまずテキストのアニメーションを開始
-                        const answerP = faqItem.querySelector('.faq-answer p');
-                        answerP.style.opacity = '0';
-                        answerP.style.transform = 'translateY(10px)';
-                        
-                        // テキストのフェードアウトを待ってから高さを縮める
-                        setTimeout(() => {
-                            faqItem.classList.remove('active');
-                        }, 200);
-                    } else {
-                        // すべてのアイテムを閉じる
-                        document.querySelectorAll('.faq-item').forEach(item => {
-                            if (item !== faqItem && item.classList.contains('active')) {
-                                const itemP = item.querySelector('.faq-answer p');
-                                itemP.style.opacity = '0';
-                                itemP.style.transform = 'translateY(10px)';
-                                
-                                setTimeout(() => {
-                                    item.classList.remove('active');
-                                }, 200);
-                            }
-                        });
-                        
-                        // 開く場合はまず高さを拡大
-                        faqItem.classList.add('active');
-                        
-                        // 高さの変化を待ってからテキストをフェードイン
-                        setTimeout(() => {
-                            const answerP = faqItem.querySelector('.faq-answer p');
-                            answerP.style.opacity = '1';
-                            answerP.style.transform = 'translateY(0)';
-                        }, 300);
-                    }
-                });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
+        
+        // ナビゲーションメニュー
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.setAttribute('aria-expanded', nav.classList.contains('active'));
             
-            // 業界タブのアクティブ状態管理
-            const tabs = document.querySelectorAll('.industry-tab');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // すべてのタブから active クラスを削除
-                    tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // クリックされたタブに active クラスを追加
-                    this.classList.add('active');
-                    
-                    // スクロール処理
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        const headerOffset = 100;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // スクロールアニメーション - パフォーマンス改善
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target); // 一度表示されたら監視を解除
-                    }
-                });
-            }, observerOptions);
-            
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Back to Topボタンの表示制御 - スロットル処理追加
-            const backToTopButton = document.getElementById('back-to-top');
-            let lastScrollTime = 0;
-            
-            window.addEventListener('scroll', function() {
-                const now = Date.now();
-                if (now - lastScrollTime > 100) { // 100ミリ秒ごとに処理
-                    if (window.pageYOffset > 300) {
-                        backToTopButton.classList.add('active');
-                    } else {
-                        backToTopButton.classList.remove('active');
-                    }
-                    lastScrollTime = now;
-                }
-            });
-            
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // ナビゲーションメニュー
-            const menuToggle = document.getElementById('menu-toggle');
-            const nav = document.getElementById('nav');
-            
-            menuToggle.addEventListener('click', function() {
-                nav.classList.toggle('active');
-                this.setAttribute('aria-expanded', nav.classList.contains('active'));
-                
-                // アイコン切り替え
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.innerHTML = isExpanded ? 
-                    '<i class="fas fa-times" aria-hidden="true"></i>' : 
-                    '<i class="fas fa-bars" aria-hidden="true"></i>';
-            });
-            
-            // チャットボット
-            const chatbotToggle = document.getElementById('chatbot-toggle');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const chatbotClose = document.getElementById('chatbot-close');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const chatbotInput = document.getElementById('chatbot-input-text');
-            const chatbotSubmit = document.getElementById('chatbot-submit');
-            
-            chatbotToggle.addEventListener('click', function() {
-                chatbotContainer.classList.toggle('active');
-                this.setAttribute('aria-expanded', chatbotContainer.classList.contains('active'));
-            });
-            
-            chatbotClose.addEventListener('click', function() {
-                chatbotContainer.classList.remove('active');
-                chatbotToggle.setAttribute('aria-expanded', 'false');
-            });
-            
-            // チャットボット入力処理
-            chatbotSubmit.addEventListener('click', sendMessage);
-            chatbotInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            function sendMessage() {
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    // ユーザーメッセージを追加
-                    addMessage(message, 'user');
-                    chatbotInput.value = '';
-                    
-                    // ボットの応答（本番環境では実際のAI応答と置き換え）
-                    setTimeout(() => {
-                        const responses = [
-                            "業界別のAI活用についてもっと詳しく知りたい場合は、お問い合わせフォームからご連絡ください。",
-                            "ShinAIでは、お客様の業界に特化したAIソリューションをご提案しています。",
-                            "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
-                            "各業界の課題に合わせたカスタマイズが可能です。詳細はお問い合わせください。"
-                        ];
-                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                        addMessage(randomResponse, 'bot');
-                    }, 800);
-                }
-            }
-            
-            function addMessage(text, sender) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.classList.add(sender + '-message');
-                messageDiv.textContent = text;
-                
-                chatbotMessages.appendChild(messageDiv);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            // アイコン切り替え
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.innerHTML = isExpanded ? 
+                '<i class="fas fa-times" aria-hidden="true"></i>' : 
+                '<i class="fas fa-bars" aria-hidden="true"></i>';
+        });
+        
+        // チャットボット
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input-text');
+        const chatbotSubmit = document.getElementById('chatbot-submit');
+        
+        chatbotToggle.addEventListener('click', function() {
+            chatbotContainer.classList.toggle('active');
+            this.setAttribute('aria-expanded', chatbotContainer.classList.contains('active'));
+        });
+        
+        chatbotClose.addEventListener('click', function() {
+            chatbotContainer.classList.remove('active');
+            chatbotToggle.setAttribute('aria-expanded', 'false');
+        });
+        
+        // チャットボット入力処理
+        chatbotSubmit.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
             }
         });
+        
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                // ユーザーメッセージを追加
+                addMessage(message, 'user');
+                chatbotInput.value = '';
+                
+                // ボットの応答（本番環境では実際のAI応答と置き換え）
+                setTimeout(() => {
+                    const responses = [
+                        "業界別のAI活用についてもっと詳しく知りたい場合は、お問い合わせフォームからご連絡ください。",
+                        "ShinAIでは、お客様の業界に特化したAIソリューションをご提案しています。",
+                        "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
+                        "各業界の課題に合わせたカスタマイズが可能です。詳細はお問い合わせください。"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'bot');
+                }, 800);
+            }
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.textContent = text;
+            
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+    });
     </script>
 </body>
 </html>
