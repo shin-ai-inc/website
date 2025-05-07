@@ -162,6 +162,7 @@
             --light-gray: #F9FAFC;
             --very-light-gray: #F4F5F7;
             --white: #FFFFFF;
+            --cream: #FFF8E1;
             --error: #FF3B3B;
             --success: #00C48C;
             
@@ -170,12 +171,14 @@
             --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
             --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            --gradient-dark: linear-gradient(135deg, #2a3f9d, #007a66);
             
             /* シャドウ */
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
             --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.12);
+            --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
             
             /* 角丸 */
             --radius-sm: 6px;
@@ -288,6 +291,45 @@
                 opacity: 0;
             }
         }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(58, 95, 235, 0.5), 0 0 10px rgba(58, 95, 235, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(58, 95, 235, 0.8), 0 0 20px rgba(58, 95, 235, 0.4);
+            }
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% {
+                border-color: rgba(58, 95, 235, 0.4);
+            }
+            50% {
+                border-color: rgba(58, 95, 235, 0.8);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         /* 
         ==============================================
@@ -307,7 +349,7 @@
         */
         .page-hero {
             position: relative;
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            background: var(--gradient-primary);
             padding: 6rem 0;
             overflow: hidden;
             margin-bottom: 4rem;
@@ -583,20 +625,21 @@
         /* 
         ==============================================
         // === component-split: ContactInfo ===
-        COMPONENT: コンタクト情報 - 視認性改善（背景色を変更し、テキスト色を反転）
+        COMPONENT: コンタクト情報 - 視認性改善（背景色を変更し、テキスト色を調整）
         ==============================================
         */
         .contact-info {
-            background: var(--white);
+            background: var(--gradient-dark);
             border-radius: 20px;
             padding: 2.8rem;
             position: relative;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(58, 95, 235, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
             transform: translateY(0);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: fit-content;
+            color: #f0f4ff; /* より明るい色に変更して視認性向上 */
         }
 
         .contact-info:hover {
@@ -610,7 +653,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.15'/%3E%3C/svg%3E");
             z-index: 0;
             opacity: 0.8;
         }
@@ -620,8 +663,9 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             position: relative;
-            color: var(--primary-dark);
+            color: #f0f4ff; /* テキスト色を明るくし視認性向上 */
             display: inline-block;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .contact-title::after {
@@ -631,16 +675,17 @@
             left: 0;
             width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 5px;
         }
 
         .contact-info p {
-            color: var(--gray);
+            color: #e0e6ff; /* より明るく鮮明なテキスト色に変更 */
             margin-bottom: 2rem;
             position: relative;
             font-size: 1.05rem;
             line-height: 1.7;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         /* 
@@ -657,66 +702,69 @@
             transition: all 0.3s ease;
             position: relative;
             padding: 1.2rem;
-            background: var(--light-gray);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
-            border: 1px solid rgba(58, 95, 235, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: var(--shadow-sm);
         }
 
         .contact-method:hover {
             transform: translateX(5px);
-            background: var(--very-light-gray);
+            background: rgba(255, 255, 255, 0.25);
             box-shadow: var(--shadow-md);
-            border-color: rgba(58, 95, 235, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
             min-width: 50px;
-            background: var(--primary);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.4rem;
-            box-shadow: 0 6px 15px rgba(58, 95, 235, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
 
         .contact-method:hover .contact-icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.4);
         }
 
         .contact-details h4 {
             font-size: 1.15rem;
             margin: 0 0 0.4rem;
-            color: var(--primary-dark);
+            color: #f5f8ff; /* より明るい色に変更 */
             font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .contact-details p {
             margin: 0;
-            color: var(--gray);
+            color: #e0e6ff; /* より明るい色に変更 */
             line-height: 1.6;
             font-size: 1rem;
             margin-bottom: 0;
         }
 
         .contact-details a {
-            color: var(--primary);
+            color: #e0e6ff; /* より明るい色に変更 */
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
-            border-bottom: 1px dashed rgba(58, 95, 235, 0.3);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
             padding-bottom: 2px;
         }
 
         .contact-details a:hover {
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--primary);
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         /* 
@@ -979,6 +1027,8 @@
 
         .btn-submit {
             background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
             color: white;
             font-weight: 700;
             border: none;
@@ -1027,6 +1077,7 @@
         .btn-submit:hover {
             transform: translateY(-6px) scale(1.05);
             box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
+            animation: glowPulse 2s infinite;
         }
 
         .btn-submit:hover::before {
