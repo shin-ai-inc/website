@@ -153,6 +153,7 @@
             --secondary: #00C9A7;
             --secondary-light: #00E6C3;
             --accent: #FF8A00;
+            --accent-light: #FFB55C;
             --dark: #1A1F36;
             --gray: #5E6C84;
             --light-gray: #F9FAFC;
@@ -163,8 +164,12 @@
             /* グラデーション強化 */
             --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
             --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
-            --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
+            --gradient-cta: linear-gradient(90deg, #FF8A00, #FF6B00);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            /* 新しいグラデーションを追加 */
+            --gradient-contact: linear-gradient(135deg, #1E40AF, #3A5FEB);
+            --gradient-free-consultation: linear-gradient(135deg, #FF8A00, #FF6B00);
+            --gradient-faq-accent: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
         }
 
         /* 
@@ -320,23 +325,47 @@
             }
         }
 
+        @keyframes shineEffect {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        @keyframes pulsate {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(0.98);
+            }
+        }
+
         /* 
         ==============================================
         // === component-split: HeroStyles ===
         COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
         ==============================================
         */
+        /* 無料相談の視覚的改善 */
         .page-hero-title .highlight-accent {
-            color: #FF8A00; /* アクセントカラー */
+            color: var(--accent);
             font-weight: 700;
             position: relative;
             display: inline-block;
-            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.25);
+            background: linear-gradient(135deg, rgba(255, 138, 0, 0.15), rgba(255, 107, 0, 0.15));
             padding: 0.2em 0.6em;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 138, 0, 0.3);
+            box-shadow: 0 0 25px rgba(255, 138, 0, 0.4); 
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 138, 0, 0.3);
+            transform: translateY(0);
+            animation: pulsate 3s ease-in-out infinite;
         }
         
         .page-hero-title .highlight-accent::after {
@@ -353,7 +382,54 @@
 
         .page-hero-title .highlight-accent:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(255, 138, 0, 0.5);
+            box-shadow: 0 0 35px rgba(255, 138, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 138, 0, 0.2), rgba(255, 107, 0, 0.2));
+        }
+        
+        /* フリーコンサルテーションテキスト強調 */
+        .free-consultation-text {
+            position: relative;
+            background: linear-gradient(90deg, #FF8A00, #FF6B00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            font-size: 1.5em;
+            text-shadow: 0 2px 15px rgba(255, 138, 0, 0.2);
+            display: inline-block;
+            padding: 0.2em 0.5em;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .free-consultation-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #FF8A00, #FF6B00);
+            border-radius: 3px;
+        }
+        
+        .free-consultation-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.6) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            background-size: 200% 100%;
+            animation: shineEffect 3s infinite linear;
+            z-index: 1;
         }
 
         /* 
@@ -379,9 +455,9 @@
         .form-check-input {
             position: absolute;
             opacity: 0;
-            cursor: pointer;
-            height: 0;
             width: 0;
+            height: 0;
+            cursor: pointer;
             z-index: 3;
         }
         
@@ -455,6 +531,24 @@
             margin-top: 1.5rem;
         }
         
+        /* チェックボックスのダブリングを修正 */
+        .checkbox-group .form-check {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-group .form-check .form-check-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            z-index: 10;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+        
         /* 
         ==============================================
         // === component-split: FormStyles ===
@@ -519,12 +613,13 @@
             margin-top: 3.5rem;
         }
         
+        /* お問い合わせ先のカラーリング改善 - プロフェッショナルなマーケティング視点 */
         .contact-info {
-            background: linear-gradient(135deg, #3A5FEB, #2C4CCA);
+            background: var(--gradient-contact);
             border-radius: var(--radius-xl);
             padding: 3rem;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 20px 60px rgba(30, 64, 175, 0.3);
             border: 1px solid rgba(58, 95, 235, 0.2);
             overflow: hidden;
             color: var(--white);
@@ -534,7 +629,7 @@
         
         .contact-info:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 70px rgba(30, 64, 175, 0.4);
         }
         
         .contact-info-pattern {
@@ -546,6 +641,33 @@
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.08'/%3E%3C/svg%3E");
             z-index: -1;
             opacity: 0.8;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            background-size: 200% 100%;
+            animation: shineEffect 8s infinite linear;
+            z-index: 0;
+        }
+        
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
         }
         
         /* 
@@ -563,6 +685,7 @@
             position: relative;
             padding-left: 0.5rem;
             transform: translateX(0);
+            z-index: 1;
         }
         
         .contact-method:hover {
@@ -573,7 +696,7 @@
             width: 55px;
             height: 55px;
             min-width: 55px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -582,10 +705,11 @@
             font-size: 1.5rem;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .contact-method:hover .contact-icon {
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.25);
             transform: scale(1.15) rotate(8deg);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
@@ -757,6 +881,23 @@
         
         .btn-icon-float:hover .icon-float {
             animation: iconBounce 0.8s ease-in-out infinite;
+        }
+        
+        /* ボタンホバー時の視認性改善 */
+        .btn-icon-float {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-icon-float span {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .btn-icon-float:hover span {
+            color: #FFFFFF;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
         /* 
@@ -931,13 +1072,15 @@
             margin: 0 auto;
         }
         
+        /* FAQアイテムの改善 - スムーズなアニメーション */
         .faq-item {
             background: var(--white);
             border-radius: var(--radius-lg);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             margin-bottom: 2rem;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0, 0, 0, 0.03);
         }
         
         .faq-item:hover {
@@ -970,7 +1113,7 @@
         
         .faq-question i {
             color: var(--primary);
-            transition: transform 0.3s ease;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             font-size: 1.1rem;
         }
         
@@ -983,25 +1126,41 @@
             transform: rotate(-180deg);
         }
         
+        /* アコーディオンのスムーズな開閉 */
         .faq-answer {
             padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(249, 250, 252, 0.7);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--gradient-faq-accent);
             border-top: 1px solid rgba(58, 95, 235, 0.08);
+            opacity: 0;
         }
         
         .faq-item.active .faq-answer {
             padding: 2rem 2.5rem;
             max-height: 1000px;
+            opacity: 1;
         }
         
         .faq-answer p {
-            color: var(--gray);
+            color: var(--dark);
             line-height: 1.8;
             margin: 0;
             font-size: 1.05rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .faq-answer p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
         }
         
         /* 
@@ -1106,12 +1265,13 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* ナビゲーションCTAボタン - 無料相談 */
         .btn-cta {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            background: var(--gradient-cta);
             color: white;
             font-weight: 700;
             border: none;
-            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 10px 30px rgba(255, 138, 0, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -1127,7 +1287,7 @@
             /* 背景ボックスシャドウで輪郭を強調 */
             outline: 2px solid rgba(255, 255, 255, 0.3);
             /* アウターグロー効果 */
-            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.4));
+            filter: drop-shadow(0 0 15px rgba(255, 138, 0, 0.3));
         }
 
         .btn-cta::before {
@@ -1144,9 +1304,9 @@
 
         .btn-cta:hover {
             transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(58, 95, 235, 0.4);
-            color: white;
-            filter: drop-shadow(0 0 20px rgba(58, 95, 235, 0.5));
+            box-shadow: 0 20px 50px rgba(255, 138, 0, 0.35);
+            color: white !important;  /* ホバー時に文字色を白に維持 */
+            filter: drop-shadow(0 0 20px rgba(255, 138, 0, 0.4));
         }
 
         .btn-cta:hover::before {
@@ -1155,7 +1315,7 @@
 
         .btn-cta:active {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 10px 25px rgba(255, 138, 0, 0.25);
         }
 
         .btn-icon-right {
@@ -1186,10 +1346,12 @@
             overflow: visible;
             transform: translateY(0);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--gradient-cta);
         }
         
         .cta-main-btn:hover {
             transform: translateY(-8px) scale(1.05);
+            color: white !important;
         }
         
         .cta-main-btn::after {
@@ -1210,6 +1372,68 @@
         
         .cta-main-btn:hover .animated-arrow {
             animation: arrowWave 1.5s ease infinite;
+        }
+
+        /* 究極のフッターCTAボタン */
+        .final-cta-btn {
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-cta);
+            color: white;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
+            border-radius: 50px;
+            padding: 1.4rem 3rem;
+            min-width: 300px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(0);
+            z-index: 1;
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .final-cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+        
+        .final-cta-btn:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 138, 0, 0.4);
+            color: white !important;
+        }
+        
+        .final-cta-btn:hover::before {
+            left: 100%;
+        }
+        
+        .final-cta-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            z-index: -1;
+            animation: pulseGlow 2s infinite;
+        }
+        
+        .final-cta-btn:hover .icon-float {
+            animation: iconBounce 0.8s ease-in-out infinite;
         }
         
         /* 
@@ -1367,7 +1591,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            background: var(--gradient-cta);
             color: white;
             font-weight: 700;
             border: none;
@@ -1375,7 +1599,7 @@
             padding: 1.3rem 2.5rem;
             min-width: 280px;
             font-size: 1.15rem;
-            box-shadow: 0 12px 35px rgba(58, 95, 235, 0.3);
+            box-shadow: 0 12px 35px rgba(255, 138, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -1400,7 +1624,8 @@
 
         .submit-btn:hover {
             transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(58, 95, 235, 0.4);
+            box-shadow: 0 20px 50px rgba(255, 138, 0, 0.4);
+            color: white !important;
         }
 
         .submit-btn:hover::before {
@@ -1423,110 +1648,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin-top: 1.8rem;
-        }
-        
-        /* ボタンの視認性強化 - 背景色と明確に区別 */
-        .nav-cta .btn-cta {
-            background: linear-gradient(135deg, #FF8A00, #FF6B00);
-            color: white;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(255, 138, 0, 0.3);
-            outline: 2px solid rgba(255, 255, 255, 0.3);
-            filter: drop-shadow(0 0 10px rgba(255, 138, 0, 0.3));
-        }
-        
-        .nav-cta .btn-cta:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 138, 0, 0.4);
-            filter: drop-shadow(0 0 15px rgba(255, 138, 0, 0.4));
-        }
-        
-        .nav-cta .btn-cta:hover::before {
-            left: 100%;
-        }
-        
-        /* パルスアニメーション付き紙飛行機アイコン */
-        .paper-plane-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .paper-plane-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0;
-            animation: pulseGlow 2s infinite;
-        }
-        
-        /* 最終CTAの強化 */
-        .final-cta-btn {
-            min-width: 300px;
-            padding: 1.4rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7, #3A5FEB);
-            background-size: 200% 100%;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            transform: translateY(0);
-            outline: 2px solid rgba(255, 255, 255, 0.3);
-            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.4));
-        }
-        
-        .final-cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: all 0.7s ease;
-            z-index: -1;
-        }
-        
-        .final-cta-btn:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(58, 95, 235, 0.45);
-            background-position: 100% 0;
-            filter: drop-shadow(0 0 20px rgba(58, 95, 235, 0.5));
-        }
-        
-        .final-cta-btn:hover::before {
-            left: 100%;
-        }
-        
-        .final-cta-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            z-index: -1;
-            animation: pulseGlow 2s infinite;
-        }
-        
-        .final-cta-btn:hover .icon-float {
-            animation: iconBounce 0.8s ease-in-out infinite;
         }
         
         @media (max-width: 768px) {
@@ -1735,7 +1856,9 @@
                             <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
                         </div>
                         
-                        <h3 class="heading-md">無料相談フォーム</h3>
+                        <h3 class="heading-md">
+                            <span class="free-consultation-text">無料相談フォーム</span>
+                        </h3>
                         <p class="form-intro">まずは無料でご相談ください。AI導入に関する課題やお悩みをお聞かせください。</p>
                         
                         <form id="contact-form-element" aria-label="お問い合わせフォーム" novalidate>
@@ -1788,7 +1911,7 @@
                                 <div class="field-error" id="message-error">この項目は必須です</div>
                             </div>
                             
-                            <!-- ご興味のあるサービス -->
+                            <!-- ご興味のあるサービス - チェックボックス重複修正 -->
                             <div class="form-group">
                                 <fieldset>
                                     <legend class="form-label">ご興味のあるサービス（複数選択可）</legend>
@@ -2296,26 +2419,75 @@
                 }
             }
             
-            // FAQアコーディオン
+            // FAQアコーディオン - スムーズなアニメーション改善
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
                 
                 question.addEventListener('click', function() {
                     const isActive = item.classList.contains('active');
                     
-                    // アクティブなFAQを閉じる
+                    // まず、他のアクティブなFAQをゆっくり閉じる
                     faqItems.forEach(faqItem => {
-                        if (faqItem !== item) {
-                            faqItem.classList.remove('active');
-                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        if (faqItem !== item && faqItem.classList.contains('active')) {
+                            const faqAnswer = faqItem.querySelector('.faq-answer');
+                            
+                            // 閉じるアニメーション
+                            faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+                            faqAnswer.style.opacity = '1';
+                            
+                            // トランジションを開始するためにリフロー
+                            faqAnswer.offsetHeight;
+                            
+                            // 閉じるトランジションを設定
+                            faqAnswer.style.maxHeight = '0';
+                            faqAnswer.style.opacity = '0';
+                            faqAnswer.style.padding = '0';
+                            
+                            // トランジション完了後にクラスを削除
+                            setTimeout(() => {
+                                faqItem.classList.remove('active');
+                                faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                            }, 400); // トランジション時間に合わせて調整
                         }
                     });
                     
-                    // クリックされた項目の開閉
-                    item.classList.toggle('active');
-                    question.setAttribute('aria-expanded', !isActive);
+                    // 遅延を入れてアニメーションの衝突を避ける
+                    setTimeout(() => {
+                        // クリックされた項目の開閉
+                        if (isActive) {
+                            // 閉じるアニメーション
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            answer.style.opacity = '1';
+                            
+                            // トランジションを開始するためにリフロー
+                            answer.offsetHeight;
+                            
+                            // 閉じるトランジション
+                            answer.style.maxHeight = '0';
+                            answer.style.opacity = '0';
+                            answer.style.padding = '0';
+                            
+                            // トランジション完了後にクラスを削除
+                            setTimeout(() => {
+                                item.classList.remove('active');
+                                question.setAttribute('aria-expanded', 'false');
+                            }, 400);
+                        } else {
+                            // 開くアニメーション
+                            item.classList.add('active');
+                            question.setAttribute('aria-expanded', 'true');
+                            
+                            // パディングを設定
+                            answer.style.padding = '2rem 2.5rem';
+                            
+                            // コンテンツの高さを取得してmaxHeightを設定
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            answer.style.opacity = '1';
+                        }
+                    }, isActive ? 0 : 200);
                 });
                 
                 // キーボード操作対応
