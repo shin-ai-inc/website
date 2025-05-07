@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - 業界別AI活用事例。福祉・介護、教育・研修、建設業、製造業など各業界に合わせた最適なAIソリューションをご紹介します。">
-    <meta name="keywords" content="AI活用事例, 業界別AI, 福祉AI, 教育AI, 建設AI, 製造業AI, 医療AI, 小売AI, 金融AI, AI導入事例, ビジネスAI, 業務効率化">
+    <meta name="keywords" content="AI活用事例, 業界別AI, 福祉AI, 教育AI, 建設AI, 製造業AI, 小売AI, 金融AI, AI導入事例, ビジネスAI, 業務効率化">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
@@ -95,9 +95,16 @@
         {
           "@type": "ListItem",
           "position": 5,
-          "name": "医療・ヘルスケア",
-          "description": "医療の質向上と医療従事者の負担軽減を両立するAIソリューションを提供しています。",
-          "url": "https://www.shinai.tech/industries.html#healthcare"
+          "name": "小売・EC",
+          "description": "顧客体験向上と販売効率化を実現するAIソリューションを提供しています。",
+          "url": "https://www.shinai.tech/industries.html#retail"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "金融・保険",
+          "description": "リスク評価の精度向上と業務効率化を実現するAIソリューションを開発しています。",
+          "url": "https://www.shinai.tech/industries.html#finance"
         }
       ]
     }
@@ -157,12 +164,17 @@
         --construction-secondary: #41C866;
         --manufacturing-primary: #00C9A7;
         --manufacturing-secondary: #00E6C3;
-        --healthcare-primary: #8C52FF;
-        --healthcare-secondary: #A67FFF;
         --retail-primary: #FF5757;
         --retail-secondary: #FF7E7E;
         --finance-primary: #FFBA00;
         --finance-secondary: #FFD056;
+        
+        /* AI導入ステップカラー - 洗練されたブルーからティールへのグラデーション */
+        --step-1-color: #3A5FEB;
+        --step-2-color: #3A7FD9;
+        --step-3-color: #3A9FC8;
+        --step-4-color: #39BCBA;
+        --step-5-color: #38DCAC;
     }
 
     /* 
@@ -463,26 +475,17 @@
     */
     .industries-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 2.5rem;
         margin-top: 3rem;
         justify-content: center;
     }
     
-    /* 奇数の場合の中央揃え対応 */
-    .industries-grid::after {
-        content: "";
-        grid-column: span 1;
-    }
-    
-    /* 左寄せにする場合はこのスタイルを削除 */
-    .industries-grid:has(.industry-card:nth-child(7)):after {
-        content: none;
-    }
-    
-    /* 金融カードを中央に表示するための調整 */
-    .industries-grid .industry-card:nth-child(7) {
-        grid-column: 2 / 3;
+    /* 6項目の場合のグリッドレイアウト - 2×3配置 */
+    @media (min-width: 992px) {
+        .industries-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     /* 
@@ -539,10 +542,6 @@
         background: linear-gradient(180deg, var(--manufacturing-primary), var(--manufacturing-secondary));
     }
 
-    .industry-card[id="healthcare"]::before {
-        background: linear-gradient(180deg, var(--healthcare-primary), var(--healthcare-secondary));
-    }
-
     .industry-card[id="retail"]::before {
         background: linear-gradient(180deg, var(--retail-primary), var(--retail-secondary));
     }
@@ -575,7 +574,7 @@
         transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     }
 
-    /* 業界別アイコンカラー改善 - 統一感と調和のある配色 */
+    /* 業界別アイコンカラー改善 - 完全な統一感 */
     .industry-card[id="welfare"] .industry-icon {
         background: linear-gradient(135deg, var(--welfare-primary), var(--welfare-secondary));
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
@@ -594,11 +593,6 @@
     .industry-card[id="manufacturing"] .industry-icon {
         background: linear-gradient(135deg, var(--manufacturing-primary), var(--manufacturing-secondary));
         box-shadow: 0 8px 20px rgba(0, 201, 167, 0.25);
-    }
-
-    .industry-card[id="healthcare"] .industry-icon {
-        background: linear-gradient(135deg, var(--healthcare-primary), var(--healthcare-secondary));
-        box-shadow: 0 8px 20px rgba(140, 82, 255, 0.25);
     }
 
     .industry-card[id="retail"] .industry-icon {
@@ -675,10 +669,6 @@
         color: var(--manufacturing-primary);
     }
 
-    .industry-card[id="healthcare"] .industry-feature i {
-        color: var(--healthcare-primary);
-    }
-
     .industry-card[id="retail"] .industry-feature i {
         color: var(--retail-primary);
     }
@@ -750,6 +740,85 @@
         animation: btnIconBounce 0.8s ease infinite;
     }
 
+    /* 業界別ボタンのカスタマイズ */
+    .industry-card[id="welfare"] .btn-outline {
+        color: var(--welfare-primary);
+        border-color: rgba(58, 95, 235, 0.25);
+    }
+
+    .industry-card[id="welfare"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(58, 95, 235, 0.1), rgba(70, 113, 255, 0.1));
+    }
+
+    .industry-card[id="welfare"] .btn-outline:hover {
+        border-color: var(--welfare-primary);
+    }
+
+    .industry-card[id="education"] .btn-outline {
+        color: var(--education-primary);
+        border-color: rgba(255, 138, 0, 0.25);
+    }
+
+    .industry-card[id="education"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 138, 0, 0.1), rgba(255, 165, 59, 0.1));
+    }
+
+    .industry-card[id="education"] .btn-outline:hover {
+        border-color: var(--education-primary);
+    }
+
+    .industry-card[id="construction"] .btn-outline {
+        color: var(--construction-primary);
+        border-color: rgba(50, 168, 82, 0.25);
+    }
+
+    .industry-card[id="construction"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(50, 168, 82, 0.1), rgba(65, 200, 102, 0.1));
+    }
+
+    .industry-card[id="construction"] .btn-outline:hover {
+        border-color: var(--construction-primary);
+    }
+
+    .industry-card[id="manufacturing"] .btn-outline {
+        color: var(--manufacturing-primary);
+        border-color: rgba(0, 201, 167, 0.25);
+    }
+
+    .industry-card[id="manufacturing"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(0, 201, 167, 0.1), rgba(0, 230, 195, 0.1));
+    }
+
+    .industry-card[id="manufacturing"] .btn-outline:hover {
+        border-color: var(--manufacturing-primary);
+    }
+
+    .industry-card[id="retail"] .btn-outline {
+        color: var(--retail-primary);
+        border-color: rgba(255, 87, 87, 0.25);
+    }
+
+    .industry-card[id="retail"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 87, 87, 0.1), rgba(255, 126, 126, 0.1));
+    }
+
+    .industry-card[id="retail"] .btn-outline:hover {
+        border-color: var(--retail-primary);
+    }
+
+    .industry-card[id="finance"] .btn-outline {
+        color: var(--finance-primary);
+        border-color: rgba(255, 186, 0, 0.25);
+    }
+
+    .industry-card[id="finance"] .btn-outline::before {
+        background: linear-gradient(90deg, rgba(255, 186, 0, 0.1), rgba(255, 208, 86, 0.1));
+    }
+
+    .industry-card[id="finance"] .btn-outline:hover {
+        border-color: var(--finance-primary);
+    }
+
     /* 
     ==============================================
     // === component-split: IndustryTabs ===
@@ -792,6 +861,31 @@
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
     }
 
+    /* 業界別タブカラーカスタマイズ */
+    .industry-tab[href="#welfare"].active {
+        background: var(--welfare-primary);
+    }
+
+    .industry-tab[href="#education"].active {
+        background: var(--education-primary);
+    }
+
+    .industry-tab[href="#construction"].active {
+        background: var(--construction-primary);
+    }
+
+    .industry-tab[href="#manufacturing"].active {
+        background: var(--manufacturing-primary);
+    }
+
+    .industry-tab[href="#retail"].active {
+        background: var(--retail-primary);
+    }
+
+    .industry-tab[href="#finance"].active {
+        background: var(--finance-primary);
+    }
+
     /* 
     ==============================================
     // === component-split: UseCaseSection ===
@@ -824,6 +918,31 @@
         height: 100%;
         background: linear-gradient(180deg, var(--primary), var(--secondary));
         z-index: 1;
+    }
+
+    /* 業界別の活用事例カードの左ラインカラー */
+    #welfare-case::before {
+        background: linear-gradient(180deg, var(--welfare-primary), var(--welfare-secondary));
+    }
+
+    #education-case::before {
+        background: linear-gradient(180deg, var(--education-primary), var(--education-secondary));
+    }
+
+    #construction-case::before {
+        background: linear-gradient(180deg, var(--construction-primary), var(--construction-secondary));
+    }
+
+    #manufacturing-case::before {
+        background: linear-gradient(180deg, var(--manufacturing-primary), var(--manufacturing-secondary));
+    }
+
+    #retail-case::before {
+        background: linear-gradient(180deg, var(--retail-primary), var(--retail-secondary));
+    }
+
+    #finance-case::before {
+        background: linear-gradient(180deg, var(--finance-primary), var(--finance-secondary));
     }
 
     .use-case-header {
@@ -884,6 +1003,31 @@
         font-size: 1.1rem;
     }
 
+    /* 活用事例のh4見出しカラーカスタマイズ */
+    #welfare-case .use-case-section h4 {
+        color: var(--welfare-primary);
+    }
+
+    #education-case .use-case-section h4 {
+        color: var(--education-primary);
+    }
+
+    #construction-case .use-case-section h4 {
+        color: var(--construction-primary);
+    }
+
+    #manufacturing-case .use-case-section h4 {
+        color: var(--manufacturing-primary);
+    }
+
+    #retail-case .use-case-section h4 {
+        color: var(--retail-primary);
+    }
+
+    #finance-case .use-case-section h4 {
+        color: var(--finance-primary);
+    }
+
     .use-case-list {
         list-style: none;
         padding: 0;
@@ -912,6 +1056,31 @@
         font-weight: bold;
     }
 
+    /* 業界別のリストマーカーカラー */
+    #welfare-case .use-case-list li::before {
+        color: var(--welfare-primary);
+    }
+
+    #education-case .use-case-list li::before {
+        color: var(--education-primary);
+    }
+
+    #construction-case .use-case-list li::before {
+        color: var(--construction-primary);
+    }
+
+    #manufacturing-case .use-case-list li::before {
+        color: var(--manufacturing-primary);
+    }
+
+    #retail-case .use-case-list li::before {
+        color: var(--retail-primary);
+    }
+
+    #finance-case .use-case-list li::before {
+        color: var(--finance-primary);
+    }
+
     .use-case-list li strong {
         color: #1A1F36;
         font-weight: 600;
@@ -938,7 +1107,7 @@
         left: 50px;
         width: 4px;
         height: 100%;
-        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        background: linear-gradient(to bottom, var(--step-1-color), var(--step-5-color));
         border-radius: 4px;
         z-index: 0;
         opacity: 0.5;
@@ -960,7 +1129,6 @@
         width: 70px;
         height: 70px;
         min-width: 70px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
         color: white;
         border-radius: 50%;
         display: flex;
@@ -968,36 +1136,39 @@
         justify-content: center;
         font-size: 1.8rem;
         font-weight: 700;
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.25);
         position: relative;
         z-index: 2;
         transition: all 0.3s ease;
     }
     
-    /* ステップ番号ごとに異なるグラデーション - 視覚的な興味を引く */
+    /* ステップ番号ごとに洗練されたブルーからティールへのグラデーション */
     .step:nth-child(1) .step-number {
-        background: linear-gradient(135deg, #3A5FEB, #4671FF);
+        background: var(--step-1-color);
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.25);
     }
     
     .step:nth-child(2) .step-number {
-        background: linear-gradient(135deg, #4671FF, #00C9A7);
+        background: var(--step-2-color);
+        box-shadow: 0 8px 25px rgba(58, 127, 217, 0.25);
     }
     
     .step:nth-child(3) .step-number {
-        background: linear-gradient(135deg, #00C9A7, #00E6C3);
+        background: var(--step-3-color);
+        box-shadow: 0 8px 25px rgba(58, 159, 200, 0.25);
     }
     
     .step:nth-child(4) .step-number {
-        background: linear-gradient(135deg, #00E6C3, #FF8A00);
+        background: var(--step-4-color);
+        box-shadow: 0 8px 25px rgba(57, 188, 186, 0.25);
     }
     
     .step:nth-child(5) .step-number {
-        background: linear-gradient(135deg, #FF8A00, #3A5FEB);
+        background: var(--step-5-color);
+        box-shadow: 0 8px 25px rgba(56, 220, 172, 0.25);
     }
     
     .step:hover .step-number {
         transform: scale(1.1) rotate(10deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
     }
     
     .step-content {
@@ -1032,41 +1203,127 @@
         content: '\f002'; /* magnifying glass */
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        color: var(--primary);
+        color: var(--step-1-color);
     }
     
     .step:nth-child(2) .step-title::before {
         content: '\f0c3'; /* flask */
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        color: var(--primary);
+        color: var(--step-2-color);
     }
     
     .step:nth-child(3) .step-title::before {
         content: '\f085'; /* cogs */
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        color: var(--primary);
+        color: var(--step-3-color);
     }
     
     .step:nth-child(4) .step-title::before {
         content: '\f0e8'; /* sitemap */
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        color: var(--primary);
+        color: var(--step-4-color);
     }
     
     .step:nth-child(5) .step-title::before {
         content: '\f201'; /* chart */
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        color: var(--primary);
+        color: var(--step-5-color);
     }
     
     .step-description {
         color: var(--gray);
         line-height: 1.7;
         margin: 0;
+    }
+
+    /* 
+    ==============================================
+    // === component-split: FAQSection ===
+    COMPONENT: よくある質問 - 不安解消
+    ==============================================
+    */
+    .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .faq-item {
+        background: white;
+        border-radius: var(--radius-lg);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    
+    .faq-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
+    }
+    
+    .faq-question {
+        padding: 1.5rem 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: var(--dark);
+        transition: all 0.3s ease;
+    }
+    
+    .faq-question h4 {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+    
+    .faq-question i {
+        color: var(--primary);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .faq-item.active .faq-question {
+        background-color: rgba(58, 95, 235, 0.05);
+        color: var(--primary);
+    }
+    
+    .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+    }
+    
+    /* スムーズなアコーディオン動作の改善 */
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    padding 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    opacity 0.3s ease;
+        background-color: white;
+        padding: 0 2rem;
+        border-top: 1px solid rgba(58, 95, 235, 0.1);
+        opacity: 0;
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 1000px;
+        padding: 1.5rem 2rem;
+        opacity: 1;
+    }
+    
+    .faq-answer p {
+        margin: 0;
+        color: var(--gray);
+        line-height: 1.7;
+        transform: translateY(10px);
+        transition: transform 0.4s ease 0.1s;
+    }
+    
+    .faq-item.active .faq-answer p {
+        transform: translateY(0);
     }
 
     /* 
@@ -1240,81 +1497,6 @@
 
     /* 
     ==============================================
-    // === component-split: FAQSection ===
-    COMPONENT: よくある質問 - 不安解消
-    ==============================================
-    */
-    .faq-container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    
-    .faq-item {
-        background: white;
-        border-radius: var(--radius-lg);
-        margin-bottom: 1.5rem;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-    
-    .faq-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-    }
-    
-    .faq-question {
-        padding: 1.5rem 2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        color: var(--dark);
-        transition: all 0.3s ease;
-    }
-    
-    .faq-question h4 {
-        margin: 0;
-        font-size: 1.1rem;
-    }
-    
-    .faq-question i {
-        color: var(--primary);
-        transition: transform 0.3s ease;
-    }
-    
-    .faq-item.active .faq-question {
-        background-color: rgba(58, 95, 235, 0.05);
-        color: var(--primary);
-    }
-    
-    .faq-item.active .faq-question i {
-        transform: rotate(180deg);
-    }
-    
-    .faq-answer {
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background-color: white;
-        border-top: 1px solid rgba(58, 95, 235, 0.1);
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 1.5rem 2rem;
-        max-height: 500px;
-    }
-    
-    .faq-answer p {
-        margin: 0;
-        color: var(--gray);
-        line-height: 1.7;
-    }
-
-    /* 
-    ==============================================
     // === component-split: Preloader ===
     COMPONENT: プリローダー - UX向上
     ==============================================
@@ -1362,11 +1544,6 @@
             grid-template-columns: repeat(2, 1fr);
         }
         
-        /* 金融カード（奇数7番目）の位置調整 */
-        .industries-grid .industry-card:nth-child(7) {
-            grid-column: auto;
-        }
-        
         .implementation-steps::before {
             left: 30px;
         }
@@ -1398,11 +1575,6 @@
     @media (max-width: 768px) {
         .industries-grid {
             grid-template-columns: 1fr;
-        }
-        
-        /* 金融カード（奇数7番目）の位置調整 */
-        .industries-grid .industry-card:nth-child(7) {
-            grid-column: auto;
         }
         
         .industry-tabs {
@@ -1645,7 +1817,6 @@
                     <a href="#education" class="industry-tab" role="tab">教育・研修</a>
                     <a href="#construction" class="industry-tab" role="tab">建設業</a>
                     <a href="#manufacturing" class="industry-tab" role="tab">製造業</a>
-                    <a href="#healthcare" class="industry-tab" role="tab">医療・ヘルスケア</a>
                     <a href="#retail" class="industry-tab" role="tab">小売・EC</a>
                     <a href="#finance" class="industry-tab" role="tab">金融・保険</a>
                 </div>
@@ -1653,7 +1824,7 @@
                 <!-- 
                 ==============================================
                 // === component-split: IndustriesGrid ===
-                COMPONENT: 業界カードグリッド - 情報整理と中央揃え
+                COMPONENT: 業界カードグリッド - 情報整理
                 ==============================================
                 -->
                 <div class="industries-grid animate-on-scroll">
@@ -1785,38 +1956,6 @@
                         </div>
                     </div>
                     
-                    <!-- 医療・ヘルスケア -->
-                    <div class="industry-card" id="healthcare">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-heartbeat" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">医療・ヘルスケア</h3>
-                        </div>
-                        <p class="industry-description">医療の質向上と医療従事者の負担軽減を両立するAIソリューションで、患者中心の医療サービス提供をサポートします。</p>
-                        <ul class="industry-features">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                医療文書支援：診療記録の効率化と品質向上
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                カルテ分析AI：過去データからの診断サポート
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                患者対応チャットボット：問診効率化と情報提供
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                医療研究支援：論文分析と仮説生成
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#healthcare-case" class="btn btn-outline btn-sm">活用事例を見る <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    
                     <!-- 小売・EC -->
                     <div class="industry-card" id="retail">
                         <div class="industry-header">
@@ -1849,7 +1988,7 @@
                         </div>
                     </div>
                     
-                    <!-- 金融・保険 - 中央揃えのために調整 -->
+                    <!-- 金融・保険 -->
                     <div class="industry-card" id="finance">
                         <div class="industry-header">
                             <div class="industry-icon">
@@ -1907,7 +2046,7 @@
                 -->
                 <div class="use-case animate-on-scroll" id="welfare-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--welfare-primary), var(--welfare-secondary)); box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);">
                             <i class="fas fa-hand-holding-heart"></i>
                         </div>
                         <div>
@@ -1956,7 +2095,7 @@
                 -->
                 <div class="use-case animate-on-scroll" id="education-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--education-primary), var(--education-secondary)); box-shadow: 0 8px 20px rgba(255, 138, 0, 0.25);">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
                         <div>
@@ -1999,62 +2138,13 @@
                 
                 <!-- 
                 ==============================================
-                // === component-split: ManufacturingUseCase ===
-                COMPONENT: 製造業の活用例 - 分野別情報
-                ==============================================
-                -->
-                <div class="use-case animate-on-scroll" id="manufacturing-case">
-                    <div class="use-case-header">
-                        <div class="use-case-icon">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <div>
-                            <h3 class="use-case-title">製造業分野でのAI活用</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-content">
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
-                            <ul class="use-case-list">
-                                <li>品質検査の精度と効率の両立</li>
-                                <li>設備の突発的故障による生産ライン停止</li>
-                                <li>熟練技術者の高齢化と技術伝承の必要性</li>
-                                <li>複雑化する生産計画の最適化</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
-                            <ul class="use-case-list">
-                                <li><strong>データ分析による品質検査AI</strong>：センサーデータを分析し、製品の品質異常を検出。人間の目では見逃す微細な不良も検出。</li>
-                                <li><strong>設備予知保全システム</strong>：センサーデータを分析し、故障の前兆を検知。計画的なメンテナンスで突発停止を防止。</li>
-                                <li><strong>知能型生産計画システム</strong>：需要予測と生産能力を考慮した最適な生産計画を立案。シミュレーションによる生産効率化を実現。</li>
-                                <li><strong>熟練技術者のノウハウAI化</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="use-case-section">
-                            <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
-                            <ul class="use-case-list">
-                                <li>検査精度が95%以上に向上し、不良品流出が80%以上減少</li>
-                                <li>設備故障による計画外停止時間が60〜70%減少</li>
-                                <li>生産計画の最適化により生産効率が15〜20%向上</li>
-                                <li>新人作業者の習熟期間が50%短縮、技術標準化が促進</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 
-                ==============================================
                 // === component-split: ConstructionUseCase ===
                 COMPONENT: 建設業の活用例 - 分野別情報
                 ==============================================
                 -->
                 <div class="use-case animate-on-scroll" id="construction-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon" style="background: linear-gradient(135deg, #32A852, #41C866); box-shadow: 0 8px 20px rgba(50, 168, 82, 0.25);">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--construction-primary), var(--construction-secondary)); box-shadow: 0 8px 20px rgba(50, 168, 82, 0.25);">
                             <i class="fas fa-hard-hat"></i>
                         </div>
                         <div>
@@ -2097,17 +2187,17 @@
                 
                 <!-- 
                 ==============================================
-                // === component-split: HealthcareUseCase ===
-                COMPONENT: 医療・ヘルスケアの活用例 - 分野別情報
+                // === component-split: ManufacturingUseCase ===
+                COMPONENT: 製造業の活用例 - 分野別情報
                 ==============================================
                 -->
-                <div class="use-case animate-on-scroll" id="healthcare-case">
+                <div class="use-case animate-on-scroll" id="manufacturing-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon" style="background: linear-gradient(135deg, #8C52FF, #A67FFF); box-shadow: 0 8px 20px rgba(140, 82, 255, 0.25);">
-                            <i class="fas fa-heartbeat"></i>
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--manufacturing-primary), var(--manufacturing-secondary)); box-shadow: 0 8px 20px rgba(0, 201, 167, 0.25);">
+                            <i class="fas fa-industry"></i>
                         </div>
                         <div>
-                            <h3 class="use-case-title">医療・ヘルスケア分野でのAI活用</h3>
+                            <h3 class="use-case-title">製造業分野でのAI活用</h3>
                         </div>
                     </div>
                     
@@ -2115,35 +2205,35 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-exclamation-circle"></i> 業界の課題</h4>
                             <ul class="use-case-list">
-                                <li>医療従事者の慢性的な人手不足と過重労働</li>
-                                <li>診断精度の向上と早期発見の重要性</li>
-                                <li>患者データの管理と活用の難しさ</li>
-                                <li>診療記録作成などの事務作業による時間圧迫</li>
+                                <li>品質検査の精度と効率の両立</li>
+                                <li>設備の突発的故障による生産ライン停止</li>
+                                <li>熟練技術者の高齢化と技術伝承の必要性</li>
+                                <li>複雑化する生産計画の最適化</li>
                             </ul>
                         </div>
                         
                         <div class="use-case-section">
                             <h4><i class="fas fa-lightbulb"></i> AIソリューション</h4>
                             <ul class="use-case-list">
-                                <li><strong>医療文書自動化AI</strong>：診察音声から診療記録を自動作成。医師の文書作成負担を軽減し、患者対応時間を確保。</li>
-                                <li><strong>診断支援システム</strong>：過去の症例データを分析し、類似症例や診断候補を提案。医師の意思決定をサポート。</li>
-                                <li><strong>患者向けチャットボット</strong>：患者からの一般的な問い合わせに24時間対応。症状の初期アセスメントや受診前情報収集を効率化。</li>
-                                <li><strong>医療研究データ分析</strong>：膨大な論文や臨床データを分析し、新たな治療法や研究仮説の提案をサポート。</li>
+                                <li><strong>品質検査AI</strong>：画像認識技術を活用した外観検査の自動化。人間の目では見逃す微細な不良も検出し、品質の安定化を実現。</li>
+                                <li><strong>設備予知保全システム</strong>：センサーデータを分析し、故障の前兆を検知。計画的なメンテナンスで突発停止を防止。</li>
+                                <li><strong>生産スケジューリングAI</strong>：需要予測と生産能力を考慮した最適な生産計画を立案。シミュレーションによる生産効率化を実現。</li>
+                                <li><strong>技術ナレッジマネジメント</strong>：熟練技術者の暗黙知をAIモデル化。新人教育や標準化されたオペレーションに活用。</li>
                             </ul>
                         </div>
                         
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>医師の事務作業時間が50%以上削減、患者対応時間が30%増加</li>
-                                <li>診断精度が15〜20%向上、見逃しリスクの低減</li>
-                                <li>患者の待ち時間短縮と満足度向上（初期対応の迅速化）</li>
-                                <li>研究開発の効率化による新たな医療イノベーションの創出</li>
+                                <li>検査精度が95%以上に向上し、不良品流出が80%以上減少</li>
+                                <li>設備故障による計画外停止時間が60〜70%減少</li>
+                                <li>生産計画の最適化により生産効率が15〜20%向上</li>
+                                <li>新人作業者の習熟期間が50%短縮、技術標準化が促進</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 
                 ==============================================
                 // === component-split: RetailUseCase ===
@@ -2152,7 +2242,7 @@
                 -->
                 <div class="use-case animate-on-scroll" id="retail-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon" style="background: linear-gradient(135deg, #FF5757, #FF7E7E); box-shadow: 0 8px 20px rgba(255, 87, 87, 0.25);">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--retail-primary), var(--retail-secondary)); box-shadow: 0 8px 20px rgba(255, 87, 87, 0.25);">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
                         <div>
@@ -2201,7 +2291,7 @@
                 -->
                 <div class="use-case animate-on-scroll" id="finance-case">
                     <div class="use-case-header">
-                        <div class="use-case-icon" style="background: linear-gradient(135deg, #FFBA00, #FFD056); box-shadow: 0 8px 20px rgba(255, 186, 0, 0.25);">
+                        <div class="use-case-icon" style="background: linear-gradient(135deg, var(--finance-primary), var(--finance-secondary)); box-shadow: 0 8px 20px rgba(255, 186, 0, 0.25);">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div>
@@ -2241,299 +2331,301 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- 
-==============================================
-// === component-split: ImplementationSteps ===
-COMPONENT: AI導入ステップ - プロセス説明
-==============================================
--->
-<section class="section section-bg-light">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <span class="section-subtitle">AI導入ステップ</span>
-            <h2 class="heading-lg">AI導入の<span class="highlight">5つのステップ</span></h2>
-            <p class="section-description">成功するAI導入のための体系的なアプローチをご紹介します</p>
+        <!-- 
+        ==============================================
+        // === component-split: ImplementationSteps ===
+        COMPONENT: AI導入ステップ - プロセス説明
+        ==============================================
+        -->
+        <section class="section section-bg-light">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">AI導入ステップ</span>
+                    <h2 class="heading-lg">AI導入の<span class="highlight">5つのステップ</span></h2>
+                    <p class="section-description">成功するAI導入のための体系的なアプローチをご紹介します</p>
+                </div>
+                
+                <div class="implementation-steps animate-on-scroll">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
+                            <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。ShinAIの専門家が、お客様と共に最適な要件を定義します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 class="step-title">PoC（実証実験）の実施</h4>
+                            <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。この段階で、投資対効果を明確にし、本格導入へのロードマップを策定します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
+                            <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含め、お客様の業務プロセスに最適化したソリューションを構築します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4 class="step-title">組織への展開と変革管理</h4>
+                            <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。ShinAIは導入後のサポートも含め、組織全体での活用を支援します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4 class="step-title">継続的な改善と内製化支援</h4>
+                            <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。ビジネス環境の変化に応じたアップデートと拡張を継続して提供します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: よくある質問 - 不安解消
+        ==============================================
+        -->
+        <section class="section section-faq">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">よくある質問</span>
+                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
+                    <p class="section-description">AI導入を検討する際によくいただく質問にお答えします</p>
+                </div>
+                
+                <div class="faq-container animate-on-scroll">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの導入は中小企業でも可能ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。ShinAIでは企業規模や予算に合わせた最適なプランをご提案いたします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI導入にはどのくらいの期間がかかりますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。ShinAIでは、迅速に効果を実感いただけるよう、段階的な導入アプローチを推奨しています。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入する際の一般的なコストはどれくらいですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。ShinAIでは投資対効果を重視し、まずは小規模な実証実験（PoC）から始めることをおすすめしています。具体的なお見積りについては、お気軽にご相談ください。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI倫理に関する考え方について</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入するための社内体制や準備について教えてください</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: CTA - 行動喚起セクション
+        ==============================================
+        -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-container animate-on-scroll">
+                    <div class="cta-bg-animation"></div>
+                    <div class="cta-shapes">
+                        <div class="cta-shape-1"></div>
+                        <div class="cta-shape-2"></div>
+                        <div class="cta-shape-3"></div>
+                    </div>
+                    <div class="cta-content">
+                        <div class="cta-title">
+                            <h2>貴社の業界に最適な<span class="text-gradient">AIソリューション</span>をご提案します</h2>
+                        </div>
+                        <div class="cta-description">
+                            <p>AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
+                            ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。</p>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="contact.html" class="btn-consultation btn-lg btn-glow">
+                                <span>無料相談する</span>
+                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            </a>
+                            <a href="services.html" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+    ==============================================
+    // === component-split: BottomBanner ===
+    COMPONENT: ボトムバナー - ブランドメッセージ強調
+    ==============================================
+    -->
+    <div class="bottom-banner">
+        <div class="bottom-banner-content">
+            「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
-        
-        <div class="implementation-steps animate-on-scroll">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h4 class="step-title">ビジネス課題の特定と要件定義</h4>
-                    <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。単なる技術導入ではなく、明確な目標とKPIを設定し、必要なデータやシステム連携を洗い出します。ShinAIの専門家が、お客様と共に最適な要件を定義します。</p>
+    </div>
+
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター - サイト全体ナビゲーション
+    ==============================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
+                        <span class="en-text">ShinAI</span>
+                    </div>
+                    <p class="footer-description">
+                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                    </p>
+                    <div class="social-links" aria-label="ソーシャルメディアリンク">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
+                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">会社情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">会社概要</a></li>
+                        <li><a href="about.html#philosophy">企業理念</a></li>
+                        <li><a href="industries.html">AI活用事例</a></li>
+                        <li><a href="about.html#careers">採用情報</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <ul class="footer-links">
+                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li>shinai.life@gmail.com</li>
+                        <li>平日 9:00〜18:00（土日祝休）</li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h4 class="step-title">PoC（実証実験）の実施</h4>
-                    <p class="step-description">小規模な環境でAIソリューションの有効性を検証します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認します。この段階で、投資対効果を明確にし、本格導入へのロードマップを策定します。</p>
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
                 </div>
             </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h4 class="step-title">AIソリューションの開発・カスタマイズ</h4>
-                    <p class="step-description">ビジネス要件に合わせたAIモデルの開発と既存システムとの連携を行います。ユーザーインターフェースの設計やデータパイプラインの構築も含め、お客様の業務プロセスに最適化したソリューションを構築します。</p>
+        </div>
+    </footer>
+
+    <!-- 
+    ==============================================
+    // === component-split: Chatbot ===
+    COMPONENT: チャットボット - インタラクティブサポート
+    ==============================================
+    -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
+            <div class="ripple"></div>
+            <i class="fas fa-robot" aria-hidden="true"></i>
+        </button>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+                <div class="message bot-message">
+                    こんにちは！ShinAIアシスタントです。業界別のAI活用方法や導入事例について、お気軽にお聞きください。
                 </div>
             </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h4 class="step-title">組織への展開と変革管理</h4>
-                    <p class="step-description">AIソリューションを組織に導入し、ユーザーへのトレーニングと変革管理を行います。技術だけでなく、ワークフローや組織文化の変革も重要です。ShinAIは導入後のサポートも含め、組織全体での活用を支援します。</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <h4 class="step-title">継続的な改善と内製化支援</h4>
-                    <p class="step-description">AIモデルのパフォーマンスモニタリングと継続的な改善を行います。社内AIチームの育成を支援し、長期的に自走できる体制を構築します。ビジネス環境の変化に応じたアップデートと拡張を継続して提供します。</p>
-                </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
-</section>
 
-<!-- 
-==============================================
-// === component-split: FAQSection ===
-COMPONENT: よくある質問 - 不安解消
-==============================================
--->
-<section class="section section-faq">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <span class="section-subtitle">よくある質問</span>
-            <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
-            <p class="section-description">AI導入を検討する際によくいただく質問にお答えします</p>
-        </div>
-        
-        <div class="faq-container animate-on-scroll">
-            <div class="faq-item active">
-                <div class="faq-question">
-                    <h4>AIの導入は中小企業でも可能ですか？</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>はい、AIは企業規模に関わらず導入可能です。特にクラウドベースのAIソリューションは初期投資を抑えながら導入できます。業務効率化や顧客対応などの分野から段階的に始めることで、中小企業でも大きな効果を得られます。ShinAIでは企業規模や予算に合わせた最適なプランをご提案いたします。</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>AI導入にはどのくらいの期間がかかりますか？</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>導入するAIソリューションの複雑さや既存システムとの統合度によって異なりますが、基本的なチャットボットなどのシンプルなソリューションであれば1〜2ヶ月程度、カスタムAIの開発には3〜6ヶ月程度かかる場合があります。ShinAIでは、迅速に効果を実感いただけるよう、段階的な導入アプローチを推奨しています。</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>AIを導入する際の一般的なコストはどれくらいですか？</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>AI導入コストは導入規模や機能によって数十万円から数千万円まで幅広く変動します。チャットボットや基本的な自動化ツールは比較的低コストで導入可能で、月額数万円からのサブスクリプションモデルも多くあります。ShinAIでは投資対効果を重視し、まずは小規模な実証実験（PoC）から始めることをおすすめしています。具体的なお見積りについては、お気軽にご相談ください。</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>AI倫理に関する考え方について</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>AIを導入するための社内体制や準備について教えてください</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 
-==============================================
-// === component-split: CTASection ===
-COMPONENT: CTA - 行動喚起セクション
-==============================================
--->
-<section class="cta-section">
-    <div class="container">
-        <div class="cta-container animate-on-scroll">
-            <div class="cta-bg-animation"></div>
-            <div class="cta-shapes">
-                <div class="cta-shape-1"></div>
-                <div class="cta-shape-2"></div>
-                <div class="cta-shape-3"></div>
-            </div>
-            <div class="cta-content">
-                <div class="cta-title">
-                    <h2>貴社の業界に最適な<span class="text-gradient">AIソリューション</span>をご提案します</h2>
-                </div>
-                <div class="cta-description">
-                    <p>AI導入には、業界特有の課題や規制を理解した上での専門的なアプローチが必要です。<br>
-                    ShinAIの業界特化型コンサルタントが、貴社の課題に最適なAIソリューションをご提案します。</p>
-                </div>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn-consultation btn-lg btn-glow">
-                        <span>無料相談する</span>
-                        <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                    </a>
-                    <a href="services.html" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</main>
-
-<!-- 
-==============================================
-// === component-split: BottomBanner ===
-COMPONENT: ボトムバナー - ブランドメッセージ強調
-==============================================
--->
-<div class="bottom-banner">
-    <div class="bottom-banner-content">
-        「真の価値を信じ、次世代のために新たな未来を創る。」
-    </div>
-</div>
-
-<!-- 
-==============================================
-// === component-split: Footer ===
-COMPONENT: フッター - サイト全体ナビゲーション
-==============================================
--->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">
-                    <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
-                    <span class="en-text">ShinAI</span>
-                </div>
-                <p class="footer-description">
-                    最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                </p>
-                <div class="social-links" aria-label="ソーシャルメディアリンク">
-                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                </div>
-            </div>
-            
-            <div>
-                <h4 class="footer-heading">サービス</h4>
-                <ul class="footer-links">
-                    <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                    <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                    <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                    <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
-                    <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="footer-heading">会社情報</h4>
-                <ul class="footer-links">
-                    <li><a href="about.html">会社概要</a></li>
-                    <li><a href="about.html#philosophy">企業理念</a></li>
-                    <li><a href="industries.html">AI活用事例</a></li>
-                    <li><a href="about.html#careers">採用情報</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="footer-heading">お問い合わせ</h4>
-                <ul class="footer-links">
-                    <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                    <li>shinai.life@gmail.com</li>
-                    <li>平日 9:00〜18:00（土日祝休）</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-            <div class="footer-bottom-links">
-                <a href="#">プライバシーポリシー</a>
-                <a href="#">利用規約</a>
-                <a href="#">特定商取引法に基づく表記</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- 
-==============================================
-// === component-split: Chatbot ===
-COMPONENT: チャットボット - インタラクティブサポート
-==============================================
--->
-<div class="chatbot" aria-label="AIアシスタント">
-    <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-        <div class="ripple"></div>
-        <i class="fas fa-robot" aria-hidden="true"></i>
+    <!-- 
+    ==============================================
+    // === component-split: BackToTop ===
+    COMPONENT: トップに戻るボタン - ナビゲーション補助
+    ==============================================
+    -->
+    <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
-    <div class="chatbot-container" id="chatbot-container">
-        <div class="chatbot-header">
-            <div class="chatbot-title">
-                <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
-            </div>
-            <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-        </div>
-        <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-            <div class="message bot-message">
-                こんにちは！ShinAIアシスタントです。業界別のAI活用方法や導入事例について、お気軽にお聞きください。
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-            <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                <i class="fas fa-paper-plane" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-</div>
 
-<!-- 
-==============================================
-// === component-split: BackToTop ===
-COMPONENT: トップに戻るボタン - ナビゲーション補助
-==============================================
--->
-<button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-</button>
-
-<!-- 
-==============================================
-// === component-split: JavaScript ===
-COMPONENT: JavaScript - インタラクション制御
-==============================================
--->
-<script>
+    <!-- 
+    ==============================================
+    // === component-split: JavaScript ===
+    COMPONENT: JavaScript - インタラクション制御
+    ==============================================
+    -->
+    <script>
     // プリロード画面の制御
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preload-container');
@@ -2551,7 +2643,7 @@ COMPONENT: JavaScript - インタラクション制御
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // アコーディオン機能の実装
+        // アコーディオン機能の実装 - スムーズなアニメーション
         const accordionHeaders = document.querySelectorAll('.faq-question');
         
         accordionHeaders.forEach(header => {
@@ -2559,15 +2651,26 @@ COMPONENT: JavaScript - インタラクション制御
                 const faqItem = this.parentElement;
                 const isActive = faqItem.classList.contains('active');
                 
-                // すべてのアイテムを閉じる
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // クリックされたアイテムが閉じていた場合は開く
+                // アニメーションの開始のために、まずopacityだけを変更
                 if (!isActive) {
-                    faqItem.classList.add('active');
+                    document.querySelectorAll('.faq-item.active .faq-answer p').forEach(p => {
+                        p.style.opacity = '0';
+                        p.style.transform = 'translateY(10px)';
+                    });
                 }
+                
+                // 少し遅延させてからクラスを変更
+                setTimeout(() => {
+                    // すべてのアイテムを閉じる
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // クリックされたアイテムが閉じていた場合は開く
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                }, 100);
             });
         });
         
@@ -2715,6 +2818,6 @@ COMPONENT: JavaScript - インタラクション制御
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
     });
-</script>
+    </script>
 </body>
 </html>
