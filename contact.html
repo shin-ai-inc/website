@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Meta Information -->
+    <!-- 
+    ==============================================
+    // === component-split: Meta ===
+    COMPONENT: メタ情報 - SEO対策
+    ==============================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - お問い合わせ・無料相談。AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
@@ -13,7 +18,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- プリロード/プリコネクト - パフォーマンス最適化 -->
+    <!-- 
+    ==============================================
+    // === component-split: Resources ===
+    COMPONENT: リソース読み込み - パフォーマンス最適化
+    ==============================================
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -22,7 +32,12 @@
     <link rel="preload" href="assets/images/logo.svg" as="image">
     <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" crossorigin>
     
-    <!-- OGP Settings -->
+    <!-- 
+    ==============================================
+    // === component-split: OGP ===
+    COMPONENT: OGP設定 - SNS共有最適化
+    ==============================================
+    -->
     <meta property="og:title" content="ShinAI - お問い合わせ・無料相談">
     <meta property="og:description" content="AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。専門コンサルタントが対応いたします。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200&h=630">
@@ -35,20 +50,26 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - お問い合わせと無料AI相談">
     
-    <!-- External Resources - 最適化 -->
+    <!-- 
+    ==============================================
+    // === component-split: ExternalResources ===
+    COMPONENT: 外部リソース - 遅延読み込み最適化
+    ==============================================
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" rel="stylesheet">
-    
-    <!-- Font Awesome - アイコン -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
-    
-    <!-- GSAP - アニメーション (遅延読み込み) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
-    <!-- JSON-LD - 構造化データ -->
+    <!-- 
+    ==============================================
+    // === component-split: StructuredData ===
+    COMPONENT: 構造化データ - 検索エンジン対応
+    ==============================================
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -99,7 +120,12 @@
     
     <title>お問い合わせ・無料相談 | ShinAI - 最先端AIソリューション</title>
     
-    <!-- スタイルシート -->
+    <!-- 
+    ==============================================
+    // === component-split: StyleSheets ===
+    COMPONENT: スタイルシート - デザイン適用
+    ==============================================
+    -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     
@@ -107,8 +133,46 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
 
-    <!-- お問い合わせページ固有のスタイル -->
+    <!-- 
+    ==============================================
+    // === component-split: PageSpecificStyles ===
+    COMPONENT: ページ固有スタイル - カスタムデザイン
+    ==============================================
+    -->
     <style>
+        /* 
+        ==============================================
+        // === component-split: GlobalStyles ===
+        COMPONENT: グローバルスタイル - 基本設定
+        ==============================================
+        */
+        :root {
+            /* カラーパレット - ブランドカラーと調和 */
+            --primary: #3A5FEB;
+            --primary-light: #4671FF;
+            --secondary: #00C9A7;
+            --secondary-light: #00E6C3;
+            --accent: #FF8A00;
+            --dark: #1A1F36;
+            --gray: #5E6C84;
+            --light-gray: #F9FAFC;
+            --white: #FFFFFF;
+            --error: #FF3B3B;
+            --success: #00C48C;
+            
+            /* グラデーション強化 */
+            --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
+            --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
+            --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+        }
+
+        /* 
+        ==============================================
+        // === component-split: Animations ===
+        COMPONENT: アニメーション - ユーザー体験向上
+        ==============================================
+        */
         /* プリロードスピナー */
         .preload-container {
             position: fixed;
@@ -187,7 +251,78 @@
             }
         }
 
-        /* ヒーローセクション - 無料相談テキスト視認性向上 */
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(3px) translateY(-3px);
+            }
+            50% {
+                transform: translateX(0) translateY(0);
+            }
+            75% {
+                transform: translateX(-2px) translateY(2px);
+            }
+        }
+
+        @keyframes iconBounce {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes arrowWave {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(8px);
+            }
+        }
+
+        @keyframes formFocusLine {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes floatingUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        @keyframes floatingDown {
+            0%, 100% {
+                transform: translateY(0) rotate(15deg);
+            }
+            50% {
+                transform: translateY(30px) rotate(-5deg);
+            }
+        }
+
+        @keyframes rotateSlowly {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 
+        ==============================================
+        // === component-split: HeroStyles ===
+        COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
+        ==============================================
+        */
         .page-hero-title .highlight-accent {
             color: #FF8A00; /* アクセントカラー */
             font-weight: 700;
@@ -213,7 +348,12 @@
             border-radius: var(--radius-full);
         }
 
-        /* カスタムチェックボックス - 機能改善 */
+        /* 
+        ==============================================
+        // === component-split: CheckboxStyles ===
+        COMPONENT: チェックボックス - 修正と改善
+        ==============================================
+        */
         .form-check {
             position: relative;
             padding-left: 2.8rem;
@@ -301,7 +441,12 @@
             margin-top: 1rem;
         }
         
-        /* フォーム入力フォーカス効果 */
+        /* 
+        ==============================================
+        // === component-split: FormStyles ===
+        COMPONENT: フォーム入力フォーカス効果 - UX向上
+        ==============================================
+        */
         .input-wrapper {
             position: relative;
             transition: all 0.3s ease;
@@ -319,13 +464,12 @@
             animation: formFocusLine 0.3s ease forwards;
         }
         
-        @keyframes formFocusLine {
-            to {
-                width: 100%;
-            }
-        }
-        
-        /* 見出し強調 */
+        /* 
+        ==============================================
+        // === component-split: HeadingStyles ===
+        COMPONENT: 見出し強調 - 視覚的強化
+        ==============================================
+        */
         .heading-lg .highlight {
             color: var(--primary);
             background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
@@ -348,7 +492,12 @@
             z-index: -1;
         }
         
-        /* コンタクトグリッド */
+        /* 
+        ==============================================
+        // === component-split: ContactGrid ===
+        COMPONENT: コンタクトグリッド - レイアウト構成
+        ==============================================
+        */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -377,6 +526,12 @@
             opacity: 0.5;
         }
         
+        /* 
+        ==============================================
+        // === component-split: ContactMethod ===
+        COMPONENT: 連絡方法 - コンタクト情報表示
+        ==============================================
+        */
         .contact-method {
             display: flex;
             align-items: flex-start;
@@ -425,7 +580,12 @@
             text-decoration: underline;
         }
         
-        /* お問い合わせフォーム */
+        /* 
+        ==============================================
+        // === component-split: ContactForm ===
+        COMPONENT: お問い合わせフォーム - 入力UI改善
+        ==============================================
+        */
         .contact-form {
             background: white;
             border-radius: var(--radius-xl);
@@ -499,6 +659,12 @@
             gap: 1.5rem;
         }
         
+        /* 
+        ==============================================
+        // === component-split: SubmitButton ===
+        COMPONENT: 送信ボタン - アニメーション強化
+        ==============================================
+        */
         .form-submit {
             margin-top: 2rem;
             text-align: center;
@@ -525,7 +691,21 @@
             text-decoration: underline;
         }
         
-        /* バリデーション */
+        /* 紙飛行機アイコンアニメーション */
+        .icon-bounce {
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        .btn-icon-bounce:hover .icon-bounce {
+            animation: iconBounce 0.8s ease-in-out infinite;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: FormValidation ===
+        COMPONENT: バリデーション - 入力チェック
+        ==============================================
+        */
         .form-control.error {
             border-color: var(--error);
             background-color: rgba(255, 59, 59, 0.03);
@@ -552,7 +732,12 @@
             animation: fadeInUp 0.3s ease forwards;
         }
         
-        /* 送信成功メッセージ */
+        /* 
+        ==============================================
+        // === component-split: SuccessMessage ===
+        COMPONENT: 送信成功メッセージ - フィードバック
+        ==============================================
+        */
         .message-success {
             background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
             border-left: 4px solid var(--success);
@@ -581,7 +766,12 @@
             animation: fadeInUp 0.5s ease forwards;
         }
         
-        /* 地図関連 */
+        /* 
+        ==============================================
+        // === component-split: MapSection ===
+        COMPONENT: 地図関連 - アクセス情報表示
+        ==============================================
+        */
         .map-container {
             overflow: hidden;
             border-radius: var(--radius-xl);
@@ -651,7 +841,12 @@
             line-height: 1.6;
         }
         
-        /* FAQセクション */
+        /* 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: FAQセクション - アコーディオン
+        ==============================================
+        */
         .section-faq {
             background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
             padding: 5rem 0;
@@ -747,7 +942,12 @@
             margin: 0;
         }
         
-        /* 装飾要素 */
+        /* 
+        ==============================================
+        // === component-split: DecorativeElements ===
+        COMPONENT: 装飾要素 - 視覚的エフェクト
+        ==============================================
+        */
         .floating-elements {
             position: absolute;
             top: 0;
@@ -792,34 +992,12 @@
             animation: rotateSlowly 60s linear infinite;
         }
         
-        @keyframes floatingUp {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
-        }
-        
-        @keyframes floatingDown {
-            0%, 100% {
-                transform: translateY(0) rotate(15deg);
-            }
-            50% {
-                transform: translateY(30px) rotate(-5deg);
-            }
-        }
-        
-        @keyframes rotateSlowly {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /* CTAセクション */
+        /* 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: CTAセクション - 行動喚起
+        ==============================================
+        */
         .section-cta {
             position: relative;
             overflow: hidden;
@@ -855,7 +1033,44 @@
             opacity: 0.8;
         }
         
-        /* レスポンシブ対応 */
+        /* 最終CTAボタン改善 */
+        .cta-main-btn {
+            position: relative;
+            overflow: visible;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cta-main-btn:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cta-main-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            z-index: -1;
+            animation: pulseGlow 2s infinite;
+        }
+        
+        .animated-arrow {
+            transition: all 0.3s ease;
+        }
+        
+        .cta-main-btn:hover .animated-arrow {
+            animation: arrowWave 1.5s ease infinite;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ResponsiveStyles ===
+        COMPONENT: レスポンシブ対応 - マルチデバイス
+        ==============================================
+        */
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -900,18 +1115,38 @@
     </style>
 </head>
 <body data-current-year="2025">
-    <!-- プリローダー -->
+    <!-- 
+    ==============================================
+    // === component-split: Preloader ===
+    COMPONENT: プリローダー - 読み込み体験向上
+    ==============================================
+    -->
     <div class="preload-container" id="preload-container">
         <div class="preload-spinner"></div>
     </div>
 
-    <!-- アクセシビリティナビゲーション -->
+    <!-- 
+    ==============================================
+    // === component-split: Accessibility ===
+    COMPONENT: アクセシビリティナビ - ウェブ標準対応
+    ==============================================
+    -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- トップバナー -->
+    <!-- 
+    ==============================================
+    // === component-split: TopBanner ===
+    COMPONENT: トップバナー - ブランド強調
+    ==============================================
+    -->
     <div class="top-banner"></div>
     
-    <!-- ヘッダー -->
+    <!-- 
+    ==============================================
+    // === component-split: Header ===
+    COMPONENT: ヘッダー - ナビゲーション
+    ==============================================
+    -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -938,7 +1173,12 @@
         </div>
     </header>
     
-    <!-- ページヒーロー -->
+    <!-- 
+    ==============================================
+    // === component-split: PageHero ===
+    COMPONENT: ページヒーロー - 第一印象強化
+    ==============================================
+    -->
     <section class="page-hero">
         <div class="page-hero-bg-container">
             <div class="page-hero-bg-gradient"></div>
@@ -975,9 +1215,19 @@
         </div>
     </section>
     
-    <!-- メインコンテンツ -->
+    <!-- 
+    ==============================================
+    // === component-split: MainContent ===
+    COMPONENT: メインコンテンツ - コンテンツ本体
+    ==============================================
+    -->
     <main class="main-content">
-        <!-- お問い合わせフォーム -->
+        <!-- 
+        ==============================================
+        // === component-split: ContactForm ===
+        COMPONENT: お問い合わせフォーム - 入力UI
+        ==============================================
+        -->
         <section class="section section-contact" id="contact-form">
             <div class="container">
                 <div class="section-title text-center">
@@ -987,7 +1237,12 @@
                 </div>
                 
                 <div class="contact-grid">
-                    <!-- お問い合わせ情報 -->
+                    <!-- 
+                    ==============================================
+                    // === component-split: ContactInfo ===
+                    COMPONENT: お問い合わせ情報 - コンタクト情報
+                    ==============================================
+                    -->
                     <div class="contact-info animate-on-scroll">
                         <div class="contact-info-pattern"></div>
                         <h3 class="contact-title">お問い合わせ先</h3>
@@ -1034,7 +1289,12 @@
                         </div>
                     </div>
                     
-                    <!-- お問い合わせフォーム -->
+                    <!-- 
+                    ==============================================
+                    // === component-split: ContactForm ===
+                    COMPONENT: お問い合わせフォーム - 入力フォーム
+                    ==============================================
+                    -->
                     <div class="contact-form animate-on-scroll">
                         <div class="message-success" id="message-success" role="alert" aria-live="polite">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
@@ -1139,11 +1399,11 @@
                                 <p>このサイトはreCAPTCHAによって保護されており、Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。</p>
                             </div>
                             
-                            <!-- 送信ボタン -->
+                            <!-- 送信ボタン - 紙飛行機アイコンアニメーション追加 -->
                             <div class="form-submit">
                                 <button type="submit" class="btn btn-cta btn-lg btn-icon-bounce">
                                     <span>無料相談を申し込む</span>
-                                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                    <i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </form>
@@ -1152,7 +1412,12 @@
             </div>
         </section>
         
-        <!-- 地図セクション -->
+        <!-- 
+        ==============================================
+        // === component-split: MapSection ===
+        COMPONENT: 地図セクション - アクセス情報
+        ==============================================
+        -->
         <section class="section section-map">
             <div class="container">
                 <div class="section-title text-center">
@@ -1189,7 +1454,12 @@
             </div>
         </section>
         
-        <!-- よくある質問セクション -->
+        <!-- 
+        ==============================================
+        // === component-split: FAQSection ===
+        COMPONENT: よくある質問セクション - 不安解消
+        ==============================================
+        -->
         <section class="section section-faq">
             <div class="container">
                 <div class="section-title text-center">
@@ -1231,28 +1501,33 @@
                     
                     <div class="faq-item" id="faq4">
                         <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq4-answer">
-                            AIを導入するための社内体制や準備について教えてください
+                            AI倫理に関する考え方について
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq4-answer" role="region" aria-labelledby="faq4">
-                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは「AI内製化支援」サービスも提供しており、貴社の状況に合わせた社内AI人材の育成もサポートしています。</p>
+                            <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item" id="faq5">
                         <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq5-answer">
-                            AI倫理について
+                            AIを導入するための社内体制や準備について教えてください
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq5-answer" role="region" aria-labelledby="faq5">
-                            <p>ShinAIでは、「人間中心のAI」を開発理念としています。当社のAIソリューションは、透明性、公平性、プライバシー保護などの倫理的側面を重視しています。AIは人間を支援し、より良い意思決定や業務効率化を実現するツールとして活用されるべきであると考えており、持続可能で信頼性の高いAI活用を一緒に考えていくことが重要だと考えています。</p>
+                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- CTAセクション -->
+        <!-- 
+        ==============================================
+        // === component-split: CTASection ===
+        COMPONENT: CTA - 行動喚起セクション
+        ==============================================
+        -->
         <section class="section section-cta">
             <div class="cta-bg">
                 <div class="cta-bg-gradient"></div>
@@ -1264,10 +1539,11 @@
                     <h2 class="cta-title">最先端AIで<br>ビジネスを次のステージへ</h2>
                     <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
+                    <!-- 最終CTAボタン - モーションエフェクト強化 -->
                     <div class="cta-buttons">
                         <a href="#contact-form" class="btn btn-cta-white btn-lg btn-icon-bounce cta-main-btn">
                             <span>無料相談を申し込む</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            <i class="fas fa-arrow-right animated-arrow" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -1281,14 +1557,24 @@
         </section>
     </main>
     
-    <!-- 下部バナー -->
+    <!-- 
+    ==============================================
+    // === component-split: BottomBanner ===
+    COMPONENT: 下部バナー - ブランドメッセージ強調
+    ==============================================
+    -->
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
-    <!-- フッター -->
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター - サイト全体ナビゲーション
+    ==============================================
+    -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1353,7 +1639,12 @@
         </div>
     </footer>
     
-    <!-- AIチャットボット -->
+    <!-- 
+    ==============================================
+    // === component-split: Chatbot ===
+    COMPONENT: チャットボット - インタラクティブサポート
+    ==============================================
+    -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1382,12 +1673,22 @@
         </div>
     </div>
     
-    <!-- トップに戻るボタン -->
+    <!-- 
+    ==============================================
+    // === component-split: BackToTop ===
+    COMPONENT: トップに戻るボタン - ナビゲーション補助
+    ==============================================
+    -->
     <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
-        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
     
-    <!-- JavaScriptロジック -->
+    <!-- 
+    ==============================================
+    // === component-split: JavaScript ===
+    COMPONENT: JavaScript - インタラクション制御
+    ==============================================
+    -->
     <script>
         // プリローダー制御
         window.addEventListener('load', function() {
