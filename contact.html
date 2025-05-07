@@ -328,12 +328,12 @@
             font-weight: 700;
             position: relative;
             display: inline-block;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* シャドウ強化で視認性向上 */
-            background: rgba(255, 255, 255, 0.35); /* 背景を若干濃くして視認性向上 */
-            padding: 0.2em 0.6em;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* 光るエフェクトを強化 */
-            transition: all 0.4s ease;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(0, 0, 0, 0.2); /* 背景から浮き出たように見せる */
+            background: rgba(255, 255, 255, 0.25); /* 薄い背景を追加 */
+            padding: 0.1em 0.5em;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 光るような効果 */
+            transition: all 0.3s ease;
         }
         
         .page-hero-title .highlight-accent::after {
@@ -342,8 +342,8 @@
             left: 0;
             bottom: -2px;
             width: 100%;
-            height: 8px; /* 下線を太く */
-            background: rgba(255, 138, 0, 0.6); /* 下線を濃く */
+            height: 6px;
+            background: rgba(255, 138, 0, 0.5);
             z-index: -1;
             border-radius: var(--radius-full);
         }
@@ -356,7 +356,7 @@
         */
         .form-check {
             position: relative;
-            padding-left: 3.2rem; /* タップ領域を広げる */
+            padding-left: 3rem;
             margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
@@ -365,7 +365,7 @@
         }
         
         .form-check:hover {
-            transform: translateX(6px); /* ホバーエフェクト強化 */
+            transform: translateX(4px);
         }
         
         .form-check-input {
@@ -392,35 +392,35 @@
             position: absolute;
             left: 0;
             top: 0;
-            width: 30px; /* サイズ拡大 */
-            height: 30px;
-            border: 2px solid rgba(58, 95, 235, 0.5); /* 境界線を強調 */
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border: 2px solid rgba(58, 95, 235, 0.4);
+            border-radius: 6px;
             background-color: var(--white);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
         
         .form-check:hover .checkmark {
             border-color: var(--primary);
-            transform: scale(1.08);
-            box-shadow: 0 6px 12px rgba(58, 95, 235, 0.35);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(58, 95, 235, 0.3);
         }
         
         .form-check-input:checked ~ .checkmark {
             background-color: var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 4px 10px rgba(58, 95, 235, 0.3);
+            box-shadow: 0 3px 8px rgba(58, 95, 235, 0.25);
         }
         
         .checkmark:after {
             content: '';
             position: absolute;
             display: none;
-            left: 10px;
+            left: 9px;
             top: 5px;
-            width: 8px;
-            height: 14px;
+            width: 7px;
+            height: 12px;
             border: solid white;
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
@@ -432,7 +432,7 @@
         }
         
         .form-check-input:focus ~ .checkmark {
-            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
         }
         
         .form-check-input:checked ~ .form-check-label {
@@ -456,20 +456,18 @@
         .input-wrapper {
             position: relative;
             transition: all 0.3s ease;
-            margin-bottom: 0.3rem; /* 下部に余白追加 */
         }
         
         .input-wrapper.focused::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -3px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
-            height: 3px; /* ライン強調 */
-            background: var(--gradient-primary); /* グラデーション適用 */
-            animation: formFocusLine 0.4s ease forwards;
-            border-radius: 3px;
+            height: 2px;
+            background: var(--primary);
+            animation: formFocusLine 0.3s ease forwards;
         }
         
         /* 
@@ -486,7 +484,6 @@
             background-clip: text;
             position: relative;
             display: inline-block;
-            font-weight: 800; /* フォント太さ強調 */
         }
         
         .heading-lg .highlight::after {
@@ -495,9 +492,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 6px; /* 下線太さ強調 */
-            background: linear-gradient(90deg, rgba(58, 95, 235, 0.4), rgba(0, 201, 167, 0.4));
-            border-radius: 3px;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+            border-radius: 2px;
             z-index: -1;
         }
         
@@ -510,17 +507,17 @@
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 3.5rem; /* 間隔を広げる */
-            margin-top: 3.5rem; /* 上部余白拡大 */
+            gap: 3rem;
+            margin-top: 3rem;
         }
         
         .contact-info {
-            background: linear-gradient(145deg, rgba(58, 95, 235, 0.98), rgba(0, 201, 167, 0.98)); /* グラデーション強化 */
+            background: linear-gradient(135deg, #3A5FEB, #2C4CCA); /* 背景色を濃く変更して視認性向上 */
             border-radius: var(--radius-xl);
-            padding: 2.8rem; /* パディング拡大 */
+            padding: 2.5rem;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* シャドウ強化 */
-            border: none; /* ボーダー削除 */
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15); /* シャドウを強化 */
+            border: 1px solid rgba(58, 95, 235, 0.2);
             overflow: hidden;
             color: var(--white); /* テキスト色を白に固定 */
         }
@@ -531,9 +528,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.12'/%3E%3C/svg%3E"); /* パターン改善 */
-            z-index: 0;
-            opacity: 1;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.06'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
         }
         
         /* 
@@ -545,64 +542,62 @@
         .contact-method {
             display: flex;
             align-items: flex-start;
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
+            gap: 1rem;
+            margin-bottom: 1.8rem; /* マージン増加 */
+            transition: all 0.3s ease;
+            position: relative; /* 位置を相対的に設定 */
+            padding-left: 0.5rem; /* 左パディング追加 */
         }
         
         .contact-method:hover {
-            transform: translateX(8px); /* ホバーエフェクト強化 */
+            transform: translateX(5px);
         }
         
         .contact-icon {
-            width: 54px; /* アイコンサイズ拡大 */
-            height: 54px;
-            min-width: 54px;
-            background: rgba(255, 255, 255, 0.18); /* 背景色調整 */
-            border-radius: 14px;
+            width: 50px; /* サイズ拡大 */
+            height: 50px; /* サイズ拡大 */
+            min-width: 50px;
+            background: rgba(255, 255, 255, 0.2); /* 背景色変更で視認性向上 */
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.4rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
+            font-size: 1.4rem; /* アイコンサイズ拡大 */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
         
         .contact-method:hover .contact-icon {
-            background: rgba(255, 255, 255, 0.3); /* ホバー時背景色変更 */
-            transform: scale(1.1) rotate(5deg); /* 回転効果追加 */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1) rotate(5deg);
         }
         
         .contact-details h4 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin: 0 0 0.4rem;
             color: var(--white);
-            font-weight: 700; /* フォント強調 */
+            font-weight: 600;
         }
         
         .contact-details p {
             margin: 0;
-            color: rgba(255, 255, 255, 0.9); /* 視認性向上 */
+            color: rgba(255, 255, 255, 0.9); /* 若干透明度を持たせる */
             line-height: 1.6;
         }
         
         .contact-details a {
-            color: var(--white);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-weight: 600; /* リンク強調 */
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.5); /* 下線追加 */
-            padding-bottom: 2px;
+            font-weight: 500;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.5); /* 下線を追加 */
+            padding-bottom: 2px; /* 下線との間隔 */
         }
         
         .contact-details a:hover {
             color: var(--white);
             border-bottom: 1px solid var(--white);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 発光効果 */
         }
         
         /* 
@@ -614,83 +609,63 @@
         .contact-form {
             background: white;
             border-radius: var(--radius-xl);
-            padding: 3.2rem; /* パディング拡大 */
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12); /* シャドウ強化 */
-            border: 1px solid rgba(58, 95, 235, 0.08);
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(58, 95, 235, 0.05);
             position: relative;
-            overflow: hidden;
-        }
-        
-        /* フォーム背景パターン追加 */
-        .contact-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.02'/%3E%3C/svg%3E");
-            opacity: 0.7;
-            z-index: 0;
         }
         
         .form-intro {
             color: var(--gray);
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
             font-size: 1.05rem;
             line-height: 1.7;
-            position: relative;
-            z-index: 1;
         }
         
         .form-group {
             margin-bottom: 1.8rem;
-            position: relative;
-            z-index: 1;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
             font-weight: 600;
             color: var(--dark);
             font-size: 1rem;
-            position: relative;
         }
         
         .form-control {
             width: 100%;
-            padding: 1.1rem 1.2rem 1.1rem 3.2rem; /* パディング調整 */
-            border: 1.5px solid rgba(58, 95, 235, 0.18); /* ボーダー強調 */
+            padding: 1.2rem 1.5rem; /* パディング増加 */
+            border: 1.5px solid rgba(58, 95, 235, 0.15);
             border-radius: var(--radius);
             font-size: 1.05rem;
             color: var(--dark);
             transition: all 0.3s ease;
             background-color: var(--white);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04); /* シャドウ追加 */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
         }
         
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.18);
-            transform: translateY(-2px); /* フォーカス時に上昇効果 */
+            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
         }
         
         .input-icon {
             position: absolute;
-            left: 1.2rem;
+            left: 1.5rem; /* 位置調整 */
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
-            opacity: 0.8;
+            opacity: 0.7;
             transition: all 0.3s ease;
             font-size: 1.2rem;
         }
         
         .input-wrapper:focus-within .input-icon {
             opacity: 1;
-            transform: translateY(-50%) scale(1.15); /* スケール効果強化 */
+            transform: translateY(-50%) scale(1.1);
             color: var(--primary);
         }
         
@@ -700,7 +675,7 @@
         }
         
         .textarea-wrapper:focus-within .input-icon {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
         
         .form-grid {
@@ -716,10 +691,8 @@
         ==============================================
         */
         .form-submit {
-            margin-top: 2.8rem; /* 余白拡大 */
+            margin-top: 2.5rem;
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
         
         .required {
@@ -731,19 +704,17 @@
             font-size: 0.85rem;
             color: var(--gray);
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
         
         .recaptcha-note a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
         }
         
         .recaptcha-note a:hover {
             text-decoration: underline;
-            color: var(--primary-light);
         }
         
         /* 紙飛行機アイコンアニメーション */
@@ -796,7 +767,7 @@
         .message-success {
             background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
             border-left: 4px solid var(--success);
-            padding: 1.4rem; /* パディング拡大 */
+            padding: 1.2rem;
             border-radius: 0 var(--radius) var(--radius) 0;
             display: flex;
             align-items: center;
@@ -830,15 +801,15 @@
         .map-container {
             overflow: hidden;
             border-radius: var(--radius-xl);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* シャドウ強化 */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
             position: relative;
             background: var(--white);
-            transition: all 0.5s ease; /* トランジション強化 */
+            transition: all 0.4s ease;
         }
         
         .map-container:hover {
-            box-shadow: 0 25px 50px rgba(58, 95, 235, 0.25);
-            transform: translateY(-12px); /* 浮き上がり効果強化 */
+            box-shadow: 0 20px 45px rgba(58, 95, 235, 0.2);
+            transform: translateY(-8px);
         }
         
         .contact-map {
@@ -855,28 +826,28 @@
             position: absolute;
             bottom: 2rem;
             left: 2rem;
-            background: rgba(255, 255, 255, 0.98); /* 背景不透明度上げる */
-            padding: 2rem; /* パディング拡大 */
+            background: var(--white);
+            padding: 1.8rem;
             border-radius: var(--radius-lg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* シャドウ強化 */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             max-width: 350px;
             z-index: 2;
-            backdrop-filter: blur(15px); /* ブラー効果強化 */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
         
         .map-info:hover {
-            transform: translateY(-8px); /* ホバー時浮き上がり強化 */
-            box-shadow: 0 15px 35px rgba(58, 95, 235, 0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.2);
         }
         
         .map-address, .map-access {
             display: flex;
             align-items: flex-start;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
         }
         
         .map-access {
@@ -885,7 +856,7 @@
         
         .map-address i, .map-access i {
             color: var(--primary);
-            font-size: 1.4rem; /* アイコンサイズ拡大 */
+            font-size: 1.3rem;
             margin-top: 0.2rem;
         }
         
@@ -903,8 +874,8 @@
         ==============================================
         */
         .section-faq {
-            background: linear-gradient(135deg, rgba(249, 250, 252, 0.98), rgba(243, 244, 246, 0.98));
-            padding: 5.5rem 0; /* パディング拡大 */
+            background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
+            padding: 5rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -916,9 +887,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.07'/%3E%3C/svg%3E"); /* パターン強化 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
             z-index: -1;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         
         .faq-container {
@@ -929,16 +900,15 @@
         .faq-item {
             background: var(--white);
             border-radius: var(--radius-lg);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* シャドウ強化 */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             margin-bottom: 1.8rem;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* トランジション調整 */
-            border: 1px solid rgba(58, 95, 235, 0.05); /* ボーダー追加 */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .faq-item:hover {
-            box-shadow: 0 15px 35px rgba(58, 95, 235, 0.2);
-            transform: translateY(-8px); /* ホバー効果強化 */
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.18);
+            transform: translateY(-5px);
         }
         
         .faq-item:last-child {
@@ -949,26 +919,24 @@
             background: var(--white);
             color: var(--dark);
             font-weight: 600;
-            padding: 1.6rem 2.2rem; /* パディング拡大 */
+            padding: 1.5rem 2rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            font-size: 1.15rem; /* フォントサイズ拡大 */
+            font-size: 1.1rem;
             line-height: 1.5;
             transition: all 0.3s ease;
         }
         
         .faq-question:hover {
             color: var(--primary);
-            background: rgba(58, 95, 235, 0.02); /* ホバー時背景色追加 */
         }
         
         .faq-question i {
             color: var(--primary);
-            transition: transform 0.4s ease;
-            font-size: 1.1rem; /* アイコンサイズ調整 */
+            transition: transform 0.3s ease;
         }
         
         .faq-item.active .faq-question {
@@ -985,12 +953,12 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(249, 250, 252, 0.8); /* 背景色調整 */
+            background: rgba(249, 250, 252, 0.7);
             border-top: 1px solid rgba(58, 95, 235, 0.08);
         }
         
         .faq-item.active .faq-answer {
-            padding: 2rem 2.2rem; /* パディング拡大 */
+            padding: 1.8rem 2rem;
             max-height: 1000px;
         }
         
@@ -998,7 +966,7 @@
             color: var(--gray);
             line-height: 1.7;
             margin: 0;
-            font-size: 1.05rem; /* フォントサイズ調整 */
+            font-size: 1.05rem;
         }
         
         /* 
@@ -1021,37 +989,34 @@
             position: absolute;
             top: 15%;
             right: 10%;
-            width: 180px; /* サイズ拡大 */
-            height: 180px;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
             border-radius: 50%;
-            animation: floatingUp 10s ease-in-out infinite; /* アニメーション調整 */
-            opacity: 0.7; /* 不透明度調整 */
+            animation: floatingUp 8s ease-in-out infinite;
         }
         
         .floating-square {
             position: absolute;
             bottom: 20%;
             left: 5%;
-            width: 120px; /* サイズ拡大 */
-            height: 120px;
-            background: linear-gradient(135deg, rgba(255, 138, 0, 0.12), rgba(255, 169, 64, 0.12));
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 64, 0.1));
             border-radius: var(--radius);
             transform: rotate(15deg);
-            animation: floatingDown 12s ease-in-out infinite; /* アニメーション調整 */
-            opacity: 0.7; /* 不透明度調整 */
+            animation: floatingDown 10s ease-in-out infinite;
         }
         
         .floating-dots {
             position: absolute;
             top: 30%;
             left: 20%;
-            width: 100px; /* サイズ拡大 */
-            height: 100px;
-            background-image: radial-gradient(circle, rgba(58, 95, 235, 0.25) 2px, transparent 2px);
+            width: 80px;
+            height: 80px;
+            background-image: radial-gradient(circle, rgba(58, 95, 235, 0.2) 2px, transparent 2px);
             background-size: 15px 15px;
-            animation: rotateSlowly 50s linear infinite;
-            opacity: 0.7; /* 不透明度調整 */
+            animation: rotateSlowly 60s linear infinite;
         }
         
         /* 
@@ -1063,7 +1028,6 @@
         .section-cta {
             position: relative;
             overflow: hidden;
-            padding: 5.5rem 0; /* パディング拡大 */
         }
         
         .cta-bg {
@@ -1081,7 +1045,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.09), rgba(0, 201, 167, 0.09)); /* グラデーション強化 */
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
             z-index: -1;
         }
         
@@ -1091,9 +1055,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.08'/%3E%3C/svg%3E"); /* パターン強化 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.07'/%3E%3C/svg%3E");
             z-index: -1;
-            opacity: 0.9; /* 不透明度調整 */
+            opacity: 0.8;
         }
         
         /* 
@@ -1103,7 +1067,7 @@
         ==============================================
         */
         .btn {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* トランジション強化 */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .btn-cta {
@@ -1111,21 +1075,20 @@
             color: white;
             font-weight: 700;
             border: none;
-            box-shadow: 0 12px 35px rgba(58, 95, 235, 0.3); /* シャドウ強化 */
+            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
             position: relative;
             overflow: hidden;
             z-index: 1;
             border-radius: 50px;
-            padding: 1.3rem 2.6rem; /* パディング拡大 */
-            min-width: 240px; /* 幅拡大 */
+            padding: 1.2rem 2.5rem;
+            min-width: 220px;
             text-align: center;
             display: inline-block;
-            font-size: 1.15rem; /* フォントサイズ拡大 */
+            font-size: 1.1rem;
             /* 背景ボックスシャドウで輪郭を強調 */
-            outline: 3px solid rgba(255, 255, 255, 0.35); /* アウトライン強化 */
-            outline-offset: 1px;
+            outline: 2px solid rgba(255, 255, 255, 0.3);
             /* アウターグロー効果 */
-            filter: drop-shadow(0 0 12px rgba(58, 95, 235, 0.45)); /* ドロップシャドウ強化 */
+            filter: drop-shadow(0 0 10px rgba(58, 95, 235, 0.4));
         }
 
         .btn-cta::before {
@@ -1135,16 +1098,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent); /* エフェクト強化 */
-            transition: all 0.8s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.7s ease;
             z-index: -1;
         }
 
         .btn-cta:hover {
-            transform: translateY(-8px) scale(1.05); /* ホバー効果強化 */
-            box-shadow: 0 18px 45px rgba(58, 95, 235, 0.4); /* ホバー時シャドウ強化 */
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
             color: white;
-            filter: drop-shadow(0 0 18px rgba(58, 95, 235, 0.6)); /* ホバー時ドロップシャドウ強化 */
+            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.5));
         }
 
         .btn-cta:hover::before {
@@ -1152,31 +1115,30 @@
         }
 
         .btn-cta:active {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         }
 
         .btn-icon-right {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.9rem; /* 間隔拡大 */
+            gap: 0.8rem;
         }
 
         .btn-icon-right i {
-            transition: transform 0.4s ease;
+            transition: transform 0.3s ease;
         }
 
         .btn-icon-right:hover i {
-            transform: translateX(8px); /* 右移動効果強化 */
-            animation: btnIconBounce 1s ease infinite; /* アニメーション追加 */
+            transform: translateX(5px);
         }
 
         .btn-icon-bounce {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.9rem; /* 間隔拡大 */
+            gap: 0.8rem;
         }
 
         /* 最終CTAボタン改善 */
@@ -1184,11 +1146,11 @@
             position: relative;
             overflow: visible;
             transform: translateY(0);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .cta-main-btn:hover {
-            transform: translateY(-8px); /* ホバー効果強化 */
+            transform: translateY(-6px);
         }
         
         .cta-main-btn::after {
@@ -1204,11 +1166,11 @@
         }
         
         .animated-arrow {
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
         
         .cta-main-btn:hover .animated-arrow {
-            animation: arrowWave 1.2s ease infinite; /* アニメーション調整 */
+            animation: arrowWave 1.5s ease infinite;
         }
         
         /* 
@@ -1220,33 +1182,23 @@
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
             }
             
             .map-info {
-                max-width: 320px;
-                padding: 1.5rem;
+                max-width: 300px;
+                padding: 1.2rem;
                 left: 1.5rem;
                 bottom: 1.5rem;
-            }
-            
-            /* ボタンサイズ調整 */
-            .btn-cta {
-                padding: 1.2rem 2.2rem;
-                font-size: 1.1rem;
-                min-width: 220px;
             }
         }
         
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
             
             .checkbox-group {
                 grid-template-columns: 1fr;
-                gap: 1rem;
             }
             
             .map-info {
@@ -1258,7 +1210,6 @@
                 margin-top: 0;
                 box-shadow: none;
                 border-top: 1px solid rgba(0, 0, 0, 0.1);
-                padding: 1.5rem;
             }
             
             .contact-map {
@@ -1267,15 +1218,6 @@
             
             .floating-elements {
                 display: none;
-            }
-            
-            /* フォームパディング調整 */
-            .contact-form {
-                padding: 2.5rem 1.8rem;
-            }
-            
-            .contact-info {
-                padding: 2.5rem 1.8rem;
             }
         }
 
@@ -1317,17 +1259,139 @@
                 height: 14px;
                 border-width: 0 3px 3px 0;
             }
-            
-            /* コンテナパディング調整 */
-            .contact-form, .contact-info {
-                padding: 2rem 1.5rem;
+        }
+
+        /* 無料相談フォームのスタイル強化 */
+        .consultation-form-section {
+            background-color: var(--light-gray);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consultation-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .consultation-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .consultation-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+        }
+
+        .consultation-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .consultation-form .form-control {
+            background-color: var(--white);
+            border: 1.5px solid rgba(58, 95, 235, 0.15);
+        }
+
+        .consultation-form .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            color: white;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            padding: 1.2rem 2.5rem;
+            min-width: 250px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover .icon-bounce {
+            animation: iconBounce 0.8s ease-in-out infinite;
+        }
+
+        .recaptcha-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 強化されたサービス選択フォーム */
+        .service-selection {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .service-selection {
+                grid-template-columns: 1fr;
             }
             
-            /* ボタンサイズ調整 */
-            .btn-cta {
-                padding: 1.1rem 2rem;
-                font-size: 1rem;
-                min-width: 100%;
+            .consultation-form-section {
+                padding: 2rem;
             }
         }
     </style>
@@ -1789,110 +1853,6 @@
     
     <!-- 
     ==============================================
-    // === component-split: Footer ===
-    COMPONENT: フッター - サイト全体ナビゲーション
-    ==============================================
-    -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/images/logo-white.svg" alt="ShinAI" width="40" height="40">
-                        <span class="en-text">ShinAI</span>
-                    </div>
-                    <p class="footer-description">
-                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                    </p>
-                    <div class="social-links" aria-label="ソーシャルメディアリンク">
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-nav">
-                    <h4 class="footer-heading">サービス</h4>
-                    <ul class="footer-links">
-                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#decision">意思決定支援AI</a></li>
-                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
-                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-nav">
-                    <h4 class="footer-heading">業界別AI活用</h4>
-                    <ul class="footer-links">
-                        <li><a href="industries.html#manufacturing">製造業</a></li>
-                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
-                        <li><a href="industries.html#finance">金融・保険</a></li>
-                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
-                        <li><a href="industries.html#education">教育・研修</a></li>
-                        <li><a href="industries.html#welfare">福祉・介護</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-heading">お問い合わせ</h4>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
-                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
-                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">利用規約</a>
-                    <a href="#">特定商取引法に基づく表記</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- 
-    ==============================================
-    // === component-split: Chatbot ===
-    COMPONENT: チャットボット - インタラクティブサポート
-    ==============================================
-    -->
-    <div class="chatbot" aria-label="AIアシスタント">
-        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-            <div class="ripple"></div>
-            <i class="fas fa-robot" aria-hidden="true"></i>
-        </button>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
-                </div>
-                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-                <div class="message bot-message">
-                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 
-    ==============================================
     // === component-split: BackToTop ===
     COMPONENT: トップに戻るボタン - ナビゲーション補助
     ==============================================
@@ -2290,3 +2250,107 @@
     </script>
 </body>
 </html>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター - サイト全体ナビゲーション
+    ==============================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-white.svg" alt="ShinAI" width="40" height="40">
+                        <span class="en-text">ShinAI</span>
+                    </div>
+                    <p class="footer-description">
+                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                    </p>
+                    <div class="social-links" aria-label="ソーシャルメディアリンク">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
+                        <li><a href="services.html#decision">意思決定支援AI</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">業界別AI活用</h4>
+                    <ul class="footer-links">
+                        <li><a href="industries.html#manufacturing">製造業</a></li>
+                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
+                        <li><a href="industries.html#finance">金融・保険</a></li>
+                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
+                        <li><a href="industries.html#education">教育・研修</a></li>
+                        <li><a href="industries.html#welfare">福祉・介護</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
+                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
+                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Chatbot ===
+    COMPONENT: チャットボット - インタラクティブサポート
+    ==============================================
+    -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
+            <div class="ripple"></div>
+            <i class="fas fa-robot" aria-hidden="true"></i>
+        </button>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+                <div class="message bot-message">
+                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
