@@ -150,17 +150,12 @@
             /* カラーパレット - ブランドカラーと調和 */
             --primary: #3A5FEB;
             --primary-light: #4671FF;
-            --primary-dark: #2B48B8;
             --secondary: #00C9A7;
             --secondary-light: #00E6C3;
-            --secondary-dark: #009B81;
             --accent: #FF8A00;
-            --accent-light: #FFA640;
-            --accent-dark: #E67A00;
             --dark: #1A1F36;
             --gray: #5E6C84;
             --light-gray: #F9FAFC;
-            --very-light-gray: #F4F5F7;
             --white: #FFFFFF;
             --error: #FF3B3B;
             --success: #00C48C;
@@ -170,25 +165,6 @@
             --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
             --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-            
-            /* シャドウ */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.12);
-            
-            /* 角丸 */
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
-            --radius-full: 9999px;
-            
-            /* アニメーション */
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-            --transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         /* 
@@ -197,42 +173,73 @@
         COMPONENT: アニメーション - ユーザー体験向上
         ==============================================
         */
-        @keyframes pulse {
+        /* プリロードスピナー */
+        .preload-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preload-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preload-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(58, 95, 235, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* グローバルアニメーション */
+        @keyframes btnIconBounce {
             0%, 100% {
-                transform: scale(1);
+                transform: translateX(0);
             }
             50% {
-                transform: scale(1.05);
+                transform: translateX(5px);
             }
         }
-        
-        @keyframes float {
+
+        @keyframes pulseGlow {
             0%, 100% {
-                transform: translateY(0);
+                box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
             }
             50% {
-                transform: translateY(-8px);
+                box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
             }
         }
-        
-        @keyframes shimmer {
+
+        @keyframes checkmark {
             0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
+                transform: scale(0);
                 opacity: 0;
             }
-            to {
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
                 opacity: 1;
             }
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -243,18 +250,22 @@
                 transform: translateY(0);
             }
         }
-        
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
             }
-            to {
-                opacity: 1;
-                transform: translateX(0);
+            25% {
+                transform: translateX(3px) translateY(-3px);
+            }
+            50% {
+                transform: translateX(0) translateY(0);
+            }
+            75% {
+                transform: translateX(-2px) translateY(2px);
             }
         }
-        
+
         @keyframes iconBounce {
             0%, 100% {
                 transform: translateX(0);
@@ -263,636 +274,100 @@
                 transform: translateX(5px);
             }
         }
-        
-        @keyframes checkmark {
-            0% {
-                transform: scale(0) rotate(45deg);
-                opacity: 0;
+
+        @keyframes arrowWave {
+            0%, 100% {
+                transform: translateX(0);
             }
             50% {
-                transform: scale(1.2) rotate(45deg);
-            }
-            100% {
-                transform: scale(1) rotate(45deg);
-                opacity: 1;
+                transform: translateX(8px);
             }
         }
-        
-        @keyframes ripple {
+
+        @keyframes formFocusLine {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes floatingUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        @keyframes floatingDown {
+            0%, 100% {
+                transform: translateY(0) rotate(15deg);
+            }
+            50% {
+                transform: translateY(30px) rotate(-5deg);
+            }
+        }
+
+        @keyframes rotateSlowly {
             0% {
-                transform: scale(1);
-                opacity: 0.4;
+                transform: rotate(0deg);
             }
             100% {
-                transform: scale(2.5);
-                opacity: 0;
+                transform: rotate(360deg);
             }
         }
 
         /* 
         ==============================================
-        // === component-split: MainContent ===
-        COMPONENT: メインコンテンツ - フローレイアウト
+        // === component-split: HeroStyles ===
+        COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
         ==============================================
         */
-        .main-content {
-            padding-top: 80px;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactHero ===
-        COMPONENT: お問い合わせヒーロー - プロ視点で改善
-        ==============================================
-        */
-        .page-hero {
-            position: relative;
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            padding: 6rem 0;
-            overflow: hidden;
-            margin-bottom: 4rem;
-        }
-
-        .page-hero-bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.15'/%3E%3C/svg%3E");
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.2);
-            display: inline-flex;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .breadcrumb a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .breadcrumb a:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .breadcrumb-separator {
-            margin: 0 0.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .page-hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: white;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .gradient-title {
-            background: white;
-            color: var(--primary);
-            padding: 0.3rem 1rem;
-            border-radius: 8px;
-            font-weight: 900;
-            position: relative;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .highlight-accent {
-            position: relative;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 138, 0, 0.9);
-            padding: 0.3rem 1rem;
-            border-radius: 8px;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(255, 138, 0, 0.3);
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
-        }
-
-        .page-hero-title:hover .highlight-accent {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .page-hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: white;
-            line-height: 1.7;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-            background: rgba(0, 0, 0, 0.1);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        /* 
-        ==============================================
-        // === component-split: HeroButton ===
-        COMPONENT: ヒーローボタン - 視認性とインタラクション向上
-        ==============================================
-        */
-        .btn-hero {
-            background: white;
-            color: var(--primary);
+        .page-hero-title .highlight-accent {
+            color: #FF8A00; /* アクセントカラー */
             font-weight: 700;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border-radius: 50px;
-            padding: 1.2rem 2.5rem;
-            min-width: 250px;
-            text-align: center;
-            display: inline-block;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(58, 95, 235, 0.2), transparent);
-            transition: all 0.7s ease;
-            z-index: -1;
-        }
-
-        .btn-hero::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-            z-index: -1;
-            transition: transform 0.5s, opacity 0.5s;
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            color: var(--primary);
-        }
-
-        .btn-hero:hover::before {
-            left: 100%;
-        }
-
-        .btn-hero:active::after {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            animation: ripple 0.6s ease-out;
-        }
-
-        .btn-icon-bounce {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-        }
-
-        .btn-icon-bounce i {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-icon-bounce:hover i {
-            animation: iconBounce 0.8s ease-in-out infinite;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactSection ===
-        COMPONENT: 連絡先セクション - コンタクト情報
-        ==============================================
-        */
-        .section-contact {
-            padding: 4rem 0 6rem;
-            position: relative;
-            background-color: var(--very-light-gray);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-
-        .section-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-            color: var(--primary);
-            font-weight: 700;
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .heading-lg {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1.2rem;
-            line-height: 1.3;
-        }
-
-        .heading-lg .highlight {
-            color: var(--primary);
-            background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             position: relative;
             display: inline-block;
-        }
-
-        .heading-lg .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 0.1em;
-            left: 0;
-            width: 100%;
-            height: 0.3em;
-            background: linear-gradient(90deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
-            border-radius: 5px;
-            z-index: -1;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactGrid ===
-        COMPONENT: コンタクトグリッド - レイアウト構成
-        ==============================================
-        */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactInfo ===
-        COMPONENT: コンタクト情報 - 視認性改善（背景色を変更し、テキスト色を反転）
-        ==============================================
-        */
-        .contact-info {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2.8rem;
-            position: relative;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(58, 95, 235, 0.1);
-            overflow: hidden;
-            transform: translateY(0);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: fit-content;
-        }
-
-        .contact-info:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .contact-info-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
-            z-index: 0;
-            opacity: 0.8;
-        }
-
-        .contact-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            position: relative;
-            color: var(--primary-dark);
-            display: inline-block;
-        }
-
-        .contact-title::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 5px;
-        }
-
-        .contact-info p {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            position: relative;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactMethod ===
-        COMPONENT: 連絡方法 - コンタクト情報表示の視認性向上
-        ==============================================
-        */
-        .contact-method {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.8rem;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(0, 0, 0, 0.2); /* 背景から浮き出たように見せる */
+            background: rgba(255, 255, 255, 0.25); /* 薄い背景を追加 */
+            padding: 0.1em 0.5em;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 光るような効果 */
             transition: all 0.3s ease;
-            position: relative;
-            padding: 1.2rem;
-            background: var(--light-gray);
-            border-radius: 12px;
-            border: 1px solid rgba(58, 95, 235, 0.08);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contact-method:hover {
-            transform: translateX(5px);
-            background: var(--very-light-gray);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(58, 95, 235, 0.15);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            min-width: 50px;
-            background: var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.4rem;
-            box-shadow: 0 6px 15px rgba(58, 95, 235, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .contact-method:hover .contact-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.3);
-        }
-
-        .contact-details h4 {
-            font-size: 1.15rem;
-            margin: 0 0 0.4rem;
-            color: var(--primary-dark);
-            font-weight: 600;
-        }
-
-        .contact-details p {
-            margin: 0;
-            color: var(--gray);
-            line-height: 1.6;
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        .contact-details a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            border-bottom: 1px dashed rgba(58, 95, 235, 0.3);
-            padding-bottom: 2px;
-        }
-
-        .contact-details a:hover {
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--primary);
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ContactForm ===
-        COMPONENT: お問い合わせフォーム - 入力UI改善
-        ==============================================
-        */
-        .contact-form {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(58, 95, 235, 0.05);
-            position: relative;
-            transform: translateY(0);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .contact-form:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .heading-md {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            color: var(--dark);
-            position: relative;
-            display: inline-block;
-        }
-
-        .heading-md::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 5px;
-        }
-
-        .form-intro {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: FormElements ===
-        COMPONENT: フォーム要素 - 入力体験向上
-        ==============================================
-        */
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.7rem;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 1rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 1.2rem 1.5rem;
-            border: 1.5px solid rgba(58, 95, 235, 0.15);
-            border-radius: 12px;
-            font-size: 1.05rem;
-            color: var(--dark);
-            transition: all 0.3s ease;
-            background-color: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .input-wrapper {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .input-wrapper:focus-within .input-icon {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-            color: var(--primary);
-        }
-
-        .textarea-wrapper .input-icon {
-            top: 1.2rem;
-            transform: none;
-        }
-
-        .textarea-wrapper:focus-within .input-icon {
-            transform: scale(1.1);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: CheckboxGroup ===
-        COMPONENT: チェックボックスグループ - レイアウト改善と視認性向上
-        ==============================================
-        */
-        .checkbox-container {
-            background: var(--light-gray);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 1.2rem;
-            border: 1px solid rgba(58, 95, 235, 0.1);
-            box-shadow: var(--shadow-sm);
         }
         
-        .checkbox-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid rgba(58, 95, 235, 0.1);
+        .page-hero-title .highlight-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 138, 0, 0.5);
+            z-index: -1;
+            border-radius: var(--radius-full);
         }
 
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
+        /* 
+        ==============================================
+        // === component-split: CheckboxStyles ===
+        COMPONENT: チェックボックス - 修正と改善
+        ==============================================
+        */
         .form-check {
             position: relative;
             padding-left: 3rem;
-            margin-bottom: 0;
+            margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: white;
-            border-radius: 12px;
-            padding: 1rem 1rem 1rem 3.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(58, 95, 235, 0.05);
         }
-
+        
         .form-check:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(58, 95, 235, 0.15);
+            transform: translateX(4px);
         }
-
+        
         .form-check-input {
             position: absolute;
             opacity: 0;
@@ -901,7 +376,7 @@
             width: 0;
             z-index: 3;
         }
-
+        
         .form-check-label {
             position: relative;
             cursor: pointer;
@@ -912,33 +387,32 @@
             line-height: 1.5;
             user-select: none;
         }
-
+        
         .checkmark {
             position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 0;
+            top: 0;
             width: 28px;
             height: 28px;
             border: 2px solid rgba(58, 95, 235, 0.4);
             border-radius: 6px;
             background-color: var(--white);
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
-
+        
         .form-check:hover .checkmark {
             border-color: var(--primary);
-            transform: translateY(-50%) scale(1.05);
-            box-shadow: var(--shadow-md);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(58, 95, 235, 0.3);
         }
-
+        
         .form-check-input:checked ~ .checkmark {
             background-color: var(--primary);
             border-color: var(--primary);
             box-shadow: 0 3px 8px rgba(58, 95, 235, 0.25);
         }
-
+        
         .checkmark:after {
             content: '';
             position: absolute;
@@ -951,217 +425,441 @@
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
         }
-
+        
         .form-check-input:checked ~ .checkmark:after {
             display: block;
             animation: checkmark 0.3s ease forwards;
         }
-
+        
         .form-check-input:focus ~ .checkmark {
             box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
         }
-
+        
         .form-check-input:checked ~ .form-check-label {
             color: var(--primary);
             font-weight: 600;
         }
-
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: FormStyles ===
+        COMPONENT: フォーム入力フォーカス効果 - UX向上
+        ==============================================
+        */
+        .input-wrapper {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .input-wrapper.focused::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            animation: formFocusLine 0.3s ease forwards;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: HeadingStyles ===
+        COMPONENT: 見出し強調 - 視覚的強化
+        ==============================================
+        */
+        .heading-lg .highlight {
+            color: var(--primary);
+            background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .heading-lg .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+            border-radius: 2px;
+            z-index: -1;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ContactGrid ===
+        COMPONENT: コンタクトグリッド - レイアウト構成
+        ==============================================
+        */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(58, 95, 235, 0.08);
+            overflow: hidden;
+        }
+        
+        .contact-info-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ContactMethod ===
+        COMPONENT: 連絡方法 - コンタクト情報表示
+        ==============================================
+        */
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 6px 15px rgba(58, 95, 235, 0.25);
+        }
+        
+        .contact-details h4 {
+            font-size: 1.15rem;
+            margin: 0 0 0.3rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .contact-details p {
+            margin: 0;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .contact-details a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .contact-details a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ContactForm ===
+        COMPONENT: お問い合わせフォーム - 入力UI改善
+        ==============================================
+        */
+        .contact-form {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(58, 95, 235, 0.05);
+            position: relative;
+        }
+        
+        .form-intro {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 3rem;
+            border: 1.5px solid rgba(58, 95, 235, 0.15);
+            border-radius: var(--radius);
+            font-size: 1.05rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            background-color: var(--white);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .input-wrapper:focus-within .input-icon {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+            color: var(--primary);
+        }
+        
+        .textarea-wrapper .input-icon {
+            top: 1.2rem;
+            transform: none;
+        }
+        
+        .textarea-wrapper:focus-within .input-icon {
+            transform: scale(1.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
         /* 
         ==============================================
         // === component-split: SubmitButton ===
-        COMPONENT: 送信ボタン - 視認性向上とアニメーション強化
+        COMPONENT: 送信ボタン - アニメーション強化
         ==============================================
         */
         .form-submit {
-            margin-top: 3rem;
+            margin-top: 2.5rem;
             text-align: center;
         }
-
-        .btn-submit {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            color: white;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            padding: 1.2rem 2.5rem;
-            min-width: 250px;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            outline: none;
-        }
-
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: all 0.7s ease;
-            z-index: 1;
-        }
-
-        .btn-submit::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
-        }
-
-        .btn-submit:hover::before {
-            left: 100%;
-        }
-
-        .btn-submit:active::after {
-            transform: translate(-50%, -50%) scale(2);
-            opacity: 0;
-            transition: 0s;
-        }
-
-        .btn-submit:active {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        }
-
-        .icon-bounce {
-            position: relative;
-            z-index: 2;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .btn-submit:hover .icon-bounce {
-            animation: iconBounce 0.8s ease-in-out infinite;
-        }
-
+        
         .required {
             color: var(--error);
             margin-left: 0.2rem;
         }
-
-        /* 
-        ==============================================
-        // === component-split: RecaptchaSection ===
-        COMPONENT: reCAPTCHA - セキュリティと信頼性
-        ==============================================
-        */
-        .recaptcha-container {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
+        
         .recaptcha-note {
             font-size: 0.85rem;
             color: var(--gray);
             text-align: center;
             margin-top: 1.2rem;
         }
-
+        
         .recaptcha-note a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
         }
-
+        
         .recaptcha-note a:hover {
             text-decoration: underline;
         }
-
+        
+        /* 紙飛行機アイコンアニメーション */
+        .icon-bounce {
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        .btn-icon-bounce:hover .icon-bounce {
+            animation: iconBounce 0.8s ease-in-out infinite;
+        }
+        
         /* 
         ==============================================
         // === component-split: FormValidation ===
-        COMPONENT: フォームバリデーション - エラー表示
+        COMPONENT: バリデーション - 入力チェック
         ==============================================
         */
         .form-control.error {
             border-color: var(--error);
             background-color: rgba(255, 59, 59, 0.05);
         }
-
+        
         .form-control.error:focus {
             box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
         }
-
+        
         .form-control.valid {
             border-color: var(--success);
             background-color: rgba(0, 196, 140, 0.05);
         }
-
+        
         .form-control.valid:focus {
             box-shadow: 0 0 0 3px rgba(0, 196, 140, 0.15);
         }
-
-        .field-error {
+        
+        .field-error.active {
             color: var(--error);
             font-size: 0.85rem;
             margin-top: 0.5rem;
-            display: none;
-        }
-
-        .field-error.active {
             display: block;
             animation: fadeInUp 0.3s ease forwards;
         }
-
+        
         /* 
         ==============================================
         // === component-split: SuccessMessage ===
-        COMPONENT: 送信成功メッセージ - ユーザーフィードバック
+        COMPONENT: 送信成功メッセージ - フィードバック
         ==============================================
         */
         .message-success {
             background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
             border-left: 4px solid var(--success);
             padding: 1.2rem;
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
             display: none;
         }
-
+        
         .message-success i {
             color: var(--success);
             font-size: 1.5rem;
         }
-
+        
         .message-success p {
             color: var(--dark);
             margin: 0;
             font-weight: 500;
         }
-
+        
         .message-success.show {
             display: flex;
             animation: fadeInUp 0.5s ease forwards;
         }
-
+        
+        /* 
+        ==============================================
+        // === component-split: MapSection ===
+        COMPONENT: 地図関連 - アクセス情報表示
+        ==============================================
+        */
+        .map-container {
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            position: relative;
+            background: var(--white);
+            transition: all 0.4s ease;
+        }
+        
+        .map-container:hover {
+            box-shadow: 0 20px 45px rgba(58, 95, 235, 0.2);
+            transform: translateY(-8px);
+        }
+        
+        .contact-map {
+            height: 450px;
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-info {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 350px;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .map-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.2);
+        }
+        
+        .map-address, .map-access {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .map-access {
+            margin-bottom: 0;
+        }
+        
+        .map-address i, .map-access i {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-top: 0.2rem;
+        }
+        
+        .map-address p, .map-access p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
         /* 
         ==============================================
         // === component-split: FAQSection ===
-        COMPONENT: よくある質問セクション - デザイン改善
+        COMPONENT: FAQセクション - アコーディオン
         ==============================================
         */
         .section-faq {
@@ -1191,17 +889,15 @@
         .faq-item {
             background: var(--white);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             margin-bottom: 1.8rem;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(58, 95, 235, 0.05);
         }
         
         .faq-item:hover {
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.18);
             transform: translateY(-5px);
-            border-color: rgba(58, 95, 235, 0.1);
         }
         
         .faq-item:last-child {
@@ -1261,47 +957,180 @@
             margin: 0;
             font-size: 1.05rem;
         }
-
+        
+        /* 
+        ==============================================
+        // === component-split: DecorativeElements ===
+        COMPONENT: 装飾要素 - 視覚的エフェクト
+        ==============================================
+        */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-circle {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+            border-radius: 50%;
+            animation: floatingUp 8s ease-in-out infinite;
+        }
+        
+        .floating-square {
+            position: absolute;
+            bottom: 20%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 64, 0.1));
+            border-radius: var(--radius);
+            transform: rotate(15deg);
+            animation: floatingDown 10s ease-in-out infinite;
+        }
+        
+        .floating-dots {
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            background-image: radial-gradient(circle, rgba(58, 95, 235, 0.2) 2px, transparent 2px);
+            background-size: 15px 15px;
+            animation: rotateSlowly 60s linear infinite;
+        }
+        
         /* 
         ==============================================
         // === component-split: CTASection ===
-        COMPONENT: CTA - 行動喚起セクション
+        COMPONENT: CTAセクション - 行動喚起
         ==============================================
         */
         .section-cta {
             position: relative;
             overflow: hidden;
-            padding: 5rem 0;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         }
         
-        .cta-content {
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .cta-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+            z-index: -1;
+        }
+        
+        .cta-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.07'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ConsultationButtonStyles ===
+        COMPONENT: 無料相談ボタン - 視認性向上（背景との区別を明確に）
+        ==============================================
+        */
+        .btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            color: white;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 50px;
+            padding: 1.2rem 2.5rem;
+            min-width: 220px;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            display: inline-block;
+            font-size: 1.1rem;
+            /* 背景ボックスシャドウで輪郭を強調 */
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            /* アウターグロー効果 */
+            filter: drop-shadow(0 0 10px rgba(58, 95, 235, 0.4));
         }
-        
-        .cta-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
         }
-        
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--gray);
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
+
+        .btn-cta:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
+            color: white;
+            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.5));
         }
-        
-        .cta-buttons {
+
+        .btn-cta:hover::before {
+            left: 100%;
+        }
+
+        .btn-cta:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        }
+
+        .btn-icon-right {
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 0.8rem;
         }
-        
+
+        .btn-icon-right i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-icon-right:hover i {
+            transform: translateX(5px);
+        }
+
+        .btn-icon-bounce {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        /* 最終CTAボタン改善 */
         .cta-main-btn {
             position: relative;
             overflow: visible;
@@ -1322,7 +1151,7 @@
             bottom: 0;
             border-radius: 50px;
             z-index: -1;
-            animation: pulse 2s infinite;
+            animation: pulseGlow 2s infinite;
         }
         
         .animated-arrow {
@@ -1330,9 +1159,9 @@
         }
         
         .cta-main-btn:hover .animated-arrow {
-            animation: iconBounce 1.5s ease infinite;
+            animation: arrowWave 1.5s ease infinite;
         }
-
+        
         /* 
         ==============================================
         // === component-split: ResponsiveStyles ===
@@ -1343,107 +1172,58 @@
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-
-            .page-hero-title {
-                font-size: 2.8rem;
-            }
-
-            .heading-lg {
-                font-size: 2.4rem;
-            }
             
-            .cta-title {
-                font-size: 2.4rem;
-            }
-            
-            .checkbox-group {
-                grid-template-columns: 1fr 1fr;
+            .map-info {
+                max-width: 300px;
+                padding: 1.2rem;
+                left: 1.5rem;
+                bottom: 1.5rem;
             }
         }
-
+        
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .checkbox-group {
                 grid-template-columns: 1fr;
             }
-
-            .page-hero-title {
-                font-size: 2.4rem;
-            }
-
-            .contact-form, .contact-info {
-                padding: 2rem;
-            }
-
-            .heading-lg {
-                font-size: 2rem;
-            }
-
-            .heading-md {
-                font-size: 1.8rem;
+            
+            .map-info {
+                position: relative;
+                left: auto;
+                bottom: auto;
+                max-width: 100%;
+                border-radius: 0;
+                margin-top: 0;
+                box-shadow: none;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
             }
             
-            .cta-title {
-                font-size: 2rem;
+            .contact-map {
+                height: 350px;
             }
             
-            .cta-buttons {
-                flex-direction: column;
-                gap: 1rem;
+            .floating-elements {
+                display: none;
             }
         }
 
-        @media (max-width: 576px) {
-            .page-hero-title {
-                font-size: 2rem;
-            }
-
-            .page-hero-description {
-                font-size: 1rem;
-            }
-
-            .contact-method {
-                padding: 1rem;
-            }
-
-            .contact-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-
-            .contact-details h4 {
-                font-size: 1rem;
-            }
-
-            .btn-hero, .btn-submit {
-                width: 100%;
-                padding: 1.1rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .checkbox-container {
-                padding: 1.5rem;
-            }
-        }
-
-        /* iPhoneなどのスマホ向け最適化 */
+        /* iPhone専用の調整 - フォームエレメントタップ領域最適化 */
         @media screen and (max-width: 390px) {
             .form-check {
-                padding: 0.8rem 0.8rem 0.8rem 3rem;
+                padding-left: 3.2rem;
+                margin-bottom: 1.5rem;
             }
             
             .checkmark {
-                width: 26px;
-                height: 26px;
-                left: 0.8rem;
+                width: 32px;
+                height: 32px;
             }
             
             .form-control {
-                padding: 1.1rem 1.2rem;
+                padding: 1.1rem 1.2rem 1.1rem 3rem;
                 font-size: 16px; /* iOS自動ズーム防止 */
             }
             
@@ -1451,20 +1231,22 @@
                 left: 1.2rem;
             }
             
-            .btn-hero, .btn-submit {
-                padding: 1.2rem 1.5rem;
+            .btn {
+                padding: 1.2rem 2rem;
                 min-height: 54px; /* タップ領域拡大 */
             }
             
             .form-check-label {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
+                padding-left: 0.8rem;
             }
             
             .checkmark:after {
-                left: 8px;
-                top: 4px;
-                width: 6px;
-                height: 11px;
+                left: 11px;
+                top: 6px;
+                width: 8px;
+                height: 14px;
+                border-width: 0 3px 3px 0;
             }
         }
     </style>
@@ -1473,7 +1255,7 @@
     <!-- 
     ==============================================
     // === component-split: Preloader ===
-    COMPONENT: プリローダー - ローディング体験向上
+    COMPONENT: プリローダー - 読み込み体験向上
     ==============================================
     -->
     <div class="preload-container" id="preload-container">
@@ -1488,6 +1270,14 @@
     -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
+    <!-- 
+    ==============================================
+    // === component-split: TopBanner ===
+    COMPONENT: トップバナー - ブランド強調
+    ==============================================
+    -->
+    <div class="top-banner"></div>
+    
     <!-- 
     ==============================================
     // === component-split: Header ===
@@ -1523,11 +1313,21 @@
     <!-- 
     ==============================================
     // === component-split: PageHero ===
-    COMPONENT: ページヒーロー - プロの視点で改善
+    COMPONENT: ページヒーロー - 第一印象強化
     ==============================================
     -->
     <section class="page-hero">
-        <div class="page-hero-bg-pattern"></div>
+        <div class="page-hero-bg-container">
+            <div class="page-hero-bg-gradient"></div>
+            <div class="page-hero-bg-pattern"></div>
+        </div>
+        
+        <div class="floating-elements">
+            <div class="floating-circle"></div>
+            <div class="floating-square"></div>
+            <div class="floating-dots"></div>
+        </div>
+        
         <div class="container">
             <div class="page-hero-content">
                 <div class="breadcrumb" aria-label="パンくずリスト">
@@ -1544,7 +1344,7 @@
                     AI導入、業務効率化、DX推進についてのご質問・ご相談を承ります。まずは無料相談から、AI導入の可能性を探ってみませんか？
                 </p>
                 
-                <a href="#contact-form" class="btn-hero btn-lg btn-icon-bounce">
+                <a href="#contact-form" class="btn btn-cta btn-lg btn-icon-bounce">
                     <span>無料相談を申し込む</span>
                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -1561,13 +1361,13 @@
     <main class="main-content">
         <!-- 
         ==============================================
-        // === component-split: ContactSection ===
-        COMPONENT: お問い合わせセクション - コンタクト情報とフォーム
+        // === component-split: ContactForm ===
+        COMPONENT: お問い合わせフォーム - 入力UI
         ==============================================
         -->
         <section class="section section-contact" id="contact-form">
             <div class="container">
-                <div class="section-title">
+                <div class="section-title text-center">
                     <span class="section-tag">Contact Us</span>
                     <h2 class="heading-lg"><span class="highlight">無料相談</span>・お問い合わせ</h2>
                     <p class="subtitle">最先端AIソリューションの導入について、ご不明点やご相談があればお気軽にお問い合わせください</p>
@@ -1691,63 +1491,101 @@
                                 <div class="field-error" id="message-error">この項目は必須です</div>
                             </div>
                             
-                            <!-- ご興味のあるサービス - 改善されたレイアウト -->
+                            <!-- ご興味のあるサービス -->
                             <div class="form-group">
                                 <fieldset>
-                                    <div class="checkbox-container">
-                                        <div class="checkbox-title">ご興味のあるサービス（複数選択可）</div>
-                                        <div class="checkbox-group">
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service1" name="service[]" value="業務自動化" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">業務自動化ソリューション</span>
-                                            </label>
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service2" name="service[]" value="意思決定支援AI" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">意思決定支援AI</span>
-                                            </label>
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service3" name="service[]" value="AI導入支援" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">AI導入戦略・実装支援</span>
-                                            </label>
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service4" name="service[]" value="オーダーメイド" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">オーダーメイド型AI開発</span>
-                                            </label>
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service5" name="service[]" value="人間中心AI" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">人間中心AIの社会実装</span>
-                                            </label>
-                                            <label class="form-check">
-                                                <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
-                                                <span class="checkmark"></span>
-                                                <span class="form-check-label">その他</span>
-                                            </label>
-                                        </div>
+                                    <legend class="form-label">ご興味のあるサービス（複数選択可）</legend>
+                                    <div class="checkbox-group">
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service1" name="service[]" value="業務自動化" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">業務自動化ソリューション</span>
+                                        </label>
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service2" name="service[]" value="意思決定支援AI" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">意思決定支援AI</span>
+                                        </label>
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service3" name="service[]" value="AI導入支援" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">AI導入戦略・実装支援</span>
+                                        </label>
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service4" name="service[]" value="オーダーメイド" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">オーダーメイド型AI開発</span>
+                                        </label>
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service5" name="service[]" value="人間中心AI" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">人間中心AIの社会実装</span>
+                                        </label>
+                                        <label class="form-check">
+                                            <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
+                                            <span class="checkmark"></span>
+                                            <span class="form-check-label">その他</span>
+                                        </label>
                                     </div>
                                 </fieldset>
                             </div>
                             
                             <!-- reCAPTCHA v3 -->
-                            <div class="recaptcha-container">
-                                <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key" data-callback="onRecaptchaVerified" data-action="contact"></div>
-                            </div>
+                            <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key" data-callback="onRecaptchaVerified" data-action="contact"></div>
                             <div class="form-group recaptcha-note">
                                 <p>このサイトはreCAPTCHAによって保護されており、Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。</p>
                             </div>
                             
-                            <!-- 送信ボタン - 視認性向上とアニメーション効果追加 -->
+                            <!-- 送信ボタン - 紙飛行機アイコンアニメーション追加 -->
                             <div class="form-submit">
-                                <button type="submit" class="btn-submit">
+                                <button type="submit" class="btn btn-cta btn-lg btn-icon-bounce">
                                     <span>無料相談を申し込む</span>
                                     <i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: MapSection ===
+        COMPONENT: 地図セクション - アクセス情報
+        ==============================================
+        -->
+        <section class="section section-map">
+            <div class="container">
+                <div class="section-title text-center">
+                    <span class="section-tag">Location</span>
+                    <h2 class="heading-lg">アクセス<span class="highlight">マップ</span></h2>
+                    <p class="subtitle">ShinAI本社へのアクセス方法</p>
+                </div>
+                
+                <div class="map-container animate-on-scroll">
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8278534072873!2d139.76382087622055!3d35.68124237258734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf97912d08d%3A0xd8a42bdb6ff39839!2z5pel5pys44CB44CSMTAwLTAwMDUg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy656We55Sw77yT5LiB55uu77yY4oiS77yT!5e0!3m2!1sja!2sjp!4v1715112385701!5m2!1sja!2sjp" 
+                            width="600" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="ShinAI本社の地図"
+                            aria-label="ShinAI本社の地図">
+                        </iframe>
+                    </div>
+                    
+                    <div class="map-info">
+                        <div class="map-address">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <p>〒100-0001 東京都千代田区丸の内3-8-3<br>Tokyo Innovation Base</p>
+                        </div>
+                        <div class="map-access">
+                            <i class="fas fa-train" aria-hidden="true"></i>
+                            <p>東京駅 丸の内口から徒歩8分<br>大手町駅 A5出口から徒歩5分</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1828,6 +1666,11 @@
         ==============================================
         -->
         <section class="section section-cta">
+            <div class="cta-bg">
+                <div class="cta-bg-gradient"></div>
+                <div class="cta-bg-pattern"></div>
+            </div>
+            
             <div class="container">
                 <div class="cta-content animate-on-scroll">
                     <h2 class="cta-title">最先端AIで<br>ビジネスを次のステージへ</h2>
@@ -1835,12 +1678,18 @@
                     
                     <!-- 最終CTAボタン - モーションエフェクト強化 -->
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn-hero btn-lg btn-icon-bounce cta-main-btn">
+                        <a href="#contact-form" class="btn btn-cta btn-lg btn-icon-bounce cta-main-btn">
                             <span>無料相談を申し込む</span>
                             <i class="fas fa-arrow-right animated-arrow" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
+            </div>
+            
+            <div class="cta-shapes">
+                <div class="cta-shape-1"></div>
+                <div class="cta-shape-2"></div>
+                <div class="cta-shape-3"></div>
             </div>
         </section>
     </main>
@@ -1854,6 +1703,110 @@
     <div class="bottom-banner">
         <div class="bottom-banner-content">
             「真の価値を信じ、次世代のために新たな未来を創る。」
+        </div>
+    </div>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター - サイト全体ナビゲーション
+    ==============================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-white.svg" alt="ShinAI" width="40" height="40">
+                        <span class="en-text">ShinAI</span>
+                    </div>
+                    <p class="footer-description">
+                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                    </p>
+                    <div class="social-links" aria-label="ソーシャルメディアリンク">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
+                        <li><a href="services.html#decision">意思決定支援AI</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">業界別AI活用</h4>
+                    <ul class="footer-links">
+                        <li><a href="industries.html#manufacturing">製造業</a></li>
+                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
+                        <li><a href="industries.html#finance">金融・保険</a></li>
+                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
+                        <li><a href="industries.html#education">教育・研修</a></li>
+                        <li><a href="industries.html#welfare">福祉・介護</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
+                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
+                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Chatbot ===
+    COMPONENT: チャットボット - インタラクティブサポート
+    ==============================================
+    -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
+            <div class="ripple"></div>
+            <i class="fas fa-robot" aria-hidden="true"></i>
+        </button>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+                <div class="message bot-message">
+                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
     
@@ -1967,6 +1920,69 @@
                     }
                 });
             });
+            
+            // チャットボット
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input-text');
+            const chatbotSubmit = document.getElementById('chatbot-submit');
+            
+            if (chatbotToggle && chatbotContainer && chatbotClose) {
+                chatbotToggle.addEventListener('click', function() {
+                    chatbotContainer.classList.toggle('active');
+                    
+                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
+                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+                
+                chatbotClose.addEventListener('click', function() {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                });
+                
+                // チャットボット入力処理
+                if (chatbotSubmit && chatbotInput && chatbotMessages) {
+                    chatbotSubmit.addEventListener('click', sendMessage);
+                    chatbotInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
+                    });
+                }
+                
+                function sendMessage() {
+                    const message = chatbotInput.value.trim();
+                    if (message) {
+                        // ユーザーメッセージを追加
+                        addMessage(message, 'user');
+                        chatbotInput.value = '';
+                        
+                        // ボットの応答
+                        setTimeout(() => {
+                            const responses = [
+                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
+                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
+                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
+                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
+                            ];
+                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                            addMessage(randomResponse, 'bot');
+                        }, 800);
+                    }
+                }
+                
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender + '-message');
+                    messageDiv.textContent = text;
+                    
+                    chatbotMessages.appendChild(messageDiv);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            }
             
             // FAQアコーディオン
             const faqItems = document.querySelectorAll('.faq-item');
@@ -2191,109 +2207,5 @@
             };
         });
     </script>
-    
-    <!-- 
-    ==============================================
-    // === component-split: Footer ===
-    COMPONENT: フッター - サイト全体ナビゲーション
-    ==============================================
-    -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
-                        <span class="en-text">ShinAI</span>
-                    </div>
-                    <p class="footer-description">
-                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                    </p>
-                    <div class="social-links" aria-label="ソーシャルメディアリンク">
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-nav">
-                    <h4 class="footer-heading">サービス</h4>
-                    <ul class="footer-links">
-                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#decision">意思決定支援AI</a></li>
-                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
-                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-nav">
-                    <h4 class="footer-heading">業界別AI活用</h4>
-                    <ul class="footer-links">
-                        <li><a href="industries.html#manufacturing">製造業</a></li>
-                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
-                        <li><a href="industries.html#finance">金融・保険</a></li>
-                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
-                        <li><a href="industries.html#education">教育・研修</a></li>
-                        <li><a href="industries.html#welfare">福祉・介護</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-heading">お問い合わせ</h4>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
-                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
-                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">利用規約</a>
-                    <a href="#">特定商取引法に基づく表記</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- 
-    ==============================================
-    // === component-split: Chatbot ===
-    COMPONENT: チャットボット - インタラクティブサポート
-    ==============================================
-    -->
-    <div class="chatbot" aria-label="AIアシスタント">
-        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-            <div class="ripple"></div>
-            <i class="fas fa-robot" aria-hidden="true"></i>
-        </button>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
-                </div>
-                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-                <div class="message bot-message">
-                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
