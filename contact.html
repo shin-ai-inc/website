@@ -4,7 +4,7 @@
     <!-- 
     ==============================================
     // === component-split: Meta ===
-    COMPONENT: メタ情報 - SEO対策
+    COMPONENT: メタ情報 - SEO対策・ページアイデンティティ
     ==============================================
     -->
     <meta charset="UTF-8">
@@ -143,7 +143,7 @@
         /* 
         ==============================================
         // === component-split: GlobalStyles ===
-        COMPONENT: グローバルスタイル - 基本設定
+        COMPONENT: グローバルスタイル - 洗練されたUI基盤
         ==============================================
         */
         :root {
@@ -152,6 +152,7 @@
             --primary-dark: #2C3E8C;
             --primary-light: #4671FF;
             --secondary: #00C9A7;
+            --secondary-dark: #00A589;
             --secondary-light: #00E6C3;
             --accent: #FF8A00;
             --accent-light: #FFA940;
@@ -162,17 +163,18 @@
             --error: #FF3B3B;
             --success: #00C48C;
             
-            /* グラデーション強化 */
-            --gradient-primary: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-            --gradient-hover: linear-gradient(135deg, var(--primary), var(--secondary-light));
-            --gradient-cta: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary-light));
+            /* グラデーション強化 - より鮮やかで洗練された配色 */
+            --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
+            --gradient-cta: linear-gradient(135deg, #3A5FEB, #00D4D4, #4671FF);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            --gradient-active: linear-gradient(135deg, #2C3E8C 0%, #00D4D4 100%);
             
-            /* タイポグラフィ調整 */
+            /* タイポグラフィ調整 - 読みやすさと美しさの両立 */
             --heading-letter-spacing: -0.5px;
             --text-letter-spacing: 0.5px;
             
-            /* 間隔とサイズの変数 */
+            /* 間隔とサイズの階層変数 - 視覚的リズムの確立 */
             --spacing-xs: 0.5rem;  /* 8px */
             --spacing-sm: 1rem;    /* 16px */
             --spacing-md: 1.5rem;  /* 24px */
@@ -180,7 +182,7 @@
             --spacing-xl: 2.5rem;  /* 40px */
             --spacing-xxl: 3rem;   /* 48px */
             
-            /* ボーダーラジウス */
+            /* ボーダーラジウス階層 - 一貫性のある丸み */
             --radius-sm: 6px;
             --radius: 8px;
             --radius-md: 12px;
@@ -189,17 +191,17 @@
             --radius-xxl: 32px;
             --radius-full: 9999px;
             
-            /* シャドウ統一 */
+            /* シャドウ統一 - 深度と高級感の表現 */
             --shadow-sm: 0 3px 8px rgba(44, 62, 140, 0.05);
             --shadow-md: 0 8px 20px rgba(44, 62, 140, 0.08);
             --shadow-lg: 0 15px 40px rgba(44, 62, 140, 0.1);
             --shadow-xl: 0 25px 60px rgba(44, 62, 140, 0.15);
             
-            /* ボタンシャドウ */
+            /* ボタンシャドウ - 注目を集めるエレメント */
             --shadow-btn: 0 10px 25px rgba(44, 62, 140, 0.15);
             --shadow-btn-hover: 0 15px 35px rgba(44, 62, 140, 0.25);
             
-            /* トランジション */
+            /* トランジション - 洗練された動きの表現 */
             --transition-fast: 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
             --transition-normal: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             --transition-slow: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -242,7 +244,7 @@
         /* 
         ==============================================
         // === component-split: Animations ===
-        COMPONENT: アニメーション - ユーザー体験向上
+        COMPONENT: アニメーション - エレガントな動き
         ==============================================
         */
         /* プリロードスピナー */
@@ -279,7 +281,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* グローバルアニメーション */
+        /* グローバルアニメーション - リッチなインタラクション */
         @keyframes btnIconBounce {
             0%, 100% {
                 transform: translateX(0);
@@ -325,16 +327,10 @@
 
         @keyframes iconFloat {
             0%, 100% {
-                transform: translateX(0) translateY(0);
-            }
-            25% {
-                transform: translateX(3px) translateY(-3px);
+                transform: translateY(0);
             }
             50% {
-                transform: translateX(0) translateY(0);
-            }
-            75% {
-                transform: translateX(-2px) translateY(2px);
+                transform: translateY(-5px);
             }
         }
 
@@ -389,26 +385,38 @@
             }
         }
 
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         /* 
         ==============================================
         // === component-split: HeroStyles ===
-        COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
+        COMPONENT: ヒーローセクション - 第一印象の強化
         ==============================================
         */
         .page-hero-title .highlight-accent {
-            background: linear-gradient(135deg, #2C3E8C 0%, #00D4D4 100%);
+            background: var(--gradient-active);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 800; /* 変更: フォントウェイト増加 */
+            font-weight: 800;
             position: relative;
             display: inline-block;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 変更: テキストシャドウ追加 */
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 0.1em 0.5em;
             border-radius: 6px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* 変更: シャドウ強化 */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
             transition: all 0.4s ease;
-            letter-spacing: -0.5px; /* 変更: レターレスポンシブ調整 */
+            letter-spacing: -0.5px;
         }
         
         .page-hero-title .highlight-accent::after {
@@ -418,7 +426,7 @@
             bottom: -2px;
             width: 100%;
             height: 6px;
-            background: rgba(0, 212, 212, 0.4); /* 変更: 不透明度増加 */
+            background: rgba(0, 212, 212, 0.4);
             z-index: -1;
             border-radius: var(--radius-full);
         }
@@ -427,20 +435,20 @@
         .page-hero-title {
             position: relative;
             filter: drop-shadow(0 0 8px rgba(44, 62, 140, 0.08));
-            font-weight: 800; /* 変更: フォントウェイト増加 */
+            font-weight: 800;
             letter-spacing: var(--heading-letter-spacing);
         }
 
         /* 
         ==============================================
         // === component-split: CheckboxStyles ===
-        COMPONENT: チェックボックス - 修正と改善
+        COMPONENT: チェックボックス - 魅力的な選択UI
         ==============================================
         */
         .form-check {
             position: relative;
-            padding-left: 3.5rem; /* 変更: タッチ領域拡大 */
-            margin-bottom: 1.4rem; /* 変更: 間隔調整 */
+            padding-left: 3.5rem;
+            margin-bottom: 1.4rem;
             display: flex;
             align-items: center;
             cursor: pointer;
@@ -453,8 +461,8 @@
         }
         
         .form-check:hover {
-            transform: translateX(4px) scale(1.01); /* 変更: ホバーエフェクト強化 */
-            background-color: rgba(58, 95, 235, 0.03); /* 変更: 背景色ハイライト */
+            transform: translateX(4px) scale(1.01);
+            background-color: rgba(58, 95, 235, 0.03);
         }
         
         .form-check-input {
@@ -481,10 +489,10 @@
             position: absolute;
             left: 0;
             top: 0;
-            width: 32px; /* 変更: サイズ拡大 */
-            height: 32px; /* 変更: サイズ拡大 */
+            width: 32px;
+            height: 32px;
             border: 2px solid rgba(58, 95, 235, 0.4);
-            border-radius: 8px; /* 変更: よりラウンドに */
+            border-radius: 8px;
             background-color: var(--white);
             transition: all var(--transition-normal);
             box-shadow: var(--shadow-sm);
@@ -492,24 +500,24 @@
         
         .form-check:hover .checkmark {
             border-color: var(--primary);
-            transform: scale(1.08); /* 変更: ホバーエフェクト強化 */
-            box-shadow: 0 4px 12px rgba(58, 95, 235, 0.35); /* 変更: シャドウ強化 */
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(58, 95, 235, 0.35);
         }
         
         .form-check-input:checked ~ .checkmark {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 3px 10px rgba(58, 95, 235, 0.3); /* 変更: シャドウ調整 */
+            background: var(--gradient-primary);
+            border-color: transparent;
+            box-shadow: 0 3px 10px rgba(58, 95, 235, 0.3);
         }
         
         .checkmark:after {
             content: '';
             position: absolute;
             display: none;
-            left: 11px; /* 変更: 位置調整 */
-            top: 6px; /* 変更: 位置調整 */
-            width: 8px; /* 変更: サイズ調整 */
-            height: 14px; /* 変更: サイズ調整 */
+            left: 11px;
+            top: 6px;
+            width: 8px;
+            height: 14px;
             border: solid white;
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
@@ -517,11 +525,11 @@
         
         .form-check-input:checked ~ .checkmark:after {
             display: block;
-            animation: checkmark 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* 変更: イージング改善 */
+            animation: checkmark 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
         
         .form-check-input:focus ~ .checkmark {
-            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.25); /* 変更: フォーカス強調 */
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.25);
         }
         
         .form-check-input:checked ~ .form-check-label {
@@ -545,7 +553,7 @@
         /* 
         ==============================================
         // === component-split: FormStyles ===
-        COMPONENT: フォーム入力フォーカス効果 - UX向上
+        COMPONENT: フォーム入力フォーカス効果 - 高級感あるUI
         ==============================================
         */
         .input-wrapper {
@@ -562,16 +570,16 @@
             width: 0;
             height: 2px;
             background: var(--gradient-primary);
-            animation: formFocusLine 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* 変更: イージング改善 */
+            animation: formFocusLine 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
         
         .input-wrapper.focused {
-            transform: scale(1.01); /* 変更: フォーカス時の拡大効果 */
+            transform: scale(1.01);
         }
         
         .form-control {
             width: 100%;
-            padding: 1.1rem 1.2rem 1.1rem 3rem; /* 変更: パディング調整 */
+            padding: 1.1rem 1.2rem 1.1rem 3rem;
             border: 1.5px solid rgba(58, 95, 235, 0.15);
             border-radius: var(--radius);
             font-size: 1.05rem;
@@ -579,7 +587,7 @@
             transition: all var(--transition-normal);
             background-color: var(--white);
             box-shadow: var(--shadow-sm);
-            min-height: 54px; /* 変更: タッチ領域拡大 */
+            min-height: 54px;
         }
         
         .form-control:focus {
@@ -601,7 +609,7 @@
         
         .input-wrapper:focus-within .input-icon {
             opacity: 1;
-            transform: translateY(-50%) scale(1.15); /* 変更: スケール効果強化 */
+            transform: translateY(-50%) scale(1.15);
             color: var(--primary);
         }
         
@@ -611,27 +619,27 @@
         }
         
         .textarea-wrapper:focus-within .input-icon {
-            transform: scale(1.15); /* 変更: スケール効果強化 */
+            transform: scale(1.15);
         }
         
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.8rem; /* 変更: 間隔拡大 */
+            gap: 1.8rem;
         }
         
         /* フォームグループ間の階層的な間隔 */
         .form-group {
-            margin-bottom: 2.2rem; /* 変更: 間隔拡大 */
+            margin-bottom: 2.2rem;
         }
         
         .form-grid .form-group {
-            margin-bottom: 1.5rem; /* 関連フィールドの間隔は狭く */
+            margin-bottom: 1.5rem;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 0.8rem; /* 変更: 間隔調整 */
+            margin-bottom: 0.8rem;
             font-weight: 600;
             color: var(--dark);
             font-size: 1rem;
@@ -640,11 +648,11 @@
         /* 
         ==============================================
         // === component-split: SubmitButton ===
-        COMPONENT: 送信ボタン - アニメーション強化
+        COMPONENT: 送信ボタン - 注目を集めるCTA
         ==============================================
         */
         .form-submit {
-            margin-top: 3rem; /* 変更: 間隔拡大 */
+            margin-top: 3rem;
             text-align: center;
         }
         
@@ -728,11 +736,14 @@
             color: white;
             outline: 2px solid rgba(255, 255, 255, 0.3);
             filter: drop-shadow(0 0 10px rgba(44, 62, 140, 0.4));
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
         }
         
         .btn-cta:hover {
             filter: drop-shadow(0 0 15px rgba(44, 62, 140, 0.5));
             color: white;
+            background: var(--gradient-hover);
         }
         
         .btn-icon-right {
@@ -762,7 +773,7 @@
         /* 
         ==============================================
         // === component-split: FormValidation ===
-        COMPONENT: バリデーション - 入力チェック
+        COMPONENT: バリデーション - 優れたユーザー体験
         ==============================================
         */
         .form-control.error {
@@ -794,7 +805,7 @@
         /* 
         ==============================================
         // === component-split: SuccessMessage ===
-        COMPONENT: 送信成功メッセージ - フィードバック
+        COMPONENT: 送信成功メッセージ - ユーザーフィードバック
         ==============================================
         */
         .message-success {
@@ -828,20 +839,20 @@
         /* 
         ==============================================
         // === component-split: ContactGrid ===
-        COMPONENT: コンタクトグリッド - レイアウト構成
+        COMPONENT: コンタクトグリッド - 情報レイアウト
         ==============================================
         */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 3.5rem; /* 変更: 間隔拡大 */
-            margin-top: 3.5rem; /* 変更: 間隔拡大 */
+            gap: 3.5rem;
+            margin-top: 3.5rem;
         }
         
         .contact-info {
             background: linear-gradient(135deg, rgba(44, 62, 140, 0.05), rgba(0, 212, 212, 0.08));
             border-radius: var(--radius-xl);
-            padding: 2.8rem; /* 変更: パディング拡大 */
+            padding: 2.8rem;
             position: relative;
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(58, 95, 235, 0.08);
@@ -850,55 +861,58 @@
         }
         
         .contact-info:hover {
-            transform: translateY(-5px); /* 変更: ホバーエフェクト追加 */
+            transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
         }
         
         /* 
         ==============================================
         // === component-split: ContactMethod ===
-        COMPONENT: 連絡方法 - コンタクト情報表示
+        COMPONENT: 連絡方法 - アイコン表示の改善
         ==============================================
         */
         .contact-method {
             display: flex;
             align-items: flex-start;
-            gap: 1.2rem; /* 変更: 間隔拡大 */
-            margin-bottom: 1.8rem; /* 変更: 間隔拡大 */
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
             transition: all var(--transition-normal);
-            padding: 0.8rem; /* 変更: パディング追加 */
+            padding: 0.8rem;
             border-radius: var(--radius);
         }
         
         .contact-method:hover {
-            transform: translateX(5px) scale(1.02); /* 変更: スケール効果追加 */
-            background-color: rgba(255, 255, 255, 0.5); /* 変更: 背景ハイライト */
+            transform: translateX(5px) scale(1.02);
+            background-color: rgba(255, 255, 255, 0.5);
         }
         
         .contact-icon {
-            width: 52px; /* 変更: サイズ拡大 */
-            height: 52px; /* 変更: サイズ拡大 */
-            min-width: 52px; /* 変更: サイズ拡大 */
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            background: var(--gradient-primary);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.4rem; /* 変更: サイズ拡大 */
-            box-shadow: 0 8px 20px rgba(44, 62, 140, 0.25); /* 変更: シャドウ調整 */
+            font-size: 1.4rem;
+            box-shadow: 0 8px 20px rgba(44, 62, 140, 0.25);
             transition: all var(--transition-normal);
         }
         
         .contact-method:hover .contact-icon {
-            transform: scale(1.1) rotate(5deg); /* 変更: ホバーエフェクト追加 */
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 25px rgba(44, 62, 140, 0.3);
         }
         
         .contact-details h4 {
-            font-size: 1.2rem; /* 変更: サイズ拡大 */
-            margin: 0 0 0.4rem; /* 変更: 間隔調整 */
+            font-size: 1.2rem;
+            margin: 0 0 0.4rem;
             color: var(--dark);
-            font-weight: 700; /* 変更: フォントウェイト増加 */
+            font-weight: 700;
         }
         
         .contact-details p {
@@ -938,28 +952,28 @@
         /* お問い合わせ先セクション強化: 文字色の濃淡を調整 */
         .contact-info h3.contact-title {
             color: var(--dark);
-            font-weight: 800; /* 変更: フォントウェイト増加 */
-            font-size: 1.6rem; /* 変更: サイズ拡大 */
-            margin-bottom: 1.2rem; /* 変更: 間隔調整 */
+            font-weight: 800;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
             letter-spacing: var(--heading-letter-spacing);
         }
         
         .contact-info p {
             color: var(--dark);
             font-weight: 500;
-            margin-bottom: 2rem; /* 変更: 間隔拡大 */
+            margin-bottom: 2rem;
         }
         
         /* 
         ==============================================
         // === component-split: ContactForm ===
-        COMPONENT: お問い合わせフォーム - 入力UI改善
+        COMPONENT: お問い合わせフォーム - メインUI
         ==============================================
         */
         .contact-form {
             background: white;
             border-radius: var(--radius-xl);
-            padding: 3.5rem; /* 変更: パディング拡大 */
+            padding: 3.5rem;
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(58, 95, 235, 0.05);
             position: relative;
@@ -968,7 +982,7 @@
         }
         
         .contact-form:hover {
-            transform: translateY(-5px); /* 変更: ホバーエフェクト追加 */
+            transform: translateY(-5px);
         }
         
         .contact-form::before {
@@ -979,20 +993,22 @@
             right: 0;
             height: 6px;
             background: var(--gradient-primary);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
             border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
         
         .form-intro {
             color: var(--gray);
-            margin-bottom: 2.5rem; /* 変更: 間隔拡大 */
-            font-size: 1.1rem; /* 変更: サイズ拡大 */
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
             line-height: 1.7;
         }
         
         /* 
         ==============================================
         // === component-split: MapSection ===
-        COMPONENT: 地図関連 - アクセス情報表示
+        COMPONENT: 地図関連 - アクセス情報
         ==============================================
         */
         .map-container {
@@ -1036,7 +1052,7 @@
         }
         
         .map-info:hover {
-            transform: translateY(-5px) scale(1.03); /* 変更: スケール効果追加 */
+            transform: translateY(-5px) scale(1.03);
             box-shadow: 0 12px 30px rgba(58, 95, 235, 0.2);
         }
         
@@ -1072,7 +1088,7 @@
         */
         .section-faq {
             background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
-            padding: 6rem 0; /* 変更: パディング拡大 */
+            padding: 6rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -1115,14 +1131,14 @@
         .faq-question {
             background: var(--white);
             color: var(--dark);
-            font-weight: 700; /* 変更: フォントウェイト増加 */
+            font-weight: 700;
             padding: 1.5rem 2rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            font-size: 1.15rem; /* 変更: サイズ拡大 */
+            font-size: 1.15rem;
             line-height: 1.5;
             transition: all var(--transition-normal);
         }
@@ -1149,7 +1165,7 @@
             padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* 変更: イージング改善 */
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: rgba(249, 250, 252, 0.7);
             border-top: 1px solid rgba(58, 95, 235, 0.08);
             opacity: 0;
@@ -1173,7 +1189,7 @@
         /* 
         ==============================================
         // === component-split: DecorativeElements ===
-        COMPONENT: 装飾要素 - 視覚的エフェクト
+        COMPONENT: 装飾要素 - ビジュアル強化
         ==============================================
         */
         .floating-elements {
@@ -1194,7 +1210,7 @@
             height: 150px;
             background: linear-gradient(135deg, rgba(44, 62, 140, 0.1), rgba(0, 212, 212, 0.1));
             border-radius: 50%;
-            animation: floatingUp 15s ease-in-out infinite; /* 変更: アニメーション時間延長 */
+            animation: floatingUp 15s ease-in-out infinite;
         }
         
         .floating-square {
@@ -1206,7 +1222,7 @@
             background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 64, 0.1));
             border-radius: var(--radius);
             transform: rotate(15deg);
-            animation: floatingDown 18s ease-in-out infinite; /* 変更: アニメーション時間延長 */
+            animation: floatingDown 18s ease-in-out infinite;
         }
         
         .floating-dots {
@@ -1217,7 +1233,7 @@
             height: 80px;
             background-image: radial-gradient(circle, rgba(58, 95, 235, 0.2) 2px, transparent 2px);
             background-size: 15px 15px;
-            animation: rotateSlowly 90s linear infinite; /* 変更: アニメーション時間延長 */
+            animation: rotateSlowly 90s linear infinite;
         }
         
         /* パララックスエフェクト */
@@ -1231,7 +1247,7 @@
         /* 
         ==============================================
         // === component-split: CTASection ===
-        COMPONENT: CTAセクション - 行動喚起
+        COMPONENT: CTAセクション - コンバージョン促進
         ==============================================
         */
         .section-cta {
@@ -1272,7 +1288,7 @@
         /* 
         ==============================================
         // === component-split: ConsultationButtonStyles ===
-        COMPONENT: 無料相談ボタン - 視認性向上（背景との区別を明確に）
+        COMPONENT: 無料相談ボタン - アピール強化
         ==============================================
         */
         .cta-main-btn {
@@ -1283,7 +1299,7 @@
         }
         
         .cta-main-btn:hover {
-            transform: translateY(-6px) scale(1.03); /* 変更: スケール効果追加 */
+            transform: translateY(-6px) scale(1.03);
         }
         
         .cta-main-btn::after {
@@ -1423,6 +1439,52 @@
         ::selection {
             background-color: rgba(58, 95, 235, 0.15);
             color: var(--primary);
+        }
+
+        /* 
+        ==============================================
+        // === component-split: LoadingAnimation ===
+        COMPONENT: 送信中アニメーション - ユーザーフィードバック
+        ==============================================
+        */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .btn-loading .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+        }
+
+        .submit-status {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .submit-status.visible {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-status.success {
+            color: var(--success);
+        }
+
+        .submit-status.error {
+            color: var(--error);
         }
     </style>
 </head>
@@ -1703,9 +1765,12 @@
                                 <p>このサイトはreCAPTCHAによって保護されており、Googleの<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">利用規約</a>が適用されます。</p>
                             </div>
                             
+                            <!-- 送信ステータス表示エリア -->
+                            <div class="submit-status" id="submit-status"></div>
+                            
                             <!-- 送信ボタン - 紙飛行機アイコンアニメーション追加 -->
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-cta btn-lg btn-icon-bounce">
+                                <button type="submit" class="btn btn-cta btn-lg btn-icon-bounce" id="submit-button">
                                     <span>無料相談を申し込む</span>
                                     <i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>
                                 </button>
@@ -2232,269 +2297,241 @@
                 updateParallax(); // 初期化
             }
             
-            // フォームバリデーション
+            // フォーム入力フォーカス効果
+            const inputWrappers = document.querySelectorAll('.input-wrapper');
+            inputWrappers.forEach(wrapper => {
+                const input = wrapper.querySelector('input, textarea');
+                if (input) {
+                    input.addEventListener('focus', function() {
+                        wrapper.classList.add('focused');
+                    });
+                    
+                    input.addEventListener('blur', function() {
+                        wrapper.classList.remove('focused');
+                    });
+                }
+            });
+            
+            // チェックボックス機能強化
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            
+            checkboxes.forEach(checkbox => {
+                const formCheck = checkbox.closest('.form-check');
+                
+                // 初期状態の確認
+                if (checkbox.checked) {
+                    formCheck.classList.add('checked');
+                }
+                
+                // クリック時の効果
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        formCheck.classList.add('checked');
+                    } else {
+                        formCheck.classList.remove('checked');
+                    }
+                });
+            });
+            
+            // Google Sheets連携のためのフォーム送信処理
             const contactForm = document.getElementById('contact-form-element');
-            const successMessage = document.getElementById('message-success');
+            const submitButton = document.getElementById('submit-button');
+            const submitStatus = document.getElementById('submit-status');
             
             if (contactForm) {
-                // フォーム入力のフォーカス効果
-                const formControls = contactForm.querySelectorAll('.form-control');
-                
-                formControls.forEach(control => {
-                    // フォーカス時の効果
-                    control.addEventListener('focus', function() {
-                        this.closest('.input-wrapper').classList.add('focused');
-                    });
-                    
-                    // フォーカスアウト時の効果
-                    control.addEventListener('blur', function() {
-                        this.closest('.input-wrapper').classList.remove('focused');
-                        validateField(this);
-                    });
-                    
-                    // 入力内容の変更時のリアルタイムバリデーション
-                    control.addEventListener('input', function() {
-                        validateField(this);
-                    });
-                });
-                
-                // チェックボックス機能強化
-                const checkboxes = contactForm.querySelectorAll('.form-check-input');
-                
-                checkboxes.forEach(checkbox => {
-                    // 初期状態の確認
-                    if (checkbox.checked) {
-                        checkbox.closest('.form-check').classList.add('checked');
-                    }
-                    
-                    // クリック時の効果
-                    checkbox.addEventListener('change', function() {
-                        if (this.checked) {
-                            this.closest('.form-check').classList.add('checked');
-                        } else {
-                            this.closest('.form-check').classList.remove('checked');
-                        }
-                    });
-                });
-                
-                // フォーム送信イベント
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
+                    // 必須項目の検証
                     let isValid = true;
-                    
-                    // 全フィールドの検証
                     const requiredFields = contactForm.querySelectorAll('[required]');
+                    
                     requiredFields.forEach(field => {
-                        if (!validateField(field)) {
+                        if (!field.value.trim()) {
+                            field.classList.add('error');
+                            
+                            const errorElement = document.getElementById(`${field.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.add('active');
+                            }
+                            
                             isValid = false;
+                        } else {
+                            field.classList.remove('error');
+                            field.classList.add('valid');
+                            
+                            const errorElement = document.getElementById(`${field.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.remove('active');
+                            }
                         }
                     });
                     
-                    if (isValid) {
-                        // フォーム送信処理
-                        submitFormToGoogleSheets();
-                    }
-                });
-                
-                // フィールドバリデーション関数
-                function validateField(field) {
-                    const fieldType = field.getAttribute('type');
-                    const fieldId = field.getAttribute('id');
-                    const errorElement = document.getElementById(`${fieldId}-error`);
-                    
-                    // 必須チェック
-                    if (field.hasAttribute('required') && !field.value.trim()) {
-                        field.classList.add('error');
-                        field.classList.remove('valid');
-                        if (errorElement) {
-                            errorElement.textContent = 'この項目は必須です';
-                            errorElement.classList.add('active');
-                        }
-                        return false;
-                    }
-                    
-                    // 特定フィールドの追加バリデーション
-                    if (fieldType === 'email' && field.value.trim()) {
+                    // メールアドレスの特別検証
+                    const emailField = document.getElementById('email');
+                    if (emailField && emailField.value.trim()) {
                         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                        if (!emailPattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
+                        if (!emailPattern.test(emailField.value)) {
+                            emailField.classList.add('error');
+                            emailField.classList.remove('valid');
+                            
+                            const errorElement = document.getElementById('email-error');
                             if (errorElement) {
                                 errorElement.textContent = '有効なメールアドレスを入力してください';
                                 errorElement.classList.add('active');
                             }
-                            return false;
+                            
+                            isValid = false;
                         }
                     }
                     
-                    // 電話番号の簡易バリデーション（入力されている場合のみ）
-                    if (fieldId === 'phone' && field.value.trim()) {
-                        const phonePattern = /^[0-9\-+() ]{7,}$/;
-                        if (!phonePattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
-                            if (errorElement) {
-                                errorElement.textContent = '有効な電話番号を入力してください';
-                                errorElement.classList.add('active');
-                            }
-                            return false;
-                        }
-                    }
-                    
-                    // バリデーション成功
-                    field.classList.remove('error');
-                    field.classList.add('valid');
-                    if (errorElement) {
-                        errorElement.classList.remove('active');
-                    }
-                    return true;
-                }
-                
-                // Google Sheetsへのフォーム送信処理
-                function submitFormToGoogleSheets() {
-                    const submitButton = contactForm.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    // ボタンをローディング状態に
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
-                    submitButton.disabled = true;
-                    
-                    // フォームデータの取得
-                    const formData = new FormData(contactForm);
-                    const formEntries = {};
-                    
-                    // FormDataから通常のオブジェクトへ変換
-                    for (let [key, value] of formData.entries()) {
-                        // チェックボックスの特殊処理
-                        if (key.endsWith('[]')) {
-                            const cleanKey = key.replace('[]', '');
-                            if (!formEntries[cleanKey]) {
-                                formEntries[cleanKey] = [];
-                            }
-                            formEntries[cleanKey].push(value);
-                        } else {
-                            formEntries[key] = value;
-                        }
-                    }
-                    
-                    // チェックボックスの値を結合
-                    if (formEntries['service']) {
-                        formEntries['service'] = formEntries['service'].join(', ');
-                    }
-                    
-                    // Google Sheets APIエンドポイント
-                    // 注: 実際の実装では、Google Apps ScriptのデプロイURLを使用します
-                    const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec';
-                    
-                    // Google Sheetsへのデータ送信
-                    // 実際の環境では下記のコードをコメントアウトを解除して使用
-                    /*
-                    fetch(scriptURL, {
-                        method: 'POST',
-                        body: JSON.stringify(formEntries),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json();
-                        }
-                        throw new Error('Network response was not ok.');
-                    })
-                    .then(data => {
-                        // 送信成功
-                        showSuccessMessage();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        // エラー処理（通知やリトライ等）
-                        alert('送信中にエラーが発生しました。後ほど再度お試しください。');
+                    if (isValid) {
+                        // 送信中の表示
+                        submitButton.innerHTML = '<span class="loading-spinner"></span>送信中...';
+                        submitButton.classList.add('btn-loading');
+                        submitButton.disabled = true;
                         
-                        // ボタンを元に戻す
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                    });
-                    */
-                    
-                    // 開発環境用の疑似送信成功処理（実際の環境では削除）
-                    setTimeout(() => {
-                        console.log('フォームデータ送信シミュレーション:', formEntries);
-                        showSuccessMessage();
-                    }, 1500);
-                }
+                        // フォームデータの取得
+                        const formData = new FormData(contactForm);
+                        const formEntries = {};
+                        
+                        // サービス選択のデータ整形
+                        const selectedServices = [];
+                        document.querySelectorAll('input[name="service[]"]:checked').forEach(checkbox => {
+                            selectedServices.push(checkbox.value);
+                        });
+                        
+                        // FormDataから通常のオブジェクトへ変換
+                        for (let [key, value] of formData.entries()) {
+                            // チェックボックスの特殊処理を除外
+                            if (key !== 'service[]') {
+                                formEntries[key] = value;
+                            }
+                        }
+                        
+                        // サービス選択を追加
+                        formEntries['services'] = selectedServices.join(', ');
+                        
+                        // タイムスタンプを更新
+                        formEntries['timestamp'] = new Date().toISOString();
+                        
+                        // Google Sheets APIエンドポイント（実際のデプロイURLに置き換える）
+                        const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec';
+                        
+                        // Google Sheetsへデータを送信する関数（実際の実装ではコメントアウトを解除）
+                        /*
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            body: JSON.stringify(formEntries),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                showSuccessMessage();
+                                return response.json();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            showErrorMessage();
+                        });
+                        */
+                        
+                        // 開発環境のためのモック送信成功（本番環境では削除）
+                        setTimeout(() => {
+                            console.log('送信データ:', formEntries);
+                            showSuccessMessage();
+                        }, 2000);
+                    }
+                });
                 
-                // 送信成功メッセージの表示
-                function showSuccessMessage() {
-                    const submitButton = contactForm.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML.includes('送信中') ? 
-                        '<span>無料相談を申し込む</span><i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>' : 
-                        submitButton.innerHTML;
-                    
-                    // 成功メッセージを表示
-                    successMessage.classList.add('show');
-                    
-                    // フォームをリセットして入力フィールドの状態をクリア
-                    contactForm.reset();
-                    contactForm.querySelectorAll('.form-control').forEach(control => {
-                        control.classList.remove('valid');
-                        control.classList.remove('error');
+                // フォーム入力リアルタイム検証
+                const formInputs = contactForm.querySelectorAll('input, textarea');
+                formInputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        if (this.hasAttribute('required') && this.value.trim()) {
+                            this.classList.remove('error');
+                            this.classList.add('valid');
+                            
+                            const errorElement = document.getElementById(`${this.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.remove('active');
+                            }
+                        }
+                        
+                        // メールアドレス特別検証
+                        if (this.id === 'email' && this.value.trim()) {
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                            if (emailPattern.test(this.value)) {
+                                this.classList.remove('error');
+                                this.classList.add('valid');
+                                
+                                const errorElement = document.getElementById('email-error');
+                                if (errorElement) {
+                                    errorElement.classList.remove('active');
+                                }
+                            }
+                        }
                     });
-                    
-                    // チェックボックスをリセット
-                    contactForm.querySelectorAll('.form-check-input').forEach(checkbox => {
-                        checkbox.checked = false;
-                        checkbox.closest('.form-check').classList.remove('checked');
-                    });
-                    
-                    // タイムスタンプ更新
-                    const timestampField = document.getElementById('timestamp');
-                    if (timestampField) {
-                        timestampField.value = new Date().toISOString();
-                    }
-                    
-                    // ボタンを元に戻す
-                    submitButton.innerHTML = originalText;
-                    submitButton.disabled = false;
-                    
-                    // 成功メッセージを自動的に非表示（オプション）
-                    setTimeout(() => {
-                        successMessage.classList.remove('show');
-                    }, 6000);
-                    
-                    // フォームまでスクロール
-                    const contactSection = document.getElementById('contact-form');
-                    if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
+                });
             }
             
-            // reCAPTCHA コールバック
+            // 送信成功メッセージの表示
+            function showSuccessMessage() {
+                // 送信ボタンを元に戻す
+                submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>';
+                submitButton.classList.remove('btn-loading');
+                submitButton.disabled = false;
+                
+                // 成功メッセージを表示
+                submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
+                submitStatus.className = 'submit-status success visible';
+                
+                // フォームをリセット
+                contactForm.reset();
+                
+                // 入力フィールドの状態をクリア
+                contactForm.querySelectorAll('.form-control').forEach(control => {
+                    control.classList.remove('valid');
+                    control.classList.remove('error');
+                });
+                
+                // チェックボックスをリセット
+                contactForm.querySelectorAll('.form-check').forEach(formCheck => {
+                    formCheck.classList.remove('checked');
+                });
+                
+                // 一定時間後にメッセージを非表示
+                setTimeout(() => {
+                    submitStatus.className = 'submit-status';
+                }, 6000);
+            }
+            
+            // 送信エラーメッセージの表示
+            function showErrorMessage() {
+                // 送信ボタンを元に戻す
+                submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>';
+                submitButton.classList.remove('btn-loading');
+                submitButton.disabled = false;
+                
+                // エラーメッセージを表示
+                submitStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+                submitStatus.className = 'submit-status error visible';
+                
+                // 一定時間後にメッセージを非表示
+                setTimeout(() => {
+                    submitStatus.className = 'submit-status';
+                }, 6000);
+            }
+            
+            // reCAPTCHA検証完了コールバック
             window.onRecaptchaVerified = function(token) {
-                // reCAPTCHA検証後の処理
                 console.log('reCAPTCHA検証完了:', token);
+                // トークンを非表示フィールドに設定するなどの処理を追加可能
             };
-            
-            // ホバーエフェクト強化
-            const enhancedHoverElements = document.querySelectorAll('.btn, .contact-method, .form-check, .faq-item');
-            enhancedHoverElements.forEach(el => {
-                el.addEventListener('mouseenter', function() {
-                    this.style.transition = 'all var(--transition-normal)';
-                });
-            });
-            
-            // アクセシビリティ強化: フォーカス管理
-            const focusableElements = document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
-            focusableElements.forEach(el => {
-                el.addEventListener('focus', function() {
-                    this.classList.add('keyboard-focus');
-                });
-                el.addEventListener('blur', function() {
-                    this.classList.remove('keyboard-focus');
-                });
-            });
         });
     </script>
 </body>
