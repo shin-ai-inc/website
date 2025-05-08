@@ -165,19 +165,6 @@
             --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
             --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-            
-            /* ブランドカラーの一貫性のため、シャドウ定義 */
-            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 15px 35px rgba(58, 95, 235, 0.12);
-            --shadow-xl: 0 25px 50px rgba(58, 95, 235, 0.15);
-            
-            /* 共通の角丸サイズ */
-            --radius-sm: 4px;
-            --radius: 8px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
-            --radius-full: 9999px;
         }
 
         /* 
@@ -336,126 +323,29 @@
         COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
         ==============================================
         */
-        .page-hero {
-            position: relative;
-            overflow: hidden;
-            padding-top: 150px;
-            padding-bottom: 80px;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
-        }
-        
-        .page-hero-title {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 1.8rem;
-            line-height: 1.2;
-        }
-        
-        .page-hero-title .gradient-title {
-            background: linear-gradient(135deg, #3A5FEB 30%, #00C9A7 70%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-            position: relative;
-            display: inline-block;
-        }
-        
         .page-hero-title .highlight-accent {
+            color: #FF8A00; /* アクセントカラー */
+            font-weight: 700;
             position: relative;
             display: inline-block;
-            color: #FFFFFF;
-            font-weight: 800;
-            background: #FF8A00;
-            padding: 0.15em 0.5em;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(255, 138, 0, 0.3);
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-        
-        .page-hero-title:hover .highlight-accent {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 6px 18px rgba(255, 138, 0, 0.4);
-        }
-        
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .page-hero-description {
-            font-size: 1.25rem;
-            color: var(--dark);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-            font-weight: 500;
-        }
-        
-        .page-hero-bg-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .page-hero-bg-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
-            z-index: 1;
-        }
-        
-        .page-hero-bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.05'/%3E%3C/svg%3E");
-            z-index: 1;
-            opacity: 0.8;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            justify-content: center;
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            font-weight: 500;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9), 0 -1px 1px rgba(0, 0, 0, 0.2); /* 背景から浮き出たように見せる */
+            background: rgba(255, 255, 255, 0.25); /* 薄い背景を追加 */
+            padding: 0.1em 0.5em;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 光るような効果 */
             transition: all 0.3s ease;
         }
         
-        .breadcrumb a:hover {
-            color: var(--secondary);
-            text-decoration: underline;
-        }
-        
-        .breadcrumb-separator {
-            margin: 0 0.5rem;
-            color: var(--gray);
-        }
-        
-        .breadcrumb-current {
-            color: var(--gray);
-            font-weight: 500;
+        .page-hero-title .highlight-accent::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 138, 0, 0.5);
+            z-index: -1;
+            border-radius: var(--radius-full);
         }
 
         /* 
@@ -586,14 +476,6 @@
         COMPONENT: 見出し強調 - 視覚的強化
         ==============================================
         */
-        .heading-lg {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-        
         .heading-lg .highlight {
             color: var(--primary);
             background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
@@ -602,7 +484,6 @@
             background-clip: text;
             position: relative;
             display: inline-block;
-            font-weight: 900;
         }
         
         .heading-lg .highlight::after {
@@ -611,9 +492,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
-            border-radius: 3px;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+            border-radius: 2px;
             z-index: -1;
         }
         
@@ -631,12 +512,12 @@
         }
         
         .contact-info {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            color: white;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
             border-radius: var(--radius-xl);
             padding: 2.5rem;
             position: relative;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(58, 95, 235, 0.08);
             overflow: hidden;
         }
         
@@ -646,24 +527,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.1'/%3E%3C/svg%3E");
-            z-index: 0;
-            opacity: 0.2;
-        }
-
-        .contact-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: white;
-            position: relative;
-        }
-        
-        .contact-info p {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            position: relative;
-            line-height: 1.7;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
         }
         
         /* 
@@ -678,7 +544,6 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
-            position: relative;
         }
         
         .contact-method:hover {
@@ -689,44 +554,38 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.3rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-method:hover .contact-icon {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(58, 95, 235, 0.25);
         }
         
         .contact-details h4 {
             font-size: 1.15rem;
             margin: 0 0 0.3rem;
-            color: white;
+            color: var(--dark);
             font-weight: 600;
         }
         
         .contact-details p {
             margin: 0;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--gray);
             line-height: 1.6;
         }
         
         .contact-details a {
-            color: white;
+            color: var(--primary);
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
         }
         
         .contact-details a:hover {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--secondary);
             text-decoration: underline;
         }
         
@@ -1034,7 +893,6 @@
             margin-bottom: 1.8rem;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(58, 95, 235, 0.05);
         }
         
         .faq-item:hover {
@@ -1423,7 +1281,7 @@
     <!-- 
     ==============================================
     // === component-split: Header ===
-    COMPONENT: ヘッダー - ナビゲーション (固定化)
+    COMPONENT: ヘッダー - ナビゲーション
     ==============================================
     -->
     <header class="header" id="header">
@@ -1815,7 +1673,7 @@
             
             <div class="container">
                 <div class="cta-content animate-on-scroll">
-                    <h2 class="cta-title heading-lg">最先端AIで<br>ビジネスを次のステージへ</h2>
+                    <h2 class="cta-title">最先端AIで<br>ビジネスを次のステージへ</h2>
                     <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
                     <!-- 最終CTAボタン - モーションエフェクト強化 -->
