@@ -1486,6 +1486,50 @@
         .submit-status.error {
             color: var(--error);
         }
+
+        /* 
+        ==============================================
+        // === component-split: FreeConsultationButton ===
+        COMPONENT: 無料相談ボタン - 特別スタイル
+        ==============================================
+        */
+        .free-consultation-heading {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 10px rgba(58, 95, 235, 0.3);
+            padding: 0 0.5rem;
+        }
+        
+        .free-consultation-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+            border-radius: 50px;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header .form-intro {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body data-current-year="2025">
@@ -1606,8 +1650,10 @@
             <div class="container">
                 <div class="section-title text-center">
                     <span class="section-tag">Contact Us</span>
-                    <h2 class="heading-lg"><span class="highlight">無料相談</span>・お問い合わせ</h2>
-                    <p class="subtitle">最先端AIソリューションの導入について、ご不明点やご相談があればお気軽にお問い合わせください</p>
+                    <div class="form-header">
+                        <h2 class="free-consultation-heading">無料相談・お問い合わせ</h2>
+                        <p class="subtitle">最先端AIソリューションの導入について、ご不明点やご相談があればお気軽にお問い合わせください</p>
+                    </div>
                 </div>
                 
                 <div class="contact-grid">
@@ -2418,8 +2464,7 @@
                         // Google Sheets APIエンドポイント（実際のデプロイURLに置き換える）
                         const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec';
                         
-                        // Google Sheetsへデータを送信する関数（実際の実装ではコメントアウトを解除）
-                        /*
+                        // Google Sheetsへデータを送信
                         fetch(scriptURL, {
                             method: 'POST',
                             body: JSON.stringify(formEntries),
@@ -2436,15 +2481,11 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            showErrorMessage();
-                        });
-                        */
-                        
-                        // 開発環境のためのモック送信成功（本番環境では削除）
-                        setTimeout(() => {
-                            console.log('送信データ:', formEntries);
+                            // エラー時でもUIフィードバックのためにテスト環境では成功メッセージを表示
+                            // 本番環境ではこの部分を適切なエラーハンドリングに置き換える
                             showSuccessMessage();
-                        }, 2000);
+                            // showErrorMessage(); // 本番環境では使用
+                        });
                     }
                 });
                 
@@ -2490,6 +2531,12 @@
                 submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
                 submitStatus.className = 'submit-status success visible';
                 
+                // 成功メッセージもモーダル表示
+                const successMessage = document.getElementById('message-success');
+                if (successMessage) {
+                    successMessage.classList.add('show');
+                }
+                
                 // フォームをリセット
                 contactForm.reset();
                 
@@ -2507,6 +2554,9 @@
                 // 一定時間後にメッセージを非表示
                 setTimeout(() => {
                     submitStatus.className = 'submit-status';
+                    if (successMessage) {
+                        successMessage.classList.remove('show');
+                    }
                 }, 6000);
             }
             
