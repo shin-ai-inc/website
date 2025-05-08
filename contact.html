@@ -13,8 +13,8 @@
     <meta name="keywords" content="AI, 人工知能, お問い合わせ, AI導入相談, 無料相談, AI活用, 業務効率化相談, DX相談">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
-    <meta name="theme-color" content="#3A5FEB">
-    <meta name="msapplication-TileColor" content="#3A5FEB">
+    <meta name="theme-color" content="#1F4788">
+    <meta name="msapplication-TileColor" content="#1F4788">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -31,6 +31,7 @@
     <link rel="preload" href="assets/css/responsive.css" as="style">
     <link rel="preload" href="assets/images/logo.svg" as="image">
     <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" crossorigin>
+    <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/yubinbango/yubinbango.min.js">
     
     <!-- 
     ==============================================
@@ -63,6 +64,9 @@
     
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <!-- 郵便番号検索ライブラリ -->
+    <script src="https://cdn.jsdelivr.net/npm/yubinbango/yubinbango.min.js" defer></script>
     
     <!-- 
     ==============================================
@@ -147,26 +151,87 @@
         ==============================================
         */
         :root {
-            /* カラーパレット - ブランドカラーと調和 */
-            --primary: #3A5FEB;
-            --primary-light: #4671FF;
-            --secondary: #00C9A7;
-            --secondary-light: #00E6C3;
-            --accent: #FF8A00;
+            /* カラーパレット - 日本の伝統色を採用 */
+            --primary: #1F4788; /* 瑠璃色（るりいろ） - 信頼感と落ち着き */
+            --primary-light: #4C75B7; /* 薄い瑠璃色 */
+            --secondary: #00A5B0; /* 浅葱色（あさぎいろ） - 清潔感と先進性 */
+            --secondary-light: #15CCCF; /* 薄い浅葱色 */
+            --accent: #DF4927; /* 朱色（しゅいろ） - 日本の伝統的なアクセントカラー */
             --dark: #1A1F36;
             --gray: #5E6C84;
             --light-gray: #F9FAFC;
             --white: #FFFFFF;
-            --error: #FF3B3B;
-            --success: #00C48C;
+            --error: #D33C43; /* 紅色（くれないいろ） - 注意喚起 */
+            --success: #176336; /* 常磐色（ときわいろ） - 成功通知 */
+            --paper: #FFFCF6; /* 和紙色 - 背景用 */
             
             /* グラデーション強化 */
-            --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
-            --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
-            --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            --gradient-primary: linear-gradient(135deg, #1F4788, #00A5B0);
+            --gradient-hover: linear-gradient(135deg, #4C75B7, #15CCCF);
+            --gradient-cta: linear-gradient(135deg, #1F4788, #00A5B0, #4C75B7);
+            --gradient-card: linear-gradient(135deg, rgba(31, 71, 136, 0.05), rgba(0, 165, 176, 0.05));
+            
+            /* 間（ま）の設定 - 余白の階層性 */
+            --space-xs: 0.5rem;  /* 8px */
+            --space-sm: 1rem;    /* 16px */
+            --space-md: 1.5rem;  /* 24px */
+            --space-lg: 2rem;    /* 32px */
+            --space-xl: 3rem;    /* 48px */
+            --space-xxl: 5rem;   /* 80px */
+            
+            /* フォント設定の強化 */
+            --font-family-ja: 'Noto Sans JP', sans-serif;
+            --font-family-en: 'Poppins', sans-serif;
+            
+            /* ラインハイト - 日本語に適した設定 */
+            --line-height-normal: 1.8;
+            --line-height-tight: 1.6;
+            --line-height-heading: 1.5;
+            
+            /* アニメーション変数 */
+            --transition-normal: all 0.3s ease;
+            --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* 日本語フォント最適化 */
+        body {
+            font-family: var(--font-family-ja);
+            line-height: var(--line-height-normal);
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "palt"; /* プロポーショナルメトリクスによる文字間調整 */
+            text-align: justify; /* 和文の両端揃え */
+            letter-spacing: 0.01em; /* 日本語に適した字間 */
+            overflow-wrap: break-word; /* 長い単語の折り返し */
+            word-break: normal; /* 日本語の単語区切り */
+        }
+        
+        /* 英数字フォント設定 */
+        .en-text {
+            font-family: var(--font-family-en);
+            letter-spacing: 0.02em;
+        }
+
+        /* 見出しの最適化 */
+        h1, h2, h3, h4, h5, h6 {
+            font-feature-settings: "palt";
+            line-height: var(--line-height-heading);
+            margin-top: 0;
+            font-weight: 700; /* 太さの調整 */
+        }
+
+        /* アクセントカラーの適用（朱色） */
+        .accent-text {
+            color: var(--accent);
+        }
+        
+        /* ボタンの視認性向上 */
+        button, a.btn {
+            font-weight: 600;
+            font-feature-settings: "palt";
+        }
+        
         /* 
         ==============================================
         // === component-split: Animations ===
@@ -180,7 +245,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: white;
+            background: var(--paper);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -196,7 +261,7 @@
         .preload-spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(58, 95, 235, 0.1);
+            border: 3px solid rgba(31, 71, 136, 0.1);
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s linear infinite;
@@ -219,10 +284,10 @@
 
         @keyframes pulseGlow {
             0%, 100% {
-                box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+                box-shadow: 0 0 0 0 rgba(31, 71, 136, 0.4);
             }
             50% {
-                box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
+                box-shadow: 0 0 0 15px rgba(31, 71, 136, 0);
             }
         }
 
@@ -323,8 +388,16 @@
         COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
         ==============================================
         */
+        .page-hero {
+            padding: var(--space-xxl) 0 var(--space-xl);
+            position: relative;
+            overflow: hidden;
+            background: var(--paper);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231F4788' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
         .page-hero-title .highlight-accent {
-            background: linear-gradient(135deg, #2C3E8C 0%, #00D4D4 100%); /* 変更：より美しいグラデーション */
+            background: linear-gradient(135deg, #1F4788 0%, #00A5B0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -346,7 +419,7 @@
             bottom: -2px;
             width: 100%;
             height: 6px;
-            background: rgba(0, 212, 212, 0.3); /* 変更：グラデーションに合わせた色 */
+            background: rgba(0, 165, 176, 0.3);
             z-index: -1;
             border-radius: var(--radius-full);
         }
@@ -359,7 +432,7 @@
         */
         .form-check {
             position: relative;
-            padding-left: 3rem;
+            padding-left: 3.2rem;
             margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
@@ -397,7 +470,7 @@
             top: 0;
             width: 28px;
             height: 28px;
-            border: 2px solid rgba(58, 95, 235, 0.4);
+            border: 2px solid rgba(31, 71, 136, 0.4);
             border-radius: 6px;
             background-color: var(--white);
             transition: all 0.3s ease;
@@ -407,13 +480,13 @@
         .form-check:hover .checkmark {
             border-color: var(--primary);
             transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(58, 95, 235, 0.3);
+            box-shadow: 0 4px 10px rgba(31, 71, 136, 0.3);
         }
         
         .form-check-input:checked ~ .checkmark {
             background-color: var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 3px 8px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 3px 8px rgba(31, 71, 136, 0.25);
         }
         
         .checkmark:after {
@@ -435,7 +508,7 @@
         }
         
         .form-check-input:focus ~ .checkmark {
-            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(31, 71, 136, 0.2);
         }
         
         .form-check-input:checked ~ .form-check-label {
@@ -445,7 +518,7 @@
         
         .checkbox-group {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 変更：2列レイアウトに */
+            grid-template-columns: repeat(2, 1fr); /* 2列レイアウト */
             gap: 1.2rem;
             margin-top: 1.2rem;
         }
@@ -481,7 +554,7 @@
         */
         .heading-lg .highlight {
             color: var(--primary);
-            background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+            background: linear-gradient(135deg, #1F4788 0%, #00A5B0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -496,7 +569,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+            background: linear-gradient(90deg, rgba(31, 71, 136, 0.3), rgba(0, 165, 176, 0.3));
             border-radius: 2px;
             z-index: -1;
         }
@@ -515,17 +588,17 @@
         }
         
         .contact-info {
-            background: linear-gradient(135deg, rgba(44, 62, 140, 0.05), rgba(0, 212, 212, 0.08)); /* 変更：より美しいグラデーション背景 */
+            background: linear-gradient(135deg, rgba(31, 71, 136, 0.05), rgba(0, 165, 176, 0.08));
             border-radius: var(--radius-xl);
             padding: 2.5rem;
             position: relative;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(58, 95, 235, 0.08);
+            border: 1px solid rgba(31, 71, 136, 0.08);
             overflow: hidden;
         }
         
         .contact-info-pattern {
-            display: none; /* 変更：水玉模様を削除 */
+            display: none; /* 水玉模様を削除 */
         }
         
         /* 
@@ -550,14 +623,14 @@
             width: 48px;
             height: 48px;
             min-width: 48px;
-            background: linear-gradient(135deg, #2C3E8C, #00D4D4); /* 変更：グラデーションを統一 */
+            background: linear-gradient(135deg, #1F4788, #00A5B0);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.3rem;
-            box-shadow: 0 6px 15px rgba(44, 62, 140, 0.25);
+            box-shadow: 0 6px 15px rgba(31, 71, 136, 0.25);
         }
         
         .contact-details h4 {
@@ -607,8 +680,9 @@
             border-radius: var(--radius-xl);
             padding: 3rem;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(58, 95, 235, 0.05);
+            border: 1px solid rgba(31, 71, 136, 0.05);
             position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231F4788' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .form-intro {
@@ -616,6 +690,26 @@
             margin-bottom: 2rem;
             font-size: 1.05rem;
             line-height: 1.7;
+        }
+        
+        /* フォームセクションの視覚的グルーピング */
+        .form-section {
+            margin-bottom: 2.5rem;
+            background: var(--paper);
+            padding: 1.8rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(31, 71, 136, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        .form-section-title {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 1px dashed rgba(31, 71, 136, 0.2);
+            padding-bottom: 0.8rem;
         }
         
         .form-group {
@@ -633,19 +727,21 @@
         .form-control {
             width: 100%;
             padding: 1rem 1.2rem 1rem 3rem;
-            border: 1.5px solid rgba(58, 95, 235, 0.15);
+            border: 1.5px solid rgba(31, 71, 136, 0.15);
             border-radius: var(--radius);
             font-size: 1.05rem;
             color: var(--dark);
             transition: all 0.3s ease;
             background-color: var(--white);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+            /* 日本語入力最適化 */
+            font-feature-settings: "palt";
         }
         
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
+            box-shadow: 0 0 0 4px rgba(31, 71, 136, 0.15);
         }
         
         .input-icon {
@@ -678,6 +774,23 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
+        }
+        
+        /* 郵便番号入力フィールド */
+        .zipcode-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .zipcode-input {
+            max-width: 200px;
+        }
+        
+        .zipcode-help {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
         }
         
         /* 
@@ -730,20 +843,20 @@
         */
         .form-control.error {
             border-color: var(--error);
-            background-color: rgba(255, 59, 59, 0.05);
+            background-color: rgba(211, 60, 67, 0.05);
         }
         
         .form-control.error:focus {
-            box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
+            box-shadow: 0 0 0 3px rgba(211, 60, 67, 0.15);
         }
         
         .form-control.valid {
             border-color: var(--success);
-            background-color: rgba(0, 196, 140, 0.05);
+            background-color: rgba(23, 99, 54, 0.05);
         }
         
         .form-control.valid:focus {
-            box-shadow: 0 0 0 3px rgba(0, 196, 140, 0.15);
+            box-shadow: 0 0 0 3px rgba(23, 99, 54, 0.15);
         }
         
         .field-error.active {
@@ -761,7 +874,7 @@
         ==============================================
         */
         .message-success {
-            background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
+            background: linear-gradient(135deg, rgba(23, 99, 54, 0.1), rgba(23, 99, 54, 0.1));
             border-left: 4px solid var(--success);
             padding: 1.2rem;
             border-radius: 0 var(--radius) var(--radius) 0;
@@ -781,6 +894,7 @@
             color: var(--dark);
             margin: 0;
             font-weight: 500;
+            line-height: 1.6;
         }
         
         .message-success.show {
@@ -804,7 +918,7 @@
         }
         
         .map-container:hover {
-            box-shadow: 0 20px 45px rgba(58, 95, 235, 0.2);
+            box-shadow: 0 20px 45px rgba(31, 71, 136, 0.2);
             transform: translateY(-8px);
         }
         
@@ -836,7 +950,7 @@
         
         .map-info:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.2);
+            box-shadow: 0 12px 30px rgba(31, 71, 136, 0.2);
         }
         
         .map-address, .map-access {
@@ -883,7 +997,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%231F4788' fill-opacity='0.06'/%3E%3C/svg%3E");
             z-index: -1;
             opacity: 0.7;
         }
@@ -903,7 +1017,7 @@
         }
         
         .faq-item:hover {
-            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.18);
+            box-shadow: 0 12px 30px rgba(31, 71, 136, 0.18);
             transform: translateY(-5px);
         }
         
@@ -948,18 +1062,18 @@
             padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.4s ease-in-out; /* 変更：よりスムーズな遷移効果 */
+            transition: all 0.4s ease-in-out; /* よりスムーズな遷移効果 */
             background: rgba(249, 250, 252, 0.7);
-            border-top: 1px solid rgba(58, 95, 235, 0.08);
+            border-top: 1px solid rgba(31, 71, 136, 0.08);
             opacity: 0;
-            transform: translateY(-10px); /* 変更：スムーズな表示効果 */
+            transform: translateY(-10px); /* スムーズな表示効果 */
         }
         
         .faq-item.active .faq-answer {
             padding: 1.8rem 2rem;
             max-height: 1000px;
             opacity: 1;
-            transform: translateY(0); /* 変更：スムーズな表示効果 */
+            transform: translateY(0); /* スムーズな表示効果 */
         }
         
         .faq-answer p {
@@ -991,7 +1105,7 @@
             right: 10%;
             width: 150px;
             height: 150px;
-            background: linear-gradient(135deg, rgba(44, 62, 140, 0.1), rgba(0, 212, 212, 0.1)); /* 変更：グラデーションを統一 */
+            background: linear-gradient(135deg, rgba(31, 71, 136, 0.1), rgba(0, 165, 176, 0.1));
             border-radius: 50%;
             animation: floatingUp 8s ease-in-out infinite;
         }
@@ -1002,7 +1116,7 @@
             left: 5%;
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 64, 0.1));
+            background: linear-gradient(135deg, rgba(223, 73, 39, 0.1), rgba(255, 169, 64, 0.1));
             border-radius: var(--radius);
             transform: rotate(15deg);
             animation: floatingDown 10s ease-in-out infinite;
@@ -1014,7 +1128,7 @@
             left: 20%;
             width: 80px;
             height: 80px;
-            background-image: radial-gradient(circle, rgba(58, 95, 235, 0.2) 2px, transparent 2px);
+            background-image: radial-gradient(circle, rgba(31, 71, 136, 0.2) 2px, transparent 2px);
             background-size: 15px 15px;
             animation: rotateSlowly 60s linear infinite;
         }
@@ -1045,7 +1159,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(44, 62, 140, 0.08), rgba(0, 212, 212, 0.08)); /* 変更：グラデーションを統一 */
+            background: linear-gradient(135deg, rgba(31, 71, 136, 0.08), rgba(0, 165, 176, 0.08));
             z-index: -1;
         }
         
@@ -1055,7 +1169,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.07'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%231F4788' fill-opacity='0.07'/%3E%3C/svg%3E");
             z-index: -1;
             opacity: 0.8;
         }
@@ -1071,11 +1185,11 @@
         }
 
         .btn-cta {
-            background: linear-gradient(135deg, #2C3E8C, #00D4D4); /* 変更：グラデーションを統一 */
+            background: linear-gradient(135deg, #1F4788, #00A5B0);
             color: white;
             font-weight: 700;
             border: none;
-            box-shadow: 0 10px 30px rgba(44, 62, 140, 0.25); /* 変更：シャドウカラーを調整 */
+            box-shadow: 0 10px 30px rgba(31, 71, 136, 0.25);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -1088,7 +1202,7 @@
             /* 背景ボックスシャドウで輪郭を強調 */
             outline: 2px solid rgba(255, 255, 255, 0.3);
             /* アウターグロー効果 */
-            filter: drop-shadow(0 0 10px rgba(44, 62, 140, 0.4)); /* 変更：シャドウカラーを調整 */
+            filter: drop-shadow(0 0 10px rgba(31, 71, 136, 0.4));
         }
 
         .btn-cta::before {
@@ -1105,9 +1219,9 @@
 
         .btn-cta:hover {
             transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(44, 62, 140, 0.35); /* 変更：シャドウカラーを調整 */
+            box-shadow: 0 15px 40px rgba(31, 71, 136, 0.35);
             color: white;
-            filter: drop-shadow(0 0 15px rgba(44, 62, 140, 0.5)); /* 変更：シャドウカラーを調整 */
+            filter: drop-shadow(0 0 15px rgba(31, 71, 136, 0.5));
         }
 
         .btn-cta:hover::before {
@@ -1116,7 +1230,7 @@
 
         .btn-cta:active {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(44, 62, 140, 0.25); /* 変更：シャドウカラーを調整 */
+            box-shadow: 0 8px 20px rgba(31, 71, 136, 0.25);
         }
 
         .btn-icon-right {
@@ -1173,6 +1287,96 @@
             animation: arrowWave 1.5s ease infinite;
         }
         
+        /* ポリシー同意チェックボックス特別スタイル */
+        .policy-check {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(31, 71, 136, 0.03);
+            border: 1px solid rgba(31, 71, 136, 0.1);
+            border-radius: var(--radius);
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: SeasonalElement ===
+        COMPONENT: 季節要素 - 微妙な季節感の表現（春 - 木漏れ日の演出）
+        ==============================================
+        */
+        .seasonal-dapple {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 179, 0.15) 10%, 
+                rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(8px);
+            opacity: 0.7;
+            animation: floatingDapple 20s ease-in-out infinite;
+        }
+        
+        .seasonal-dapple:nth-child(2) {
+            top: 15%;
+            left: 10%;
+            width: 180px;
+            height: 180px;
+            animation-delay: 5s;
+            animation-duration: 25s;
+        }
+        
+        @keyframes floatingDapple {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(20px, -20px) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: TrustIndicators ===
+        COMPONENT: 信頼性表示 - 安心感の醸成
+        ==============================================
+        */
+        .trust-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px dashed rgba(31, 71, 136, 0.15);
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(31, 71, 136, 0.05);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .trust-item:hover {
+            background: rgba(31, 71, 136, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .trust-item i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
         /* 
         ==============================================
         // === component-split: ResponsiveStyles ===
@@ -1189,6 +1393,10 @@
                 padding: 1.2rem;
                 left: 1.5rem;
                 bottom: 1.5rem;
+            }
+            
+            .form-section {
+                padding: 1.5rem;
             }
         }
         
@@ -1219,10 +1427,14 @@
             .floating-elements {
                 display: none;
             }
+            
+            .contact-form {
+                padding: 2rem;
+            }
         }
 
         /* iPhone専用の調整 - フォームエレメントタップ領域最適化 */
-        @media screen and (max-width: 390px) {
+        @media screen and (max-width: 430px) {
             .form-check {
                 padding-left: 3.2rem;
                 margin-bottom: 1.5rem;
@@ -1245,6 +1457,7 @@
             .btn {
                 padding: 1.2rem 2rem;
                 min-height: 54px; /* タップ領域拡大 */
+                width: 100%; /* 小さい画面ではボタンを幅いっぱいに */
             }
             
             .form-check-label {
@@ -1258,6 +1471,24 @@
                 width: 8px;
                 height: 14px;
                 border-width: 0 3px 3px 0;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .form-section {
+                padding: 1.2rem;
+            }
+            
+            .zipcode-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .zipcode-input {
+                max-width: 100%;
             }
         }
     </style>
@@ -1332,6 +1563,10 @@
             <div class="page-hero-bg-gradient"></div>
             <div class="page-hero-bg-pattern"></div>
         </div>
+        
+        <!-- 季節要素 - 春の木漏れ日効果 -->
+        <div class="seasonal-dapple"></div>
+        <div class="seasonal-dapple"></div>
         
         <div class="floating-elements">
             <div class="floating-circle"></div>
@@ -1427,6 +1662,22 @@
                                 <p>Zoom / Google Meet / Teams でのオンライン相談も承っております。</p>
                             </div>
                         </div>
+                        
+                        <!-- 信頼性指標 -->
+                        <div class="trust-indicators">
+                            <div class="trust-item">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                <span>SSL暗号化通信</span>
+                            </div>
+                            <div class="trust-item">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                <span>情報セキュリティ対策済</span>
+                            </div>
+                            <div class="trust-item">
+                                <i class="fas fa-user-shield" aria-hidden="true"></i>
+                                <span>プライバシーマーク取得</span>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- 
@@ -1438,43 +1689,65 @@
                     <div class="contact-form animate-on-scroll">
                         <div class="message-success" id="message-success" role="alert" aria-live="polite">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
-                            <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
+                            <p>お問い合わせいただき、誠にありがとうございます。貴重なお時間をいただき感謝申し上げます。<br>担当者より1営業日以内に折り返しご連絡いたします。</p>
                         </div>
                         
                         <h3 class="heading-md">無料相談フォーム</h3>
                         <p class="form-intro">まずは無料でご相談ください。AI導入に関する課題やお悩みをお聞かせください。</p>
                         
-                        <form id="contact-form-element" aria-label="お問い合わせフォーム" novalidate>
-                            <!-- お名前フィールド -->
-                            <div class="form-group">
-                                <label for="name" class="form-label">お名前<span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="山田 太郎" required aria-required="true" aria-describedby="name-error">
-                                </div>
-                                <div class="field-error" id="name-error">この項目は必須です</div>
-                            </div>
+                        <!-- YubinBangoの初期化 -->
+                        <form id="contact-form-element" class="h-adr" aria-label="お問い合わせフォーム" novalidate>
+                            <span class="p-country-name" style="display:none;">Japan</span>
                             
-                            <!-- メールアドレスフィールド -->
-                            <div class="form-group">
-                                <label for="email" class="form-label">メールアドレス<span class="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required aria-required="true" aria-describedby="email-error">
-                                </div>
-                                <div class="field-error" id="email-error">有効なメールアドレスを入力してください</div>
-                            </div>
-                            
-                            <!-- 会社名・電話番号フィールド -->
-                            <div class="form-grid">
+                            <!-- お客様情報セクション -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">お客様情報</h4>
+                                
+                                <!-- お名前フィールド -->
                                 <div class="form-group">
-                                    <label for="company" class="form-label">会社名</label>
+                                    <label for="name" class="form-label">お名前<span class="required">*</span></label>
                                     <div class="input-wrapper">
-                                        <i class="fas fa-building input-icon" aria-hidden="true"></i>
-                                        <input type="text" id="company" name="company" class="form-control" placeholder="株式会社〇〇">
+                                        <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="山田 太郎" required aria-required="true" aria-describedby="name-error">
                                     </div>
+                                    <div class="field-error" id="name-error">この項目は必須です</div>
                                 </div>
                                 
+                                <!-- 会社名・役職フィールド -->
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="company" class="form-label">会社名</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-building input-icon" aria-hidden="true"></i>
+                                            <input type="text" id="company" name="company" class="form-control" placeholder="株式会社〇〇">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="position" class="form-label">役職</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-id-badge input-icon" aria-hidden="true"></i>
+                                            <input type="text" id="position" name="position" class="form-control" placeholder="部長">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 連絡先情報セクション -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">連絡先情報</h4>
+                                
+                                <!-- メールアドレスフィールド -->
+                                <div class="form-group">
+                                    <label for="email" class="form-label">メールアドレス<span class="required">*</span></label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required aria-required="true" aria-describedby="email-error">
+                                    </div>
+                                    <div class="field-error" id="email-error">有効なメールアドレスを入力してください</div>
+                                </div>
+                                
+                                <!-- 電話番号フィールド -->
                                 <div class="form-group">
                                     <label for="phone" class="form-label">電話番号</label>
                                     <div class="input-wrapper">
@@ -1482,55 +1755,107 @@
                                         <input type="tel" id="phone" name="phone" class="form-control" placeholder="03-1234-5678">
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <!-- お問い合わせ内容フィールド -->
-                            <div class="form-group">
-                                <label for="message" class="form-label">お問い合わせ内容<span class="required">*</span></label>
-                                <div class="input-wrapper textarea-wrapper">
-                                    <i class="fas fa-comment input-icon" aria-hidden="true"></i>
-                                    <textarea id="message" name="message" class="form-control" placeholder="お問い合わせ内容をご記入ください" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
-                                </div>
-                                <div class="field-error" id="message-error">この項目は必須です</div>
-                            </div>
-                            
-                            <!-- ご興味のあるサービス -->
-                            <div class="form-group">
-                                <fieldset>
-                                    <legend class="form-label">ご興味のあるサービス（複数選択可）</legend>
-                                    <div class="checkbox-group">
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service1" name="service[]" value="業務自動化" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">業務自動化ソリューション</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service2" name="service[]" value="意思決定支援AI" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">意思決定支援AI</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service3" name="service[]" value="AI導入支援" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">AI導入戦略・実装支援</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service4" name="service[]" value="オーダーメイド" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">オーダーメイド型AI開発</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service5" name="service[]" value="人間中心AI" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">人間中心AIの社会実装</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">その他</span>
-                                        </label>
+                                
+                                <!-- 郵便番号・住所フィールド -->
+                                <div class="form-group">
+                                    <label for="postal-code" class="form-label">郵便番号</label>
+                                    <div class="zipcode-wrapper">
+                                        <div class="input-wrapper zipcode-input">
+                                            <i class="fas fa-map-pin input-icon" aria-hidden="true"></i>
+                                            <input type="text" id="postal-code" name="postal-code" class="form-control p-postal-code" placeholder="100-0001" aria-describedby="zipcode-help">
+                                        </div>
+                                        <p class="zipcode-help">※入力後に住所が自動入力されます</p>
                                     </div>
-                                </fieldset>
+                                </div>
+                                
+                                <!-- 住所フィールド -->
+                                <div class="form-group">
+                                    <label for="address" class="form-label">住所</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-map-marker-alt input-icon" aria-hidden="true"></i>
+                                        <input type="text" id="address" name="address" class="form-control p-region p-locality p-street-address p-extended-address" placeholder="東京都千代田区丸の内3-8-3">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- お問い合わせ内容セクション -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">お問い合わせ内容</h4>
+                                
+                                <!-- お問い合わせ内容フィールド -->
+                                <div class="form-group">
+                                    <label for="message" class="form-label">お問い合わせ内容<span class="required">*</span></label>
+                                    <div class="input-wrapper textarea-wrapper">
+                                        <i class="fas fa-comment input-icon" aria-hidden="true"></i>
+                                        <textarea id="message" name="message" class="form-control" placeholder="お問い合わせ内容をご記入ください&#10;&#10;【記入例】&#10;・AI導入のコンサルティングについて相談したい&#10;・業務効率化の課題がある&#10;・具体的な成功事例を知りたい" rows="6" required aria-required="true" aria-describedby="message-error"></textarea>
+                                    </div>
+                                    <div class="field-error" id="message-error">この項目は必須です</div>
+                                </div>
+                                
+                                <!-- ご興味のあるサービス -->
+                                <div class="form-group">
+                                    <fieldset>
+                                        <legend class="form-label">ご興味のあるサービス（複数選択可）</legend>
+                                        <div class="checkbox-group">
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service1" name="service[]" value="業務自動化" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">業務自動化ソリューション</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service2" name="service[]" value="意思決定支援AI" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">意思決定支援AI</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service3" name="service[]" value="AI導入支援" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">AI導入戦略・実装支援</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service4" name="service[]" value="オーダーメイド" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">オーダーメイド型AI開発</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service5" name="service[]" value="人間中心AI" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">人間中心AIの社会実装</span>
+                                            </label>
+                                            <label class="form-check">
+                                                <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
+                                                <span class="checkmark"></span>
+                                                <span class="form-check-label">その他</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                
+                                <!-- どこで知ったか -->
+                                <div class="form-group">
+                                    <label for="referral" class="form-label">当社をどのようにお知りになりましたか？</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-search input-icon" aria-hidden="true"></i>
+                                        <select id="referral" name="referral" class="form-control">
+                                            <option value="">お選びください</option>
+                                            <option value="search">検索エンジン</option>
+                                            <option value="sns">SNS</option>
+                                            <option value="recommend">知人の紹介</option>
+                                            <option value="article">記事・ブログ</option>
+                                            <option value="event">セミナー・イベント</option>
+                                            <option value="other">その他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- プライバシーポリシー同意 -->
+                            <div class="policy-check">
+                                <label class="form-check">
+                                    <input type="checkbox" id="privacy-agreement" name="privacy-agreement" class="form-check-input" required aria-required="true">
+                                    <span class="checkmark"></span>
+                                    <span class="form-check-label"><a href="#" target="_blank">プライバシーポリシー</a>に同意する<span class="required">*</span></span>
+                                </label>
                             </div>
                             
                             <!-- reCAPTCHA v3 -->
@@ -1615,7 +1940,7 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq1-answer" role="region" aria-labelledby="faq1">
-                            <p>AI導入の主なメリットには、業務効率化（作業の自動化による人的リソースの最適化）、コスト削減（24時間稼働による人件費削減）、データ分析による高度な意思決定支援、顧客体験の向上（パーソナライズされたサービス提供）などがあります。業種や企業規模によって期待できる効果は異なりますので、まずは無料相談で貴社に最適なAI活用方法をご提案いたします。</p>
+                            <p>AI導入の主なメリットには、業務効率化（作業の自動化による人的リソースの最適化）、コスト削減（24時間稼働による人件費削減）、データ分析による高度な意思決定支援、顧客体験の向上（パーソナライズされたサービス提供）などがございます。業種や企業規模によって期待できる効果は異なりますので、まずは無料相談で貴社に最適なAI活用方法をご提案いたします。</p>
                         </div>
                     </div>
                     
@@ -1625,7 +1950,7 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq2-answer" role="region" aria-labelledby="faq2">
-                            <p>AI導入の期間は、導入する機能の複雑さや規模によって異なります。一般的なチャットボット導入なら1〜2ヶ月程度、業務プロセス全体に関わる大規模なシステムなら3〜6ヶ月程度が目安です。ShinAIでは段階的なアプローチを推奨しており、小規模な実証実験（PoC）からスタートし、成果を確認しながら段階的に拡大していく方法をとっています。</p>
+                            <p>AI導入の期間は、導入する機能の複雑さや規模によって異なります。一般的なチャットボット導入なら1〜2ヶ月程度、業務プロセス全体に関わる大規模なシステムなら3〜6ヶ月程度が目安でございます。ShinAIでは段階的なアプローチを推奨しており、小規模な実証実験（PoC）からスタートし、成果を確認しながら段階的に拡大していく方法をとっております。</p>
                         </div>
                     </div>
                     
@@ -1635,7 +1960,7 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq3-answer" role="region" aria-labelledby="faq3">
-                            <p>AI導入費用は、サービス内容や規模によって大きく異なります。業務自動化ソリューションは初期費用30万円〜、月額10万円〜、意思決定支援AIは初期費用45万円〜、月額15万円〜が目安となります。また、企業規模や要件に応じたカスタマイズも可能です。詳しい見積もりはお問い合わせフォームよりお気軽にご相談ください。</p>
+                            <p>AI導入費用は、サービス内容や規模によって大きく異なります。業務自動化ソリューションは初期費用30万円〜、月額10万円〜、意思決定支援AIは初期費用45万円〜、月額15万円〜が目安となります。また、企業規模や要件に応じたカスタマイズも可能でございます。詳しい見積もりはお問い合わせフォームよりお気軽にご相談ください。</p>
                         </div>
                     </div>
                     
@@ -1645,7 +1970,7 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq4-answer" role="region" aria-labelledby="faq4">
-                            <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しています。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えています。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指します。</p>
+                            <p>ShinAIでは、「人間中心のAI」という理念のもと、AIの透明性、公平性、プライバシー保護などを重視しております。AI技術の活用においては、効率化だけでなく、人間の創造性や意思決定を支援し、より良い社会の実現に貢献することが重要と考えております。お客様と共に、AIの効果的かつ責任ある活用方法を検討し、持続可能で信頼性の高いシステム構築を目指してまいります。</p>
                         </div>
                     </div>
 
@@ -1655,7 +1980,27 @@
                             <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer" id="faq5-answer" role="region" aria-labelledby="faq5">
-                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要です。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援します。</p>
+                            <p>AI導入の成功には、経営層のコミットメントと現場の理解・協力が重要でございます。基本的な準備として、1) 解決したい課題の明確化、2) 活用したいデータの整理、3) 推進担当者・チームの設置、4) 社内での理解促進、が挙げられます。ShinAIでは、AIリテラシー向上のための研修プログラムも提供しており、組織全体でのAI活用を支援いたします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq6">
+                        <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq6-answer">
+                            他社のAIソリューションと比較して、ShinAIの強みは何ですか？
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer" id="faq6-answer" role="region" aria-labelledby="faq6">
+                            <p>ShinAIの強みは、導入後の内製化支援と継続的な伴走型サポートにございます。多くのAI導入がPoC（実証実験）で終わってしまう中、弊社では「やりっぱなしにしないAI導入」をモットーに、貴社内でAIを継続的に活用・改善できる体制づくりまでサポートいたします。また、日本企業特有の組織文化や業務プロセスへの深い理解があり、AIの技術的な導入だけでなく、組織風土や人材育成の観点も含めた総合的な支援が可能でございます。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq7">
+                        <div class="faq-question" tabindex="0" role="button" aria-expanded="false" aria-controls="faq7-answer">
+                            AI導入の事例や成功事例を教えてください
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer" id="faq7-answer" role="region" aria-labelledby="faq7">
+                            <p>多様な業界での導入実績がございます。例えば、製造業では品質検査の自動化により不良率を60%削減、金融業では顧客対応AIによる応対時間を75%短縮、小売業ではAIを活用した需要予測で在庫コストを40%削減するなどの成果を上げております。業界別の詳細な事例については、無料相談の際に詳しくご説明させていただきます。守秘義務の範囲内で、貴社の業種・課題に近い事例をご紹介することも可能でございます。</p>
                         </div>
                     </div>
                 </div>
@@ -1677,7 +2022,7 @@
             <div class="container">
                 <div class="cta-content animate-on-scroll">
                     <h2 class="cta-title">最先端AIで<br>ビジネスを次のステージへ</h2>
-                    <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献します。あなたのビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
+                    <p class="cta-description">ShinAIは、AI技術を通じて企業の成長と社会の発展に貢献いたします。貴社のビジネスが次のステージに進むための第一歩を、今踏み出しませんか？</p>
                     
                     <!-- 最終CTAボタン - モーションエフェクト強化 -->
                     <div class="cta-buttons">
@@ -1801,7 +2146,7 @@
             </div>
             <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
                 <div class="message bot-message">
-                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
+                    こんにちは！ShinAIアシスタントでございます。AI導入に関するご質問やお悩みがございましたら、お気軽にお聞かせください。
                 </div>
             </div>
             <div class="chatbot-input">
@@ -1965,10 +2310,10 @@
                         // ボットの応答
                         setTimeout(() => {
                             const responses = [
-                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
-                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
-                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
-                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
+                                "AI導入についてご質問がありましたら、お気軽にお問い合わせくださいませ。",
+                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しております。",
+                                "無料相談では、AIの導入に関する疑問やお悩みに丁寧にお答えいたします。",
+                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントが誠心誠意ご対応させていただきます。"
                             ];
                             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
                             addMessage(randomResponse, 'bot');
@@ -2101,6 +2446,18 @@
                     if (isValid) {
                         // フォーム送信処理
                         simulateFormSubmission();
+                    } else {
+                        // 最初のエラー項目にスクロール
+                        const firstError = contactForm.querySelector('.form-control.error');
+                        if (firstError) {
+                            const errorOffset = firstError.getBoundingClientRect().top + window.pageYOffset;
+                            const headerHeight = document.querySelector('.header').offsetHeight;
+                            
+                            window.scrollTo({
+                                top: errorOffset - headerHeight - 50,
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
                 
@@ -2149,6 +2506,27 @@
                         }
                     }
                     
+                    // 郵便番号のバリデーション（入力されている場合のみ）
+                    if (fieldId === 'postal-code' && field.value.trim()) {
+                        const postalPattern = /^\d{3}-?\d{4}$/;
+                        if (!postalPattern.test(field.value)) {
+                            field.classList.add('error');
+                            field.classList.remove('valid');
+                            if (errorElement) {
+                                errorElement.textContent = '郵便番号は123-4567の形式で入力してください';
+                                errorElement.classList.add('active');
+                            }
+                            return false;
+                        }
+                    }
+                    
+                    // プライバシーポリシー同意のチェック
+                    if (fieldId === 'privacy-agreement' && !field.checked) {
+                        field.classList.add('error');
+                        field.classList.remove('valid');
+                        return false;
+                    }
+                    
                     // バリデーション成功
                     field.classList.remove('error');
                     field.classList.add('valid');
@@ -2189,16 +2567,16 @@
                         submitButton.innerHTML = originalText;
                         submitButton.disabled = false;
                         
-                        // 成功メッセージを自動的に非表示（オプション）
-                        setTimeout(() => {
-                            successMessage.classList.remove('show');
-                        }, 6000);
-                        
-                        // フォームまでスクロール
+                        // 成功メッセージまでスクロール
                         const contactSection = document.getElementById('contact-form');
                         if (contactSection) {
                             contactSection.scrollIntoView({ behavior: 'smooth' });
                         }
+                        
+                        // 一定時間後に成功メッセージを非表示（オプション）
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                        }, 10000);
                     }, 1500);
                 }
             }
@@ -2208,6 +2586,19 @@
                 // reCAPTCHA検証後の処理
                 console.log('reCAPTCHA検証完了:', token);
             };
+            
+            // 郵便番号→住所自動入力のカスタム処理（YubinBangoの拡張）
+            const postalCodeField = document.getElementById('postal-code');
+            if (postalCodeField) {
+                postalCodeField.addEventListener('blur', function() {
+                    // 入力された値がYubinBangoのパターンに一致しない場合は整形
+                    const postalValue = this.value.trim().replace(/[^\d]/g, '');
+                    if (postalValue.length === 7) {
+                        const formattedValue = postalValue.substring(0, 3) + '-' + postalValue.substring(3);
+                        this.value = formattedValue;
+                    }
+                });
+            }
         });
     </script>
 </body>
