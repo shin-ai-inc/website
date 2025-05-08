@@ -1530,6 +1530,848 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
+        /* 
+        ==============================================
+        // === component-split: Header ===
+        COMPONENT: ヘッダー - 固定型ナビゲーション
+        ==============================================
+        */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(44, 62, 140, 0.08);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled .header-inner {
+            padding: 0.7rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover img {
+            transform: rotate(10deg);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            margin-left: 1rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 992px) {
+            .nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: white;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav.active {
+                transform: translateY(0);
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-cta {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .nav-cta .btn {
+                width: 100%;
+            }
+        }
+        
+        /* Skip Navigation Link - アクセシビリティ */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            z-index: 10000;
+            transition: top 0.3s ease;
+        }
+        
+        .skip-nav:focus {
+            top: 0;
+        }
+        
+        /* ページヒーロー部分の調整 - 固定ヘッダー対応 */
+        .page-hero {
+            padding-top: 120px;
+            background: linear-gradient(135deg, rgba(249, 250, 252, 0.95), rgba(243, 244, 246, 0.95));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .page-hero-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+            z-index: -1;
+        }
+        
+        .page-hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.04'/%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .page-hero-content {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-light);
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb-current {
+            color: var(--gray);
+        }
+        
+        .page-hero-title {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .gradient-title {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-hero-description {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.2rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero {
+                padding-top: 100px;
+            }
+            
+            .page-hero-content {
+                padding: 3rem 0;
+            }
+            
+            .page-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-hero-title {
+                font-size: 2rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1rem;
+            }
+        }
+        
+        /* フッター改善 */
+        .footer {
+            background: linear-gradient(135deg, #1A1F36, #2C3E8C);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.1'/%3E%3C/svg%3E");
+            z-index: 0;
+            opacity: 0.2;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .en-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .footer-description {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .footer-links li i {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+        }
+        
+        /* 下部バナー */
+        .bottom-banner {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bottom-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 8s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* トップに戻るボタン */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient-primary);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(44, 62, 140, 0.3);
+            transition: all 0.3s ease;
+            z-index: 99;
+            opacity: 0;
+            transform: translateY(20px);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(44, 62, 140, 0.4);
+        }
+        
+        /* チャットボット */
+        .chatbot {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 99;
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            color: white;
+            border: none;
+            box-shadow: 0 5px 20px rgba(44, 62, 140, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .ripple {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            animation: pulseGlow 2s infinite;
+        }
+        
+        .chatbot-container {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 320px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(44, 62, 140, 0.2);
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            transform-origin: bottom left;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .chatbot-container.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .chatbot-header {
+            background: var(--gradient-primary);
+            padding: 1.2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-close:hover {
+            transform: scale(1.2);
+        }
+        
+        .chatbot-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        
+        .bot-message {
+            background: rgba(58, 95, 235, 0.08);
+            color: var(--dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .chatbot-input input {
+            flex-grow: 1;
+            border: 1px solid rgba(58, 95, 235, 0.2);
+            border-radius: 30px;
+            padding: 0.8rem 1.2rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+        }
+        
+        .chatbot-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-submit:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+        
+        /* セクション共通スタイル */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .section-title {
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+        
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            background: rgba(58, 95, 235, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        .heading-lg {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(58, 95, 235, 0.1);
+            z-index: -1;
+            border-radius: 30px;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* アニメーションクラス */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-fadeIn {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .animate-delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        .animate-delay-5 {
+            animation-delay: 1s;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* リセットCSS追加 */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        
+        ul, ol {
+            list-style: none;
+        }
     </style>
 </head>
 <body data-current-year="2025">
