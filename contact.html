@@ -159,12 +159,15 @@
             --white: #FFFFFF;
             --error: #FF3B3B;
             --success: #00C48C;
+            --gold: #E6B422;
+            --purple: #6C63FF;
             
             /* グラデーション強化 */
             --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
             --gradient-hover: linear-gradient(135deg, #4671FF, #00E6C3);
             --gradient-cta: linear-gradient(135deg, #3A5FEB, #00C9A7, #4671FF);
             --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            --gradient-accent: linear-gradient(135deg, #6C63FF, #E6B422);
         }
 
         /* 
@@ -317,295 +320,38 @@
             }
         }
 
-        /* 紙飛行機アニメーション - 改善ポイント */
-        @keyframes planeFloat {
-            0% {
-                transform: translateY(0) rotate(0);
-            }
-            25% {
-                transform: translateY(-3px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(0) rotate(0);
-            }
-            75% {
-                transform: translateY(3px) rotate(-5deg);
-            }
-            100% {
-                transform: translateY(0) rotate(0);
-            }
-        }
-
         /* 
         ==============================================
         // === component-split: HeroStyles ===
         COMPONENT: ヒーローセクション - 無料相談テキスト視認性向上
         ==============================================
         */
-        .page-hero {
+        .page-hero-title .highlight-accent {
+            background: linear-gradient(135deg, #6C63FF 0%, #E6B422 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
             position: relative;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.95), rgba(0, 201, 167, 0.95));
-            padding: 5rem 0;
-            overflow: hidden;
-        }
-
-        .page-hero-bg-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .page-hero-bg-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.95), rgba(0, 201, 167, 0.95));
-            z-index: 0;
-        }
-
-        .page-hero-bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23FFFFFF' fill-opacity='0.15'/%3E%3C/svg%3E");
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .page-hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.2);
-            display: inline-flex;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .breadcrumb a {
-            color: white;
-            text-decoration: none;
+            display: inline-block;
+            text-shadow: none;
+            background-color: transparent;
+            padding: 0.1em 0.5em;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             transition: all 0.3s ease;
         }
-
-        .breadcrumb a:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .breadcrumb-separator {
-            margin: 0 0.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .page-hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: white;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .gradient-title {
-            background: white;
-            color: var(--primary);
-            padding: 0.3rem 1rem;
-            border-radius: 8px;
-            font-weight: 900;
-            position: relative;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 無料相談テキスト視認性向上 - 改善ポイント */
-        .highlight-accent {
-            position: relative;
-            font-weight: 800;
-            /* 黄色系の明るい色に変更して視認性向上 */
-            color: #FFEB3B; 
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 138, 0, 0.9);
-            padding: 0.4rem 1.2rem;
-            border-radius: 8px;
-            display: inline-block;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .page-hero-title:hover .highlight-accent {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .page-hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: white;
-            line-height: 1.7;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-            background: rgba(0, 0, 0, 0.1);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        /* 
-        ==============================================
-        // === component-split: ConsultationButtonStyles ===
-        COMPONENT: 無料相談ボタン - 視認性向上（背景との区別を明確に）
-        ==============================================
-        */
-        .btn {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-cta {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            color: white;
-            font-weight: 700;
-            border: none;
-            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border-radius: 50px;
-            padding: 1.2rem 2.5rem;
-            min-width: 220px;
-            text-align: center;
-            display: inline-block;
-            font-size: 1.1rem;
-            /* 背景ボックスシャドウで輪郭を強調 */
-            outline: 2px solid rgba(255, 255, 255, 0.3);
-            /* アウターグロー効果 */
-            filter: drop-shadow(0 0 10px rgba(58, 95, 235, 0.4));
-        }
-
-        .btn-cta::before {
+        
+        .page-hero-title .highlight-accent::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            left: 0;
+            bottom: -2px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: all 0.7s ease;
+            height: 6px;
+            background: rgba(108, 99, 255, 0.5);
             z-index: -1;
-        }
-
-        .btn-cta:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
-            color: white;
-            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.5));
-        }
-
-        .btn-cta:hover::before {
-            left: 100%;
-        }
-
-        .btn-cta:active {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        }
-
-        .btn-icon-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-        }
-
-        .btn-icon-right i {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-icon-right:hover i {
-            transform: translateX(5px);
-        }
-
-        .btn-icon-bounce {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-        }
-
-        /* 紙飛行機アイコンのアニメーション - 改善ポイント */
-        .icon-bounce {
-            animation: planeFloat 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-icon-bounce:hover .icon-bounce {
-            animation: iconBounce 0.8s ease-in-out infinite;
-        }
-
-        /* ヒーローセクション内のCTAボタン - 背景との区別を明確に */
-        .page-hero .btn-cta {
-            background: white;
-            color: var(--primary);
-            font-weight: 700;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border-radius: 50px;
-            padding: 1.2rem 2.5rem;
-            min-width: 250px;
-            text-align: center;
-            display: inline-block;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .page-hero .btn-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(58, 95, 235, 0.2), transparent);
-            transition: all 0.7s ease;
-            z-index: -1;
-        }
-
-        .page-hero .btn-cta:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            color: var(--primary);
-        }
-
-        .page-hero .btn-cta:hover::before {
-            left: 100%;
+            border-radius: var(--radius-full);
         }
 
         /* 
@@ -703,7 +449,7 @@
         .checkbox-group {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
+            gap: 1rem;
             margin-top: 1.2rem;
         }
         
@@ -787,7 +533,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zM20 69v2H0v-2h20zm79.32-55l-1 1.732-17.32-10L82 4l17.32 10zm-80 80l-1 1.732-17.32-10L2 84l17.32 10zm96.546-75.84l-1.732 1-10-17.32 1.732-1 10 17.32zm-100 100l-1.732 1-10-17.32 1.732-1 10 17.32zM38.16 24.134l1 1.732-17.32 10-1-1.732 17.32-10zM60 29v2H40v-2h20zm19.32 5l-1 1.732-17.32-10L62 24l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM111 40h-2V20h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zM40 49v2H20v-2h20zm19.32 5l-1 1.732-17.32-10L42 44l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM91 60h-2V40h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM39.32 74l-1 1.732-17.32-10L22 64l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM71 80h-2V60h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM120 89v2h-20v-2h20zm-84.134 9.16l-1.732 1-10-17.32 1.732-1 10 17.32zM51 100h-2V80h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM100 109v2H80v-2h20zm19.32 5l-1 1.732-17.32-10 1-1.732 17.32 10zM31 120h-2v-20h2v20z' fill='%233A5FEB' fill-opacity='0.08'/%3E%3C/svg%3E");
             z-index: -1;
             opacity: 0.8;
         }
@@ -833,7 +579,7 @@
         
         .contact-details p {
             margin: 0;
-            color: var(--gray);
+            color: var(--dark);
             line-height: 1.6;
         }
         
@@ -847,6 +593,17 @@
         .contact-details a:hover {
             color: var(--secondary);
             text-decoration: underline;
+        }
+        
+        /* お問い合わせ先セクション強化: 文字色の濃淡を調整 */
+        .contact-info h3.contact-title {
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .contact-info p {
+            color: var(--dark);
+            font-weight: 500;
         }
         
         /* 
@@ -885,9 +642,9 @@
         
         .form-control {
             width: 100%;
-            padding: 1.2rem 1.5rem 1.2rem 3.2rem;
+            padding: 1rem 1.2rem 1rem 3rem;
             border: 1.5px solid rgba(58, 95, 235, 0.15);
-            border-radius: 12px;
+            border-radius: var(--radius);
             font-size: 1.05rem;
             color: var(--dark);
             transition: all 0.3s ease;
@@ -899,7 +656,6 @@
             border-color: var(--primary);
             outline: none;
             box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.15);
-            transform: translateY(-2px);
         }
         
         .input-icon {
@@ -937,59 +693,12 @@
         /* 
         ==============================================
         // === component-split: SubmitButton ===
-        COMPONENT: 送信ボタン - 紙飛行機アイコンアニメーション追加
+        COMPONENT: 送信ボタン - アニメーション強化
         ==============================================
         */
         .form-submit {
             margin-top: 2.5rem;
             text-align: center;
-        }
-        
-        .btn-submit {
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            color: white;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            padding: 1.2rem 2.5rem;
-            min-width: 250px;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            outline: none;
-        }
-
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: all 0.7s ease;
-            z-index: 1;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
-        }
-
-        .btn-submit:hover::before {
-            left: 100%;
-        }
-
-        .btn-submit:active {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         }
         
         .required {
@@ -1014,10 +723,19 @@
             text-decoration: underline;
         }
         
+        /* 紙飛行機アイコンアニメーション */
+        .icon-bounce {
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        .btn-icon-bounce:hover .icon-bounce {
+            animation: iconBounce 0.8s ease-in-out infinite;
+        }
+        
         /* 
         ==============================================
         // === component-split: FormValidation ===
-        COMPONENT: 入力チェック - バリデーション
+        COMPONENT: バリデーション - 入力チェック
         ==============================================
         */
         .form-control.error {
@@ -1240,14 +958,18 @@
             padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
             background: rgba(249, 250, 252, 0.7);
             border-top: 1px solid rgba(58, 95, 235, 0.08);
+            opacity: 0;
+            transform: translateY(-10px);
         }
         
         .faq-item.active .faq-answer {
             padding: 1.8rem 2rem;
             max-height: 1000px;
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .faq-answer p {
@@ -1348,7 +1070,88 @@
             opacity: 0.8;
         }
         
-        /* 最終CTAボタン改善 - スクリーンショット参考 */
+        /* 
+        ==============================================
+        // === component-split: ConsultationButtonStyles ===
+        COMPONENT: 無料相談ボタン - 視認性向上（背景との区別を明確に）
+        ==============================================
+        */
+        .btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+            color: white;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 10px 30px rgba(58, 95, 235, 0.25);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 50px;
+            padding: 1.2rem 2.5rem;
+            min-width: 220px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1.1rem;
+            /* 背景ボックスシャドウで輪郭を強調 */
+            outline: 2px solid rgba(255, 255, 255, 0.3);
+            /* アウターグロー効果 */
+            filter: drop-shadow(0 0 10px rgba(58, 95, 235, 0.4));
+        }
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(58, 95, 235, 0.35);
+            color: white;
+            filter: drop-shadow(0 0 15px rgba(58, 95, 235, 0.5));
+        }
+
+        .btn-cta:hover::before {
+            left: 100%;
+        }
+
+        .btn-cta:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        }
+
+        .btn-icon-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .btn-icon-right i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-icon-right:hover i {
+            transform: translateX(5px);
+        }
+
+        .btn-icon-bounce {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        /* 最終CTAボタン改善 */
         .cta-main-btn {
             position: relative;
             overflow: visible;
@@ -1396,6 +1199,10 @@
                 padding: 1.2rem;
                 left: 1.5rem;
                 bottom: 1.5rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -1519,853 +1326,6 @@
                         <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
                         <li class="nav-cta"><a href="#contact-form" class="btn btn-cta btn-icon-right">無料相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li>
                     </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-heading">お問い合わせ</h4>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
-                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
-                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">利用規約</a>
-                    <a href="#">特定商取引法に基づく表記</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- 
-    ==============================================
-    // === component-split: Chatbot ===
-    COMPONENT: チャットボット - インタラクティブサポート
-    ==============================================
-    -->
-    <div class="chatbot" aria-label="AIアシスタント">
-        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-            <div class="ripple"></div>
-            <i class="fas fa-robot" aria-hidden="true"></i>
-        </button>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
-                </div>
-                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-                <div class="message bot-message">
-                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 
-    ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップに戻るボタン - ナビゲーション補助
-    ==============================================
-    -->
-    <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </a>
-    
-    <!-- 
-    ==============================================
-    // === component-split: JavaScript ===
-    COMPONENT: JavaScript - インタラクション制御
-    ==============================================
-    -->
-    <script>
-        // プリローダー制御
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preload-container');
-            if (preloader) {
-                setTimeout(function() {
-                    preloader.classList.add('hidden');
-                    setTimeout(function() {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 300);
-            }
-        });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // 現在年表示
-            const currentYearElement = document.getElementById('current-year');
-            if (currentYearElement) {
-                const currentYear = new Date().getFullYear();
-                currentYearElement.textContent = currentYear;
-                document.body.setAttribute('data-current-year', currentYear);
-            }
-            
-            // ヘッダースクロール効果
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 10) {
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-            });
-            
-            // トップに戻るボタン
-            const backToTopButton = document.getElementById('back-to-top');
-            let lastScrollTime = 0;
-            
-            window.addEventListener('scroll', function() {
-                const now = Date.now();
-                if (now - lastScrollTime > 100) { // スロットリング処理
-                    if (window.scrollY > 300) {
-                        backToTopButton.classList.add('active');
-                    } else {
-                        backToTopButton.classList.remove('active');
-                    }
-                    lastScrollTime = now;
-                }
-            });
-            
-            backToTopButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // ハンバーガーメニュー
-            const menuToggle = document.getElementById('menu-toggle');
-            const nav = document.getElementById('nav');
-            
-            if (menuToggle && nav) {
-                menuToggle.addEventListener('click', function() {
-                    nav.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                    
-                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                    menuToggle.setAttribute('aria-expanded', !isExpanded);
-                    menuToggle.innerHTML = isExpanded ? 
-                        '<i class="fas fa-bars" aria-hidden="true"></i>' : 
-                        '<i class="fas fa-times" aria-hidden="true"></i>';
-                });
-            }
-            
-            // スムーススクロール
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        
-                        window.scrollTo({
-                            top: targetPosition - headerHeight - 20,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // チャットボット
-            const chatbotToggle = document.getElementById('chatbot-toggle');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const chatbotClose = document.getElementById('chatbot-close');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const chatbotInput = document.getElementById('chatbot-input-text');
-            const chatbotSubmit = document.getElementById('chatbot-submit');
-            
-            if (chatbotToggle && chatbotContainer && chatbotClose) {
-                chatbotToggle.addEventListener('click', function() {
-                    chatbotContainer.classList.toggle('active');
-                    
-                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
-                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
-                });
-                
-                chatbotClose.addEventListener('click', function() {
-                    chatbotContainer.classList.remove('active');
-                    chatbotToggle.setAttribute('aria-expanded', 'false');
-                });
-                
-                // チャットボット入力処理
-                if (chatbotSubmit && chatbotInput && chatbotMessages) {
-                    chatbotSubmit.addEventListener('click', sendMessage);
-                    chatbotInput.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter') {
-                            sendMessage();
-                        }
-                    });
-                }
-                
-                function sendMessage() {
-                    const message = chatbotInput.value.trim();
-                    if (message) {
-                        // ユーザーメッセージを追加
-                        addMessage(message, 'user');
-                        chatbotInput.value = '';
-                        
-                        // ボットの応答
-                        setTimeout(() => {
-                            const responses = [
-                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
-                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
-                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
-                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
-                            ];
-                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                            addMessage(randomResponse, 'bot');
-                        }, 800);
-                    }
-                }
-                
-                function addMessage(text, sender) {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.classList.add('message');
-                    messageDiv.classList.add(sender + '-message');
-                    messageDiv.textContent = text;
-                    
-                    chatbotMessages.appendChild(messageDiv);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }
-            }
-            
-            // FAQアコーディオン
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', function() {
-                    const isActive = item.classList.contains('active');
-                    
-                    // アクティブなFAQを閉じる
-                    faqItems.forEach(faqItem => {
-                        if (faqItem !== item) {
-                            faqItem.classList.remove('active');
-                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                    
-                    // クリックされた項目の開閉
-                    item.classList.toggle('active');
-                    question.setAttribute('aria-expanded', !isActive);
-                });
-                
-                // キーボード操作対応
-                question.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        question.click();
-                    }
-                });
-            });
-            
-            // アニメーションスクロール検出
-            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-            
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target); // 一度表示されたら監視を解除
-                    }
-                });
-            }, observerOptions);
-            
-            animateOnScrollElements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // フォームバリデーション
-            const contactForm = document.getElementById('contact-form-element');
-            const successMessage = document.getElementById('message-success');
-            
-            if (contactForm) {
-                // フォーム入力のフォーカス効果
-                const formControls = contactForm.querySelectorAll('.form-control');
-                
-                formControls.forEach(control => {
-                    // フォーカス時の効果
-                    control.addEventListener('focus', function() {
-                        this.closest('.input-wrapper').classList.add('focused');
-                    });
-                    
-                    // フォーカスアウト時の効果
-                    control.addEventListener('blur', function() {
-                        this.closest('.input-wrapper').classList.remove('focused');
-                        validateField(this);
-                    });
-                    
-                    // 入力内容の変更時のリアルタイムバリデーション
-                    control.addEventListener('input', function() {
-                        validateField(this);
-                    });
-                });
-                
-                // チェックボックス機能強化
-                const checkboxes = contactForm.querySelectorAll('.form-check-input');
-                
-                checkboxes.forEach(checkbox => {
-                    // 初期状態の確認
-                    if (checkbox.checked) {
-                        checkbox.closest('.form-check').classList.add('checked');
-                    }
-                    
-                    // クリック時の効果
-                    checkbox.addEventListener('change', function() {
-                        if (this.checked) {
-                            this.closest('.form-check').classList.add('checked');
-                        } else {
-                            this.closest('.form-check').classList.remove('checked');
-                        }
-                    });
-                });
-                
-                // フォーム送信イベント
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    let isValid = true;
-                    
-                    // 全フィールドの検証
-                    const requiredFields = contactForm.querySelectorAll('[required]');
-                    requiredFields.forEach(field => {
-                        if (!validateField(field)) {
-                            isValid = false;
-                        }
-                    });
-                    
-                    if (isValid) {
-                        // フォーム送信処理
-                        simulateFormSubmission();
-                    }
-                });
-                
-                // フィールドバリデーション関数
-                function validateField(field) {
-                    const fieldType = field.getAttribute('type');
-                    const fieldId = field.getAttribute('id');
-                    const errorElement = document.getElementById(`${fieldId}-error`);
-                    
-                    // 必須チェック
-                    if (field.hasAttribute('required') && !field.value.trim()) {
-                        field.classList.add('error');
-                        field.classList.remove('valid');
-                        if (errorElement) {
-                            errorElement.textContent = 'この項目は必須です';
-                            errorElement.classList.add('active');
-                        }
-                        return false;
-                    }
-                    
-                    // 特定フィールドの追加バリデーション
-                    if (fieldType === 'email' && field.value.trim()) {
-                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                        if (!emailPattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
-                            if (errorElement) {
-                                errorElement.textContent = '有効なメールアドレスを入力してください';
-                                errorElement.classList.add('active');
-                            }
-                            return false;
-                        }
-                    }
-                    
-                    // 電話番号の簡易バリデーション（入力されている場合のみ）
-                    if (fieldId === 'phone' && field.value.trim()) {
-                        const phonePattern = /^[0-9\-+() ]{7,}$/;
-                        if (!phonePattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
-                            if (errorElement) {
-                                errorElement.textContent = '有効な電話番号を入力してください';
-                                errorElement.classList.add('active');
-                            }
-                            return false;
-                        }
-                    }
-                    
-                    // バリデーション成功
-                    field.classList.remove('error');
-                    field.classList.add('valid');
-                    if (errorElement) {
-                        errorElement.classList.remove('active');
-                    }
-                    return true;
-                }
-                
-                // フォーム送信シミュレーション
-                function simulateFormSubmission() {
-                    const submitButton = contactForm.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    // ボタンをローディング状態に
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
-                    submitButton.disabled = true;
-                    
-                    // 送信処理シミュレーション（実際はサーバーとの通信）
-                    setTimeout(() => {
-                        // 成功メッセージを表示
-                        successMessage.classList.add('show');
-                        
-                        // フォームをリセットして入力フィールドの状態をクリア
-                        contactForm.reset();
-                        formControls.forEach(control => {
-                            control.classList.remove('valid');
-                            control.classList.remove('error');
-                        });
-                        
-                        // チェックボックスをリセット
-                        checkboxes.forEach(checkbox => {
-                            checkbox.checked = false;
-                            checkbox.closest('.form-check').classList.remove('checked');
-                        });
-                        
-                        // ボタンを元に戻す
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                        
-                        // 成功メッセージを自動的に非表示（オプション）
-                        setTimeout(() => {
-                            successMessage.classList.remove('show');
-                        }, 6000);
-                        
-                        // フォームまでスクロール
-                        const contactSection = document.getElementById('contact-form');
-                        if (contactSection) {
-                            contactSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }, 1500);
-                }
-            }
-            
-            // reCAPTCHA コールバック
-            window.onRecaptchaVerified = function(token) {
-                // reCAPTCHA検証後の処理
-                console.log('reCAPTCHA検証完了:', token);
-            };
-        });
-    </script>
-</body>
-</html>
-    
-    <!-- 
-    ==============================================
-    // === component-split: JavaScript ===
-    COMPONENT: JavaScript - インタラクション制御
-    ==============================================
-    -->
-    <script>
-        // プリローダー制御
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preload-container');
-            if (preloader) {
-                setTimeout(function() {
-                    preloader.classList.add('hidden');
-                    setTimeout(function() {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 300);
-            }
-        });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // 現在年表示
-            const currentYearElement = document.getElementById('current-year');
-            if (currentYearElement) {
-                const currentYear = new Date().getFullYear();
-                currentYearElement.textContent = currentYear;
-                document.body.setAttribute('data-current-year', currentYear);
-            }
-            
-            // ヘッダースクロール効果
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 10) {
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-            });
-            
-            // トップに戻るボタン
-            const backToTopButton = document.getElementById('back-to-top');
-            let lastScrollTime = 0;
-            
-            window.addEventListener('scroll', function() {
-                const now = Date.now();
-                if (now - lastScrollTime > 100) { // スロットリング処理
-                    if (window.scrollY > 300) {
-                        backToTopButton.classList.add('active');
-                    } else {
-                        backToTopButton.classList.remove('active');
-                    }
-                    lastScrollTime = now;
-                }
-            });
-            
-            backToTopButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // ハンバーガーメニュー
-            const menuToggle = document.getElementById('menu-toggle');
-            const nav = document.getElementById('nav');
-            
-            if (menuToggle && nav) {
-                menuToggle.addEventListener('click', function() {
-                    nav.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                    
-                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                    menuToggle.setAttribute('aria-expanded', !isExpanded);
-                    menuToggle.innerHTML = isExpanded ? 
-                        '<i class="fas fa-bars" aria-hidden="true"></i>' : 
-                        '<i class="fas fa-times" aria-hidden="true"></i>';
-                });
-            }
-            
-            // スムーススクロール
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        
-                        window.scrollTo({
-                            top: targetPosition - headerHeight - 20,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // チャットボット
-            const chatbotToggle = document.getElementById('chatbot-toggle');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const chatbotClose = document.getElementById('chatbot-close');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const chatbotInput = document.getElementById('chatbot-input-text');
-            const chatbotSubmit = document.getElementById('chatbot-submit');
-            
-            if (chatbotToggle && chatbotContainer && chatbotClose) {
-                chatbotToggle.addEventListener('click', function() {
-                    chatbotContainer.classList.toggle('active');
-                    
-                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
-                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
-                });
-                
-                chatbotClose.addEventListener('click', function() {
-                    chatbotContainer.classList.remove('active');
-                    chatbotToggle.setAttribute('aria-expanded', 'false');
-                });
-                
-                // チャットボット入力処理
-                if (chatbotSubmit && chatbotInput && chatbotMessages) {
-                    chatbotSubmit.addEventListener('click', sendMessage);
-                    chatbotInput.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter') {
-                            sendMessage();
-                        }
-                    });
-                }
-                
-                function sendMessage() {
-                    const message = chatbotInput.value.trim();
-                    if (message) {
-                        // ユーザーメッセージを追加
-                        addMessage(message, 'user');
-                        chatbotInput.value = '';
-                        
-                        // ボットの応答
-                        setTimeout(() => {
-                            const responses = [
-                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
-                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
-                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
-                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
-                            ];
-                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                            addMessage(randomResponse, 'bot');
-                        }, 800);
-                    }
-                }
-                
-                function addMessage(text, sender) {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.classList.add('message');
-                    messageDiv.classList.add(sender + '-message');
-                    messageDiv.textContent = text;
-                    
-                    chatbotMessages.appendChild(messageDiv);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                }
-            }
-            
-            // FAQアコーディオン
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', function() {
-                    const isActive = item.classList.contains('active');
-                    
-                    // アクティブなFAQを閉じる
-                    faqItems.forEach(faqItem => {
-                        if (faqItem !== item) {
-                            faqItem.classList.remove('active');
-                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                    
-                    // クリックされた項目の開閉
-                    item.classList.toggle('active');
-                    question.setAttribute('aria-expanded', !isActive);
-                });
-                
-                // キーボード操作対応
-                question.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        question.click();
-                    }
-                });
-            });
-            
-            // アニメーションスクロール検出
-            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-            
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target); // 一度表示されたら監視を解除
-                    }
-                });
-            }, observerOptions);
-            
-            animateOnScrollElements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // フォームバリデーション
-            const contactForm = document.getElementById('contact-form-element');
-            const successMessage = document.getElementById('message-success');
-            
-            if (contactForm) {
-                // フォーム入力のフォーカス効果
-                const formControls = contactForm.querySelectorAll('.form-control');
-                
-                formControls.forEach(control => {
-                    // フォーカス時の効果
-                    control.addEventListener('focus', function() {
-                        this.closest('.input-wrapper').classList.add('focused');
-                    });
-                    
-                    // フォーカスアウト時の効果
-                    control.addEventListener('blur', function() {
-                        this.closest('.input-wrapper').classList.remove('focused');
-                        validateField(this);
-                    });
-                    
-                    // 入力内容の変更時のリアルタイムバリデーション
-                    control.addEventListener('input', function() {
-                        validateField(this);
-                    });
-                });
-                
-                // チェックボックス機能強化
-                const checkboxes = contactForm.querySelectorAll('.form-check-input');
-                
-                checkboxes.forEach(checkbox => {
-                    // 初期状態の確認
-                    if (checkbox.checked) {
-                        checkbox.closest('.form-check').classList.add('checked');
-                    }
-                    
-                    // クリック時の効果
-                    checkbox.addEventListener('change', function() {
-                        if (this.checked) {
-                            this.closest('.form-check').classList.add('checked');
-                        } else {
-                            this.closest('.form-check').classList.remove('checked');
-                        }
-                    });
-                });
-                
-                // フォーム送信イベント
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    let isValid = true;
-                    
-                    // 全フィールドの検証
-                    const requiredFields = contactForm.querySelectorAll('[required]');
-                    requiredFields.forEach(field => {
-                        if (!validateField(field)) {
-                            isValid = false;
-                        }
-                    });
-                    
-                    if (isValid) {
-                        // フォーム送信処理
-                        simulateFormSubmission();
-                    }
-                });
-                
-                // フィールドバリデーション関数
-                function validateField(field) {
-                    const fieldType = field.getAttribute('type');
-                    const fieldId = field.getAttribute('id');
-                    const errorElement = document.getElementById(`${fieldId}-error`);
-                    
-                    // 必須チェック
-                    if (field.hasAttribute('required') && !field.value.trim()) {
-                        field.classList.add('error');
-                        field.classList.remove('valid');
-                        if (errorElement) {
-                            errorElement.textContent = 'この項目は必須です';
-                            errorElement.classList.add('active');
-                        }
-                        return false;
-                    }
-                    
-                    // 特定フィールドの追加バリデーション
-                    if (fieldType === 'email' && field.value.trim()) {
-                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                        if (!emailPattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
-                            if (errorElement) {
-                                errorElement.textContent = '有効なメールアドレスを入力してください';
-                                errorElement.classList.add('active');
-                            }
-                            return false;
-                        }
-                    }
-                    
-                    // 電話番号の簡易バリデーション（入力されている場合のみ）
-                    if (fieldId === 'phone' && field.value.trim()) {
-                        const phonePattern = /^[0-9\-+() ]{7,}$/;
-                        if (!phonePattern.test(field.value)) {
-                            field.classList.add('error');
-                            field.classList.remove('valid');
-                            if (errorElement) {
-                                errorElement.textContent = '有効な電話番号を入力してください';
-                                errorElement.classList.add('active');
-                            }
-                            return false;
-                        }
-                    }
-                    
-                    // バリデーション成功
-                    field.classList.remove('error');
-                    field.classList.add('valid');
-                    if (errorElement) {
-                        errorElement.classList.remove('active');
-                    }
-                    return true;
-                }
-                
-                // フォーム送信シミュレーション
-                function simulateFormSubmission() {
-                    const submitButton = contactForm.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    // ボタンをローディング状態に
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
-                    submitButton.disabled = true;
-                    
-                    // 送信処理シミュレーション（実際はサーバーとの通信）
-                    setTimeout(() => {
-                        // 成功メッセージを表示
-                        successMessage.classList.add('show');
-                        
-                        // フォームをリセットして入力フィールドの状態をクリア
-                        contactForm.reset();
-                        formControls.forEach(control => {
-                            control.classList.remove('valid');
-                            control.classList.remove('error');
-                        });
-                        
-                        // チェックボックスをリセット
-                        checkboxes.forEach(checkbox => {
-                            checkbox.checked = false;
-                            checkbox.closest('.form-check').classList.remove('checked');
-                        });
-                        
-                        // ボタンを元に戻す
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                        
-                        // 成功メッセージを自動的に非表示（オプション）
-                        setTimeout(() => {
-                            successMessage.classList.remove('show');
-                        }, 6000);
-                        
-                        // フォームまでスクロール
-                        const contactSection = document.getElementById('contact-form');
-                        if (contactSection) {
-                            contactSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }, 1500);
-                }
-            }
-            
-            // reCAPTCHA コールバック
-            window.onRecaptchaVerified = function(token) {
-                // reCAPTCHA検証後の処理
-                console.log('reCAPTCHA検証完了:', token);
-            };
-        });
-    </script>
-</body>
-</html>
                 </nav>
                 
                 <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
@@ -2455,14 +1415,6 @@
                             <div class="contact-details">
                                 <h4>所在地</h4>
                                 <p>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon"><i class="fas fa-phone-alt" aria-hidden="true"></i></div>
-                            <div class="contact-details">
-                                <h4>電話番号</h4>
-                                <p><a href="tel:03-1234-5678" aria-label="電話番号:03-1234-5678">03-1234-5678</a></p>
                             </div>
                         </div>
                         
@@ -2603,7 +1555,7 @@
                             
                             <!-- 送信ボタン - 紙飛行機アイコンアニメーション追加 -->
                             <div class="form-submit">
-                                <button type="submit" class="btn-submit">
+                                <button type="submit" class="btn btn-cta btn-lg btn-icon-bounce">
                                     <span>無料相談を申し込む</span>
                                     <i class="fas fa-paper-plane icon-bounce" aria-hidden="true"></i>
                                 </button>
@@ -2884,3 +1836,393 @@
     <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
+    
+    <!-- 
+    ==============================================
+    // === component-split: JavaScript ===
+    COMPONENT: JavaScript - インタラクション制御
+    ==============================================
+    -->
+    <script>
+        // プリローダー制御
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preload-container');
+            if (preloader) {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 300);
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 現在年表示
+            const currentYearElement = document.getElementById('current-year');
+            if (currentYearElement) {
+                const currentYear = new Date().getFullYear();
+                currentYearElement.textContent = currentYear;
+                document.body.setAttribute('data-current-year', currentYear);
+            }
+            
+            // ヘッダースクロール効果
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+            
+            // トップに戻るボタン
+            const backToTopButton = document.getElementById('back-to-top');
+            let lastScrollTime = 0;
+            
+            window.addEventListener('scroll', function() {
+                const now = Date.now();
+                if (now - lastScrollTime > 100) { // スロットリング処理
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('active');
+                    } else {
+                        backToTopButton.classList.remove('active');
+                    }
+                    lastScrollTime = now;
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // ハンバーガーメニュー
+            const menuToggle = document.getElementById('menu-toggle');
+            const nav = document.getElementById('nav');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                    
+                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    menuToggle.setAttribute('aria-expanded', !isExpanded);
+                    menuToggle.innerHTML = isExpanded ? 
+                        '<i class="fas fa-bars" aria-hidden="true"></i>' : 
+                        '<i class="fas fa-times" aria-hidden="true"></i>';
+                });
+            }
+            
+            // スムーススクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // チャットボット
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input-text');
+            const chatbotSubmit = document.getElementById('chatbot-submit');
+            
+            if (chatbotToggle && chatbotContainer && chatbotClose) {
+                chatbotToggle.addEventListener('click', function() {
+                    chatbotContainer.classList.toggle('active');
+                    
+                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
+                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+                
+                chatbotClose.addEventListener('click', function() {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                });
+                
+                // チャットボット入力処理
+                if (chatbotSubmit && chatbotInput && chatbotMessages) {
+                    chatbotSubmit.addEventListener('click', sendMessage);
+                    chatbotInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
+                    });
+                }
+                
+                function sendMessage() {
+                    const message = chatbotInput.value.trim();
+                    if (message) {
+                        // ユーザーメッセージを追加
+                        addMessage(message, 'user');
+                        chatbotInput.value = '';
+                        
+                        // ボットの応答
+                        setTimeout(() => {
+                            const responses = [
+                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
+                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
+                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
+                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
+                            ];
+                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                            addMessage(randomResponse, 'bot');
+                        }, 800);
+                    }
+                }
+                
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender + '-message');
+                    messageDiv.textContent = text;
+                    
+                    chatbotMessages.appendChild(messageDiv);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            }
+            
+            // FAQアコーディオン
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    const isActive = item.classList.contains('active');
+                    
+                    // アクティブなFAQを閉じる
+                    faqItems.forEach(faqItem => {
+                        if (faqItem !== item) {
+                            faqItem.classList.remove('active');
+                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // クリックされた項目の開閉
+                    item.classList.toggle('active');
+                    question.setAttribute('aria-expanded', !isActive);
+                });
+                
+                // キーボード操作対応
+                question.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        question.click();
+                    }
+                });
+            });
+            
+            // アニメーションスクロール検出
+            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target); // 一度表示されたら監視を解除
+                    }
+                });
+            }, observerOptions);
+            
+            animateOnScrollElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // フォームバリデーション
+            const contactForm = document.getElementById('contact-form-element');
+            const successMessage = document.getElementById('message-success');
+            
+            if (contactForm) {
+                // フォーム入力のフォーカス効果
+                const formControls = contactForm.querySelectorAll('.form-control');
+                
+                formControls.forEach(control => {
+                    // フォーカス時の効果
+                    control.addEventListener('focus', function() {
+                        this.closest('.input-wrapper').classList.add('focused');
+                    });
+                    
+                    // フォーカスアウト時の効果
+                    control.addEventListener('blur', function() {
+                        this.closest('.input-wrapper').classList.remove('focused');
+                        validateField(this);
+                    });
+                    
+                    // 入力内容の変更時のリアルタイムバリデーション
+                    control.addEventListener('input', function() {
+                        validateField(this);
+                    });
+                });
+                
+                // チェックボックス機能強化
+                const checkboxes = contactForm.querySelectorAll('.form-check-input');
+                
+                checkboxes.forEach(checkbox => {
+                    // 初期状態の確認
+                    if (checkbox.checked) {
+                        checkbox.closest('.form-check').classList.add('checked');
+                    }
+                    
+                    // クリック時の効果
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            this.closest('.form-check').classList.add('checked');
+                        } else {
+                            this.closest('.form-check').classList.remove('checked');
+                        }
+                    });
+                });
+                
+                // フォーム送信イベント
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    let isValid = true;
+                    
+                    // 全フィールドの検証
+                    const requiredFields = contactForm.querySelectorAll('[required]');
+                    requiredFields.forEach(field => {
+                        if (!validateField(field)) {
+                            isValid = false;
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // フォーム送信処理
+                        simulateFormSubmission();
+                    }
+                });
+                
+                // フィールドバリデーション関数
+                function validateField(field) {
+                    const fieldType = field.getAttribute('type');
+                    const fieldId = field.getAttribute('id');
+                    const errorElement = document.getElementById(`${fieldId}-error`);
+                    
+                    // 必須チェック
+                    if (field.hasAttribute('required') && !field.value.trim()) {
+                        field.classList.add('error');
+                        field.classList.remove('valid');
+                        if (errorElement) {
+                            errorElement.textContent = 'この項目は必須です';
+                            errorElement.classList.add('active');
+                        }
+                        return false;
+                    }
+                    
+                    // 特定フィールドの追加バリデーション
+                    if (fieldType === 'email' && field.value.trim()) {
+                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!emailPattern.test(field.value)) {
+                            field.classList.add('error');
+                            field.classList.remove('valid');
+                            if (errorElement) {
+                                errorElement.textContent = '有効なメールアドレスを入力してください';
+                                errorElement.classList.add('active');
+                            }
+                            return false;
+                        }
+                    }
+                    
+                    // 電話番号の簡易バリデーション（入力されている場合のみ）
+                    if (fieldId === 'phone' && field.value.trim()) {
+                        const phonePattern = /^[0-9\-+() ]{7,}$/;
+                        if (!phonePattern.test(field.value)) {
+                            field.classList.add('error');
+                            field.classList.remove('valid');
+                            if (errorElement) {
+                                errorElement.textContent = '有効な電話番号を入力してください';
+                                errorElement.classList.add('active');
+                            }
+                            return false;
+                        }
+                    }
+                    
+                    // バリデーション成功
+                    field.classList.remove('error');
+                    field.classList.add('valid');
+                    if (errorElement) {
+                        errorElement.classList.remove('active');
+                    }
+                    return true;
+                }
+                
+                // フォーム送信シミュレーション
+                function simulateFormSubmission() {
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitButton.innerHTML;
+                    
+                    // ボタンをローディング状態に
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 送信中...';
+                    submitButton.disabled = true;
+                    
+                    // 送信処理シミュレーション（実際はサーバーとの通信）
+                    setTimeout(() => {
+                        // 成功メッセージを表示
+                        successMessage.classList.add('show');
+                        
+                        // フォームをリセットして入力フィールドの状態をクリア
+                        contactForm.reset();
+                        formControls.forEach(control => {
+                            control.classList.remove('valid');
+                            control.classList.remove('error');
+                        });
+                        
+                        // チェックボックスをリセット
+                        checkboxes.forEach(checkbox => {
+                            checkbox.checked = false;
+                            checkbox.closest('.form-check').classList.remove('checked');
+                        });
+                        
+                        // ボタンを元に戻す
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        
+                        // 成功メッセージを自動的に非表示（オプション）
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                        }, 6000);
+                        
+                        // フォームまでスクロール
+                        const contactSection = document.getElementById('contact-form');
+                        if (contactSection) {
+                            contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 1500);
+                }
+            }
+            
+            // reCAPTCHA コールバック
+            window.onRecaptchaVerified = function(token) {
+                // reCAPTCHA検証後の処理
+                console.log('reCAPTCHA検証完了:', token);
+            };
+        });
+    </script>
+</body>
+</html>
