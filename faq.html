@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- component-split: MetaInformation -->
+    <!-- 
+    ==============================================
+    // === component-split: Meta ===
+    COMPONENT: メタ情報
+    機能: SEO対策、OGP設定、ページアイデンティティの確立
+    モバイル対応: viewport設定によるレスポンシブ対応
+    ==============================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShinAI - よくあるご質問。AI導入・活用に関するご質問にお答えします。チャットボット開発、AI資料作成、DX推進に関する疑問を解決します。">
-    <meta name="keywords" content="AI FAQ, AI よくある質問, AI導入, ビジネスAI, 業務効率化, AI活用, チャットボット, AI資料作成, DX推進, RAG, 生成AI">
+    <meta name="description" content="ShinAI - よくあるご質問。AI活用に関するよくある質問と回答を掲載しています。専門知識がなくてもAIを活用して業務効率化、コスト削減、売上アップを実現する方法をご紹介します。">
+    <meta name="keywords" content="AI FAQ, よくある質問, AI相談, AI導入, 業務効率化, コスト削減, 伴走型開発, プロトタイプ開発">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
     <meta name="msapplication-TileColor" content="#3A5FEB">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@ShinAI_JP">
-    <meta name="ps:topic" content="AIサービス, 生成AI活用, 業務効率化, DX推進, AI導入支援, AI FAQ">
     
-    <!-- component-split: OGPSettings -->
-    <meta property="og:title" content="ShinAI - よくあるご質問 | AI導入・活用に関するよくある質問と回答">
-    <meta property="og:description" content="AI導入・活用に関するよくあるご質問にお答えします。導入コスト、効果、必要なデータ量など、AI活用に関する疑問を解決します。">
+    <!-- 
+    ==============================================
+    // === component-split: ResourcePreloading ===
+    COMPONENT: リソース事前読み込み
+    機能: 重要リソースの先読みによるパフォーマンス最適化
+    用途: CLS（Cumulative Layout Shift）の軽減、初期表示の高速化
+    ==============================================
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="assets/css/style.css" as="style">
+    <link rel="preload" href="assets/css/responsive.css" as="style">
+    <link rel="preload" href="assets/images/logo.svg" as="image">
+    <link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" crossorigin>
+    
+    <!-- 
+    ==============================================
+    // === component-split: OGP ===
+    COMPONENT: OGP設定
+    機能: SNSシェア時の表示最適化、ブランド認知度向上
+    用途: Twitter、Facebook、Slackなどでのシェア表示の制御
+    ==============================================
+    -->
+    <meta property="og:title" content="よくあるご質問 | ShinAI - ビジネスのためのAI活用を実現します">
+    <meta property="og:description" content="AI活用に関するよくある質問と回答を掲載。業務効率化、コスト削減、売上アップなど、AI導入のメリットと進め方について詳しく解説します。">
     <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
     <meta property="og:url" content="https://www.shinai.tech/faq.html">
     <meta property="og:type" content="website">
@@ -29,25 +56,31 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="ShinAI - よくあるご質問">
     
-    <!-- component-split: ExternalResources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    ==============================================
+    // === component-split: ExternalResources ===
+    COMPONENT: 外部リソース
+    機能: フォント、アイコン、アニメーションライブラリの読み込み
+    最適化: 遅延読み込みによるパフォーマンス向上
+    ==============================================
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- component-split: FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Font Awesome CDN最新版：確実なアイコン表示のために更新 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
-    <!-- component-split: JavaScriptLibraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
-    <!-- component-split: SwiperJS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <!-- GSAP & ScrollTrigger：高度なアニメーション -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     
-    <!-- component-split: StructuredData -->
+    <!-- 
+    ==============================================
+    // === component-split: StructuredData ===
+    COMPONENT: 構造化データ
+    機能: 検索エンジン最適化、リッチスニペット表示対応
+    用途: Googleなどの検索エンジンでの表示強化
+    ==============================================
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -55,389 +88,101 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "AIの導入にはどのくらいのコストがかかりますか？",
+          "name": "AIについて詳しくないのですが相談できますか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AIの導入コストは、ソリューションの規模や複雑さによって大きく異なります。小規模なチャットボット導入なら月額10万円程度から、フルカスタムのAIシステム開発では数百万円以上の初期コストが必要な場合もあります。当社では、小さく始めて効果を確認しながら段階的に拡張していくアプローチを推奨しています。まずはお気軽にご相談ください。"
+            "text": "はい、もちろん可能です。ShinAIでは、AI初心者の方にも分かりやすく説明することを心がけています。専門用語を使わずに、AIでできることやメリットをご説明しますので、どうぞお気軽にご相談ください。"
           }
         },
         {
           "@type": "Question",
-          "name": "AI導入の効果はどれくらいで出ますか？",
+          "name": "AI導入にはどのくらいの費用がかかりますか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AIの効果は導入する業務や目的によって異なりますが、基本的なチャットボットや自動化ツールであれば、導入後1〜3ヶ月程度で効果が現れ始めます。多くのケースでは、問い合わせ対応の自動化で30〜50%の業務効率化、データ分析AIによる予測精度向上で15〜25%の業績改善などの効果が報告されています。当社では、導入前に期待される効果を数値化し、KPIを設定してから開発を進めています。"
+            "text": "AI導入の費用は、導入規模や目的によって大きく異なります。ShinAIでは小さく始めて段階的に拡張していくアプローチを採用しており、まずはプロトタイプを構築して効果を確認していただくことが可能です。小規模な自動化ツールであれば月額数万円からの導入が可能です。まずは無料相談で、お客様の状況や予算に合わせた最適なプランをご提案いたします。"
           }
         },
         {
           "@type": "Question",
-          "name": "AIを導入するために必要なデータ量はどのくらいですか？",
+          "name": "プロトタイプからの開発とは具体的にどういうことですか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "必要なデータ量はAIの用途によって異なります。近年の大規模言語モデル（LLM）などは少ないデータでも活用できるため、導入のハードルは下がっています。例えば、チャットボットであれば100〜200の質問と回答のセット、予測モデルであれば数百〜数千件のデータがあれば初期導入が可能です。データが少ない場合でも、段階的に収集しながらAIの精度を向上させていくアプローチも可能です。当社ではお客様のデータ状況に合わせた最適なソリューションをご提案します。"
+            "text": "従来のシステム開発では、全ての要件を最初に詳細に定義し、大規模な初期投資を行う必要がありましたが、AIの領域では可能性の幅が広く、最初から全てを定義することが難しい場合があります。そこでShinAIでは、まず小規模なプロトタイプを素早く構築し、実際の業務での効果を確認しながら段階的に機能を拡張していく方法を採用しています。これにより、初期投資リスクを抑えつつ、実際の業務に最適なAIソリューションを構築することが可能です。"
           }
         },
         {
           "@type": "Question",
-          "name": "AIの導入に社内の専門人材は必要ですか？",
+          "name": "どのような業種でAIを活用できますか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。"
+            "text": "あらゆる業種でAIを活用いただけます。製造業、小売業、医療・福祉、教育、金融、不動産など、業種を問わず、データ入力や分析、顧客対応、品質管理など、様々なシーンでAIが活躍しています。"
           }
         },
         {
           "@type": "Question",
-          "name": "既存システムとの連携は可能ですか？",
+          "name": "小規模な会社でもAI導入は可能ですか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "ShinAIのAIチャットボットサービスについて教えてください",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入について相談したいのですが",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIの内製化支援について詳しく知りたい",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIプロトタイプ開発はどのように進めますか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AIプロトタイプ開発は、お客様のビジネス課題を理解することから始まります。初期ヒアリングを通じて課題を明確にし、2-4週間で最小限の機能を持つプロトタイプを開発します。このアプローチにより、低コストでAIの有効性を検証し、段階的に機能を拡張していくことが可能です。小さく始めて、実証しながら発展させる「伴走型開発」が、AI導入の成功率を高めています。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "生成AIとRAG（検索拡張生成）の違いは何ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "生成AIは学習データに基づいて新しいコンテンツを生成する技術で、ChatGPTなどが代表例です。一方、RAG（検索拡張生成）は生成AIに企業の独自データ（社内文書やナレッジベースなど）を参照させる仕組みです。RAGを活用することで、一般的な生成AIの回答に自社独自の情報を組み込み、より正確で業務に特化した回答を得ることができます。ShinAIでは、お客様のナレッジを活かしたRAGシステムの構築を得意としています。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入後のサポート体制はどうなっていますか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは、AI導入後も継続的なサポートを提供しています。基本的なテクニカルサポートに加え、定期的なパフォーマンス分析、AIモデルの精度向上、機能拡張の提案などを行います。また、月次または四半期ごとのレビューミーティングを通じて、導入効果の測定や今後の改善点について共有します。さらに、社内チームが自立的にAIを運用できるよう、トレーニングやナレッジ移転も実施しています。「やりっぱなしにしない」継続的なサポートが、長期的なAI活用の成功につながると考えています。"
+            "text": "はい、もちろん可能です。最近ではクラウドベースのAIサービスが充実し、中小企業や個人事業主の方でも手軽に導入できるAIソリューションが増えています。ShinAIでは、お客様の規模に合わせた最適な提案をいたします。小さく始めて効果を確認しながら段階的に拡張していくアプローチで、初期投資を抑えながらAIの効果を実感していただけます。"
           }
         }
       ]
     }
     </script>
     
-    <!-- component-split: WebSiteStructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://www.shinai.tech",
-      "name": "ShinAI",
-      "description": "企業成長を加速する最先端AIソリューション",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.shinai.tech/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+    <title>よくあるご質問 | ShinAI - ビジネスのためのAI活用を実現します</title>
     
-    <!-- component-split: PageTitle -->
-    <title>よくあるご質問 | ShinAI - 最先端AIソリューション</title>
-    
-    <!-- component-split: StyleSheets -->
+    <!-- 
+    ==============================================
+    // === component-split: StyleSheets ===
+    COMPONENT: スタイルシート
+    機能: デザイン適用、レスポンシブ対応
+    拡張性: 共通スタイルと固有スタイルの分離による再利用性向上
+    ==============================================
+    -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     
-    <!-- component-split: Favicon -->
+    <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
-
-    <!-- component-split: PageSpecificStyles -->
-    <style>
-    /* FAQページ専用スタイル */
-    .faq-section {
-        padding: 5rem 0;
-    }
-    
-    .faq-container {
-        max-width: 900px;
-        margin: 4rem auto 0;
-    }
-    
-    .faq-item {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        margin-bottom: 1.5rem;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-    
-    .faq-item.active,
-    .faq-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .faq-question {
-        background: var(--white);
-        color: var(--dark);
-        font-weight: 600;
-        padding: 1.8rem 2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        font-size: 1.15rem;
-        line-height: 1.5;
-        transition: all 0.3s ease;
-    }
-    
-    .faq-question:hover,
-    .faq-item.active .faq-question {
-        color: var(--primary);
-    }
-    
-    .faq-question h4 {
-        margin: 0;
-        font-size: 1.15rem;
-        font-weight: 600;
-    }
-    
-    .faq-question i {
-        color: var(--primary);
-        font-size: 1.1rem;
-        transition: transform 0.3s ease;
-    }
-    
-    .faq-item.active .faq-question i {
-        transform: rotate(-180deg);
-    }
-    
-    .faq-answer {
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background: rgba(249, 250, 252, 0.7);
-        border-top: 1px solid rgba(58, 95, 235, 0.08);
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 1.8rem 2rem;
-        max-height: 1000px;
-    }
-    
-    .faq-answer p {
-        color: var(--gray);
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    /* component-split: FAQCategoryTabs */
-    .faq-categories {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-        margin-bottom: 2.5rem;
-    }
-    
-    .faq-category {
-        padding: 0.8rem 1.5rem;
-        background: rgba(58, 95, 235, 0.08);
-        color: var(--primary);
-        border-radius: 30px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-    }
-    
-    .faq-category:hover {
-        background: rgba(58, 95, 235, 0.15);
-        transform: translateY(-3px);
-    }
-    
-    .faq-category.active {
-        background: var(--primary);
-        color: white;
-    }
-
-    /* component-split: FAQSearchForm */
-    .faq-search {
-        max-width: 600px;
-        margin: 0 auto 3rem;
-        position: relative;
-    }
-    
-    .faq-search input {
-        width: 100%;
-        padding: 1.2rem 1.5rem 1.2rem 3.5rem;
-        border: 2px solid rgba(58, 95, 235, 0.2);
-        border-radius: 50px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-    
-    .faq-search input:focus {
-        border-color: var(--primary);
-        outline: none;
-        box-shadow: 0 0 0 5px rgba(58, 95, 235, 0.1);
-    }
-    
-    .faq-search i {
-        position: absolute;
-        left: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--primary);
-        font-size: 1.2rem;
-    }
-
-    /* component-split: FAQBanner */
-    .faq-banner {
-        background: rgba(58, 95, 235, 0.1);
-        padding: 2rem;
-        text-align: center;
-        margin: 3rem 0;
-        border-radius: 8px;
-    }
-    
-    .faq-banner h2 {
-        margin-bottom: 1rem;
-        font-size: 1.8rem;
-        color: var(--dark);
-    }
-    
-    .faq-banner p {
-        margin-bottom: 1.5rem;
-        color: var(--gray);
-    }
-    
-    .faq-banner .btn-cta {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-    }
-    
-    .faq-banner .btn-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
-    }
-
-    /* component-split: MarketingPitchStyles */
-    .pitch {
-        background: linear-gradient(to right, #6a11cb, #2575fc);
-        color: #fff;
-        padding: 2rem;
-        border-radius: 8px;
-        margin: 2rem 0;
-    }
-    
-    .pitch h2 {
-        margin-bottom: 1rem;
-    }
-    
-    .pitch ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .pitch li {
-        margin-bottom: .75rem;
-    }
-    
-    .pitch .closer {
-        font-style: italic;
-        margin-top: .5rem;
-    }
-
-    /* component-split: ResponsiveStyles */
-    @media (max-width: 768px) {
-        .faq-question {
-            padding: 1.5rem;
-            font-size: 1rem;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 1.5rem;
-        }
-        
-        .faq-category {
-            padding: 0.7rem 1.2rem;
-            font-size: 0.9rem;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .faq-question {
-            padding: 1.2rem;
-            font-size: 0.95rem;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 1.2rem;
-        }
-        
-        .faq-categories {
-            gap: 0.7rem;
-        }
-        
-        .faq-category {
-            padding: 0.6rem 1rem;
-            font-size: 0.85rem;
-        }
-        
-        .faq-search input {
-            padding: 1rem 1.2rem 1rem 3rem;
-            font-size: 0.9rem;
-        }
-    }
-    </style>
 </head>
 <body>
-    <!-- component-split: AccessibilityNav -->
+    <!-- 
+    ==============================================
+    // === component-split: Preloader ===
+    COMPONENT: プリローダー
+    機能: 読み込み体験向上、初期表示の改善
+    用途: ページ読み込み中のユーザーフィードバック
+    ==============================================
+    -->
+    <div class="preload-container" id="preload-container">
+        <div class="preload-spinner"></div>
+    </div>
+
+    <!-- 
+    ==============================================
+    // === component-split: AccessibilityNav ===
+    COMPONENT: アクセシビリティナビゲーション
+    機能: スキップナビゲーション、キーボード操作サポート
+    用途: スクリーンリーダー対応、アクセシビリティ向上
+    ==============================================
+    -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
-    <!-- component-split: TopBanner -->
-    <div class="top-banner"></div>
-    
-    <!-- component-split: Header -->
+    <!-- 
+    ==============================================
+    // === component-split: Header ===
+    COMPONENT: ヘッダー
+    機能: サイト全体ナビゲーション、ブランド表示
+    特徴: 固定配置、スクロール検出、レスポンシブ対応
+    ==============================================
+    -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
                 <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
-                    <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
+                    <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
                     <span class="en-text">ShinAI</span>
                 </a>
                 
@@ -449,12 +194,7 @@
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
                         <li><a href="faq.html" class="nav-link active" aria-current="page">よくあるご質問</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
-                        <li class="nav-cta">
-                            <a href="contact.html" class="btn btn-consultation">
-                                <span>無料相談</span>
-                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                            </a>
-                        </li>
+                        <li class="nav-cta"><a href="contact.html#contact-form" class="btn-consultation">無料相談</a></li>
                     </ul>
                 </nav>
                 
@@ -464,216 +204,409 @@
             </div>
         </div>
     </header>
-    
-    <!-- component-split: PageHero -->
-    <div class="page-hero">
-        <div class="page-hero-bg-container">
-            <div class="page-hero-bg-gradient"></div>
-            <div class="page-hero-bg-pattern"></div>
+
+    <!-- 
+    ==============================================
+    // === component-split: PageHero ===
+    COMPONENT: ページヒーロー
+    機能: 第一印象強化、ページ目的の明示
+    特徴: 視覚的インパクト、アニメーション効果
+    ==============================================
+    -->
+    <section class="faq-hero">
+        <div class="faq-hero-bg-container">
+            <div class="faq-hero-bg-gradient"></div>
+            <div class="faq-hero-bg-pattern"></div>
+            <!-- 浮遊要素の追加 - 背景の視覚的魅力向上 -->
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
         </div>
+        
         <div class="container">
-            <div class="page-hero-content">
-                <div class="breadcrumb" aria-label="パンくずリスト">
-                    <a href="index.html" class="breadcrumb-item">ホーム</a>
-                    <span class="breadcrumb-separator">/</span>
-                    <span class="breadcrumb-current">よくあるご質問</span>
+            <div class="breadcrumb" aria-label="パンくずリスト">
+                <a href="index.html">ホーム</a>
+                <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                <span class="breadcrumb-current">よくあるご質問</span>
+            </div>
+            
+            <h1 class="faq-hero-title slide-in-up" id="main-content">
+                よくあるご質問
+            </h1>
+            
+            <p class="faq-hero-description slide-in-up animate-delay-1">
+                AI活用に関するよくある質問と回答を掲載しています。<br>
+                ご不明な点がございましたら、お気軽にお問い合わせください。
+            </p>
+        </div>
+    </section>
+
+    <!-- 
+    ==============================================
+    // === component-split: FAQSearch ===
+    COMPONENT: FAQ検索
+    機能: キーワード検索によるFAQ絞り込み
+    特徴: リアルタイム検索、ユーザビリティ向上
+    ==============================================
+    -->
+    <section class="section">
+        <div class="container">
+            <div class="faq-search">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="text" id="faq-search-input" placeholder="キーワードで質問を検索..." aria-label="質問を検索">
+            </div>
+            
+            <div class="faq-categories">
+                <button class="faq-category active" data-category="all">すべて</button>
+                <button class="faq-category" data-category="beginner">初めての方向け</button>
+                <button class="faq-category" data-category="cost">費用・導入</button>
+                <button class="faq-category" data-category="development">開発手法</button>
+                <button class="faq-category" data-category="industry">業界別</button>
+                <button class="faq-category" data-category="service">サービス内容</button>
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: MarketingPitch ===
+            COMPONENT: マーケティングピッチ
+            機能: AI伴走型開発の強み訴求
+            特徴: 視覚的効果、価値提案
+            ==============================================
+            -->
+            <section class="pitch bounce-in-up">
+                <h2>AI伴走型開発の強み</h2>
+                <ul>
+                    <li data-emoji="🎯">
+                        <strong>現状課題への共感：</strong>従来開発は一括要件定義・高額投資が前提。
+                    </li>
+                    <li data-emoji="🚀">
+                        <strong>AIの新性質：</strong>初期全定義は非現実的、可能性は無限大。
+                    </li>
+                    <li data-emoji="🤝">
+                        <strong>伴走スタイル：</strong>小さく始めてプロトタイプ提示→共創最適化。
+                    </li>
+                </ul>
+                <p><strong>メリット：</strong>リスク抑制・柔軟対応・共創関係</p>
+                <p class="closer">「まずやってみる」から始め、成果を確かめながら進めます。</p>
+            </section>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQAccordion_初めての方向け ===
+            COMPONENT: FAQアコーディオン
+            機能: 質問と回答の表示
+            特徴: 展開・収納インタラクション
+            ==============================================
+            -->
+            <div class="faq-group" data-category="beginner">
+                <h2 class="faq-group-title">初めての方向け</h2>
+                <div class="faq-container">
+                    <div class="faq-item active">
+                        <div class="faq-question" aria-expanded="true" tabindex="0">
+                            <h4>AIについて詳しくないのですが相談できますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                はい、もちろん可能です。ShinAIでは、AI初心者の方にも分かりやすく説明することを心がけています。専門用語を使わずに、AIでできることやメリットをご説明しますので、どうぞお気軽にご相談ください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>何から始めれば良いかわかりません</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                まずは現在の業務の中で、単純作業や時間がかかっている作業を整理してみましょう。データ入力、メール対応、資料作成など、AIで効率化できる業務は多くあります。ShinAIでは無料相談を通じて、御社の業務を分析し、AI活用の最適なスタート地点をご提案いたします。「何から始めるべきか分からない」という段階からでもサポートいたしますので、お気軽にご相談ください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>AIの導入にはどれくらいの期間がかかりますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                AIの導入期間は、導入規模や目的によって異なります。ShinAIでは、小規模なプロトタイプであれば最短2週間程度で構築可能です。まずは小さな成功体験を積み重ねながら、段階的に機能を拡張していくアプローチを取っています。これにより、短期間で効果を実感していただきながら、最適なソリューションを構築していくことが可能です。
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="page-hero-title">よくあるご質問</h1>
-                <p class="page-hero-description">
-                    AI導入・活用に関するよくあるご質問をまとめました<br>
-                    導入コスト、効果、必要なデータ量など、AI活用を始める際の疑問を解決します
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQAccordion_費用・導入 ===
+            COMPONENT: FAQアコーディオン
+            機能: 質問と回答の表示
+            特徴: 展開・収納インタラクション
+            ==============================================
+            -->
+            <div class="faq-group" data-category="cost">
+                <h2 class="faq-group-title">費用・導入について</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>AI導入にはどのくらいの費用がかかりますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                AI導入の費用は、導入規模や目的によって大きく異なります。ShinAIでは小さく始めて段階的に拡張していくアプローチを採用しており、まずはプロトタイプを構築して効果を確認していただくことが可能です。小規模な自動化ツールであれば月額数万円からの導入が可能です。まずは無料相談で、お客様の状況や予算に合わせた最適なプランをご提案いたします。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>小規模な会社でもAI導入は可能ですか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                はい、もちろん可能です。最近ではクラウドベースのAIサービスが充実し、中小企業や個人事業主の方でも手軽に導入できるAIソリューションが増えています。ShinAIでは、お客様の規模に合わせた最適な提案をいたします。小さく始めて効果を確認しながら段階的に拡張していくアプローチで、初期投資を抑えながらAIの効果を実感していただけます。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>AI導入の効果はどれくらいで実感できますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                AI導入の効果は、適用する業務やプロセスによって異なりますが、多くの場合、導入直後から効果を実感していただけます。例えば、データ入力や資料作成の自動化では、作業時間が導入前と比較して約60～80%削減されるケースが多くあります。ShinAIでは、効果測定の仕組みも一緒に構築し、ROI（投資対効果）を可視化することで、AI導入の成果を定量的に評価できるようサポートしています。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQAccordion_開発手法 ===
+            COMPONENT: FAQアコーディオン
+            機能: 質問と回答の表示
+            特徴: 展開・収納インタラクション
+            ==============================================
+            -->
+            <div class="faq-group" data-category="development">
+                <h2 class="faq-group-title">開発手法について</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>プロトタイプからの開発とは具体的にどういうことですか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                従来のシステム開発では、全ての要件を最初に詳細に定義し、大規模な初期投資を行う必要がありましたが、AIの領域では可能性の幅が広く、最初から全てを定義することが難しい場合があります。そこでShinAIでは、まず小規模なプロトタイプを素早く構築し、実際の業務での効果を確認しながら段階的に機能を拡張していく方法を採用しています。これにより、初期投資リスクを抑えつつ、実際の業務に最適なAIソリューションを構築することが可能です。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>既存のシステムとAIを連携させることはできますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                はい、可能です。ShinAIでは、既存のシステムやツールとAIを連携させることで、より効果的なソリューションを構築します。例えば、既存のCRMシステムと連携して顧客対応を自動化したり、ERPシステムと連携して需要予測を行ったりするなど、お客様の環境に合わせた最適な連携方法をご提案します。APIやウェブフック、RPA（ロボティック・プロセス・オートメーション）などの技術を活用し、シームレスな連携を実現します。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>AIの開発・導入後のサポート体制はどうなっていますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                ShinAIでは、AI導入後も継続的なサポートを提供しています。導入直後はより手厚いサポートを行い、お客様が新しいAIソリューションに適応できるようサポートします。また、定期的なモニタリングやメンテナンス、パフォーマンス最適化、必要に応じた機能追加など、長期的な視点でAIソリューションの価値を最大化するためのサポートを行います。サポートプランは、お客様のニーズに合わせてカスタマイズ可能です。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQAccordion_業界別 ===
+            COMPONENT: FAQアコーディオン
+            機能: 質問と回答の表示
+            特徴: 展開・収納インタラクション
+            ==============================================
+            -->
+            <div class="faq-group" data-category="industry">
+                <h2 class="faq-group-title">業界別活用について</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>どのような業種でAIを活用できますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                あらゆる業種でAIを活用いただけます。製造業、小売業、医療・福祉、教育、金融、不動産など、業種を問わず、データ入力や分析、顧客対応、品質管理など、様々なシーンでAIが活躍しています。詳しくは「業界別活用」ページをご覧ください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>製造業でのAI活用事例を教えてください</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                製造業では、品質検査の自動化、予知保全、需要予測など様々な場面でAIが活用されています。例えば、カメラ画像をAIが分析して製品の欠陥を検出したり、機械の稼働データからAIが故障予兆を検知したりすることで、生産効率の向上やコスト削減を実現しています。また、過去の販売データや市場トレンドからAIが将来の需要を予測することで、適切な生産計画を立案し、過剰在庫や機会損失を防ぐことも可能です。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>医療・福祉分野でのAI活用方法は？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                医療・福祉分野では、患者データの分析による診断支援、医療画像解析、患者見守りシステム、業務効率化など様々な形でAIが活用されています。例えば、レントゲンやCT画像をAIが分析して異常を検出したり、患者の行動パターンをAIが学習して異常を検知したりすることで、医療・介護の質向上と効率化を実現しています。また、電子カルテ入力の自動化や予約管理の最適化など、バックオフィス業務においてもAIが活躍しています。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQAccordion_サービス内容 ===
+            COMPONENT: FAQアコーディオン
+            機能: 質問と回答の表示
+            特徴: 展開・収納インタラクション
+            ==============================================
+            -->
+            <div class="faq-group" data-category="service">
+                <h2 class="faq-group-title">サービス内容について</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>無料相談の流れを教えてください</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                無料相談では、まずお客様の現状の課題や目標をお聞かせいただきます。その後、ShinAIのAIコンサルタントが、課題解決のためのAI活用方法や導入ステップ、期待される効果などをご提案します。対面でもオンラインでも対応可能です。ご相談は約1時間程度で、特に事前準備は必要ありません。お気軽にお問い合わせください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>提供しているAIソリューションの種類は？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                ShinAIでは、業務効率化、コスト削減、売上向上に繋がる多様なAIソリューションを提供しています。具体的には、自然言語処理を活用した文書処理・顧客対応の自動化、画像認識技術を活用した検査・監視システム、データ分析による需要予測・最適化システムなどがあります。また、お客様の業務に合わせたカスタムAIソリューションの開発も行っています。詳しくは「サービス」ページをご覧ください。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" aria-expanded="false" tabindex="0">
+                            <h4>セキュリティ対策はどうなっていますか？</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                ShinAIでは、お客様のデータセキュリティを最優先事項として考えています。データの暗号化、アクセス制御、定期的なセキュリティ監査など、複数層の防御策を実施しています。また、お客様の要件に応じてオンプレミスでの導入やプライベートクラウド環境の構築も可能です。AIモデルの学習や運用においても、データの匿名化や最小限のデータ利用など、プライバシーを尊重したアプローチを取っています。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 
+            ==============================================
+            // === component-split: FAQCTA ===
+            COMPONENT: FAQCTA
+            機能: 相談誘導、次のステップ促進
+            特徴: 視覚的アピール、アクション誘導
+            ==============================================
+            -->
+            <div class="faq-cta bounce-in-up">
+                <h2 class="faq-cta-title">まだ疑問が解決しませんか？</h2>
+                <p class="faq-cta-description">
+                    当サイトに掲載されていない質問や、貴社固有の課題についてもお気軽にご相談ください。<br>
+                    AIの専門家が丁寧にお答えします。
                 </p>
+                <div class="faq-cta-buttons">
+                    <a href="contact.html#contact-form" class="btn btn-primary btn-lg btn-icon-right">
+                        <span>無料相談を申し込む</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a href="services.html" class="btn btn-outline btn-lg btn-icon-right">
+                        <span>サービス詳細を見る</span>
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
     
-    <main id="main-content">
-        <!-- component-split: FAQSection -->
-        <section class="section">
-            <div class="container">
-                <!-- component-split: FAQSearch -->
-                <div class="faq-search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <input type="text" id="faq-search-input" placeholder="キーワードで質問を検索..." aria-label="よくある質問を検索">
-                </div>
-                
-                <!-- component-split: FAQCategories -->
-                <div class="faq-categories">
-                    <button class="faq-category active" data-category="all">すべて</button>
-                    <button class="faq-category" data-category="cost">コスト・導入</button>
-                    <button class="faq-category" data-category="effect">効果・メリット</button>
-                    <button class="faq-category" data-category="data">データ・技術</button>
-                    <button class="faq-category" data-category="service">サービス内容</button>
-                    <button class="faq-category" data-category="support">サポート体制</button>
-                </div>
-                
-                <!-- component-split: SectionHeader -->
-                <div class="section-header animate-on-scroll">
-                    <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
-                    <h2 class="heading-lg">AI導入・活用に関する<span class="highlight">よくあるご質問</span></h2>
-                    <p class="section-description">AI導入を検討される際によくいただく質問と回答をまとめました<br>その他のご質問はお問い合わせフォームよりお気軽にご連絡ください</p>
-                </div>
-                
-                <!-- component-split: FAQAccordion -->
-                <div class="faq-container animate-on-scroll">
-                    <!-- component-split: FAQItem-Cost1 -->
-                    <div class="faq-item" data-category="cost">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-                            <h4>AIの導入にはどのくらいのコストがかかりますか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-1" aria-hidden="true">
-                            <p>AIの導入コストは、ソリューションの規模や複雑さによって大きく異なります。小規模なチャットボット導入なら月額10万円程度から、フルカスタムのAIシステム開発では数百万円以上の初期コストが必要な場合もあります。当社では、小さく始めて効果を確認しながら段階的に拡張していくアプローチを推奨しています。まずはお気軽にご相談ください。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Effect1 -->
-                    <div class="faq-item" data-category="effect">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-                            <h4>AI導入の効果はどれくらいで出ますか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-2" aria-hidden="true">
-                            <p>AIの効果は導入する業務や目的によって異なりますが、基本的なチャットボットや自動化ツールであれば、導入後1〜3ヶ月程度で効果が現れ始めます。多くのケースでは、問い合わせ対応の自動化で30〜50%の業務効率化、データ分析AIによる予測精度向上で15〜25%の業績改善などの効果が報告されています。当社では、導入前に期待される効果を数値化し、KPIを設定してから開発を進めています。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Data1 -->
-                    <div class="faq-item" data-category="data">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-                            <h4>AIを導入するために必要なデータ量はどのくらいですか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-3" aria-hidden="true">
-                            <p>必要なデータ量はAIの用途によって異なります。近年の大規模言語モデル（LLM）などは少ないデータでも活用できるため、導入のハードルは下がっています。例えば、チャットボットであれば100〜200の質問と回答のセット、予測モデルであれば数百〜数千件のデータがあれば初期導入が可能です。データが少ない場合でも、段階的に収集しながらAIの精度を向上させていくアプローチも可能です。当社ではお客様のデータ状況に合わせた最適なソリューションをご提案します。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Cost2 -->
-                    <div class="faq-item" data-category="cost">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-                            <h4>AIの導入に社内の専門人材は必要ですか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-4" aria-hidden="true">
-                            <p>AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Data2 -->
-                    <div class="faq-item" data-category="data">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-                            <h4>既存システムとの連携は可能ですか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-5" aria-hidden="true">
-                            <p>はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Service1 -->
-                    <div class="faq-item" data-category="service">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
-                            <h4>ShinAIのAIチャットボットサービスについて教えてください</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-6" aria-hidden="true">
-                            <p>ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。例えば、FAQの自動回答、予約管理、製品情報提供などの基本機能に加え、顧客データベースとの連携による個別最適化されたレコメンデーションや、ECサイトとの連携による購買支援など、ビジネスニーズに合わせた機能拡張が可能です。また、導入後の効果測定や継続的な改善サポートも提供しています。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Cost3 -->
-                    <div class="faq-item" data-category="cost">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-7">
-                            <h4>AI導入について相談したいのですが</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-7" aria-hidden="true">
-                            <p>AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。相談では、お客様の業務課題や目標をお伺いし、AIでどのような解決が可能かをわかりやすく説明します。実績事例のご紹介や、概算の費用感、導入スケジュールなどもお伝えします。まずはお気軽にご連絡ください。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Service2 -->
-                    <div class="faq-item" data-category="service">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-8">
-                            <h4>AIの内製化支援について詳しく知りたい</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-8" aria-hidden="true">
-                            <p>ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。具体的には、技術研修プログラムの提供、AIプロジェクト推進体制の構築支援、ガバナンス・セキュリティ体制の設計、社内勉強会の実施、技術ナレッジの共有など、段階的に社内人材を育成するプログラムを用意しています。また、初期開発から徐々に貴社チームへの権限移譲を行うハンドオーバープランも提供しています。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Service3 -->
-                    <div class="faq-item" data-category="service">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-9">
-                            <h4>AIプロトタイプ開発はどのように進めますか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-9" aria-hidden="true">
-                            <p>AIプロトタイプ開発は、お客様のビジネス課題を理解することから始まります。初期ヒアリングを通じて課題を明確にし、2-4週間で最小限の機能を持つプロトタイプを開発します。このアプローチにより、低コストでAIの有効性を検証し、段階的に機能を拡張していくことが可能です。小さく始めて、実証しながら発展させる「伴走型開発」が、AI導入の成功率を高めています。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Data3 -->
-                    <div class="faq-item" data-category="data">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-10">
-                            <h4>生成AIとRAG（検索拡張生成）の違いは何ですか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-10" aria-hidden="true">
-                            <p>生成AIは学習データに基づいて新しいコンテンツを生成する技術で、ChatGPTなどが代表例です。一方、RAG（検索拡張生成）は生成AIに企業の独自データ（社内文書やナレッジベースなど）を参照させる仕組みです。RAGを活用することで、一般的な生成AIの回答に自社独自の情報を組み込み、より正確で業務に特化した回答を得ることができます。ShinAIでは、お客様のナレッジを活かしたRAGシステムの構築を得意としています。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- component-split: FAQItem-Support1 -->
-                    <div class="faq-item" data-category="support">
-                        <div class="faq-question" aria-expanded="false" aria-controls="faq-answer-11">
-                            <h4>AI導入後のサポート体制はどうなっていますか？</h4>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-11" aria-hidden="true">
-                            <p>ShinAIでは、AI導入後も継続的なサポートを提供しています。基本的なテクニカルサポートに加え、定期的なパフォーマンス分析、AIモデルの精度向上、機能拡張の提案などを行います。また、月次または四半期ごとのレビューミーティングを通じて、導入効果の測定や今後の改善点について共有します。さらに、社内チームが自立的にAIを運用できるよう、トレーニングやナレッジ移転も実施しています。「やりっぱなしにしない」継続的なサポートが、長期的なAI活用の成功につながると考えています。</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- component-split: ContactCTA -->
-                <div class="faq-banner animate-on-scroll">
-                    <h2>さらに詳しい情報が必要ですか？</h2>
-                    <p>お客様の具体的な状況に合わせたご提案をいたします。まずは無料相談からお気軽にご連絡ください。</p>
-                    <a href="contact.html" class="btn-cta">お問い合わせへ</a>
-                </div>
-                
-                <!-- component-split: MarketingPitch -->
-                <section class="pitch animate-on-scroll">
-                    <h2>AI 伴走型開発の強み</h2>
-                    <ul>
-                        <li>🎯 <strong>現状課題への共感：</strong>従来開発は一括要件定義・高額投資が前提。</li>
-                        <li>🚀 <strong>AI の新性質：</strong>初期全定義は非現実的、可能性は無限大。</li>
-                        <li>🤝 <strong>伴走スタイル：</strong>小さく始めてプロトタイプ提示→共創最適化。</li>
-                    </ul>
-                    <p><strong>メリット：</strong>リスク抑制・柔軟対応・共創関係</p>
-                    <p class="closer">「まずやってみる」から始め、成果を確かめながら進めます。</p>
-                </section>
-            </div>
-        </section>
-    </main>
-    
-    <!-- component-split: BottomBanner -->
-    <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            「真の価値を信じ、次世代のために新たな未来を創る。」
-        </div>
-    </div>
-    
-    <!-- component-split: Footer -->
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター
+    機能: サイト全体ナビゲーション、リンク集約
+    特徴: グリッドレイアウト、SNSリンク、著作権表示
+    ==============================================
+    -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div>
+                <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
+                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
                         <span class="en-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
@@ -687,39 +620,42 @@
                     </div>
                 </div>
                 
-                <div>
+                <div class="footer-nav">
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
                         <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#decision">意思決定支援AI</a></li>
                         <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
-                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
+                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h4 class="footer-heading">会社情報</h4>
+                <div class="footer-nav">
+                    <h4 class="footer-heading">業界別AI活用</h4>
                     <ul class="footer-links">
-                        <li><a href="about.html">会社概要</a></li>
-                        <li><a href="about.html#philosophy">企業理念</a></li>
-                        <li><a href="industries.html">AI活用事例</a></li>
-                        <li><a href="about.html#careers">採用情報</a></li>
+                        <li><a href="industries.html#manufacturing">製造業</a></li>
+                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
+                        <li><a href="industries.html#finance">金融・保険</a></li>
+                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
+                        <li><a href="industries.html#education">教育・研修</a></li>
+                        <li><a href="industries.html#welfare">福祉・介護</a></li>
                     </ul>
                 </div>
                 
-                <div>
+                <div class="footer-contact">
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <ul class="footer-links">
-                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li>shinai.life@gmail.com</li>
-                        <li>平日 9:00〜18:00（土日祝休）</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
+                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
+                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="contact.html#contact-form">お問い合わせフォーム</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <p class="copyright">© <span id="current-year">2023</span> ShinAI All Rights Reserved.</p>
                 <div class="footer-bottom-links">
                     <a href="#">プライバシーポリシー</a>
                     <a href="#">利用規約</a>
@@ -729,7 +665,14 @@
         </div>
     </footer>
     
-    <!-- component-split: ChatbotComponent -->
+    <!-- 
+    ==============================================
+    // === component-split: ChatbotWidget ===
+    COMPONENT: チャットボット
+    機能: インタラクティブサポート、ヘルプ提供
+    特徴: フローティング配置、会話型インターフェース
+    ==============================================
+    -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -757,165 +700,272 @@
             </div>
         </div>
     </div>
-
-    <!-- component-split: BackToTop -->
-    <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
+    
+    <!-- 
+    ==============================================
+    // === component-split: BackToTop ===
+    COMPONENT: トップに戻るボタン
+    機能: ナビゲーション補助、ユーザビリティ向上
+    特徴: フローティング配置、スクロール検出
+    ==============================================
+    -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </button>
+    </a>
     
-    <!-- component-split: CommonJavaScript -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/chatbot.js"></script>
-    
-    <!-- component-split: PageSpecificScripts -->
+    <!-- 
+    ==============================================
+    // === component-split: MainScript ===
+    COMPONENT: メインスクリプト
+    機能: インタラクション制御、動的機能の実装
+    特徴: イベントハンドリング、アニメーション制御
+    ==============================================
+    -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // カレントイヤーの更新
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // FAQアコーディオン
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                // アクセシビリティ属性の更新
-                this.setAttribute('aria-expanded', isActive ? 'false' : 'true');
-                const answerId = this.getAttribute('aria-controls');
-                const answer = document.getElementById(answerId);
-                answer.setAttribute('aria-hidden', isActive ? 'true' : 'false');
-                
-                // 開閉状態の切り替え
-                faqItem.classList.toggle('active');
-                
-                // GSAPアニメーション
-                if (window.gsap) {
-                    if (!isActive) {
-                        gsap.fromTo(answer, 
-                            { maxHeight: 0, opacity: 0 },
-                            { maxHeight: 1000, opacity: 1, duration: 0.5, ease: "power3.out" }
-                        );
-                    } else {
-                        gsap.to(answer, { maxHeight: 0, opacity: 0, duration: 0.3, ease: "power2.in" });
-                    }
-                }
-            });
+        // プリローダー制御
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preload-container');
+            if (preloader) {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 300);
+            }
         });
         
-        // FAQ検索機能
-        const searchInput = document.getElementById('faq-search-input');
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase().trim();
+        document.addEventListener('DOMContentLoaded', function() {
+            // 現在年表示
+            const currentYearElement = document.getElementById('current-year');
+            if (currentYearElement) {
+                const currentYear = new Date().getFullYear();
+                currentYearElement.textContent = currentYear;
+            }
+            
+            // ヘッダースクロール効果
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+            
+            // トップに戻るボタン
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // ハンバーガーメニュー
+            const menuToggle = document.getElementById('menu-toggle');
+            const nav = document.getElementById('nav');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                    
+                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    menuToggle.setAttribute('aria-expanded', !isExpanded);
+                    menuToggle.innerHTML = isExpanded ? 
+                        '<i class="fas fa-bars" aria-hidden="true"></i>' : 
+                        '<i class="fas fa-times" aria-hidden="true"></i>';
+                });
+            }
+            
+            // FAQアコーディオン制御
+            const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
-                const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+                const question = item.querySelector('.faq-question');
                 
-                if (searchTerm === '' || question.includes(searchTerm) || answer.includes(searchTerm)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-        
-        // FAQカテゴリフィルター
-        const categoryButtons = document.querySelectorAll('.faq-category');
-        
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
+                question.addEventListener('click', function() {
+                    const isActive = item.classList.contains('active');
+                    
+                    // 同じグループ内の他のアイテムを閉じる
+                    const parentGroup = item.closest('.faq-group');
+                    parentGroup.querySelectorAll('.faq-item').forEach(faqItem => {
+                        if (faqItem !== item) {
+                            faqItem.classList.remove('active');
+                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // クリックされたアイテムの開閉制御
+                    item.classList.toggle('active');
+                    question.setAttribute('aria-expanded', !isActive);
+                });
                 
-                // アクティブなカテゴリボタンの更新
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // FAQアイテムのフィルタリング
-                faqItems.forEach(item => {
-                    if (category === 'all' || item.getAttribute('data-category') === category) {
-                        item.style.display = '';
-                    } else {
-                        item.style.display = 'none';
+                // キーボード操作対応
+                question.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        question.click();
                     }
                 });
             });
-        });
-        
-        // スクロールアニメーション
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // ヘッダースクロール効果
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            
+            // FAQ検索機能
+            const searchInput = document.getElementById('faq-search-input');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    faqItems.forEach(item => {
+                        const questionText = item.querySelector('h4').textContent.toLowerCase();
+                        const answerText = item.querySelector('.faq-answer p').textContent.toLowerCase();
+                        
+                        if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                            item.style.display = 'block';
+                            
+                            // 検索語をハイライト（オプション）
+                            if (searchTerm.length > 1) {
+                                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                                item.querySelector('h4').innerHTML = item.querySelector('h4').textContent.replace(regex, '<mark>$1</mark>');
+                            } else {
+                                item.querySelector('h4').innerHTML = item.querySelector('h4').textContent;
+                            }
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // グループの表示制御
+                    document.querySelectorAll('.faq-group').forEach(group => {
+                        const visibleItems = group.querySelectorAll('.faq-item[style="display: block"]');
+                        if (visibleItems.length === 0) {
+                            group.style.display = 'none';
+                        } else {
+                            group.style.display = 'block';
+                        }
+                    });
+                });
             }
-        });
-        
-        // Back to Topボタン
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('active');
-            } else {
-                backToTopButton.classList.remove('active');
+            
+            // FAQカテゴリフィルタリング
+            const categoryButtons = document.querySelectorAll('.faq-category');
+            
+            if (categoryButtons.length > 0) {
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // アクティブボタン切替
+                        categoryButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const category = this.getAttribute('data-category');
+                        
+                        // グループの表示制御
+                        if (category === 'all') {
+                            document.querySelectorAll('.faq-group').forEach(group => {
+                                group.style.display = 'block';
+                            });
+                        } else {
+                            document.querySelectorAll('.faq-group').forEach(group => {
+                                if (group.getAttribute('data-category') === category) {
+                                    group.style.display = 'block';
+                                } else {
+                                    group.style.display = 'none';
+                                }
+                            });
+                        }
+                    });
+                });
             }
-        });
-        
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // キーボードアクセシビリティ
-        faqQuestions.forEach(question => {
-            question.addEventListener('keydown', function(e) {
-                // Enterキーまたはスペースキーでアコーディオンを開閉
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
+            
+            // チャットボット制御
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input-text');
+            const chatbotSubmit = document.getElementById('chatbot-submit');
+            
+            if (chatbotToggle && chatbotContainer && chatbotClose) {
+                chatbotToggle.addEventListener('click', function() {
+                    chatbotContainer.classList.toggle('active');
+                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
+                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+                
+                chatbotClose.addEventListener('click', function() {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                });
+                
+                // チャットボット入力処理
+                if (chatbotSubmit && chatbotInput && chatbotMessages) {
+                    chatbotSubmit.addEventListener('click', sendMessage);
+                    chatbotInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
+                    });
                 }
+                
+                function sendMessage() {
+                    const message = chatbotInput.value.trim();
+                    if (message) {
+                        // ユーザーメッセージを追加
+                        addMessage(message, 'user');
+                        chatbotInput.value = '';
+                        
+                        // 簡易的な応答（実際はAJAXでサーバーに問い合わせるなど）
+                        setTimeout(() => {
+                            if (message.toLowerCase().includes('費用') || message.toLowerCase().includes('料金')) {
+                                addMessage('AI導入の費用は、導入規模や目的によって異なります。小規模なプロトタイプであれば数十万円からの導入が可能です。詳しくは無料相談でご案内しています。', 'bot');
+                            } else if (message.toLowerCase().includes('開発') || message.toLowerCase().includes('期間')) {
+                                addMessage('AI導入の期間は、プロジェクトの複雑さによりますが、小規模なプロトタイプであれば2週間程度から着手可能です。段階的に機能を拡張していくアプローチを取っています。', 'bot');
+                            } else {
+                                addMessage('お問い合わせありがとうございます。より詳細な情報は無料相談でご案内しています。お問い合わせフォームよりお気軽にご連絡ください。', 'bot');
+                            }
+                        }, 800);
+                    }
+                }
+                
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender + '-message');
+                    messageDiv.textContent = text;
+                    
+                    chatbotMessages.appendChild(messageDiv);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            }
+            
+            // スクロールアニメーション
+            const animateElements = document.querySelectorAll('.bounce-in-up, .slide-in-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
             });
         });
-
-        // マーケティングピッチセクションのアニメーション
-        if (window.gsap && document.querySelector('.pitch')) {
-            gsap.from('.pitch', { 
-                opacity: 0, 
-                y: 30, 
-                duration: 0.8, 
-                scrollTrigger: {
-                    trigger: '.pitch',
-                    start: 'top 80%'
-                }
-            });
-        }
-    });
     </script>
 </body>
 </html>
