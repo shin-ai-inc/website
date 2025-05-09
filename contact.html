@@ -2890,6 +2890,185 @@
         .px-3 { padding-left: 1.5rem; padding-right: 1.5rem; }
         .px-4 { padding-left: 2rem; padding-right: 2rem; }
         .px-5 { padding-left: 2.5rem; padding-right: 2.5rem; }
+
+        /* 
+        ==============================================
+        // === component-split: PrototypeApproachSection ===
+        COMPONENT: プロトタイプアプローチ - 伴走型開発の特徴
+        ==============================================
+        */
+        .companion-approach {
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+            padding: 4rem 0;
+            margin-top: 2rem;
+        }
+        
+        .companion-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .companion-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
+            background-size: 200% auto;
+            animation: gradientShift 6s linear infinite;
+            z-index: var(--z-normal);
+        }
+        
+        .companion-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        
+        .companion-subtitle {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(58, 95, 235, 0.08);
+            border-radius: var(--radius-full);
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .companion-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .companion-description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .companion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .companion-point {
+            background: rgba(249, 250, 252, 0.8);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .companion-point:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+            background: white;
+            border-color: rgba(58, 95, 235, 0.1);
+        }
+        
+        /* 光るエフェクト */
+        .companion-point::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+            z-index: 1;
+        }
+        
+        .companion-point:hover::after {
+            left: 100%;
+        }
+        
+        .companion-point-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
+            transition: all var(--transition-normal);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .companion-point:hover .companion-point-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.25);
+        }
+        
+        .companion-point h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .companion-point p {
+            color: var(--gray);
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 992px) {
+            .companion-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .companion-container {
+                padding: 2rem;
+            }
+            
+            .companion-title {
+                font-size: 1.8rem;
+            }
+            
+            .companion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3059,47 +3238,45 @@
 
         <!-- 
         ==============================================
-        // === component-split: ApproachSection ===
-        COMPONENT: 伴走型開発アプローチ - マーケティングメッセージ強化
+        // === component-split: PrototypeApproachSection ===
+        COMPONENT: プロトタイプアプローチ - 伴走型開発の特徴
         ==============================================
         -->
-        <section class="section">
+        <section class="companion-approach">
             <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">ShinAIの強み</span>
-                    <h2 class="section-title"><span class="highlight">プロトタイプからの伴走型開発</span></h2>
-                    <p class="section-description">従来の重厚長大なシステム開発とは異なる、AIならではの柔軟なアプローチ</p>
-                </div>
-                
-                <div class="approach-container">
-                    <div class="approach-header">
-                        <div class="approach-subtitle">小さく始めて、効果を確認しながら最適化</div>
-                        <p class="approach-description">AIの特性を活かした「まずはやってみる」アプローチで、<br>初期投資リスクを抑えながら最適なAIソリューションを構築します。</p>
+                <div class="companion-container bounce-in-up">
+                    <div class="companion-header">
+                        <span class="companion-subtitle">ShinAIの開発手法</span>
+                        <h2 class="companion-title">プロトタイプからの<span class="gradient-text">伴走型開発</span></h2>
+                        <p class="companion-description">
+                            AI領域では、従来の重厚長大なシステム開発とは異なるアプローチが効果的です。<br>
+                            小さく始めて効果を確認しながら、最適なAIソリューションを一緒に構築していきます。
+                        </p>
                     </div>
                     
-                    <div class="approach-steps">
-                        <div class="approach-step">
-                            <div class="approach-step-icon">
+                    <div class="companion-grid">
+                        <div class="companion-point bounce-in-up animate-delay-1">
+                            <div class="companion-point-icon">
                                 <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
-                            <h3 class="approach-step-title">従来型開発の課題</h3>
-                            <p class="approach-step-description">これまでのシステム開発は、明確な要件を一括で決めて、<span class="approach-highlight">初期から高額な投資</span>を前提にしなければならないスタイルが一般的でした。</p>
+                            <h3>従来型開発の課題</h3>
+                            <p>これまでのシステム開発は、明確な要件を一括で決めて、<span class="highlight-text">初期から高額な投資</span>を前提にしなければならないスタイルが一般的でした。</p>
                         </div>
                         
-                        <div class="approach-step">
-                            <div class="approach-step-icon">
+                        <div class="companion-point bounce-in-up animate-delay-2">
+                            <div class="companion-point-icon">
                                 <i class="fas fa-rocket" aria-hidden="true"></i>
                             </div>
-                            <h3 class="approach-step-title">AIならではの特性</h3>
-                            <p class="approach-step-description">AIにおいては「やれることの幅」が非常に広く、<span class="approach-highlight">プロトタイプから始めて段階的に拡張</span>していく柔軟なアプローチが最適です。</p>
+                            <h3>AIならではの特性</h3>
+                            <p>AIにおいては「やれることの幅」が非常に広く、<span class="highlight-text">プロトタイプから始めて段階的に拡張</span>していく柔軟なアプローチが最適です。</p>
                         </div>
                         
-                        <div class="approach-step">
-                            <div class="approach-step-icon">
+                        <div class="companion-point bounce-in-up animate-delay-3">
+                            <div class="companion-point-icon">
                                 <i class="fas fa-handshake" aria-hidden="true"></i>
                             </div>
-                            <h3 class="approach-step-title">ShinAIの伴走型開発</h3>
-                            <p class="approach-step-description">まず小さく始め、<span class="approach-highlight">方向性の確認と実業務へのフィット</span>を一緒にすり合わせながら、パートナーとして伴走します。</p>
+                            <h3>ShinAIの伴走型開発</h3>
+                            <p>まず小さく始め、<span class="highlight-text">方向性の確認と実業務へのフィット</span>を一緒にすり合わせながら、パートナーとして伴走します。</p>
                         </div>
                     </div>
                 </div>
