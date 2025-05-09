@@ -619,6 +619,154 @@
 
         /* 
         ==============================================
+        // === component-split: BenefitsStyles ===
+        COMPONENT: メリット - 視覚的説明
+        ==============================================
+        */
+        .benefits-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2.2rem;
+            transition: all var(--transition-normal);
+            text-align: center;
+            border: 1px solid rgba(58, 95, 235, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
+            background-size: 200% auto;
+            animation: gradientShift 6s linear infinite;
+            z-index: var(--z-normal);
+        }
+
+        /* ベネフィットカード光るエフェクト */
+        .benefit-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+            z-index: 1;
+        }
+
+        .benefit-card:hover::after {
+            left: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* 改善したアイコンスタイル - 参考画像に基づく */
+        .benefit-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: all var(--transition-normal);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        }
+        
+        .benefit-card:nth-child(2) .benefit-icon {
+            background: linear-gradient(135deg, #00C9A7, #00E6C3);
+        }
+        
+        .benefit-card:nth-child(3) .benefit-icon {
+            background: linear-gradient(135deg, #FF8A00, #FFA940);
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.35);
+        }
+        
+        .benefit-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .benefit-description {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .benefit-stat {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all var(--transition-normal);
+            position: relative;
+            z-index: 2;
+        }
+
+        .benefit-card:hover .benefit-stat {
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+            transform: scale(1.05);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* 
+        ==============================================
         // === component-split: ContactFormStyles ===
         COMPONENT: お問い合わせフォーム - インタラクションデザイン
         ==============================================
@@ -1255,146 +1403,6 @@
 
         /* 
         ==============================================
-        // === component-split: BenefitsStyles ===
-        COMPONENT: メリット - 視覚的説明
-        ==============================================
-        */
-        .benefits-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 3rem;
-        }
-        
-        .benefit-card {
-            flex: 1;
-            min-width: 300px;
-            max-width: 350px;
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            padding: 2.2rem;
-            transition: all var(--transition-normal);
-            text-align: center;
-            border: 1px solid rgba(58, 95, 235, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .benefit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
-            background-size: 200% auto;
-            animation: gradientShift 6s linear infinite;
-            z-index: var(--z-normal);
-        }
-
-        /* ベネフィットカード光るエフェクト */
-        .benefit-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-            z-index: 1;
-        }
-
-        .benefit-card:hover::after {
-            left: 100%;
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .benefit-icon {
-            width: 85px;
-            height: 85px;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--primary);
-            font-size: 2.2rem;
-            transition: all var(--transition-normal);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .benefit-card:hover .benefit-icon {
-            transform: scale(1.1) rotate(5deg);
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            color: white;
-            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
-        }
-        
-        .benefit-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .benefit-description {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .benefit-stat {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: all var(--transition-normal);
-            position: relative;
-            z-index: 2;
-        }
-
-        .benefit-card:hover .benefit-stat {
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-            transform: scale(1.05);
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 0.3rem;
-            background: linear-gradient(to right, #3A5FEB, #00C9A7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        /* 
-        ==============================================
         // === component-split: FAQSection ===
         COMPONENT: よくある質問 - 不安解消
         ==============================================
@@ -1875,6 +1883,23 @@
 
         .menu-toggle:hover {
             color: var(--primary);
+        }
+
+        /* CTAボタン - スクリーンショットのデザインに合わせて更新 */
+        .nav-cta .btn-consultation {
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            border-radius: 30px;
+            padding: 0.6rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .nav-cta .btn-consultation-message {
+            display: none; /* スクリーンショットにはサブテキストがないため */
         }
 
         /* フッタースタイル */
@@ -2695,10 +2720,7 @@
                         <li><a href="services.html" class="nav-link">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
                         <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
-                        <li class="nav-cta"><a href="#contact-form" class="btn btn-consultation">
-                            <span>無料相談</span>
-                            <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                        </a></li>
+                        <li class="nav-cta"><a href="#contact-form" class="btn-consultation">無料相談</a></li>
                     </ul>
                 </nav>
                 
@@ -2760,15 +2782,15 @@
         <!-- 
         ==============================================
         // === component-split: BenefitsSection ===
-        COMPONENT: メリットセクション - 価値提案
+        COMPONENT: AIのメリットセクション - スクリーンショットに合わせて修正
         ==============================================
         -->
         <section class="section section-bg-gradient">
             <div class="container">
                 <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">AIで実現できること</span>
-                    <h2 class="section-title">AI活用でビジネスに<span class="highlight">3つのメリット</span></h2>
-                    <p class="section-description">専門知識がなくても、AIを活用してビジネス課題を解決できます。</p>
+                    <span class="section-subtitle">AI導入のメリット</span>
+                    <h2 class="section-title">AIがもたらす<span class="highlight">3つの価値</span></h2>
+                    <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
                 </div>
                 
                 <div class="benefits-container">
@@ -2777,10 +2799,14 @@
                             <i class="fas fa-bolt" aria-hidden="true"></i>
                         </div>
                         <h3 class="benefit-title">業務効率化</h3>
-                        <p class="benefit-description">データ入力や情報検索などの定型業務を自動化。人の作業時間を大幅に削減し、本来の創造的な仕事に集中できます。</p>
+                        <p class="benefit-description">AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
                         <div class="benefit-stat">
                             <div class="stat-value">35%</div>
-                            <div class="stat-label">平均業務時間削減率</div>
+                            <div class="stat-label">効率化</div>
+                        </div>
+                        <div class="benefit-stat">
+                            <div class="stat-value">60%</div>
+                            <div class="stat-label">時間削減</div>
                         </div>
                     </div>
                     
@@ -2789,22 +2815,30 @@
                             <i class="fas fa-coins" aria-hidden="true"></i>
                         </div>
                         <h3 class="benefit-title">コスト削減</h3>
-                        <p class="benefit-description">24時間365日休まず働くAIが、人件費や残業代を削減。ミスも減り、より効率的なビジネス運営が可能になります。</p>
+                        <p class="benefit-description">AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
                         <div class="benefit-stat">
                             <div class="stat-value">40%</div>
-                            <div class="stat-label">平均コスト削減率</div>
+                            <div class="stat-label">コスト削減</div>
+                        </div>
+                        <div class="benefit-stat">
+                            <div class="stat-value">30%</div>
+                            <div class="stat-label">利益向上</div>
                         </div>
                     </div>
                     
                     <div class="benefit-card animate-on-scroll">
                         <div class="benefit-icon">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <i class="fas fa-search" aria-hidden="true"></i>
                         </div>
-                        <h3 class="benefit-title">売上アップ</h3>
-                        <p class="benefit-description">顧客データを分析し、最適な商品提案や営業戦略を実現。人間では見つけられないビジネスチャンスを発見します。</p>
+                        <h3 class="benefit-title">データ分析</h3>
+                        <p class="benefit-description">大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">90%</div>
+                            <div class="stat-label">データ活用</div>
+                        </div>
                         <div class="benefit-stat">
                             <div class="stat-value">25%</div>
-                            <div class="stat-label">平均売上向上率</div>
+                            <div class="stat-label">売上増加</div>
                         </div>
                     </div>
                 </div>
