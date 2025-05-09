@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ShinAI - 無料でAI活用のご相談を承ります。専門知識がなくても大丈夫。業務効率化、コスト削減、売上アップなど、AIでできることを分かりやすくご説明します。">
-    <meta name="keywords" content="AI相談, 無料相談, 業務効率化, AI導入, 初めてのAI, AI活用, ビジネスAI, 生産性向上, 法人AI, DX推進">
+    <meta name="keywords" content="AI相談, 無料相談, 業務効率化, AI導入, 初めてのAI, AI活用, ビジネスAI, 生産性向上, 法人AI, DX推進, AI伴走開発, プロトタイプ開発">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
@@ -58,10 +58,10 @@
     -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome CDN更新：確実なアイコン表示のために最新バージョンを使用 -->
+    <!-- Font Awesome CDN最新版：確実なアイコン表示のために更新 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
-    <!-- GSAP & ScrollTrigger -->
+    <!-- GSAP & ScrollTrigger：高度なアニメーション -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     
@@ -376,6 +376,53 @@
             }
         }
 
+        @keyframes buttonPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+            }
+        }
+
+        @keyframes highlightGlow {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(0, 201, 167, 0);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(0, 201, 167, 0.5);
+            }
+        }
+
+        @keyframes bounceInUp {
+            from, 60%, 75%, 90%, to {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            from {
+                opacity: 0;
+                transform: translate3d(0, 50px, 0);
+            }
+            60% {
+                opacity: 1;
+                transform: translate3d(0, -10px, 0);
+            }
+            75% {
+                transform: translate3d(0, 5px, 0);
+            }
+            90% {
+                transform: translate3d(0, -2px, 0);
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
         .fade-in {
             animation: fadeIn 1s ease forwards;
         }
@@ -390,6 +437,10 @@
 
         .slide-in-up {
             animation: slideInUp 1s ease forwards;
+        }
+
+        .bounce-in-up {
+            animation: bounceInUp 1.2s ease forwards;
         }
 
         .animate-delay-1 {
@@ -992,14 +1043,14 @@
             margin-top: 0.5rem;
         }
         
-        /* 改善されたチェックボックス - 重複問題の修正 */
+        /* 改善されたチェックボックス - 行動心理学に基づいた直感的デザイン */
         .form-check {
             position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
             transition: all var(--transition-normal);
-            padding: 1rem 1.2rem 1rem 3.2rem;
+            padding: 1rem 1.2rem 1rem 3.5rem;
             border-radius: var(--radius);
             background: rgba(249, 250, 252, 0.8);
             border: 1px solid rgba(58, 95, 235, 0.08);
@@ -1043,11 +1094,11 @@
             top: 50%;
             left: 1.2rem;
             transform: translateY(-50%);
-            height: 24px;
-            width: 24px;
+            height: 26px;
+            width: 26px;
             background-color: white;
             border: 2px solid rgba(58, 95, 235, 0.3);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             transition: all var(--transition-normal);
             z-index: 2;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
@@ -1059,19 +1110,19 @@
         }
         
         .form-check-input:checked ~ .checkmark {
-            background: white;
-            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
         }
         
         .checkmark:after {
             content: "";
             position: absolute;
             display: none;
-            left: 8px;
-            top: 4px;
+            left: 9px;
+            top: 5px;
             width: 6px;
             height: 11px;
-            border: solid var(--primary);
+            border: solid white;
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
         }
@@ -1093,6 +1144,13 @@
         .form-check-input:checked ~ .form-check-label {
             color: var(--primary);
             font-weight: 600;
+        }
+
+        /* 選択済みチェックボックス強調 */
+        .form-check.checked {
+            background: rgba(58, 95, 235, 0.05);
+            border-color: rgba(58, 95, 235, 0.2);
+            box-shadow: var(--shadow-md);
         }
 
         /* 
@@ -1358,6 +1416,10 @@
             background: linear-gradient(135deg, #9DB6FF, #BED2FF);
         }
         
+        .process-step:nth-child(5) .process-step-icon {
+            background: linear-gradient(135deg, #BED2FF, #DEEAFF);
+        }
+        
         .process-step:hover .process-step-icon {
             transform: scale(1.1);
             box-shadow: var(--shadow-lg);
@@ -1479,6 +1541,151 @@
         .faq-content {
             color: var(--gray);
             line-height: 1.7;
+        }
+
+        /* 
+        ==============================================
+        // === component-split: ApproachSection ===
+        COMPONENT: AIアプローチ - 伴走型開発の特徴
+        ==============================================
+        */
+        .approach-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            border: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .approach-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
+            background-size: 200% auto;
+            animation: gradientShift 6s linear infinite;
+            z-index: var(--z-normal);
+        }
+        
+        .approach-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .approach-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .approach-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .approach-description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .approach-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .approach-step {
+            background: rgba(249, 250, 252, 0.8);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid rgba(58, 95, 235, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        .approach-step:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+            background: white;
+            border-color: rgba(58, 95, 235, 0.1);
+        }
+        
+        .approach-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(58, 95, 235, 0.05), transparent);
+            transition: 0.5s;
+            z-index: 1;
+        }
+        
+        .approach-step:hover::before {
+            left: 100%;
+        }
+        
+        .approach-step-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+            transition: all var(--transition-normal);
+        }
+        
+        .approach-step:hover .approach-step-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+        }
+        
+        .approach-step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .approach-step-description {
+            color: var(--gray);
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .approach-highlight {
+            display: inline-block;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: highlightGlow 3s infinite;
         }
 
         /* 
@@ -1607,6 +1814,11 @@
             transform: translateY(-5px);
             box-shadow: var(--shadow-btn-hover);
             background: linear-gradient(to right, #4671FF, #00E6C3);
+        }
+
+        /* アニメーション強化したCTAボタン */
+        .btn-primary.btn-animated {
+            animation: buttonPulse 2s infinite;
         }
 
         /* ボタン光るエフェクト */
@@ -2235,18 +2447,18 @@
 
             /* iPhoneでのレイアウト最適化 */
             .form-check {
-                padding: 1rem 1rem 1rem 3rem;
+                padding: 1rem 1rem 1rem 3.5rem;
             }
 
             .checkmark {
                 left: 1rem;
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
             }
 
             .checkmark:after {
-                left: 7px;
-                top: 3px;
+                left: 8px;
+                top: 4px;
                 width: 5px;
                 height: 10px;
             }
@@ -2764,7 +2976,7 @@
                     専門知識がなくても大丈夫。あなたのビジネスに合った活用方法をご提案します。
                 </p>
                 
-                <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right slide-in-up animate-delay-2">
+                <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right slide-in-up animate-delay-2 btn-animated">
                     <span>相談してみる</span>
                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -2794,7 +3006,7 @@
                 </div>
                 
                 <div class="benefits-container">
-                    <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-card bounce-in-up animate-delay-1">
                         <div class="benefit-icon">
                             <i class="fas fa-bolt" aria-hidden="true"></i>
                         </div>
@@ -2810,7 +3022,7 @@
                         </div>
                     </div>
                     
-                    <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-card bounce-in-up animate-delay-2">
                         <div class="benefit-icon">
                             <i class="fas fa-coins" aria-hidden="true"></i>
                         </div>
@@ -2826,7 +3038,7 @@
                         </div>
                     </div>
                     
-                    <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-card bounce-in-up animate-delay-3">
                         <div class="benefit-icon">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </div>
@@ -2847,11 +3059,60 @@
 
         <!-- 
         ==============================================
+        // === component-split: ApproachSection ===
+        COMPONENT: 伴走型開発アプローチ - マーケティングメッセージ強化
+        ==============================================
+        -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">ShinAIの強み</span>
+                    <h2 class="section-title"><span class="highlight">プロトタイプからの伴走型開発</span></h2>
+                    <p class="section-description">従来の重厚長大なシステム開発とは異なる、AIならではの柔軟なアプローチ</p>
+                </div>
+                
+                <div class="approach-container">
+                    <div class="approach-header">
+                        <div class="approach-subtitle">小さく始めて、効果を確認しながら最適化</div>
+                        <p class="approach-description">AIの特性を活かした「まずはやってみる」アプローチで、<br>初期投資リスクを抑えながら最適なAIソリューションを構築します。</p>
+                    </div>
+                    
+                    <div class="approach-steps">
+                        <div class="approach-step">
+                            <div class="approach-step-icon">
+                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="approach-step-title">従来型開発の課題</h3>
+                            <p class="approach-step-description">これまでのシステム開発は、明確な要件を一括で決めて、<span class="approach-highlight">初期から高額な投資</span>を前提にしなければならないスタイルが一般的でした。</p>
+                        </div>
+                        
+                        <div class="approach-step">
+                            <div class="approach-step-icon">
+                                <i class="fas fa-rocket" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="approach-step-title">AIならではの特性</h3>
+                            <p class="approach-step-description">AIにおいては「やれることの幅」が非常に広く、<span class="approach-highlight">プロトタイプから始めて段階的に拡張</span>していく柔軟なアプローチが最適です。</p>
+                        </div>
+                        
+                        <div class="approach-step">
+                            <div class="approach-step-icon">
+                                <i class="fas fa-handshake" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="approach-step-title">ShinAIの伴走型開発</h3>
+                            <p class="approach-step-description">まず小さく始め、<span class="approach-highlight">方向性の確認と実業務へのフィット</span>を一緒にすり合わせながら、パートナーとして伴走します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
         // === component-split: ProcessFlowSection ===
         COMPONENT: 導入の流れセクション - 視覚的プロセス
         ==============================================
         -->
-        <section class="section">
+        <section class="section section-bg-gradient">
             <div class="container">
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">相談の流れ</span>
@@ -2861,7 +3122,7 @@
                 
                 <div class="progress-steps">
                     <div class="progress-timeline">
-                        <div class="progress-step animate-on-scroll">
+                        <div class="progress-step bounce-in-up">
                             <div class="progress-step-icon">1</div>
                             <div class="progress-step-content">
                                 <h3 class="progress-step-title">無料相談</h3>
@@ -2869,7 +3130,7 @@
                             </div>
                         </div>
                         
-                        <div class="progress-step animate-on-scroll">
+                        <div class="progress-step bounce-in-up animate-delay-1">
                             <div class="progress-step-icon">2</div>
                             <div class="progress-step-content">
                                 <h3 class="progress-step-title">提案</h3>
@@ -2877,19 +3138,27 @@
                             </div>
                         </div>
                         
-                        <div class="progress-step animate-on-scroll">
+                        <div class="progress-step bounce-in-up animate-delay-2">
                             <div class="progress-step-icon">3</div>
                             <div class="progress-step-content">
-                                <h3 class="progress-step-title">試験導入</h3>
-                                <p class="progress-step-description">小規模な範囲で試験的に導入し、効果を確認します。</p>
+                                <h3 class="progress-step-title">プロトタイプ</h3>
+                                <p class="progress-step-description">小規模なAIシステムを素早く構築し、効果を検証します。</p>
                             </div>
                         </div>
                         
-                        <div class="progress-step animate-on-scroll">
+                        <div class="progress-step bounce-in-up animate-delay-3">
                             <div class="progress-step-icon">4</div>
                             <div class="progress-step-content">
-                                <h3 class="progress-step-title">本格導入</h3>
-                                <p class="progress-step-description">効果が確認できたら、本格的に導入・運用を開始します。</p>
+                                <h3 class="progress-step-title">段階的導入</h3>
+                                <p class="progress-step-description">効果を確認しながら、段階的に機能を拡張していきます。</p>
+                            </div>
+                        </div>
+
+                        <div class="progress-step bounce-in-up animate-delay-4">
+                            <div class="progress-step-icon">5</div>
+                            <div class="progress-step-content">
+                                <h3 class="progress-step-title">伴走支援</h3>
+                                <p class="progress-step-description">導入後も継続的に改善提案やサポートを行います。</p>
                             </div>
                         </div>
                     </div>
@@ -2918,7 +3187,7 @@
                     COMPONENT: お問い合わせ情報 - コンタクト情報
                     ==============================================
                     -->
-                    <div class="contact-info animate-on-scroll">
+                    <div class="contact-info bounce-in-up">
                         <div class="contact-info-header">
                             <h3 class="contact-info-title">お問い合わせ先</h3>
                             <p class="contact-info-subtitle">お気軽にご連絡ください</p>
@@ -2973,7 +3242,7 @@
                     COMPONENT: お問い合わせフォーム - 入力フォーム
                     ==============================================
                     -->
-                    <div class="contact-form-container animate-on-scroll">
+                    <div class="contact-form-container bounce-in-up animate-delay-1">
                         <div class="message-success" id="message-success" role="alert" aria-live="polite">
                             <i class="fas fa-check-circle" aria-hidden="true"></i>
                             <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
@@ -3027,7 +3296,7 @@
                                 <div class="field-hint">任意項目です</div>
                             </div>
                             
-                            <!-- 興味のあるサービス - チェックボックス修正版 -->
+                            <!-- 興味のあるサービス - 改善されたチェックボックス -->
                             <div class="form-group">
                                 <label class="form-label">ご興味のある分野（複数選択可）</label>
                                 <div class="checkbox-group">
@@ -3080,7 +3349,7 @@
                             
                             <!-- 送信ボタン -->
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon-right btn-glow" id="submit-button">
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated" id="submit-button">
                                     <span>無料相談を申し込む</span>
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </button>
@@ -3110,7 +3379,7 @@
                 </div>
                 
                 <div class="faq-section">
-                    <div class="faq-container animate-on-scroll">
+                    <div class="faq-container bounce-in-up">
                         <div class="faq-item active">
                             <div class="faq-question" aria-expanded="true" tabindex="0">
                                 <span>AIについて詳しくないのですが相談できますか？</span>
@@ -3134,21 +3403,21 @@
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-content">
-                                    <p>AI導入の費用は、導入規模や目的によって大きく異なります。小規模な自動化ツールであれば月額数万円からの導入が可能です。まずは無料相談で、お客様の状況や予算に合わせた最適なプランをご提案いたします。</p>
+                                    <p>AI導入の費用は、導入規模や目的によって大きく異なります。ShinAIでは小さく始めて段階的に拡張していくアプローチを採用しており、まずはプロトタイプを構築して効果を確認していただくことが可能です。小規模な自動化ツールであれば月額数万円からの導入が可能です。まずは無料相談で、お客様の状況や予算に合わせた最適なプランをご提案いたします。</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="faq-item">
                             <div class="faq-question" aria-expanded="false" tabindex="0">
-                                <span>AI導入にどのくらいの期間がかかりますか？</span>
+                                <span>プロトタイプからの開発とは具体的にどういうことですか？</span>
                                 <div class="faq-toggle">
                                     <i class="fas fa-chevron-down" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-content">
-                                    <p>AI導入の期間は、導入するAIの種類や規模によって異なります。シンプルなチャットボットであれば1〜2週間程度、複雑なデータ分析AIなら1〜3ヶ月程度が目安です。具体的な期間は、無料相談の際にご案内いたします。</p>
+                                    <p>従来のシステム開発では、全ての要件を最初に詳細に定義し、大規模な初期投資を行う必要がありましたが、AIの領域では可能性の幅が広く、最初から全てを定義することが難しい場合があります。そこでShinAIでは、まず小規模なプロトタイプを素早く構築し、実際の業務での効果を確認しながら段階的に機能を拡張していく方法を採用しています。これにより、初期投資リスクを抑えつつ、実際の業務に最適なAIソリューションを構築することが可能です。</p>
                                 </div>
                             </div>
                         </div>
@@ -3176,7 +3445,7 @@
                             </div>
                             <div class="faq-answer">
                                 <div class="faq-content">
-                                    <p>はい、もちろん可能です。最近ではクラウドベースのAIサービスが充実し、中小企業や個人事業主の方でも手軽に導入できるAIソリューションが増えています。ShinAIでは、お客様の規模に合わせた最適な提案をいたします。</p>
+                                    <p>はい、もちろん可能です。最近ではクラウドベースのAIサービスが充実し、中小企業や個人事業主の方でも手軽に導入できるAIソリューションが増えています。ShinAIでは、お客様の規模に合わせた最適な提案をいたします。小さく始めて効果を確認しながら段階的に拡張していくアプローチで、初期投資を抑えながらAIの効果を実感していただけます。</p>
                                 </div>
                             </div>
                         </div>
@@ -3193,7 +3462,7 @@
         -->
         <section class="cta-section">
             <div class="container">
-                <div class="cta-container animate-on-scroll">
+                <div class="cta-container bounce-in-up">
                     <div class="cta-title">
                         AIの力で<span class="text-gradient">ビジネスを進化</span>させませんか？
                     </div>
@@ -3201,7 +3470,7 @@
                         専門知識がなくても大丈夫。まずは無料相談で、あなたのビジネスに合ったAI活用法を一緒に見つけましょう。
                     </div>
                     <div class="cta-buttons">
-                        <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right btn-glow">
+                        <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated">
                             <span>無料相談してみる</span>
                             <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -3481,6 +3750,7 @@
                                 "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
                                 "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
                                 "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
+                                "プロトタイプからの伴走型開発で、初期投資リスクを抑えたAI導入を実現します。",
                                 "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
                             ];
                             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
