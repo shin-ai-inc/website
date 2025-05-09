@@ -35,15 +35,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- component-split: FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <!-- GSAP for advanced animations -->
+    <!-- component-split: JavaScriptLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-    <!-- Swiper JS -->
+    <!-- component-split: SwiperJS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     
@@ -87,7 +87,7 @@
     }
     </script>
     
-    <!-- WebSite構造化データ -->
+    <!-- component-split: WebSiteStructuredData -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -103,47 +103,14 @@
     }
     </script>
     
-    <!-- FAQページの構造化データ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "ShinAIのAIチャットボットサービスについて教えてください",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入について相談したいのですが",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIの内製化支援について詳しく知りたい",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
-          }
-        }
-      ]
-    }
-    </script>
-    
+    <!-- component-split: PageTitle -->
     <title>サービス | ShinAI - 最先端AIソリューション</title>
     
-    <!-- スタイルシート -->
+    <!-- component-split: StyleSheets -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     
-    <!-- ファビコン -->
+    <!-- component-split: Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
 
@@ -178,7 +145,7 @@
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
     }
 
-    /* サービスカード強化 */
+    /* component-split: ServiceCardStyles */
     .service-card {
         background: var(--white);
         border-radius: var(--radius-lg);
@@ -322,7 +289,7 @@
         padding: 1rem;
     }
 
-    /* 特徴カード強化 */
+    /* component-split: FeatureCardStyles */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -385,7 +352,7 @@
         text-align: center;
     }
 
-    /* プロセスタイムライン強化 */
+    /* component-split: ProcessTimelineStyles */
     .process-timeline {
         position: relative;
         max-width: 900px;
@@ -483,86 +450,126 @@
         line-height: 1.7;
     }
 
-    /* FAQ強化 */
-    .faq-container {
-        max-width: 900px;
-        margin: 4rem auto 0;
-    }
-    
-    .faq-item {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        margin-bottom: 1.5rem;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-    
-    .faq-item.active,
-    .faq-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .faq-question {
-        background: var(--white);
-        color: var(--dark);
-        font-weight: 600;
-        padding: 1.8rem 2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    /* component-split: FAQBannerStyles */
+    .faq-banner {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.08));
+        padding: 3rem 2.5rem;
+        text-align: center;
+        margin: 4rem 0;
+        border-radius: 16px;
         position: relative;
-        font-size: 1.15rem;
-        line-height: 1.5;
-        transition: all 0.3s ease;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.1);
+        border: 1px solid rgba(58, 95, 235, 0.1);
+        transition: all 0.4s ease;
     }
     
-    .faq-question:hover,
-    .faq-item.active .faq-question {
-        color: var(--primary);
+    .faq-banner:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
     }
     
-    .faq-question h4 {
-        margin: 0;
-        font-size: 1.15rem;
+    .faq-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544V0h.284zM0 5.373l25.456 25.455-1.414 1.415L0 8.2V5.374zm0 5.656l22.627 22.627-1.414 1.414L0 13.86v-2.83zm0 5.656l19.8 19.8-1.415 1.413L0 19.514v-2.83zm0 5.657l16.97 16.97-1.414 1.415L0 25.172v-2.83zM0 28l14.142 14.142-1.414 1.414L0 30.828V28zm0 5.657L11.314 44.97 9.9 46.386l-9.9-9.9v-2.828zm0 5.657L8.485 47.8 7.07 49.212 0 42.143v-2.83zm0 5.657l5.657 5.657-1.414 1.415L0 47.8v-2.83zm0 5.657l2.828 2.83-1.414 1.413L0 53.456v-2.83zM54.627 60L30 35.373 5.373 60H8.2L30 38.2 51.8 60h2.827zm-5.656 0L30 41.03 11.03 60h2.828L30 43.858 46.142 60h2.83zm-5.656 0L30 46.686 16.686 60h2.83L30 49.515 40.485 60h2.83zm-5.657 0L30 52.343 22.344 60h2.83L30 55.172 34.828 60h2.83zM32 60l-2-2-2 2h4zM59.716 0l-28 28 1.414 1.414L60 2.544V0h-.284zM60 5.373L34.544 30.828l1.414 1.415L60 8.2V5.374zm0 5.656L37.373 33.656l1.414 1.414L60 13.86v-2.83zm0 5.656l-19.8 19.8 1.415 1.413L60 19.514v-2.83zm0 5.657l-16.97 16.97 1.414 1.415L60 25.172v-2.83zM60 28L45.858 42.142l1.414 1.414L60 30.828V28zm0 5.657L48.686 44.97l1.415 1.415 9.9-9.9v-2.828zm0 5.657L51.515 47.8l1.414 1.413 7.07-7.07v-2.83zm0 5.657l-5.657 5.657 1.414 1.415L60 47.8v-2.83zm0 5.657l-2.828 2.83 1.414 1.413L60 53.456v-2.83zM39.9 16.385l1.414-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-2.83 2.828l1.415-1.414 1.414 1.414-1.414 1.415-1.414-1.415zm-1.414 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-1.413 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zM27 32.9l1.414-1.415 1.414 1.414-1.414 1.414L27 32.9zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-1.414 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-1.413 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zM16.385 48.9l1.414-1.415 1.414 1.414-1.414 1.414-1.414-1.414zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zM10.343 54.9l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zM20.272 16.385l1.414-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-2.83 2.828l1.415-1.414 1.414 1.414-1.414 1.415-1.414-1.415zm-1.414 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-1.413 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414zM7.372 32.9l1.414-1.415 1.414 1.414-1.414 1.414-1.414-1.414zm-2.83 2.827l1.415-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm-1.414 2.83l1.414-1.416 1.414 1.415-1.414 1.414-1.414-1.414z' fill='%233A5FEB' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.5;
+        z-index: 1;
+    }
+    
+    .faq-banner::after {
+        content: '';
+        position: absolute;
+        top: -150%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(ellipse at center, rgba(58, 95, 235, 0.1) 0%, rgba(0, 201, 167, 0) 70%);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        z-index: 0;
+    }
+    
+    .faq-banner:hover::after {
+        opacity: 1;
+    }
+    
+    .faq-banner h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        color: var(--dark);
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+    
+    .faq-banner p {
+        font-size: 1.2rem;
+        color: var(--gray);
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .faq-banner .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.2rem 2.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 50px;
         font-weight: 600;
+        font-size: 1.15rem;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
     }
     
-    .faq-question i {
-        color: var(--primary);
-        font-size: 1.1rem;
+    .faq-banner .btn-cta:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.4);
+    }
+    
+    .faq-banner .btn-cta::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+    
+    .faq-banner .btn-cta:hover::after {
+        left: 100%;
+    }
+    
+    .faq-banner .btn-cta i {
+        margin-left: 0.8rem;
         transition: transform 0.3s ease;
     }
     
-    .faq-item.active .faq-question i {
-        transform: rotate(-180deg);
-    }
-    
-    .faq-answer {
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background: rgba(249, 250, 252, 0.7);
-        border-top: 1px solid rgba(58, 95, 235, 0.08);
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 1.8rem 2rem;
-        max-height: 1000px;
-    }
-    
-    .faq-answer p {
-        color: var(--gray);
-        line-height: 1.7;
-        margin: 0;
+    .faq-banner .btn-cta:hover i {
+        transform: translateX(5px);
     }
 
-    /* CTA強化 */
+    /* component-split: EnhancedCTAStyles */
     .cta-container {
         background: var(--white);
         border-radius: 24px;
@@ -580,12 +587,12 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        right: 0;
         height: 8px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: var(--z-normal);
     }
-    
+
     .cta-bg-animation {
         position: absolute;
         top: 0;
@@ -596,6 +603,12 @@
         background-size: 200% 200%;
         animation: gradientBG 15s ease infinite;
         z-index: var(--z-back);
+    }
+    
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
     
     .cta-title {
@@ -645,7 +658,16 @@
         animation: pulseGlow 2s infinite;
     }
 
-    /* レスポンシブ調整 */
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
+        }
+    }
+
+    /* component-split: ResponsiveStyles */
     @media (max-width: 992px) {
         .features-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -665,6 +687,14 @@
             height: 40px;
             font-size: 1.2rem;
             margin-right: 2rem;
+        }
+        
+        .faq-banner {
+            padding: 2.5rem 2rem;
+        }
+        
+        .faq-banner h2 {
+            font-size: 1.8rem;
         }
     }
     
@@ -704,6 +734,23 @@
         
         .cta-container {
             padding: 3rem 2rem;
+        }
+        
+        .faq-banner {
+            padding: 2rem 1.5rem;
+        }
+        
+        .faq-banner h2 {
+            font-size: 1.6rem;
+        }
+        
+        .faq-banner p {
+            font-size: 1.1rem;
+        }
+        
+        .faq-banner .btn-cta {
+            padding: 1rem 2rem;
+            font-size: 1rem;
         }
     }
     
@@ -757,6 +804,25 @@
         .process-step-content::before {
             display: none;
         }
+        
+        .faq-banner {
+            padding: 1.8rem 1.2rem;
+            margin: 3rem 0;
+        }
+        
+        .faq-banner h2 {
+            font-size: 1.4rem;
+        }
+        
+        .faq-banner p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-banner .btn-cta {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+        }
     }
     </style>
 </head>
@@ -776,12 +842,14 @@
                     <span class="en-text">ShinAI</span>
                 </a>
                 
+                <!-- component-split: GlobalNav -->
                 <nav aria-label="メインナビゲーション">
                     <ul class="nav" id="nav">
                         <li><a href="index.html" class="nav-link">ホーム</a></li>
                         <li><a href="about.html" class="nav-link">会社紹介</a></li>
                         <li><a href="services.html" class="nav-link active" aria-current="page">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
+                        <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>  <!-- 新規追加 -->
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
                         <li class="nav-cta">
                             <a href="contact.html" class="btn btn-consultation">
@@ -833,7 +901,7 @@
                 </div>
                 
                 <div class="services-grid">
-                    <!-- 業務自動化ソリューション -->
+                    <!-- component-split: ServiceCard-Automation -->
                     <div class="service-card animate-on-scroll" id="automation">
                         <div class="service-image">
                             <picture>
@@ -863,7 +931,7 @@
                         </div>
                     </div>
                     
-                    <!-- 企画書資料作成AIツール「アイプロ」 -->
+                    <!-- component-split: ServiceCard-AIPro -->
                     <div class="service-card animate-on-scroll" id="aipro">
                         <div class="service-image">
                             <picture>
@@ -893,7 +961,7 @@
                         </div>
                     </div>
                     
-                    <!-- AI導入戦略・実装支援 -->
+                    <!-- component-split: ServiceCard-Consulting -->
                     <div class="service-card animate-on-scroll" id="consulting">
                         <div class="service-image">
                             <picture>
@@ -923,7 +991,14 @@
                         </div>
                     </div>
                     
-                    <!-- オーダーメイド型AI開発 -->
+                    <!-- component-split: FAQ Banner -->
+                    <section class="faq-banner animate-on-scroll">
+                        <h2>よくあるご質問</h2>
+                        <p>AI導入コスト、効果、必要なデータ量など、サービスに関するよくあるご質問をまとめています。</p>
+                        <a href="faq.html" class="btn-cta">FAQを見る <i class="fas fa-arrow-right"></i></a>
+                    </section>
+                    
+                    <!-- component-split: ServiceCard-CustomAI -->
                     <div class="service-card animate-on-scroll" id="custom-ai">
                         <div class="service-image">
                             <picture>
@@ -953,7 +1028,7 @@
                         </div>
                     </div>
                     
-                    <!-- 人間中心AIの社会実装 -->
+                    <!-- component-split: ServiceCard-HumanCentered -->
                     <div class="service-card animate-on-scroll" id="human-centered">
                         <div class="service-image">
                             <picture>
@@ -1084,70 +1159,7 @@
             </div>
         </section>
         
-        <!-- component-split: FAQ -->
-        <section class="section section-bg-gradient">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">よくある質問</span>
-                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
-                    <p class="section-description">AI導入を検討される際によくいただく質問にお答えします</p>
-                </div>
-                
-                <div class="faq-container animate-on-scroll">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIの導入にはどのくらいのコストがかかりますか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AIの導入コストは、ソリューションの規模や複雑さによって大きく異なります。小規模なチャットボット導入なら月額10万円程度から、フルカスタムのAIシステム開発では数百万円以上の初期コストが必要な場合もあります。当社では、小さく始めて効果を確認しながら段階的に拡張していくアプローチを推奨しています。まずはお気軽にご相談ください。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AI導入の効果はどれくらいで出ますか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AIの効果は導入する業務や目的によって異なりますが、基本的なチャットボットや自動化ツールであれば、導入後1〜3ヶ月程度で効果が現れ始めます。多くのケースでは、問い合わせ対応の自動化で30〜50%の業務効率化、データ分析AIによる予測精度向上で15〜25%の業績改善などの効果が報告されています。当社では、導入前に期待される効果を数値化し、KPIを設定してから開発を進めています。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIを導入するために必要なデータ量はどのくらいですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>必要なデータ量はAIの用途によって異なります。近年の大規模言語モデル（LLM）などは少ないデータでも活用できるため、導入のハードルは下がっています。例えば、チャットボットであれば100〜200の質問と回答のセット、予測モデルであれば数百〜数千件のデータがあれば初期導入が可能です。データが少ない場合でも、段階的に収集しながらAIの精度を向上させていくアプローチも可能です。当社ではお客様のデータ状況に合わせた最適なソリューションをご提案します。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIの導入に社内の専門人材は必要ですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>既存システムとの連携は可能ですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: ServicesCTA -->
+        <!-- component-split: EnhancedCTA -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -1280,7 +1292,7 @@
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- component-split: JavaScript -->
+    <!-- component-split: CommonJavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
     
@@ -1289,23 +1301,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // FAQアコーディオン
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                faqItem.classList.toggle('active');
-                
-                // 他のアコーディオンを閉じる
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) {
-                        item.classList.remove('active');
-                    }
-                });
-            });
-        });
         
         // スクロールアニメーション
         const observerOptions = {
@@ -1366,6 +1361,48 @@
                 this.style.zIndex = '1';
             });
         });
+        
+        // GSAP アニメーション
+        if (window.gsap) {
+            // FAQバナーのアニメーション
+            gsap.from('.faq-banner', {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '.faq-banner',
+                    start: 'top 80%'
+                }
+            });
+            
+            // サービスカードのアニメーション
+            gsap.utils.toArray('.service-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%'
+                    }
+                });
+            });
+            
+            // プロセスステップのアニメーション
+            gsap.utils.toArray('.process-step').forEach((step, i) => {
+                gsap.from(step, {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.6,
+                    delay: i * 0.15,
+                    scrollTrigger: {
+                        trigger: step,
+                        start: 'top 80%'
+                    }
+                });
+            });
+        }
     });
     </script>
 </body>
