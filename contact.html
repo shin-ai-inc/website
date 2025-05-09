@@ -1532,105 +1532,23 @@
 
         /* 
         ==============================================
-        // === component-split: FAQSection ===
-        COMPONENT: よくある質問
-        機能: 不安解消、情報提供
-        特徴: アコーディオン形式、インタラクティブな開閉
-        ==============================================
-        */
-        .faq-section {
-            margin-top: 4rem;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            transition: all var(--transition-normal);
-            border: 1px solid rgba(58, 95, 235, 0.08);
-            transform: translateZ(0); /* パフォーマンス最適化 */
-        }
-
-        .faq-item:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            border-left: 4px solid transparent;
-            transition: all var(--transition-normal);
-        }
-
-        .faq-item.active .faq-question {
-            border-left-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .faq-toggle {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            transition: all var(--transition-normal);
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, padding 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            max-height: 500px;
-        }
-
-        .faq-content {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-
-        /* 
-        ==============================================
         // === component-split: CompanionApproachSection ===
-        COMPONENT: 伴走型開発アプローチ
-        機能: 企業の特徴を強調、差別化ポイントの視覚化
-        特徴: グリッドレイアウト、アイコンによる視認性向上
+        COMPONENT: AI伴走型開発アプローチセクション
+        機能: アプローチの強みの訴求、直感的な理解
+        特徴: エレガントなカード表示、マーケティングポイントの視覚化
         ==============================================
         */
         .companion-approach {
             background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-            padding: 4rem 0;
-            margin-top: 2rem;
+            padding: 3rem 0;
+            margin: 2rem 0 4rem;
+            position: relative;
         }
         
         .companion-container {
             background: white;
             border-radius: var(--radius-xl);
-            padding: 3rem;
+            padding: 2.5rem;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
@@ -1652,14 +1570,14 @@
         }
         
         .companion-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
         
         .companion-subtitle {
             display: inline-block;
             padding: 0.5rem 1.5rem;
-            background: rgba(58, 95, 235, 0.08);
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
             border-radius: var(--radius-full);
             color: var(--primary);
             font-weight: 600;
@@ -1669,9 +1587,9 @@
         }
         
         .companion-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--dark);
         }
         
@@ -1682,62 +1600,47 @@
             margin: 0 auto;
             line-height: 1.7;
         }
-        
-        .companion-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+
+        .companion-points {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         
         .companion-point {
             background: rgba(249, 250, 252, 0.8);
             border-radius: var(--radius-lg);
-            padding: 2rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
             transition: all var(--transition-normal);
+            border: 1px solid rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.04);
             transform: translateZ(0); /* パフォーマンス最適化 */
         }
         
         .companion-point:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             background: white;
             border-color: rgba(58, 95, 235, 0.1);
         }
         
-        /* 光るエフェクト */
-        .companion-point::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-            z-index: 1;
-            will-change: transform; /* パフォーマンス最適化 */
-        }
-        
-        .companion-point:hover::after {
-            left: 100%;
-        }
-        
         .companion-point-icon {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
+            border-radius: 12px;
+            margin-right: 1.2rem;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
             transition: all var(--transition-normal);
             position: relative;
             z-index: 2;
@@ -1745,269 +1648,44 @@
         
         .companion-point:hover .companion-point-icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.25);
+            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         }
         
-        .companion-point h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 1rem;
+        .companion-point-content {
+            flex: 1;
             position: relative;
             z-index: 2;
         }
         
-        .companion-point p {
-            color: var(--gray);
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .highlight-text {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(to right, #3A5FEB, #00C9A7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-        }
-
-        /* 
-        ==============================================
-        // === component-split: CTAStyles ===
-        COMPONENT: CTA (行動喚起)
-        機能: ユーザーの行動を促す、視覚的な強調
-        特徴: グラデーション、アニメーション、強調ボタン
-        ==============================================
-        */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-container {
-            background: white;
-            border-radius: var(--radius-xl);
-            padding: 3.5rem;
-            box-shadow: var(--shadow-xl);
-            text-align: center;
-            position: relative;
-            z-index: var(--z-normal);
-            border: 1px solid rgba(58, 95, 235, 0.05);
-            overflow: hidden;
-            transform: translateZ(0); /* パフォーマンス最適化 */
-        }
-        
-        .cta-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
-            background-size: 200% auto;
-            animation: gradientShift 6s linear infinite;
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            z-index: var(--z-normal);
-        }
-
-        /* CTA光るエフェクト */
-        .cta-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                to right,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            animation: shimmer 5s infinite;
-            z-index: 1;
-            will-change: transform; /* パフォーマンス最適化 */
-        }
-        
-        .cta-title {
-            font-size: 2.7rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            line-height: 1.3;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .cta-title .text-gradient {
-            background: linear-gradient(to right, #3A5FEB, #00C9A7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .cta-description {
+        .companion-point-content h3 {
             font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* 
-        ==============================================
-        // === component-split: ButtonStyles ===
-        COMPONENT: ボタンスタイル
-        機能: インタラクション、視覚的フィードバック
-        特徴: アニメーション効果、グラデーション、シャドウ
-        ==============================================
-        */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.9rem 2.2rem;
-            border-radius: var(--radius-full);
             font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition-normal);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            z-index: var(--z-normal);
-            min-width: 180px;
-            font-size: 1rem;
-            transform: translateZ(0); /* パフォーマンス最適化 */
+            margin: 0 0 0.5rem;
+            color: var(--dark);
         }
         
-        .btn-lg {
-            padding: 1.1rem 2.7rem;
-            font-size: 1.15rem;
+        .companion-point-content p {
+            color: var(--gray);
+            margin: 0;
+            line-height: 1.6;
         }
         
-        .btn-primary {
-            background: linear-gradient(to right, #3A5FEB, #00C9A7);
-            color: white;
-            box-shadow: var(--shadow-btn);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-btn-hover);
-            background: linear-gradient(to right, #4671FF, #00E6C3);
-        }
-
-        /* アニメーション強化したCTAボタン */
-        .btn-primary.btn-animated {
-            animation: buttonPulse 2s infinite;
-            will-change: transform, box-shadow; /* パフォーマンス最適化 */
-        }
-
-        /* ボタン光るエフェクト */
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-            will-change: transform; /* パフォーマンス最適化 */
-        }
-
-        .btn-primary:hover::after {
-            left: 150%;
-        }
-        
-        .btn-outline {
-            background: white;
+        .companion-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--primary);
-            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.1);
-            border: 1px solid rgba(58, 95, 235, 0.2);
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            border-radius: var(--radius);
+            transition: all var(--transition-normal);
         }
         
-        .btn-outline:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
-            border-color: var(--primary);
-            background: rgba(58, 95, 235, 0.05);
-        }
-        
-        .btn-icon-right {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-        
-        .btn-icon-right i {
-            transition: transform var(--transition-normal);
-            will-change: transform; /* パフォーマンス最適化 */
-        }
-        
-        .btn-icon-right:hover i {
-            animation: arrowWave 1.5s ease infinite;
-        }
-        
-        .btn-glow {
-            position: relative;
-        }
-        
-        .btn-glow::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: var(--radius-full);
-            z-index: var(--z-back);
-            animation: pulseGlow 2s infinite;
-        }
-        
-        .btn-consultation {
-            background: linear-gradient(to right, #3A5FEB, #00C9A7);
-            color: white;
-            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-            position: relative;
-            z-index: var(--z-normal);
-            display: inline-flex;
-            flex-direction: column;
-            padding: 0.8rem 1.5rem;
-        }
-        
-        .btn-consultation:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.4);
-            background: linear-gradient(to right, #4671FF, #00E6C3);
-        }
-        
-        .btn-consultation-message {
-            font-size: 0.75rem;
-            font-weight: 400;
-            opacity: 0.9;
-            margin-top: 0.2rem;
+        .companion-footer:hover {
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
         }
 
         /* 
@@ -2669,7 +2347,6 @@
             .progress-steps {
                 max-width: 900px;
                 margin: 3rem auto;
-                position: relative;
             }
             
             .progress-timeline {
@@ -3146,6 +2823,7 @@
                             <li><a href="about.html" class="nav-link">会社紹介</a></li>
                             <li><a href="services.html" class="nav-link">サービス</a></li>
                             <li><a href="industries.html" class="nav-link">業界別活用</a></li>
+                            <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
                             <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
                             <li class="nav-cta"><a href="#contact-form" class="btn-consultation">無料相談</a></li>
                         </ul>
@@ -3283,7 +2961,7 @@
             // === component-split: CompanionApproachSection ===
             COMPONENT: 伴走型開発アプローチ
             機能: 差別化要因の強調、開発手法の説明
-            特徴: 3カラムレイアウト、アイコン、グラデーション
+            特徴: わかりやすいポイント説明、訴求力の高い表現
             ==============================================
             -->
             <section class="companion-approach">
@@ -3298,30 +2976,40 @@
                             </p>
                         </div>
                         
-                        <div class="companion-grid">
+                        <div class="companion-points">
                             <div class="companion-point bounce-in-up animate-delay-1">
                                 <div class="companion-point-icon">
                                     <i class="fas fa-lightbulb" aria-hidden="true"></i>
                                 </div>
-                                <h3>従来型開発の課題</h3>
-                                <p>これまでのシステム開発は、明確な要件を一括で決めて、<span class="highlight-text">初期から高額な投資</span>を前提にしなければならないスタイルが一般的でした。</p>
+                                <div class="companion-point-content">
+                                    <h3>現状課題への共感</h3>
+                                    <p>従来開発は一括要件定義・高額投資が前提。AI開発では柔軟性と段階的アプローチが求められます。</p>
+                                </div>
                             </div>
                             
                             <div class="companion-point bounce-in-up animate-delay-2">
                                 <div class="companion-point-icon">
                                     <i class="fas fa-rocket" aria-hidden="true"></i>
                                 </div>
-                                <h3>AIならではの特性</h3>
-                                <p>AIにおいては「やれることの幅」が非常に広く、<span class="highlight-text">プロトタイプから始めて段階的に拡張</span>していく柔軟なアプローチが最適です。</p>
+                                <div class="companion-point-content">
+                                    <h3>AIの無限の可能性</h3>
+                                    <p>AIの「やれることの幅」は非常に広く、初期の段階で全てを定義しきることは現実的ではありません。</p>
+                                </div>
                             </div>
                             
                             <div class="companion-point bounce-in-up animate-delay-3">
                                 <div class="companion-point-icon">
                                     <i class="fas fa-handshake" aria-hidden="true"></i>
                                 </div>
-                                <h3>ShinAIの伴走型開発</h3>
-                                <p>まず小さく始め、<span class="highlight-text">方向性の確認と実業務へのフィット</span>を一緒にすり合わせながら、パートナーとして伴走します。</p>
+                                <div class="companion-point-content">
+                                    <h3>共創関係の構築</h3>
+                                    <p>まず小さく始めてプロトタイプをご提示し、方向性を確認しながら、伴走型で最適化していきます。</p>
+                                </div>
                             </div>
+                        </div>
+                        
+                        <div class="companion-footer bounce-in-up animate-delay-4">
+                            「まずやってみる」から始め、成果を確かめながら一緒に進めることが成功への近道です
                         </div>
                     </div>
                 </div>
@@ -3343,45 +3031,60 @@
                         <p class="section-description">専門知識がなくても安心。丁寧にサポートします。</p>
                     </div>
                     
-                    <div class="progress-steps">
-                        <div class="progress-timeline">
-                            <div class="progress-step bounce-in-up">
-                                <div class="progress-step-icon">1</div>
-                                <div class="progress-step-content">
-                                    <h3 class="progress-step-title">無料相談</h3>
-                                    <p class="progress-step-description">現在の課題や目標をお聞かせください。専門用語は必要ありません。</p>
+                    <div class="process-steps">
+                        <div class="process-timeline">
+                            <div class="process-step bounce-in-up">
+                                <div class="process-step-icon">
+                                    <i class="fas fa-comments" aria-hidden="true"></i>
+                                    <div class="process-step-number">1</div>
+                                </div>
+                                <div class="process-step-content">
+                                    <h3 class="process-step-title">無料相談</h3>
+                                    <p class="process-step-description">現在の課題や目標をお聞かせください。専門用語は必要ありません。</p>
                                 </div>
                             </div>
                             
-                            <div class="progress-step bounce-in-up animate-delay-1">
-                                <div class="progress-step-icon">2</div>
-                                <div class="progress-step-content">
-                                    <h3 class="progress-step-title">提案</h3>
-                                    <p class="progress-step-description">ビジネスに合った最適なAI活用方法をご提案します。</p>
+                            <div class="process-step bounce-in-up animate-delay-1">
+                                <div class="process-step-icon">
+                                    <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                                    <div class="process-step-number">2</div>
+                                </div>
+                                <div class="process-step-content">
+                                    <h3 class="process-step-title">提案</h3>
+                                    <p class="process-step-description">ビジネスに合った最適なAI活用方法をご提案します。</p>
                                 </div>
                             </div>
                             
-                            <div class="progress-step bounce-in-up animate-delay-2">
-                                <div class="progress-step-icon">3</div>
-                                <div class="progress-step-content">
-                                    <h3 class="progress-step-title">プロトタイプ</h3>
-                                    <p class="progress-step-description">小規模なAIシステムを素早く構築し、効果を検証します。</p>
+                            <div class="process-step bounce-in-up animate-delay-2">
+                                <div class="process-step-icon">
+                                    <i class="fas fa-flask" aria-hidden="true"></i>
+                                    <div class="process-step-number">3</div>
+                                </div>
+                                <div class="process-step-content">
+                                    <h3 class="process-step-title">プロトタイプ</h3>
+                                    <p class="process-step-description">小規模なAIシステムを素早く構築し、効果を検証します。</p>
                                 </div>
                             </div>
                             
-                            <div class="progress-step bounce-in-up animate-delay-3">
-                                <div class="progress-step-icon">4</div>
-                                <div class="progress-step-content">
-                                    <h3 class="progress-step-title">段階的導入</h3>
-                                    <p class="progress-step-description">効果を確認しながら、段階的に機能を拡張していきます。</p>
+                            <div class="process-step bounce-in-up animate-delay-3">
+                                <div class="process-step-icon">
+                                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                                    <div class="process-step-number">4</div>
+                                </div>
+                                <div class="process-step-content">
+                                    <h3 class="process-step-title">段階的導入</h3>
+                                    <p class="process-step-description">効果を確認しながら、段階的に機能を拡張していきます。</p>
                                 </div>
                             </div>
 
-                            <div class="progress-step bounce-in-up animate-delay-4">
-                                <div class="progress-step-icon">5</div>
-                                <div class="progress-step-content">
-                                    <h3 class="progress-step-title">伴走支援</h3>
-                                    <p class="progress-step-description">導入後も継続的に改善提案やサポートを行います。</p>
+                            <div class="process-step bounce-in-up animate-delay-4">
+                                <div class="process-step-icon">
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                    <div class="process-step-number">5</div>
+                                </div>
+                                <div class="process-step-content">
+                                    <h3 class="process-step-title">伴走支援</h3>
+                                    <p class="process-step-description">導入後も継続的に改善提案やサポートを行います。</p>
                                 </div>
                             </div>
                         </div>
@@ -3588,98 +3291,6 @@
                                 <input type="hidden" name="timestamp" id="timestamp">
                                 <input type="hidden" name="form_source" value="website_contact_form">
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 
-            ==============================================
-            // === component-split: FAQSection ===
-            COMPONENT: よくある質問
-            機能: 不安解消、情報提供
-            特徴: アコーディオン形式、クリック操作
-            ==============================================
-            -->
-            <section class="section">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <span class="section-subtitle">よくある質問</span>
-                        <h2 class="section-title">AI導入に関する<span class="highlight">よくある質問</span></h2>
-                        <p class="section-description">AI導入に関してよくいただくご質問をまとめました。</p>
-                    </div>
-                    
-                    <div class="faq-section">
-                        <div class="faq-container bounce-in-up">
-                            <div class="faq-item active">
-                                <div class="faq-question" aria-expanded="true" tabindex="0">
-                                    <span>AIについて詳しくないのですが相談できますか？</span>
-                                    <div class="faq-toggle">
-                                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-content">
-                                        <p>はい、もちろん可能です。ShinAIでは、AI初心者の方にも分かりやすく説明することを心がけています。専門用語を使わずに、AIでできることやメリットをご説明しますので、どうぞお気軽にご相談ください。</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question" aria-expanded="false" tabindex="0">
-                                    <span>AI導入にはどのくらいの費用がかかりますか？</span>
-                                    <div class="faq-toggle">
-                                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-content">
-                                        <p>AI導入の費用は、導入規模や目的によって大きく異なります。ShinAIでは小さく始めて段階的に拡張していくアプローチを採用しており、まずはプロトタイプを構築して効果を確認していただくことが可能です。小規模な自動化ツールであれば月額数万円からの導入が可能です。まずは無料相談で、お客様の状況や予算に合わせた最適なプランをご提案いたします。</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question" aria-expanded="false" tabindex="0">
-                                    <span>プロトタイプからの開発とは具体的にどういうことですか？</span>
-                                    <div class="faq-toggle">
-                                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-content">
-                                        <p>従来のシステム開発では、全ての要件を最初に詳細に定義し、大規模な初期投資を行う必要がありましたが、AIの領域では可能性の幅が広く、最初から全てを定義することが難しい場合があります。そこでShinAIでは、まず小規模なプロトタイプを素早く構築し、実際の業務での効果を確認しながら段階的に機能を拡張していく方法を採用しています。これにより、初期投資リスクを抑えつつ、実際の業務に最適なAIソリューションを構築することが可能です。</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question" aria-expanded="false" tabindex="0">
-                                    <span>どのような業種でAIを活用できますか？</span>
-                                    <div class="faq-toggle">
-                                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-content">
-                                        <p>あらゆる業種でAIを活用いただけます。製造業、小売業、医療・福祉、教育、金融、不動産など、業種を問わず、データ入力や分析、顧客対応、品質管理など、様々なシーンでAIが活躍しています。詳しくは「業界別活用」ページをご覧ください。</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item">
-                                <div class="faq-question" aria-expanded="false" tabindex="0">
-                                    <span>小規模な会社でもAI導入は可能ですか？</span>
-                                    <div class="faq-toggle">
-                                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="faq-answer">
-                                    <div class="faq-content">
-                                        <p>はい、もちろん可能です。最近ではクラウドベースのAIサービスが充実し、中小企業や個人事業主の方でも手軽に導入できるAIソリューションが増えています。ShinAIでは、お客様の規模に合わせた最適な提案をいたします。小さく始めて効果を確認しながら段階的に拡張していくアプローチで、初期投資を抑えながらAIの効果を実感していただけます。</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -4010,37 +3621,6 @@
                         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
                     }
                 }
-                
-                // FAQアコーディオン
-                const faqItems = document.querySelectorAll('.faq-item');
-                
-                faqItems.forEach(item => {
-                    const question = item.querySelector('.faq-question');
-                    
-                    question.addEventListener('click', function() {
-                        const isActive = item.classList.contains('active');
-                        
-                        // アクティブなFAQを閉じる
-                        faqItems.forEach(faqItem => {
-                            if (faqItem !== item) {
-                                faqItem.classList.remove('active');
-                                faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                            }
-                        });
-                        
-                        // クリックされた項目の開閉
-                        item.classList.toggle('active');
-                        question.setAttribute('aria-expanded', !isActive);
-                    });
-                    
-                    // キーボード操作対応
-                    question.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            question.click();
-                        }
-                    });
-                });
                 
                 // アニメーションスクロール検出
                 const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
