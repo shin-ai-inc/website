@@ -146,6 +146,493 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
+
+    <!-- 
+    ==============================================
+    // === component-split: PageSpecificStyles ===
+    COMPONENT: ページ固有スタイル
+    機能: カスタムデザイン、インタラクション制御
+    用途: FAQページ専用のビジュアル効果、アニメーション
+    ==============================================
+    -->
+    <style>
+        /* 
+        ==============================================
+        // === component-split: FAQSpecificStyles ===
+        COMPONENT: FAQ固有のスタイル
+        機能: FAQ特有の要素のデザイン、インタラクション
+        特徴: アコーディオン、検索機能、カテゴリ分け
+        ==============================================
+        */
+        .faq-hero {
+            position: relative;
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #f5f7ff, #ffffff);
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .faq-hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: var(--z-back);
+        }
+        
+        .faq-hero-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 252, 0.95));
+            z-index: var(--z-back);
+        }
+        
+        .faq-hero-bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%233A5FEB' fill-opacity='0.06'/%3E%3C/svg%3E");
+            z-index: var(--z-back);
+            opacity: 0.7;
+        }
+        
+        .faq-hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+            letter-spacing: var(--heading-letter-spacing);
+        }
+        
+        .faq-hero-description {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        
+        /* FAQ検索機能 */
+        .faq-search {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .faq-search i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        #faq-search-input {
+            width: 100%;
+            padding: 1.2rem 1.2rem 1.2rem 3rem;
+            border: 2px solid rgba(58, 95, 235, 0.2);
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+        }
+        
+        #faq-search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.1), var(--shadow-md);
+        }
+        
+        /* FAQカテゴリタブ */
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-category {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 1px solid rgba(58, 95, 235, 0.2);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .faq-category:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .faq-category.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+        }
+        
+        /* FAQグループとアイテム */
+        .faq-group {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-group-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(58, 95, 235, 0.1);
+        }
+        
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+        
+        .faq-question h4 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark);
+            transition: color var(--transition-fast);
+            flex: 1;
+        }
+        
+        .faq-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            color: var(--primary);
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+        
+        .faq-toggle i {
+            font-size: 0.9rem;
+            transition: transform var(--transition-normal);
+            transform-origin: center;
+        }
+        
+        .faq-item.active .faq-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-question h4 {
+            color: var(--primary);
+        }
+        
+        .faq-item.active .faq-question {
+            border-left: 4px solid var(--primary);
+            background: linear-gradient(90deg, rgba(58, 95, 235, 0.03), transparent);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            height: 0;
+            overflow: hidden;
+            transition: height var(--transition-normal), padding var(--transition-normal);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            height: auto;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* マーケティングピッチエリア */
+        .pitch {
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            margin: 0 auto 3rem;
+            max-width: 800px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(58, 95, 235, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pitch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            z-index: 1;
+        }
+        
+        .pitch h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
+        }
+        
+        .pitch ul {
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pitch li {
+            padding: 0.8rem 0 0.8rem 3rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(58, 95, 235, 0.05);
+        }
+        
+        .pitch li::before {
+            content: attr(data-emoji);
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .pitch li strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .pitch p {
+            margin: 0 0 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .pitch .closer {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+            border-radius: var(--radius);
+        }
+        
+        /* FAQ CTA */
+        .faq-cta {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .faq-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            z-index: 1;
+        }
+        
+        .faq-cta-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .faq-cta-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-cta-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .faq-cta-buttons .btn {
+            min-width: 220px;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .faq-hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .faq-category {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .faq-cta {
+                padding: 2rem;
+            }
+            
+            .faq-cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .faq-cta-description {
+                font-size: 1.1rem;
+            }
+            
+            .pitch {
+                padding: 2rem;
+            }
+            
+            .pitch h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .faq-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .faq-hero-title {
+                font-size: 2rem;
+            }
+            
+            .faq-hero-description {
+                font-size: 1rem;
+            }
+            
+            .faq-search i {
+                left: 15px;
+                font-size: 1rem;
+            }
+            
+            #faq-search-input {
+                padding: 1rem 1rem 1rem 2.5rem;
+                font-size: 1rem;
+            }
+            
+            .faq-categories {
+                gap: 0.5rem;
+            }
+            
+            .faq-category {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .faq-group-title {
+                font-size: 1.5rem;
+            }
+            
+            .faq-question h4 {
+                font-size: 1.05rem;
+            }
+            
+            .faq-cta {
+                padding: 1.5rem;
+            }
+            
+            .faq-cta-title {
+                font-size: 1.6rem;
+            }
+            
+            .faq-cta-description {
+                font-size: 1rem;
+            }
+            
+            .faq-cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .faq-cta-buttons .btn {
+                width: 100%;
+            }
+            
+            .pitch {
+                padding: 1.5rem;
+            }
+            
+            .pitch h2 {
+                font-size: 1.4rem;
+            }
+            
+            .pitch li {
+                padding-left: 2.5rem;
+            }
+            
+            .pitch li::before {
+                font-size: 1.2rem;
+            }
+            
+            .pitch .closer {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -243,10 +730,10 @@
 
     <!-- 
     ==============================================
-    // === component-split: FAQSearch ===
-    COMPONENT: FAQ検索
-    機能: キーワード検索によるFAQ絞り込み
-    特徴: リアルタイム検索、ユーザビリティ向上
+    // === component-split: FAQContent ===
+    COMPONENT: FAQ本文
+    機能: 質問と回答の提供、ユーザーの疑問解消
+    特徴: カテゴリー分け、検索機能、アコーディオン形式
     ==============================================
     -->
     <section class="section">
@@ -277,17 +764,17 @@
                 <h2>AI伴走型開発の強み</h2>
                 <ul>
                     <li data-emoji="🎯">
-                        <strong>現状課題への共感：</strong>従来開発は一括要件定義・高額投資が前提。
+                        <strong>現状課題への共感：</strong>従来開発は一括要件定義・高額投資が前提。AIの領域では柔軟性と段階的アプローチが求められます。
                     </li>
                     <li data-emoji="🚀">
-                        <strong>AIの新性質：</strong>初期全定義は非現実的、可能性は無限大。
+                        <strong>AIの無限の可能性：</strong>AIの「やれることの幅」は非常に広く、初期の段階で全てを定義しきることは現実的ではありません。
                     </li>
                     <li data-emoji="🤝">
-                        <strong>伴走スタイル：</strong>小さく始めてプロトタイプ提示→共創最適化。
+                        <strong>共創関係の構築：</strong>まず小さく始めてプロトタイプをご提示し、方向性を確認しながら、伴走型で最適化していきます。
                     </li>
                 </ul>
-                <p><strong>メリット：</strong>リスク抑制・柔軟対応・共創関係</p>
-                <p class="closer">「まずやってみる」から始め、成果を確かめながら進めます。</p>
+                <p><strong>メリット：</strong>初期投資リスクの抑制・柔軟な対応・共創パートナーシップの実現</p>
+                <p class="closer">「まずやってみる」から始め、成果を確かめながら進めることが成功への近道です</p>
             </section>
             
             <!-- 
@@ -741,6 +1228,7 @@
             if (currentYearElement) {
                 const currentYear = new Date().getFullYear();
                 currentYearElement.textContent = currentYear;
+                document.body.setAttribute('data-current-year', currentYear);
             }
             
             // ヘッダースクロール効果
@@ -755,11 +1243,17 @@
             
             // トップに戻るボタン
             const backToTopButton = document.getElementById('back-to-top');
+            let lastScrollTime = 0;
+            
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.add('active');
-                } else {
-                    backToTopButton.classList.remove('active');
+                const now = Date.now();
+                if (now - lastScrollTime > 100) { // スロットリング処理
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('active');
+                    } else {
+                        backToTopButton.classList.remove('active');
+                    }
+                    lastScrollTime = now;
                 }
             });
             
@@ -788,37 +1282,133 @@
                 });
             }
             
-            // FAQアコーディオン制御
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', function() {
-                    const isActive = item.classList.contains('active');
+            // スムーススクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
                     
-                    // 同じグループ内の他のアイテムを閉じる
-                    const parentGroup = item.closest('.faq-group');
-                    parentGroup.querySelectorAll('.faq-item').forEach(faqItem => {
-                        if (faqItem !== item) {
-                            faqItem.classList.remove('active');
-                            faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                        }
-                    });
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
                     
-                    // クリックされたアイテムの開閉制御
-                    item.classList.toggle('active');
-                    question.setAttribute('aria-expanded', !isActive);
-                });
-                
-                // キーボード操作対応
-                question.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        question.click();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight - 20,
+                            behavior: 'smooth'
+                        });
                     }
                 });
             });
+            
+            // FAQアコーディオン制御とGSAPアニメーション
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            if (window.gsap) {
+                // GSAPが利用可能な場合、アニメーションを設定
+                gsap.registerPlugin(ScrollTrigger);
+                
+                gsap.utils.toArray('.faq-item').forEach(item => {
+                    const answer = item.querySelector('.faq-answer');
+                    const content = answer.querySelector('p');
+                    
+                    // 初期化
+                    gsap.set(answer, { height: 0 });
+                    
+                    item.addEventListener('click', function() {
+                        const isActive = this.classList.contains('active');
+                        
+                        // すべて閉じる
+                        faqItems.forEach(faqItem => {
+                            if (faqItem !== item) {
+                                faqItem.classList.remove('active');
+                                faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                                
+                                const otherAnswer = faqItem.querySelector('.faq-answer');
+                                gsap.to(otherAnswer, {
+                                    height: 0,
+                                    duration: 0.3,
+                                    ease: 'power2.out'
+                                });
+                            }
+                        });
+                        
+                        // クリックされた項目の表示/非表示を切り替え
+                        this.classList.toggle('active');
+                        const question = this.querySelector('.faq-question');
+                        question.setAttribute('aria-expanded', !isActive);
+                        
+                        if (!isActive) {
+                            // 開く
+                            gsap.set(answer, { height: 'auto' });
+                            gsap.from(answer, {
+                                height: 0,
+                                duration: 0.4,
+                                ease: 'power2.out'
+                            });
+                            
+                            // コンテンツのフェードイン
+                            gsap.fromTo(content, 
+                                { opacity: 0, y: 10 },
+                                { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
+                            );
+                        } else {
+                            // 閉じる
+                            gsap.to(answer, {
+                                height: 0,
+                                duration: 0.3,
+                                ease: 'power2.in'
+                            });
+                        }
+                    });
+                });
+                
+                // スクロールアニメーション
+                gsap.utils.toArray('.bounce-in-up').forEach(element => {
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: 'top 85%',
+                        onEnter: () => {
+                            gsap.fromTo(element,
+                                { y: 50, opacity: 0 },
+                                { y: 0, opacity: 1, duration: 0.7, ease: 'back.out(1.5)' }
+                            );
+                        },
+                        once: true
+                    });
+                });
+            } else {
+                // GSAPが利用できない場合、通常のJavaScriptでアコーディオン機能を実装
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    
+                    question.addEventListener('click', function() {
+                        const isActive = item.classList.contains('active');
+                        
+                        // アクティブなFAQを閉じる
+                        faqItems.forEach(faqItem => {
+                            if (faqItem !== item) {
+                                faqItem.classList.remove('active');
+                                faqItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        
+                        // クリックされた項目の開閉
+                        item.classList.toggle('active');
+                        question.setAttribute('aria-expanded', !isActive);
+                    });
+                    
+                    // キーボード操作対応
+                    question.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            question.click();
+                        }
+                    });
+                });
+            }
             
             // FAQ検索機能
             const searchInput = document.getElementById('faq-search-input');
@@ -848,7 +1438,10 @@
                     
                     // グループの表示制御
                     document.querySelectorAll('.faq-group').forEach(group => {
-                        const visibleItems = group.querySelectorAll('.faq-item[style="display: block"]');
+                        const visibleItems = Array.from(group.querySelectorAll('.faq-item')).filter(item => 
+                            item.style.display !== 'none'
+                        );
+                        
                         if (visibleItems.length === 0) {
                             group.style.display = 'none';
                         } else {
@@ -948,23 +1541,6 @@
                     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
                 }
             }
-            
-            // スクロールアニメーション
-            const animateElements = document.querySelectorAll('.bounce-in-up, .slide-in-up');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            animateElements.forEach(element => {
-                observer.observe(element);
-            });
         });
     </script>
 </body>
