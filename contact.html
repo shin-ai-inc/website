@@ -494,6 +494,10 @@
         .animate-delay-5 {
             animation-delay: 1s;
         }
+        
+        .animate-in {
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
 
         /* 
         ==============================================
@@ -781,25 +785,38 @@
         .benefit-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: white;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            color: white;
-            font-size: 2rem;
             transition: all var(--transition-normal);
             position: relative;
             z-index: 2;
             box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         }
+
+        .benefit-icon-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            color: white;
+            font-size: 2rem;
+        }
         
-        .benefit-card:nth-child(2) .benefit-icon {
+        .benefit-card:nth-child(1) .benefit-icon-inner {
+            background: linear-gradient(135deg, #3A5FEB, #4671FF);
+        }
+        
+        .benefit-card:nth-child(2) .benefit-icon-inner {
             background: linear-gradient(135deg, #00C9A7, #00E6C3);
         }
         
-        .benefit-card:nth-child(3) .benefit-icon {
+        .benefit-card:nth-child(3) .benefit-icon-inner {
             background: linear-gradient(135deg, #FF8A00, #FFA940);
         }
         
@@ -851,6 +868,27 @@
             line-height: 1;
             margin-bottom: 0.3rem;
             background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .benefit-card:nth-child(1) .stat-value {
+            background: linear-gradient(to right, #3A5FEB, #4671FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .benefit-card:nth-child(2) .stat-value {
+            background: linear-gradient(to right, #00C9A7, #00E6C3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .benefit-card:nth-child(3) .stat-value {
+            background: linear-gradient(to right, #FF8A00, #FFA940);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1151,8 +1189,8 @@
             top: 50%;
             left: 1.2rem;
             transform: translateY(-50%);
-            height: 26px;
-            width: 26px;
+            height: 24px;
+            width: 24px;
             background-color: white;
             border: 2px solid rgba(58, 95, 235, 0.3);
             border-radius: var(--radius-sm);
@@ -1175,10 +1213,10 @@
             content: "";
             position: absolute;
             display: none;
-            left: 9px;
-            top: 5px;
-            width: 6px;
-            height: 11px;
+            left: 8px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
             border: solid white;
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
@@ -1296,7 +1334,7 @@
             padding: 2.2rem;
         }
         
-        /* 改善されたコンタクト方法スタイル - スクリーンショット合わせ */
+        /* 改善されたコンタクト方法スタイル - スクリーンショットに合わせた調整 */
         .contact-method {
             display: flex;
             align-items: flex-start;
@@ -1344,22 +1382,35 @@
             width: 60px;
             height: 60px;
             min-width: 60px;
-            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            border-radius: 14px;
             margin-right: 1.2rem;
-            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
             transition: all var(--transition-normal);
             position: relative;
             z-index: 2;
+            background: white;
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.1);
+        }
+
+        .contact-icon-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            color: white;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #3A5FEB, #00C9A7);
         }
         
         .contact-method:hover .contact-icon {
             transform: scale(1.1) rotate(5deg);
+        }
+        
+        .contact-method:hover .contact-icon-inner {
             box-shadow: 0 8px 20px rgba(58, 95, 235, 0.3);
             background: linear-gradient(135deg, #4671FF, #00E6C3);
         }
@@ -1591,6 +1642,13 @@
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--dark);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .companion-description {
@@ -1901,8 +1959,9 @@
             white-space: nowrap;
         }
 
-        .nav-cta .btn-consultation-message {
-            display: none; /* スクリーンショットにはサブテキストがないため */
+        .nav-cta .btn-consultation:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
         }
 
         /* 
