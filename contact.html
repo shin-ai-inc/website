@@ -1907,6 +1907,112 @@
 
         /* 
         ==============================================
+        // === component-split: ButtonStyles ===
+        COMPONENT: ボタンスタイル
+        機能: インタラクション、アクション誘導
+        特徴: 視覚的フィードバック、アニメーション効果
+        ==============================================
+        */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            outline: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0); /* パフォーマンス最適化 */
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-btn);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: var(--shadow-btn-hover);
+            transform: translateY(-3px) scale(1.02);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(58, 95, 235, 0.05);
+            transform: translateY(-3px);
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-icon-right {
+            gap: 0.8rem;
+        }
+        
+        .btn-icon-right i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-icon-right:hover i {
+            animation: arrowWave 1s infinite;
+        }
+        
+        .btn-animated {
+            animation: buttonPulse 2s infinite;
+        }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            background-color: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(58, 95, 235, 0.2);
+            gap: 0.8rem;
+        }
+        
+        .btn-download:hover {
+            background: rgba(58, 95, 235, 0.05);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-download i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-download:hover i {
+            transform: translateY(2px);
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* 
+        ==============================================
         // === component-split: FooterStyles ===
         COMPONENT: フッター
         機能: サイト全体ナビゲーション、リンク集約
@@ -2020,1868 +2126,1980 @@
         }
 
         .footer-bottom-links a {
-                color: rgba(255, 255, 255, 0.5);
-                text-decoration: none;
-                transition: color 0.3s ease;
-            }
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-            .footer-bottom-links a:hover {
-                color: var(--secondary);
-            }
+        .footer-bottom-links a:hover {
+            color: var(--secondary);
+        }
 
-            /* 
-            ==============================================
-            // === component-split: ChatbotStyles ===
-            COMPONENT: チャットボット
-            機能: インタラクティブサポート、会話型インターフェース
-            特徴: フローティング配置、アニメーション効果
-            ==============================================
-            */
-            .chatbot {
-                position: fixed;
-                right: 20px;
-                bottom: 20px;
-                z-index: var(--z-highest);
-            }
+        /* 
+        ==============================================
+        // === component-split: ChatbotStyles ===
+        COMPONENT: チャットボット
+        機能: インタラクティブサポート、会話型インターフェース
+        特徴: フローティング配置、アニメーション効果
+        ==============================================
+        */
+        .chatbot {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: var(--z-highest);
+        }
 
-            .chatbot-toggle {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                background: var(--gradient-primary);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: none;
-                cursor: pointer;
-                box-shadow: var(--shadow-lg);
-                position: relative;
-                font-size: 1.5rem;
-                transition: all var(--transition-normal);
-                z-index: 2;
-                transform: translateZ(0); /* パフォーマンス最適化 */
-            }
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            font-size: 1.5rem;
+            transition: all var(--transition-normal);
+            z-index: 2;
+            transform: translateZ(0); /* パフォーマンス最適化 */
+        }
 
-            .chatbot-toggle:hover {
-                transform: scale(1.1);
-                box-shadow: var(--shadow-xl);
-            }
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
 
-            .ripple {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                background: var(--gradient-primary);
-                opacity: 0.5;
-                transform: scale(1);
-                animation: pulse 1.5s infinite;
-                z-index: -1;
-                will-change: transform; /* パフォーマンス最適化 */
-            }
+        .ripple {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            opacity: 0.5;
+            transform: scale(1);
+            animation: pulse 1.5s infinite;
+            z-index: -1;
+            will-change: transform; /* パフォーマンス最適化 */
+        }
 
-            /* チャットボットコンテナ */
-            .chatbot-container {
-                position: absolute;
-                bottom: 80px;
-                right: 0;
-                width: 350px;
-                background: white;
-                border-radius: 20px;
-                box-shadow: var(--shadow-xl);
-                overflow: hidden;
-                transition: all 0.3s ease;
-                opacity: 0;
-                transform-origin: bottom right;
-                transform: scale(0.9);
-                pointer-events: none;
-                max-height: 500px;
-                display: flex;
-                flex-direction: column;
-                will-change: transform, opacity; /* パフォーマンス最適化 */
-            }
+        /* チャットボットコンテナ */
+        .chatbot-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform-origin: bottom right;
+            transform: scale(0.9);
+            pointer-events: none;
+            max-height: 500px;
+            display: flex;
+            flex-direction: column;
+            will-change: transform, opacity; /* パフォーマンス最適化 */
+        }
 
-            .chatbot-container.active {
-                opacity: 1;
-                transform: scale(1);
-                pointer-events: all;
-            }
+        .chatbot-container.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
 
-            .chatbot-header {
-                padding: 15px 20px;
-                background: var(--gradient-primary);
-                color: white;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        .chatbot-header {
+            padding: 15px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .chatbot-title {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-weight: 600;
-            }
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
 
-            .chatbot-close {
-                background: none;
-                border: none;
-                color: white;
-                cursor: pointer;
-                font-size: 1.2rem;
-                padding: 0;
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: all 0.2s ease;
-            }
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
 
-            .chatbot-close:hover {
-                background: rgba(255, 255, 255, 0.2);
-            }
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-            .chatbot-messages {
-                padding: 20px;
-                height: 300px;
-                overflow-y: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
+        .chatbot-messages {
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-            .message {
-                max-width: 80%;
-                padding: 12px 15px;
-                border-radius: 15px;
-                font-size: 0.95rem;
-                line-height: 1.5;
-            }
+        .message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
-            .bot-message {
-                background: #f0f2f5;
-                color: var(--dark);
-                align-self: flex-start;
-                border-bottom-left-radius: 5px;
-            }
+        .bot-message {
+            background: #f0f2f5;
+            color: var(--dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
 
-            .user-message {
-                background: var(--primary);
-                color: white;
-                align-self: flex-end;
-                border-bottom-right-radius: 5px;
-            }
+        .user-message {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
 
-            .chatbot-input {
-                padding: 15px;
-                border-top: 1px solid #e0e0e0;
-                display: flex;
-                gap: 10px;
-            }
+        .chatbot-input {
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
 
-            .chatbot-input input {
-                flex: 1;
-                padding: 10px 15px;
-                border: 1px solid #e0e0e0;
-                border-radius: 20px;
-                outline: none;
-                font-size: 0.95rem;
-                transition: all 0.2s ease;
-            }
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
 
-            .chatbot-input input:focus {
-                border-color: var(--primary);
-                box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
-            }
+        .chatbot-input input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+        }
 
-            .chatbot-submit {
-                width: 40px;
-                height: 40px;
-                background: var(--gradient-primary);
-                color: white;
-                border: none;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
+        .chatbot-submit {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-            .chatbot-submit:hover {
-                transform: scale(1.1);
-            }
+        .chatbot-submit:hover {
+            transform: scale(1.1);
+        }
 
-            /* 
-            ==============================================
-            // === component-split: NavigationUtilities ===
-            COMPONENT: ナビゲーションユーティリティ
-            機能: アクセシビリティ向上、ユーザー補助
-            特徴: バックトゥトップボタン、スキップナビ
-            ==============================================
-            */
-            .back-to-top {
-                position: fixed;
-                right: 20px;
-                bottom: 90px;
-                width: 45px;
-                height: 45px;
-                border-radius: 50%;
-                background: var(--gradient-primary);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: var(--z-high);
-                text-decoration: none;
-                box-shadow: var(--shadow-md);
-                transform: translateY(100px);
-                opacity: 0;
-                transition: all var(--transition-normal);
-                border: none;
-                cursor: pointer;
-                will-change: transform, opacity; /* パフォーマンス最適化 */
-            }
+        /* 
+        ==============================================
+        // === component-split: NavigationUtilities ===
+        COMPONENT: ナビゲーションユーティリティ
+        機能: アクセシビリティ向上、ユーザー補助
+        特徴: バックトゥトップボタン、スキップナビ
+        ==============================================
+        */
+        .back-to-top {
+            position: fixed;
+            right: 20px;
+            bottom: 90px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-high);
+            text-decoration: none;
+            box-shadow: var(--shadow-md);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all var(--transition-normal);
+            border: none;
+            cursor: pointer;
+            will-change: transform, opacity; /* パフォーマンス最適化 */
+        }
 
-            .back-to-top.active {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .back-to-top.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-            .back-to-top:hover {
-                transform: translateY(-5px);
-                box-shadow: var(--shadow-lg);
-            }
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
 
-            /* スキップナビゲーション - アクセシビリティ対応 */
-            .skip-nav {
-                position: absolute;
-                top: -40px;
-                left: 0;
-                padding: 8px 12px;
-                background: var(--primary);
-                color: white;
-                border-radius: 0 0 4px 0;
-                transition: top 0.3s;
-                z-index: var(--z-highest);
-                text-decoration: none;
-            }
+        /* スキップナビゲーション - アクセシビリティ対応 */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            padding: 8px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 0 0 4px 0;
+            transition: top 0.3s;
+            z-index: var(--z-highest);
+            text-decoration: none;
+        }
 
-            .skip-nav:focus {
-                top: 0;
-            }
+        .skip-nav:focus {
+            top: 0;
+        }
 
-            /* 
-            ==============================================
-            // === component-split: AccessibilitySupport ===
-            COMPONENT: アクセシビリティサポート
-            機能: ウェブ標準対応、支援技術との連携
-            特徴: フォーカス表示、スクリーンリーダー対応
-            ==============================================
-            */
-            input:focus, 
-            textarea:focus, 
-            button:focus, 
-            a:focus {
-                outline: 2px solid var(--primary);
-                outline-offset: 2px;
-            }
+        /* 
+        ==============================================
+        // === component-split: AccessibilitySupport ===
+        COMPONENT: アクセシビリティサポート
+        機能: ウェブ標準対応、支援技術との連携
+        特徴: フォーカス表示、スクリーンリーダー対応
+        ==============================================
+        */
+        input:focus, 
+        textarea:focus, 
+        button:focus, 
+        a:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
 
-            [aria-hidden="true"] {
-                display: none;
-            }
+        [aria-hidden="true"] {
+            display: none;
+        }
 
-            .required {
-                color: var(--primary);
-                font-weight: 600;
-            }
+        .required {
+            color: var(--primary);
+            font-weight: 600;
+        }
 
-            /* 
-            ==============================================
-            // === component-split: Preloader ===
-            COMPONENT: プリローダー
-            機能: 読み込み体験向上、視覚的フィードバック
-            特徴: アニメーション効果、スムーズな遷移
-            ==============================================
-            */
-            .preload-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: var(--z-highest);
-                transition: opacity 0.5s ease;
-            }
-
-            .preload-container.hidden {
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            .preload-spinner {
-                width: 50px;
-                height: 50px;
-                border: 3px solid rgba(58, 95, 235, 0.1);
-                border-top-color: var(--primary);
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-                will-change: transform; /* パフォーマンス最適化 */
-            }
-
-            /* 
-            ==============================================
-            // === component-split: ProgressIndicator ===
-            COMPONENT: 進行状況インジケーター
-            機能: ステップの可視化、進行管理
-            特徴: タイムライン表現、レスポンシブ対応
-            ==============================================
-            */
-            .progress-steps {
-                max-width: 900px;
-                margin: 3rem auto;
-            }
-            
-            .progress-timeline {
-                display: flex;
-                justify-content: space-between;
-                position: relative;
-                margin: 0 auto;
-            }
-            
-            .progress-timeline::before {
-                content: '';
-                position: absolute;
-                top: 25px;
-                left: 0;
-                width: 100%;
-                height: 3px;
-                background: linear-gradient(to right, #3A5FEB, #00C9A7);
-                z-index: 1;
-            }
-            
-            .progress-step {
-                flex: 1;
-                text-align: center;
-                position: relative;
-                z-index: 2;
-            }
-            
-            .progress-step-icon {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #3A5FEB, #4671FF);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto 1rem;
-                font-size: 1.2rem;
-                font-weight: 600;
-                box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
-                position: relative;
-                z-index: 2;
-                transition: all var(--transition-normal);
-            }
-            
-            .progress-step:nth-child(1) .progress-step-icon {
-                background: linear-gradient(135deg, #3A5FEB, #4671FF);
-            }
-            
-            .progress-step:nth-child(2) .progress-step-icon {
-                background: linear-gradient(135deg, #4671FF, #6C8DFF);
-            }
-            
-            .progress-step:nth-child(3) .progress-step-icon {
-                background: linear-gradient(135deg, #6C8DFF, #93ABFF);
-            }
-            
-            .progress-step:nth-child(4) .progress-step-icon {
-                background: linear-gradient(135deg, #93ABFF, #B9C9FF);
-            }
-            
-            .progress-step-icon:hover {
-                transform: scale(1.1);
-                box-shadow: 0 8px 25px rgba(58, 95, 235, 0.3);
-            }
-            
-            .progress-step-title {
-                font-weight: 600;
-                color: var(--dark);
-                margin-bottom: 0.5rem;
-            }
-            
-            .progress-step-description {
-                font-size: 0.9rem;
-                color: var(--gray);
-                line-height: 1.6;
-                max-width: 200px;
-                margin: 0 auto;
-            }
-
-            /* 
-            ==============================================
-            // === component-split: ContainerAndGrid ===
-            COMPONENT: コンテナとグリッド
-            機能: レイアウト制御、サイズ管理
-            特徴: レスポンシブ対応、一貫した余白
-            ==============================================
-            */
-            .container {
-                width: 100%;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 15px;
-            }
-
-            /* 
-            ==============================================
-            // === component-split: UtilityClasses ===
-            COMPONENT: ユーティリティクラス
-            機能: 共通スタイルの適用、マークアップ簡素化
-            特徴: マージン、パディング、テキスト配置など
-            ==============================================
-            */
-            .text-center {
-                text-align: center;
-            }
-            
-            .mt-1 { margin-top: 0.5rem; }
-            .mt-2 { margin-top: 1rem; }
-            .mt-3 { margin-top: 1.5rem; }
-            .mt-4 { margin-top: 2rem; }
-            .mt-5 { margin-top: 2.5rem; }
-            
-            .py-1 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-            .py-2 { padding-top: 1rem; padding-bottom: 1rem; }
-            .py-3 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-            .py-4 { padding-top: 2rem; padding-bottom: 2rem; }
-            .py-5 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
-            
-            .px-1 { padding-left: 0.5rem; padding-right: 0.5rem; }
-            .px-2 { padding-left: 1rem; padding-right: 1rem; }
-            .px-3 { padding-left: 1.5rem; padding-right: 1.5rem; }
-            .px-4 { padding-left: 2rem; padding-right: 2rem; }
-            .px-5 { padding-left: 2.5rem; padding-right: 2.5rem; }
-
-            /* 
-            ==============================================
-            // === component-split: ResponsiveStyles ===
-            COMPONENT: レスポンシブスタイル
-            機能: マルチデバイス対応、レイアウト調整
-            特徴: モバイルファースト、ブレイクポイント制御
-            ==============================================
-            */
-            @media (max-width: 992px) {
-                .page-hero-title {
-                    font-size: 2.8rem;
-                }
-                
-                .contact-wrapper {
-                    grid-template-columns: 1fr;
-                    gap: 2rem;
-                }
-                
-                .process-timeline {
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 2rem;
-                }
-                
-                .process-timeline::before {
-                    top: 0;
-                    left: 40px;
-                    width: 4px;
-                    height: 100%;
-                }
-                
-                .process-step {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    text-align: left;
-                    padding-left: 2rem;
-                }
-                
-                .process-step-icon {
-                    margin: 0 1.5rem 0 0;
-                }
-                
-                .cta-title {
-                    font-size: 2.2rem;
-                }
-                
-                .cta-description {
-                    font-size: 1.1rem;
-                }
-
-                .footer-grid {
-                    grid-template-columns: 1fr 1fr;
-                }
-                
-                .companion-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-                
-                .benefit-icon {
-                    width: 75px;
-                    height: 75px;
-                    font-size: 1.8rem;
-                }
-            }
-            
-            @media (max-width: 768px) {
-                .page-hero-title {
-                    font-size: 2.5rem;
-                }
-                
-                .page-hero-description {
-                    font-size: 1.1rem;
-                }
-                
-                .section-title {
-                    font-size: 2rem;
-                }
-                
-                .section-description {
-                    font-size: 1rem;
-                }
-                
-                .contact-form-container, .contact-info, .cta-container {
-                    padding: 2rem;
-                }
-                
-                .form-grid {
-                    grid-template-columns: 1fr;
-                    gap: 1rem;
-                }
-                
-                .checkbox-group {
-                    grid-template-columns: 1fr;
-                }
-                
-                .benefits-container {
-                    flex-direction: column;
-                    align-items: center;
-                }
-                
-                .benefit-card {
-                    width: 100%;
-                    max-width: 100%;
-                }
-                
-                .cta-buttons {
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-                
-                .btn {
-                    width: 100%;
-                }
-
-                .menu-toggle {
-                    display: block;
-                }
-
-                .nav {
-                    position: fixed;
-                    top: 70px;
-                    left: 0;
-                    width: 100%;
-                    height: auto;
-                    max-height: 0;
-                    overflow: hidden;
-                    flex-direction: column;
-                    background: white;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                    transition: all var(--transition-normal);
-                    z-index: var(--z-high);
-                    padding: 0;
-                    gap: 0;
-                }
-
-                .nav.active {
-                    max-height: 500px;
-                    padding: 1rem 0;
-                }
-
-                .nav li {
-                    width: 100%;
-                    text-align: center;
-                }
-
-                .nav-link {
-                    display: block;
-                    padding: 1rem;
-                }
-
-                .nav-cta {
-                    margin: 1rem 0;
-                }
-
-                .footer-grid {
-                    grid-template-columns: 1fr;
-                    gap: 2rem;
-                }
-
-                .footer-bottom {
-                    flex-direction: column;
-                    text-align: center;
-                }
-
-                .footer-bottom-links {
-                    justify-content: center;
-                }
-                
-                .companion-grid {
-                    grid-template-columns: 1fr;
-                }
-                
-                .progress-timeline {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 2rem;
-                }
-                
-                .progress-timeline::before {
-                    top: 0;
-                    left: 25px;
-                    width: 3px;
-                    height: 100%;
-                }
-                
-                .progress-step {
-                    display: flex;
-                    align-items: center;
-                    text-align: left;
-                    padding-left: 60px;
-                    width: 100%;
-                }
-                
-                .progress-step-icon {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    margin: 0;
-                }
-                
-                .progress-step-title, .progress-step-description {
-                    max-width: 100%;
-                    margin: 0;
-                }
-                
-                .progress-step-content {
-                    margin-left: 1rem;
-                }
-            }
-            
-            @media (max-width: 576px) {
-                .page-hero {
-                    padding: 120px 0 60px;
-                }
-                
-                .page-hero-title {
-                    font-size: 2.2rem;
-                }
-                
-                .page-hero-description {
-                    font-size: 1rem;
-                }
-                
-                .section {
-                    padding: 3rem 0;
-                }
-                
-                .section-title {
-                    font-size: 1.8rem;
-                }
-                
-                .contact-form-container, .contact-info {
-                    padding: 1.5rem;
-                }
-                
-                .contact-form-title {
-                    font-size: 1.5rem;
-                }
-                
-                .process-step {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    text-align: left;
-                    padding-left: 4rem;
-                }
-                
-                .process-step-icon {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 60px;
-                    height: 60px;
-                    font-size: 1.5rem;
-                }
-                
-                .process-step-content {
-                    margin-top: 0.5rem;
-                }
-                
-                .cta-title {
-                    font-size: 1.8rem;
-                }
-                
-                .cta-description {
-                    font-size: 1rem;
-                }
-
-                /* iPhoneでのレイアウト最適化 */
-                .form-check {
-                    padding: 1rem 1rem 1rem 3.5rem;
-                }
-
-                .checkmark {
-                    left: 1rem;
-                    width: 24px;
-                    height: 24px;
-                }
-
-                .checkmark:after {
-                    left: 8px;
-                    top: 4px;
-                    width: 5px;
-                    height: 10px;
-                }
-                
-                .contact-icon {
-                    width: 54px;
-                    height: 54px;
-                    font-size: 1.3rem;
-                }
-                
-                .companion-point-icon {
-                    width: 60px;
-                    height: 60px;
-                    font-size: 1.5rem;
-                }
-                
-                .benefit-icon {
-                    width: 70px;
-                    height: 70px;
-                    font-size: 1.6rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <!-- 
+        /* 
         ==============================================
         // === component-split: Preloader ===
         COMPONENT: プリローダー
-        機能: 読み込み体験向上、初期表示の改善
-        用途: ページ読み込み中のユーザーフィードバック
+        機能: 読み込み体験向上、視覚的フィードバック
+        特徴: アニメーション効果、スムーズな遷移
         ==============================================
-        -->
-        <div class="preload-container" id="preload-container">
-            <div class="preload-spinner"></div>
-        </div>
+        */
+        .preload-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-highest);
+            transition: opacity 0.5s ease;
+        }
 
-        <!-- 
-        ==============================================
-        // === component-split: AccessibilityNav ===
-        COMPONENT: アクセシビリティナビゲーション
-        機能: スキップナビゲーション、キーボード操作サポート
-        用途: スクリーンリーダー対応、アクセシビリティ向上
-        ==============================================
-        -->
-        <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
+        .preload-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-        <!-- 
+        .preload-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(58, 95, 235, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            will-change: transform; /* パフォーマンス最適化 */
+        }
+
+        /* 
         ==============================================
-        // === component-split: Header ===
-        COMPONENT: ヘッダー
-        機能: サイト全体ナビゲーション、ブランド表示
-        特徴: 固定配置、スクロール検出、レスポンシブ対応
+        // === component-split: ProgressIndicator ===
+        COMPONENT: 進行状況インジケーター
+        機能: ステップの可視化、進行管理
+        特徴: タイムライン表現、レスポンシブ対応
         ==============================================
-        -->
-        <header class="header" id="header">
-            <div class="container">
-                <div class="header-inner">
-                    <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
-                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
-                        <span class="en-text">ShinAI</span>
-                    </a>
-                    
-                    <nav aria-label="メインナビゲーション">
-                        <ul class="nav" id="nav">
-                            <li><a href="index.html" class="nav-link">ホーム</a></li>
-                            <li><a href="about.html" class="nav-link">会社紹介</a></li>
-                            <li><a href="services.html" class="nav-link">サービス</a></li>
-                            <li><a href="industries.html" class="nav-link">業界別活用</a></li>
-                            <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
-                            <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
-                            <li class="nav-cta"><a href="#contact-form" class="btn-consultation">無料相談</a></li>
-                        </ul>
-                    </nav>
-                    
-                    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
-                        <i class="fas fa-bars" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        </header>
+        */
+        .progress-steps {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
         
+        .progress-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .progress-timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            z-index: 1;
+        }
+        
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3A5FEB, #4671FF);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+        
+        .progress-step:nth-child(1) .progress-step-icon {
+            background: linear-gradient(135deg, #3A5FEB, #4671FF);
+        }
+        
+        .progress-step:nth-child(2) .progress-step-icon {
+            background: linear-gradient(135deg, #4671FF, #6C8DFF);
+        }
+        
+        .progress-step:nth-child(3) .progress-step-icon {
+            background: linear-gradient(135deg, #6C8DFF, #93ABFF);
+        }
+        
+        .progress-step:nth-child(4) .progress-step-icon {
+            background: linear-gradient(135deg, #93ABFF, #B9C9FF);
+        }
+        
+        .progress-step-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(58, 95, 235, 0.3);
+        }
+        
+        .progress-step-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-step-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: ContainerAndGrid ===
+        COMPONENT: コンテナとグリッド
+        機能: レイアウト制御、サイズ管理
+        特徴: レスポンシブ対応、一貫した余白
+        ==============================================
+        */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 
+        ==============================================
+        // === component-split: CTA ===
+        COMPONENT: 行動喚起セクション
+        機能: ユーザー行動の促進、視覚的魅力
+        特徴: 目立つデザイン、クリアなメッセージ
+        ==============================================
+        */
+        .cta-section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .cta-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(58, 95, 235, 0.08);
+        }
+        
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
+            background-size: 200% auto;
+            animation: gradientShift 6s linear infinite;
+            z-index: var(--z-normal);
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #3A5FEB, #00C9A7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .cta-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: var(--z-back);
+            overflow: hidden;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .cta-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(58, 95, 235, 0.05) 0%, rgba(58, 95, 235, 0) 70%);
+            animation: floatingUp 20s infinite alternate;
+        }
+        
+        .cta-shape-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -50px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 201, 167, 0.05) 0%, rgba(0, 201, 167, 0) 70%);
+            animation: floatingUp 15s infinite alternate-reverse;
+        }
+        
+        .cta-shape-3 {
+            position: absolute;
+            top: 40%;
+            left: 60%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 138, 0, 0.05) 0%, rgba(255, 138, 0, 0) 70%);
+            animation: floatingUp 18s infinite alternate;
+        }
+
+        /* 
+        ==============================================
+        // === component-split: UtilityClasses ===
+        COMPONENT: ユーティリティクラス
+        機能: 共通スタイルの適用、マークアップ簡素化
+        特徴: マージン、パディング、テキスト配置など
+        ==============================================
+        */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 2.5rem; }
+        
+        .py-1 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .py-2 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-3 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .py-4 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-5 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+        
+        .px-1 { padding-left: 0.5rem; padding-right: 0.5rem; }
+        .px-2 { padding-left: 1rem; padding-right: 1rem; }
+        .px-3 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .px-4 { padding-left: 2rem; padding-right: 2rem; }
+        .px-5 { padding-left: 2.5rem; padding-right: 2.5rem; }
+
+        /* 
+        ==============================================
+        // === component-split: ResponsiveStyles ===
+        COMPONENT: レスポンシブスタイル
+        機能: マルチデバイス対応、レイアウト調整
+        特徴: モバイルファースト、ブレイクポイント制御
+        ==============================================
+        */
+        @media (max-width: 992px) {
+            .page-hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .process-timeline {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+            
+            .process-timeline::before {
+                top: 0;
+                left: 40px;
+                width: 4px;
+                height: 100%;
+            }
+            
+            .process-step {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                text-align: left;
+                padding-left: 2rem;
+            }
+            
+            .process-step-icon {
+                margin: 0 1.5rem 0 0;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-description {
+                font-size: 1.1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .companion-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefit-icon {
+                width: 75px;
+                height: 75px;
+                font-size: 1.8rem;
+            }
+            
+            .progress-timeline {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+            
+            .progress-timeline::before {
+                top: 0;
+                left: 25px;
+                width: 3px;
+                height: 100%;
+            }
+            
+            .progress-step {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                padding-left: 60px;
+                width: 100%;
+            }
+            
+            .progress-step-icon {
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin: 0;
+            }
+            
+            .progress-step-title, .progress-step-description {
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .progress-step-content {
+                margin-left: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-description {
+                font-size: 1rem;
+            }
+            
+            .contact-form-container, .contact-info, .cta-container {
+                padding: 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .benefit-card {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: auto;
+                max-height: 0;
+                overflow: hidden;
+                flex-direction: column;
+                background: white;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: all var(--transition-normal);
+                z-index: var(--z-high);
+                padding: 0;
+                gap: 0;
+            }
+
+            .nav.active {
+                max-height: 500px;
+                padding: 1rem 0;
+            }
+
+            .nav li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1rem;
+            }
+
+            .nav-cta {
+                margin: 1rem 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .page-hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .page-hero-description {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form-container, .contact-info {
+                padding: 1.5rem;
+            }
+            
+            .contact-form-title {
+                font-size: 1.5rem;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                padding-left: 4rem;
+            }
+            
+            .process-step-icon {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .process-step-content {
+                margin-top: 0.5rem;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-description {
+                font-size: 1rem;
+            }
+
+            /* iPhoneでのレイアウト最適化 */
+            .form-check {
+                padding: 1rem 1rem 1rem 3.5rem;
+            }
+
+            .checkmark {
+                left: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+
+            .checkmark:after {
+                left: 8px;
+                top: 4px;
+                width: 5px;
+                height: 10px;
+            }
+            
+            .contact-icon {
+                width: 54px;
+                height: 54px;
+                font-size: 1.3rem;
+            }
+            
+            .companion-point-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .benefit-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    ==============================================
+    // === component-split: Preloader ===
+    COMPONENT: プリローダー
+    機能: 読み込み体験向上、初期表示の改善
+    用途: ページ読み込み中のユーザーフィードバック
+    ==============================================
+    -->
+    <div class="preload-container" id="preload-container">
+        <div class="preload-spinner"></div>
+    </div>
+
+    <!-- 
+    ==============================================
+    // === component-split: AccessibilityNav ===
+    COMPONENT: アクセシビリティナビゲーション
+    機能: スキップナビゲーション、キーボード操作サポート
+    用途: スクリーンリーダー対応、アクセシビリティ向上
+    ==============================================
+    -->
+    <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
+
+    <!-- 
+    ==============================================
+    // === component-split: Header ===
+    COMPONENT: ヘッダー
+    機能: サイト全体ナビゲーション、ブランド表示
+    特徴: 固定配置、スクロール検出、レスポンシブ対応
+    ==============================================
+    -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
+                    <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
+                    <span class="en-text">ShinAI</span>
+                </a>
+                
+                <nav aria-label="メインナビゲーション">
+                    <ul class="nav" id="nav">
+                        <li><a href="index.html" class="nav-link">ホーム</a></li>
+                        <li><a href="about.html" class="nav-link">会社紹介</a></li>
+                        <li><a href="services.html" class="nav-link">サービス</a></li>
+                        <li><a href="industries.html" class="nav-link">業界別活用</a></li>
+                        <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
+                        <li><a href="contact.html" class="nav-link active" aria-current="page">お問い合わせ</a></li>
+                        <li class="nav-cta"><a href="#contact-form" class="btn-consultation">無料相談</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 
+    ==============================================
+    // === component-split: PageHero ===
+    COMPONENT: ページヒーロー
+    機能: 第一印象強化、ページ目的の明示
+    特徴: 視覚的インパクト、アニメーション効果
+    ==============================================
+    -->
+    <section class="page-hero">
+        <div class="page-hero-bg-container">
+            <div class="page-hero-bg-gradient"></div>
+            <div class="page-hero-bg-pattern"></div>
+            <!-- 浮遊要素の追加 - 背景の視覚的魅力向上 -->
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+        </div>
+        
+        <div class="container">
+            <div class="page-hero-content">
+                <div class="breadcrumb" aria-label="パンくずリスト">
+                    <a href="index.html">ホーム</a>
+                    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+                    <span class="breadcrumb-current">お問い合わせ</span>
+                </div>
+                
+                <h1 class="page-hero-title slide-in-up" id="main-content">
+                    AIでできることを<span class="gradient-title">無料で相談</span>
+                </h1>
+                
+                <p class="page-hero-description slide-in-up animate-delay-1">
+                    AI活用に関する疑問や課題をお気軽にご相談ください。<br>
+                    専門知識がなくても大丈夫。あなたのビジネスに合った活用方法をご提案します。
+                </p>
+                
+                <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right slide-in-up animate-delay-2 btn-animated">
+                    <span>相談してみる</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 
+    ==============================================
+    // === component-split: MainContent ===
+    COMPONENT: メインコンテンツ
+    機能: コンテンツ本体、構造化情報の提供
+    特徴: セクション分割、視覚的階層化
+    ==============================================
+    -->
+    <main>
         <!-- 
         ==============================================
-        // === component-split: PageHero ===
-        COMPONENT: ページヒーロー
-        機能: 第一印象強化、ページ目的の明示
-        特徴: 視覚的インパクト、アニメーション効果
+        // === component-split: BenefitsSection ===
+        COMPONENT: AIのメリットセクション
+        機能: 価値提案、特徴説明
+        特徴: カード形式、アイコン表示、数値の可視化
         ==============================================
         -->
-        <section class="page-hero">
-            <div class="page-hero-bg-container">
-                <div class="page-hero-bg-gradient"></div>
-                <div class="page-hero-bg-pattern"></div>
-                <!-- 浮遊要素の追加 - 背景の視覚的魅力向上 -->
-                <div class="hero-floating-element"></div>
-                <div class="hero-floating-element"></div>
-                <div class="hero-floating-element"></div>
-            </div>
-            
+        <section class="section section-bg-gradient">
             <div class="container">
-                <div class="page-hero-content">
-                    <div class="breadcrumb" aria-label="パンくずリスト">
-                        <a href="index.html">ホーム</a>
-                        <span class="breadcrumb-separator" aria-hidden="true">/</span>
-                        <span class="breadcrumb-current">お問い合わせ</span>
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">AI導入のメリット</span>
+                    <h2 class="section-title">AIがもたらす<span class="highlight">3つの価値</span></h2>
+                    <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
+                </div>
+                
+                <div class="benefits-container">
+                    <div class="benefit-card bounce-in-up animate-delay-1">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="benefit-title">業務効率化</h3>
+                        <p class="benefit-description">AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">35%</div>
+                            <div class="stat-label">効率化</div>
+                        </div>
+                        <div class="benefit-stat">
+                            <div class="stat-value">60%</div>
+                            <div class="stat-label">時間削減</div>
+                        </div>
                     </div>
                     
-                    <h1 class="page-hero-title slide-in-up" id="main-content">
-                        AIでできることを<span class="gradient-title">無料で相談</span>
-                    </h1>
+                    <div class="benefit-card bounce-in-up animate-delay-2">
+                        <div class="benefit-icon">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="benefit-title">コスト削減</h3>
+                        <p class="benefit-description">AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">40%</div>
+                            <div class="stat-label">コスト削減</div>
+                        </div>
+                        <div class="benefit-stat">
+                            <div class="stat-value">30%</div>
+                            <div class="stat-label">利益向上</div>
+                        </div>
+                    </div>
                     
-                    <p class="page-hero-description slide-in-up animate-delay-1">
-                        AI活用に関する疑問や課題をお気軽にご相談ください。<br>
-                        専門知識がなくても大丈夫。あなたのビジネスに合った活用方法をご提案します。
-                    </p>
+                    <div class="benefit-card bounce-in-up animate-delay-3">
+                        <div class="benefit-icon">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="benefit-title">データ分析</h3>
+                        <p class="benefit-description">大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">90%</div>
+                            <div class="stat-label">データ活用</div>
+                        </div>
+                        <div class="benefit-stat">
+                            <div class="stat-value">25%</div>
+                            <div class="stat-label">売上増加</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: CompanionApproachSection ===
+        COMPONENT: 伴走型開発アプローチ
+        機能: 差別化要因の強調、開発手法の説明
+        特徴: わかりやすいポイント説明、訴求力の高い表現
+        ==============================================
+        -->
+        <section class="companion-approach">
+            <div class="container">
+                <div class="companion-container bounce-in-up">
+                    <div class="companion-header">
+                        <span class="companion-subtitle">ShinAIの開発手法</span>
+                        <h2 class="companion-title">プロトタイプからの<span class="gradient-text">伴走型開発</span></h2>
+                        <p class="companion-description">
+                            AI領域では、従来の重厚長大なシステム開発とは異なるアプローチが効果的です。<br>
+                            小さく始めて効果を確認しながら、最適なAIソリューションを一緒に構築していきます。
+                        </p>
+                    </div>
                     
-                    <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right slide-in-up animate-delay-2 btn-animated">
-                        <span>相談してみる</span>
-                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    </a>
+                    <div class="companion-points">
+                        <div class="companion-point bounce-in-up animate-delay-1">
+                            <div class="companion-point-icon">
+                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            </div>
+                            <div class="companion-point-content">
+                                <h3>現状課題への共感</h3>
+                                <p>従来のシステム会社のやり方は、要件定義と高額投資が前提でした。AI開発では柔軟性と段階的アプローチが重要です。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="companion-point bounce-in-up animate-delay-2">
+                            <div class="companion-point-icon">
+                                <i class="fas fa-rocket" aria-hidden="true"></i>
+                            </div>
+                            <div class="companion-point-content">
+                                <h3>AIの無限の可能性</h3>
+                                <p>AIの「やれることの幅」は非常に広く、初期の段階で全てを定義しきることは現実的ではありません。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="companion-point bounce-in-up animate-delay-3">
+                            <div class="companion-point-icon">
+                                <i class="fas fa-handshake" aria-hidden="true"></i>
+                            </div>
+                            <div class="companion-point-content">
+                                <h3>共創関係の構築</h3>
+                                <p>まず小さく始めてプロトタイプをご提示し、方向性を確認しながら、伴走型で最適化していきます。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="companion-footer bounce-in-up animate-delay-4">
+                        「まずやってみる」から始め、成果を確かめながら一緒に進めることが成功への近道です
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        ==============================================
+        // === component-split: ProcessFlowSection ===
+        COMPONENT: 導入の流れセクション
+        機能: プロセスの視覚化、ステップの説明
+        特徴: タイムライン表示、ステップごとのアイコン
+        ==============================================
+        -->
+        <section class="section section-bg-gradient">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">相談の流れ</span>
+                    <h2 class="section-title">無料相談から<span class="highlight">導入までの流れ</span></h2>
+                    <p class="section-description">専門知識がなくても安心。丁寧にサポートします。</p>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="process-timeline">
+                        <div class="process-step bounce-in-up">
+                            <div class="process-step-icon">
+                                <i class="fas fa-comments" aria-hidden="true"></i>
+                                <div class="process-step-number">1</div>
+                            </div>
+                            <div class="process-step-content">
+                                <h3 class="process-step-title">無料相談</h3>
+                                <p class="process-step-description">現在の課題や目標をお聞かせください。専門用語は必要ありません。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step bounce-in-up animate-delay-1">
+                            <div class="process-step-icon">
+                                <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                                <div class="process-step-number">2</div>
+                            </div>
+                            <div class="process-step-content">
+                                <h3 class="process-step-title">提案</h3>
+                                <p class="process-step-description">ビジネスに合った最適なAI活用方法をご提案します。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step bounce-in-up animate-delay-2">
+                            <div class="process-step-icon">
+                                <i class="fas fa-flask" aria-hidden="true"></i>
+                                <div class="process-step-number">3</div>
+                            </div>
+                            <div class="process-step-content">
+                                <h3 class="process-step-title">プロトタイプ</h3>
+                                <p class="process-step-description">小規模なAIシステムを素早く構築し、効果を検証します。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="process-step bounce-in-up animate-delay-3">
+                            <div class="process-step-icon">
+                                <i class="fas fa-cogs" aria-hidden="true"></i>
+                                <div class="process-step-number">4</div>
+                            </div>
+                            <div class="process-step-content">
+                                <h3 class="process-step-title">段階的導入</h3>
+                                <p class="process-step-description">効果を確認しながら、段階的に機能を拡張していきます。</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step bounce-in-up animate-delay-4">
+                            <div class="process-step-icon">
+                                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                <div class="process-step-number">5</div>
+                            </div>
+                            <div class="process-step-content">
+                                <h3 class="process-step-title">伴走支援</h3>
+                                <p class="process-step-description">導入後も継続的に改善提案やサポートを行います。</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         
         <!-- 
         ==============================================
-        // === component-split: MainContent ===
-        COMPONENT: メインコンテンツ
-        機能: コンテンツ本体、構造化情報の提供
-        特徴: セクション分割、視覚的階層化
+        // === component-split: ContactFormSection ===
+        COMPONENT: お問い合わせフォーム
+        機能: ユーザー入力、情報収集
+        特徴: 2カラムレイアウト、視覚的フィードバック
         ==============================================
         -->
-        <main>
-            <!-- 
-            ==============================================
-            // === component-split: BenefitsSection ===
-            COMPONENT: AIのメリットセクション
-            機能: 価値提案、特徴説明
-            特徴: カード形式、アイコン表示、数値の可視化
-            ==============================================
-            -->
-            <section class="section section-bg-gradient">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <span class="section-subtitle">AI導入のメリット</span>
-                        <h2 class="section-title">AIがもたらす<span class="highlight">3つの価値</span></h2>
-                        <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
+        <section class="section section-bg-light" id="contact-form">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">お問い合わせ</span>
+                    <h2 class="section-title">AIについて<span class="highlight">気軽に相談</span>できます</h2>
+                    <p class="section-description">専門知識がなくても、分かりやすく説明します。お気軽にご連絡ください。</p>
+                </div>
+                
+                <div class="contact-wrapper">
+                    <!-- 
+                    ==============================================
+                    // === component-split: ContactInfo ===
+                    COMPONENT: お問い合わせ情報
+                    機能: 連絡先情報の表示
+                    特徴: アイコン表示、視覚的な階層化
+                    ==============================================
+                    -->
+                    <div class="contact-info bounce-in-up">
+                        <div class="contact-info-header">
+                            <h3 class="contact-info-title">お問い合わせ先</h3>
+                            <p class="contact-info-subtitle">お気軽にご連絡ください</p>
+                        </div>
+                        
+                        <div class="contact-info-content">
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>所在地</h4>
+                                    <p>〒100-0001 東京都千代田区丸の内3-8-3<br>Tokyo Innovation Base</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>メールアドレス</h4>
+                                    <p><a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>営業時間</h4>
+                                    <p>平日 9:00〜18:00（土日祝休）</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-laptop" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>オンライン相談</h4>
+                                    <p>Zoom / Google Meet / Teams でのオンライン相談も可能です</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="benefits-container">
-                        <div class="benefit-card bounce-in-up animate-delay-1">
-                            <div class="benefit-icon">
-                                <i class="fas fa-bolt" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="benefit-title">業務効率化</h3>
-                            <p class="benefit-description">AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
-                            <div class="benefit-stat">
-                                <div class="stat-value">35%</div>
-                                <div class="stat-label">効率化</div>
-                            </div>
-                            <div class="benefit-stat">
-                                <div class="stat-value">60%</div>
-                                <div class="stat-label">時間削減</div>
-                            </div>
+                    <!-- 
+                    ==============================================
+                    // === component-split: ContactForm ===
+                    COMPONENT: お問い合わせフォーム
+                    機能: 入力フォーム、情報送信
+                    特徴: フィールドバリデーション、送信状態表示
+                    ==============================================
+                    -->
+                    <div class="contact-form-container bounce-in-up animate-delay-1">
+                        <div class="message-success" id="message-success" role="alert" aria-live="polite">
+                            <i class="fas fa-check-circle" aria-hidden="true"></i>
+                            <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
                         </div>
                         
-                        <div class="benefit-card bounce-in-up animate-delay-2">
-                            <div class="benefit-icon">
-                                <i class="fas fa-coins" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="benefit-title">コスト削減</h3>
-                            <p class="benefit-description">AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
-                            <div class="benefit-stat">
-                                <div class="stat-value">40%</div>
-                                <div class="stat-label">コスト削減</div>
-                            </div>
-                            <div class="benefit-stat">
-                                <div class="stat-value">30%</div>
-                                <div class="stat-label">利益向上</div>
-                            </div>
+                        <div class="contact-form-header">
+                            <div class="free-consultation-badge">無料相談受付中</div>
+                            <h3 class="contact-form-title">AIについて気軽に相談できます</h3>
+                            <p class="contact-form-description">専門知識がなくても大丈夫。あなたのビジネスに合ったAI活用方法を一緒に考えましょう。</p>
                         </div>
                         
-                        <div class="benefit-card bounce-in-up animate-delay-3">
-                            <div class="benefit-icon">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="benefit-title">データ分析</h3>
-                            <p class="benefit-description">大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
-                            <div class="benefit-stat">
-                                <div class="stat-value">90%</div>
-                                <div class="stat-label">データ活用</div>
-                            </div>
-                            <div class="benefit-stat">
-                                <div class="stat-value">25%</div>
-                                <div class="stat-label">売上増加</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 
-            ==============================================
-            // === component-split: CompanionApproachSection ===
-            COMPONENT: 伴走型開発アプローチ
-            機能: 差別化要因の強調、開発手法の説明
-            特徴: わかりやすいポイント説明、訴求力の高い表現
-            ==============================================
-            -->
-            <section class="companion-approach">
-                <div class="container">
-                    <div class="companion-container bounce-in-up">
-                        <div class="companion-header">
-                            <span class="companion-subtitle">ShinAIの開発手法</span>
-                            <h2 class="companion-title">プロトタイプからの<span class="gradient-text">伴走型開発</span></h2>
-                            <p class="companion-description">
-                                AI領域では、従来の重厚長大なシステム開発とは異なるアプローチが効果的です。<br>
-                                小さく始めて効果を確認しながら、最適なAIソリューションを一緒に構築していきます。
-                            </p>
-                        </div>
-                        
-                        <div class="companion-points">
-                            <div class="companion-point bounce-in-up animate-delay-1">
-                                <div class="companion-point-icon">
-                                    <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <form id="contact-form-element" aria-label="お問い合わせフォーム" novalidate>
+                            <!-- お名前フィールド -->
+                            <div class="form-group">
+                                <label for="name" class="form-label">お名前<span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="例: 山田 太郎" required aria-required="true">
+                                    <span class="focus-border"></span>
                                 </div>
-                                <div class="companion-point-content">
-                                    <h3>現状課題への共感</h3>
-                                    <p>従来開発は一括要件定義・高額投資が前提。AI開発では柔軟性と段階的アプローチが求められます。</p>
-                                </div>
+                                <div class="field-error" id="name-error">お名前を入力してください</div>
                             </div>
                             
-                            <div class="companion-point bounce-in-up animate-delay-2">
-                                <div class="companion-point-icon">
-                                    <i class="fas fa-rocket" aria-hidden="true"></i>
-                                </div>
-                                <div class="companion-point-content">
-                                    <h3>AIの無限の可能性</h3>
-                                    <p>AIの「やれることの幅」は非常に広く、初期の段階で全てを定義しきることは現実的ではありません。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="companion-point bounce-in-up animate-delay-3">
-                                <div class="companion-point-icon">
-                                    <i class="fas fa-handshake" aria-hidden="true"></i>
-                                </div>
-                                <div class="companion-point-content">
-                                    <h3>共創関係の構築</h3>
-                                    <p>まず小さく始めてプロトタイプをご提示し、方向性を確認しながら、伴走型で最適化していきます。</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="companion-footer bounce-in-up animate-delay-4">
-                            「まずやってみる」から始め、成果を確かめながら一緒に進めることが成功への近道です
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 
-            ==============================================
-            // === component-split: ProcessFlowSection ===
-            COMPONENT: 導入の流れセクション
-            機能: プロセスの視覚化、ステップの説明
-            特徴: タイムライン表示、ステップごとのアイコン
-            ==============================================
-            -->
-            <section class="section section-bg-gradient">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <span class="section-subtitle">相談の流れ</span>
-                        <h2 class="section-title">無料相談から<span class="highlight">導入までの流れ</span></h2>
-                        <p class="section-description">専門知識がなくても安心。丁寧にサポートします。</p>
-                    </div>
-                    
-                    <div class="process-steps">
-                        <div class="process-timeline">
-                            <div class="process-step bounce-in-up">
-                                <div class="process-step-icon">
-                                    <i class="fas fa-comments" aria-hidden="true"></i>
-                                    <div class="process-step-number">1</div>
-                                </div>
-                                <div class="process-step-content">
-                                    <h3 class="process-step-title">無料相談</h3>
-                                    <p class="process-step-description">現在の課題や目標をお聞かせください。専門用語は必要ありません。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="process-step bounce-in-up animate-delay-1">
-                                <div class="process-step-icon">
-                                    <i class="fas fa-clipboard-check" aria-hidden="true"></i>
-                                    <div class="process-step-number">2</div>
-                                </div>
-                                <div class="process-step-content">
-                                    <h3 class="process-step-title">提案</h3>
-                                    <p class="process-step-description">ビジネスに合った最適なAI活用方法をご提案します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="process-step bounce-in-up animate-delay-2">
-                                <div class="process-step-icon">
-                                    <i class="fas fa-flask" aria-hidden="true"></i>
-                                    <div class="process-step-number">3</div>
-                                </div>
-                                <div class="process-step-content">
-                                    <h3 class="process-step-title">プロトタイプ</h3>
-                                    <p class="process-step-description">小規模なAIシステムを素早く構築し、効果を検証します。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="process-step bounce-in-up animate-delay-3">
-                                <div class="process-step-icon">
-                                    <i class="fas fa-cogs" aria-hidden="true"></i>
-                                    <div class="process-step-number">4</div>
-                                </div>
-                                <div class="process-step-content">
-                                    <h3 class="process-step-title">段階的導入</h3>
-                                    <p class="process-step-description">効果を確認しながら、段階的に機能を拡張していきます。</p>
-                                </div>
-                            </div>
-
-                            <div class="process-step bounce-in-up animate-delay-4">
-                                <div class="process-step-icon">
-                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
-                                    <div class="process-step-number">5</div>
-                                </div>
-                                <div class="process-step-content">
-                                    <h3 class="process-step-title">伴走支援</h3>
-                                    <p class="process-step-description">導入後も継続的に改善提案やサポートを行います。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 
-            ==============================================
-            // === component-split: ContactFormSection ===
-            COMPONENT: お問い合わせフォーム
-            機能: ユーザー入力、情報収集
-            特徴: 2カラムレイアウト、視覚的フィードバック
-            ==============================================
-            -->
-            <section class="section section-bg-light" id="contact-form">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <span class="section-subtitle">お問い合わせ</span>
-                        <h2 class="section-title">AIについて<span class="highlight">気軽に相談</span>できます</h2>
-                        <p class="section-description">専門知識がなくても、分かりやすく説明します。お気軽にご連絡ください。</p>
-                    </div>
-                    
-                    <div class="contact-wrapper">
-                        <!-- 
-                        ==============================================
-                        // === component-split: ContactInfo ===
-                        COMPONENT: お問い合わせ情報
-                        機能: 連絡先情報の表示
-                        特徴: アイコン表示、視覚的な階層化
-                        ==============================================
-                        -->
-                        <div class="contact-info bounce-in-up">
-                            <div class="contact-info-header">
-                                <h3 class="contact-info-title">お問い合わせ先</h3>
-                                <p class="contact-info-subtitle">お気軽にご連絡ください</p>
-                            </div>
-                            
-                            <div class="contact-info-content">
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="contact-details">
-                                        <h4>所在地</h4>
-                                        <p>〒100-0001 東京都千代田区丸の内3-8-3<br>Tokyo Innovation Base</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="contact-details">
-                                        <h4>メールアドレス</h4>
-                                        <p><a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></p>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-clock" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="contact-details">
-                                        <h4>営業時間</h4>
-                                        <p>平日 9:00〜18:00（土日祝休）</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="contact-method">
-                                    <div class="contact-icon">
-                                        <i class="fas fa-laptop" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="contact-details">
-                                        <h4>オンライン相談</h4>
-                                        <p>Zoom / Google Meet / Teams でのオンライン相談も可能です</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 
-                        ==============================================
-                        // === component-split: ContactForm ===
-                        COMPONENT: お問い合わせフォーム
-                        機能: 入力フォーム、情報送信
-                        特徴: フィールドバリデーション、送信状態表示
-                        ==============================================
-                        -->
-                        <div class="contact-form-container bounce-in-up animate-delay-1">
-                            <div class="message-success" id="message-success" role="alert" aria-live="polite">
-                                <i class="fas fa-check-circle" aria-hidden="true"></i>
-                                <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
-                            </div>
-                            
-                            <div class="contact-form-header">
-                                <div class="free-consultation-badge">無料相談受付中</div>
-                                <h3 class="contact-form-title">AIについて気軽に相談できます</h3>
-                                <p class="contact-form-description">専門知識がなくても大丈夫。あなたのビジネスに合ったAI活用方法を一緒に考えましょう。</p>
-                            </div>
-                            
-                            <form id="contact-form-element" aria-label="お問い合わせフォーム" novalidate>
-                                <!-- お名前フィールド -->
+                            <!-- フォームグリッド: メールアドレスと電話番号 -->
+                            <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="name" class="form-label">お名前<span class="required">*</span></label>
+                                    <label for="email" class="form-label">メールアドレス<span class="required">*</span></label>
                                     <div class="input-wrapper">
-                                        <input type="text" id="name" name="name" class="form-control" placeholder="例: 山田 太郎" required aria-required="true">
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="例: example@email.com" required aria-required="true">
                                         <span class="focus-border"></span>
                                     </div>
-                                    <div class="field-error" id="name-error">お名前を入力してください</div>
+                                    <div class="field-error" id="email-error">有効なメールアドレスを入力してください</div>
                                 </div>
                                 
-                                <!-- フォームグリッド: メールアドレスと電話番号 -->
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label for="email" class="form-label">メールアドレス<span class="required">*</span></label>
-                                        <div class="input-wrapper">
-                                            <input type="email" id="email" name="email" class="form-control" placeholder="例: example@email.com" required aria-required="true">
-                                            <span class="focus-border"></span>
-                                        </div>
-                                        <div class="field-error" id="email-error">有効なメールアドレスを入力してください</div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="phone" class="form-label">電話番号</label>
-                                        <div class="input-wrapper">
-                                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="例: 03-1234-5678">
-                                            <span class="focus-border"></span>
-                                        </div>
-                                        <div class="field-hint">任意項目です</div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 会社名フィールド -->
                                 <div class="form-group">
-                                    <label for="company" class="form-label">会社名</label>
+                                    <label for="phone" class="form-label">電話番号</label>
                                     <div class="input-wrapper">
-                                        <input type="text" id="company" name="company" class="form-control" placeholder="例: 株式会社〇〇">
+                                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="例: 03-1234-5678">
                                         <span class="focus-border"></span>
                                     </div>
                                     <div class="field-hint">任意項目です</div>
                                 </div>
-                                
-                                <!-- 興味のあるサービス - 改善されたチェックボックス -->
-                                <div class="form-group">
-                                    <label class="form-label">ご興味のある分野（複数選択可）</label>
-                                    <div class="checkbox-group">
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service1" name="service[]" value="業務効率化" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">業務の効率化・自動化</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service2" name="service[]" value="コスト削減" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">コスト削減</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service3" name="service[]" value="売上アップ" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">売上・利益アップ</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service4" name="service[]" value="顧客対応" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">顧客対応の改善</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service5" name="service[]" value="データ分析" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">データ分析・活用</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
-                                            <span class="checkmark"></span>
-                                            <span class="form-check-label">その他</span>
-                                        </label>
-                                    </div>
+                            </div>
+                            
+                            <!-- 会社名フィールド -->
+                            <div class="form-group">
+                                <label for="company" class="form-label">会社名</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="company" name="company" class="form-control" placeholder="例: 株式会社〇〇">
+                                    <span class="focus-border"></span>
                                 </div>
-                                
-                                <!-- お問い合わせ内容フィールド -->
-                                <div class="form-group">
-                                    <label for="message" class="form-label">お問い合わせ内容<span class="required">*</span></label>
-                                    <div class="input-wrapper">
-                                        <textarea id="message" name="message" class="form-control" placeholder="現在の課題や相談したい内容をご記入ください" rows="5" required aria-required="true"></textarea>
-                                        <span class="focus-border"></span>
-                                    </div>
-                                    <div class="field-error" id="message-error">お問い合わせ内容を入力してください</div>
-                                    <div class="field-hint">専門知識は必要ありません。どんな内容でもお気軽にご相談ください。</div>
+                                <div class="field-hint">任意項目です</div>
+                            </div>
+                            
+                            <!-- 興味のあるサービス - 改善されたチェックボックス -->
+                            <div class="form-group">
+                                <label class="form-label">ご興味のある分野（複数選択可）</label>
+                                <div class="checkbox-group">
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service1" name="service[]" value="業務効率化" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">業務の効率化・自動化</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service2" name="service[]" value="コスト削減" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">コスト削減</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service3" name="service[]" value="売上アップ" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">売上・利益アップ</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service4" name="service[]" value="顧客対応" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">顧客対応の改善</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service5" name="service[]" value="データ分析" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">データ分析・活用</span>
+                                    </label>
+                                    <label class="form-check">
+                                        <input type="checkbox" id="service6" name="service[]" value="その他" class="form-check-input">
+                                        <span class="checkmark"></span>
+                                        <span class="form-check-label">その他</span>
+                                    </label>
                                 </div>
-                                
-                                <!-- 送信ステータス表示エリア -->
-                                <div class="submit-status" id="submit-status"></div>
-                                
-                                <!-- 送信ボタン -->
-                                <div class="form-submit">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated" id="submit-button">
-                                        <span>無料相談を申し込む</span>
-                                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                    </button>
+                            </div>
+                            
+                            <!-- お問い合わせ内容フィールド -->
+                            <div class="form-group">
+                                <label for="message" class="form-label">お問い合わせ内容<span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <textarea id="message" name="message" class="form-control" placeholder="現在の課題や相談したい内容をご記入ください" rows="5" required aria-required="true"></textarea>
+                                    <span class="focus-border"></span>
                                 </div>
-                                
-                                <!-- Google Sheets連携用の非表示フィールド -->
-                                <input type="hidden" name="timestamp" id="timestamp">
-                                <input type="hidden" name="form_source" value="website_contact_form">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 
-            ==============================================
-            // === component-split: CTASection ===
-            COMPONENT: CTA (行動喚起)
-            機能: ユーザーの行動を促す、次のステップへ誘導
-            特徴: 目立つデザイン、明確なメッセージ
-            ==============================================
-            -->
-            <section class="cta-section">
-                <div class="container">
-                    <div class="cta-container bounce-in-up">
-                        <div class="cta-title">
-                            AIの力で<span class="text-gradient">ビジネスを進化</span>させませんか？
-                        </div>
-                        <div class="cta-description">
-                            専門知識がなくても大丈夫。まずは無料相談で、あなたのビジネスに合ったAI活用法を一緒に見つけましょう。
-                        </div>
-                        <div class="cta-buttons">
-                            <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated">
-                                <span>無料相談してみる</span>
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                            <a href="services.html" class="btn btn-outline btn-lg btn-icon-right">
-                                <span>サービス詳細を見る</span>
-                                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        
-        <!-- 
-        ==============================================
-        // === component-split: Footer ===
-        COMPONENT: フッター
-        機能: サイト全体ナビゲーション、リンク集約
-        特徴: グリッドレイアウト、SNSリンク、著作権表示
-        ==============================================
-        -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <div class="footer-logo">
-                            <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
-                            <span class="en-text">ShinAI</span>
-                        </div>
-                        <p class="footer-description">
-                            最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                        </p>
-                        <div class="social-links" aria-label="ソーシャルメディアリンク">
-                            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-nav">
-                        <h4 class="footer-heading">サービス</h4>
-                        <ul class="footer-links">
-                            <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                            <li><a href="services.html#decision">意思決定支援AI</a></li>
-                            <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                            <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
-                            <li><a href="services.html#human">人間中心AIの社会実装</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-nav">
-                        <h4 class="footer-heading">業界別AI活用</h4>
-                        <ul class="footer-links">
-                            <li><a href="industries.html#manufacturing">製造業</a></li>
-                            <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
-                            <li><a href="industries.html#finance">金融・保険</a></li>
-                            <li><a href="industries.html#retail">小売・Eコマース</a></li>
-                            <li><a href="industries.html#education">教育・研修</a></li>
-                            <li><a href="industries.html#welfare">福祉・介護</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-contact">
-                        <h4 class="footer-heading">お問い合わせ</h4>
-                        <ul class="footer-links">
-                            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                            <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
-                            <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
-                            <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="footer-bottom">
-                    <p class="copyright">© <span id="current-year">2023</span> ShinAI All Rights Reserved.</p>
-                    <div class="footer-bottom-links">
-                        <a href="#">プライバシーポリシー</a>
-                        <a href="#">利用規約</a>
-                        <a href="#">特定商取引法に基づく表記</a>
+                                <div class="field-error" id="message-error">お問い合わせ内容を入力してください</div>
+                                <div class="field-hint">専門知識は必要ありません。どんな内容でもお気軽にご相談ください。</div>
+                            </div>
+                            
+                            <!-- 送信ステータス表示エリア -->
+                            <div class="submit-status" id="submit-status"></div>
+                            
+                            <!-- 送信ボタン -->
+                            <div class="form-submit">
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated" id="submit-button">
+                                    <span>無料相談を申し込む</span>
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Google Sheets連携用の非表示フィールド -->
+                            <input type="hidden" name="timestamp" id="timestamp">
+                            <input type="hidden" name="form_source" value="website_contact_form">
+                        </form>
                     </div>
                 </div>
             </div>
-        </footer>
-        
+        </section>
+
         <!-- 
         ==============================================
-        // === component-split: ChatbotWidget ===
-        COMPONENT: チャットボット
-        機能: インタラクティブサポート、ヘルプ提供
-        特徴: フローティング配置、会話型インターフェース
+        // === component-split: CTASection ===
+        COMPONENT: CTA (行動喚起)
+        機能: ユーザーの行動を促す、次のステップへ誘導
+        特徴: 目立つデザイン、明確なメッセージ
         ==============================================
         -->
-        <div class="chatbot" aria-label="AIアシスタント">
-            <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-                <div class="ripple"></div>
-                <i class="fas fa-robot" aria-hidden="true"></i>
-            </button>
-            <div class="chatbot-container" id="chatbot-container">
-                <div class="chatbot-header">
-                    <div class="chatbot-title">
-                        <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-container bounce-in-up">
+                    <div class="cta-shapes">
+                        <div class="cta-shape-1"></div>
+                        <div class="cta-shape-2"></div>
+                        <div class="cta-shape-3"></div>
                     </div>
-                    <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                        <i class="fas fa-times" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-                    <div class="message bot-message">
-                        こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
+                    <div class="cta-title">
+                        AIの力で<span class="text-gradient">ビジネスを進化</span>させませんか？
+                    </div>
+                    <div class="cta-description">
+                        専門知識がなくても大丈夫。まずは無料相談で、あなたのビジネスに合ったAI活用法を一緒に見つけましょう。
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#contact-form" class="btn btn-primary btn-lg btn-icon-right btn-glow btn-animated">
+                            <span>無料相談してみる</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a href="services.html" class="btn btn-outline btn-lg btn-icon-right">
+                            <span>サービス詳細を見る</span>
+                            <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="chatbot-input">
-                    <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                    <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                    </button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- 
+    ==============================================
+    // === component-split: Footer ===
+    COMPONENT: フッター
+    機能: サイト全体ナビゲーション、リンク集約
+    特徴: グリッドレイアウト、SNSリンク、著作権表示
+    ==============================================
+    -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
+                        <span class="en-text">ShinAI</span>
+                    </div>
+                    <p class="footer-description">
+                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                    </p>
+                    <div class="social-links" aria-label="ソーシャルメディアリンク">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
+                        <li><a href="services.html#decision">意思決定支援AI</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human">人間中心AIの社会実装</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">業界別AI活用</h4>
+                    <ul class="footer-links">
+                        <li><a href="industries.html#manufacturing">製造業</a></li>
+                        <li><a href="industries.html#healthcare">医療・ヘルスケア</a></li>
+                        <li><a href="industries.html#finance">金融・保険</a></li>
+                        <li><a href="industries.html#retail">小売・Eコマース</a></li>
+                        <li><a href="industries.html#education">教育・研修</a></li>
+                        <li><a href="industries.html#welfare">福祉・介護</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a></li>
+                        <li><i class="fas fa-clock" aria-hidden="true"></i> 平日 9:00〜18:00（土日祝休）</li>
+                        <li><i class="fas fa-file-alt" aria-hidden="true"></i> <a href="#contact-form">お問い合わせフォーム</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© <span id="current-year">2023</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                    <a href="#">特定商取引法に基づく表記</a>
                 </div>
             </div>
         </div>
-        
-        <!-- 
-        ==============================================
-        // === component-split: BackToTop ===
-        COMPONENT: トップに戻るボタン
-        機能: ナビゲーション補助、ユーザビリティ向上
-        特徴: フローティング配置、スクロール検出
-        ==============================================
-        -->
-        <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
-            <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-        
-        <!-- 
-        ==============================================
-        // === component-split: MainScript ===
-        COMPONENT: メインスクリプト
-        機能: インタラクション制御、動的機能の実装
-        特徴: イベントハンドリング、アニメーション制御、フォーム検証
-        ==============================================
-        -->
-        <script>
-            // プリローダー制御
-            window.addEventListener('load', function() {
-                const preloader = document.getElementById('preload-container');
-                if (preloader) {
+    </footer>
+    
+    <!-- 
+    ==============================================
+    // === component-split: ChatbotWidget ===
+    COMPONENT: チャットボット
+    機能: インタラクティブサポート、ヘルプ提供
+    特徴: フローティング配置、会話型インターフェース
+    ==============================================
+    -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
+            <div class="ripple"></div>
+            <i class="fas fa-robot" aria-hidden="true"></i>
+        </button>
+        <div class="chatbot-container" id="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+                <div class="message bot-message">
+                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 
+    ==============================================
+    // === component-split: BackToTop ===
+    COMPONENT: トップに戻るボタン
+    機能: ナビゲーション補助、ユーザビリティ向上
+    特徴: フローティング配置、スクロール検出
+    ==============================================
+    -->
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="ページの先頭へ">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
+    
+    <!-- 
+    ==============================================
+    // === component-split: MainScript ===
+    COMPONENT: メインスクリプト
+    機能: インタラクション制御、動的機能の実装
+    特徴: イベントハンドリング、アニメーション制御、フォーム検証
+    ==============================================
+    -->
+    <script>
+        // プリローダー制御
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preload-container');
+            if (preloader) {
+                setTimeout(function() {
+                    preloader.classList.add('hidden');
                     setTimeout(function() {
-                        preloader.classList.add('hidden');
-                        setTimeout(function() {
-                            preloader.style.display = 'none';
-                        }, 500);
-                    }, 300);
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 300);
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 現在年表示
+            const currentYearElement = document.getElementById('current-year');
+            if (currentYearElement) {
+                const currentYear = new Date().getFullYear();
+                currentYearElement.textContent = currentYear;
+                document.body.setAttribute('data-current-year', currentYear);
+            }
+            
+            // タイムスタンプの設定
+            const timestampField = document.getElementById('timestamp');
+            if (timestampField) {
+                const now = new Date();
+                timestampField.value = now.toISOString();
+            }
+            
+            // ヘッダースクロール効果
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
                 }
             });
             
-            document.addEventListener('DOMContentLoaded', function() {
-                // 現在年表示
-                const currentYearElement = document.getElementById('current-year');
-                if (currentYearElement) {
-                    const currentYear = new Date().getFullYear();
-                    currentYearElement.textContent = currentYear;
-                    document.body.setAttribute('data-current-year', currentYear);
-                }
-                
-                // タイムスタンプの設定
-                const timestampField = document.getElementById('timestamp');
-                if (timestampField) {
-                    const now = new Date();
-                    timestampField.value = now.toISOString();
-                }
-                
-                // ヘッダースクロール効果
-                const header = document.getElementById('header');
-                window.addEventListener('scroll', function() {
-                    if (window.scrollY > 10) {
-                        header.classList.add('header-scrolled');
+            // トップに戻るボタン
+            const backToTopButton = document.getElementById('back-to-top');
+            let lastScrollTime = 0;
+            
+            window.addEventListener('scroll', function() {
+                const now = Date.now();
+                if (now - lastScrollTime > 100) { // スロットリング処理
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('active');
                     } else {
-                        header.classList.remove('header-scrolled');
+                        backToTopButton.classList.remove('active');
                     }
+                    lastScrollTime = now;
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-                
-                // トップに戻るボタン
-                const backToTopButton = document.getElementById('back-to-top');
-                let lastScrollTime = 0;
-                
-                window.addEventListener('scroll', function() {
-                    const now = Date.now();
-                    if (now - lastScrollTime > 100) { // スロットリング処理
-                        if (window.scrollY > 300) {
-                            backToTopButton.classList.add('active');
-                        } else {
-                            backToTopButton.classList.remove('active');
-                        }
-                        lastScrollTime = now;
-                    }
+            });
+            
+            // ハンバーガーメニュー
+            const menuToggle = document.getElementById('menu-toggle');
+            const nav = document.getElementById('nav');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                    
+                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    menuToggle.setAttribute('aria-expanded', !isExpanded);
+                    menuToggle.innerHTML = isExpanded ? 
+                        '<i class="fas fa-bars" aria-hidden="true"></i>' : 
+                        '<i class="fas fa-times" aria-hidden="true"></i>';
                 });
-                
-                backToTopButton.addEventListener('click', function(e) {
+            }
+            
+            // スムーススクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // チャットボット
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input-text');
+            const chatbotSubmit = document.getElementById('chatbot-submit');
+            
+            if (chatbotToggle && chatbotContainer && chatbotClose) {
+                chatbotToggle.addEventListener('click', function() {
+                    chatbotContainer.classList.toggle('active');
+                    
+                    const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
+                    chatbotToggle.setAttribute('aria-expanded', !isExpanded);
                 });
                 
-                // ハンバーガーメニュー
-                const menuToggle = document.getElementById('menu-toggle');
-                const nav = document.getElementById('nav');
+                chatbotClose.addEventListener('click', function() {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                });
                 
-                if (menuToggle && nav) {
-                    menuToggle.addEventListener('click', function() {
-                        nav.classList.toggle('active');
-                        menuToggle.classList.toggle('active');
-                        
-                        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                        menuToggle.setAttribute('aria-expanded', !isExpanded);
-                        menuToggle.innerHTML = isExpanded ? 
-                            '<i class="fas fa-bars" aria-hidden="true"></i>' : 
-                            '<i class="fas fa-times" aria-hidden="true"></i>';
+                // チャットボット入力処理
+                if (chatbotSubmit && chatbotInput && chatbotMessages) {
+                    chatbotSubmit.addEventListener('click', sendMessage);
+                    chatbotInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
                     });
                 }
                 
-                // スムーススクロール
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
+                function sendMessage() {
+                    const message = chatbotInput.value.trim();
+                    if (message) {
+                        // ユーザーメッセージを追加
+                        addMessage(message, 'user');
+                        chatbotInput.value = '';
                         
-                        const targetId = this.getAttribute('href');
-                        if (targetId === '#') return;
-                        
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            const headerHeight = document.querySelector('.header').offsetHeight;
-                            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                            
-                            window.scrollTo({
-                                top: targetPosition - headerHeight - 20,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
-                
-                // チャットボット
-                const chatbotToggle = document.getElementById('chatbot-toggle');
-                const chatbotContainer = document.getElementById('chatbot-container');
-                const chatbotClose = document.getElementById('chatbot-close');
-                const chatbotMessages = document.getElementById('chatbot-messages');
-                const chatbotInput = document.getElementById('chatbot-input-text');
-                const chatbotSubmit = document.getElementById('chatbot-submit');
-                
-                if (chatbotToggle && chatbotContainer && chatbotClose) {
-                    chatbotToggle.addEventListener('click', function() {
-                        chatbotContainer.classList.toggle('active');
-                        
-                        const isExpanded = chatbotToggle.getAttribute('aria-expanded') === 'true';
-                        chatbotToggle.setAttribute('aria-expanded', !isExpanded);
-                    });
-                    
-                    chatbotClose.addEventListener('click', function() {
-                        chatbotContainer.classList.remove('active');
-                        chatbotToggle.setAttribute('aria-expanded', 'false');
-                    });
-                    
-                    // チャットボット入力処理
-                    if (chatbotSubmit && chatbotInput && chatbotMessages) {
-                        chatbotSubmit.addEventListener('click', sendMessage);
-                        chatbotInput.addEventListener('keypress', function(e) {
-                            if (e.key === 'Enter') {
-                                sendMessage();
-                            }
-                        });
-                    }
-                    
-                    function sendMessage() {
-                        const message = chatbotInput.value.trim();
-                        if (message) {
-                            // ユーザーメッセージを追加
-                            addMessage(message, 'user');
-                            chatbotInput.value = '';
-                            
-                            // ボットの応答
-                            setTimeout(() => {
-                                const responses = [
-                                    "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
-                                    "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
-                                    "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
-                                    "プロトタイプからの伴走型開発で、初期投資リスクを抑えたAI導入を実現します。",
-                                    "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
-                                ];
-                                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                                addMessage(randomResponse, 'bot');
-                            }, 800);
-                        }
-                    }
-                    
-                    function addMessage(text, sender) {
-                        const messageDiv = document.createElement('div');
-                        messageDiv.classList.add('message');
-                        messageDiv.classList.add(sender + '-message');
-                        messageDiv.textContent = text;
-                        
-                        chatbotMessages.appendChild(messageDiv);
-                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                        // ボットの応答
+                        setTimeout(() => {
+                            const responses = [
+                                "AI導入についてご質問がありましたら、お気軽にお問い合わせください。",
+                                "ShinAIでは、お客様の課題に合わせたAIソリューションをご提案しています。",
+                                "無料相談では、AIの導入に関する疑問やお悩みにお答えします。",
+                                "プロトタイプからの伴走型開発で、初期投資リスクを抑えたAI導入を実現します。",
+                                "お問い合わせフォームからご連絡いただければ、専任のコンサルタントがご対応いたします。"
+                            ];
+                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                            addMessage(randomResponse, 'bot');
+                        }, 800);
                     }
                 }
                 
-                // アニメーションスクロール検出
-                const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-                
-                const observerOptions = {
-                    threshold: 0.15,
-                    rootMargin: '0px 0px -50px 0px'
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-in');
-                            observer.unobserve(entry.target); // 一度表示されたら監視を解除
-                        }
-                    });
-                }, observerOptions);
-                
-                animateOnScrollElements.forEach(el => {
-                    observer.observe(el);
-                });
-                
-                // フォーム入力フォーカス効果
-                const inputWrappers = document.querySelectorAll('.input-wrapper');
-                inputWrappers.forEach(wrapper => {
-                    const input = wrapper.querySelector('input, textarea');
-                    if (input) {
-                        input.addEventListener('focus', function() {
-                            wrapper.classList.add('focused');
-                        });
-                        
-                        input.addEventListener('blur', function() {
-                            wrapper.classList.remove('focused');
-                        });
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+                    messageDiv.classList.add(sender + '-message');
+                    messageDiv.textContent = text;
+                    
+                    chatbotMessages.appendChild(messageDiv);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            }
+            
+            // アニメーションスクロール検出
+            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target); // 一度表示されたら監視を解除
                     }
                 });
-                
-                // チェックボックス機能強化
-                const checkboxes = document.querySelectorAll('.form-check-input');
-                
-                checkboxes.forEach(checkbox => {
-                    const formCheck = checkbox.closest('.form-check');
+            }, observerOptions);
+            
+            animateOnScrollElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // フォーム入力フォーカス効果
+            const inputWrappers = document.querySelectorAll('.input-wrapper');
+            inputWrappers.forEach(wrapper => {
+                const input = wrapper.querySelector('input, textarea');
+                if (input) {
+                    input.addEventListener('focus', function() {
+                        wrapper.classList.add('focused');
+                    });
                     
-                    // 初期状態の確認
-                    if (checkbox.checked) {
+                    input.addEventListener('blur', function() {
+                        wrapper.classList.remove('focused');
+                    });
+                }
+            });
+            
+            // チェックボックス機能強化
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            
+            checkboxes.forEach(checkbox => {
+                const formCheck = checkbox.closest('.form-check');
+                
+                // 初期状態の確認
+                if (checkbox.checked) {
+                    formCheck.classList.add('checked');
+                }
+                
+                // クリック時の効果
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
                         formCheck.classList.add('checked');
+                    } else {
+                        formCheck.classList.remove('checked');
+                    }
+                });
+            });
+            
+            // Google Sheets連携のためのフォーム送信処理
+            const contactForm = document.getElementById('contact-form-element');
+            const submitButton = document.getElementById('submit-button');
+            const submitStatus = document.getElementById('submit-status');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // 必須項目の検証
+                    let isValid = true;
+                    const requiredFields = contactForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            field.classList.add('error');
+                            
+                            const errorElement = document.getElementById(`${field.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.add('active');
+                            }
+                            
+                            isValid = false;
+                        } else {
+                            field.classList.remove('error');
+                            field.classList.add('valid');
+                            
+                            const errorElement = document.getElementById(`${field.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.remove('active');
+                            }
+                        }
+                    });
+                    
+                    // メールアドレスの特別検証
+                    const emailField = document.getElementById('email');
+                    if (emailField && emailField.value.trim()) {
+                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!emailPattern.test(emailField.value)) {
+                            emailField.classList.add('error');
+                            emailField.classList.remove('valid');
+                            
+                            const errorElement = document.getElementById('email-error');
+                            if (errorElement) {
+                                errorElement.textContent = '有効なメールアドレスを入力してください';
+                                errorElement.classList.add('active');
+                            }
+                            
+                            isValid = false;
+                        }
                     }
                     
-                    // クリック時の効果
-                    checkbox.addEventListener('change', function() {
-                        if (this.checked) {
-                            formCheck.classList.add('checked');
-                        } else {
-                            formCheck.classList.remove('checked');
-                        }
-                    });
-                });
-                
-                // Google Sheets連携のためのフォーム送信処理
-                const contactForm = document.getElementById('contact-form-element');
-                const submitButton = document.getElementById('submit-button');
-                const submitStatus = document.getElementById('submit-status');
-                
-                if (contactForm) {
-                    contactForm.addEventListener('submit', function(e) {
-                        e.preventDefault();
+                    if (isValid) {
+                        // 送信中の表示
+                        submitButton.innerHTML = '<span class="loading-spinner"></span>送信中...';
+                        submitButton.classList.add('btn-loading');
+                        submitButton.disabled = true;
                         
-                        // 必須項目の検証
-                        let isValid = true;
-                        const requiredFields = contactForm.querySelectorAll('[required]');
+                        // フォームデータの取得
+                        const formData = new FormData(contactForm);
+                        const formEntries = {};
                         
-                        requiredFields.forEach(field => {
-                            if (!field.value.trim()) {
-                                field.classList.add('error');
-                                
-                                const errorElement = document.getElementById(`${field.id}-error`);
-                                if (errorElement) {
-                                    errorElement.classList.add('active');
-                                }
-                                
-                                isValid = false;
-                            } else {
-                                field.classList.remove('error');
-                                field.classList.add('valid');
-                                
-                                const errorElement = document.getElementById(`${field.id}-error`);
-                                if (errorElement) {
-                                    errorElement.classList.remove('active');
-                                }
-                            }
+                        // サービス選択のデータ整形
+                        const selectedServices = [];
+                        document.querySelectorAll('input[name="service[]"]:checked').forEach(checkbox => {
+                            selectedServices.push(checkbox.value);
                         });
                         
-                        // メールアドレスの特別検証
-                        const emailField = document.getElementById('email');
-                        if (emailField && emailField.value.trim()) {
-                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                            if (!emailPattern.test(emailField.value)) {
-                                emailField.classList.add('error');
-                                emailField.classList.remove('valid');
-                                
-                                const errorElement = document.getElementById('email-error');
-                                if (errorElement) {
-                                    errorElement.textContent = '有効なメールアドレスを入力してください';
-                                    errorElement.classList.add('active');
-                                }
-                                
-                                isValid = false;
+                        // FormDataから通常のオブジェクトへ変換
+                        for (let [key, value] of formData.entries()) {
+                            // チェックボックスの特殊処理を除外
+                            if (key !== 'service[]') {
+                                formEntries[key] = value;
                             }
                         }
                         
-                        if (isValid) {
-                            // 送信中の表示
-                            submitButton.innerHTML = '<span class="loading-spinner"></span>送信中...';
-                            submitButton.classList.add('btn-loading');
-                            submitButton.disabled = true;
-                            
-                            // フォームデータの取得
-                            const formData = new FormData(contactForm);
-                            const formEntries = {};
-                            
-                            // サービス選択のデータ整形
-                            const selectedServices = [];
-                            document.querySelectorAll('input[name="service[]"]:checked').forEach(checkbox => {
-                                selectedServices.push(checkbox.value);
-                            });
-                            
-                            // FormDataから通常のオブジェクトへ変換
-                            for (let [key, value] of formData.entries()) {
-                                // チェックボックスの特殊処理を除外
-                                if (key !== 'service[]') {
-                                    formEntries[key] = value;
-                                }
+                        // サービス選択を追加
+                        formEntries['services'] = selectedServices.join(', ');
+                        
+                        // タイムスタンプを更新
+                        formEntries['timestamp'] = new Date().toISOString();
+                        
+                        // Google Sheets APIエンドポイント（実際のデプロイURLに置き換える）
+                        const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec';
+                        
+                        // Google Sheetsへデータを送信
+                        // テスト環境のため、実際のAPIコールをシミュレート
+                        setTimeout(() => {
+                            showSuccessMessage();
+                        }, 1500);
+                        
+                        // 実際のデプロイ時は以下のコードを使用
+                        /*
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            body: JSON.stringify(formEntries),
+                            headers: {
+                                'Content-Type': 'application/json'
                             }
-                            
-                            // サービス選択を追加
-                            formEntries['services'] = selectedServices.join(', ');
-                            
-                            // タイムスタンプを更新
-                            formEntries['timestamp'] = new Date().toISOString();
-                            
-                            // Google Sheets APIエンドポイント（実際のデプロイURLに置き換える）
-                            const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec';
-                            
-                            // Google Sheetsへデータを送信
-                            // テスト環境のため、実際のAPIコールをシミュレート
-                            setTimeout(() => {
+                        })
+                        .then(response => {
+                            if (response.ok) {
                                 showSuccessMessage();
-                            }, 1500);
+                                return response.json();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            showErrorMessage();
+                        });
+                        */
+                    }
+                });
+                
+                // フォーム入力リアルタイム検証
+                const formInputs = contactForm.querySelectorAll('input, textarea');
+                formInputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        if (this.hasAttribute('required') && this.value.trim()) {
+                            this.classList.remove('error');
+                            this.classList.add('valid');
                             
-                            // 実際のデプロイ時は以下のコードを使用
-                            /*
-                            fetch(scriptURL, {
-                                method: 'POST',
-                                body: JSON.stringify(formEntries),
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            })
-                            .then(response => {
-                                if (response.ok) {
-                                    showSuccessMessage();
-                                    return response.json();
-                                }
-                                throw new Error('Network response was not ok.');
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                showErrorMessage();
-                            });
-                            */
+                            const errorElement = document.getElementById(`${this.id}-error`);
+                            if (errorElement) {
+                                errorElement.classList.remove('active');
+                            }
                         }
-                    });
-                    
-                    // フォーム入力リアルタイム検証
-                    const formInputs = contactForm.querySelectorAll('input, textarea');
-                    formInputs.forEach(input => {
-                        input.addEventListener('input', function() {
-                            if (this.hasAttribute('required') && this.value.trim()) {
+                        
+                        // メールアドレス特別検証
+                        if (this.id === 'email' && this.value.trim()) {
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                            if (emailPattern.test(this.value)) {
                                 this.classList.remove('error');
                                 this.classList.add('valid');
                                 
-                                const errorElement = document.getElementById(`${this.id}-error`);
+                                const errorElement = document.getElementById('email-error');
                                 if (errorElement) {
                                     errorElement.classList.remove('active');
                                 }
                             }
-                            
-                            // メールアドレス特別検証
-                            if (this.id === 'email' && this.value.trim()) {
-                                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                                if (emailPattern.test(this.value)) {
-                                    this.classList.remove('error');
-                                    this.classList.add('valid');
-                                    
-                                    const errorElement = document.getElementById('email-error');
-                                    if (errorElement) {
-                                        errorElement.classList.remove('active');
-                                    }
-                                }
-                            }
-                        });
-                    });
-                }
-                
-                // 送信成功メッセージの表示
-                function showSuccessMessage() {
-                    // 送信ボタンを元に戻す
-                    submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-arrow-right" aria-hidden="true"></i>';
-                    submitButton.classList.remove('btn-loading');
-                    submitButton.disabled = false;
-                    
-                    // 成功メッセージを表示
-                    submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
-                    submitStatus.className = 'submit-status success visible';
-                    
-                    // 成功メッセージもモーダル表示
-                    const successMessage = document.getElementById('message-success');
-                    if (successMessage) {
-                        successMessage.classList.add('show');
-                    }
-                    
-                    // フォームをリセット
-                    contactForm.reset();
-                    
-                    // 入力フィールドの状態をクリア
-                    contactForm.querySelectorAll('.form-control').forEach(control => {
-                        control.classList.remove('valid');
-                        control.classList.remove('error');
-                    });
-                    
-                    // チェックボックスをリセット
-                    contactForm.querySelectorAll('.form-check').forEach(formCheck => {
-                        formCheck.classList.remove('checked');
-                    });
-                    
-                    // 一定時間後にメッセージを非表示
-                    setTimeout(() => {
-                        submitStatus.className = 'submit-status';
-                        if (successMessage) {
-                            successMessage.classList.remove('show');
                         }
-                    }, 6000);
+                    });
+                });
+            }
+            
+            // 送信成功メッセージの表示
+            function showSuccessMessage() {
+                // 送信ボタンを元に戻す
+                submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-arrow-right" aria-hidden="true"></i>';
+                submitButton.classList.remove('btn-loading');
+                submitButton.disabled = false;
+                
+                // 成功メッセージを表示
+                submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
+                submitStatus.className = 'submit-status success visible';
+                
+                // 成功メッセージもモーダル表示
+                const successMessage = document.getElementById('message-success');
+                if (successMessage) {
+                    successMessage.classList.add('show');
                 }
                 
-                // 送信エラーメッセージの表示
-                function showErrorMessage() {
-                    // 送信ボタンを元に戻す
-                    submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-arrow-right" aria-hidden="true"></i>';
-                    submitButton.classList.remove('btn-loading');
-                    submitButton.disabled = false;
-                    
-                    // エラーメッセージを表示
-                    submitStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
-                    submitStatus.className = 'submit-status error visible';
-                    
-                    // 一定時間後にメッセージを非表示
-                    setTimeout(() => {
-                        submitStatus.className = 'submit-status';
-                    }, 6000);
-                }
-            });
-        </script>
-    </body>
+                // フォームをリセット
+                contactForm.reset();
+                
+                // 入力フィールドの状態をクリア
+                contactForm.querySelectorAll('.form-control').forEach(control => {
+                    control.classList.remove('valid');
+                    control.classList.remove('error');
+                });
+                
+                // チェックボックスをリセット
+                contactForm.querySelectorAll('.form-check').forEach(formCheck => {
+                    formCheck.classList.remove('checked');
+                });
+                
+                // 一定時間後にメッセージを非表示
+                setTimeout(() => {
+                    submitStatus.className = 'submit-status';
+                    if (successMessage) {
+                        successMessage.classList.remove('show');
+                    }
+                }, 6000);
+            }
+            
+            // 送信エラーメッセージの表示
+            function showErrorMessage() {
+                // 送信ボタンを元に戻す
+                submitButton.innerHTML = '<span>無料相談を申し込む</span><i class="fas fa-arrow-right" aria-hidden="true"></i>';
+                submitButton.classList.remove('btn-loading');
+                submitButton.disabled = false;
+                
+                // エラーメッセージを表示
+                submitStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+                submitStatus.className = 'submit-status error visible';
+                
+                // 一定時間後にメッセージを非表示
+                setTimeout(() => {
+                    submitStatus.className = 'submit-status';
+                }, 6000);
+            }
+        });
+    </script>
+</body>
 </html>
