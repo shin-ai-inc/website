@@ -378,7 +378,7 @@
     }
     
     .service-content {
-        padding: 2rem 2rem 2.5rem;
+        padding: 2.2rem 2rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -406,7 +406,7 @@
     }
     
     .service-title {
-        font-size: 1.6rem;
+        font-size: 1.45rem;
         font-weight: 700;
         margin-bottom: 1.3rem;
         color: var(--dark);
@@ -414,18 +414,35 @@
         display: block;
         transition: color 0.3s ease;
         line-height: 1.35;
-        letter-spacing: 0.02em;
+        letter-spacing: -0.02em;
+        text-align: left;
     }
     
-    .service-title .title-break {
-        display: block;
-        margin-bottom: 0.3rem;
+    .service-title br {
+        display: inline;
+    }
+    
+    @media (min-width: 1200px) {
+        .service-title {
+            font-size: 1.5rem;
+            min-height: 3.8rem;
+        }
+    }
+    
+    @media (max-width: 1199px) {
+        .service-title br {
+            display: none;
+        }
+        
+        .service-title {
+            white-space: normal;
+        }
     }
     
     .service-title::after {
         content: '';
         position: absolute;
-        bottom: -10px;
+        bottom: -8px;
         left: 0;
         width: 50px;
         height: 3px;
@@ -446,7 +463,7 @@
         color: var(--gray);
         margin-bottom: 2rem;
         flex-grow: 1;
-        line-height: 1.7;
+        line-height: 1.75;
         font-size: 1rem;
         letter-spacing: 0.01em;
     }
@@ -1428,32 +1445,47 @@
             width: 340px;
             height: 480px;
         }
+    .hide-mobile {
+        display: inline;
     }
     
-    @media (max-width: 992px) {
-        .service-title {
-            font-size: 1.4rem;
-        }
-        
-        .service-title .title-break {
+    @media (max-width: 768px) {
+        .hide-mobile {
             display: none;
         }
         
-        .service-title::after {
-            bottom: -8px;
-        }
-    }
-    
-    @media (max-width: 576px) {
         .service-title {
             font-size: 1.3rem;
-            margin-bottom: 1rem;
+            text-align: center;
         }
         
-        .service-title .title-break {
-            display: block;
+        .service-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .service-content {
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+        }
+        
+        .service-icon-circle {
+            margin: 0 auto 1.5rem;
         }
     }
+        .service-image {
+            height: 200px;
+        }
+        
+        .service-content {
+            padding: 1.8rem;
+        }
+        
+        .service-icon-circle {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
         
         .feature-card {
             padding: 2rem;
@@ -1662,7 +1694,7 @@
                     <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
                     <span class="section-subtitle">ShinAIのソリューション</span>
                     <h2 class="heading-lg">お客様に寄り添う<span class="highlight">３つのAIソリューション</span></h2>
-                    <p class="section-description">シンプルかつ分かりやすく、お客様のビジネス課題を解決へ導く、厳選されたAIソリューションをご提供します</p>
+                    <p class="section-description">シンプルで分かりやすく、確実に成果を生み出す<br class="hide-mobile">厳選された3つのAIソリューションをご提供します</p>
                 </div>
                 
                 <div class="services-grid animate-on-scroll">
@@ -1683,7 +1715,7 @@
                             <div class="service-icon-circle">
                                 <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
-                            <h3 class="service-title">新規事業企画書AIツール<br class="title-break">「アイプロ」</h3>
+                            <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
                             <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">時間短縮</span>
@@ -1713,7 +1745,7 @@
                             <div class="service-icon-circle">
                                 <i class="fas fa-robot" aria-hidden="true"></i>
                             </div>
-                            <h3 class="service-title">オーダーメイド<br class="title-break">AIアプリケーション開発</h3>
+                            <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
                             <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">カスタム開発</span>
@@ -1743,7 +1775,7 @@
                             <div class="service-icon-circle">
                                 <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
-                            <h3 class="service-title">AI導入(DX/AX)<br class="title-break">コンサルティング</h3>
+                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
                             <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">伴走支援</span>
