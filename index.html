@@ -38,12 +38,11 @@
     <!-- Font Awesome - 最新バージョン -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- GSAP for advanced animations -->
+    <!-- component-split: AnimationLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-    <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     
@@ -100,7 +99,7 @@
     }
     </script>
     
-    <!-- WebSite構造化データ -->
+    <!-- component-split: WebSiteStructuredData -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -116,7 +115,7 @@
     }
     </script>
     
-    <!-- FAQページの構造化データ -->
+    <!-- component-split: FAQStructuredData -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -162,16 +161,240 @@
 
     <!-- component-split: PageSpecificStyles -->
     <style>
-    /* 革新的なヒーローセクションスタイル */
+    /* 共通CSS変数の定義 */
+    :root {
+        --primary: #3A5FEB;
+        --secondary: #00C9A7;
+        --primary-light: #9AAEFF;
+        --secondary-light: #85EDD6;
+        --dark: #1a1f36;
+        --gray: #6c7293;
+        --light-gray: #f5f5f7;
+        --white: #ffffff;
+        --gradient-primary: linear-gradient(90deg, #3A5FEB, #00C9A7);
+        --gradient-highlight: linear-gradient(90deg, #9AAEFF, #85EDD6);
+        --gradient-glass: linear-gradient(120deg, rgba(154, 174, 255, 0.2), rgba(133, 237, 214, 0.2));
+        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+        --radius: 12px;
+        --radius-lg: 20px;
+        --radius-full: 50px;
+        --z-back: -1;
+        --z-normal: 1;
+        --z-tooltip: 10;
+        --z-fixed: 100;
+        --z-modal: 1000;
+        --z-chatbot: 999;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* グローバルスタイル */
+    html {
+        scroll-behavior: smooth;
+        height: 100%;
+    }
+    
+    body {
+        font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background-color: var(--white);
+        overflow-x: hidden;
+        min-height: 100%;
+    }
+    
+    /* スクロールスナップ対応 (スワイプ型レスポンシブデザイン) */
+    @media (max-width: 768px) {
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        .scroll-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    /* ヘッダー - 一行に納まるよう最適化 */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: var(--z-fixed);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+    }
+
+    .header.scrolled {
+        padding: 0.5rem 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--dark);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover img {
+        transform: rotate(15deg);
+        filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
+    }
+
+    /* ナビゲーションスタイル - 一行に収まるよう最適化 */
+    .nav {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 1.5rem;
+    }
+
+    .nav-link {
+        color: var(--dark);
+        font-weight: 600;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 0.95rem;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-full);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+        width: 100%;
+    }
+
+    .nav-cta {
+        margin-left: 1rem;
+    }
+
+    /* 無料相談ボタン - グラデーションに合わせて */
+    .btn-consultation {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 0.8rem 1.6rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        text-decoration: none;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-consultation:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+
+    .btn-consultation-message {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 400;
+        margin-top: 0.3rem;
+        opacity: 0.9;
+    }
+
+    .menu-toggle {
+        display: none;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 0.8rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+    }
+
+    /* パーティクルエフェクト - 維持 */
+    .particles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .particles-fallback {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        z-index: 0;
+        display: none;
+    }
+
+    /* ヒーローセクション - 人間らしい時間の表現改善 */
     .hero {
         min-height: 100vh;
         position: relative;
         display: flex;
         align-items: center;
         overflow: hidden;
-        padding-top: 100px;
+        padding-top: 80px;
         text-align: center;
-        z-index: 1;
     }
 
     .hero-bg-container {
@@ -206,7 +429,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.95) 100%);
         z-index: 0;
     }
 
@@ -215,37 +438,87 @@
         max-width: 900px;
         margin: 0 auto;
         z-index: 10;
-        animation: fadeInUp 1s ease-out;
     }
 
-    .brand-logo {
-        margin-bottom: 1.5rem;
-        transform: scale(1);
-        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 浮遊エレメント - スタイル強化 */
+    .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
     }
 
-    .hero-content:hover .brand-logo {
-        transform: scale(1.1) rotate(10deg);
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--gradient-glass);
+        opacity: 0.6;
+        animation: float 20s infinite alternate ease-in-out;
     }
 
-    .brand-icon {
-        width: 90px;
-        height: 90px;
-        filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.25));
+    .floating-element:nth-child(1) {
+        width: 120px;
+        height: 120px;
+        top: 15%;
+        left: 10%;
+        animation-duration: 20s;
+    }
+
+    .floating-element:nth-child(2) {
+        width: 180px;
+        height: 180px;
+        top: 60%;
+        left: 15%;
+        animation-delay: 2s;
+        animation-duration: 18s;
+    }
+
+    .floating-element:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        top: 25%;
+        right: 15%;
+        animation-delay: 1s;
+        animation-duration: 22s;
+    }
+
+    .floating-element:nth-child(4) {
+        width: 140px;
+        height: 140px;
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 3s;
+        animation-duration: 25s;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+            transform: translate(30px, 20px) rotate(5deg);
+        }
+        100% {
+            transform: translate(-20px, 40px) rotate(-5deg);
+        }
     }
 
     .hero-label {
         display: inline-block;
-        background: linear-gradient(120deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
-        padding: 0.6rem 1.8rem;
+        background: var(--gradient-glass);
+        padding: 0.7rem 1.8rem;
         border-radius: 50px;
         color: var(--primary);
         font-weight: 700;
         margin-bottom: 1.8rem;
-        letter-spacing: 0.5px;
         position: relative;
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(58, 95, 235, 0.12);
+        animation: fadeInUp 0.8s 0.1s forwards;
+        opacity: 0;
     }
 
     .hero-label::before {
@@ -255,7 +528,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
         animation: shimmer 3s infinite;
     }
 
@@ -263,42 +536,56 @@
         to { left: 100%; }
     }
 
+    /* ヒーロータイトルスタイル - 人間らしい時間の表現改善 */
     .hero-title {
-        font-size: 4.2rem;
+        font-size: 4rem;
         font-weight: 900;
         line-height: 1.2;
-        margin-bottom: 1.8rem;
+        margin-bottom: 2rem;
         color: var(--dark);
-        max-width: 100%;
-        position: relative;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        animation: fadeInUp 0.8s 0.2s forwards;
+        opacity: 0;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
+    /* 「人間らしい時間」のスタイル - 美しいグラデーション */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        color: var(--primary);
-        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+        background: linear-gradient(to right, #9AAEFF, #85EDD6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        color: transparent;
         font-weight: 900;
+        filter: drop-shadow(0 2px 3px rgba(58, 95, 235, 0.15));
+        transition: all 0.3s ease;
+        transform: translateY(0);
     }
 
+    /* 人間らしい時間の下線エフェクト */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
         bottom: 0.1em;
         left: 0;
         width: 100%;
-        height: 0.2em;
-        background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
+        height: 0.15em;
+        background: linear-gradient(to right, rgba(154, 174, 255, 0.3), rgba(133, 237, 214, 0.3));
         z-index: -1;
         border-radius: 5px;
+        transition: height 0.3s ease;
+    }
+
+    /* ホバーエフェクト */
+    .hero-title .highlight:hover {
+        filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.3));
+        transform: translateY(-3px);
+    }
+
+    .hero-title .highlight:hover::after {
+        height: 0.3em;
+        background: linear-gradient(to right, rgba(154, 174, 255, 0.4), rgba(133, 237, 214, 0.4));
     }
 
     .hero-description {
@@ -309,6 +596,8 @@
         margin-left: auto;
         margin-right: auto;
         color: rgba(26, 31, 54, 0.9);
+        animation: fadeInUp 0.8s 0.3s forwards;
+        opacity: 0;
     }
 
     .hero-cta {
@@ -317,6 +606,8 @@
         gap: 1.2rem;
         margin-bottom: 3rem;
         justify-content: center;
+        animation: fadeInUp 0.8s 0.4s forwards;
+        opacity: 0;
     }
 
     .hero-cta .btn {
@@ -329,10 +620,11 @@
         position: relative;
         overflow: hidden;
         z-index: 1;
+        text-decoration: none;
     }
 
     .hero-cta .btn-primary {
-        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        background: var(--gradient-primary);
         color: white;
         box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
     }
@@ -358,51 +650,24 @@
         left: 100%;
     }
 
-    .hero-cta .btn-consultation {
+    .hero-cta .btn-outline {
         background: white;
         color: var(--primary);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         border: 2px solid var(--primary);
     }
 
-    .hero-cta .btn-consultation:hover {
+    .hero-cta .btn-outline:hover {
         background: var(--primary);
         color: white;
         transform: translateY(-6px) scale(1.05);
         box-shadow: 0 15px 35px rgba(58, 95, 235, 0.25);
     }
 
-    .btn-consultation-message {
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 400;
-        margin-top: 0.3rem;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-    }
-
-    .btn-consultation:hover .btn-consultation-message {
-        opacity: 1;
-        color: white;
-    }
-
-    .btn-download {
+    .btn-icon-bounce {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        background: transparent;
-        color: var(--primary);
-        font-weight: 600;
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        border: 1px solid rgba(58, 95, 235, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .btn-download:hover {
-        background: rgba(58, 95, 235, 0.05);
-        border-color: var(--primary);
-        transform: translateY(-3px);
+        gap: 0.8rem;
     }
 
     .btn-icon-bounce i {
@@ -414,21 +679,38 @@
     }
 
     @keyframes btnIconBounce {
-        0%, 100% {
-            transform: translateX(0);
-        }
-        50% {
-            transform: translateX(5px);
-        }
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+    }
+
+    .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: transparent;
+        color: var(--primary);
+        font-weight: 600;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid rgba(58, 95, 235, 0.2);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-download:hover {
+        background: rgba(58, 95, 235, 0.05);
+        border-color: var(--primary);
+        transform: translateY(-3px);
     }
 
     .hero-tagline {
         font-size: 1.25rem;
         font-style: italic;
         color: var(--primary);
-        opacity: 0.9;
         margin-top: 1rem;
         display: inline-block;
+        animation: fadeInUp 0.8s 0.5s forwards;
+        opacity: 0;
     }
 
     .hero-tagline p {
@@ -443,338 +725,271 @@
         opacity: 0.6;
     }
 
-    /* 浮遊エレメントアニメーション */
-    .floating-elements {
+    /* サービスプレビューカード - マーケティング改善版 */
+    .services-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .service-preview-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .service-preview-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.2);
+    }
+
+    .service-preview-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        z-index: 2;
+        box-shadow: 0 4px 10px rgba(58, 95, 235, 0.2);
+    }
+
+    .service-preview-card:nth-child(1) .service-preview-badge {
+        background: linear-gradient(135deg, #9AAEFF, #85EDD6);
+    }
+
+    .service-preview-card:nth-child(2) .service-preview-badge {
+        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+    }
+
+    .service-preview-card:nth-child(3) .service-preview-badge {
+        background: linear-gradient(135deg, #00C9A7, #FF8A00);
+    }
+
+    .service-preview-image {
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-preview-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .service-preview-card:hover .service-preview-image img {
+        transform: scale(1.08);
+    }
+
+    .service-preview-image::after {
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none;
-        z-index: 1;
+        background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 
-    .floating-element {
-        position: absolute;
+    .service-preview-card:hover .service-preview-image::after {
+        opacity: 1;
+    }
+
+    .service-preview-icon {
+        width: 60px;
+        height: 60px;
+        background: white;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
-        opacity: 0.5;
-        animation: float 15s infinite alternate ease-in-out;
-    }
-
-    .floating-element:nth-child(1) {
-        width: 100px;
-        height: 100px;
-        top: 15%;
-        left: 10%;
-        animation-duration: 20s;
-    }
-
-    .floating-element:nth-child(2) {
-        width: 150px;
-        height: 150px;
-        top: 60%;
-        left: 15%;
-        animation-delay: 2s;
-        animation-duration: 18s;
-    }
-
-    .floating-element:nth-child(3) {
-        width: 80px;
-        height: 80px;
-        top: 25%;
-        right: 15%;
-        animation-delay: 1s;
-        animation-duration: 22s;
-    }
-
-    .floating-element:nth-child(4) {
-        width: 120px;
-        height: 120px;
-        bottom: 20%;
-        right: 10%;
-        animation-delay: 3s;
-        animation-duration: 25s;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
-        }
-        50% {
-            transform: translate(30px, 20px) rotate(5deg);
-        }
-        100% {
-            transform: translate(-20px, 40px) rotate(-5deg);
-        }
-    }
-
-    /* 3つの価値セクション改善 */
-    .benefits-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3rem;
-        margin-top: 4rem;
-    }
-
-    .benefit-card {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-        padding: 2.5rem;
-        height: 100%;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .benefit-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.2);
-        border-color: rgba(58, 95, 235, 0.15);
-    }
-
-    .benefit-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        z-index: 1;
-    }
-
-    .benefit-icon {
-        width: 90px;
-        height: 90px;
-        background: white;
-        color: var(--primary);
-        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 2rem;
-        font-size: 2.2rem;
-        position: relative;
-        z-index: 1;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        color: var(--primary);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        transition: all 0.3s ease;
     }
 
-    /* カード別スタイル */
-    .benefit-card:nth-child(1) .benefit-icon {
-        color: #3A5FEB;
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.2);
+    .service-preview-card:hover .service-preview-icon {
+        transform: translateX(-50%) translateY(-5px) scale(1.1);
+        box-shadow: 0 12px 25px rgba(58, 95, 235, 0.3);
     }
 
-    .benefit-card:nth-child(2) .benefit-icon {
-        color: #00C9A7;
-        box-shadow: 0 10px 30px rgba(0, 201, 167, 0.2);
-    }
-
-    .benefit-card:nth-child(3) .benefit-icon {
-        color: #FF8A00;
-        box-shadow: 0 10px 30px rgba(255, 138, 0, 0.2);
-    }
-
-    .benefit-card:hover .benefit-icon {
-        transform: scale(1.1) rotate(10deg);
-    }
-
-    .benefit-card:nth-child(1):hover .benefit-icon {
-        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.3);
-    }
-
-    .benefit-card:nth-child(2):hover .benefit-icon {
-        box-shadow: 0 15px 40px rgba(0, 201, 167, 0.3);
-    }
-
-    .benefit-card:nth-child(3):hover .benefit-icon {
-        box-shadow: 0 15px 40px rgba(255, 138, 0, 0.3);
-    }
-
-    .benefit-content {
+    .service-preview-content {
+        padding: 2rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        text-align: center;
-    }
-
-    .benefit-content h3 {
-        font-size: 1.6rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: var(--dark);
-    }
-
-    .benefit-content p {
-        color: var(--gray);
-        line-height: 1.8;
-        margin-bottom: 1.8rem;
-        font-size: 1.05rem;
-    }
-
-    .benefit-stats {
-        display: flex;
-        justify-content: space-around;
-        margin: 1.5rem 0;
-        background: rgba(58, 95, 235, 0.06);
-        padding: 1.5rem;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-    }
-
-    .benefit-card:nth-child(1) .benefit-stats {
-        background: rgba(58, 95, 235, 0.06);
-    }
-
-    .benefit-card:nth-child(2) .benefit-stats {
-        background: rgba(0, 201, 167, 0.06);
-    }
-
-    .benefit-card:nth-child(3) .benefit-stats {
-        background: rgba(255, 138, 0, 0.06);
-    }
-
-    .benefit-card:hover .benefit-stats {
-        transform: scale(1.05);
-    }
-
-    .benefit-stat {
-        text-align: center;
-    }
-
-    .stat-value {
-        font-size: 2.8rem;
-        font-weight: 800;
-        color: var(--primary);
-        display: inline-block;
-        line-height: 1;
-    }
-
-    .benefit-card:nth-child(1) .stat-value, 
-    .benefit-card:nth-child(1) .stat-percent {
-        color: #3A5FEB;
-    }
-
-    .benefit-card:nth-child(2) .stat-value, 
-    .benefit-card:nth-child(2) .stat-percent {
-        color: #00C9A7;
-    }
-
-    .benefit-card:nth-child(3) .stat-value, 
-    .benefit-card:nth-child(3) .stat-percent {
-        color: #FF8A00;
-    }
-
-    .stat-percent {
-        font-size: 1.6rem;
-        font-weight: 700;
-    }
-
-    .stat-label {
-        font-size: 0.95rem;
-        color: var(--gray);
-        font-weight: 500;
-        margin-top: 0.4rem;
-        display: block;
-    }
-
-    /* ヘッダー固定化とエフェクト */
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        transition: all 0.4s ease;
-    }
-
-    .header.scrolled {
-        padding: 0.5rem 0;
-        background-color: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-inner {
-        display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 1rem 0;
+        text-align: center;
     }
 
-    .logo {
+    .service-preview-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 1rem;
+        margin-top: 1.5rem;
+        line-height: 1.4;
+    }
+
+    .service-preview-description {
+        font-size: 1rem;
+        color: var(--gray);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .service-preview-cta {
+        margin-top: auto;
         display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .service-preview-link {
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: var(--dark);
         transition: all 0.3s ease;
+        text-decoration: none;
     }
 
-    .logo:hover {
-        transform: scale(1.05);
+    .service-preview-link:hover {
+        gap: 0.8rem;
+        text-decoration: underline;
     }
 
-    .logo img {
-        width: 40px;
-        height: 40px;
-        filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
-        transition: all 0.3s ease;
+    /* AI伴走型開発セクション */
+    .ai-escort-section {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
     }
 
-    .logo:hover img {
-        transform: rotate(15deg);
-        filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
-    }
-
-    .nav {
-        display: flex;
-        gap: 2rem;
+    .ai-escort-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
         align-items: center;
     }
 
-    .nav-link {
-        color: var(--dark);
-        font-weight: 600;
+    .ai-escort-text {
         position: relative;
-        padding: 0.5rem 0;
+        z-index: 1;
+    }
+
+    .ai-escort-text h3 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .ai-escort-text h3::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+    }
+
+    .ai-escort-text p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--gray);
+        margin-bottom: 2rem;
+    }
+
+    .ai-escort-features {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .ai-escort-feature {
+        display: flex;
+        align-items: start;
+        gap: 1rem;
+    }
+
+    .ai-escort-feature-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.5rem;
+        flex-shrink: 0;
         transition: all 0.3s ease;
     }
 
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        transition: width 0.3s ease;
-        border-radius: 50px;
+    .ai-escort-feature:hover .ai-escort-feature-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: var(--gradient-primary);
+        color: white;
     }
 
-    .nav-link:hover,
-    .nav-link.active {
-        color: var(--primary);
+    .ai-escort-feature-content h4 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 0.5rem;
     }
 
-    .nav-link:hover::after,
-    .nav-link.active::after {
+    .ai-escort-feature-content p {
+        font-size: 1rem;
+        color: var(--gray);
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .ai-escort-image {
+        position: relative;
+        z-index: 1;
+    }
+
+    .ai-escort-image img {
         width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
     }
 
-    .nav-cta {
-        margin-left: 1.5rem;
+    .ai-escort-image:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
     }
 
     /* CTAセクション改善 */
@@ -822,7 +1037,7 @@
         left: 0;
         width: 100%;
         height: 8px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         z-index: 1;
     }
 
@@ -835,9 +1050,12 @@
         font-weight: 800;
         color: var(--dark);
         line-height: 1.3;
-        background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
+    }
+
+    .text-gradient {
+        color: transparent;
+        background: var(--gradient-primary);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         background-clip: text;
     }
 
@@ -881,25 +1099,372 @@
         }
     }
 
-    /* レスポンシブ対応 */
-    @media (max-width: 992px) {
+    /* チャットボット改善 */
+    .chatbot {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: var(--z-chatbot);
+    }
+
+    .chatbot-toggle {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        position: relative;
+        z-index: 3;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.15) rotate(10deg);
+        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.45);
+    }
+
+    .chatbot-toggle .ripple {
+        position: absolute;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        background: rgba(58, 95, 235, 0.4);
+        animation: ripple 1.5s infinite;
+        z-index: -1;
+    }
+
+    @keyframes ripple {
+        0% {
+            transform: scale(1);
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(2);
+            opacity: 0;
+        }
+    }
+
+    .chatbot-container {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 380px;
+        height: 520px;
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: scale(0);
+        transform-origin: bottom right;
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        z-index: 2;
+    }
+
+    .chatbot-container.active {
+        transform: scale(1);
+    }
+
+    .chatbot-header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1.2rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-title {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .chatbot-close {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chatbot-close:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: rotate(90deg);
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 1.5rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background: linear-gradient(to bottom, rgba(58, 95, 235, 0.03), transparent);
+    }
+
+    .message {
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
+        max-width: 80%;
+        line-height: 1.6;
+        position: relative;
+        animation: messageSlideIn 0.3s ease-out;
+        font-size: 0.95rem;
+    }
+
+    @keyframes messageSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .bot-message {
+        background: linear-gradient(135deg, #f0f4fd, #e8effc);
+        color: var(--dark);
+        border-top-left-radius: 5px;
+        align-self: flex-start;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .user-message {
+        background: var(--gradient-primary);
+        color: white;
+        border-top-right-radius: 5px;
+        align-self: flex-end;
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+    }
+
+    .chatbot-input {
+        display: flex;
+        align-items: center;
+        padding: 1.2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: #fafbfc;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 30px;
+        padding: 0.9rem 1.3rem;
+        font-size: 0.95rem;
+        outline: none;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .chatbot-input input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.15);
+    }
+
+    .chatbot-submit {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        margin-left: 0.8rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .chatbot-submit:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+    }
+
+    .typing-indicator {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 1rem 1.2rem;
+        background: linear-gradient(135deg, #f0f4fd, #e8effc);
+        border-radius: 20px;
+        border-top-left-radius: 5px;
+        align-self: flex-start;
+        max-width: 80%;
+        margin-top: 0.5rem;
+    }
+
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--primary);
+        border-radius: 50%;
+        animation: typingAnim 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnim {
+        0%, 60%, 100% {
+            transform: translateY(0);
+        }
+        30% {
+            transform: translateY(-10px);
+        }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 110px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: white;
+        color: var(--primary);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 99;
+    }
+
+    .back-to-top.active {
+        opacity: 1;
+        visibility: visible;
+        bottom: 30px;
+    }
+
+    .back-to-top:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+    }
+
+    /* スワイプインジケーター */
+    .swipe-indicator {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--primary);
+        font-size: 1.5rem;
+        animation: bounceUpDown 2s infinite;
+        z-index: 50;
+        opacity: 0.8;
+        pointer-events: none;
+        display: none;
+    }
+
+    @keyframes bounceUpDown {
+        0%, 100% { transform: translateY(0) translateX(-50%); }
+        50% { transform: translateY(-15px) translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+        .swipe-indicator {
+            display: block;
+        }
+    }
+
+    /* アニメーションキーフレーム */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* スクロールアニメーション */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .animate-on-scroll.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* レスポンシブ対応の強化 */
+    @media (max-width: 1199px) {
+        .nav-link {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-consultation {
+            padding: 0.6rem 1.1rem;
+        }
+        
+        .services-preview-grid {
+            gap: 1.5rem;
+        }
+        
+        .service-preview-title {
+            font-size: 1.3rem;
+        }
+        
         .hero-title {
             font-size: 3.5rem;
         }
-        
-        .benefits-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+    }
+
+    @media (max-width: 992px) {
+        .hero-title {
+            font-size: 3rem;
         }
         
-        .benefit-card {
-            padding: 2rem;
+        .hero-description {
+            font-size: 1.1rem;
         }
         
-        .benefit-icon {
-            width: 80px;
-            height: 80px;
-            font-size: 2rem;
+        .services-preview-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .service-preview-image {
+            height: 180px;
+        }
+        
+        .service-preview-icon {
+            top: 150px;
         }
         
         .cta-container {
@@ -909,39 +1474,65 @@
         .cta-title h2 {
             font-size: 2.4rem;
         }
+        
+        .ai-escort-content {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .ai-escort-image {
+            order: -1;
+        }
+        
+        /* モバイルメニューの表示 */
+        .menu-toggle {
+            display: flex;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 6rem 2rem 2rem;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            overflow-y: auto;
+        }
+        
+        .nav.active {
+            right: 0;
+        }
+        
+        .nav-link {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-cta {
+            margin-top: 2rem;
+            width: 100%;
+            margin-left: 0;
+        }
+        
+        .btn-consultation {
+            width: 100%;
+            margin-left: 0;
+            text-align: center;
+        }
     }
 
     @media (max-width: 768px) {
         .hero-title {
-            font-size: 2.8rem;
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-        }
-        
-        .benefits-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-        
-        .benefit-stats {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 2rem;
-        }
-        
-        .cta-description {
-            font-size: 1.1rem;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .hero-title {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
         
         .hero-cta {
@@ -953,8 +1544,77 @@
             width: 100%;
         }
         
-        .benefits-grid {
+        .services-preview-grid {
             grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .service-preview-card {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .service-preview-image {
+            height: 180px;
+        }
+        
+        .service-preview-content {
+            padding: 1.5rem;
+        }
+        
+        .service-preview-icon {
+            top: 150px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+        }
+        
+        .cta-title h2 {
+            font-size: 2rem;
+        }
+        
+        .cta-description {
+            font-size: 1.1rem;
+        }
+        
+        .chatbot-container {
+            width: 340px;
+            height: 480px;
+        }
+        
+        .section {
+            scroll-snap-align: start;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        
+        .service-preview-image {
+            height: 150px;
+        }
+        
+        .service-preview-icon {
+            top: 125px;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+        }
+        
+        .service-preview-title {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        .service-preview-description {
+            font-size: 0.95rem;
+        }
+        
+        .service-preview-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
         }
         
         .cta-container {
@@ -973,17 +1633,146 @@
         .cta-buttons .btn {
             width: 100%;
         }
+        
+        .ai-escort-text h3 {
+            font-size: 2rem;
+        }
+        
+        .chatbot {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .chatbot-container {
+            width: calc(100vw - 40px);
+            height: 460px;
+        }
+        
+        .back-to-top {
+            right: 90px;
+            bottom: 20px;
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    /* iPhone特化最適化 */
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 812px) 
+    and (-webkit-min-device-pixel-ratio: 3) {
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .header {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        .header-inner {
+            padding: 0.8rem 0;
+        }
+        
+        .services-preview-grid {
+            padding: 0 1rem;
+        }
+        
+        .service-preview-card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-preview-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-preview-icon {
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            bottom: 25px;
+            right: 25px;
+        }
+        
+        .chatbot-toggle .ripple {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .nav {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .btn {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, button, select, textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        /* パーティクルエフェクトの最適化 */
+        .particles-container {
+            will-change: transform;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        /* タッチ操作の改善 */
+        .service-preview-card, 
+        .hero-cta .btn, 
+        .ai-escort-feature, 
+        .chatbot-toggle, 
+        .back-to-top {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        /* スワイプ対応セクション */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    /* WebKit用スクロールバーカスタム */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--gradient-primary);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
     }
     </style>
 </head>
-<body>
+<body class="scroll-container">
     <!-- component-split: AccessibilityNavigation -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
 
     <!-- component-split: TopBanner -->
     <div class="top-banner"></div>
     
-    <!-- component-split: Header - FAQページを追加した統一版 -->
+    <!-- component-split: Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -1001,7 +1790,7 @@
                         <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
                         <li class="nav-cta">
-                            <a href="contact.html" class="btn btn-consultation">
+                            <a href="contact.html" class="btn-consultation">
                                 <span>無料相談</span>
                                 <span class="btn-consultation-message">個別でじっくり相談できます</span>
                             </a>
@@ -1016,14 +1805,14 @@
         </div>
     </header>
     
-    <!-- component-split: ParticlesContainer -->
+    <!-- component-split: ParticleEffect -->
     <div class="particles-container" id="particles"></div>
     <div class="particles-fallback"></div>
     
     <main id="main-content">
-        <!-- component-split: HeroSection - 既存のデザインを維持 -->
-        <section class="hero">
-            <!-- 浮遊エレメント -->
+        <!-- component-split: HeroSection -->
+        <section class="section hero scroll-section" id="hero">
+            <!-- 浮遊エレメント - スクリーンショットに合わせた色 -->
             <div class="floating-elements">
                 <div class="floating-element"></div>
                 <div class="floating-element"></div>
@@ -1046,27 +1835,26 @@
             <div class="hero-overlay"></div>
             
             <div class="container">
-                <div class="hero-content animate-fadeIn">
+                <div class="hero-content">
                     <div class="brand-logo">
                         <img src="assets/images/logo.svg" alt="ShinAI Logo" class="brand-icon" width="90" height="90">
                     </div>
-                    <div class="hero-label animate-fadeIn animate-delay-1">AI導入・業務効率化支援</div>
-                    <h1 class="hero-title animate-fadeIn animate-delay-2">
+                    <div class="hero-label">AI導入・業務効率化支援</div>
+                    <h1 class="hero-title">
                         AIの力で<span class="highlight">人間らしい時間</span>を<br>取り戻す
                     </h1>
-                    <p class="hero-description animate-fadeIn animate-delay-3">
+                    <p class="hero-description">
                         最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。<br>
                         人々が大切な人との時間や創造的な仕事に集中できる社会を実現します。
                     </p>
                     
-                    <div class="hero-cta animate-fadeIn animate-delay-4">
-                        <a href="services.html" class="btn btn-primary btn-lg btn-icon-bounce">
-                            <span>サービスを見る</span>
+                    <div class="hero-cta">
+                        <a href="services.html" class="btn btn-primary btn-icon-bounce">
+                            サービスを見る
                             <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
-                        <a href="contact.html" class="btn btn-consultation btn-lg">
-                            <span>無料相談する</span>
-                            <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                        <a href="contact.html" class="btn btn-outline">
+                            無料相談する
                         </a>
                         <a href="#" class="btn-download">
                             資料ダウンロード
@@ -1074,222 +1862,99 @@
                         </a>
                     </div>
 
-                    <div class="hero-tagline animate-fadeIn animate-delay-5">
+                    <div class="hero-tagline">
                         <p>真の価値を信じ、次世代のために新たな未来を創る</p>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- component-split: AboutSection -->
-        <section class="section section-bg-light">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">ShinAIについて</span>
-                    <h2 class="heading-lg">「真」の価値を追求する<span class="highlight">AI企業</span></h2>
-                    <p class="section-description">ShinAIは「真の価値を信じ、次世代のために新たな未来を創る」という理念のもと、最先端のAI技術で企業の課題解決を支援しています</p>
-                </div>
-                
-                <div class="about-grid animate-on-scroll">
-                    <div class="about-image">
-                        <picture>
-                            <source srcset="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900&fm=webp" type="image/webp">
-                            <img 
-                                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900" 
-                                alt="チームワークを象徴する画像" 
-                                width="1200"
-                                height="900"
-                                loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="about-content">
-                        <div class="glass-card about-message">
-                            <p>ShinAIという社名には、「真」の価値を追求し、「新」たな未来を創造するという理念が込められています。私たちは最先端のAI技術を駆使して、企業の本質的な課題解決を支援します。</p>
-                        </div>
-                        
-                        <h3>AIの力で人の時間を解放する</h3>
-                        <p>私たちの使命は、AI技術を活用して定型業務や複雑な分析作業を自動化し、人々が創造的な仕事や大切な人との時間に集中できる環境を作ることです。テクノロジーは人間の可能性を広げるために存在すると考えています。</p>
-                        
-                        <div class="about-buttons">
-                            <a href="about.html" class="btn btn-primary btn-icon-bounce">会社概要を見る <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+            
+            <!-- モバイル向けスワイプ指示 -->
+            <div class="swipe-indicator">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </section>
         
-        <!-- component-split: BenefitsSection - 3つの価値セクション -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">AI導入のメリット</span>
-                    <h2 class="heading-lg">AIがもたらす<span class="highlight">3つの価値</span></h2>
-                    <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <!-- 業務効率化 -->
-                    <div class="benefit-card animate-on-scroll">
-                        <div class="benefit-icon">
-                            <i class="fas fa-bolt" aria-hidden="true"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h3>業務効率化</h3>
-                            <p>AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
-                            <div class="benefit-stats">
-                                <div class="benefit-stat">
-                                    <span class="stat-value">35</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">効率化</span>
-                                </div>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">60</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">時間削減</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- コスト削減 -->
-                    <div class="benefit-card animate-on-scroll">
-                        <div class="benefit-icon">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h3>コスト削減</h3>
-                            <p>AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
-                            <div class="benefit-stats">
-                                <div class="benefit-stat">
-                                    <span class="stat-value">40</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">コスト削減</span>
-                                </div>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">30</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">利益向上</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- データ分析 -->
-                    <div class="benefit-card animate-on-scroll">
-                        <div class="benefit-icon">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h3>データ分析</h3>
-                            <p>大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
-                            <div class="benefit-stats">
-                                <div class="benefit-stat">
-                                    <span class="stat-value">90</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">データ活用</span>
-                                </div>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">25</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">売上増加</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: ServicesSection -->
-        <section class="section section-bg-light" id="services">
+        <!-- component-split: ServicesSection - マーケティング改善版 -->
+        <section class="section section-bg-light scroll-section" id="services">
             <div class="container">
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">ShinAIのソリューション</span>
-                    <h2 class="heading-lg">ビジネスの課題を解決する<span class="highlight">AIソリューション</span></h2>
-                    <p class="section-description">ShinAIは、AI技術で企業の変革・成長・共感を支援する<strong>実装型パートナー</strong>です</p>
+                    <h2 class="heading-lg">お客様の課題を解決する<span class="highlight">3つのAIソリューション</span></h2>
+                    <p class="section-description">最先端のAI技術で、業務効率化から新規事業創出まで幅広くサポートします</p>
                 </div>
                 
-                <div class="services-grid">
-                    <!-- 業務自動化ソリューション -->
-                    <div class="service-card animate-on-scroll">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AIチャットボットのイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-comment-dots" aria-hidden="true"></i>
-                            </div>
+                <div class="services-preview-grid">
+                    <!-- 新規事業企画書AIツール「アイプロ」 -->
+                    <div class="service-preview-card animate-on-scroll">
+                        <div class="service-preview-badge">人気 No.1</div>
+                        <div class="service-preview-image">
+                            <img 
+                                 src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400" 
+                                 alt="企画書資料作成AIツール「アイプロ」" 
+                                 loading="lazy"
+                                 width="600" 
+                                 height="400">
                         </div>
-                        <div class="service-content">
-                            <h3 class="service-title">業務自動化ソリューション</h3>
-                            <p class="service-description">AIチャットボットとバーチャルアシスタントによる問い合わせ対応、予約、社内支援などを自動化。24時間対応、多言語、直感的な操作で顧客体験と業務効率を両立します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">24時間対応</span>
-                                <span class="service-tag">多言語対応</span>
-                                <span class="service-tag">顧客満足度向上</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services.html#automation" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                        <div class="service-preview-icon">
+                            <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                        </div>
+                        <div class="service-preview-content">
+                            <h3 class="service-preview-title">新規事業企画書AIツール<br>「アイプロ」</h3>
+                            <p class="service-preview-description">データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。</p>
+                            <div class="service-preview-cta">
+                                <a href="services.html#aipro" class="service-preview-link">
+                                    詳しく見る <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- 企画書資料作成AIツール「アイプロ」 -->
-                    <div class="service-card animate-on-scroll">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="企画書資料作成AIツール「アイプロ」のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-file-alt" aria-hidden="true"></i>
-                            </div>
+                    <!-- オーダーメイドAI開発 -->
+                    <div class="service-preview-card animate-on-scroll">
+                        <div class="service-preview-badge">カスタマイズ</div>
+                        <div class="service-preview-image">
+                            <img 
+                                 src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=600&h=400" 
+                                 alt="オーダーメイドAI開発" 
+                                 loading="lazy"
+                                 width="600" 
+                                 height="400">
                         </div>
-                        <div class="service-content">
-                            <h3 class="service-title">企画書資料作成AIツール「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">時間短縮</span>
-                                <span class="service-tag">データ活用</span>
-                                <span class="service-tag">生産性向上</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services.html#aipro" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                        <div class="service-preview-icon">
+                            <i class="fas fa-robot" aria-hidden="true"></i>
+                        </div>
+                        <div class="service-preview-content">
+                            <h3 class="service-preview-title">オーダーメイドAI開発</h3>
+                            <p class="service-preview-description">御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。</p>
+                            <div class="service-preview-cta">
+                                <a href="services.html#custom-ai" class="service-preview-link">
+                                    詳しく見る <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- AI戦略 -->
-                    <div class="service-card animate-on-scroll">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AI戦略コンサルティングのイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            </div>
+                    <!-- AI導入コンサルティング -->
+                    <div class="service-preview-card animate-on-scroll">
+                        <div class="service-preview-badge">伴走支援</div>
+                        <div class="service-preview-image">
+                            <img 
+                                 src="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400" 
+                                 alt="AI導入コンサルティング" 
+                                 loading="lazy"
+                                 width="600" 
+                                 height="400">
                         </div>
-                        <div class="service-content">
-                            <h3 class="service-title">AI導入戦略・実装支援</h3>
-                            <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">伴走支援</span>
-                                <span class="service-tag">内製化支援</span>
-                                <span class="service-tag">成果定着</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services.html#consulting" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                        <div class="service-preview-icon">
+                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        </div>
+                        <div class="service-preview-content">
+                            <h3 class="service-preview-title">AI導入コンサルティング</h3>
+                            <p class="service-preview-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。</p>
+                            <div class="service-preview-cta">
+                                <a href="services.html#consulting" class="service-preview-link">
+                                    詳しく見る <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1299,229 +1964,81 @@
                     <a href="services.html" class="btn btn-primary btn-lg btn-icon-bounce">すべてのサービスを見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-        </section>
-        
-        <!-- component-split: IndustriesSection -->
-        <section class="section" id="industries-preview">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">業界別AI活用</span>
-                    <h2 class="heading-lg">業界別<span class="highlight">AI活用</span>のメリット</h2>
-                    <p class="section-description">ShinAIは「AI導入に課題と可能性が共存する産業」に特化し、個別最適な支援を提供</p>
-                </div>
-                
-                <div class="industry-slider animate-on-scroll">
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            <!-- 業界カード: 福祉・介護 -->
-                            <div class="swiper-slide">
-                                <div class="industry-card">
-                                    <div class="industry-header">
-                                        <div class="industry-icon">
-                                            <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
-                                        </div>
-                                        <h3 class="industry-title">福祉・介護</h3>
-                                    </div>
-                                    <p class="industry-description">人手不足と高齢化社会に直面する福祉・介護分野でのAI活用を支援しています。</p>
-                                    <ul class="industry-features">
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            記録支援AI
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            高齢者向け会話アシスタント
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            介護スタッフ支援AI
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- 業界カード: 教育・研修 -->
-                            <div class="swiper-slide">
-                                <div class="industry-card">
-                                    <div class="industry-header">
-                                        <div class="industry-icon">
-                                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                                        </div>
-                                        <h3 class="industry-title">教育・研修</h3>
-                                    </div>
-                                    <p class="industry-description">個別最適化された学習体験を提供し、教育の質と効率を向上させるAIソリューションを開発しています。</p>
-                                    <ul class="industry-features">
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            対話型学習支援
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            研修用AIメンター
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            学習進捗分析ツール
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- 業界カード: 建設業 -->
-                            <div class="swiper-slide">
-                                <div class="industry-card">
-                                    <div class="industry-header">
-                                        <div class="industry-icon">
-                                            <i class="fas fa-hard-hat" aria-hidden="true"></i>
-                                        </div>
-                                        <h3 class="industry-title">建設業</h3>
-                                    </div>
-                                    <p class="industry-description">安全性向上と技術伝承を支援する、建設業界向けのAIソリューションを提供しています。</p>
-                                    <ul class="industry-features">
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            安全教育AI
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            マニュアル対話支援
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            現場情報共有AI
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- 業界カード: 製造業 -->
-                            <div class="swiper-slide">
-                                <div class="industry-card">
-                                    <div class="industry-header">
-                                        <div class="industry-icon">
-                                            <i class="fas fa-industry" aria-hidden="true"></i>
-                                        </div>
-                                        <h3 class="industry-title">製造業</h3>
-                                    </div>
-                                    <p class="industry-description">工場の生産性向上と品質管理の自動化を実現するAIソリューションを開発しています。</p>
-                                    <ul class="industry-features">
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            品質検査AI
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            設備予知保全
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            生産スケジューリング
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- 業界カード: 医療・ヘルスケア -->
-                            <div class="swiper-slide">
-                                <div class="industry-card">
-                                    <div class="industry-header">
-                                        <div class="industry-icon">
-                                            <i class="fas fa-heartbeat" aria-hidden="true"></i>
-                                        </div>
-                                        <h3 class="industry-title">医療・ヘルスケア</h3>
-                                    </div>
-                                    <p class="industry-description">医療の質向上と医療従事者の負担軽減を両立するAIソリューションを提供しています。</p>
-                                    <ul class="industry-features">
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            医療画像診断支援
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            医療文書作成
-                                        </li>
-                                        <li class="industry-feature">
-                                            <i class="fas fa-check" aria-hidden="true"></i>
-                                            患者対応チャットボット
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-                
-                <div class="section-footer animate-on-scroll">
-                    <a href="industries.html" class="btn btn-primary btn-lg btn-icon-bounce">すべての業界別事例を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                </div>
+            
+            <!-- モバイル向けスワイプ指示 -->
+            <div class="swipe-indicator">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </section>
         
-        <!-- component-split: ValueSection -->
-        <section class="section section-bg-light">
+        <!-- component-split: AI伴走型開発Section -->
+        <section class="section ai-escort-section scroll-section" id="ai-escort">
             <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">ビジョン＆ミッション</span>
-                    <h2 class="heading-lg">AIの力で<span class="highlight">大切な人と過ごす時間</span>を取り戻す</h2>
-                    <p class="section-description">ShinAIは技術の進化を通じて、人間らしい生き方を支援するAI企業です</p>
-                </div>
-                
-                <div class="vision-grid">
-                    <div class="glass-card vision-card animate-on-scroll">
-                        <div class="vision-icon">
-                            <i class="fas fa-clock"></i>
+                <div class="ai-escort-content">
+                    <div class="ai-escort-text animate-on-scroll">
+                        <h3>AI伴走型開発で<br>確実な成果を実現</h3>
+                        <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。企画から実装、運用、そして自走化まで一貫して伴走することで、「やりっぱなしにならない」AI導入を実現します。</p>
+                        
+                        <div class="ai-escort-features">
+                            <div class="ai-escort-feature">
+                                <div class="ai-escort-feature-icon">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i>
+                                </div>
+                                <div class="ai-escort-feature-content">
+                                    <h4>短期導入・即効果</h4>
+                                    <p>最短2週間からの効果検証。小さく始めて段階的に拡張する確実なアプローチを採用しています。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-escort-feature">
+                                <div class="ai-escort-feature-icon">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                </div>
+                                <div class="ai-escort-feature-content">
+                                    <h4>内製化支援</h4>
+                                    <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力します。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-escort-feature">
+                                <div class="ai-escort-feature-icon">
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                </div>
+                                <div class="ai-escort-feature-content">
+                                    <h4>成果を可視化</h4>
+                                    <p>ROI（投資対効果）を明確化し、AIによる業績向上を具体的な数字で示します。</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3>時間の解放</h3>
-                        <p>AIによる定型業務の自動化で、創造的な仕事や人間関係に集中できる時間を生み出します。真に人間にしかできない価値創造に集中できる環境を目指します。</p>
                     </div>
                     
-                    <div class="glass-card vision-card animate-on-scroll">
-                        <div class="vision-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3>真の価値追求</h3>
-                        <p>「真」の価値とは何かを常に問い、テクノロジーの進化が人間の幸福につながるよう、本質的な課題解決に取り組みます。</p>
-                    </div>
-                    
-                    <div class="glass-card vision-card animate-on-scroll">
-                        <div class="vision-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h3>持続可能な成長</h3>
-                        <p>次世代のために持続可能な未来を創るため、短期的な利益だけでなく長期的な視点で社会的価値と経済的価値の両立を目指します。</p>
+                    <div class="ai-escort-image animate-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800" alt="AI伴走型開発" class="floating-animation">
                     </div>
                 </div>
-                
-                <div class="section-footer animate-on-scroll">
-                    <a href="about.html#philosophy" class="btn btn-primary btn-lg btn-icon-bounce">企業理念を詳しく見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                </div>
+            </div>
+            
+            <!-- モバイル向けスワイプ指示 -->
+            <div class="swipe-indicator">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </section>
         
-        <!-- component-split: CTASection - 改善版 -->
-        <section class="cta-section">
+        <!-- component-split: CTASection -->
+        <section class="cta-section scroll-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
                     <div class="cta-bg-animation"></div>
-                    <div class="cta-shapes">
-                        <div class="cta-shape-1"></div>
-                        <div class="cta-shape-2"></div>
-                        <div class="cta-shape-3"></div>
-                    </div>
                     <div class="cta-content">
                         <div class="cta-title">
-                            <h2>AIによる<span class="text-gradient">業務効率化</span>を<br>今すぐ始めませんか？</h2>
+                            <h2>AIで<span class="text-gradient">ビジネスの可能性</span>を広げませんか？</h2>
                         </div>
                         <div class="cta-description">
-                            <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から。AI導入の第一歩を踏み出しましょう。</p>
+                            <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から、AI導入の第一歩を踏み出しましょう。</p>
                         </div>
                         <div class="cta-buttons">
-                            <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
-                                <span>無料相談する</span>
-                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                            <a href="contact.html" class="btn-consultation btn-lg btn-glow">
+                                無料相談する
                             </a>
                             <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
                         </div>
@@ -1530,13 +2047,6 @@
             </div>
         </section>
     </main>
-    
-    <!-- component-split: BottomBanner -->
-    <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            「真の価値を信じ、次世代のために新たな未来を創る。」
-        </div>
-    </div>
     
     <!-- component-split: Footer -->
     <footer class="footer">
@@ -1561,11 +2071,9 @@
                 <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
-                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
+                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#custom-ai">オーダーメイドAI開発</a></li>
+                        <li><a href="services.html#consulting">AI導入コンサルティング</a></li>
                     </ul>
                 </div>
                 
@@ -1630,7 +2138,7 @@
         </div>
     </div>
 
-    <!-- component-split: BackToTopButton -->
+    <!-- component-split: BackToTop -->
     <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
@@ -1638,46 +2146,12 @@
     <!-- component-split: JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/three-particles.js"></script>
-    <script src="assets/js/chatbot.js"></script>
     
     <!-- component-split: PageSpecificScripts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Swiper初期化
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 30,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-        });
         
         // ヒーロー画像の自動切り替え
         const heroImages = [
@@ -1713,6 +2187,38 @@
             }
         });
         
+        // スクロールアニメーション
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    
+                    // サービスカードの遅延アニメーション - より滑らかな表示
+                    if (entry.target.classList.contains('services-preview-grid')) {
+                        const cards = entry.target.querySelectorAll('.service-preview-card');
+                        cards.forEach((card, index) => {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(30px)';
+                            setTimeout(() => {
+                                card.style.transition = 'all 0.6s ease';
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 150 * index);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
         // Back to Topボタンの表示制御
         const backToTopButton = document.getElementById('back-to-top');
         
@@ -1731,46 +2237,41 @@
             });
         });
         
-        // ページ読み込み完了時のアニメーション
-        setTimeout(function() {
-            document.body.classList.add('loaded');
-        }, 300);
+        // モバイルナビゲーション
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        const body = document.body;
         
-        // スクロールアニメーション
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
+        menuToggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            nav.classList.toggle('active');
+            body.classList.toggle('nav-open');
+            
+            if (!expanded) {
+                this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+            }
         });
         
-        // チャットボット機能の完全実装
+        // ナビゲーションリンクのクリックでメニューを閉じる
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+                body.classList.remove('nav-open');
+                menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+        
+        // チャットボット機能
         const chatbotToggle = document.getElementById('chatbot-toggle');
         const chatbotContainer = document.getElementById('chatbot-container');
         const chatbotClose = document.getElementById('chatbot-close');
         const chatbotInput = document.getElementById('chatbot-input-text');
         const chatbotSubmit = document.getElementById('chatbot-submit');
         const chatbotMessages = document.getElementById('chatbot-messages');
-        
-        chatbotToggle.addEventListener('click', function() {
-            chatbotContainer.classList.toggle('active');
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
-            
-            if (!expanded) {
-                chatbotInput.focus();
-            }
-        });
         
         chatbotClose.addEventListener('click', function() {
             chatbotContainer.classList.remove('active');
@@ -1811,28 +2312,32 @@
         function botResponse(userInput) {
             showTypingIndicator();
             
+            // 応答を遅延させて自然な対話感を作る
             setTimeout(() => {
                 removeTypingIndicator();
                 
+                // シンプルな応答ロジック
                 let response;
                 const input = userInput.toLowerCase();
                 
-                if (input.includes('こんにちは') || input.includes('はじめまして')) {
-                    response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？';
+                if (input.includes('こんにちは') || input.includes('はじめまして') || input.includes('こんばんは')) {
+                    response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？AI導入について何かお困りのことはございますか？';
                 } else if (input.includes('料金') || input.includes('費用') || input.includes('価格')) {
-                    response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。詳しくは無料相談にてお見積りをご案内しております。';
-                } else if (input.includes('アイプロ')) {
-                    response = '「アイプロ」は、AIが自動で高品質な企画書を作成するツールです。データドリブンな提案で、営業・企画部門の生産性を大幅に向上させます。';
+                    response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。詳しくは無料相談にてお見積りをご案内しております。お気軽にお問い合わせください。';
+                } else if (input.includes('アイプロ') || input.includes('企画書')) {
+                    response = '新規事業企画書AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。詳細は「新規事業企画書AIツール」のページをご覧ください。';
                 } else if (input.includes('導入事例') || input.includes('実績')) {
-                    response = '導入事例については「業界別活用」ページで詳しくご紹介しています。福祉・介護、教育、建設業など様々な業界での活用事例がございます。';
+                    response = '導入事例については「業界別活用」ページでご紹介しています。様々な業界でのAI活用事例がございますので、ぜひご覧ください。';
                 } else if (input.includes('相談') || input.includes('問い合わせ')) {
-                    response = '無料相談は「お問い合わせ」ページからお申し込みいただけます。お客様の課題に合わせた最適なAIソリューションをご提案いたします。';
+                    response = '無料相談は「お問い合わせ」ページからお申し込みいただけます。お客様の課題に合わせた最適なAIソリューションをご提案いたします。まずはお気軽にご相談ください。';
+                } else if (input.includes('デモ') || input.includes('試用')) {
+                    response = '各サービスのデモンストレーションやトライアルは、無料相談にてご案内しております。実際にご体験いただくことで、より具体的なイメージを持っていただけます。';
                 } else {
                     response = 'ご質問ありがとうございます。より詳しくお答えさせていただきたいので、お問い合わせフォームからご連絡いただくか、無料相談にてお話しさせていただければ幸いです。';
                 }
                 
                 addMessage(response);
-            }, 2000);
+            }, 1500);
         }
         
         function handleUserInput() {
@@ -1853,80 +2358,12 @@
             }
         });
         
-        // モバイルメニューの実装
-        const menuToggle = document.getElementById('menu-toggle');
-        const nav = document.getElementById('nav');
-        const body = document.body;
-        
-        menuToggle.addEventListener('click', function() {
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
-            nav.classList.toggle('active');
-            body.classList.toggle('nav-open');
-            
-            if (!expanded) {
-                this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-            } else {
-                this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-            }
-        });
-        
-        // ナビゲーションリンクのクリックでメニューを閉じる
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                nav.classList.remove('active');
-                body.classList.remove('nav-open');
-                menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                menuToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-        
-        // スワイプインジケーターの実装
-        const benefitsGrid = document.querySelector('.benefits-grid');
-        const servicesGrid = document.querySelector('.services-grid');
-        
-        if (window.innerWidth <= 768) {
-            // ベネフィットのスワイプインジケーター
-            if (benefitsGrid) {
-                const benefitCards = benefitsGrid.querySelectorAll('.benefit-card');
-                const benefitIndicators = document.querySelectorAll('.benefits-grid ~ .swipe-indicator .swipe-dot');
-                
-                benefitsGrid.addEventListener('scroll', function() {
-                    const scrollLeft = this.scrollLeft;
-                    const cardWidth = benefitCards[0].offsetWidth + 24; // カード幅 + gap
-                    const currentIndex = Math.round(scrollLeft / cardWidth);
-                    
-                    benefitIndicators.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === currentIndex);
-                    });
-                });
-            }
-            
-            // サービスのスワイプインジケーター
-            if (servicesGrid) {
-                const serviceCards = servicesGrid.querySelectorAll('.service-card');
-                const serviceIndicators = document.querySelectorAll('.services-grid ~ .swipe-indicator .swipe-dot');
-                
-                servicesGrid.addEventListener('scroll', function() {
-                    const scrollLeft = this.scrollLeft;
-                    const cardWidth = serviceCards[0].offsetWidth + 24; // カード幅 + gap
-                    const currentIndex = Math.round(scrollLeft / cardWidth);
-                    
-                    serviceIndicators.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === currentIndex);
-                    });
-                });
-            }
-        }
-        
         // iPhoneでのスクロール改善
         if (/iPhone/.test(navigator.userAgent)) {
             document.documentElement.classList.add('ios-device');
             
             // タッチイベントの改善
-            const cards = document.querySelectorAll('.service-card, .benefit-card, .vision-card');
-            
-            cards.forEach(card => {
+            document.querySelectorAll('.service-preview-card').forEach(card => {
                 card.addEventListener('touchstart', function() {
                     this.classList.add('touch-active');
                 });
@@ -1956,7 +2393,76 @@
         // ページロード完了時のアニメーション
         window.addEventListener('load', function() {
             document.body.classList.add('page-loaded');
+            
+            // ヒーローセクションのアニメーション
+            const heroElements = document.querySelectorAll('.hero-content > *');
+            heroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
         });
+        
+        // アクセシビリティ機能
+        // Escキーでモーダルを閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (chatbotContainer.classList.contains('active')) {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                }
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    body.classList.remove('nav-open');
+                    menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        
+        // フォーカストラップの実装
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+            
+            element.addEventListener('keydown', function(e) {
+                const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                
+                if (!isTabPressed) {
+                    return;
+                }
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // チャットボットが開いたときにフォーカストラップを設定
+        const mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active')) {
+                        trapFocus(target);
+                    }
+                }
+            });
+        });
+        
+        mutationObserver.observe(chatbotContainer, { attributes: true });
     });
     </script>
 </body>
