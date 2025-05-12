@@ -58,9 +58,9 @@
           "position": 1,
           "item": {
             "@type": "Service",
-            "name": "企画書資料作成AIツール「アイプロ」",
-            "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。",
-            "url": "https://www.shinai.tech/services.html#aipro"
+            "name": "業務自動化ソリューション",
+            "description": "AIチャットボットとバーチャルアシスタントによる問い合わせ対応、予約、社内支援などを自動化。24時間対応、多言語、直感的な操作で顧客体験と業務効率を両立します。",
+            "url": "https://www.shinai.tech/services.html#automation"
           }
         },
         {
@@ -68,9 +68,9 @@
           "position": 2,
           "item": {
             "@type": "Service",
-            "name": "オーダーメイドAIアプリケーション開発",
-            "description": "お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。",
-            "url": "https://www.shinai.tech/services.html#custom-ai"
+            "name": "企画書資料作成AIツール「アイプロ」",
+            "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。",
+            "url": "https://www.shinai.tech/services.html#aipro"
           }
         },
         {
@@ -78,7 +78,7 @@
           "position": 3,
           "item": {
             "@type": "Service",
-            "name": "AI導入(DX/AX)コンサルティング",
+            "name": "AI導入戦略・実装支援",
             "description": "DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。",
             "url": "https://www.shinai.tech/services.html#consulting"
           }
@@ -103,6 +103,40 @@
     }
     </script>
     
+    <!-- FAQページの構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ShinAIのAIチャットボットサービスについて教えてください",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI導入について相談したいのですが",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AIの内製化支援について詳しく知りたい",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
+          }
+        }
+      ]
+    }
+    </script>
+    
     <title>サービス | ShinAI - 最先端AIソリューション</title>
     
     <!-- スタイルシート -->
@@ -115,466 +149,417 @@
 
     <!-- component-split: PageSpecificStyles -->
     <style>
-    /* ヘッダーの修正スタイル - スクリーンショットに合わせる */
-    .header {
-        background: linear-gradient(90deg, #3A5FEB, #00C9A7);
-        position: sticky;
-        top: 0;
-        width: 100%;
-        z-index: var(--z-header);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 10px 0;
+    /* サービスページ向け特殊スタイル */
+    .section {
+        padding: 5rem 0;
     }
     
-    .header-inner {
+    .section-bg-gradient {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+    }
+    
+    .brand-catchphrase {
+        font-style: italic;
+        color: var(--primary);
+        font-weight: 500;
+        display: inline-block;
+        background: rgba(58, 95, 235, 0.05);
+        padding: 0.75rem 1.5rem;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        border-left: 3px solid var(--primary);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
+        transform: translateY(0);
+        transition: all 0.3s ease;
+    }
+    
+    .section-header:hover .brand-catchphrase {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
+    }
+
+    /* サービスカード強化 */
+    .service-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        margin-bottom: 2rem;
+    }
+    
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: var(--z-normal);
+    }
+    
+    .service-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
+        border-color: rgba(58, 95, 235, 0.12);
+    }
+    
+    .service-image {
+        height: 240px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .service-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1s ease;
+    }
+    
+    .service-card:hover .service-image img {
+        transform: scale(1.08);
+    }
+    
+    .service-icon {
+        position: absolute;
+        bottom: -25px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 1.5rem;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        z-index: var(--z-normal);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .service-card:hover .service-icon {
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+    
+    .service-content {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .service-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
+    }
+    
+    .service-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: var(--radius-full);
+        transition: width 0.3s ease;
+    }
+    
+    .service-card:hover .service-title::after {
+        width: 100%;
+    }
+    
+    .service-description {
+        color: var(--gray);
+        margin-bottom: 1.8rem;
+        flex-grow: 1;
+        line-height: 1.7;
+    }
+    
+    .service-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-bottom: 2rem;
+    }
+    
+    .service-tag {
+        background: rgba(58, 95, 235, 0.08);
+        color: var(--primary);
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .service-tag:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
+        background: rgba(58, 95, 235, 0.12);
+    }
+    
+    .service-footer {
+        margin-top: auto;
+    }
+    
+    .service-footer .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    /* 特徴カード強化 */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-top: 3rem;
+    }
+    
+    .feature-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        padding: 2.5rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2rem;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.3);
+    }
+    
+    .feature-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        color: var(--dark);
+        text-align: center;
+    }
+    
+    .feature-card p {
+        color: var(--gray);
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    /* プロセスタイムライン強化 */
+    .process-timeline {
+        position: relative;
+        max-width: 900px;
+        margin: 4rem auto 0;
+        padding: 0 2rem;
+    }
+    
+    .process-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(2rem + 20px);
+        width: 4px;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        border-radius: var(--radius-full);
+        z-index: 1;
+    }
+    
+    .process-step {
+        display: flex;
+        position: relative;
+        margin-bottom: 3.5rem;
+        z-index: 2;
+    }
+    
+    .process-step:last-child {
+        margin-bottom: 0;
+    }
+    
+    .process-step-number {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-right: 2.5rem;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+    
+    .process-step:hover .process-step-number {
+        transform: scale(1.1);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+    }
+    
+    .process-step-content {
+        flex: 1;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 1.8rem 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        position: relative;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .process-step:hover .process-step-content {
+        transform: translateX(15px);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .process-step-content::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background: var(--white);
+        transform: rotate(45deg);
+        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.03);
+        border-left: 1px solid rgba(0, 0, 0, 0.03);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .process-step-content h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        color: var(--dark);
+    }
+    
+    .process-step-content p {
+        color: var(--gray);
+        margin-bottom: 0;
+        line-height: 1.7;
+    }
+
+    /* FAQ強化 */
+    .faq-container {
+        max-width: 900px;
+        margin: 4rem auto 0;
+    }
+    
+    .faq-item {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .faq-item.active,
+    .faq-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .faq-question {
+        background: var(--white);
+        color: var(--dark);
+        font-weight: 600;
+        padding: 1.8rem 2rem;
+        cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover,
+    .faq-item.active .faq-question {
+        color: var(--primary);
+    }
+    
+    .faq-question h4 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    
+    .faq-question i {
+        color: var(--primary);
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question i {
+        transform: rotate(-180deg);
+    }
+    
+    .faq-answer {
         padding: 0;
-    }
-    
-    .nav {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-    }
-    
-    .nav-link {
-        color: white;
-        font-weight: 500;
-        padding: 0 15px;
-        font-family: var(--font-jp);
-        transition: all 0.3s ease;
-    }
-    
-    .nav-link:hover,
-    .nav-link.active {
-        color: rgba(255, 255, 255, 0.85);
-    }
-    
-    .logo {
-        color: white;
-        font-weight: 700;
-    }
-    
-    .btn-consultation {
-        background: white;
-        color: var(--primary);
-        border-radius: 50px;
-        padding: 10px 20px;
-        margin-left: 15px;
-    }
-    
-    .btn-consultation:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-    }
-    
-    /* サービスページ向け特殊スタイル */
-    .section {
-        padding: 5rem 0;
-    }
-    
-    .section-bg-gradient {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-    }
-    
-    .brand-catchphrase {
-        font-style: italic;
-        color: var(--primary);
-        font-weight: 500;
-        display: inline-block;
-        background: rgba(58, 95, 235, 0.05);
-        padding: 0.75rem 1.5rem;
-        border-radius: 0 var(--radius) var(--radius) 0;
-        border-left: 3px solid var(--primary);
-        margin-bottom: 1.5rem;
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
-        transform: translateY(0);
-        transition: all 0.3s ease;
-    }
-    
-    .section-header:hover .brand-catchphrase {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
-    }
-
-    /* サービスカード強化 */
-    .service-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        max-height: 0;
         overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-        margin-bottom: 2rem;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: rgba(249, 250, 252, 0.7);
+        border-top: 1px solid rgba(58, 95, 235, 0.08);
     }
     
-    .service-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        z-index: var(--z-normal);
-    }
-    
-    .service-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
-        border-color: rgba(58, 95, 235, 0.12);
-    }
-    
-    .service-image {
-        height: 240px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .service-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 1s ease;
-    }
-    
-    .service-card:hover .service-image img {
-        transform: scale(1.08);
-    }
-    
-    .service-icon {
-        position: absolute;
-        bottom: -25px;
-        right: 25px;
-        width: 65px;
-        height: 65px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-size: 1.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        z-index: var(--z-normal);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .service-card:hover .service-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
-    }
-    
-    .service-content {
-        padding: 2rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .service-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: var(--dark);
-        position: relative;
-        display: inline-block;
-    }
-    
-    .service-title::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: var(--primary);
-        border-radius: var(--radius-full);
-        transition: width 0.3s ease;
-    }
-    
-    .service-card:hover .service-title::after {
-        width: 100%;
-    }
-    
-    .service-description {
-        color: var(--gray);
-        margin-bottom: 1.8rem;
-        flex-grow: 1;
-        line-height: 1.7;
-    }
-    
-    .service-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.7rem;
-        margin-bottom: 2rem;
-    }
-    
-    .service-tag {
-        background: rgba(58, 95, 235, 0.08);
-        color: var(--primary);
-        padding: 0.4rem 1rem;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .service-tag:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
-        background: rgba(58, 95, 235, 0.12);
-    }
-    
-    .service-footer {
-        margin-top: auto;
-    }
-    
-    .service-footer .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    /* 特徴カード強化 */
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
-    }
-    
-    .feature-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
-        padding: 2.5rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-        overflow: hidden;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 2rem;
-        font-size: 2rem;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
-        position: relative;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .feature-card:hover .feature-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.3);
-    }
-    
-    .feature-card h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: var(--dark);
-        text-align: center;
-    }
-    
-    .feature-card p {
-        color: var(--gray);
-        line-height: 1.8;
-        text-align: center;
-    }
-
-    /* プロセスタイムライン強化 */
-    .process-timeline {
-        position: relative;
-        max-width: 900px;
-        margin: 4rem auto 0;
-        padding: 0 2rem;
-    }
-    
-    .process-timeline::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: calc(2rem + 20px);
-        width: 4px;
-        background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        border-radius: var(--radius-full);
-        z-index: 1;
-    }
-    
-    .process-step {
-        display: flex;
-        position: relative;
-        margin-bottom: 3.5rem;
-        z-index: 2;
-    }
-    
-    .process-step:last-child {
-        margin-bottom: 0;
-    }
-    
-    .process-step-number {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-right: 2.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
-        position: relative;
-        z-index: 2;
-        transition: all 0.3s ease;
-    }
-    
-    .process-step:hover .process-step-number {
-        transform: scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
-    }
-    
-    .process-step-content {
-        flex: 1;
-        background: var(--white);
-        border-radius: var(--radius-lg);
+    .faq-item.active .faq-answer {
         padding: 1.8rem 2rem;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        position: relative;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 0, 0, 0.04);
+        max-height: 1000px;
     }
     
-    .process-step:hover .process-step-content {
-        transform: translateX(15px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .process-step-content::before {
-        content: '';
-        position: absolute;
-        top: 20px;
-        left: -10px;
-        width: 20px;
-        height: 20px;
-        background: var(--white);
-        transform: rotate(45deg);
-        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.03);
-        border-left: 1px solid rgba(0, 0, 0, 0.03);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-    }
-    
-    .process-step-content h3 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-bottom: 0.8rem;
-        color: var(--dark);
-    }
-    
-    .process-step-content p {
+    .faq-answer p {
         color: var(--gray);
-        margin-bottom: 0;
         line-height: 1.7;
-    }
-
-    /* FAQ Banner */
-    .faq-banner {
-        background: rgba(58, 95, 235, 0.1);
-        padding: 2rem;
-        text-align: center;
-        margin: 3rem 0;
-        border-radius: 12px;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .faq-banner:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.15);
-    }
-
-    .faq-banner::before {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(180deg, rgba(58, 95, 235, 0.05), transparent);
-        transition: all 0.5s ease;
-        z-index: 1;
-    }
-
-    .faq-banner:hover::before {
-        top: 0;
-    }
-
-    .faq-banner h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--dark);
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner p {
-        color: var(--gray);
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-        position: relative;
-        z-index: 2;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .faq-banner .btn-cta {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-        margin-top: 1rem;
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner .btn-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
+        margin: 0;
     }
 
     /* CTA強化 */
@@ -658,1208 +643,6 @@
         border-radius: 50px;
         z-index: var(--z-back);
         animation: pulseGlow 2s infinite;
-    }
-
-    /* レスポンシブ調整 */
-    @media (max-width: 992px) {
-        .features-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 2.4rem;
-        }
-        
-        .process-timeline::before {
-            left: calc(2rem + 15px);
-        }
-        
-        .process-step-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            margin-right: 2rem;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .features-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 2rem;
-        }
-        
-        .cta-description {
-            font-size: 1.1rem;
-        }
-        
-        .process-timeline {
-            padding: 0 1rem;
-        }
-        
-        .process-timeline::before {
-            left: calc(1rem + 15px);
-        }
-        
-        .process-step-number {
-            margin-right: 1.5rem;
-        }
-        
-        .process-step-content {
-            padding: 1.5rem;
-        }
-        
-        .process-step-content h3 {
-            font-size: 1.2rem;
-        }
-        
-        .cta-container {
-            padding: 3rem 2rem;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .service-image {
-            height: 200px;
-        }
-        
-        .service-content {
-            padding: 1.5rem;
-        }
-        
-        .service-icon {
-            width: 55px;
-            height: 55px;
-            font-size: 1.3rem;
-            right: 20px;
-        }
-        
-        .feature-card {
-            padding: 1.8rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 1.8rem;
-        }
-        
-        .cta-buttons {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .cta-container {
-            padding: 2.5rem 1.5rem;
-        }
-        
-        .process-timeline::before {
-            display: none;
-        }
-        
-        .process-step {
-            flex-direction: column;
-        }
-        
-        .process-step-number {
-            margin-bottom: 1rem;
-            margin-right: 0;
-            align-self: flex-start;
-        }
-        
-        .process-step-content::before {
-            display: none;
-        }
-    }
-    </style>
-</head>
-<body>
-    <!-- component-split: AccessibilityNav -->
-    <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
-
-    <!-- component-split: Header -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.html" class="logo" aria-label="ShinAIホームページへ">
-                    <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
-                    <span class="en-text">ShinAI</span>
-                </a>
-                
-                <nav aria-label="メインナビゲーション">
-                    <ul class="nav" id="nav">
-                        <li><a href="index.html" class="nav-link">ホーム</a></li>
-                        <li><a href="about.html" class="nav-link">会社紹介</a></li>
-                        <li><a href="services.html" class="nav-link active" aria-current="page">サービス</a></li>
-                        <li><a href="industries.html" class="nav-link">業界別活用</a></li>
-                        <li><a href="faq.html" class="nav-link">よくある質問</a></li>
-                        <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
-                        <li class="nav-cta">
-                            <a href="contact.html" class="btn btn-consultation">
-                                <span>無料相談</span>
-                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-    
-    <!-- component-split: PageHero -->
-    <div class="page-hero">
-        <div class="page-hero-bg-container">
-            <div class="page-hero-bg-gradient"></div>
-            <div class="page-hero-bg-pattern"></div>
-        </div>
-        <div class="container">
-            <div class="page-hero-content">
-                <div class="breadcrumb" aria-label="パンくずリスト">
-                    <a href="index.html" class="breadcrumb-item">ホーム</a>
-                    <span class="breadcrumb-separator">/</span>
-                    <span class="breadcrumb-current">サービス</span>
-                </div>
-                <h1 class="page-hero-title">ShinAIのサービス</h1>
-                <p class="page-hero-description">
-                    最先端のAI技術を活用し、企業の課題を解決するソリューションを提供<br>
-                    企画書作成から開発、導入まで、包括的なAIサポートをご紹介します
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <main id="main-content">
-        <!-- component-split: ServiceList -->
-        <section class="section" id="services">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
-                    <span class="section-subtitle">ShinAIのソリューション</span>
-                    <h2 class="heading-lg">ビジネスの課題を解決する<span class="highlight">AIソリューション</span></h2>
-                    <p class="section-description">ShinAIは、AI技術で企業の変革・成長・共感を支援する<strong>実装型パートナー</strong>です</p>
-                </div>
-                
-                <div class="services-grid">
-                    <!-- 企画書資料作成AIツール「アイプロ」 -->
-                    <div class="service-card animate-on-scroll" id="aipro">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="企画書資料作成AIツール「アイプロ」のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-file-alt" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">企画書資料作成AIツール「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">時間短縮</span>
-                                <span class="service-tag">データ活用</span>
-                                <span class="service-tag">生産性向上</span>
-                                <span class="service-tag">新規事業創出</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-aipro.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- オーダーメイドAIアプリケーション開発 -->
-                    <div class="service-card animate-on-scroll" id="custom-ai">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="オーダーメイドAIアプリケーション開発のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-code" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
-                            <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。業務自動化ボット、レコメンドシステム、予測分析など、独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">カスタム開発</span>
-                                <span class="service-tag">独自データ活用</span>
-                                <span class="service-tag">システム連携</span>
-                                <span class="service-tag">業務自動化</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-custom.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- AI導入(DX/AX)コンサルティング -->
-                    <div class="service-card animate-on-scroll" id="consulting">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AI導入(DX/AX)コンサルティングのイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
-                            <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。人間中心のAI活用方針の策定から、実装までトータルサポート。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">伴走支援</span>
-                                <span class="service-tag">内製化支援</span>
-                                <span class="service-tag">成果定着</span>
-                                <span class="service-tag">人材育成</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-consulting.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section-footer animate-on-scroll">
-                    <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">お問い合わせ・ご相談 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: ServiceFeatures -->
-        <section class="section section-bg-gradient">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">サービスの特徴</span>
-                    <h2 class="heading-lg">ShinAIが選ばれる<span class="highlight">3つの理由</span></h2>
-                    <p class="section-description">AIソリューションの開発から導入、定着までを一貫してサポートします</p>
-                </div>
-                
-                <div class="features-grid animate-on-scroll">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3>短期間での導入と効果実証</h3>
-                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の開発が可能です。小さく始めて段階的に拡張する確実なアプローチを採用しています。</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>社内チーム育成と自走化支援</h3>
-                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力。技術だけでなく、企画から運用までのノウハウを共有し、自社でAI活用を推進できる体制構築を支援します。</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>安全なAI活用の実現</h3>
-                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築。データガバナンス対策とAI倫理を遵守した安全なAI活用で、ユーザーからの信頼を獲得します。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: ServiceProcess -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">AI導入プロセス</span>
-                    <h2 class="heading-lg">ShinAIの<span class="highlight">導入支援プロセス</span></h2>
-                    <p class="section-description">AIソリューション導入から定着までの5つのステップをご紹介します</p>
-                </div>
-                
-                <div class="process-timeline animate-on-scroll">
-                    <div class="process-step">
-                        <div class="process-step-number">1</div>
-                        <div class="process-step-content">
-                            <h3>課題分析・企画</h3>
-                            <p>お客様の現状課題をヒアリングし、AI導入の目的とKPIを明確化。ROI（投資対効果）を最大化するための企画立案を行います。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="process-step-number">2</div>
-                        <div class="process-step-content">
-                            <h3>PoC（実証実験）</h3>
-                            <p>小規模な範囲で短期間のテスト運用を実施。AIソリューションの技術的な実現性と期待される効果を検証します。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="process-step-number">3</div>
-                        <div class="process-step-content">
-                            <h3>システム開発・導入</h3>
-                            <p>PoCの結果をもとに、本格的なシステム開発と実装を行います。お客様の既存システムとの連携や、セキュリティ対策も含めて設計します。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="process-step-number">4</div>
-                        <div class="process-step-content">
-                            <h3>社内チーム育成</h3>
-                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転を実施。運用ノウハウを共有します。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="process-step-number">5</div>
-                        <div class="process-step-content">
-                            <h3>運用サポート・拡張</h3>
-                            <p>導入後の運用をサポートし、定期的な改善提案と機能拡張を行います。AIの性能向上とビジネス成果の最大化を継続的に支援します。</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section-footer animate-on-scroll">
-                    <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">まずは無料相談する <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: FAQBanner -->
-        <section class="section">
-            <div class="container">
-                <div class="faq-banner animate-on-scroll">
-                    <h3>AIに関するよくある質問</h3>
-                    <p>AI導入や活用方法についてのよくある質問をまとめました。導入コスト、効果測定、必要なデータ量、内製化方法など、具体的な疑問にお答えします。</p>
-                    <a href="faq.html" class="btn-cta">FAQページを見る <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: ServicesCTA -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-container animate-on-scroll">
-                    <div class="cta-bg-animation"></div>
-                    <div class="cta-shapes">
-                        <div class="cta-shape-1"></div>
-                        <div class="cta-shape-2"></div>
-                        <div class="cta-shape-3"></div>
-                    </div>
-                    <div class="cta-content">
-                        <div class="cta-title">
-                            <h2>AIで<span class="text-gradient">ビジネスの可能性</span>を広げませんか？</h2>
-                        </div>
-                        <div class="cta-description">
-                            <p>ShinAIは、あなたのビジネスに最適なAIソリューションを提案します。<br>まずは無料相談から、AI導入の第一歩を踏み出しましょう。</p>
-                        </div>
-                        <div class="cta-buttons">
-                            <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
-                                <span>無料相談する</span>
-                                <span class="btn-consultation-message">個別でじっくり相談できます</span>
-                            </a>
-                            <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- component-split: BottomBanner -->
-    <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            「真の価値を信じ、次世代のために新たな未来を創る。」
-        </div>
-    </div>
-    
-    <!-- component-split: Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
-                        <span class="en-text">ShinAI</span>
-                    </div>
-                    <p class="footer-description">
-                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                    </p>
-                    <div class="social-links" aria-label="ソーシャルメディアリンク">
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">サービス</h4>
-                    <ul class="footer-links">
-                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイドAIアプリケーション開発</a></li>
-                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">会社情報</h4>
-                    <ul class="footer-links">
-                        <li><a href="about.html">会社概要</a></li>
-                        <li><a href="about.html#philosophy">企業理念</a></li>
-                        <li><a href="industries.html">AI活用事例</a></li>
-                        <li><a href="faq.html">よくある質問</a></li>
-                        <li><a href="about.html#careers">採用情報</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">お問い合わせ</h4>
-                    <ul class="footer-links">
-                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li>shinai.life@gmail.com</li>
-                        <li>平日 9:00〜18:00（土日祝休）</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">利用規約</a>
-                    <a href="#">特定商取引法に基づく表記</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- component-split: ChatbotComponent -->
-    <div class="chatbot" aria-label="AIアシスタント">
-        <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
-            <div class="ripple"></div>
-            <i class="fas fa-robot" aria-hidden="true"></i>
-        </button>
-        <div class="chatbot-container" id="chatbot-container">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
-                </div>
-                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
-                <div class="message bot-message">
-                    こんにちは！ShinAIアシスタントです。AI導入に関するご質問やお悩みがありましたら、お気軽にお聞きください。
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- component-split: BackToTop -->
-    <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </button>
-    
-    <!-- component-split: JavaScript -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/chatbot.js"></script>
-    
-    <!-- component-split: PageSpecificScripts -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // カレントイヤーの更新
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // スクロールアニメーション
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // ヘッダースクロール効果
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Back to Topボタン
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('active');
-            } else {
-                backToTopButton.classList.remove('active');
-            }
-        });
-        
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // サービスカードホバーエフェクト強化
-        const serviceCards = document.querySelectorAll('.service-card');
-        
-        serviceCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-    });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ja">
-<head>
-    <!-- component-split: MetaInformation -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShinAI - 企業の課題解決と成長を支援する最先端AIソリューション。チャットボット開発、AI資料作成、DX推進をサポートし、大切な人と過ごす時間を創出します。">
-    <meta name="keywords" content="AI, 人工知能, ビジネスAI, 業務効率化, AI導入, チャットボット, AI資料作成, DX推進, RAG, 生成AI">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="ShinAI">
-    <meta name="theme-color" content="#3A5FEB">
-    <meta name="msapplication-TileColor" content="#3A5FEB">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@ShinAI_JP">
-    <meta name="ps:topic" content="AIサービス, 生成AI活用, 業務効率化, DX推進, AI導入支援">
-    
-    <!-- component-split: OGPSettings -->
-    <meta property="og:title" content="ShinAI - サービス | 企業成長を加速する最先端AIソリューション">
-    <meta property="og:description" content="真の価値を追求するAI技術で企業の課題を解決し、人間らしい時間を取り戻す。ShinAIの革新的サービスをご紹介します。">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=1200&h=630">
-    <meta property="og:url" content="https://www.shinai.tech/services.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="ShinAI">
-    <meta property="og:locale" content="ja_JP">
-    <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="ShinAI - 革新的なAIソリューション">
-    
-    <!-- component-split: ExternalResources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
-    <!-- Swiper JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-    
-    <!-- component-split: StructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Service",
-            "name": "企画書資料作成AIツール「アイプロ」",
-            "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。",
-            "url": "https://www.shinai.tech/services.html#aipro"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "Service",
-            "name": "オーダーメイドAIアプリケーション開発",
-            "description": "お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。",
-            "url": "https://www.shinai.tech/services.html#custom-ai"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "Service",
-            "name": "AI導入(DX/AX)コンサルティング",
-            "description": "DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。",
-            "url": "https://www.shinai.tech/services.html#consulting"
-          }
-        }
-      ]
-    }
-    </script>
-    
-    <!-- WebSite構造化データ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://www.shinai.tech",
-      "name": "ShinAI",
-      "description": "企業成長を加速する最先端AIソリューション",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.shinai.tech/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    
-    <title>サービス | ShinAI - 最先端AIソリューション</title>
-    
-    <!-- スタイルシート -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    
-    <!-- ファビコン -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-    <link rel="apple-touch-icon" href="assets/images/logo.svg">
-
-    <!-- component-split: PageSpecificStyles -->
-    <style>
-    /* サービスページ向け特殊スタイル */
-    .section {
-        padding: 5rem 0;
-    }
-    
-    .section-bg-gradient {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-    }
-    
-    .brand-catchphrase {
-        font-style: italic;
-        color: var(--primary);
-        font-weight: 500;
-        display: inline-block;
-        background: rgba(58, 95, 235, 0.05);
-        padding: 0.75rem 1.5rem;
-        border-radius: 0 var(--radius) var(--radius) 0;
-        border-left: 3px solid var(--primary);
-        margin-bottom: 1.5rem;
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
-        transform: translateY(0);
-        transition: all 0.3s ease;
-    }
-    
-    .section-header:hover .brand-catchphrase {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
-    }
-
-    /* サービスカード強化 */
-    .service-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-        margin-bottom: 2rem;
-    }
-    
-    .service-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        z-index: var(--z-normal);
-    }
-    
-    .service-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
-        border-color: rgba(58, 95, 235, 0.12);
-    }
-    
-    .service-image {
-        height: 240px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .service-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 1s ease;
-    }
-    
-    .service-card:hover .service-image img {
-        transform: scale(1.08);
-    }
-    
-    .service-icon {
-        position: absolute;
-        bottom: -25px;
-        right: 25px;
-        width: 65px;
-        height: 65px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-size: 1.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        z-index: var(--z-normal);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .service-card:hover .service-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
-    }
-    
-    .service-content {
-        padding: 2rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .service-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: var(--dark);
-        position: relative;
-        display: inline-block;
-    }
-    
-    .service-title::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: var(--primary);
-        border-radius: var(--radius-full);
-        transition: width 0.3s ease;
-    }
-    
-    .service-card:hover .service-title::after {
-        width: 100%;
-    }
-    
-    .service-description {
-        color: var(--gray);
-        margin-bottom: 1.8rem;
-        flex-grow: 1;
-        line-height: 1.7;
-    }
-    
-    .service-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.7rem;
-        margin-bottom: 2rem;
-    }
-    
-    .service-tag {
-        background: rgba(58, 95, 235, 0.08);
-        color: var(--primary);
-        padding: 0.4rem 1rem;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .service-tag:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
-        background: rgba(58, 95, 235, 0.12);
-    }
-    
-    .service-footer {
-        margin-top: auto;
-    }
-    
-    .service-footer .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    /* 特徴カード強化 */
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
-    }
-    
-    .feature-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
-        padding: 2.5rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        position: relative;
-        overflow: hidden;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 2rem;
-        font-size: 2rem;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
-        position: relative;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .feature-card:hover .feature-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.3);
-    }
-    
-    .feature-card h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: var(--dark);
-        text-align: center;
-    }
-    
-    .feature-card p {
-        color: var(--gray);
-        line-height: 1.8;
-        text-align: center;
-    }
-
-    /* プロセスタイムライン強化 */
-    .process-timeline {
-        position: relative;
-        max-width: 900px;
-        margin: 4rem auto 0;
-        padding: 0 2rem;
-    }
-    
-    .process-timeline::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: calc(2rem + 20px);
-        width: 4px;
-        background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        border-radius: var(--radius-full);
-        z-index: 1;
-    }
-    
-    .process-step {
-        display: flex;
-        position: relative;
-        margin-bottom: 3.5rem;
-        z-index: 2;
-    }
-    
-    .process-step:last-child {
-        margin-bottom: 0;
-    }
-    
-    .process-step-number {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: var(--white);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-right: 2.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
-        position: relative;
-        z-index: 2;
-        transition: all 0.3s ease;
-    }
-    
-    .process-step:hover .process-step-number {
-        transform: scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
-    }
-    
-    .process-step-content {
-        flex: 1;
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        padding: 1.8rem 2rem;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        position: relative;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-    
-    .process-step:hover .process-step-content {
-        transform: translateX(15px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .process-step-content::before {
-        content: '';
-        position: absolute;
-        top: 20px;
-        left: -10px;
-        width: 20px;
-        height: 20px;
-        background: var(--white);
-        transform: rotate(45deg);
-        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.03);
-        border-left: 1px solid rgba(0, 0, 0, 0.03);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-    }
-    
-    .process-step-content h3 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-bottom: 0.8rem;
-        color: var(--dark);
-    }
-    
-    .process-step-content p {
-        color: var(--gray);
-        margin-bottom: 0;
-        line-height: 1.7;
-    }
-
-    /* CTA強化 */
-    .cta-container {
-        background: var(--white);
-        border-radius: 24px;
-        padding: 4rem 3rem;
-        box-shadow: 0 25px 60px rgba(58, 95, 235, 0.15);
-        position: relative;
-        overflow: hidden;
-        z-index: var(--z-normal);
-        border: 1px solid rgba(58, 95, 235, 0.1);
-        text-align: center;
-    }
-    
-    .cta-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 8px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        z-index: var(--z-normal);
-    }
-    
-    .cta-bg-animation {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03), rgba(58, 95, 235, 0.03));
-        background-size: 200% 200%;
-        animation: gradientBG 15s ease infinite;
-        z-index: var(--z-back);
-    }
-    
-    .cta-title {
-        margin-bottom: 1.5rem;
-    }
-    
-    .cta-title h2 {
-        font-size: 2.8rem;
-        font-weight: 800;
-        color: var(--dark);
-        line-height: 1.3;
-        margin-bottom: 0;
-    }
-    
-    .cta-description {
-        font-size: 1.2rem;
-        color: var(--gray);
-        max-width: 800px;
-        margin: 0 auto 2.5rem;
-        line-height: 1.8;
-    }
-    
-    .cta-buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .cta-buttons .btn {
-        min-width: 220px;
-    }
-    
-    .btn-glow {
-        position: relative;
-    }
-    
-    .btn-glow::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 50px;
-        z-index: var(--z-back);
-        animation: pulseGlow 2s infinite;
-    }
-
-    /* FAQ Banner */
-    .faq-banner {
-        background: rgba(58, 95, 235, 0.1);
-        padding: 2rem;
-        text-align: center;
-        margin: 3rem 0;
-        border-radius: 12px;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .faq-banner:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.15);
-    }
-
-    .faq-banner::before {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(180deg, rgba(58, 95, 235, 0.05), transparent);
-        transition: all 0.5s ease;
-        z-index: 1;
-    }
-
-    .faq-banner:hover::before {
-        top: 0;
-    }
-
-    .faq-banner h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--dark);
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner p {
-        color: var(--gray);
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-        position: relative;
-        z-index: 2;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .faq-banner .btn-cta {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-        margin-top: 1rem;
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner .btn-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
     }
 
     /* レスポンシブ調整 */
@@ -1999,7 +782,6 @@
                         <li><a href="about.html" class="nav-link">会社紹介</a></li>
                         <li><a href="services.html" class="nav-link active" aria-current="page">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
-                        <li><a href="faq.html" class="nav-link">よくある質問</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
                         <li class="nav-cta">
                             <a href="contact.html" class="btn btn-consultation">
@@ -2033,7 +815,7 @@
                 <h1 class="page-hero-title">ShinAIのサービス</h1>
                 <p class="page-hero-description">
                     最先端のAI技術を活用し、企業の課題を解決するソリューションを提供<br>
-                    企画書作成から開発、導入まで、包括的なAIサポートをご紹介します
+                    チャットボット開発から業務効率化まで、包括的なAIサポートをご紹介します
                 </p>
             </div>
         </div>
@@ -2051,6 +833,36 @@
                 </div>
                 
                 <div class="services-grid">
+                    <!-- 業務自動化ソリューション -->
+                    <div class="service-card animate-on-scroll" id="automation">
+                        <div class="service-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
+                                <img 
+                                     src="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400" 
+                                     alt="AIチャットボットのイメージ" 
+                                     loading="lazy"
+                                     width="600" 
+                                     height="400">
+                            </picture>
+                            <div class="service-icon">
+                                <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">業務自動化ソリューション</h3>
+                            <p class="service-description">AIチャットボットとバーチャルアシスタントによる問い合わせ対応、予約、社内支援などを自動化。24時間対応、多言語、直感的な操作で顧客体験と業務効率を両立します。</p>
+                            <div class="service-tags">
+                                <span class="service-tag">24時間対応</span>
+                                <span class="service-tag">多言語対応</span>
+                                <span class="service-tag">顧客満足度向上</span>
+                            </div>
+                            <div class="service-footer">
+                                <a href="services-automation.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- 企画書資料作成AIツール「アイプロ」 -->
                     <div class="service-card animate-on-scroll" id="aipro">
                         <div class="service-image">
@@ -2074,7 +886,6 @@
                                 <span class="service-tag">時間短縮</span>
                                 <span class="service-tag">データ活用</span>
                                 <span class="service-tag">生産性向上</span>
-                                <span class="service-tag">新規事業創出</span>
                             </div>
                             <div class="service-footer">
                                 <a href="services-aipro.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
@@ -2082,45 +893,14 @@
                         </div>
                     </div>
                     
-                    <!-- オーダーメイドAIアプリケーション開発 -->
-                    <div class="service-card animate-on-scroll" id="custom-ai">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="オーダーメイドAIアプリケーション開発のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-code" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
-                            <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。業務自動化ボット、レコメンドシステム、予測分析など、独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">カスタム開発</span>
-                                <span class="service-tag">独自データ活用</span>
-                                <span class="service-tag">システム連携</span>
-                                <span class="service-tag">業務自動化</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-custom.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- AI導入(DX/AX)コンサルティング -->
+                    <!-- AI導入戦略・実装支援 -->
                     <div class="service-card animate-on-scroll" id="consulting">
                         <div class="service-image">
                             <picture>
                                 <source srcset="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
                                 <img 
                                      src="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AI導入(DX/AX)コンサルティングのイメージ" 
+                                     alt="AI戦略コンサルティングのイメージ" 
                                      loading="lazy"
                                      width="600" 
                                      height="400">
@@ -2130,16 +910,75 @@
                             </div>
                         </div>
                         <div class="service-content">
-                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
-                            <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。人間中心のAI活用方針の策定から、実装までトータルサポート。</p>
+                            <h3 class="service-title">AI導入戦略・実装支援</h3>
+                            <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">伴走支援</span>
                                 <span class="service-tag">内製化支援</span>
                                 <span class="service-tag">成果定着</span>
-                                <span class="service-tag">人材育成</span>
                             </div>
                             <div class="service-footer">
                                 <a href="services-consulting.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- オーダーメイド型AI開発 -->
+                    <div class="service-card animate-on-scroll" id="custom-ai">
+                        <div class="service-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
+                                <img 
+                                     src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400" 
+                                     alt="オーダーメイド型AI開発のイメージ" 
+                                     loading="lazy"
+                                     width="600" 
+                                     height="400">
+                            </picture>
+                            <div class="service-icon">
+                                <i class="fas fa-code" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">オーダーメイド型AI開発</h3>
+                            <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
+                            <div class="service-tags">
+                                <span class="service-tag">カスタム開発</span>
+                                <span class="service-tag">独自データ活用</span>
+                                <span class="service-tag">システム連携</span>
+                            </div>
+                            <div class="service-footer">
+                                <a href="services-custom.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 人間中心AIの社会実装 -->
+                    <div class="service-card animate-on-scroll" id="human-centered">
+                        <div class="service-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
+                                <img 
+                                     src="https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?auto=format&fit=crop&q=80&w=600&h=400" 
+                                     alt="人間中心AIの社会実装のイメージ" 
+                                     loading="lazy"
+                                     width="600" 
+                                     height="400">
+                            </picture>
+                            <div class="service-icon">
+                                <i class="fas fa-heart" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">人間中心AIの社会実装</h3>
+                            <p class="service-description">AIを「人間の可能性を広げるパートナー」と位置づけ、人間らしい「時間」と「絆」を創る社会実装プロジェクトを企業・自治体と共創。福祉・教育などの社会課題解決に取り組みます。</p>
+                            <div class="service-tags">
+                                <span class="service-tag">社会課題解決</span>
+                                <span class="service-tag">自治体連携</span>
+                                <span class="service-tag">コミュニティ支援</span>
+                            </div>
+                            <div class="service-footer">
+                                <a href="services-human.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -2245,13 +1084,65 @@
             </div>
         </section>
         
-        <!-- component-split: FAQBanner -->
-        <section class="section">
+        <!-- component-split: FAQ -->
+        <section class="section section-bg-gradient">
             <div class="container">
-                <div class="faq-banner animate-on-scroll">
-                    <h3>AIに関するよくある質問</h3>
-                    <p>AI導入や活用方法についてのよくある質問をまとめました。導入コスト、効果測定、必要なデータ量、内製化方法など、具体的な疑問にお答えします。</p>
-                    <a href="faq.html" class="btn-cta">FAQページを見る <i class="fas fa-arrow-right"></i></a>
+                <div class="section-header animate-on-scroll">
+                    <span class="section-subtitle">よくある質問</span>
+                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
+                    <p class="section-description">AI導入を検討される際によくいただく質問にお答えします</p>
+                </div>
+                
+                <div class="faq-container animate-on-scroll">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの導入にはどのくらいのコストがかかりますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AIの導入コストは、ソリューションの規模や複雑さによって大きく異なります。小規模なチャットボット導入なら月額10万円程度から、フルカスタムのAIシステム開発では数百万円以上の初期コストが必要な場合もあります。当社では、小さく始めて効果を確認しながら段階的に拡張していくアプローチを推奨しています。まずはお気軽にご相談ください。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AI導入の効果はどれくらいで出ますか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AIの効果は導入する業務や目的によって異なりますが、基本的なチャットボットや自動化ツールであれば、導入後1〜3ヶ月程度で効果が現れ始めます。多くのケースでは、問い合わせ対応の自動化で30〜50%の業務効率化、データ分析AIによる予測精度向上で15〜25%の業績改善などの効果が報告されています。当社では、導入前に期待される効果を数値化し、KPIを設定してから開発を進めています。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIを導入するために必要なデータ量はどのくらいですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>必要なデータ量はAIの用途によって異なります。近年の大規模言語モデル（LLM）などは少ないデータでも活用できるため、導入のハードルは下がっています。例えば、チャットボットであれば100〜200の質問と回答のセット、予測モデルであれば数百〜数千件のデータがあれば初期導入が可能です。データが少ない場合でも、段階的に収集しながらAIの精度を向上させていくアプローチも可能です。当社ではお客様のデータ状況に合わせた最適なソリューションをご提案します。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>AIの導入に社内の専門人材は必要ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>既存システムとの連携は可能ですか？</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2316,9 +1207,11 @@
                 <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
+                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
                         <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイドAIアプリケーション開発</a></li>
-                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
+                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
+                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
                     </ul>
                 </div>
                 
@@ -2328,7 +1221,6 @@
                         <li><a href="about.html">会社概要</a></li>
                         <li><a href="about.html#philosophy">企業理念</a></li>
                         <li><a href="industries.html">AI活用事例</a></li>
-                        <li><a href="faq.html">よくある質問</a></li>
                         <li><a href="about.html#careers">採用情報</a></li>
                     </ul>
                 </div>
@@ -2397,6 +1289,23 @@
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // FAQアコーディオン
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+                
+                // 他のアコーディオンを閉じる
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
         
         // スクロールアニメーション
         const observerOptions = {
