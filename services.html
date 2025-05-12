@@ -115,35 +115,125 @@
 
     <!-- component-split: PageSpecificStyles -->
     <style>
-    /* サービスページ向け特殊スタイル */
-    .section {
-        padding: 5rem 0;
+    /* 新しいヘッダースタイル - グラデーションブルー */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: var(--z-header);
+        background: linear-gradient(90deg, #2563EB, #3984FF);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
     }
     
-    .section-bg-gradient {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
     }
     
-    .brand-catchphrase {
-        font-style: italic;
-        color: var(--primary);
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--white);
+        font-family: var(--font-en);
+    }
+    
+    .nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .nav-link {
+        color: var(--white);
         font-weight: 500;
-        display: inline-block;
-        background: rgba(58, 95, 235, 0.05);
-        padding: 0.75rem 1.5rem;
-        border-radius: 0 var(--radius) var(--radius) 0;
-        border-left: 3px solid var(--primary);
-        margin-bottom: 1.5rem;
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
-        transform: translateY(0);
+        position: relative;
+        padding: 0.5rem 0;
+        font-family: var(--font-jp);
+        opacity: 0.85;
+        transition: opacity 0.3s ease;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        opacity: 1;
+        color: var(--white);
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--white);
+        border-radius: var(--radius-full);
+    }
+    
+    .nav-cta {
+        margin-left: 1.5rem;
+    }
+    
+    .btn-consultation {
+        background: #fff;
+        color: #3A5FEB;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        font-weight: 700;
+        padding: 0.85rem 1.5rem;
+        border-radius: 50px;
         transition: all 0.3s ease;
     }
     
-    .section-header:hover .brand-catchphrase {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
+    .btn-consultation:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
-
+    
+    .btn-consultation-message {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+    
+    /* メニュートグル - モバイル */
+    .menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: var(--white);
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* トップバナー削除 */
+    .top-banner {
+        display: none;
+    }
+    
+    /* ページヒーロー調整 - ヘッダー高さ補正 */
+    .page-hero {
+        padding-top: 120px;
+        min-height: 320px;
+    }
+    
     /* サービスカード強化 */
     .service-card {
         background: var(--white);
@@ -449,6 +539,79 @@
         line-height: 1.7;
     }
 
+    /* FAQ Banner */
+    .faq-banner {
+        background: rgba(58, 95, 235, 0.1);
+        padding: 2rem;
+        text-align: center;
+        margin: 3rem 0;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .faq-banner:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.15);
+    }
+
+    .faq-banner::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(58, 95, 235, 0.05), transparent);
+        transition: all 0.5s ease;
+        z-index: 1;
+    }
+
+    .faq-banner:hover::before {
+        top: 0;
+    }
+
+    .faq-banner h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--dark);
+        position: relative;
+        z-index: 2;
+    }
+
+    .faq-banner p {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .faq-banner .btn-cta {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+        margin-top: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .faq-banner .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
+    }
+
     /* CTA強化 */
     .cta-container {
         background: var(--white);
@@ -532,79 +695,6 @@
         animation: pulseGlow 2s infinite;
     }
 
-    /* FAQ Banner */
-    .faq-banner {
-        background: rgba(58, 95, 235, 0.1);
-        padding: 2rem;
-        text-align: center;
-        margin: 3rem 0;
-        border-radius: 12px;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .faq-banner:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.15);
-    }
-
-    .faq-banner::before {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(180deg, rgba(58, 95, 235, 0.05), transparent);
-        transition: all 0.5s ease;
-        z-index: 1;
-    }
-
-    .faq-banner:hover::before {
-        top: 0;
-    }
-
-    .faq-banner h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--dark);
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner p {
-        color: var(--gray);
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-        position: relative;
-        z-index: 2;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .faq-banner .btn-cta {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
-        margin-top: 1rem;
-        position: relative;
-        z-index: 2;
-    }
-
-    .faq-banner .btn-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
-    }
-
     /* レスポンシブ調整 */
     @media (max-width: 992px) {
         .features-grid {
@@ -629,6 +719,52 @@
     }
     
     @media (max-width: 768px) {
+        .header-inner {
+            padding: 0.8rem 1rem;
+        }
+        
+        .nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #2563EB;
+            padding: 1rem;
+            flex-direction: column;
+            align-items: center;
+            z-index: var(--z-dropdown);
+        }
+        
+        .nav.active {
+            display: flex;
+        }
+        
+        .nav-link {
+            padding: 0.8rem 0;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-cta {
+            margin-left: 0;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        .nav-cta .btn {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: flex;
+        }
+        
         .features-grid {
             grid-template-columns: 1fr;
             gap: 2rem;
@@ -723,9 +859,6 @@
 <body>
     <!-- component-split: AccessibilityNav -->
     <a href="#main-content" class="skip-nav">メインコンテンツへスキップ</a>
-
-    <!-- component-split: TopBanner -->
-    <div class="top-banner"></div>
     
     <!-- component-split: Header -->
     <header class="header" id="header">
@@ -1199,6 +1332,16 @@
             card.addEventListener('mouseleave', function() {
                 this.style.zIndex = '1';
             });
+        });
+        
+        // メニュートグル
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('active');
         });
     });
     </script>
