@@ -173,7 +173,7 @@
         --white: #ffffff;
         --gradient-primary: linear-gradient(90deg, #3A5FEB, #00C9A7);
         --gradient-highlight: linear-gradient(90deg, #9AAEFF, #85EDD6);
-        --gradient-glass: linear-gradient(120deg, rgba(154, 174, 255, 0.4), rgba(133, 237, 214, 0.4));
+        --gradient-glass: linear-gradient(120deg, rgba(154, 174, 255, 0.2), rgba(133, 237, 214, 0.2));
         --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
         --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
@@ -204,22 +204,21 @@
         min-height: 100%;
     }
     
-    /* スワイプ型スクロール対応 */
-    .scroll-container {
-        height: 100vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        scroll-snap-type: y mandatory;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .scroll-section {
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    /* スクロールスナップ対応 (スワイプ型レスポンシブデザイン) */
+    @media (max-width: 768px) {
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        .scroll-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 
     /* ヘッダー - 一行に納まるよう最適化 */
@@ -441,7 +440,7 @@
         z-index: 10;
     }
 
-    /* 浮遊エレメント - スタイル強化・濃淡調整 */
+    /* 浮遊エレメント - スタイル強化 */
     .floating-elements {
         position: absolute;
         top: 0;
@@ -455,10 +454,9 @@
     .floating-element {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(154, 174, 255, 0.6), rgba(133, 237, 214, 0.6));
-        opacity: 0.8;
+        background: var(--gradient-glass);
+        opacity: 0.6;
         animation: float 20s infinite alternate ease-in-out;
-        box-shadow: 0 8px 32px rgba(58, 95, 235, 0.15);
     }
 
     .floating-element:nth-child(1) {
@@ -518,7 +516,7 @@
         margin-bottom: 1.8rem;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(58, 95, 235, 0.2);
+        box-shadow: 0 4px 15px rgba(58, 95, 235, 0.12);
         animation: fadeInUp 0.8s 0.1s forwards;
         opacity: 0;
     }
@@ -550,22 +548,22 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* 「人間らしい時間」のスタイル - 色の濃淡調整 */
+    /* 「人間らしい時間」のスタイル - 美しいグラデーション */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        background: linear-gradient(to right, #7B93FF, #5EDBBC);
+        background: linear-gradient(to right, #9AAEFF, #85EDD6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: transparent;
         font-weight: 900;
-        filter: drop-shadow(0 2px 4px rgba(58, 95, 235, 0.3));
+        filter: drop-shadow(0 2px 3px rgba(58, 95, 235, 0.15));
         transition: all 0.3s ease;
         transform: translateY(0);
     }
 
-    /* 人間らしい時間の下線エフェクト - 可視性向上 */
+    /* 人間らしい時間の下線エフェクト */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
@@ -573,21 +571,21 @@
         left: 0;
         width: 100%;
         height: 0.15em;
-        background: linear-gradient(to right, rgba(123, 147, 255, 0.5), rgba(94, 219, 188, 0.5));
+        background: linear-gradient(to right, rgba(154, 174, 255, 0.3), rgba(133, 237, 214, 0.3));
         z-index: -1;
         border-radius: 5px;
         transition: height 0.3s ease;
     }
 
-    /* ホバーエフェクト強化 */
+    /* ホバーエフェクト */
     .hero-title .highlight:hover {
-        filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.5));
+        filter: drop-shadow(0 4px 8px rgba(58, 95, 235, 0.3));
         transform: translateY(-3px);
     }
 
     .hero-title .highlight:hover::after {
         height: 0.3em;
-        background: linear-gradient(to right, rgba(123, 147, 255, 0.7), rgba(94, 219, 188, 0.7));
+        background: linear-gradient(to right, rgba(154, 174, 255, 0.4), rgba(133, 237, 214, 0.4));
     }
 
     .hero-description {
@@ -769,7 +767,7 @@
     }
 
     .service-preview-card:nth-child(1) .service-preview-badge {
-        background: linear-gradient(135deg, #7B93FF, #5EDBBC);
+        background: linear-gradient(135deg, #9AAEFF, #85EDD6);
     }
 
     .service-preview-card:nth-child(2) .service-preview-badge {
@@ -804,7 +802,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+        background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
         opacity: 0;
         transition: opacity 0.3s ease;
     }
@@ -1374,7 +1372,7 @@
         box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
     }
 
-    /* スワイプインジケーター - モバイル */
+    /* スワイプインジケーター */
     .swipe-indicator {
         position: fixed;
         bottom: 2rem;
@@ -1533,23 +1531,6 @@
     }
 
     @media (max-width: 768px) {
-        /* スワイプ型スクロール対応強化 */
-        .scroll-container {
-            height: 100vh;
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .scroll-section {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    
         .hero-title {
             font-size: 2.5rem;
         }
@@ -1599,6 +1580,10 @@
         .chatbot-container {
             width: 340px;
             height: 480px;
+        }
+        
+        .section {
+            scroll-snap-align: start;
         }
     }
 
@@ -1750,13 +1735,12 @@
             touch-action: manipulation;
         }
         
-        /* スワイプ対応セクション強化 */
+        /* スワイプ対応セクション */
         .section {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            scroll-snap-align: start;
         }
     }
 
@@ -1828,7 +1812,7 @@
     <main id="main-content">
         <!-- component-split: HeroSection -->
         <section class="section hero scroll-section" id="hero">
-            <!-- 浮遊エレメント - 濃度を上げてより鮮明に -->
+            <!-- 浮遊エレメント - スクリーンショットに合わせた色 -->
             <div class="floating-elements">
                 <div class="floating-element"></div>
                 <div class="floating-element"></div>
@@ -2281,28 +2265,13 @@
             });
         });
         
-        // チャットボット機能の完全実装
+        // チャットボット機能
         const chatbotToggle = document.getElementById('chatbot-toggle');
         const chatbotContainer = document.getElementById('chatbot-container');
         const chatbotClose = document.getElementById('chatbot-close');
         const chatbotInput = document.getElementById('chatbot-input-text');
         const chatbotSubmit = document.getElementById('chatbot-submit');
         const chatbotMessages = document.getElementById('chatbot-messages');
-        
-        chatbotToggle.addEventListener('click', function() {
-            chatbotContainer.classList.toggle('active');
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
-            
-            if (!expanded) {
-                chatbotInput.focus();
-                // ウェルカムメッセージの表示アニメーションを追加
-                setTimeout(() => {
-                    const welcomeMsg = chatbotMessages.querySelector('.bot-message');
-                    welcomeMsg.style.animation = 'messageSlideIn 0.5s ease-out forwards';
-                }, 300);
-            }
-        });
         
         chatbotClose.addEventListener('click', function() {
             chatbotContainer.classList.remove('active');
@@ -2316,8 +2285,6 @@
             messageDiv.textContent = text;
             chatbotMessages.appendChild(messageDiv);
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            
-            return messageDiv;
         }
         
         function showTypingIndicator() {
@@ -2354,7 +2321,7 @@
                 const input = userInput.toLowerCase();
                 
                 if (input.includes('こんにちは') || input.includes('はじめまして') || input.includes('こんばんは')) {
-                    response = 'こんにちは！ShinAIアシスタントです。AI導入について何かお困りのことはございますか？';
+                    response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？AI導入について何かお困りのことはございますか？';
                 } else if (input.includes('料金') || input.includes('費用') || input.includes('価格')) {
                     response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。詳しくは無料相談にてお見積りをご案内しております。お気軽にお問い合わせください。';
                 } else if (input.includes('アイプロ') || input.includes('企画書')) {
@@ -2369,8 +2336,7 @@
                     response = 'ご質問ありがとうございます。より詳しくお答えさせていただきたいので、お問い合わせフォームからご連絡いただくか、無料相談にてお話しさせていただければ幸いです。';
                 }
                 
-                const messageEl = addMessage(response);
-                messageEl.style.animation = 'messageSlideIn 0.5s ease-out forwards';
+                addMessage(response);
             }, 1500);
         }
         
@@ -2392,80 +2358,37 @@
             }
         });
         
-        // スワイプ型スクロール対応
-        if ('ontouchstart' in window || navigator.maxTouchPoints) {
-            const sections = document.querySelectorAll('.scroll-section');
-            let touchStartY = 0;
-            let touchEndY = 0;
-            let currentSectionIndex = 0;
-            
-            document.addEventListener('touchstart', function(e) {
-                touchStartY = e.touches[0].clientY;
-            }, false);
-            
-            document.addEventListener('touchend', function(e) {
-                touchEndY = e.changedTouches[0].clientY;
-                handleSwipe();
-            }, false);
-            
-            function handleSwipe() {
-                const diff = touchStartY - touchEndY;
-                const threshold = 50; // スワイプを検出する閾値
-                
-                if (Math.abs(diff) < threshold) return;
-                
-                if (diff > 0) {
-                    // 上にスワイプ - 次のセクションへ
-                    if (currentSectionIndex < sections.length - 1) {
-                        currentSectionIndex++;
-                        scrollToSection(currentSectionIndex);
-                    }
-                } else {
-                    // 下にスワイプ - 前のセクションへ
-                    if (currentSectionIndex > 0) {
-                        currentSectionIndex--;
-                        scrollToSection(currentSectionIndex);
-                    }
-                }
-            }
-            
-            function scrollToSection(index) {
-                sections[index].scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-            
-            // スクロールイベントで現在のセクションを追跡
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.scrollY;
-                
-                sections.forEach((section, index) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    
-                    if (scrollPosition >= sectionTop - 100 && 
-                        scrollPosition < sectionTop + sectionHeight - 100) {
-                        currentSectionIndex = index;
-                    }
-                });
-            });
-        }
-        
         // iPhoneでのスクロール改善
         if (/iPhone/.test(navigator.userAgent)) {
             document.documentElement.classList.add('ios-device');
             
             // タッチイベントの改善
-            document.querySelectorAll('.service-preview-card, .hero-cta .btn, .chatbot-toggle, .back-to-top').forEach(el => {
-                el.addEventListener('touchstart', function() {
+            document.querySelectorAll('.service-preview-card').forEach(card => {
+                card.addEventListener('touchstart', function() {
                     this.classList.add('touch-active');
-                }, {passive: true});
+                });
                 
-                el.addEventListener('touchend', function() {
+                card.addEventListener('touchend', function() {
                     this.classList.remove('touch-active');
-                }, {passive: true});
+                });
             });
         }
+        
+        // パフォーマンス最適化
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateElements);
+                ticking = true;
+            }
+        }
+        
+        function updateElements() {
+            // スクロールに応じた要素の更新
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', requestTick);
         
         // ページロード完了時のアニメーション
         window.addEventListener('load', function() {
@@ -2489,7 +2412,6 @@
                     chatbotContainer.classList.remove('active');
                     chatbotToggle.setAttribute('aria-expanded', 'false');
                 }
-                
                 if (nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     body.classList.remove('nav-open');
@@ -2504,16 +2426,15 @@
             const focusableElements = element.querySelectorAll(
                 'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
             );
-            
-            if (focusableElements.length === 0) return;
-            
             const firstFocusableElement = focusableElements[0];
             const lastFocusableElement = focusableElements[focusableElements.length - 1];
             
             element.addEventListener('keydown', function(e) {
                 const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
                 
-                if (!isTabPressed) return;
+                if (!isTabPressed) {
+                    return;
+                }
                 
                 if (e.shiftKey) {
                     if (document.activeElement === firstFocusableElement) {
