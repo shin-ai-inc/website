@@ -35,12 +35,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Font Awesome - 最新バージョンに更新 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
     <!-- Swiper JS -->
@@ -58,9 +58,9 @@
           "position": 1,
           "item": {
             "@type": "Service",
-            "name": "業務自動化ソリューション",
-            "description": "AIチャットボットとバーチャルアシスタントによる問い合わせ対応、予約、社内支援などを自動化。24時間対応、多言語、直感的な操作で顧客体験と業務効率を両立します。",
-            "url": "https://www.shinai.tech/services.html#automation"
+            "name": "新規事業企画書AIツール「アイプロ」",
+            "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。",
+            "url": "https://www.shinai.tech/services.html#aipro"
           }
         },
         {
@@ -68,9 +68,9 @@
           "position": 2,
           "item": {
             "@type": "Service",
-            "name": "企画書資料作成AIツール「アイプロ」",
-            "description": "AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。",
-            "url": "https://www.shinai.tech/services.html#aipro"
+            "name": "オーダーメイドAIアプリケーション開発",
+            "description": "お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。",
+            "url": "https://www.shinai.tech/services.html#custom-ai"
           }
         },
         {
@@ -78,7 +78,7 @@
           "position": 3,
           "item": {
             "@type": "Service",
-            "name": "AI導入戦略・実装支援",
+            "name": "AI導入(DX/AX)コンサルティング",
             "description": "DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。",
             "url": "https://www.shinai.tech/services.html#consulting"
           }
@@ -100,40 +100,6 @@
         "target": "https://www.shinai.tech/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
-    }
-    </script>
-    
-    <!-- FAQページの構造化データ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "ShinAIのAIチャットボットサービスについて教えてください",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入について相談したいのですが",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIの内製化支援について詳しく知りたい",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
-          }
-        }
-      ]
     }
     </script>
     
@@ -205,7 +171,7 @@
     }
     
     .service-card:hover {
-        transform: translateY(-15px);
+        transform: translateY(-15px) scale(1.02);
         box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
         border-color: rgba(58, 95, 235, 0.12);
     }
@@ -483,83 +449,110 @@
         line-height: 1.7;
     }
 
-    /* FAQ強化 */
-    .faq-container {
-        max-width: 900px;
-        margin: 4rem auto 0;
-    }
-    
-    .faq-item {
-        background: var(--white);
+    /* AI伴走型開発セクション追加 */
+    .escort-development {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
+        padding: 4rem 0;
         border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        margin-bottom: 1.5rem;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-    
-    .faq-item.active,
-    .faq-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
-    }
-    
-    .faq-question {
-        background: var(--white);
-        color: var(--dark);
-        font-weight: 600;
-        padding: 1.8rem 2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        margin: 4rem 0;
         position: relative;
-        font-size: 1.15rem;
-        line-height: 1.5;
+        overflow: hidden;
+    }
+
+    .escort-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.1;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .escort-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+
+    .escort-text {
+        flex: 1;
+        min-width: 280px;
+        padding: 0 2rem;
+    }
+
+    .escort-text h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        position: relative;
+    }
+
+    .escort-text h2:after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: var(--radius-full);
+    }
+
+    .escort-text p {
+        color: var(--gray);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+
+    .escort-image {
+        flex: 1;
+        min-width: 280px;
+        position: relative;
+    }
+
+    .escort-image img {
+        width: 100%;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transition: all 0.5s ease;
+    }
+
+    .escort-icons {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .escort-icon {
+        text-align: center;
+    }
+
+    .escort-icon i {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: block;
         transition: all 0.3s ease;
     }
-    
-    .faq-question:hover,
-    .faq-item.active .faq-question {
-        color: var(--primary);
+
+    .escort-icon:hover i {
+        transform: translateY(-8px);
+        color: var(--secondary);
     }
-    
-    .faq-question h4 {
-        margin: 0;
-        font-size: 1.15rem;
+
+    .escort-icon span {
+        display: block;
         font-weight: 600;
-    }
-    
-    .faq-question i {
-        color: var(--primary);
-        font-size: 1.1rem;
-        transition: transform 0.3s ease;
-    }
-    
-    .faq-item.active .faq-question i {
-        transform: rotate(-180deg);
-    }
-    
-    .faq-answer {
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background: rgba(249, 250, 252, 0.7);
-        border-top: 1px solid rgba(58, 95, 235, 0.08);
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 1.8rem 2rem;
-        max-height: 1000px;
-    }
-    
-    .faq-answer p {
-        color: var(--gray);
-        line-height: 1.7;
-        margin: 0;
+        color: var(--dark);
     }
 
     /* CTA強化 */
@@ -645,6 +638,47 @@
         animation: pulseGlow 2s infinite;
     }
 
+    /* アニメーション強化 */
+    @keyframes pulseGlow {
+        0% {
+            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0);
+        }
+    }
+
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @keyframes floatAnimation {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .floating-animation {
+        animation: floatAnimation 4s ease-in-out infinite;
+    }
+
     /* レスポンシブ調整 */
     @media (max-width: 992px) {
         .features-grid {
@@ -665,6 +699,14 @@
             height: 40px;
             font-size: 1.2rem;
             margin-right: 2rem;
+        }
+
+        .escort-content {
+            flex-direction: column;
+        }
+
+        .escort-text, .escort-image {
+            width: 100%;
         }
     }
     
@@ -704,6 +746,11 @@
         
         .cta-container {
             padding: 3rem 2rem;
+        }
+
+        .escort-icons {
+            flex-wrap: wrap;
+            justify-content: center;
         }
     }
     
@@ -757,6 +804,54 @@
         .process-step-content::before {
             display: none;
         }
+
+        .escort-text {
+            padding: 0 1rem;
+        }
+
+        .escort-text h2 {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* iPhone特化最適化 */
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 812px) 
+    and (-webkit-min-device-pixel-ratio: 3) {
+        .header-inner {
+            padding: 0.8rem 0;
+        }
+
+        .nav-link {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .service-card {
+            margin-bottom: 2.5rem;
+        }
+
+        .service-tag {
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+        }
+
+        .escort-text h2 {
+            font-size: 1.6rem;
+        }
+
+        .escort-text p {
+            font-size: 1rem;
+        }
+
+        .escort-icon i {
+            font-size: 2rem;
+        }
+
+        .escort-icon span {
+            font-size: 0.8rem;
+        }
     }
     </style>
 </head>
@@ -782,6 +877,7 @@
                         <li><a href="about.html" class="nav-link">会社紹介</a></li>
                         <li><a href="services.html" class="nav-link active" aria-current="page">サービス</a></li>
                         <li><a href="industries.html" class="nav-link">業界別活用</a></li>
+                        <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
                         <li><a href="contact.html" class="nav-link">お問い合わせ</a></li>
                         <li class="nav-cta">
                             <a href="contact.html" class="btn btn-consultation">
@@ -815,7 +911,7 @@
                 <h1 class="page-hero-title">ShinAIのサービス</h1>
                 <p class="page-hero-description">
                     最先端のAI技術を活用し、企業の課題を解決するソリューションを提供<br>
-                    チャットボット開発から業務効率化まで、包括的なAIサポートをご紹介します
+                    ビジネスの成長と人間らしい時間の創出をサポートします
                 </p>
             </div>
         </div>
@@ -833,37 +929,7 @@
                 </div>
                 
                 <div class="services-grid">
-                    <!-- 業務自動化ソリューション -->
-                    <div class="service-card animate-on-scroll" id="automation">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="AIチャットボットのイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-comment-dots" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">業務自動化ソリューション</h3>
-                            <p class="service-description">AIチャットボットとバーチャルアシスタントによる問い合わせ対応、予約、社内支援などを自動化。24時間対応、多言語、直感的な操作で顧客体験と業務効率を両立します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">24時間対応</span>
-                                <span class="service-tag">多言語対応</span>
-                                <span class="service-tag">顧客満足度向上</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-automation.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 企画書資料作成AIツール「アイプロ」 -->
+                    <!-- 新規事業企画書AIツール「アイプロ」 -->
                     <div class="service-card animate-on-scroll" id="aipro">
                         <div class="service-image">
                             <picture>
@@ -876,12 +942,12 @@
                                      height="400">
                             </picture>
                             <div class="service-icon">
-                                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="service-content">
-                            <h3 class="service-title">企画書資料作成AIツール「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上。</p>
+                            <h3 class="service-title">新規事業企画書AIツール「アイプロ」</h3>
+                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を向上します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">時間短縮</span>
                                 <span class="service-tag">データ活用</span>
@@ -893,7 +959,37 @@
                         </div>
                     </div>
                     
-                    <!-- AI導入戦略・実装支援 -->
+                    <!-- オーダーメイドAIアプリケーション開発 -->
+                    <div class="service-card animate-on-scroll" id="custom-ai">
+                        <div class="service-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
+                                <img 
+                                     src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400" 
+                                     alt="オーダーメイド型AI開発のイメージ" 
+                                     loading="lazy"
+                                     width="600" 
+                                     height="400">
+                            </picture>
+                            <div class="service-icon">
+                                <i class="fas fa-robot" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
+                            <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
+                            <div class="service-tags">
+                                <span class="service-tag">カスタム開発</span>
+                                <span class="service-tag">独自データ活用</span>
+                                <span class="service-tag">システム連携</span>
+                            </div>
+                            <div class="service-footer">
+                                <a href="services-custom.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI導入(DX/AX)コンサルティング -->
                     <div class="service-card animate-on-scroll" id="consulting">
                         <div class="service-image">
                             <picture>
@@ -910,7 +1006,7 @@
                             </div>
                         </div>
                         <div class="service-content">
-                            <h3 class="service-title">AI導入戦略・実装支援</h3>
+                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
                             <p class="service-description">DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag">伴走支援</span>
@@ -919,66 +1015,6 @@
                             </div>
                             <div class="service-footer">
                                 <a href="services-consulting.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- オーダーメイド型AI開発 -->
-                    <div class="service-card animate-on-scroll" id="custom-ai">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="オーダーメイド型AI開発のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-code" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">オーダーメイド型AI開発</h3>
-                            <p class="service-description">お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。独自データを活用した特化型AIモデルの構築や、既存システムとのシームレスな連携を実現します。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">カスタム開発</span>
-                                <span class="service-tag">独自データ活用</span>
-                                <span class="service-tag">システム連携</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-custom.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 人間中心AIの社会実装 -->
-                    <div class="service-card animate-on-scroll" id="human-centered">
-                        <div class="service-image">
-                            <picture>
-                                <source srcset="https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?auto=format&fit=crop&q=80&w=600&h=400&fm=webp" type="image/webp">
-                                <img 
-                                     src="https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?auto=format&fit=crop&q=80&w=600&h=400" 
-                                     alt="人間中心AIの社会実装のイメージ" 
-                                     loading="lazy"
-                                     width="600" 
-                                     height="400">
-                            </picture>
-                            <div class="service-icon">
-                                <i class="fas fa-heart" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">人間中心AIの社会実装</h3>
-                            <p class="service-description">AIを「人間の可能性を広げるパートナー」と位置づけ、人間らしい「時間」と「絆」を創る社会実装プロジェクトを企業・自治体と共創。福祉・教育などの社会課題解決に取り組みます。</p>
-                            <div class="service-tags">
-                                <span class="service-tag">社会課題解決</span>
-                                <span class="service-tag">自治体連携</span>
-                                <span class="service-tag">コミュニティ支援</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services-human.html" class="btn btn-outline btn-icon-bounce">詳細を見る <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -1022,6 +1058,41 @@
                         </div>
                         <h3>安全なAI活用の実現</h3>
                         <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築。データガバナンス対策とAI倫理を遵守した安全なAI活用で、ユーザーからの信頼を獲得します。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- component-split: AI伴走型開発 -->
+        <section class="section">
+            <div class="container">
+                <div class="escort-development animate-on-scroll">
+                    <div class="escort-bg" style="background-image: url('https://images.unsplash.com/photo-1673187648450-6966b606932c?auto=format&fit=crop&q=80&w=1200')"></div>
+                    <div class="container">
+                        <div class="escort-content">
+                            <div class="escort-text">
+                                <h2>AI伴走型開発で<br>確実な成果を実現</h2>
+                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。企画から実装、運用、そして自走化まで一貫して伴走することで、「やりっぱなしにならない」AI導入を実現。</p>
+                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させます。</p>
+                                <div class="escort-icons">
+                                    <div class="escort-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>効果測定</span>
+                                    </div>
+                                    <div class="escort-icon">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span>継続的改善</span>
+                                    </div>
+                                    <div class="escort-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <span>社内育成</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="escort-image">
+                                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800" alt="AI伴走型開発" class="floating-animation">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1079,70 +1150,8 @@
                 </div>
                 
                 <div class="section-footer animate-on-scroll">
+                    <a href="faq.html" class="btn btn-secondary btn-lg btn-icon-bounce">よくある質問を見る <i class="fas fa-question-circle"></i></a>
                     <a href="contact.html" class="btn btn-primary btn-lg btn-icon-bounce">まずは無料相談する <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- component-split: FAQ -->
-        <section class="section section-bg-gradient">
-            <div class="container">
-                <div class="section-header animate-on-scroll">
-                    <span class="section-subtitle">よくある質問</span>
-                    <h2 class="heading-lg">AI導入に関する<span class="highlight">FAQ</span></h2>
-                    <p class="section-description">AI導入を検討される際によくいただく質問にお答えします</p>
-                </div>
-                
-                <div class="faq-container animate-on-scroll">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIの導入にはどのくらいのコストがかかりますか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AIの導入コストは、ソリューションの規模や複雑さによって大きく異なります。小規模なチャットボット導入なら月額10万円程度から、フルカスタムのAIシステム開発では数百万円以上の初期コストが必要な場合もあります。当社では、小さく始めて効果を確認しながら段階的に拡張していくアプローチを推奨しています。まずはお気軽にご相談ください。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AI導入の効果はどれくらいで出ますか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AIの効果は導入する業務や目的によって異なりますが、基本的なチャットボットや自動化ツールであれば、導入後1〜3ヶ月程度で効果が現れ始めます。多くのケースでは、問い合わせ対応の自動化で30〜50%の業務効率化、データ分析AIによる予測精度向上で15〜25%の業績改善などの効果が報告されています。当社では、導入前に期待される効果を数値化し、KPIを設定してから開発を進めています。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIを導入するために必要なデータ量はどのくらいですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>必要なデータ量はAIの用途によって異なります。近年の大規模言語モデル（LLM）などは少ないデータでも活用できるため、導入のハードルは下がっています。例えば、チャットボットであれば100〜200の質問と回答のセット、予測モデルであれば数百〜数千件のデータがあれば初期導入が可能です。データが少ない場合でも、段階的に収集しながらAIの精度を向上させていくアプローチも可能です。当社ではお客様のデータ状況に合わせた最適なソリューションをご提案します。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>AIの導入に社内の専門人材は必要ですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>AI導入の初期段階では必ずしも社内に専門人材は必要ありません。当社のサービスは、AI専門知識がないお客様でも導入できるよう設計されています。ただし、AIの効果を長期的に最大化するためには、運用を担当する社内人材の育成が重要です。そのため、当社では技術導入と併せて、社内チームの育成プログラムや内製化支援も提供しています。必要なスキルセットや組織体制についても、プロジェクトの一環としてアドバイスいたします。</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>既存システムとの連携は可能ですか？</h4>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>はい、可能です。当社のAIソリューションは、お客様の既存システム（CRM、ERP、基幹系システムなど）と連携できるよう設計されています。API連携やデータベース連携など、様々な方法で既存システムとシームレスに統合することができます。導入前のヒアリングで現在のシステム環境を詳しくお伺いし、最適な連携方法をご提案します。また、独自システムとの連携が必要な場合は、カスタム開発での対応も可能です。</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1207,11 +1216,9 @@
                 <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイド型AI開発</a></li>
-                        <li><a href="services.html#human-centered">人間中心AIの社会実装</a></li>
+                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#custom-ai">オーダーメイドAIアプリケーション開発</a></li>
+                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
                     </ul>
                 </div>
                 
@@ -1221,6 +1228,7 @@
                         <li><a href="about.html">会社概要</a></li>
                         <li><a href="about.html#philosophy">企業理念</a></li>
                         <li><a href="industries.html">AI活用事例</a></li>
+                        <li><a href="faq.html">よくあるご質問</a></li>
                         <li><a href="about.html#careers">採用情報</a></li>
                     </ul>
                 </div>
@@ -1290,23 +1298,6 @@
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // FAQアコーディオン
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                faqItem.classList.toggle('active');
-                
-                // 他のアコーディオンを閉じる
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) {
-                        item.classList.remove('active');
-                    }
-                });
-            });
-        });
-        
         // スクロールアニメーション
         const observerOptions = {
             threshold: 0.15,
@@ -1317,6 +1308,36 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in');
+                    
+                    // サービスカードの遅延アニメーション
+                    if (entry.target.classList.contains('services-grid')) {
+                        const cards = entry.target.querySelectorAll('.service-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate-in');
+                            }, 200 * index);
+                        });
+                    }
+                    
+                    // 特徴カードの遅延アニメーション
+                    if (entry.target.classList.contains('features-grid')) {
+                        const cards = entry.target.querySelectorAll('.feature-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate-in');
+                            }, 150 * index);
+                        });
+                    }
+                    
+                    // プロセスステップの遅延アニメーション
+                    if (entry.target.classList.contains('process-timeline')) {
+                        const steps = entry.target.querySelectorAll('.process-step');
+                        steps.forEach((step, index) => {
+                            setTimeout(() => {
+                                step.classList.add('animate-in');
+                            }, 200 * index);
+                        });
+                    }
                 }
             });
         }, observerOptions);
@@ -1366,6 +1387,27 @@
                 this.style.zIndex = '1';
             });
         });
+        
+        // モバイルナビゲーション改善
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            nav.classList.toggle('active');
+            
+            if (!expanded) {
+                this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+            }
+        });
+        
+        // iPhoneでのスクロール改善
+        if (/iPhone/.test(navigator.userAgent)) {
+            document.documentElement.classList.add('ios-device');
+        }
     });
     </script>
 </body>
