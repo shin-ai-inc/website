@@ -4,8 +4,8 @@
     <!-- component-split: MetaInformation -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShinAI - 企業の課題解決と成長を支援する最先端AIソリューション。チャットボット開発、AI資料作成、DX推進をサポートし、大切な人と過ごす時間を創出します。">
-    <meta name="keywords" content="AI, 人工知能, ビジネスAI, 業務効率化, AI導入, チャットボット, AI資料作成, DX推進, RAG, 生成AI">
+    <meta name="description" content="ShinAI - 企業の課題解決と成長を支援する最先端AIソリューション。新規事業企画書AIツール「アイプロ」、オーダーメイドAI開発、AI導入コンサルティングをサポートし、大切な人と過ごす時間を創出します。">
+    <meta name="keywords" content="AI, 人工知能, ビジネスAI, 業務効率化, AI導入, アイプロ, オーダーメイドAI, DX推進, AX推進, 生成AI">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
@@ -35,7 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome - 最新バージョンに更新 -->
+    <!-- Font Awesome - 最新バージョン -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- GSAP for advanced animations -->
@@ -115,9 +115,40 @@
 
     <!-- component-split: PageSpecificStyles -->
     <style>
-    /* サービスページ向け特殊スタイル */
+    /* プロフェッショナル共通スタイル */
+    :root {
+        --primary: #3A5FEB;
+        --secondary: #00C9A7;
+        --dark: #1a1f36;
+        --gray: #6c7293;
+        --light-gray: #f5f5f7;
+        --white: #ffffff;
+        --success: #00C9A7;
+        --warning: #FFA800;
+        --danger: #FF4747;
+        --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        --gradient-secondary: linear-gradient(135deg, #667eea, #764ba2);
+        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+        --shadow-xl: 0 25px 60px rgba(58, 95, 235, 0.18);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --radius: 12px;
+        --radius-lg: 20px;
+        --radius-full: 50px;
+        --z-back: -1;
+        --z-normal: 1;
+        --z-tooltip: 10;
+        --z-fixed: 100;
+        --z-modal: 1000;
+        --z-chatbot: 999;
+    }
+
+    /* セクション共通スタイル */
     .section {
-        padding: 5rem 0;
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
     }
     
     .section-bg-gradient {
@@ -144,9 +175,57 @@
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.15);
     }
 
-    /* ヘッダーナビゲーション改善 - 1行表示 */
+    /* ヘッダー改善 - index.htmlのエフェクトを統合 */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: var(--z-fixed);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+    }
+
+    .header.scrolled {
+        padding: 0.5rem 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
     .header-inner {
-        padding: 0.8rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--dark);
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+        filter: drop-shadow(0 2px 5px rgba(58, 95, 235, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .logo:hover img {
+        transform: rotate(15deg);
+        filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
     }
 
     .nav {
@@ -161,8 +240,8 @@
 
     .nav-link {
         color: var(--dark);
-        font-weight: 500;
-        padding: 0.6rem 0.7rem;
+        font-weight: 600;
+        padding: 0.6rem 0.8rem;
         border-radius: var(--radius);
         transition: all 0.3s ease;
         display: inline-block;
@@ -171,26 +250,51 @@
         white-space: nowrap;
     }
 
-    .nav-link:hover, .nav-link.active {
-        color: var(--primary);
-    }
-
-    .nav-link.active::after {
+    .nav-link::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 24px;
+        width: 0;
         height: 3px;
-        background: var(--primary);
-        border-radius: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: width 0.3s ease;
+        border-radius: var(--radius-full);
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+        width: 24px;
+    }
+
+    .nav-cta {
+        margin-left: 1rem;
     }
 
     .btn-consultation {
-        margin-left: 0.7rem;
-        padding: 0.6rem 1.2rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 0.6rem 1.4rem;
         white-space: nowrap;
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-consultation:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+
+    .btn-consultation-message {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 400;
+        margin-top: 0.3rem;
+        opacity: 0.9;
     }
 
     @media (min-width: 1200px) {
@@ -199,12 +303,12 @@
         }
     }
 
-    /* サービスカード強化 */
+    /* サービスカード最高峰の改善 */
     .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin-top: 3rem;
+        gap: 2.5rem;
+        margin-top: 4rem;
     }
     
     .service-card {
@@ -212,7 +316,7 @@
         border-radius: var(--radius-lg);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -230,18 +334,25 @@
         height: 6px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: var(--z-normal);
+        transition: height 0.3s ease;
     }
     
     .service-card:hover {
         transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.18);
+        box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.12);
     }
     
+    .service-card:hover::before {
+        height: 100%;
+        opacity: 0.05;
+    }
+    
     .service-image {
-        height: 240px;
+        height: 260px;
         position: relative;
         overflow: hidden;
+        background: var(--gradient-primary);
     }
     
     .service-image img {
@@ -249,46 +360,48 @@
         height: 100%;
         object-fit: cover;
         transition: transform 1s ease;
+        mix-blend-mode: luminosity;
+        opacity: 0.9;
     }
     
     .service-card:hover .service-image img {
-        transform: scale(1.08);
-    }
-    
-    .service-icon {
-        position: absolute;
-        bottom: -25px;
-        right: 25px;
-        width: 65px;
-        height: 65px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-size: 1.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        z-index: var(--z-normal);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .service-card:hover .service-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+        transform: scale(1.1);
+        opacity: 1;
+        mix-blend-mode: normal;
     }
     
     .service-content {
-        padding: 2rem;
+        padding: 2.5rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
     }
     
+    .service-icon-circle {
+        width: 70px;
+        height: 70px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 1.8rem;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.3);
+        margin-bottom: 2rem;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .service-card:hover .service-icon-circle {
+        transform: rotate(360deg) scale(1.15);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.4);
+    }
+    
     .service-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.3rem;
         color: var(--dark);
         position: relative;
         display: inline-block;
@@ -297,11 +410,11 @@
     .service-title::after {
         content: '';
         position: absolute;
-        bottom: -5px;
+        bottom: -6px;
         left: 0;
         width: 40px;
         height: 3px;
-        background: var(--primary);
+        background: var(--gradient-primary);
         border-radius: var(--radius-full);
         transition: width 0.3s ease;
     }
@@ -312,32 +425,35 @@
     
     .service-description {
         color: var(--gray);
-        margin-bottom: 1.8rem;
+        margin-bottom: 2rem;
         flex-grow: 1;
-        line-height: 1.7;
+        line-height: 1.75;
+        font-size: 1.05rem;
     }
     
     .service-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.7rem;
+        gap: 0.8rem;
         margin-bottom: 2rem;
     }
     
     .service-tag {
         background: rgba(58, 95, 235, 0.08);
         color: var(--primary);
-        padding: 0.4rem 1rem;
+        padding: 0.5rem 1.2rem;
         border-radius: 50px;
         font-size: 0.85rem;
         font-weight: 600;
         transition: all 0.3s ease;
+        border: 1px solid transparent;
     }
     
     .service-tag:hover {
         transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.15);
-        background: rgba(58, 95, 235, 0.12);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+        background: rgba(58, 95, 235, 0.15);
+        border-color: rgba(58, 95, 235, 0.3);
     }
     
     .service-footer {
@@ -347,22 +463,46 @@
     .service-footer .btn {
         width: 100%;
         justify-content: center;
-        padding: 1rem;
+        padding: 1.1rem;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
     }
 
-    /* 特徴カード強化 */
+    .service-footer .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        z-index: -1;
+        transition: left 0.5s ease;
+    }
+
+    .service-footer .btn:hover::before {
+        left: 0;
+    }
+
+    .service-footer .btn:hover {
+        color: white;
+        border-color: transparent;
+    }
+
+    /* 特徴カード最高峰の改善 */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
+        gap: 3rem;
+        margin-top: 4rem;
     }
     
     .feature-card {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
-        padding: 2.5rem;
+        box-shadow: var(--shadow-md);
+        padding: 3rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 1px solid rgba(0, 0, 0, 0.04);
         position: relative;
@@ -370,55 +510,85 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        text-align: center;
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transform: rotate(45deg);
+        transition: all 0.6s ease;
+        z-index: 0;
+    }
+    
+    .feature-card:hover::before {
+        opacity: 0.1;
+        transform: rotate(45deg) translate(0, 0);
     }
     
     .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
+        transform: translateY(-12px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(58, 95, 235, 0.15);
     }
     
     .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        width: 90px;
+        height: 90px;
+        background: var(--gradient-primary);
         color: var(--white);
-        border-radius: 16px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0 auto 2rem;
-        font-size: 2rem;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.2);
+        font-size: 2.2rem;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
         position: relative;
+        z-index: 1;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     .feature-card:hover .feature-icon {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.3);
+        transform: rotateY(180deg) scale(1.1);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.35);
+        border-radius: 50%;
     }
     
     .feature-card h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.3rem;
         color: var(--dark);
-        text-align: center;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+    }
+    
+    .feature-card:hover h3 {
+        color: var(--primary);
     }
     
     .feature-card p {
         color: var(--gray);
         line-height: 1.8;
-        text-align: center;
+        position: relative;
+        z-index: 1;
+        font-size: 1.05rem;
     }
 
-    /* プロセスタイムライン強化 */
+    /* プロセスタイムライン最高峰の改善 */
     .process-timeline {
         position: relative;
-        max-width: 900px;
+        max-width: 1000px;
         margin: 4rem auto 0;
-        padding: 0 2rem;
+        padding: 0 3rem;
     }
     
     .process-timeline::before {
@@ -426,9 +596,9 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: calc(2rem + 20px);
+        left: calc(3rem + 25px);
         width: 4px;
-        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         border-radius: var(--radius-full);
         z-index: 1;
     }
@@ -436,8 +606,24 @@
     .process-step {
         display: flex;
         position: relative;
-        margin-bottom: 3.5rem;
+        margin-bottom: 4rem;
         z-index: 2;
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: slideInLeft 0.6s forwards;
+    }
+    
+    .process-step:nth-child(1) { animation-delay: 0.1s; }
+    .process-step:nth-child(2) { animation-delay: 0.2s; }
+    .process-step:nth-child(3) { animation-delay: 0.3s; }
+    .process-step:nth-child(4) { animation-delay: 0.4s; }
+    .process-step:nth-child(5) { animation-delay: 0.5s; }
+    
+    @keyframes slideInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
     
     .process-step:last-child {
@@ -445,80 +631,125 @@
     }
     
     .process-step-number {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
         color: var(--white);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         font-weight: 700;
-        margin-right: 2.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+        margin-right: 3rem;
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
         position: relative;
         z-index: 2;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
+    }
+    
+    .process-step-number::before {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(58, 95, 235, 0.1);
+        z-index: -1;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.3);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
     }
     
     .process-step:hover .process-step-number {
-        transform: scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+        transform: scale(1.15);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.35);
     }
     
     .process-step-content {
         flex: 1;
         background: var(--white);
         border-radius: var(--radius-lg);
-        padding: 1.8rem 2rem;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        padding: 2rem 2.5rem;
+        box-shadow: var(--shadow-md);
         position: relative;
         transition: all 0.3s ease;
         border: 1px solid rgba(0, 0, 0, 0.04);
     }
     
     .process-step:hover .process-step-content {
-        transform: translateX(15px);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.15);
-        border-color: rgba(58, 95, 235, 0.1);
+        transform: translateX(10px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(58, 95, 235, 0.15);
     }
     
     .process-step-content::before {
         content: '';
         position: absolute;
-        top: 20px;
-        left: -10px;
-        width: 20px;
-        height: 20px;
+        top: 22px;
+        left: -12px;
+        width: 24px;
+        height: 24px;
         background: var(--white);
         transform: rotate(45deg);
-        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.03);
-        border-left: 1px solid rgba(0, 0, 0, 0.03);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.05);
+        border-left: 1px solid rgba(0, 0, 0, 0.04);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
     
     .process-step-content h3 {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
         color: var(--dark);
+        position: relative;
+    }
+    
+    .process-step-content h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-full);
+        transition: width 0.3s ease;
+    }
+    
+    .process-step:hover .process-step-content h3::after {
+        width: 80px;
     }
     
     .process-step-content p {
         color: var(--gray);
         margin-bottom: 0;
-        line-height: 1.7;
+        line-height: 1.8;
+        font-size: 1.05rem;
     }
 
-    /* AI伴走型開発セクション追加 */
+    /* AI伴走型開発セクション最高峰の改善 */
     .escort-development {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-        padding: 4rem 0;
-        border-radius: var(--radius-lg);
-        margin: 4rem 0;
+        background: var(--gradient-primary);
+        padding: 5rem 0;
+        border-radius: 30px;
+        margin: 5rem 0;
         position: relative;
         overflow: hidden;
+        box-shadow: var(--shadow-xl);
     }
 
     .escort-bg {
@@ -531,6 +762,7 @@
         opacity: 0.1;
         background-size: cover;
         background-position: center;
+        mix-blend-mode: overlay;
     }
 
     .escort-content {
@@ -540,84 +772,99 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 3rem;
+        gap: 4rem;
     }
 
     .escort-text {
         flex: 1;
-        min-width: 280px;
+        min-width: 300px;
         padding: 0 2rem;
+        color: white;
     }
 
     .escort-text h2 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         font-weight: 800;
-        margin-bottom: 1.5rem;
-        color: var(--dark);
+        margin-bottom: 1.8rem;
+        color: white;
         position: relative;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .escort-text h2:after {
         content: '';
         position: absolute;
-        bottom: -0.5rem;
+        bottom: -0.8rem;
         left: 0;
-        width: 80px;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        width: 100px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.8);
         border-radius: var(--radius-full);
     }
 
     .escort-text p {
-        color: var(--gray);
-        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.15rem;
         line-height: 1.8;
         margin-bottom: 2rem;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     }
 
     .escort-image {
         flex: 1;
-        min-width: 280px;
+        min-width: 300px;
         position: relative;
     }
 
     .escort-image img {
         width: 100%;
         border-radius: var(--radius-lg);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         transition: all 0.5s ease;
+    }
+
+    .escort-image:hover img {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
     }
 
     .escort-icons {
         display: flex;
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: 3rem;
+        margin-top: 3rem;
     }
 
     .escort-icon {
         text-align: center;
-    }
-
-    .escort-icon i {
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-        display: block;
         transition: all 0.3s ease;
     }
 
-    .escort-icon:hover i {
+    .escort-icon i {
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 1rem;
+        display: block;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .escort-icon:hover {
         transform: translateY(-8px);
-        color: var(--secondary);
+    }
+
+    .escort-icon:hover i {
+        transform: scale(1.2) rotate(10deg);
     }
 
     .escort-icon span {
         display: block;
         font-weight: 600;
-        color: var(--dark);
+        color: white;
+        font-size: 1.1rem;
+        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
     }
 
-    /* チャットボット改善 */
+    /* チャットボット最高峰の改善 */
     .chatbot {
         position: fixed;
         bottom: 30px;
@@ -626,34 +873,34 @@
     }
 
     .chatbot-toggle {
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         color: var(--white);
         border: none;
         cursor: pointer;
-        box-shadow: 0 5px 20px rgba(58, 95, 235, 0.3);
+        box-shadow: 0 10px 30px rgba(58, 95, 235, 0.35);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         position: relative;
         z-index: 3;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     }
 
     .chatbot-toggle:hover {
-        transform: scale(1.1);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.4);
+        transform: scale(1.15) rotate(10deg);
+        box-shadow: 0 15px 40px rgba(58, 95, 235, 0.45);
     }
 
     .chatbot-toggle .ripple {
         position: absolute;
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
-        background: rgba(58, 95, 235, 0.3);
+        background: rgba(58, 95, 235, 0.4);
         animation: ripple 1.5s infinite;
         z-index: -1;
     }
@@ -661,10 +908,10 @@
     @keyframes ripple {
         0% {
             transform: scale(1);
-            opacity: 0.4;
+            opacity: 0.5;
         }
         100% {
-            transform: scale(1.7);
+            transform: scale(2);
             opacity: 0;
         }
     }
@@ -673,17 +920,17 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 360px;
-        height: 500px;
+        width: 380px;
+        height: 520px;
         background: var(--white);
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         overflow: hidden;
         transform: scale(0);
         transform-origin: bottom right;
-        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         z-index: 2;
     }
 
@@ -692,53 +939,64 @@
     }
 
     .chatbot-header {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         color: var(--white);
-        padding: 15px 20px;
+        padding: 1.2rem 1.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .chatbot-title {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 0.8rem;
         font-weight: 600;
+        font-size: 1.1rem;
     }
 
     .chatbot-close {
-        background: none;
+        background: rgba(255, 255, 255, 0.15);
         border: none;
         color: var(--white);
         font-size: 1.2rem;
         cursor: pointer;
         transition: all 0.3s ease;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .chatbot-close:hover {
+        background: rgba(255, 255, 255, 0.25);
         transform: rotate(90deg);
     }
 
     .chatbot-messages {
         flex: 1;
-        padding: 20px;
+        padding: 1.5rem;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 1rem;
+        background: linear-gradient(to bottom, rgba(58, 95, 235, 0.03), transparent);
     }
 
     .message {
-        padding: 12px 16px;
-        border-radius: 18px;
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
         max-width: 80%;
-        line-height: 1.5;
+        line-height: 1.6;
         position: relative;
-        animation: messageAnim 0.3s forwards;
+        animation: messageSlideIn 0.3s ease-out;
+        font-size: 0.95rem;
     }
 
-    @keyframes messageAnim {
+    @keyframes messageSlideIn {
         from {
             opacity: 0;
             transform: translateY(20px);
@@ -750,34 +1008,38 @@
     }
 
     .bot-message {
-        background: #f0f4fd;
+        background: linear-gradient(135deg, #f0f4fd, #e8effc);
         color: var(--dark);
-        border-top-left-radius: 4px;
+        border-top-left-radius: 5px;
         align-self: flex-start;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
     .user-message {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         color: var(--white);
-        border-top-right-radius: 4px;
+        border-top-right-radius: 5px;
         align-self: flex-end;
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
     }
 
     .chatbot-input {
         display: flex;
         align-items: center;
-        padding: 15px;
+        padding: 1.2rem;
         border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: #fafbfc;
     }
 
     .chatbot-input input {
         flex: 1;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 30px;
-        padding: 12px 20px;
-        font-size: 14px;
+        padding: 0.9rem 1.3rem;
+        font-size: 0.95rem;
         outline: none;
         transition: all 0.3s ease;
+        background: white;
     }
 
     .chatbot-input input:focus {
@@ -786,36 +1048,37 @@
     }
 
     .chatbot-submit {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: var(--gradient-primary);
         color: var(--white);
         border: none;
-        margin-left: 10px;
+        margin-left: 0.8rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
+        font-size: 1.1rem;
     }
 
     .chatbot-submit:hover {
         transform: scale(1.1);
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
     }
 
     .typing-indicator {
         display: flex;
         align-items: center;
         gap: 5px;
-        padding: 10px 16px;
-        background: #f0f4fd;
-        border-radius: 18px;
-        border-top-left-radius: 4px;
+        padding: 1rem 1.2rem;
+        background: linear-gradient(135deg, #f0f4fd, #e8effc);
+        border-radius: 20px;
+        border-top-left-radius: 5px;
         align-self: flex-start;
         max-width: 80%;
-        margin-top: 5px;
+        margin-top: 0.5rem;
     }
 
     .typing-dot {
@@ -823,62 +1086,32 @@
         height: 8px;
         background: var(--primary);
         border-radius: 50%;
-        animation: typingAnim 1s infinite ease-in-out;
+        animation: typingAnim 1.4s infinite ease-in-out;
     }
 
-    .typing-dot:nth-child(1) {
-        animation-delay: 0s;
-    }
-
-    .typing-dot:nth-child(2) {
-        animation-delay: 0.3s;
-    }
-
-    .typing-dot:nth-child(3) {
-        animation-delay: 0.6s;
-    }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes typingAnim {
-        0%, 100% {
+        0%, 60%, 100% {
             transform: translateY(0);
         }
-        50% {
-            transform: translateY(-5px);
+        30% {
+            transform: translateY(-10px);
         }
     }
-
-    /* サービスアイコン修正 */
-    .service-icon-circle {
-        width: 65px;
-        height: 65px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-size: 1.5rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        margin-bottom: 1.5rem;
-        position: relative;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .service-card:hover .service-icon-circle {
-        transform: rotate(15deg) scale(1.1);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
-    }
     
-    /* CTA強化 */
+    /* CTA最高峰の改善 */
     .cta-container {
         background: var(--white);
-        border-radius: 24px;
-        padding: 4rem 3rem;
-        box-shadow: 0 25px 60px rgba(58, 95, 235, 0.15);
+        border-radius: 30px;
+        padding: 5rem 4rem;
+        box-shadow: var(--shadow-xl);
         position: relative;
         overflow: hidden;
         z-index: var(--z-normal);
-        border: 1px solid rgba(58, 95, 235, 0.1);
+        border: 2px solid rgba(58, 95, 235, 0.1);
         text-align: center;
     }
     
@@ -888,8 +1121,8 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 8px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        height: 10px;
+        background: var(--gradient-primary);
         z-index: var(--z-normal);
     }
     
@@ -906,22 +1139,30 @@
     }
     
     .cta-title {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
     }
     
     .cta-title h2 {
-        font-size: 2.8rem;
+        font-size: 3rem;
         font-weight: 800;
         color: var(--dark);
         line-height: 1.3;
         margin-bottom: 0;
+        letter-spacing: -0.5px;
+    }
+
+    .text-gradient {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     .cta-description {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         color: var(--gray);
         max-width: 800px;
-        margin: 0 auto 2.5rem;
+        margin: 0 auto 3rem;
         line-height: 1.8;
     }
     
@@ -933,38 +1174,49 @@
     }
     
     .cta-buttons .btn {
-        min-width: 220px;
+        min-width: 240px;
+        padding: 1.2rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
     }
     
     .btn-glow {
         position: relative;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        overflow: hidden;
     }
     
     .btn-glow::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 50px;
-        z-index: var(--z-back);
-        animation: pulseGlow 2s infinite;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        animation: glowPulse 3s ease-out infinite;
+    }
+
+    @keyframes glowPulse {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0.8;
+        }
+        70% {
+            transform: translate(-50%, -50%) scale(1.5);
+            opacity: 0;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
     }
 
     /* アニメーション強化 */
-    @keyframes pulseGlow {
-        0% {
-            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0.4);
-        }
-        70% {
-            box-shadow: 0 0 0 15px rgba(58, 95, 235, 0);
-        }
-        100% {
-            box-shadow: 0 0 0 0 rgba(58, 95, 235, 0);
-        }
-    }
-
     @keyframes gradientBG {
         0% {
             background-position: 0% 50%;
@@ -982,7 +1234,7 @@
             transform: translateY(0);
         }
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
         }
         100% {
             transform: translateY(0);
@@ -1009,15 +1261,20 @@
         }
     }
 
-    /* レスポンシブ調整 */
+    /* レスポンシブ調整 - プロフェッショナル対応 */
     @media (max-width: 1199px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
         .nav-link {
-            padding: 0.6rem 0.55rem;
+            padding: 0.6rem 0.65rem;
             font-size: 0.9rem;
         }
         
         .btn-consultation {
-            padding: 0.6rem 1rem;
+            padding: 0.6rem 1.1rem;
         }
     }
 
@@ -1027,22 +1284,18 @@
             gap: 2rem;
         }
         
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
         .cta-title h2 {
             font-size: 2.4rem;
         }
         
         .process-timeline::before {
-            left: calc(2rem + 15px);
+            left: calc(2rem + 20px);
         }
         
         .process-step-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+            font-size: 1.4rem;
             margin-right: 2rem;
         }
 
@@ -1054,24 +1307,37 @@
             width: 100%;
         }
 
-        /* モバイルメニューのスタイリング */
+        /* モバイルメニューの最高峰スタイリング */
         .menu-toggle {
             display: flex;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
         }
 
         .nav {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 80%;
+            width: 85%;
             max-width: 400px;
             height: 100vh;
-            background: var(--white);
+            background: white;
             flex-direction: column;
             align-items: flex-start;
-            padding: 5rem 2rem 2rem;
-            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
             z-index: 100;
             overflow-y: auto;
         }
@@ -1082,12 +1348,13 @@
 
         .nav-link {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem;
             font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .nav-cta {
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             width: 100%;
         }
 
@@ -1099,13 +1366,10 @@
     }
     
     @media (max-width: 768px) {
-        .features-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
+        .features-grid,
         .services-grid {
             grid-template-columns: 1fr;
+            gap: 2rem;
         }
 
         .cta-title h2 {
@@ -1121,7 +1385,7 @@
         }
         
         .process-timeline::before {
-            left: calc(1rem + 15px);
+            left: calc(1rem + 20px);
         }
         
         .process-step-number {
@@ -1133,7 +1397,7 @@
         }
         
         .process-step-content h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         
         .cta-container {
@@ -1146,8 +1410,8 @@
         }
 
         .chatbot-container {
-            width: 320px;
-            height: 450px;
+            width: 340px;
+            height: 480px;
         }
     }
     
@@ -1157,18 +1421,17 @@
         }
         
         .service-content {
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
         
-        .service-icon {
-            width: 55px;
-            height: 55px;
-            font-size: 1.3rem;
-            right: 20px;
+        .service-icon-circle {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
         }
         
         .feature-card {
-            padding: 1.8rem;
+            padding: 2rem;
         }
         
         .cta-title h2 {
@@ -1207,7 +1470,7 @@
         }
 
         .escort-text h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .chatbot {
@@ -1217,30 +1480,44 @@
         
         .chatbot-container {
             width: calc(100vw - 40px);
-            height: 450px;
+            height: 460px;
         }
     }
 
-    /* iPhone特化最適化 */
+    /* iPhone特化最適化 - プロフェッショナル対応 */
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 812px) 
     and (-webkit-min-device-pixel-ratio: 3) {
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .header {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
         .header-inner {
             padding: 0.8rem 0;
         }
 
         .service-card {
             margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.01);
         }
 
         .service-tag {
-            font-size: 0.75rem;
-            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.9rem;
         }
 
         .escort-text h2 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .escort-text p {
@@ -1248,22 +1525,44 @@
         }
 
         .escort-icon i {
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
         .escort-icon span {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .chatbot-toggle {
-            width: 55px;
-            height: 55px;
-            font-size: 1.3rem;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            bottom: 25px;
+            right: 25px;
         }
 
         .chatbot-toggle .ripple {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        input, button, select, textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .process-step {
+            opacity: 1;
+            transform: none;
+            animation: none;
         }
     }
     </style>
@@ -1275,7 +1574,7 @@
     <!-- component-split: TopBanner -->
     <div class="top-banner"></div>
     
-    <!-- component-split: Header -->
+    <!-- component-split: Header - 完全改善版 -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-inner">
@@ -1330,14 +1629,14 @@
     </div>
     
     <main id="main-content">
-        <!-- component-split: ServiceList -->
+        <!-- component-split: ServiceList - 3つのサービスに厳選 -->
         <section class="section" id="services">
             <div class="container">
                 <div class="section-header animate-on-scroll">
                     <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
                     <span class="section-subtitle">ShinAIのソリューション</span>
                     <h2 class="heading-lg">お客様に寄り添う<span class="highlight">３つのAIソリューション</span></h2>
-                    <p class="section-description">ビジネスにおける各種課題解決から企業の変革・成長まで、最先端のAI技術で包括的にサポートします</p>
+                    <p class="section-description">シンプルかつ分かりやすく、お客様のビジネス課題を解決へ導く、厳選されたAIソリューションをご提供します</p>
                 </div>
                 
                 <div class="services-grid animate-on-scroll">
@@ -1444,7 +1743,7 @@
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">サービスの特徴</span>
                     <h2 class="heading-lg">ShinAIが選ばれる<span class="highlight">3つの理由</span></h2>
-                    <p class="section-description">AIソリューションの開発から導入、定着までを一貫してサポートします</p>
+                    <p class="section-description">お客様と共に成長し、真の価値を創造するAIパートナーとして</p>
                 </div>
                 
                 <div class="features-grid animate-on-scroll">
@@ -1475,7 +1774,7 @@
             </div>
         </section>
         
-        <!-- component-split: AI伴走型開発 -->
+        <!-- component-split: AI伴走型開発 - プロフェッショナル改善 -->
         <section class="section">
             <div class="container">
                 <div class="escort-development animate-on-scroll">
@@ -1485,7 +1784,7 @@
                             <div class="escort-text">
                                 <h2>AI伴走型開発で<br>確実な成果を実現</h2>
                                 <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。企画から実装、運用、そして自走化まで一貫して伴走することで、「やりっぱなしにならない」AI導入を実現。</p>
-                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させます。</p>
+                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、真の価値を共に創造します。</p>
                                 <div class="escort-icons">
                                     <div class="escort-icon">
                                         <i class="fas fa-chart-line"></i>
@@ -1516,7 +1815,7 @@
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">AI導入プロセス</span>
                     <h2 class="heading-lg">ShinAIの<span class="highlight">導入支援プロセス</span></h2>
-                    <p class="section-description">AIソリューション導入から定着までの5つのステップをご紹介します</p>
+                    <p class="section-description">お客様と共に歩む、確実な成果を生み出すAI導入の5つのステップ</p>
                 </div>
                 
                 <div class="process-timeline animate-on-scroll">
@@ -1568,7 +1867,7 @@
             </div>
         </section>
         
-        <!-- component-split: ServicesCTA -->
+        <!-- component-split: ServicesCTA - 最高峰の改善 -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-container animate-on-scroll">
@@ -1666,7 +1965,7 @@
         </div>
     </footer>
     
-    <!-- component-split: ChatbotComponent -->
+    <!-- component-split: ChatbotComponent - 最高峰改善 -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-toggle" id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container" aria-label="チャットボットを開く">
             <div class="ripple"></div>
@@ -1710,7 +2009,7 @@
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // スクロールアニメーション
+        // スクロールアニメーション - プロフェッショナル改善
         const observerOptions = {
             threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
@@ -1727,6 +2026,8 @@
                         cards.forEach((card, index) => {
                             setTimeout(() => {
                                 card.classList.add('animate-in');
+                                card.style.transform = 'translateY(0)';
+                                card.style.opacity = '1';
                             }, 200 * index);
                         });
                     }
@@ -1737,6 +2038,8 @@
                         cards.forEach((card, index) => {
                             setTimeout(() => {
                                 card.classList.add('animate-in');
+                                card.style.transform = 'translateY(0)';
+                                card.style.opacity = '1';
                             }, 150 * index);
                         });
                     }
@@ -1758,18 +2061,30 @@
             observer.observe(el);
         });
         
-        // ヘッダースクロール効果
+        // ヘッダースクロール効果 - index.htmlのエフェクトを統合
         const header = document.getElementById('header');
+        let lastScrollY = window.scrollY;
         
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // スクロール方向によるヘッダーの表示・非表示
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
         });
         
-        // Back to Topボタン
+        // Back to Topボタン - 改善版
         const backToTopButton = document.getElementById('back-to-top');
         
         window.addEventListener('scroll', function() {
@@ -1793,21 +2108,33 @@
         serviceCards.forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.zIndex = '10';
+                // 他のカードを少し暗くする
+                serviceCards.forEach(otherCard => {
+                    if (otherCard !== this) {
+                        otherCard.style.opacity = '0.7';
+                    }
+                });
             });
             
             card.addEventListener('mouseleave', function() {
                 this.style.zIndex = '1';
+                // すべてのカードの不透明度を元に戻す
+                serviceCards.forEach(otherCard => {
+                    otherCard.style.opacity = '1';
+                });
             });
         });
         
         // モバイルナビゲーション改善
         const menuToggle = document.getElementById('menu-toggle');
         const nav = document.getElementById('nav');
+        const body = document.body;
         
         menuToggle.addEventListener('click', function() {
             const expanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !expanded);
             nav.classList.toggle('active');
+            body.classList.toggle('nav-open');
             
             if (!expanded) {
                 this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
@@ -1816,7 +2143,17 @@
             }
         });
         
-        // チャットボット機能
+        // ナビゲーションリンクのクリックでメニューを閉じる
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+                body.classList.remove('nav-open');
+                menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+        
+        // チャットボット機能 - プロフェッショナル改善
         const chatbotToggle = document.getElementById('chatbot-toggle');
         const chatbotContainer = document.getElementById('chatbot-container');
         const chatbotClose = document.getElementById('chatbot-close');
@@ -1831,6 +2168,11 @@
             
             if (!expanded) {
                 chatbotInput.focus();
+                // ウェルカムメッセージのアニメーション
+                setTimeout(() => {
+                    const welcomeMsg = chatbotMessages.querySelector('.bot-message');
+                    welcomeMsg.style.animation = 'messageSlideIn 0.5s ease-out';
+                }, 300);
             }
         });
         
@@ -1877,26 +2219,28 @@
             setTimeout(() => {
                 removeTypingIndicator();
                 
-                // シンプルな応答ロジック
+                // シンプルな応答ロジック - 人間の行動心理学を考慮
                 let response;
                 const input = userInput.toLowerCase();
                 
                 if (input.includes('こんにちは') || input.includes('はじめまして') || input.includes('こんばんは')) {
-                    response = 'こんにちは！ShinAIアシスタントです。AI導入について何かお手伝いできることはありますか？';
+                    response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？AI導入について何かお困りのことはございますか？';
                 } else if (input.includes('料金') || input.includes('費用') || input.includes('価格')) {
                     response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。詳しくは無料相談にてお見積りをご案内しております。お気軽にお問い合わせください。';
                 } else if (input.includes('アイプロ') || input.includes('企画書')) {
-                    response = '企画書作成AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。詳細は「新規事業企画書AIツール」のページをご覧ください。';
+                    response = '新規事業企画書AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。詳細は「新規事業企画書AIツール」のページをご覧ください。';
                 } else if (input.includes('導入事例') || input.includes('実績')) {
                     response = '導入事例については「業界別活用」ページでご紹介しています。様々な業界でのAI活用事例がございますので、ぜひご覧ください。';
                 } else if (input.includes('相談') || input.includes('問い合わせ')) {
-                    response = '無料相談は「お問い合わせ」ページからお申し込みいただけます。お客様の課題に合わせた最適なAIソリューションをご提案いたします。';
+                    response = '無料相談は「お問い合わせ」ページからお申し込みいただけます。お客様の課題に合わせた最適なAIソリューションをご提案いたします。まずはお気軽にご相談ください。';
+                } else if (input.includes('デモ') || input.includes('試用')) {
+                    response = '各サービスのデモンストレーションやトライアルは、無料相談にてご案内しております。実際にご体験いただくことで、より具体的なイメージを持っていただけます。';
                 } else {
-                    response = 'ご質問ありがとうございます。具体的な内容については、お問い合わせフォームからご連絡いただくか、無料相談にてお話しさせていただければ幸いです。';
+                    response = 'ご質問ありがとうございます。より詳しくお答えさせていただきたいので、お問い合わせフォームからご連絡いただくか、無料相談にてお話しさせていただければ幸いです。';
                 }
                 
                 addMessage(response);
-            }, 1500);
+            }, 1800);
         }
         
         function handleUserInput() {
@@ -1920,7 +2264,108 @@
         // iPhoneでのスクロール改善
         if (/iPhone/.test(navigator.userAgent)) {
             document.documentElement.classList.add('ios-device');
+            
+            // タッチイベントの改善
+            serviceCards.forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('touch-active');
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.classList.remove('touch-active');
+                });
+            });
         }
+        
+        // パフォーマンス最適化
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateElements);
+                ticking = true;
+            }
+        }
+        
+        function updateElements() {
+            // スクロールに応じた要素の更新
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', requestTick);
+        
+        // ページロード完了時のアニメーション
+        window.addEventListener('load', function() {
+            document.body.classList.add('page-loaded');
+            
+            // ヒーローセクションのアニメーション
+            const heroElements = document.querySelectorAll('.page-hero-content > *');
+            heroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+        
+        // アクセシビリティ機能
+        // Escキーでモーダルを閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (chatbotContainer.classList.contains('active')) {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                }
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    body.classList.remove('nav-open');
+                    menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        
+        // フォーカストラップの実装
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+            
+            element.addEventListener('keydown', function(e) {
+                const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                
+                if (!isTabPressed) {
+                    return;
+                }
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // チャットボットが開いたときにフォーカストラップを設定
+        const mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active')) {
+                        trapFocus(target);
+                    }
+                }
+            });
+        });
+        
+        mutationObserver.observe(chatbotContainer, { attributes: true });
     });
     </script>
 </body>
