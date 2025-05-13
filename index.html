@@ -159,6 +159,69 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
+    
+    <!-- Three.jsパーティクル用スクリプト -->
+    <script>
+        // パーティクル効果の初期化
+        window.addEventListener('load', function() {
+            if (typeof THREE !== 'undefined') {
+                // Three.jsが読み込まれていれば、パーティクルを初期化
+                initParticles();
+            }
+        });
+        
+        function initParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            // Three.jsでパーティクルを作成
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: particlesContainer, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // パーティクル生成
+            const particles = new THREE.BufferGeometry();
+            const particleCount = 50;
+            const positions = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const material = new THREE.PointsMaterial({
+                color: 0x3A5FEB,
+                size: 0.05,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particleSystem = new THREE.Points(particles, material);
+            scene.add(particleSystem);
+            
+            camera.position.z = 5;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                particleSystem.rotation.x += 0.001;
+                particleSystem.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // ウィンドウリサイズ対応
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+    </script>
 
     <!-- component-split: PageSpecificStyles -->
     <style>
@@ -624,47 +687,61 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* 「人間らしい時間」のスタイル - 立体的な表現 */
+    /* 「人間らしい時間」のスタイル - 立体感（シャドウなし） */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        background: linear-gradient(to right, #9AAEFF, #85EDD6);
+        background: linear-gradient(135deg, #7B9FFF 0%, #6EDEC8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: transparent;
         font-weight: 900;
-        filter: drop-shadow(0 3px 4px rgba(58, 95, 235, 0.25));
         transition: var(--transition);
-        transform: translateY(0);
-        text-shadow: 2px 2px 3px rgba(58, 95, 235, 0.1);
+        transform: translateY(0) perspective(1000px) rotateX(0deg);
+        text-transform: none;
+        letter-spacing: -0.02em;
     }
 
     /* 人間らしい時間の下線エフェクト - 立体感強化 */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
-        bottom: 0.08em;
+        bottom: -0.05em;
         left: 0;
         width: 100%;
-        height: 0.18em;
-        background: linear-gradient(to right, rgba(154, 174, 255, 0.45), rgba(133, 237, 214, 0.45));
+        height: 0.12em;
+        background: linear-gradient(135deg, #7B9FFF 0%, #6EDEC8 100%);
         z-index: -1;
-        border-radius: 5px;
-        transition: height 0.3s ease;
-        box-shadow: 0 2px 4px rgba(58, 95, 235, 0.2);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+        transform: translateZ(0) scaleY(1);
+    }
+
+    /* 文字の3D効果 */
+    .hero-title .highlight::before {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(135deg, #5E85FF 0%, #4ED6B8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        z-index: -1;
+        transform: translateX(2px) translateY(2px) translateZ(-10px);
+        opacity: 0.5;
     }
 
     /* ホバー時の立体効果 */
     .hero-title .highlight:hover {
-        filter: drop-shadow(0 4px 6px rgba(58, 95, 235, 0.35));
-        transform: translateY(-2px);
+        transform: translateY(-3px) perspective(1000px) rotateX(-5deg);
     }
 
     .hero-title .highlight:hover::after {
-        height: 0.25em;
-        background: linear-gradient(to right, rgba(154, 174, 255, 0.55), rgba(133, 237, 214, 0.55));
-        box-shadow: 0 3px 6px rgba(58, 95, 235, 0.3);
+        height: 0.18em;
+        transform: translateZ(0) scaleY(1.2);
+        background: linear-gradient(135deg, #8EA9FF 0%, #7EE6D8 100%);
     }
 
     /* ホバーエフェクト */
@@ -1977,7 +2054,7 @@
                             </div>
                             <div class="hero-label">AI導入・業務効率化支援</div>
                             <h1 class="hero-title">
-                                AIの力で<span class="highlight">人間らしい時間</span>を<br>取り戻す
+                                AIの力で<span class="highlight" data-text="人間らしい時間">人間らしい時間</span>を<br>取り戻す
                             </h1>
                             <p class="hero-description">
                                 最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。<br>
@@ -2306,7 +2383,7 @@
                 <div class="chatbot-title">
                     <i class="fas fa-robot" aria-hidden="true"></i> ShinAIアシスタント
                 </div>
-                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる">
+                <button class="chatbot-close" id="chatbot-close" aria-label="チャットボットを閉じる" type="button">
                     <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -2317,7 +2394,7 @@
             </div>
             <div class="chatbot-input">
                 <input type="text" id="chatbot-input-text" placeholder="メッセージを入力..." aria-label="メッセージを入力">
-                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信">
+                <button class="chatbot-submit" id="chatbot-submit" aria-label="送信" type="button">
                     <i class="fas fa-paper-plane" aria-hidden="true"></i>
                 </button>
             </div>
@@ -2547,18 +2624,38 @@
         const chatbotSubmit = document.getElementById('chatbot-submit');
         const chatbotMessages = document.getElementById('chatbot-messages');
         
-        chatbotToggle.addEventListener('click', function() {
+        // チャットボットの初期状態を非表示に設定
+        chatbotContainer.classList.remove('active');
+        
+        chatbotToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             chatbotContainer.classList.add('active');
             this.setAttribute('aria-expanded', 'true');
             this.classList.add('hidden');
-            chatbotInput.focus();
+            setTimeout(() => {
+                chatbotInput.focus();
+            }, 300);
         });
         
-        chatbotClose.addEventListener('click', function() {
+        chatbotClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             chatbotContainer.classList.remove('active');
             chatbotToggle.setAttribute('aria-expanded', 'false');
             chatbotToggle.classList.remove('hidden');
         });
+        
+        // モバイルでのバツボタンをより確実に動作させる
+        if ('ontouchstart' in window) {
+            chatbotClose.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                chatbotContainer.classList.remove('active');
+                chatbotToggle.setAttribute('aria-expanded', 'false');
+                chatbotToggle.classList.remove('hidden');
+            });
+        }
         
         function addMessage(text, isUser = false) {
             const messageDiv = document.createElement('div');
