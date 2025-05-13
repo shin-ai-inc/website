@@ -208,10 +208,28 @@
             overflow: hidden;
         }
         
+        /* フッターセクション専用のスタイル */
+        .footer-section {
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
         /* フッターを含むセクションも同じ高さに */
         .footer {
             position: relative;
             margin-top: auto;
+            background: transparent;
+        }
+        
+        /* パーティクルが見えるようにセクションの背景を調整 */
+        .swipe-slide {
+            background: transparent;
+        }
+        
+        .swipe-slide.footer-section {
+            background: var(--dark);
         }
         
         .swipe-pagination {
@@ -268,14 +286,14 @@
         }
     }
 
-    /* パーティクルコンテナ - 初期仕様準拠 */
+    /* パーティクルコンテナ - グローバル背景として設定 */
     .particles-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1;
+        z-index: -10; /* 最背面に配置 */
         pointer-events: none;
     }
     
@@ -285,7 +303,29 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1;
+        z-index: -10; /* 最背面に配置 */
+    }
+    
+    /* セクションの背景設定 - Three.jsが透けて見えるように */
+    .section {
+        background: transparent; /* 背景を透明に */
+        position: relative;
+        z-index: 1;
+    }
+    
+    .section-bg-light {
+        background-color: rgba(245, 245, 247, 0.85); /* 半透明に変更 */
+    }
+    
+    /* 各セクションでThree.jsが見えるように */
+    main {
+        background: transparent;
+    }
+    
+    .swipe-container,
+    .swipe-wrapper,
+    .swipe-slide {
+        background: transparent;
     }
     
     /* 水玉模様の背景 - ヒーローセクションのみ */
@@ -296,8 +336,8 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        z-index: -2;
-        background: linear-gradient(to bottom right, #e3f2fd, #f5f5f5);
+        z-index: -1; /* パーティクルより上、コンテンツより下 */
+        background: linear-gradient(to bottom right, rgba(227, 242, 253, 0.9), rgba(245, 245, 245, 0.9));
     }
     
     .hero-bubble {
@@ -3045,6 +3085,76 @@
                     </div>
                 </section>
             </main>
+            
+            <!-- Footer Section - 最後のスワイプセクションとして配置 -->
+            <section class="swipe-slide footer-section">
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-grid">
+                            <div>
+                                <div class="footer-logo">
+                                    <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
+                                    <span class="en-text">ShinAI</span>
+                                </div>
+                                <p class="footer-description">
+                                    最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                                </p>
+                                <div class="social-links" aria-label="ソーシャルメディアリンク">
+                                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="footer-heading">サービス</h4>
+                                <ul class="footer-links">
+                                    <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
+                                    <li><a href="services.html#custom-ai">オーダーメイドAI開発</a></li>
+                                    <li><a href="services.html#consulting">AI導入コンサルティング</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="footer-heading">会社情報</h4>
+                                <ul class="footer-links">
+                                    <li><a href="about.html">会社概要</a></li>
+                                    <li><a href="about.html#philosophy">企業理念</a></li>
+                                    <li><a href="industries.html">AI活用事例</a></li>
+                                    <li><a href="faq.html">よくあるご質問</a></li>
+                                    <li><a href="about.html#careers">採用情報</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="footer-heading">お問い合わせ</h4>
+                                <ul class="footer-links">
+                                    <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
+                                    <li>shinai.life@gmail.com</li>
+                                    <li>平日 9:00〜18:00（土日祝休）</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="footer-bottom">
+                            <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                            <div class="footer-bottom-links">
+                                <a href="#">プライバシーポリシー</a>
+                                <a href="#">利用規約</a>
+                                <a href="#">特定商取引法に基づく表記</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                
+                <!-- Bottom Banner -->
+                <div class="bottom-banner">
+                    <div class="bottom-banner-content">
+                        「真の価値を信じ、次世代のために新たな未来を創る。」
+                    </div>
+                </div>
+            </section>
         </div>
         
         <!-- Swipe Pagination for Mobile -->
@@ -3058,76 +3168,9 @@
             <span class="swipe-pagination-bullet"></span>
             <span class="swipe-pagination-bullet"></span>
             <span class="swipe-pagination-bullet"></span>
+            <span class="swipe-pagination-bullet"></span>
         </div>
     </div>
-    
-    <!-- component-split: BottomBanner -->
-    <div class="bottom-banner">
-        <div class="bottom-banner-content">
-            「真の価値を信じ、次世代のために新たな未来を創る。」
-        </div>
-    </div>
-    
-    <!-- component-split: Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="ShinAI ロゴ" width="40" height="40">
-                        <span class="en-text">ShinAI</span>
-                    </div>
-                    <p class="footer-description">
-                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
-                    </p>
-                    <div class="social-links" aria-label="ソーシャルメディアリンク">
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">サービス</h4>
-                    <ul class="footer-links">
-                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#custom-ai">オーダーメイドAI開発</a></li>
-                        <li><a href="services.html#consulting">AI導入コンサルティング</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">会社情報</h4>
-                    <ul class="footer-links">
-                        <li><a href="about.html">会社概要</a></li>
-                        <li><a href="about.html#philosophy">企業理念</a></li>
-                        <li><a href="industries.html">AI活用事例</a></li>
-                        <li><a href="faq.html">よくあるご質問</a></li>
-                        <li><a href="about.html#careers">採用情報</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-heading">お問い合わせ</h4>
-                    <ul class="footer-links">
-                        <li>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</li>
-                        <li>shinai.life@gmail.com</li>
-                        <li>平日 9:00〜18:00（土日祝休）</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">利用規約</a>
-                    <a href="#">特定商取引法に基づく表記</a>
-                </div>
-            </div>
-        </div>
-    </footer>
     
     <!-- component-split: ChatbotComponent -->
     <div class="chatbot" aria-label="AIアシスタント">
@@ -3197,8 +3240,7 @@
             }, 100);
         }
         
-        // パーティクルエフェクトの初期化 - 初期仕様準拠（Three.js）
-        // Three.jsの読み込み確認と初期化
+        // パーティクルエフェクトの初期化 - グローバル背景として確実に表示
         function initParticles() {
             if (!window.THREE) {
                 console.error('Three.js is not loaded');
@@ -3223,9 +3265,9 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setClearColor(0x000000, 0);
             
-            // パーティクル生成 - 初期仕様準拠
+            // パーティクル生成 - 視認性向上
             const particles = new THREE.BufferGeometry();
-            const particleCount = 60;
+            const particleCount = 100; // 数を増やして全体をカバー
             const positions = new Float32Array(particleCount * 3);
             const colors = new Float32Array(particleCount * 3);
             const sizes = new Float32Array(particleCount);
@@ -3233,38 +3275,38 @@
             for (let i = 0; i < particleCount; i++) {
                 const i3 = i * 3;
                 
-                // ランダムな位置
-                positions[i3] = (Math.random() - 0.5) * 20;
-                positions[i3 + 1] = (Math.random() - 0.5) * 20;
-                positions[i3 + 2] = (Math.random() - 0.5) * 20;
+                // より広い範囲に配置
+                positions[i3] = (Math.random() - 0.5) * 30;
+                positions[i3 + 1] = (Math.random() - 0.5) * 30;
+                positions[i3 + 2] = (Math.random() - 0.5) * 30;
                 
-                // 初期仕様のカラーリング（プライマリとセカンダリ）
+                // カラーリング
                 if (Math.random() > 0.5) {
-                    // プライマリカラー
-                    colors[i3] = 0.231; // R (58/255)
-                    colors[i3 + 1] = 0.373; // G (95/255)
-                    colors[i3 + 2] = 0.922; // B (235/255)
+                    // プライマリカラー - より鮮明に
+                    colors[i3] = 0.3; // R
+                    colors[i3 + 1] = 0.4; // G
+                    colors[i3 + 2] = 0.95; // B
                 } else {
                     // セカンダリカラー
-                    colors[i3] = 0; // R (0/255)
-                    colors[i3 + 1] = 0.788; // G (201/255)
-                    colors[i3 + 2] = 0.655; // B (167/255)
+                    colors[i3] = 0; // R
+                    colors[i3 + 1] = 0.8; // G
+                    colors[i3 + 2] = 0.7; // B
                 }
                 
-                // ランダムなサイズ
-                sizes[i] = Math.random() * 0.3 + 0.1;
+                // より大きなサイズ
+                sizes[i] = Math.random() * 0.5 + 0.2;
             }
             
             particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
             particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
             
-            // パーティクルマテリアル
+            // パーティクルマテリアル - より鮮明に
             const material = new THREE.PointsMaterial({
-                size: 0.15,
+                size: 0.2,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.8,
+                opacity: 0.9,
                 sizeAttenuation: true,
                 blending: THREE.AdditiveBlending
             });
@@ -3272,7 +3314,7 @@
             const particleSystem = new THREE.Points(particles, material);
             scene.add(particleSystem);
             
-            camera.position.z = 5;
+            camera.position.z = 8;
             
             // 環境光
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -3292,8 +3334,8 @@
                 requestAnimationFrame(animate);
                 
                 // パーティクルの回転
-                particleSystem.rotation.x += 0.0005;
-                particleSystem.rotation.y += 0.0005;
+                particleSystem.rotation.x += 0.0003;
+                particleSystem.rotation.y += 0.0003;
                 
                 // マウス位置に応じたカメラの動き
                 camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
@@ -3311,6 +3353,8 @@
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
+            
+            console.log('Particles initialized successfully');
         }
         
         // Three.jsの読み込み待機と初期化
