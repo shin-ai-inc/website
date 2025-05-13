@@ -248,9 +248,9 @@
         z-index: -1;
     }
     
-    /* 水玉模様の背景 - スクリーンショット準拠 */
-    .bubble-background {
-        position: fixed;
+    /* 水玉模様の背景 - ヒーローセクションのみ */
+    .hero-bubble-bg {
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -260,14 +260,14 @@
         background: linear-gradient(to bottom right, #e3f2fd, #f5f5f5);
     }
     
-    .bubble {
+    .hero-bubble {
         position: absolute;
         border-radius: 50%;
         opacity: 0.3;
         animation: floatBubble 20s infinite ease-in-out;
     }
     
-    .bubble-1 {
+    .hero-bubble-1 {
         width: 200px;
         height: 200px;
         background: radial-gradient(circle at 30% 30%, rgba(186, 228, 255, 0.8), rgba(154, 208, 241, 0.4));
@@ -276,7 +276,7 @@
         animation-duration: 18s;
     }
     
-    .bubble-2 {
+    .hero-bubble-2 {
         width: 300px;
         height: 300px;
         background: radial-gradient(circle at 30% 30%, rgba(200, 230, 255, 0.7), rgba(170, 210, 240, 0.3));
@@ -286,7 +286,7 @@
         animation-delay: 3s;
     }
     
-    .bubble-3 {
+    .hero-bubble-3 {
         width: 150px;
         height: 150px;
         background: radial-gradient(circle at 30% 30%, rgba(190, 225, 255, 0.6), rgba(160, 205, 240, 0.3));
@@ -296,7 +296,7 @@
         animation-delay: 5s;
     }
     
-    .bubble-4 {
+    .hero-bubble-4 {
         width: 250px;
         height: 250px;
         background: radial-gradient(circle at 30% 30%, rgba(180, 220, 255, 0.7), rgba(150, 200, 240, 0.3));
@@ -2452,20 +2452,20 @@
     <!-- component-split: ParticleEffect -->
     <canvas id="particles-js" class="particles-container"></canvas>
     
-    <!-- component-split: BubbleBackground -->
-    <div class="bubble-background">
-        <div class="bubble bubble-1"></div>
-        <div class="bubble bubble-2"></div>
-        <div class="bubble bubble-3"></div>
-        <div class="bubble bubble-4"></div>
-    </div>
-    
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
         <div class="swipe-wrapper" id="swipe-wrapper">
             <main id="main-content">
                 <!-- component-split: HeroSection -->
                 <section class="section hero swipe-slide" id="hero">
+                    <!-- ヒーローセクション専用の水玉背景 -->
+                    <div class="hero-bubble-bg">
+                        <div class="hero-bubble hero-bubble-1"></div>
+                        <div class="hero-bubble hero-bubble-2"></div>
+                        <div class="hero-bubble hero-bubble-3"></div>
+                        <div class="hero-bubble hero-bubble-4"></div>
+                    </div>
+                    
                     <!-- 浮遊エレメント -->
                     <div class="floating-elements">
                         <div class="floating-element"></div>
