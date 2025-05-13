@@ -41,8 +41,7 @@
     <!-- component-split: AnimationLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
-    <!-- Particles.js for background effects -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -178,6 +177,7 @@
             transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
             display: flex;
             flex-direction: column;
+            transform: translateY(0); /* 初期位置を明示的に設定 */
         }
         
         .swipe-slide {
@@ -191,6 +191,13 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+        }
+        
+        /* ヒーローセクションを確実に表示 */
+        .swipe-slide:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .swipe-pagination {
@@ -221,7 +228,17 @@
         }
     }
 
-    /* Particles.js背景 - 初期仕様の淡いピンク準拠 */
+    /* パーティクルコンテナ - 初期仕様準拠 */
+    .particles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+    
     #particles-js {
         position: fixed;
         top: 0;
@@ -229,24 +246,79 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background: linear-gradient(to bottom, #ffffff, #fafafa);
     }
     
-    /* 各セクションの背景設定 */
-    .section {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .section::before {
-        content: '';
-        position: absolute;
+    /* 水玉模様の背景 - スクリーンショット準拠 */
+    .bubble-background {
+        position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.95);
-        z-index: -1;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -2;
+        background: linear-gradient(to bottom right, #e3f2fd, #f5f5f5);
+    }
+    
+    .bubble {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: floatBubble 20s infinite ease-in-out;
+    }
+    
+    .bubble-1 {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at 30% 30%, rgba(186, 228, 255, 0.8), rgba(154, 208, 241, 0.4));
+        top: 10%;
+        left: 10%;
+        animation-duration: 18s;
+    }
+    
+    .bubble-2 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle at 30% 30%, rgba(200, 230, 255, 0.7), rgba(170, 210, 240, 0.3));
+        top: 60%;
+        right: 10%;
+        animation-duration: 22s;
+        animation-delay: 3s;
+    }
+    
+    .bubble-3 {
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle at 30% 30%, rgba(190, 225, 255, 0.6), rgba(160, 205, 240, 0.3));
+        bottom: 20%;
+        left: 20%;
+        animation-duration: 25s;
+        animation-delay: 5s;
+    }
+    
+    .bubble-4 {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle at 30% 30%, rgba(180, 220, 255, 0.7), rgba(150, 200, 240, 0.3));
+        top: 30%;
+        right: 30%;
+        animation-duration: 20s;
+        animation-delay: 2s;
+    }
+    
+    @keyframes floatBubble {
+        0%, 100% {
+            transform: translateY(0) translateX(0) scale(1);
+        }
+        25% {
+            transform: translateY(-20px) translateX(10px) scale(1.05);
+        }
+        50% {
+            transform: translateY(10px) translateX(-20px) scale(0.95);
+        }
+        75% {
+            transform: translateY(-10px) translateX(20px) scale(1.02);
+        }
     }
     
     /* ヘッダー最適化 - モバイル初期非表示 */
@@ -527,8 +599,8 @@
     .floating-element {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
-        opacity: 0.5;
+        background: radial-gradient(circle at 30% 30%, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.1));
+        opacity: 0.6;
         animation: float 15s infinite alternate ease-in-out;
     }
 
@@ -2377,8 +2449,16 @@
         </div>
     </header>
     
-    <!-- component-split: ParticleBackground -->
-    <div id="particles-js"></div>
+    <!-- component-split: ParticleEffect -->
+    <canvas id="particles-js" class="particles-container"></canvas>
+    
+    <!-- component-split: BubbleBackground -->
+    <div class="bubble-background">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+    </div>
     
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
@@ -3054,109 +3134,126 @@
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Particles.js初期化 - 初期仕様の淡いピンク色準拠
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": ["#ff1493", "#ffb6c1", "#ffc0cb"]  // 淡いピンク色
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffb6c1",
-                    "opacity": 0.3,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
+        // モバイルの初期表示を修正 - トップページが確実に表示されるように
+        if (window.innerWidth <= 768) {
+            // スワイプラッパーの初期位置を明示的に設定
+            const swipeWrapper = document.getElementById('swipe-wrapper');
+            swipeWrapper.style.transform = 'translateY(0)';
+            
+            // 初期状態でhero要素の高さを画面いっぱいに設定
+            const hero = document.getElementById('hero');
+            hero.style.minHeight = '100vh';
+            hero.style.height = '100vh';
+        }
+        
+        // パーティクルエフェクトの初期化 - 初期仕様準拠（Three.js）
+        if (window.THREE) {
+            initParticles();
+        }
+        
+        function initParticles() {
+            const container = document.getElementById('particles-js');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas: container,
+                alpha: true,
+                antialias: true
+            });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x000000, 0);
+            
+            // パーティクル生成 - 初期仕様準拠
+            const particles = new THREE.BufferGeometry();
+            const particleCount = 60;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                
+                // ランダムな位置
+                positions[i3] = (Math.random() - 0.5) * 20;
+                positions[i3 + 1] = (Math.random() - 0.5) * 20;
+                positions[i3 + 2] = (Math.random() - 0.5) * 20;
+                
+                // 初期仕様のカラーリング（プライマリとセカンダリ）
+                if (Math.random() > 0.5) {
+                    // プライマリカラー
+                    colors[i3] = 0.231; // R
+                    colors[i3 + 1] = 0.373; // G
+                    colors[i3 + 2] = 0.922; // B
+                } else {
+                    // セカンダリカラー
+                    colors[i3] = 0; // R
+                    colors[i3 + 1] = 0.788; // G
+                    colors[i3 + 2] = 0.655; // B
                 }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "repulse"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
+                
+                // ランダムなサイズ
+                sizes[i] = Math.random() * 0.1 + 0.02;
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            // パーティクルマテリアル
+            const material = new THREE.PointsMaterial({
+                size: 0.05,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.7,
+                sizeAttenuation: true,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const particleSystem = new THREE.Points(particles, material);
+            scene.add(particleSystem);
+            
+            camera.position.z = 5;
+            
+            // 環境光
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // マウス追従用変数
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+            
+            // アニメーションループ
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // パーティクルの回転
+                particleSystem.rotation.x += 0.001;
+                particleSystem.rotation.y += 0.001;
+                
+                // マウス位置に応じたカメラの動き
+                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // ウィンドウリサイズ対応
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
         
         // Swiper初期化
         var swiper = new Swiper(".mySwiper", {
