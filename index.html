@@ -41,7 +41,8 @@
     <!-- component-split: AnimationLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -86,65 +87,15 @@
         },
         {
           "@type": "Offer",
-          "name": "オーダーメイドAIアプリケーション開発",
+          "name": "オーダーメイドAI開発",
           "description": "お客様の業種・業態特有の課題に対応したカスタムAIソリューションを開発。",
           "url": "https://www.shinai.tech/services.html#custom-ai"
         },
         {
           "@type": "Offer",
           "name": "AI導入コンサルティング",
-          "description": "DX/AXの伴走支援（戦略設計〜実装）と社内AIチーム育成・内製化支援で、成果定着と自走化を実現。",
+          "description": "DX/AXの伴走支援と社内AIチーム育成・内製化支援で、成果定着と自走化を実現。",
           "url": "https://www.shinai.tech/services.html#consulting"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- component-split: WebSiteStructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://www.shinai.tech",
-      "name": "ShinAI",
-      "description": "企業成長を加速する最先端AIソリューション",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.shinai.tech/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    
-    <!-- component-split: FAQStructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "ShinAIのAIチャットボットサービスについて教えてください",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入について相談したいのですが",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIの内製化支援について詳しく知りたい",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
-          }
         }
       ]
     }
@@ -206,28 +157,7 @@
         position: relative;
     }
     
-    /* パーティクルコンテナ - 初期仕様準拠 */
-    .particles-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
-    }
-    
-    /* canvasスタイル */
-    #particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-    
-    /* スワイプ型レスポンシブデザイン - 完全版 */
+    /* スワイプ型レスポンシブデザイン */
     @media (max-width: 768px) {
         html, body {
             height: 100%;
@@ -255,6 +185,7 @@
             width: 100%;
             position: relative;
             overflow-y: auto;
+            overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             flex-shrink: 0;
             display: flex;
@@ -290,7 +221,35 @@
         }
     }
 
-    /* ヘッダー最適化 - モバイルでの完全非表示対応 */
+    /* Particles.js背景 - 初期仕様の淡いピンク準拠 */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(to bottom, #ffffff, #fafafa);
+    }
+    
+    /* 各セクションの背景設定 */
+    .section {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        z-index: -1;
+    }
+    
+    /* ヘッダー最適化 - モバイル初期非表示 */
     .header {
         position: fixed;
         top: 0;
@@ -360,7 +319,7 @@
         filter: drop-shadow(0 3px 8px rgba(58, 95, 235, 0.3));
     }
 
-    /* ナビゲーション - サービスと同一仕様 */
+    /* ナビゲーション */
     .nav {
         display: flex;
         align-items: center;
@@ -490,7 +449,7 @@
         box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
     }
 
-    /* ヒーローセクション - パーティクル背景付き */
+    /* ヒーローセクション */
     .hero {
         min-height: 100vh;
         position: relative;
@@ -506,6 +465,7 @@
         .hero {
             padding-top: 40px;
             padding-bottom: 80px;
+            min-height: 100vh;
         }
     }
 
@@ -553,7 +513,7 @@
         animation: fadeInUp 1s ease-out;
     }
 
-    /* 浮遊エレメント - 初期仕様準拠 */
+    /* 浮遊エレメント */
     .floating-elements {
         position: absolute;
         top: 0;
@@ -567,7 +527,7 @@
     .floating-element {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.2), rgba(0, 201, 167, 0.2));
+        background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
         opacity: 0.5;
         animation: float 15s infinite alternate ease-in-out;
     }
@@ -1048,7 +1008,7 @@
         display: block;
     }
 
-    /* サービスプレビューカード - マーケティング改善版 */
+    /* サービスプレビューカード */
     .services-preview-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1542,7 +1502,7 @@
         }
     }
 
-    /* チャットボット改善 - 完全修正版 */
+    /* チャットボット改善 */
     .chatbot {
         position: fixed;
         bottom: 30px;
@@ -2339,7 +2299,7 @@
         }
         
         /* パーティクルエフェクトの最適化 */
-        .particles-container {
+        #particles-js {
             will-change: transform;
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
@@ -2417,10 +2377,8 @@
         </div>
     </header>
     
-    <!-- component-split: ParticleEffect -->
-    <div class="particles-container">
-        <canvas id="particles"></canvas>
-    </div>
+    <!-- component-split: ParticleBackground -->
+    <div id="particles-js"></div>
     
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
@@ -3096,136 +3054,109 @@
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // パーティクルエフェクトの初期化 - 初期仕様準拠
-        if (window.THREE) {
-            initParticles();
-        }
-        
-        function initParticles() {
-            const container = document.querySelector('.particles-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas: document.getElementById('particles'),
-                alpha: true,
-                antialias: true
-            });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setClearColor(0x000000, 0);
-            
-            // パーティクル生成 - 初期仕様の数量とカラー
-            const particles = new THREE.BufferGeometry();
-            const particleCount = 80;
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            const sizes = new Float32Array(particleCount);
-            
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                
-                // ランダムな位置
-                positions[i3] = (Math.random() - 0.5) * 15;
-                positions[i3 + 1] = (Math.random() - 0.5) * 15;
-                positions[i3 + 2] = (Math.random() - 0.5) * 15;
-                
-                // 初期仕様のカラーリング（プライマリとセカンダリの混合）
-                if (Math.random() > 0.5) {
-                    // プライマリカラー系
-                    colors[i3] = 0.231; // R (59/255)
-                    colors[i3 + 1] = 0.373; // G (95/255)
-                    colors[i3 + 2] = 0.922; // B (235/255)
-                } else {
-                    // セカンダリカラー系
-                    colors[i3] = 0; // R (0/255)
-                    colors[i3 + 1] = 0.788; // G (201/255)
-                    colors[i3 + 2] = 0.655; // B (167/255)
+        // Particles.js初期化 - 初期仕様の淡いピンク色準拠
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#ff1493", "#ffb6c1", "#ffc0cb"]  // 淡いピンク色
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffb6c1",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
                 }
-                
-                // ランダムなサイズ
-                sizes[i] = Math.random() * 0.05 + 0.01;
-            }
-            
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-            
-            // パーティクルマテリアル
-            const material = new THREE.PointsMaterial({
-                size: 0.02,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                sizeAttenuation: true,
-                blending: THREE.AdditiveBlending
-            });
-            
-            const particleSystem = new THREE.Points(particles, material);
-            scene.add(particleSystem);
-            
-            camera.position.z = 5;
-            
-            // 環境光
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            // マウス追従用変数
-            let mouseX = 0;
-            let mouseY = 0;
-            let windowHalfX = window.innerWidth / 2;
-            let windowHalfY = window.innerHeight / 2;
-            
-            document.addEventListener('mousemove', (event) => {
-                mouseX = event.clientX - windowHalfX;
-                mouseY = event.clientY - windowHalfY;
-            });
-            
-            // アニメーションループ
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                // パーティクルの回転
-                particleSystem.rotation.x += 0.0005;
-                particleSystem.rotation.y += 0.0005;
-                
-                // マウス位置に応じたカメラの動き
-                camera.position.x += (mouseX * 0.0001 - camera.position.x) * 0.05;
-                camera.position.y += (-mouseY * 0.0001 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                // パーティクルの個別アニメーション
-                const positions = particles.attributes.position.array;
-                const time = Date.now() * 0.00005;
-                
-                for (let i = 0; i < particleCount; i++) {
-                    const i3 = i * 3;
-                    const x = positions[i3];
-                    const y = positions[i3 + 1];
-                    
-                    // 波形アニメーション
-                    positions[i3 + 1] = y + Math.sin((x + time) * 2) * 0.001;
-                    positions[i3] = x + Math.cos((y + time) * 2) * 0.001;
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
                 }
-                
-                particles.attributes.position.needsUpdate = true;
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // ウィンドウリサイズ対応
-            window.addEventListener('resize', () => {
-                windowHalfX = window.innerWidth / 2;
-                windowHalfY = window.innerHeight / 2;
-                
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
+            },
+            "retina_detect": true
+        });
         
         // Swiper初期化
         var swiper = new Swiper(".mySwiper", {
@@ -3275,11 +3206,10 @@
         }
         
         function initSwipeEvents() {
-            slides.forEach((slide, index) => {
-                slide.addEventListener('touchstart', handleTouchStart, { passive: true });
-                slide.addEventListener('touchmove', handleTouchMove, { passive: false });
-                slide.addEventListener('touchend', handleTouchEnd, { passive: true });
-            });
+            // タッチイベントのリスナー
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
             
             // ページネーションのクリックイベント
             bullets.forEach((bullet, index) => {
@@ -3376,19 +3306,21 @@
             });
         });
         
-        // ヘッダーのスクロール効果
+        // ヘッダーのスクロール効果（デスクトップのみ）
         let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            lastScrollTop = scrollTop;
-        });
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }
         
         // ヒーロー画像の自動切り替え
         const heroImages = [
@@ -3413,34 +3345,38 @@
         // 10秒ごとに画像を切り替え
         setInterval(rotateHeroImage, 10000);
         
-        // スクロールアニメーション
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
+        // スクロールアニメーション（デスクトップのみ）
+        if (window.innerWidth > 768) {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
+        }
         
         // Back to Topボタン
         const backToTopButton = document.getElementById('back-to-top');
         
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('active');
-            } else {
-                backToTopButton.classList.remove('active');
-            }
-        });
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+        }
         
         backToTopButton.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
@@ -3580,6 +3516,11 @@
                     bullets.forEach(bullet => bullet.classList.remove('active'));
                     if (bullets[0]) bullets[0].classList.add('active');
                     header.classList.add('visible');
+                    
+                    // スワイプイベントをリセット
+                    document.removeEventListener('touchstart', handleTouchStart);
+                    document.removeEventListener('touchmove', handleTouchMove);
+                    document.removeEventListener('touchend', handleTouchEnd);
                 } else {
                     // モバイルビュー
                     header.classList.remove('visible');
