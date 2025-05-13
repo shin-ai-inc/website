@@ -169,7 +169,7 @@
         --primary-light: #9AAEFF;
         --secondary-light: #85EDD6;
         --dark: #1a1f36;
-        --gray: #6c7293;
+        --gray: #4a4d5e;
         --light-gray: #f5f5f7;
         --white: #ffffff;
         --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
@@ -227,11 +227,12 @@
         .swipe-slide {
             height: 100vh;
             width: 100%;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: center;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scroll-snap-align: start;
         }
         
         .swipe-slide.active {
@@ -253,8 +254,8 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: rgba(58, 95, 235, 0.3);
+            border: 2px solid rgba(58, 95, 235, 0.6);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -270,7 +271,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
             font-size: 24px;
             animation: upDownAnimation 1.5s infinite;
         }
@@ -387,7 +388,7 @@
     .btn-consultation {
         background: var(--gradient-primary);
         color: white;
-        padding: 0.6rem 1.4rem;
+        padding: 0.5rem 1.2rem;
         border-radius: 50px;
         font-weight: 600;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -406,9 +407,9 @@
 
     .btn-consultation-message {
         display: block;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 400;
-        margin-top: 0.3rem;
+        margin-top: 0.2rem;
         opacity: 0.9;
     }
 
@@ -613,30 +614,31 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* 「人間らしい時間」のスタイル - 美しいグラデーション */
+    /* 「人間らしい時間」のスタイル - 視認性向上 */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        background: linear-gradient(to right, #9AAEFF, #85EDD6);
+        background: linear-gradient(to right, #3A5FEB, #00C9A7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: transparent;
         font-weight: 900;
-        filter: drop-shadow(0 2px 3px rgba(58, 95, 235, 0.15));
+        filter: drop-shadow(0 2px 4px rgba(58, 95, 235, 0.2));
         transition: var(--transition);
         transform: translateY(0);
+        text-shadow: 0 0 20px rgba(58, 95, 235, 0.3);
     }
 
     /* 人間らしい時間の下線エフェクト */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
-        bottom: 0.1em;
+        bottom: 0.05em;
         left: 0;
         width: 100%;
-        height: 0.15em;
-        background: linear-gradient(to right, rgba(154, 174, 255, 0.3), rgba(133, 237, 214, 0.3));
+        height: 0.2em;
+        background: linear-gradient(to right, rgba(58, 95, 235, 0.4), rgba(0, 201, 167, 0.4));
         z-index: -1;
         border-radius: 5px;
         transition: height 0.3s ease;
@@ -949,9 +951,9 @@
         text-decoration: underline;
     }
 
-    /* AI伴走型開発セクション */
+    /* AI伴走型開発セクション - 背景をホワイトに */
     .ai-escort-section {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        background: #ffffff;
         padding: 5rem 0;
         position: relative;
         overflow: hidden;
@@ -1256,6 +1258,10 @@
         font-size: 1.1rem;
     }
 
+    .chatbot-toggle.hidden {
+        display: none;
+    }
+
     .chatbot-close {
         background: rgba(255, 255, 255, 0.15);
         border: none;
@@ -1263,8 +1269,9 @@
         font-size: 1.2rem;
         cursor: pointer;
         transition: all 0.3s ease;
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -1876,7 +1883,7 @@
     
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
-        <div class="swipe-wrapper">
+        <div class="swipe-wrapper" id="swipe-wrapper">
             <main id="main-content">
                 <!-- component-split: HeroSection -->
                 <section class="section hero swipe-slide" id="hero">
@@ -2484,12 +2491,14 @@
         chatbotToggle.addEventListener('click', function() {
             chatbotContainer.classList.add('active');
             this.setAttribute('aria-expanded', 'true');
+            this.classList.add('hidden');
             chatbotInput.focus();
         });
         
         chatbotClose.addEventListener('click', function() {
             chatbotContainer.classList.remove('active');
             chatbotToggle.setAttribute('aria-expanded', 'false');
+            chatbotToggle.classList.remove('hidden');
         });
         
         function addMessage(text, isUser = false) {
