@@ -430,14 +430,14 @@
         box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
     }
 
-    /* パーティクルエフェクト - 維持 */
+    /* パーティクルエフェクト - 維持と有効化 */
     .particles-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 0;
+        z-index: -1;
         pointer-events: none;
     }
 
@@ -448,8 +448,7 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
-        z-index: 0;
-        display: none;
+        z-index: -1;
     }
 
     /* ヒーローセクション - 人間らしい時間の表現改善 */
@@ -614,31 +613,30 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* 「人間らしい時間」のスタイル - 視認性向上 */
+    /* 「人間らしい時間」のスタイル - 淡い色に戻す */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        background: linear-gradient(to right, #3A5FEB, #00C9A7);
+        background: linear-gradient(to right, #9AAEFF, #85EDD6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: transparent;
         font-weight: 900;
-        filter: drop-shadow(0 2px 4px rgba(58, 95, 235, 0.2));
+        filter: drop-shadow(0 2px 3px rgba(58, 95, 235, 0.15));
         transition: var(--transition);
         transform: translateY(0);
-        text-shadow: 0 0 20px rgba(58, 95, 235, 0.3);
     }
 
     /* 人間らしい時間の下線エフェクト */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
-        bottom: 0.05em;
+        bottom: 0.1em;
         left: 0;
         width: 100%;
-        height: 0.2em;
-        background: linear-gradient(to right, rgba(58, 95, 235, 0.4), rgba(0, 201, 167, 0.4));
+        height: 0.15em;
+        background: linear-gradient(to right, rgba(154, 174, 255, 0.3), rgba(133, 237, 214, 0.3));
         z-index: -1;
         border-radius: 5px;
         transition: height 0.3s ease;
@@ -1258,10 +1256,6 @@
         font-size: 1.1rem;
     }
 
-    .chatbot-toggle.hidden {
-        display: none;
-    }
-
     .chatbot-close {
         background: rgba(255, 255, 255, 0.15);
         border: none;
@@ -1272,10 +1266,26 @@
         width: 32px;
         height: 32px;
         min-width: 32px;
+        min-height: 32px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .chatbot-toggle.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .chatbot-close {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            min-height: 30px;
+        }
     }
 
     .chatbot-close:hover {
@@ -1580,11 +1590,12 @@
         .header {
             position: fixed;
             padding: 0;
+            background-color: rgba(255, 255, 255, 0.98);
         }
         
         .header-inner {
-            height: 50px;
-            padding: 0.5rem 0;
+            height: 55px;
+            padding: 0.5rem 1rem;
         }
         
         .logo {
@@ -1596,80 +1607,117 @@
             height: 35px;
         }
         
+        .nav {
+            display: none;
+        }
+        
+        .menu-toggle {
+            display: flex;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
+        }
+        
         .hero {
-            padding-top: 50px;
-            min-height: calc(100vh - 50px);
+            padding-top: 55px;
+            min-height: 100vh;
         }
         
-        .hero-title {
-            font-size: 2.5rem;
-        }
-        
-        .hero-cta {
+        /* モバイルメニュー */
+        .nav.active {
+            display: flex;
+            position: fixed;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 55px);
+            background: white;
             flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            overflow-y: auto;
+        }
+        
+        .nav-link {
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-cta {
+            margin-top: 1rem;
             width: 100%;
         }
         
-        .hero-cta .btn {
+        .btn-consultation {
             width: 100%;
+            text-align: center;
         }
         
-        .services-preview-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        .service-preview-card {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .service-preview-image {
-            height: 180px;
-        }
-        
-        .service-preview-content {
-            padding: 1.5rem;
-        }
-        
-        .service-preview-icon {
-            top: 150px;
-            width: 50px;
-            height: 50px;
-            font-size: 1.3rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 2rem;
-        }
-        
-        .cta-description {
-            font-size: 1.1rem;
+        /* チャットボットの位置調整 */
+        .chatbot {
+            bottom: 20px;
+            right: 20px;
+            z-index: var(--z-chatbot);
         }
         
         .chatbot-container {
             width: 340px;
             height: 480px;
+            bottom: 80px;
+            right: 20px;
         }
     }
 
     @media (max-width: 576px) {
         .header-inner {
-            height: 45px;
-            padding: 0.4rem 0;
+            height: 50px;
+            padding: 0.4rem 1rem;
         }
         
-        .nav-link {
-            font-size: 0.9rem;
-            padding: 1rem;
+        .logo {
+            font-size: 1.2rem;
+        }
+        
+        .logo img {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .menu-toggle {
+            padding: 0.5rem 0.7rem;
+            font-size: 1.1rem;
         }
         
         .hero {
-            padding-top: 45px;
+            padding-top: 50px;
         }
         
         .hero-title {
             font-size: 2.2rem;
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+        }
+        
+        .hero-cta .btn {
+            font-size: 0.95rem;
+            padding: 0.8rem 1.5rem;
         }
         
         .service-preview-image {
@@ -1719,18 +1767,26 @@
         }
         
         .chatbot {
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
+        }
+        
+        .chatbot-toggle {
+            width: 55px;
+            height: 55px;
+            font-size: 1.5rem;
         }
         
         .chatbot-container {
-            width: calc(100vw - 40px);
-            height: 460px;
+            width: calc(100vw - 30px);
+            height: 450px;
+            bottom: 70px;
+            right: 15px;
         }
         
         .back-to-top {
-            right: 90px;
-            bottom: 20px;
+            right: 85px;
+            bottom: 15px;
             width: 40px;
             height: 40px;
         }
@@ -2458,12 +2514,11 @@
         const body = document.body;
         
         menuToggle.addEventListener('click', function() {
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
             nav.classList.toggle('active');
-            body.classList.toggle('nav-open');
+            const expanded = nav.classList.contains('active');
+            this.setAttribute('aria-expanded', expanded);
             
-            if (!expanded) {
+            if (expanded) {
                 this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
             } else {
                 this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
@@ -2474,7 +2529,6 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 nav.classList.remove('active');
-                body.classList.remove('nav-open');
                 menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 menuToggle.setAttribute('aria-expanded', 'false');
             });
