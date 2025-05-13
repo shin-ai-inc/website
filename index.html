@@ -41,7 +41,8 @@
     <!-- component-split: AnimationLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -95,56 +96,6 @@
           "name": "AI導入コンサルティング",
           "description": "DX/AXの伴走支援と社内AIチーム育成・内製化支援で、成果定着と自走化を実現。",
           "url": "https://www.shinai.tech/services.html#consulting"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- component-split: WebSiteStructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://www.shinai.tech",
-      "name": "ShinAI",
-      "description": "企業成長を加速する最先端AIソリューション",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.shinai.tech/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    
-    <!-- component-split: FAQStructuredData -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "ShinAIのAIチャットボットサービスについて教えてください",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIのAIチャットボットは、24時間対応でお客様のお問い合わせに対応します。多言語対応、直感的な操作で顧客体験と業務効率を両立します。お客様のサービスに合わせたカスタマイズも可能です。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AI導入について相談したいのですが",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI導入についてのご相談は、お問い合わせフォームからお気軽にご連絡ください。専門のコンサルタントが対応いたします。初回相談は無料で承っております。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "AIの内製化支援について詳しく知りたい",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。貴社の状況に合わせた最適なプランをご提案いたします。"
-          }
         }
       ]
     }
@@ -204,17 +155,6 @@
         overflow-x: hidden;
         min-height: 100%;
         position: relative;
-    }
-    
-    /* Three.jsパーティクルコンテナ */
-    #three-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        background: linear-gradient(to bottom, #ffffff, #fafafa);
     }
     
     /* スワイプ型レスポンシブデザイン */
@@ -281,7 +221,35 @@
         }
     }
 
-    /* ヘッダー最適化 */
+    /* Particles.js背景 - 初期仕様の淡いピンク準拠 */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(to bottom, #ffffff, #fafafa);
+    }
+    
+    /* 各セクションの背景設定 */
+    .section {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        z-index: -1;
+    }
+    
+    /* ヘッダー最適化 - モバイル初期非表示 */
     .header {
         position: fixed;
         top: 0;
@@ -545,7 +513,7 @@
         animation: fadeInUp 1s ease-out;
     }
 
-    /* 浮遊エレメント - 初期仕様準拠 */
+    /* 浮遊エレメント */
     .floating-elements {
         position: absolute;
         top: 0;
@@ -824,7 +792,7 @@
         opacity: 0.6;
     }
 
-    /* 共通セクション設定 */
+    /* Benefitsセクション - 3つの価値 */
     .section {
         padding: 5rem 0;
         position: relative;
@@ -879,7 +847,6 @@
         line-height: 1.7;
     }
 
-    /* Benefitsセクション - 3つの価値 */
     .benefits-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1041,7 +1008,7 @@
         display: block;
     }
 
-    /* サービスプレビューカード - マーケティング改善版 */
+    /* サービスプレビューカード */
     .services-preview-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1535,7 +1502,7 @@
         }
     }
 
-    /* チャットボット改善 - 完全修正版 */
+    /* チャットボット改善 */
     .chatbot {
         position: fixed;
         bottom: 30px;
@@ -2331,6 +2298,13 @@
             appearance: none;
         }
         
+        /* パーティクルエフェクトの最適化 */
+        #particles-js {
+            will-change: transform;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
         /* タッチ操作の改善 */
         .service-preview-card, 
         .hero-cta .btn, 
@@ -2403,8 +2377,8 @@
         </div>
     </header>
     
-    <!-- component-split: Three.jsパーティクル背景 -->
-    <div id="three-container"></div>
+    <!-- component-split: ParticleBackground -->
+    <div id="particles-js"></div>
     
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
@@ -2500,6 +2474,82 @@
                                 
                                 <div class="about-buttons">
                                     <a href="about.html" class="btn btn-primary btn-icon-bounce">会社概要を見る <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- component-split: BenefitsSection - 3つの価値 -->
+                <section class="section swipe-slide">
+                    <div class="container">
+                        <div class="section-header animate-on-scroll">
+                            <span class="section-subtitle">AI導入のメリット</span>
+                            <h2 class="heading-lg">AIがもたらす<span class="highlight">3つの価値</span></h2>
+                            <p class="section-description">ShinAIのAIソリューションが企業にもたらす主な価値をご紹介します</p>
+                        </div>
+                        
+                        <div class="benefits-grid">
+                            <!-- 業務効率化 -->
+                            <div class="benefit-card animate-on-scroll">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-bolt" aria-hidden="true"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h3>業務効率化</h3>
+                                    <p>AI導入により、定型業務の自動化や意思決定の迅速化が可能になります。人的リソースを創造的な業務に集中させることができます。</p>
+                                    <div class="benefit-stats">
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">35</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">効率化</span>
+                                        </div>
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">60</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">時間削減</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- コスト削減 -->
+                            <div class="benefit-card animate-on-scroll">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h3>コスト削減</h3>
+                                    <p>AIによる自動化で人件費を抑えつつ、24時間稼働でのサービス提供やエラー率の低減によるコスト削減が実現します。</p>
+                                    <div class="benefit-stats">
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">40</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">コスト削減</span>
+                                        </div>
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">30</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">利益向上</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- データ分析 -->
+                            <div class="benefit-card animate-on-scroll">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h3>データ分析</h3>
+                                    <p>大量のデータから有益な情報を抽出し、ビジネス戦略に活かすことができます。顧客行動の理解やマーケットトレンドの把握が容易になります。</p>
+                                    <div class="benefit-stats">
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">90</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">データ活用</span>
+                                        </div>
+                                        <div class="benefit-stat">
+                                            <span class="stat-value">25</span><span class="stat-percent">%</span>
+                                            <span class="stat-label">売上増加</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2637,6 +2687,33 @@
                                         </div>
                                     </div>
                                     
+                                    <!-- 業界カード: 教育・研修 -->
+                                    <div class="swiper-slide">
+                                        <div class="industry-card">
+                                            <div class="industry-header">
+                                                <div class="industry-icon">
+                                                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                                </div>
+                                                <h3 class="industry-title">教育・研修</h3>
+                                            </div>
+                                            <p class="industry-description">個別最適化された学習体験を提供し、教育の質と効率を向上させるAIソリューションを開発しています。</p>
+                                            <ul class="industry-features">
+                                                <li class="industry-feature">
+                                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                                    対話型学習支援
+                                                </li>
+                                                <li class="industry-feature">
+                                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                                    研修用AIメンター
+                                                </li>
+                                                <li class="industry-feature">
+                                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                                    学習進捗分析ツール
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
                                     <!-- 業界カード: 建設業 -->
                                     <div class="swiper-slide">
                                         <div class="industry-card">
@@ -2730,6 +2807,47 @@
                     </div>
                 </section>
                 
+                <!-- component-split: ValueSection - ビジョン＆ミッション -->
+                <section class="section section-bg-light swipe-slide">
+                    <div class="container">
+                        <div class="section-header animate-on-scroll">
+                            <span class="section-subtitle">ビジョン＆ミッション</span>
+                            <h2 class="heading-lg">AIの力で<span class="highlight">大切な人と過ごす時間</span>を取り戻す</h2>
+                            <p class="section-description">ShinAIは技術の進化を通じて、人間らしい生き方を支援するAI企業です</p>
+                        </div>
+                        
+                        <div class="vision-grid">
+                            <div class="glass-card vision-card animate-on-scroll">
+                                <div class="vision-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3>時間の解放</h3>
+                                <p>AIによる定型業務の自動化で、創造的な仕事や人間関係に集中できる時間を生み出します。真に人間にしかできない価値創造に集中できる環境を目指します。</p>
+                            </div>
+                            
+                            <div class="glass-card vision-card animate-on-scroll">
+                                <div class="vision-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h3>真の価値追求</h3>
+                                <p>「真」の価値とは何かを常に問い、テクノロジーの進化が人間の幸福につながるよう、本質的な課題解決に取り組みます。</p>
+                            </div>
+                            
+                            <div class="glass-card vision-card animate-on-scroll">
+                                <div class="vision-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3>持続可能な成長</h3>
+                                <p>次世代のために持続可能な未来を創るため、短期的な利益だけでなく長期的な視点で社会的価値と経済的価値の両立を目指します。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="section-footer animate-on-scroll">
+                            <a href="about.html#philosophy" class="btn btn-primary btn-lg btn-icon-bounce">企業理念を詳しく見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </section>
+                
                 <!-- component-split: AIEscortSection -->
                 <section class="ai-escort-section swipe-slide" id="ai-escort">
                     <div class="container">
@@ -2818,6 +2936,15 @@
             <span class="swipe-pagination-bullet"></span>
             <span class="swipe-pagination-bullet"></span>
             <span class="swipe-pagination-bullet"></span>
+            <span class="swipe-pagination-bullet"></span>
+            <span class="swipe-pagination-bullet"></span>
+        </div>
+    </div>
+    
+    <!-- component-split: BottomBanner -->
+    <div class="bottom-banner">
+        <div class="bottom-banner-content">
+            「真の価値を信じ、次世代のために新たな未来を創る。」
         </div>
     </div>
     
@@ -2911,15 +3038,125 @@
         </div>
     </div>
 
-        
+    <!-- component-split: BackToTop -->
+    <button id="back-to-top" class="back-to-top" aria-label="トップへ戻る">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+    
     <!-- component-split: JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/three-particles.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- component-split: PageSpecificScripts -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // カレントイヤーの更新
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Three.jsパーティクルエフェクト初期化
-        initThreeJsParticles();
+        // Particles.js初期化 - 初期仕様の淡いピンク色準拠
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#ff1493", "#ffb6c1", "#ffc0cb"]  // 淡いピンク色
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffb6c1",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
         
         // Swiper初期化
         var swiper = new Swiper(".mySwiper", {
@@ -3297,144 +3534,6 @@
             document.body.classList.add('page-loaded');
         });
     });
-
-    // Three.jsパーティクルエフェクト
-    function initThreeJsParticles() {
-        const container = document.getElementById('three-container');
-        if (!container) return;
-        
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        
-        // Three.jsのシーン作成
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        camera.position.z = 30;
-        
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(width, height);
-        renderer.setClearColor(0xffffff, 0);
-        container.appendChild(renderer.domElement);
-        
-        // パーティクルの設定
-        const particleCount = 100;
-        const particles = new THREE.BufferGeometry();
-        const positions = [];
-        const colors = [];
-        
-        // ブランドカラーのグラデーション（青と緑）
-        const color1 = new THREE.Color(0x3A5FEB); // 青
-        const color2 = new THREE.Color(0x00C9A7); // 緑
-        
-        for (let i = 0; i < particleCount; i++) {
-            // ランダムな位置
-            const x = Math.random() * 100 - 50;
-            const y = Math.random() * 100 - 50;
-            const z = Math.random() * 100 - 50;
-            
-            positions.push(x, y, z);
-            
-            // 色の混合（グラデーション）
-            const mixRatio = Math.random();
-            const mixedColor = new THREE.Color().lerpColors(color1, color2, mixRatio);
-            
-            colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
-        }
-        
-        particles.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        particles.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-        
-        const material = new THREE.PointsMaterial({
-            size: 0.6,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.7,
-            sizeAttenuation: true
-        });
-        
-        const particleSystem = new THREE.Points(particles, material);
-        scene.add(particleSystem);
-        
-        // 接続線の描画
-        const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0xcccccc,
-            transparent: true,
-            opacity: 0.2
-        });
-        
-        const lineGeometry = new THREE.BufferGeometry();
-        const linePositions = [];
-        
-        // 近いパーティクル同士を線で結ぶ
-        const maxDistance = 15; // 結ぶ最大距離
-        
-        for (let i = 0; i < particleCount; i++) {
-            for (let j = i + 1; j < particleCount; j++) {
-                const x1 = positions[i * 3];
-                const y1 = positions[i * 3 + 1];
-                const z1 = positions[i * 3 + 2];
-                
-                const x2 = positions[j * 3];
-                const y2 = positions[j * 3 + 1];
-                const z2 = positions[j * 3 + 2];
-                
-                const distance = Math.sqrt(
-                    Math.pow(x2 - x1, 2) +
-                    Math.pow(y2 - y1, 2) +
-                    Math.pow(z2 - z1, 2)
-                );
-                
-                if (distance < maxDistance) {
-                    linePositions.push(x1, y1, z1, x2, y2, z2);
-                }
-            }
-        }
-        
-        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-        scene.add(lines);
-        
-        // マウス操作
-        let mouseX = 0;
-        let mouseY = 0;
-        let windowHalfX = width / 2;
-        let windowHalfY = height / 2;
-        
-        document.addEventListener('mousemove', function(event) {
-            mouseX = (event.clientX - windowHalfX) * 0.05;
-            mouseY = (event.clientY - windowHalfY) * 0.05;
-        });
-        
-        // リサイズ処理
-        window.addEventListener('resize', function() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            windowHalfX = width / 2;
-            windowHalfY = height / 2;
-            
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        });
-        
-        // アニメーションループ
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // パーティクルの回転
-            particleSystem.rotation.x += 0.0005;
-            particleSystem.rotation.y += 0.001;
-            
-            // マウス操作によるカメラ回転
-            camera.position.x += (mouseX - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY - camera.position.y) * 0.05;
-            camera.lookAt(scene.position);
-            
-            renderer.render(scene, camera);
-        }
-        
-        animate();
-    }
     </script>
 </body>
 </html>
