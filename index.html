@@ -300,16 +300,36 @@
         transition: var(--transition);
     }
 
+    /* ヘッダー最適化 - モバイル時に完全非表示 */
     @media (max-width: 768px) {
         .header {
             transform: translateY(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
             opacity: 0;
             visibility: hidden;
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.3s ease;
         }
         
         .header.visible {
             transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* ハンバーガーメニューは常に表示 */
+        .menu-toggle {
+            display: flex;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 103;
             opacity: 1;
             visibility: visible;
         }
@@ -554,7 +574,7 @@
         animation: fadeInUp 1s ease-out;
     }
 
-    /* 浮遊エレメント - 初期仕様準拠 */
+    /* 浮遊エレメント - 淡い水色に変更 */
     .floating-elements {
         position: absolute;
         top: 0;
@@ -568,7 +588,7 @@
     .floating-element {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.1));
+        background: linear-gradient(135deg, rgba(173, 216, 230, 0.1), rgba(135, 206, 235, 0.1));
         opacity: 0.5;
         animation: float 15s infinite alternate ease-in-out;
     }
@@ -2240,11 +2260,11 @@
         
         /* スマホ版でチャットボットが自動表示されないよう確実にする */
         .chatbot-container {
-            display: none;
+            display: none !important;
         }
         
         .chatbot-container.active {
-            display: flex;
+            display: flex !important;
         }
     }
 
@@ -2303,7 +2323,6 @@
         }
     }
 
-    /* iPhone特化最適化 */
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 812px) 
@@ -2338,6 +2357,33 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
+        }
+        
+        /* iPhone最適化 - スワイプ操作の強化 */
+        .swipe-container {
+            height: 100%;
+            overflow: hidden;
+            touch-action: pan-y;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .swipe-wrapper {
+            height: 100%;
+            will-change: transform;
+        }
+        
+        .swipe-slide {
+            height: 100vh;
+            height: -webkit-fill-available;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+        
+        /* iPhoneノッチ対応 */
+        .hero {
+            padding-top: env(safe-area-inset-top, 40px);
+            padding-bottom: env(safe-area-inset-bottom, 40px);
         }
         
         /* タッチ操作の改善 */
@@ -2808,7 +2854,7 @@
                                 <div class="cta-buttons">
                                     <a href="contact.html" class="btn btn-consultation btn-lg btn-glow">
                                         <span>無料相談する</span>
-                                        <span class="btn-consultation-message">個別でじっくり相談できます</span>
+                                        <span class="btn-consultation-message">初回相談は完全無料です</span>
                                     </a>
                                     <a href="#" class="btn-download btn-lg">AI導入資料をダウンロード <i class="fas fa-file-download" aria-hidden="true"></i></a>
                                 </div>
@@ -3066,7 +3112,7 @@
             nav.classList.toggle('active');
             
             // ヘッダーを表示
-            header.classList.add('visible');
+            header.classList.toggle('visible');
             
             // アイコンの切り替え
             if (!expanded) {
@@ -3321,6 +3367,18 @@
                     heroSection.style.display = 'flex';
                     heroSection.style.alignItems = 'center';
                     heroSection.style.justifyContent = 'center';
+                    
+                    // スワイプを最初のスライドに設定
+                    swipeWrapper.style.transform = 'translateY(0)';
+                    currentSlide = 0;
+                    
+                    // ページネーションの更新
+                    bullets.forEach((bullet, i) => {
+                        bullet.classList.toggle('active', i === 0);
+                    });
+                    
+                    // ヘッダーは非表示、メニューボタンのみ表示
+                    header.classList.remove('visible');
                 }
             }
         });
@@ -3350,9 +3408,9 @@
         const positions = [];
         const colors = [];
         
-        // 淡いピンク色
-        const pinkColor = new THREE.Color(0xffb6c1);
-        const lightPinkColor = new THREE.Color(0xffc0cb);
+        // 淡い水色
+        const lightBlue1 = new THREE.Color(0xade8f4); // 淡い水色
+        const lightBlue2 = new THREE.Color(0xb8e0f9); // さらに淡い水色
         
         for (let i = 0; i < particleCount; i++) {
             // ランダムな位置
@@ -3364,7 +3422,7 @@
             
             // 色の混合（グラデーション）
             const mixRatio = Math.random();
-            const mixedColor = new THREE.Color().lerpColors(pinkColor, lightPinkColor, mixRatio);
+            const mixedColor = new THREE.Color().lerpColors(lightBlue1, lightBlue2, mixRatio);
             
             colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
         }
@@ -3405,6 +3463,47 @@
             camera.updateProjectionMatrix();
             renderer.setSize(width, height);
         });
+        
+        // セクションによるパーティクル濃淡調整
+        function updateParticleOpacity() {
+            // 現在のスクロール位置を取得
+            const scrollY = window.scrollY || window.pageYOffset;
+            const aboutSection = document.querySelector('.section-bg-light');
+            const servicesSection = document.getElementById('services');
+            
+            if (aboutSection && servicesSection) {
+                const aboutTop = aboutSection.offsetTop;
+                const aboutBottom = aboutTop + aboutSection.offsetHeight;
+                const servicesTop = servicesSection.offsetTop;
+                const servicesBottom = servicesTop + servicesSection.offsetHeight;
+                
+                // ShinAIについてのセクションか、ソリューションセクションにいる場合
+                if ((scrollY >= aboutTop && scrollY < aboutBottom) || 
+                    (scrollY >= servicesTop && scrollY < servicesBottom)) {
+                    material.opacity = 0.3; // 薄く表示
+                } else {
+                    material.opacity = 0.7; // 通常表示
+                }
+            }
+        }
+        
+        // スクロールイベントでパーティクル濃淡を調整
+        window.addEventListener('scroll', updateParticleOpacity);
+        
+        // スワイプ時のパーティクル濃淡調整（モバイル用）
+        if (window.innerWidth <= 768) {
+            const swipeBullets = document.querySelectorAll('.swipe-pagination-bullet');
+            swipeBullets.forEach((bullet, index) => {
+                bullet.addEventListener('click', function() {
+                    // ShinAIについてのセクション(index=1)か、ソリューションセクション(index=2)を選択した場合
+                    if (index === 1 || index === 2) {
+                        material.opacity = 0.3; // 薄く表示
+                    } else {
+                        material.opacity = 0.7; // 通常表示
+                    }
+                });
+            });
+        }
         
         // アニメーションループ
         function animate() {
