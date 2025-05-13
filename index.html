@@ -41,7 +41,7 @@
     <!-- component-split: AnimationLibraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Swiper JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -203,6 +203,28 @@
         background-color: #ffffff;
         overflow-x: hidden;
         min-height: 100%;
+        position: relative;
+    }
+    
+    /* パーティクルコンテナ - 初期仕様準拠 */
+    .particles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    }
+    
+    /* canvasスタイル */
+    #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
     }
     
     /* スワイプ型レスポンシブデザイン - 完全版 */
@@ -238,25 +260,6 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-        }
-        
-        .swipe-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--primary);
-            font-size: 20px;
-            animation: swipeUpHint 2s infinite;
-        }
-        
-        @keyframes swipeUpHint {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
         }
         
         .swipe-pagination {
@@ -487,37 +490,6 @@
         box-shadow: 0 5px 15px rgba(58, 95, 235, 0.3);
     }
 
-    /* パーティクルエフェクト - 初期仕様準拠 */
-    .particles-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
-
-    #particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-
-    .particles-fallback {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
-        z-index: -1;
-        display: none;
-    }
-
     /* ヒーローセクション - パーティクル背景付き */
     .hero {
         min-height: 100vh;
@@ -711,8 +683,7 @@
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        color: var(--primary);
-        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.8) 0%, rgba(0, 201, 167, 0.8) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -868,7 +839,7 @@
     }
 
     .section-bg-light {
-        background-color: #f5f5f7;
+        background-color: rgba(245, 245, 247, 0.8);
     }
 
     .container {
@@ -2447,8 +2418,9 @@
     </header>
     
     <!-- component-split: ParticleEffect -->
-    <canvas id="particles" class="particles-container"></canvas>
-    <div class="particles-fallback"></div>
+    <div class="particles-container">
+        <canvas id="particles"></canvas>
+    </div>
     
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
@@ -3009,12 +2981,6 @@
             <span class="swipe-pagination-bullet"></span>
             <span class="swipe-pagination-bullet"></span>
         </div>
-        
-        <!-- Swipe Indicator -->
-        <div class="swipe-indicator">
-            <i class="fas fa-chevron-up"></i>
-            <span>スワイプして続きを見る</span>
-        </div>
     </div>
     
     <!-- component-split: BottomBanner -->
@@ -3136,48 +3102,63 @@
         }
         
         function initParticles() {
+            const container = document.querySelector('.particles-container');
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ 
                 canvas: document.getElementById('particles'),
-                alpha: true 
+                alpha: true,
+                antialias: true
             });
             
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x000000, 0);
             
-            // パーティクル生成
+            // パーティクル生成 - 初期仕様の数量とカラー
             const particles = new THREE.BufferGeometry();
-            const particleCount = 50;
+            const particleCount = 80;
             const positions = new Float32Array(particleCount * 3);
             const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
             
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 10;
-                positions[i + 1] = (Math.random() - 0.5) * 10;
-                positions[i + 2] = (Math.random() - 0.5) * 10;
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
                 
-                // 初期仕様のカラーリング
+                // ランダムな位置
+                positions[i3] = (Math.random() - 0.5) * 15;
+                positions[i3 + 1] = (Math.random() - 0.5) * 15;
+                positions[i3 + 2] = (Math.random() - 0.5) * 15;
+                
+                // 初期仕様のカラーリング（プライマリとセカンダリの混合）
                 if (Math.random() > 0.5) {
-                    colors[i] = 0.23; // R (プライマリカラー)
-                    colors[i + 1] = 0.37; // G
-                    colors[i + 2] = 0.92; // B
+                    // プライマリカラー系
+                    colors[i3] = 0.231; // R (59/255)
+                    colors[i3 + 1] = 0.373; // G (95/255)
+                    colors[i3 + 2] = 0.922; // B (235/255)
                 } else {
-                    colors[i] = 0; // R (セカンダリカラー)
-                    colors[i + 1] = 0.79; // G
-                    colors[i + 2] = 0.65; // B
+                    // セカンダリカラー系
+                    colors[i3] = 0; // R (0/255)
+                    colors[i3 + 1] = 0.788; // G (201/255)
+                    colors[i3 + 2] = 0.655; // B (167/255)
                 }
+                
+                // ランダムなサイズ
+                sizes[i] = Math.random() * 0.05 + 0.01;
             }
             
             particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
             
+            // パーティクルマテリアル
             const material = new THREE.PointsMaterial({
-                size: 0.01,
+                size: 0.02,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.6,
-                sizeAttenuation: true
+                opacity: 0.8,
+                sizeAttenuation: true,
+                blending: THREE.AdditiveBlending
             });
             
             const particleSystem = new THREE.Points(particles, material);
@@ -3185,23 +3166,49 @@
             
             camera.position.z = 5;
             
-            // マウス追従
+            // 環境光
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // マウス追従用変数
             let mouseX = 0;
             let mouseY = 0;
+            let windowHalfX = window.innerWidth / 2;
+            let windowHalfY = window.innerHeight / 2;
             
             document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                mouseX = event.clientX - windowHalfX;
+                mouseY = event.clientY - windowHalfY;
             });
             
+            // アニメーションループ
             function animate() {
                 requestAnimationFrame(animate);
                 
-                particleSystem.rotation.x += 0.001;
-                particleSystem.rotation.y += 0.001;
+                // パーティクルの回転
+                particleSystem.rotation.x += 0.0005;
+                particleSystem.rotation.y += 0.0005;
                 
-                particleSystem.rotation.x += mouseY * 0.0005;
-                particleSystem.rotation.y += mouseX * 0.0005;
+                // マウス位置に応じたカメラの動き
+                camera.position.x += (mouseX * 0.0001 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 0.0001 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                
+                // パーティクルの個別アニメーション
+                const positions = particles.attributes.position.array;
+                const time = Date.now() * 0.00005;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const i3 = i * 3;
+                    const x = positions[i3];
+                    const y = positions[i3 + 1];
+                    
+                    // 波形アニメーション
+                    positions[i3 + 1] = y + Math.sin((x + time) * 2) * 0.001;
+                    positions[i3] = x + Math.cos((y + time) * 2) * 0.001;
+                }
+                
+                particles.attributes.position.needsUpdate = true;
                 
                 renderer.render(scene, camera);
             }
@@ -3210,8 +3217,12 @@
             
             // ウィンドウリサイズ対応
             window.addEventListener('resize', () => {
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+                
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
+                
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
         }
@@ -3506,31 +3517,32 @@
             }
         }
         
-        // ボット応答 - 人間の行動心理学を考慮
+        // ボット応答 - 人間の行動心理学を考慮（AI伴走型開発の理念反映）
         function botResponse(userInput) {
             showTypingIndicator();
             
             setTimeout(() => {
                 removeTypingIndicator();
                 
-                // シンプルな応答ロジック
                 let response;
                 const input = userInput.toLowerCase();
                 
                 if (input.includes('こんにちは') || input.includes('はじめまして')) {
                     response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？AI導入について何かお困りのことはございますか？';
                 } else if (input.includes('料金') || input.includes('費用') || input.includes('価格')) {
-                    response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。まずは小さなプロトタイプから始めて、段階的に拡張していく柔軟なプランをご用意しています。詳しくは無料相談にてお見積りをご案内しております。';
+                    response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。まずは小さなプロトタイプから始めて、効果を検証しながら段階的に拡張していく柔軟なプランをご用意しています。初期投資を抑えながら着実に成果を出すことが可能です。詳しくは無料相談にてお見積りをご案内しております。';
                 } else if (input.includes('アイプロ') || input.includes('企画書')) {
-                    response = '新規事業企画書AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。まずはプロトタイプからお試しいただき、段階的に機能を拡張することも可能です。詳しくはサービスページをご覧ください。';
+                    response = '新規事業企画書AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。まずはプロトタイプでその効果を実感いただき、段階的に機能を拡張することも可能です。「小さく始めて大きく育てる」アプローチで、リスクを最小限に抑えながら導入いただけます。詳しくはサービスページをご覧ください。';
                 } else if (input.includes('導入事例') || input.includes('実績')) {
-                    response = '様々な業界でのAI活用事例をご用意しています。業界別活用ページで、福祉・介護、教育、建設、製造、医療など、各分野での実績をご紹介しています。どの業界でもまずは小さく始めて、効果を実感してから拡張できるようサポートしています。';
+                    response = '様々な業界でのAI活用事例をご用意しています。重要なのは、どの事例も「小さく始めて、効果を確認しながら拡張していく」アプローチを採用している点です。福祉・介護、教育、建設、製造、医療など、各分野でまずはプロトタイプから始めて、着実に成果を積み重ねています。';
                 } else if (input.includes('相談') || input.includes('問い合わせ')) {
-                    response = '無料相談は「お問い合わせ」ページからお申し込みいただけます。小さなプロトタイプから始めて、お客様と伴走しながら理想のAIソリューションを実現します。お気軽にご相談ください。';
+                    response = '無料相談では、まず貴社の課題をじっくりお伺いし、小さなプロトタイプから始める最適なAI導入プランをご提案します。「伴走型開発」により、お客様と同じ方向を向いて、一緒に成功へと向かっていきます。お気軽にご相談ください。';
                 } else if (input.includes('内製化') || input.includes('教育')) {
-                    response = 'ShinAIでは社内AIチームの育成・内製化支援を行っています。「やりっぱなしにしないAI導入」を徹底し、成果定着と自走化を実現します。知識移転にも注力しており、お客様が自走できる体制づくりをサポートします。';
+                    response = 'ShinAIでは社内AIチームの育成・内製化支援を重視しています。「やりっぱなしにしないAI導入」を徹底し、プロトタイプから始めて、徐々に貴社スタッフが自走できる体制を構築します。伴走しながら知識移転を行い、持続可能なAI活用を実現します。';
+                } else if (input.includes('プロトタイプ') || input.includes('小さく始める')) {
+                    response = '素晴らしい着眼点です！ShinAIの強みは「プロトタイプからの伴走型開発」です。従来の重いシステム開発とは異なり、まず小さく始めて効果を確認し、方向性をすり合わせながら段階的に拡張していきます。これにより初期投資リスクを抑えながら、確実に成果を出すことができます。';
                 } else {
-                    response = 'ご質問ありがとうございます。ShinAIでは、まず小さく始めて効果を実感していただくアプローチを大切にしています。より詳しくお答えさせていただきたいので、お問い合わせフォームからご連絡いただくか、無料相談をご利用ください。';
+                    response = 'ご質問ありがとうございます。ShinAIでは、まず小さなプロトタイプから始めて、お客様と伴走しながら最適なAIソリューションを構築していきます。初期投資を抑えながら着実に成果を積み重ねるアプローチで、多くの企業様から高い評価をいただいています。詳しくは無料相談にてご説明させていただきますので、お気軽にお問い合わせください。';
                 }
                 
                 addMessage(response);
