@@ -250,7 +250,12 @@
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center; /* 中央配置に変更 */
+        }
+        
+        /* フッターをスワイプ最下部に固定 */
+        .footer {
+            margin-top: auto;
         }
         
         .swipe-pagination {
@@ -496,8 +501,12 @@
     @media (max-width: 768px) {
         .hero {
             padding-top: 40px;
-            padding-bottom: 80px;
-            min-height: 100vh;
+            padding-bottom: 40px;
+            height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 
@@ -2409,23 +2418,24 @@
     <!-- component-split: SwipeContainer for Mobile -->
     <div class="swipe-container">
         <div class="swipe-wrapper" id="swipe-wrapper">
-            <main id="main-content">
-                <!-- component-split: HeroSection -->
-                <section class="section hero swipe-slide" id="hero">
-                    <!-- 浮遊エレメント -->
-                    <div class="floating-elements">
-                        <div class="floating-element"></div>
-                        <div class="floating-element"></div>
-                        <div class="floating-element"></div>
-                        <div class="floating-element"></div>
-                    </div>
+            <div class="swipe-wrapper" id="swipe-wrapper">
+                <main id="main-content">
+                    <!-- component-split: HeroSection -->
+                    <section class="section hero swipe-slide" id="hero">
+                        <!-- 浮遊エレメント -->
+                        <div class="floating-elements">
+                            <div class="floating-element"></div>
+                            <div class="floating-element"></div>
+                            <div class="floating-element"></div>
+                            <div class="floating-element"></div>
+                        </div>
                     
                     <div class="hero-bg-container">
                         <picture>
                             <source srcset="https://images.unsplash.com/photo-1675483052107-bca0ce10114b?auto=format&fit=crop&q=80&w=2000&h=1200&fm=webp" type="image/webp">
                             <img 
                                  src="https://images.unsplash.com/photo-1675483052107-bca0ce10114b?auto=format&fit=crop&q=80&w=2000&h=1200" 
-                                 alt="AI技術を象徴する抽象的な青と紫のグラデーション" 
+                                 alt="ShinAI - ヒーロー背景画像" 
                                  class="hero-bg active" 
                                  loading="eager"
                                  width="2000"
@@ -3027,6 +3037,12 @@
                 bullet.classList.toggle('active', i === index);
             });
             
+            // モバイル時はホームセクションを常に画面いっぱいに表示
+            if (index === 0) {
+                document.querySelector('#hero').style.height = '100vh';
+                document.querySelector('#hero').style.minHeight = '-webkit-fill-available';
+            }
+            
             // トランジション完了後
             setTimeout(() => {
                 isTransitioning = false;
@@ -3292,9 +3308,21 @@
             }, 250);
         });
         
-        // ページロード完了時のアニメーション
+        // ページロード完了時の処理
         window.addEventListener('load', function() {
             document.body.classList.add('page-loaded');
+            
+            // モバイル表示時にヒーローセクションを全画面で表示
+            if (window.innerWidth <= 768) {
+                const heroSection = document.getElementById('hero');
+                if (heroSection) {
+                    heroSection.style.height = '100vh';
+                    heroSection.style.minHeight = '-webkit-fill-available';
+                    heroSection.style.display = 'flex';
+                    heroSection.style.alignItems = 'center';
+                    heroSection.style.justifyContent = 'center';
+                }
+            }
         });
     });
 
@@ -3322,9 +3350,9 @@
         const positions = [];
         const colors = [];
         
-        // ブランドカラーのグラデーション（青と緑）
-        const color1 = new THREE.Color(0x3A5FEB); // 青
-        const color2 = new THREE.Color(0x00C9A7); // 緑
+        // 淡いピンク色
+        const pinkColor = new THREE.Color(0xffb6c1);
+        const lightPinkColor = new THREE.Color(0xffc0cb);
         
         for (let i = 0; i < particleCount; i++) {
             // ランダムな位置
@@ -3336,7 +3364,7 @@
             
             // 色の混合（グラデーション）
             const mixRatio = Math.random();
-            const mixedColor = new THREE.Color().lerpColors(color1, color2, mixRatio);
+            const mixedColor = new THREE.Color().lerpColors(pinkColor, lightPinkColor, mixRatio);
             
             colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
         }
@@ -3354,45 +3382,6 @@
         
         const particleSystem = new THREE.Points(particles, material);
         scene.add(particleSystem);
-        
-        // 接続線の描画
-        const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0xcccccc,
-            transparent: true,
-            opacity: 0.2
-        });
-        
-        const lineGeometry = new THREE.BufferGeometry();
-        const linePositions = [];
-        
-        // 近いパーティクル同士を線で結ぶ
-        const maxDistance = 15; // 結ぶ最大距離
-        
-        for (let i = 0; i < particleCount; i++) {
-            for (let j = i + 1; j < particleCount; j++) {
-                const x1 = positions[i * 3];
-                const y1 = positions[i * 3 + 1];
-                const z1 = positions[i * 3 + 2];
-                
-                const x2 = positions[j * 3];
-                const y2 = positions[j * 3 + 1];
-                const z2 = positions[j * 3 + 2];
-                
-                const distance = Math.sqrt(
-                    Math.pow(x2 - x1, 2) +
-                    Math.pow(y2 - y1, 2) +
-                    Math.pow(z2 - z1, 2)
-                );
-                
-                if (distance < maxDistance) {
-                    linePositions.push(x1, y1, z1, x2, y2, z2);
-                }
-            }
-        }
-        
-        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-        scene.add(lines);
         
         // マウス操作
         let mouseX = 0;
