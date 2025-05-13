@@ -156,13 +156,15 @@
         position: relative;
     }
     
-    /* スワイプ型レスポンシブデザイン - 改善版 */
+    /* スワイプ型レスポンシブデザイン - 完全改良版 */
     @media (max-width: 768px) {
         html, body {
             height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
             position: fixed;
-            width: 100%;
         }
         
         .swipe-container {
@@ -177,7 +179,7 @@
         .swipe-wrapper {
             height: 100vh;
             width: 100%;
-            position: relative;
+            position: absolute;
             transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
             display: flex;
             flex-direction: column;
@@ -189,88 +191,99 @@
             min-height: 100vh;
             height: 100vh;
             width: 100%;
-            position: relative;
+            position: absolute;
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
             scroll-behavior: smooth;
+            padding: 0;
         }
         
-        /* ヒーローセクションを確実に最初に表示 */
-        .swipe-slide:first-child {
+        /* 各スライドの位置を明示的に設定 */
+        .swipe-slide:nth-child(1) { top: 0vh; }
+        .swipe-slide:nth-child(2) { top: 100vh; }
+        .swipe-slide:nth-child(3) { top: 200vh; }
+        .swipe-slide:nth-child(4) { top: 300vh; }
+        .swipe-slide:nth-child(5) { top: 400vh; }
+        .swipe-slide:nth-child(6) { top: 500vh; }
+        .swipe-slide:nth-child(7) { top: 600vh; }
+        .swipe-slide:nth-child(8) { top: 700vh; }
+        .swipe-slide:nth-child(9) { top: 800vh; }
+        .swipe-slide:nth-child(10) { top: 900vh; }
+        
+        /* ヒーローセクションの調整 */
+        .hero {
+            min-height: 100vh;
+            height: 100vh;
+            padding-top: 60px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
         }
         
-        /* フッターセクション専用のスタイル */
-        .footer-section {
-            background: var(--dark);
+        /* セクションの調整 */
+        .section {
+            min-height: 100vh;
+            padding: 3rem 1rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
         }
         
-        /* フッターを含むセクションも同じ高さに */
-        .footer {
-            position: relative;
-            margin-top: auto;
-            background: transparent;
-        }
-        
-        /* パーティクルが見えるようにセクションの背景を調整 */
-        .swipe-slide {
-            background: transparent;
-        }
-        
-        .swipe-slide.footer-section {
+        /* フッターセクションの調整 */
+        .footer-section {
             background: var(--dark);
+            min-height: 100vh;
         }
         
+        .footer {
+            padding: 2rem 0;
+        }
+        
+        /* スワイプページネーション */
         .swipe-pagination {
             position: fixed;
-            right: 20px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
         .swipe-pagination-bullet {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: rgba(58, 95, 235, 0.3);
-            border: 2px solid rgba(58, 95, 235, 0.6);
+            background: rgba(255, 192, 203, 0.3);
+            border: 2px solid rgba(255, 192, 203, 0.6);
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(4px);
         }
         
         .swipe-pagination-bullet.active {
-            background: var(--primary);
-            transform: scale(1.3);
-            box-shadow: 0 0 10px rgba(58, 95, 235, 0.5);
+            background: #FFB6C1;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
         }
         
         /* スワイプインジケーター */
         .swipe-indicator {
             position: fixed;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            color: var(--primary);
-            font-size: 0.9rem;
+            color: #FFB6C1;
+            font-size: 0.85rem;
             animation: bounce 2s infinite;
             opacity: 0.8;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         @keyframes bounce {
@@ -283,6 +296,50 @@
             60% {
                 transform: translateX(-50%) translateY(-5px);
             }
+        }
+        
+        /* パーティクルが見えるようにセクションの背景を調整 */
+        .swipe-slide {
+            background: transparent;
+        }
+        
+        .section-bg-light {
+            background-color: rgba(245, 245, 247, 0.9);
+        }
+        
+        /* ヘッダーの調整 */
+        .header {
+            z-index: 1001;
+        }
+        
+        /* コンテンツの調整 */
+        .container {
+            padding: 0 1rem;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+        }
+        
+        .hero-cta {
+            flex-direction: column;
+            width: 100%;
+            padding: 0 1rem;
+        }
+        
+        .hero-cta .btn {
+            width: 100%;
+        }
+        
+        .benefits-grid,
+        .services-preview-grid,
+        .vision-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
     }
 
@@ -3240,10 +3297,15 @@
             }, 100);
         }
         
-        // パーティクルエフェクトの初期化 - グローバル背景として確実に表示
+        // パーティクルエフェクトの初期化 - 初期ファイル準拠（淡いピンク色）
         function initParticles() {
             if (!window.THREE) {
                 console.error('Three.js is not loaded');
+                // Three.jsの手動読み込み
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+                script.onload = () => initParticles();
+                document.head.appendChild(script);
                 return;
             }
             
@@ -3253,6 +3315,7 @@
                 return;
             }
             
+            // Three.jsのセットアップ
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ 
@@ -3265,96 +3328,87 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setClearColor(0x000000, 0);
             
-            // パーティクル生成 - 視認性向上
-            const particles = new THREE.BufferGeometry();
-            const particleCount = 100; // 数を増やして全体をカバー
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            const sizes = new Float32Array(particleCount);
+            // ジオメトリとマテリアルの作成 - 初期ファイルの設定を再現
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            const colors = [];
+            
+            // パーティクルの数を増やして全体をカバー
+            const particleCount = 150;
             
             for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
+                // ランダムな位置（より広い範囲）
+                const x = (Math.random() - 0.5) * 50;
+                const y = (Math.random() - 0.5) * 50;
+                const z = (Math.random() - 0.5) * 50;
                 
-                // より広い範囲に配置
-                positions[i3] = (Math.random() - 0.5) * 30;
-                positions[i3 + 1] = (Math.random() - 0.5) * 30;
-                positions[i3 + 2] = (Math.random() - 0.5) * 30;
+                vertices.push(x, y, z);
                 
-                // カラーリング
-                if (Math.random() > 0.5) {
-                    // プライマリカラー - より鮮明に
-                    colors[i3] = 0.3; // R
-                    colors[i3 + 1] = 0.4; // G
-                    colors[i3 + 2] = 0.95; // B
-                } else {
-                    // セカンダリカラー
-                    colors[i3] = 0; // R
-                    colors[i3 + 1] = 0.8; // G
-                    colors[i3 + 2] = 0.7; // B
-                }
+                // 淡いピンク色のグラデーション
+                const r = 0.98 + Math.random() * 0.02; // 250-255
+                const g = 0.82 + Math.random() * 0.08; // 210-230
+                const b = 0.94 + Math.random() * 0.05; // 240-252
                 
-                // より大きなサイズ
-                sizes[i] = Math.random() * 0.5 + 0.2;
+                colors.push(r, g, b);
             }
             
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
             
-            // パーティクルマテリアル - より鮮明に
+            // 淡いピンクのパーティクルマテリアル
             const material = new THREE.PointsMaterial({
-                size: 0.2,
+                size: 2.5,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.9,
-                sizeAttenuation: true,
-                blending: THREE.AdditiveBlending
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
             });
             
-            const particleSystem = new THREE.Points(particles, material);
-            scene.add(particleSystem);
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
             
-            camera.position.z = 8;
+            // カメラの位置
+            camera.position.z = 30;
             
-            // 環境光
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            // マウス追従用変数
+            // マウス位置追跡
             let mouseX = 0;
             let mouseY = 0;
             
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
+            const onDocumentMouseMove = (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / 100;
+                mouseY = (event.clientY - window.innerHeight / 2) / 100;
+            };
             
-            // アニメーションループ
-            function animate() {
+            document.addEventListener('mousemove', onDocumentMouseMove);
+            
+            // アニメーションループ - 初期ファイルと同じ動き
+            const animate = () => {
                 requestAnimationFrame(animate);
                 
-                // パーティクルの回転
-                particleSystem.rotation.x += 0.0003;
-                particleSystem.rotation.y += 0.0003;
+                // ゆっくりとした回転
+                particles.rotation.x += 0.0002;
+                particles.rotation.y += 0.0003;
                 
-                // マウス位置に応じたカメラの動き
-                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
-                camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.02;
-                camera.lookAt(scene.position);
+                // マウス追従の動き
+                particles.position.x += (mouseX - particles.position.x) * 0.02;
+                particles.position.y += (-mouseY - particles.position.y) * 0.02;
                 
                 renderer.render(scene, camera);
-            }
+            };
             
             animate();
             
             // ウィンドウリサイズ対応
-            window.addEventListener('resize', () => {
+            const onWindowResize = () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+            };
             
-            console.log('Particles initialized successfully');
+            window.addEventListener('resize', onWindowResize);
+            
+            console.log('Particles initialized with pink theme');
         }
         
         // Three.jsの読み込み待機と初期化
