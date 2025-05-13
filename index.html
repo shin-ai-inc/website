@@ -159,69 +159,6 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
-    
-    <!-- Three.jsパーティクル用スクリプト -->
-    <script>
-        // パーティクル効果の初期化
-        window.addEventListener('load', function() {
-            if (typeof THREE !== 'undefined') {
-                // Three.jsが読み込まれていれば、パーティクルを初期化
-                initParticles();
-            }
-        });
-        
-        function initParticles() {
-            const particlesContainer = document.getElementById('particles');
-            if (!particlesContainer) return;
-            
-            // Three.jsでパーティクルを作成
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: particlesContainer, alpha: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            
-            // パーティクル生成
-            const particles = new THREE.BufferGeometry();
-            const particleCount = 50;
-            const positions = new Float32Array(particleCount * 3);
-            
-            for (let i = 0; i < particleCount * 3; i++) {
-                positions[i] = (Math.random() - 0.5) * 10;
-            }
-            
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            
-            const material = new THREE.PointsMaterial({
-                color: 0x3A5FEB,
-                size: 0.05,
-                transparent: true,
-                opacity: 0.6
-            });
-            
-            const particleSystem = new THREE.Points(particles, material);
-            scene.add(particleSystem);
-            
-            camera.position.z = 5;
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                particleSystem.rotation.x += 0.001;
-                particleSystem.rotation.y += 0.001;
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // ウィンドウリサイズ対応
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-    </script>
 
     <!-- component-split: PageSpecificStyles -->
     <style>
@@ -687,61 +624,28 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* 「人間らしい時間」のスタイル - 立体感（シャドウなし） */
+    /* 「人間らしい時間」のスタイル - 初期カラーを使用 */
     .hero-title .highlight {
         position: relative;
         display: inline-block;
-        background: linear-gradient(135deg, #7B9FFF 0%, #6EDEC8 100%);
+        background: linear-gradient(135deg, #1a1f36 0%, #3A5FEB 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: transparent;
         font-weight: 900;
-        transition: var(--transition);
-        transform: translateY(0) perspective(1000px) rotateX(0deg);
-        text-transform: none;
-        letter-spacing: -0.02em;
     }
 
-    /* 人間らしい時間の下線エフェクト - 立体感強化 */
+    /* 人間らしい時間の下線エフェクト */
     .hero-title .highlight::after {
         content: '';
         position: absolute;
-        bottom: -0.05em;
+        bottom: 0.1em;
         left: 0;
         width: 100%;
-        height: 0.12em;
-        background: linear-gradient(135deg, #7B9FFF 0%, #6EDEC8 100%);
+        height: 0.2em;
+        background: linear-gradient(90deg, rgba(58, 95, 235, 0.3), rgba(0, 201, 167, 0.3));
         z-index: -1;
-        border-radius: 3px;
-        transition: all 0.3s ease;
-        transform: translateZ(0) scaleY(1);
-    }
-
-    /* 文字の3D効果 */
-    .hero-title .highlight::before {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: linear-gradient(135deg, #5E85FF 0%, #4ED6B8 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        z-index: -1;
-        transform: translateX(2px) translateY(2px) translateZ(-10px);
-        opacity: 0.5;
-    }
-
-    /* ホバー時の立体効果 */
-    .hero-title .highlight:hover {
-        transform: translateY(-3px) perspective(1000px) rotateX(-5deg);
-    }
-
-    .hero-title .highlight:hover::after {
-        height: 0.18em;
-        transform: translateZ(0) scaleY(1.2);
-        background: linear-gradient(135deg, #8EA9FF 0%, #7EE6D8 100%);
+        border-radius: 5px;
     }
 
     /* ホバーエフェクト */
@@ -1327,7 +1231,7 @@
         background: white;
         border-radius: 24px;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        display: flex;
+        display: none;
         flex-direction: column;
         overflow: hidden;
         transform: scale(0);
@@ -1338,6 +1242,7 @@
 
     .chatbot-container.active {
         transform: scale(1);
+        display: flex;
     }
 
     .chatbot-header {
@@ -2016,7 +1921,7 @@
     </header>
     
     <!-- component-split: ParticleEffect -->
-    <canvas id="particles" class="particles-container"></canvas>
+    <div class="particles-container" id="particles"></div>
     <div class="particles-fallback"></div>
     
     <!-- component-split: SwipeContainer for Mobile -->
@@ -2624,13 +2529,19 @@
         const chatbotSubmit = document.getElementById('chatbot-submit');
         const chatbotMessages = document.getElementById('chatbot-messages');
         
-        // チャットボットの初期状態を非表示に設定
-        chatbotContainer.classList.remove('active');
+        // チャットボットの初期状態を非表示に設定（ページ読み込み時に確実に非表示）
+        if (chatbotContainer) {
+            chatbotContainer.classList.remove('active');
+            chatbotContainer.style.display = 'none';
+        }
         
         chatbotToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            chatbotContainer.classList.add('active');
+            chatbotContainer.style.display = 'flex';
+            setTimeout(() => {
+                chatbotContainer.classList.add('active');
+            }, 10);
             this.setAttribute('aria-expanded', 'true');
             this.classList.add('hidden');
             setTimeout(() => {
@@ -2644,6 +2555,9 @@
             chatbotContainer.classList.remove('active');
             chatbotToggle.setAttribute('aria-expanded', 'false');
             chatbotToggle.classList.remove('hidden');
+            setTimeout(() => {
+                chatbotContainer.style.display = 'none';
+            }, 300);
         });
         
         // モバイルでのバツボタンをより確実に動作させる
@@ -2654,6 +2568,9 @@
                 chatbotContainer.classList.remove('active');
                 chatbotToggle.setAttribute('aria-expanded', 'false');
                 chatbotToggle.classList.remove('hidden');
+                setTimeout(() => {
+                    chatbotContainer.style.display = 'none';
+                }, 300);
             });
         }
         
