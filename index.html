@@ -156,32 +156,38 @@
         position: relative;
     }
     
-    /* スワイプ型レスポンシブデザイン - 完全実装 */
+    /* スワイプ型レスポンシブデザイン - 改善版 */
     @media (max-width: 768px) {
         html, body {
             height: 100%;
             overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
         
         .swipe-container {
             height: 100vh;
             width: 100%;
-            position: relative;
+            position: fixed;
             overflow: hidden;
+            top: 0;
+            left: 0;
         }
         
         .swipe-wrapper {
             height: 100vh;
             width: 100%;
             position: relative;
-            transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
             display: flex;
             flex-direction: column;
             transform: translateY(0);
+            will-change: transform;
         }
         
         .swipe-slide {
             min-height: 100vh;
+            height: 100vh;
             width: 100%;
             position: relative;
             overflow-y: auto;
@@ -191,6 +197,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            scroll-behavior: smooth;
         }
         
         /* ヒーローセクションを確実に最初に表示 */
@@ -198,6 +205,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* フッターを含むセクションも同じ高さに */
+        .footer {
+            position: relative;
+            margin-top: auto;
         }
         
         .swipe-pagination {
@@ -205,7 +219,7 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 100;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -219,12 +233,38 @@
             border: 2px solid rgba(58, 95, 235, 0.6);
             cursor: pointer;
             transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
         }
         
         .swipe-pagination-bullet.active {
             background: var(--primary);
             transform: scale(1.3);
             box-shadow: 0 0 10px rgba(58, 95, 235, 0.5);
+        }
+        
+        /* スワイプインジケーター */
+        .swipe-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            color: var(--primary);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
     }
 
@@ -3136,23 +3176,41 @@
         
         // モバイルの初期表示を修正 - トップページが確実に表示されるように
         if (window.innerWidth <= 768) {
-            // スワイプラッパーの初期位置を明示的に設定
+            // スワイプラッパーの初期位置を強制的に設定
             const swipeWrapper = document.getElementById('swipe-wrapper');
             swipeWrapper.style.transform = 'translateY(0)';
+            swipeWrapper.style.transition = 'none'; // 初期表示時はアニメーション無効
             
             // 初期状態でhero要素の高さを画面いっぱいに設定
             const hero = document.getElementById('hero');
             hero.style.minHeight = '100vh';
             hero.style.height = '100vh';
+            
+            // スクロール位置を強制的にトップへ
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            
+            // 少し遅延してからトランジションを有効化
+            setTimeout(() => {
+                swipeWrapper.style.transition = '';
+            }, 100);
         }
         
         // パーティクルエフェクトの初期化 - 初期仕様準拠（Three.js）
-        if (window.THREE) {
-            initParticles();
-        }
-        
+        // Three.jsの読み込み確認と初期化
         function initParticles() {
+            if (!window.THREE) {
+                console.error('Three.js is not loaded');
+                return;
+            }
+            
             const container = document.getElementById('particles-js');
+            if (!container) {
+                console.error('Particles container not found');
+                return;
+            }
+            
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ 
@@ -3183,18 +3241,18 @@
                 // 初期仕様のカラーリング（プライマリとセカンダリ）
                 if (Math.random() > 0.5) {
                     // プライマリカラー
-                    colors[i3] = 0.231; // R
-                    colors[i3 + 1] = 0.373; // G
-                    colors[i3 + 2] = 0.922; // B
+                    colors[i3] = 0.231; // R (58/255)
+                    colors[i3 + 1] = 0.373; // G (95/255)
+                    colors[i3 + 2] = 0.922; // B (235/255)
                 } else {
                     // セカンダリカラー
-                    colors[i3] = 0; // R
-                    colors[i3 + 1] = 0.788; // G
-                    colors[i3 + 2] = 0.655; // B
+                    colors[i3] = 0; // R (0/255)
+                    colors[i3 + 1] = 0.788; // G (201/255)
+                    colors[i3 + 2] = 0.655; // B (167/255)
                 }
                 
                 // ランダムなサイズ
-                sizes[i] = Math.random() * 0.1 + 0.02;
+                sizes[i] = Math.random() * 0.3 + 0.1;
             }
             
             particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -3203,10 +3261,10 @@
             
             // パーティクルマテリアル
             const material = new THREE.PointsMaterial({
-                size: 0.05,
+                size: 0.15,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.7,
+                opacity: 0.8,
                 sizeAttenuation: true,
                 blending: THREE.AdditiveBlending
             });
@@ -3234,12 +3292,12 @@
                 requestAnimationFrame(animate);
                 
                 // パーティクルの回転
-                particleSystem.rotation.x += 0.001;
-                particleSystem.rotation.y += 0.001;
+                particleSystem.rotation.x += 0.0005;
+                particleSystem.rotation.y += 0.0005;
                 
                 // マウス位置に応じたカメラの動き
-                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
-                camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
+                camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.02;
                 camera.lookAt(scene.position);
                 
                 renderer.render(scene, camera);
@@ -3253,6 +3311,19 @@
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
+        }
+        
+        // Three.jsの読み込み待機と初期化
+        if (window.THREE) {
+            initParticles();
+        } else {
+            // Three.jsが読み込まれるまで待機
+            const checkThree = setInterval(() => {
+                if (window.THREE) {
+                    clearInterval(checkThree);
+                    initParticles();
+                }
+            }, 100);
         }
         
         // Swiper初期化
@@ -3288,7 +3359,7 @@
             },
         });
         
-        // スワイプ型レスポンシブデザインの実装 - 完全実装
+        // スワイプ型レスポンシブデザインの実装 - 改善版
         const slides = document.querySelectorAll('.swipe-slide');
         const bullets = document.querySelectorAll('.swipe-pagination-bullet');
         const swipeWrapper = document.getElementById('swipe-wrapper');
@@ -3296,10 +3367,15 @@
         let isTransitioning = false;
         let touchStartY = 0;
         let touchEndY = 0;
+        let touchStartTime = 0;
+        const swipeThreshold = 50; // スワイプ感度
+        const swipeTimeout = 500; // スワイプ判定時間
         
         // スワイプイベントの初期化
         if (window.innerWidth <= 768) {
             initSwipeEvents();
+            // スワイプインジケーターを追加
+            addSwipeIndicator();
         }
         
         function initSwipeEvents() {
@@ -3307,6 +3383,9 @@
             document.addEventListener('touchstart', handleTouchStart, { passive: true });
             document.addEventListener('touchmove', handleTouchMove, { passive: false });
             document.addEventListener('touchend', handleTouchEnd, { passive: true });
+            
+            // マウスホイールイベント（デスクトップでのテスト用）
+            document.addEventListener('wheel', handleWheel, { passive: false });
             
             // ページネーションのクリックイベント
             bullets.forEach((bullet, index) => {
@@ -3316,6 +3395,7 @@
         
         function handleTouchStart(e) {
             touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
         }
         
         function handleTouchMove(e) {
@@ -3326,14 +3406,30 @@
         
         function handleTouchEnd(e) {
             touchEndY = e.changedTouches[0].clientY;
-            handleSwipe();
+            const touchEndTime = Date.now();
+            const timeDiff = touchEndTime - touchStartTime;
+            
+            // スワイプ速度も考慮
+            if (timeDiff < swipeTimeout) {
+                handleSwipe();
+            }
+        }
+        
+        function handleWheel(e) {
+            if (isTransitioning) return;
+            e.preventDefault();
+            
+            if (e.deltaY > 0 && currentSlide < slides.length - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (e.deltaY < 0 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
         }
         
         function handleSwipe() {
             if (isTransitioning) return;
             
             const swipeDistance = touchStartY - touchEndY;
-            const swipeThreshold = 50;
             
             if (Math.abs(swipeDistance) > swipeThreshold) {
                 if (swipeDistance > 0 && currentSlide < slides.length - 1) {
@@ -3347,7 +3443,7 @@
         }
         
         function goToSlide(index) {
-            if (isTransitioning || index === currentSlide) return;
+            if (isTransitioning || index === currentSlide || index < 0 || index >= slides.length) return;
             
             isTransitioning = true;
             currentSlide = index;
@@ -3361,10 +3457,23 @@
                 bullet.classList.toggle('active', i === index);
             });
             
+            // 最初のスライドの場合、スワイプインジケーターを表示
+            const indicator = document.querySelector('.swipe-indicator');
+            if (indicator) {
+                indicator.style.display = index === 0 ? 'block' : 'none';
+            }
+            
             // トランジション完了後
             setTimeout(() => {
                 isTransitioning = false;
-            }, 500);
+            }, 600);
+        }
+        
+        function addSwipeIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'swipe-indicator';
+            indicator.innerHTML = '↑ スワイプして詳細を見る';
+            document.body.appendChild(indicator);
         }
         
         // ヘッダーの制御
