@@ -2153,7 +2153,7 @@
 
     /* ========================================================
     ▼ Back to Top Button - 改善版
-    ======================================================== -->
+    ======================================================== */
     .back-to-top {
         position: fixed;
         bottom: 30px;
@@ -2578,268 +2578,269 @@
     }
 
     .btn-primary {
-    background: var(--gradient-primary);
-    color: white;
-    padding: 0.8rem 1.8rem;
-    box-shadow: 0 4px 12px rgba(58, 95, 235, 0.2);
-}
+        background: var(--gradient-primary);
+        color: white;
+        padding: 0.8rem 1.8rem;
+        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.2);
+    }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(58, 95, 235, 0.3);
-}
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(58, 95, 235, 0.3);
+    }
 
-.btn-outline {
-    background: transparent;
-    color: var(--primary);
-    padding: 0.8rem 1.8rem;
-    border: 2px solid var(--primary);
-}
+    .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        padding: 0.8rem 1.8rem;
+        border: 2px solid var(--primary);
+    }
 
-.btn-outline:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-}
+    .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+    }
 
-/* ========================================================
-▼ 共通セクションスタイル
-======================================================== */
-.section-footer {
-    text-align: center;
-    margin-top: 3rem;
-}
-
-@media (max-width: 768px) {
+    /* ========================================================
+    ▼ 共通セクションスタイル
+    ======================================================== */
     .section-footer {
-        margin-top: 2rem;
+        text-align: center;
+        margin-top: 3rem;
     }
-}
 
-/* ========================================================
-▼ アクセシビリティ対応 - 改善版
-======================================================== */
-.skip-nav {
-    position: absolute;
-    left: -9999px;
-    z-index: 999;
-    padding: 1rem;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
-    border-radius: var(--radius);
-}
+    @media (max-width: 768px) {
+        .section-footer {
+            margin-top: 2rem;
+        }
+    }
 
-.skip-nav:focus {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 1rem;
-}
+    /* ========================================================
+    ▼ アクセシビリティ対応 - 改善版
+    ======================================================== */
+    .skip-nav {
+        position: absolute;
+        left: -9999px;
+        z-index: 999;
+        padding: 1rem;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: var(--radius);
+    }
 
-/* フォーカスインジケーター改善 */
-*:focus {
-    outline: 3px solid var(--primary);
-    outline-offset: 3px;
-}
+    .skip-nav:focus {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 1rem;
+    }
 
-/* タブキー使用時のみフォーカスリングを表示 */
-*:focus:not(:focus-visible) {
-    outline: none;
-}
+    /* フォーカスインジケーター改善 */
+    *:focus {
+        outline: 3px solid var(--primary);
+        outline-offset: 3px;
+    }
 
-*:focus-visible {
-    outline: 3px solid var(--primary);
-    outline-offset: 3px;
-}
+    /* タブキー使用時のみフォーカスリングを表示 */
+    *:focus:not(:focus-visible) {
+        outline: none;
+    }
 
-/* キーボードナビゲーション改善 */
-.keyboard-focusable {
-    position: relative;
-}
+    *:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 3px;
+    }
 
-.keyboard-focusable:focus-visible::after {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 3px solid var(--primary);
-    border-radius: inherit;
-    pointer-events: none;
-}
+    /* キーボードナビゲーション改善 */
+    .keyboard-focusable {
+        position: relative;
+    }
 
-/* ========================================================
-▼ レスポンシブユーティリティクラス
-======================================================== */
-.hide-mobile {
-    display: block;
-}
+    .keyboard-focusable:focus-visible::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border: 3px solid var(--primary);
+        border-radius: inherit;
+        pointer-events: none;
+    }
 
-@media (max-width: 768px) {
+    /* ========================================================
+    ▼ レスポンシブユーティリティクラス
+    ======================================================== */
     .hide-mobile {
-        display: none !important;
+        display: block;
     }
-}
 
-.show-mobile {
-    display: none;
-}
+    @media (max-width: 768px) {
+        .hide-mobile {
+            display: none !important;
+        }
+    }
 
-@media (max-width: 768px) {
     .show-mobile {
-        display: block !important;
-    }
-}
-
-/* ========================================================
-▼ パフォーマンス最適化
-======================================================== */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.hero-bg {
-    content-visibility: auto;
-}
-
-/* ========================================================
-▼ iPhone特化最適化 - プロフェッショナル対応
-======================================================== */
-@media only screen 
-and (min-device-width: 375px) 
-and (max-device-width: 812px) 
-and (-webkit-min-device-pixel-ratio: 3) {
-    body {
-        -webkit-text-size-adjust: 100%;
+        display: none;
     }
 
-    .header {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+    @media (max-width: 768px) {
+        .show-mobile {
+            display: block !important;
+        }
     }
 
-    .services-preview-grid {
-        padding: 0 0.8rem;
+    /* ========================================================
+    ▼ パフォーマンス最適化
+    ======================================================== */
+    img {
+        max-width: 100%;
+        height: auto;
+        loading: lazy;
     }
 
-    .service-preview-card {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        margin-bottom: 1.5rem;
+    .hero-bg {
+        loading: eager;
     }
 
-    .nav {
-        -webkit-overflow-scrolling: touch;
+    /* ========================================================
+    ▼ iPhone特化最適化 - プロフェッショナル対応
+    ======================================================== */
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 812px) 
+    and (-webkit-min-device-pixel-ratio: 3) {
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .header {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .services-preview-grid {
+            padding: 0 0.8rem;
+        }
+
+        .service-preview-card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+        }
+
+        .nav {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        input, button, select, textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* iPhone最適化 - スワイプ操作の強化 */
+        .swipe-container {
+            height: 100%;
+            overflow: hidden;
+            touch-action: pan-y;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .swipe-wrapper {
+            height: 100%;
+            will-change: transform;
+        }
+
+        .swipe-slide {
+            height: 100vh;
+            height: -webkit-fill-available;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        /* iPhoneノッチ対応 */
+        .hero {
+            padding-top: env(safe-area-inset-top, 40px);
+            padding-bottom: env(safe-area-inset-bottom, 40px);
+        }
+
+        /* タッチ操作の改善 */
+        .service-preview-card, 
+        .hero-cta .btn, 
+        .ai-escort-feature, 
+        .chatbot-toggle, 
+        .back-to-top {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
     }
 
-    .btn {
-        -webkit-tap-highlight-color: transparent;
+    /* ========================================================
+    ▼ WebKit用スクロールバーカスタム
+    ======================================================== */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
     }
 
-    input, button, select, textarea {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
     }
 
-    /* iPhone最適化 - スワイプ操作の強化 */
-    .swipe-container {
+    ::-webkit-scrollbar-thumb {
+        background: var(--gradient-primary);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    /* ========================================================
+    ▼ プリローダー
+    ======================================================== */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
-        overflow: hidden;
-        touch-action: pan-y;
-        -webkit-user-select: none;
-        user-select: none;
+        background: white;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    .swipe-wrapper {
-        height: 100%;
-        will-change: transform;
+    .preloader.loaded {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    .swipe-slide {
-        height: 100vh;
-        height: -webkit-fill-available;
-        overflow: hidden;
-        touch-action: pan-y;
+    .preloader-spinner {
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgba(58, 95, 235, 0.1);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
     }
 
-    /* iPhoneノッチ対応 */
-    .hero {
-        padding-top: env(safe-area-inset-top, 40px);
-        padding-bottom: env(safe-area-inset-bottom, 40px);
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
     }
-
-    /* タッチ操作の改善 */
-    .service-preview-card, 
-    .hero-cta .btn, 
-    .ai-escort-feature, 
-    .chatbot-toggle, 
-    .back-to-top {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-}
-
-/* ========================================================
-▼ WebKit用スクロールバーカスタム
-======================================================== */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--gradient-primary);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-/* ========================================================
-▼ プリローダー
-======================================================== */
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.preloader.loaded {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.preloader-spinner {
-    width: 60px;
-    height: 60px;
-    border: 3px solid rgba(58, 95, 235, 0.1);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-</style>
+    </style>
 </head>
 <body>
     <!-- ========================================================
@@ -2927,6 +2928,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                  src="https://images.unsplash.com/photo-1675483052107-bca0ce10114b?auto=format&fit=crop&q=80&w=2000&h=1200" 
                                  alt="ShinAI - ヒーロー背景画像" 
                                  class="hero-bg active" 
+                                 loading="eager"
                                  width="2000"
                                  height="1200">
                         </picture>
@@ -2936,6 +2938,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                  src="https://images.unsplash.com/photo-1677442135136-760c813029de?auto=format&fit=crop&q=80&w=2000&h=1200" 
                                  alt="ShinAI - ヒーロー背景画像2" 
                                  class="hero-bg" 
+                                 loading="lazy"
                                  width="2000"
                                  height="1200">
                         </picture>
@@ -2945,6 +2948,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                  src="https://images.unsplash.com/photo-1669644841336-aa3677cfb7ac?auto=format&fit=crop&q=80&w=2000&h=1200" 
                                  alt="ShinAI - ヒーロー背景画像3" 
                                  class="hero-bg" 
+                                 loading="lazy"
                                  width="2000"
                                  height="1200">
                         </picture>
@@ -3005,7 +3009,8 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                         src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900" 
                                         alt="チームワークを象徴する画像" 
                                         width="1200"
-                                        height="900">
+                                        height="900"
+                                        loading="lazy">
                                 </picture>
                             </div>
                             <div class="about-content">
@@ -3043,6 +3048,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                     <img 
                                          src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?auto=format&fit=crop&q=80&w=600&h=400" 
                                          alt="企画書資料作成AIツール「アイプロ」" 
+                                         loading="lazy"
                                          width="600" 
                                          height="400">
                                 </div>
@@ -3067,6 +3073,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                     <img 
                                          src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=600&h=400" 
                                          alt="オーダーメイドAI開発" 
+                                         loading="lazy"
                                          width="600" 
                                          height="400">
                                 </div>
@@ -3091,6 +3098,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
                                     <img 
                                          src="https://images.unsplash.com/photo-1664575599618-8f6bd76fc670?auto=format&fit=crop&q=80&w=600&h=400" 
                                          alt="AI導入コンサルティング" 
+                                         loading="lazy"
                                          width="600" 
                                          height="400">
                                 </div>
@@ -3448,8 +3456,694 @@ and (-webkit-min-device-pixel-ratio: 3) {
     <!-- ========================================================
     ▼ JavaScript - プロフェッショナル改善版
     ======================================================== -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/three-particles.js"></script>
-    <script src="assets/js/chatbot.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================================
+        // カレントイヤーの更新
+        // ========================================================
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // ========================================================
+        // プリローダー制御
+        // ========================================================
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('loaded');
+            }, 500);
+        });
+        
+        // ========================================================
+        // Three.jsパーティクルエフェクト初期化
+        // ========================================================
+        initThreeJsParticles();
+        
+        // ========================================================
+        // Swiper初期化 - 業界別AI活用セクション
+        // ========================================================
+        let swiperInstance = null;
+        if (typeof Swiper !== 'undefined') {
+            swiperInstance = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+            });
+        }
+        
+        // ========================================================
+        // スワイプ型レスポンシブデザインの実装 - iPhone最適化
+        // ========================================================
+        const slides = document.querySelectorAll('.swipe-slide');
+        const bullets = document.querySelectorAll('.swipe-pagination-bullet');
+        const swipeWrapper = document.getElementById('swipe-wrapper');
+        let currentSlide = 0;
+        let isTransitioning = false;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        // スワイプイベントの初期化
+        if (window.innerWidth <= 768) {
+            initSwipeEvents();
+        }
+        
+        function initSwipeEvents() {
+            // タッチイベントのリスナー
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
+            
+            // マウスホイールイベント
+            document.addEventListener('wheel', handleWheel, { passive: false });
+            
+            // ページネーションのクリックイベント
+            bullets.forEach((bullet, index) => {
+                bullet.addEventListener('click', () => goToSlide(index));
+            });
+        }
+        
+        function handleTouchStart(e) {
+            touchStartY = e.touches[0].clientY;
+        }
+        
+        function handleTouchMove(e) {
+            if (e.cancelable) {
+                e.preventDefault();
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            touchEndY = e.changedTouches[0].clientY;
+            handleSwipe();
+        }
+        
+        function handleWheel(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                if (e.deltaY > 0 && currentSlide < slides.length - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (e.deltaY < 0 && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+        }
+        
+        function handleSwipe() {
+            if (isTransitioning) return;
+            
+            const swipeDistance = touchStartY - touchEndY;
+            const swipeThreshold = 50;
+            
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0 && currentSlide < slides.length - 1) {
+                    // スワイプアップ（次のスライドへ）
+                    goToSlide(currentSlide + 1);
+                } else if (swipeDistance < 0 && currentSlide > 0) {
+                    // スワイプダウン（前のスライドへ）
+                    goToSlide(currentSlide - 1);
+                }
+            }
+        }
+        
+        function goToSlide(index) {
+            if (isTransitioning || index === currentSlide) return;
+            
+            isTransitioning = true;
+            currentSlide = index;
+            
+            // スライドの移動
+            const translateY = -100 * index;
+            swipeWrapper.style.transform = `translateY(${translateY}vh)`;
+            
+            // ページネーションの更新
+            bullets.forEach((bullet, i) => {
+                bullet.classList.toggle('active', i === index);
+            });
+            
+            // ヒーローセクションの表示管理
+            if (index === 0) {
+                document.body.classList.add('hero-in-view');
+                document.querySelector('#hero').style.height = '100vh';
+                document.querySelector('#hero').style.minHeight = '-webkit-fill-available';
+            } else {
+                document.body.classList.remove('hero-in-view');
+            }
+            
+            // トランジション完了後
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+        
+        // ========================================================
+        // ヘッダーの制御
+        // ========================================================
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        
+        // ハンバーガーメニューの制御
+        menuToggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            nav.classList.toggle('active');
+            
+            // アイコンの切り替え
+            if (!expanded) {
+                this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                this.setAttribute('aria-label', 'メニューを閉じる');
+            } else {
+                this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                this.setAttribute('aria-label', 'メニューを開く');
+            }
+        });
+        
+        // ナビゲーションリンクのクリックでメニューを閉じる
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+        
+        // ヘッダーのスクロール効果（デスクトップのみ）
+        let lastScrollTop = 0;
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        }
+        
+        // ========================================================
+        // ヒーロー背景画像の自動切り替え
+        // ========================================================
+        const heroImages = document.querySelectorAll('.hero-bg');
+        let currentImageIndex = 0;
+        
+        if (heroImages.length > 1) {
+            setInterval(() => {
+                // 現在の画像を非アクティブに
+                heroImages[currentImageIndex].classList.remove('active');
+                
+                // 次の画像インデックス
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                
+                // 次の画像をアクティブに
+                heroImages[currentImageIndex].classList.add('active');
+            }, 5000);
+        }
+        
+        // ========================================================
+        // スクロールアニメーション（デスクトップのみ）
+        // ========================================================
+        if (window.innerWidth > 768) {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // ========================================================
+        // Back to Topボタン
+        // ========================================================
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+        }
+        
+        backToTopButton.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                // モバイルの場合は最初のスライドに戻る
+                goToSlide(0);
+            } else {
+                // デスクトップの場合は通常のスクロール
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // ========================================================
+        // チャットボット機能 - プロフェッショナル改善版
+        // ========================================================
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotInput = document.getElementById('chatbot-input-text');
+        const chatbotSubmit = document.getElementById('chatbot-submit');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        
+        // チャットボットトグル
+        chatbotToggle.addEventListener('click', function() {
+            chatbotContainer.classList.add('active');
+            chatbotToggle.classList.add('hidden');
+            chatbotInput.focus();
+            this.setAttribute('aria-expanded', 'true');
+        });
+        
+        // チャットボットを閉じる
+        chatbotClose.addEventListener('click', function() {
+            chatbotContainer.classList.remove('active');
+            chatbotToggle.classList.remove('hidden');
+            chatbotToggle.setAttribute('aria-expanded', 'false');
+        });
+        
+        // タッチデバイス対応
+        chatbotClose.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            chatbotContainer.classList.remove('active');
+            chatbotToggle.classList.remove('hidden');
+            chatbotToggle.setAttribute('aria-expanded', 'false');
+        });
+        
+        // メッセージ追加関数
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        // タイピングインジケーター表示
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('typing-indicator');
+            typingDiv.setAttribute('id', 'typing-indicator');
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('typing-dot');
+                typingDiv.appendChild(dot);
+            }
+            
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        // タイピングインジケーター削除
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+        
+        // ボット応答 - プロフェッショナル版
+        function botResponse(userInput) {
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                let response;
+                const input = userInput.toLowerCase();
+                
+                if (input.includes('こんにちは') || input.includes('はじめまして')) {
+                    response = 'こんにちは！ShinAIアシスタントです。本日はどのようなお手伝いをさせていただきましょうか？AI導入について何かお困りのことはございますか？';
+                } else if (input.includes('料金') || input.includes('費用') || input.includes('価格')) {
+                    response = 'ShinAIのサービス料金は、導入規模やカスタマイズ内容によって異なります。まずは小さなプロトタイプから始めて、効果を検証しながら段階的に拡張していく柔軟なプランをご用意しています。初期投資を抑えながら着実に成果を出すことが可能です。詳しくは無料相談にてお見積りをご案内しております。';
+                } else if (input.includes('アイプロ') || input.includes('企画書')) {
+                    response = '新規事業企画書AIツール「アイプロ」は、データに基づいた高品質な企画書を短時間で作成できるサービスです。まずはプロトタイプでその効果を実感いただき、段階的に機能を拡張することも可能です。「小さく始めて大きく育てる」アプローチで、リスクを最小限に抑えながら導入いただけます。詳しくはサービスページをご覧ください。';
+                } else if (input.includes('導入事例') || input.includes('実績')) {
+                    response = '様々な業界でのAI活用事例をご用意しています。重要なのは、どの事例も「小さく始めて、効果を確認しながら拡張していく」アプローチを採用している点です。福祉・介護、建設、製造、医療など、各分野でまずはプロトタイプから始めて、着実に成果を積み重ねています。';
+                } else if (input.includes('相談') || input.includes('問い合わせ')) {
+                    response = '無料相談では、まず貴社の課題をじっくりお伺いし、小さなプロトタイプから始める最適なAI導入プランをご提案します。「伴走型開発」により、お客様と同じ方向を向いて、一緒に成功へと向かっていきます。お気軽にご相談ください。';
+                } else if (input.includes('内製化') || input.includes('教育')) {
+                    response = 'ShinAIでは社内AIチームの育成・内製化支援を重視しています。「やりっぱなしにしないAI導入」を徹底し、プロトタイプから始めて、徐々に貴社スタッフが自走できる体制を構築します。伴走しながら知識移転を行い、持続可能なAI活用を実現します。';
+                } else if (input.includes('プロトタイプ') || input.includes('小さく始める')) {
+                    response = '素晴らしい着眼点です！ShinAIの強みは「プロトタイプからの伴走型開発」です。従来の重いシステム開発とは異なり、まず小さく始めて効果を確認し、方向性をすり合わせながら段階的に拡張していきます。これにより初期投資リスクを抑えながら、確実に成果を出すことができます。';
+                } else {
+                    response = 'ご質問ありがとうございます。ShinAIでは、まず小さなプロトタイプから始めて、お客様と伴走しながら最適なAIソリューションを構築していきます。初期投資を抑えながら着実に成果を積み重ねるアプローチで、多くの企業様から高い評価をいただいています。詳しくは無料相談にてご説明させていただきますので、お気軽にお問い合わせください。';
+                }
+                
+                addMessage(response);
+            }, 1500);
+        }
+        
+        // ユーザー入力処理
+        function handleUserInput() {
+            const userText = chatbotInput.value.trim();
+            if (userText === '') return;
+            
+            addMessage(userText, true);
+            chatbotInput.value = '';
+            
+            botResponse(userText);
+        }
+        
+        chatbotSubmit.addEventListener('click', handleUserInput);
+        
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+        
+        // ========================================================
+        // リサイズイベント処理
+        // ========================================================
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth > 768) {
+                    // デスクトップビュー
+                    swipeWrapper.style.transform = '';
+                    currentSlide = 0;
+                    bullets.forEach(bullet => bullet.classList.remove('active'));
+                    if (bullets[0]) bullets[0].classList.add('active');
+                    
+                    // スワイプイベントをリセット
+                    document.removeEventListener('touchstart', handleTouchStart);
+                    document.removeEventListener('touchmove', handleTouchMove);
+                    document.removeEventListener('touchend', handleTouchEnd);
+                    document.removeEventListener('wheel', handleWheel);
+                } else {
+                    // モバイルビュー
+                    initSwipeEvents();
+                }
+                
+                // Swiperの再初期化
+                if (swiperInstance) {
+                    swiperInstance.update();
+                }
+            }, 250);
+        });
+        
+        // ========================================================
+        // ページロード完了時の処理
+        // ========================================================
+        window.addEventListener('load', function() {
+            document.body.classList.add('page-loaded');
+            
+            // モバイル表示時にヒーローセクションを全画面で表示
+            if (window.innerWidth <= 768) {
+                const heroSection = document.getElementById('hero');
+                if (heroSection) {
+                    heroSection.style.height = '100vh';
+                    heroSection.style.minHeight = '-webkit-fill-available';
+                    heroSection.style.display = 'flex';
+                    heroSection.style.alignItems = 'center';
+                    heroSection.style.justifyContent = 'center';
+                    
+                    // スワイプを最初のスライドに設定
+                    swipeWrapper.style.transform = 'translateY(0)';
+                    currentSlide = 0;
+                    
+                    // ページネーションの更新
+                    bullets.forEach((bullet, i) => {
+                        bullet.classList.toggle('active', i === 0);
+                    });
+                }
+            }
+        });
+        
+        // ========================================================
+        // パフォーマンス最適化
+        // ========================================================
+        // スクロールイベントの最適化
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateElements);
+                ticking = true;
+            }
+        }
+        
+        function updateElements() {
+            // スクロールに応じた要素の更新
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', requestTick);
+        
+        // ========================================================
+        // アクセシビリティ機能
+        // ========================================================
+        // Escキーでモーダルを閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (chatbotContainer.classList.contains('active')) {
+                    chatbotContainer.classList.remove('active');
+                    chatbotToggle.classList.remove('hidden');
+                    chatbotToggle.setAttribute('aria-expanded', 'false');
+                }
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        
+        // フォーカストラップの実装
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+            );
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+            
+            element.addEventListener('keydown', function(e) {
+                const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+                
+                if (!isTabPressed) {
+                    return;
+                }
+                
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+        
+        // チャットボットが開いたときにフォーカストラップを設定
+        const mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('active')) {
+                        trapFocus(target);
+                    }
+                }
+            });
+        });
+        
+        mutationObserver.observe(chatbotContainer, { attributes: true });
+    });
+
+    // ========================================================
+    // Three.jsパーティクルエフェクト - プロフェッショナル改善版
+    // ========================================================
+    function initThreeJsParticles() {
+        const container = document.getElementById('three-container');
+        if (!container || typeof THREE === 'undefined') return;
+        
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        
+        // パフォーマンス最適化: モバイルデバイスでパーティクル数を削減
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 50 : 100;
+        
+        // Three.jsのシーン作成
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.z = 30;
+        
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        renderer.setClearColor(0xffffff, 0);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+        
+        // パーティクルの設定
+        const particles = new THREE.BufferGeometry();
+        const positions = [];
+        const colors = [];
+        const sizes = [];
+        
+        // ピンク色のパーティクル（ヒーローセクション以外）
+        const pink1 = new THREE.Color(0xffc0cb); // ライトピンク
+        const pink2 = new THREE.Color(0xffdae0); // さらに淡いピンク
+        
+        // 水色のパーティクル（ヒーローセクション用）
+        const lightBlue1 = new THREE.Color(0xade8f4);
+        const lightBlue2 = new THREE.Color(0xb8e0f9);
+        
+        for (let i = 0; i < particleCount; i++) {
+            // ランダムな位置
+            const x = Math.random() * 100 - 50;
+            const y = Math.random() * 100 - 50;
+            const z = Math.random() * 100 - 50;
+            
+            positions.push(x, y, z);
+            
+            // 色の設定（初期状態は淡いピンク）
+            const mixRatio = Math.random();
+            const mixedColor = new THREE.Color().lerpColors(pink1, pink2, mixRatio);
+            
+            colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
+            sizes.push(Math.random() * 2 + 0.5);
+        }
+        
+        particles.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        particles.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        particles.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.8,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.5,
+            sizeAttenuation: true
+        });
+        
+        const particleSystem = new THREE.Points(particles, material);
+        scene.add(particleSystem);
+        
+        // マウス操作
+        let mouseX = 0;
+        let mouseY = 0;
+        let windowHalfX = width / 2;
+        let windowHalfY = height / 2;
+        
+        document.addEventListener('mousemove', function(event) {
+            mouseX = (event.clientX - windowHalfX) * 0.05;
+            mouseY = (event.clientY - windowHalfY) * 0.05;
+        });
+        
+        // リサイズ処理
+        window.addEventListener('resize', function() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            windowHalfX = width / 2;
+            windowHalfY = height / 2;
+            
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        });
+        
+        // パーティクルの色更新関数
+        function updateParticleColors() {
+            const isHeroInView = document.body.classList.contains('hero-in-view');
+            const colors = particles.getAttribute('color');
+            
+            for (let i = 0; i < particleCount; i++) {
+                if (isHeroInView) {
+                    // ヒーローセクション: パーティクルをほぼ透明に
+                    material.opacity = 0.1;
+                } else {
+                    // その他のセクション: 淡いピンク色
+                    material.opacity = 0.5;
+                    const mixRatio = Math.random();
+                    const mixedColor = new THREE.Color().lerpColors(pink1, pink2, mixRatio);
+                    colors.array[i * 3] = mixedColor.r;
+                    colors.array[i * 3 + 1] = mixedColor.g;
+                    colors.array[i * 3 + 2] = mixedColor.b;
+                }
+            }
+            
+            colors.needsUpdate = true;
+        }
+        
+        // セクション変更時の監視
+        const bodyObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    updateParticleColors();
+                }
+            });
+        });
+        
+        bodyObserver.observe(document.body, { attributes: true });
+        
+        // アニメーションループ
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // パーティクルの回転
+            particleSystem.rotation.x += 0.0005;
+            particleSystem.rotation.y += 0.001;
+            
+            // カメラの微妙な動き
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // 初期色設定
+        updateParticleColors();
+    }
+    </script>
 </body>
 </html>
