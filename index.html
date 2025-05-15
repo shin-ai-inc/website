@@ -11,8 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="ShinAIは最先端のAI技術で企業の課題を解決。小さく始めて大きく育てる伴走型開発で、確実な成果を実現します。初期投資を抑えて、最短2週間で効果を体感。">
-    <meta name="keywords" content="AI導入支援,業務効率化,プロトタイプ開発,伴走型AI開発,人工知能,DX推進,生成AI,企業向けAI">
+    <meta name="description" content="ShinAIは最先端のAI技術で企業の課題を解決。AIエージェント開発やRAG構築など社内向けシステム開発から、AIプロダクト提供まで。小さく始めて大きく育てる伴走型開発で、確実な成果を実現します。">
+    <meta name="keywords" content="AI開発,AIエージェント,RAG構築,業務効率化,プロトタイプ開発,伴走型AI開発,人工知能,DX推進,生成AI,LLM,企業向けAI">
     <meta name="author" content="ShinAI">
     <meta name="theme-color" content="#3A5FEB">
     <meta name="robots" content="index, follow">
@@ -25,8 +25,8 @@
     ==============================================
     -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="ShinAI - プロトタイプから始める伴走型AI開発">
-    <meta property="og:description" content="小さく始めて大きく育てる。初期投資を抑えて確実な成果を実現するAI開発パートナー">
+    <meta property="og:title" content="ShinAI - AIシステム受託開発・AIプロダクト提供">
+    <meta property="og:description" content="小さく始めて大きく育てる。AIエージェント開発やRAG構築から、業務効率化AIツールまで。初期投資を抑えて確実な成果を実現するAI開発パートナー">
     <meta property="og:url" content="https://shinai.tech">
     <meta property="og:image" content="https://shinai.tech/assets/images/ogp.jpg">
     <meta property="og:site_name" content="ShinAI">
@@ -111,7 +111,7 @@
       "name": "ShinAI",
       "url": "https://shinai.tech",
       "logo": "https://shinai.tech/assets/images/logo.svg",
-      "description": "プロトタイプから始める伴走型AI開発で企業の課題を解決",
+      "description": "AIシステム受託開発・AIプロダクト提供。AIエージェント開発やRAG構築、業務効率化AIツールなど",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "千代田区",
@@ -134,7 +134,7 @@
     }
     </script>
     
-    <title>ShinAI - AI導入・業務効率化支援｜プロトタイプから始める伴走型AI開発</title>
+    <title>ShinAI - AIシステム受託開発・AIプロダクト提供｜プロトタイプから始める伴走型AI開発</title>
     
     <!-- 
     ==============================================
@@ -1159,53 +1159,82 @@
         特徴: カード形式、アイコン表示、アニメーション効果
         ==============================================
         */
+        .services-section {
+            position: relative;
+            background: linear-gradient(to bottom, rgba(248, 250, 252, 0.8), white);
+            overflow: hidden;
+            padding: var(--section-padding) 0;
+        }
+        
+        .service-badge {
+            display: inline-block;
+            background: rgba(58, 95, 235, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            color: var(--primary);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .services-container {
+            margin-top: 3.5rem;
+        }
+        
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            margin-top: var(--space-10);
+            gap: 2rem;
         }
         
         .service-card {
             background: var(--white);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
+            border-radius: var(--radius-lg);
             overflow: hidden;
+            box-shadow: var(--shadow-md);
             transition: var(--transition-bounce);
-            height: 100%;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0, 0, 0, 0.05);
             position: relative;
-            transform: translateY(0);
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-primary);
-            z-index: 1;
-            transition: height 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
         }
         
-        .service-card:hover::before {
-            height: 7px;
+        /* サービスカードバッジ */
+        .service-card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: var(--font-weight-semibold);
+            z-index: 5;
+            box-shadow: var(--shadow-sm);
         }
         
         .service-image {
-            height: 240px;
+            height: 200px;
             overflow: hidden;
             position: relative;
-            background-color: #f8fafc; /* 画像読み込み前の背景色 */
+        }
+        
+        .service-image::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(15, 23, 42, 0.3), transparent);
+            z-index: 1;
         }
         
         .service-image img {
@@ -1213,18 +1242,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
-            z-index: 1;
-        }
-        
-        .service-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f0f4ff, #e6f9f7);
-            z-index: 0;
         }
         
         .service-card:hover .service-image img {
@@ -1232,102 +1249,84 @@
         }
         
         .service-content {
-            padding: 2rem;
+            padding: 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
         
+        .service-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: -40px auto 1rem;
+            position: relative;
+            z-index: 5;
+        }
+        
         .service-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-primary);
-            color: var(--white);
-            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition-bounce);
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+        
+        .service-icon i {
+            font-size: 1.8rem;
         }
         
         .service-card:hover .service-icon {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
+            transform: rotate(10deg) scale(1.1);
         }
         
         .service-title {
+            text-align: center;
             font-size: 1.4rem;
             font-weight: var(--font-weight-bold);
             margin-bottom: 1rem;
             color: var(--dark);
             position: relative;
-            line-height: 1.3;
         }
         
         .service-title::after {
             content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
+            display: block;
             width: 50px;
             height: 3px;
             background: var(--gradient-primary);
+            margin: 0.8rem auto 0;
             border-radius: var(--radius-full);
             transition: width 0.3s ease;
         }
         
-        .service-card:hover .service-title {
-            color: var(--primary);
-        }
-        
         .service-card:hover .service-title::after {
-            width: 100px;
+            width: 80px;
         }
         
         .service-description {
             color: var(--gray);
+            text-align: center;
             margin-bottom: 1.5rem;
             flex-grow: 1;
-            line-height: var(--line-height-relaxed);
-        }
-        
-        .service-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-tag {
-            background: rgba(58, 95, 235, 0.08);
-            color: var(--primary);
-            padding: 0.4rem 1rem;
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: var(--font-weight-medium);
-            transition: var(--transition-normal);
-        }
-        
-        .service-tag:hover {
-            background: rgba(58, 95, 235, 0.12);
-            transform: translateY(-2px);
-        }
-        
-        .service-footer {
-            margin-top: auto;
+            line-height: 1.7;
         }
         
         .service-link {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            padding-top: 1rem;
             color: var(--primary);
             font-weight: var(--font-weight-semibold);
-            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: var(--transition-normal);
-            position: relative;
         }
         
         .service-link:hover {
@@ -1563,7 +1562,7 @@
             overflow: hidden;
             text-align: center;
         }
-
+        
         .cta-content {
             position: relative;
             z-index: var(--z-elevate);
@@ -2394,6 +2393,89 @@
             .swiper-slide-section:last-child {
                 padding-bottom: 4rem;
             }
+            
+            /* サービスカードのモバイル表示最適化 */
+            .service-mobile-card {
+                display: flex;
+                flex-direction: column;
+                background: white;
+                border-radius: var(--radius-lg);
+                margin-bottom: 1.5rem;
+                box-shadow: var(--shadow-md);
+                overflow: hidden;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            .service-mobile-header {
+                position: relative;
+                height: 120px;
+                overflow: hidden;
+            }
+            
+            .service-mobile-badge {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: white;
+                padding: 0.3rem 0.6rem;
+                border-radius: var(--radius-full);
+                font-size: 0.7rem;
+                font-weight: var(--font-weight-semibold);
+                z-index: 2;
+                box-shadow: var(--shadow-sm);
+            }
+            
+            .service-mobile-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .service-mobile-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--gradient-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+                position: absolute;
+                bottom: -25px;
+                left: 50%;
+                transform: translateX(-50%);
+                box-shadow: var(--shadow-md);
+                z-index: 2;
+            }
+            
+            .service-mobile-content {
+                padding: 2rem 1.2rem 1.2rem;
+                text-align: center;
+            }
+            
+            .service-mobile-title {
+                font-size: 1.2rem;
+                font-weight: var(--font-weight-bold);
+                margin-bottom: 0.5rem;
+            }
+            
+            .service-mobile-desc {
+                font-size: 0.9rem;
+                color: var(--gray);
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+            
+            .service-mobile-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.3rem;
+                color: var(--primary);
+                font-weight: var(--font-weight-semibold);
+                font-size: 0.9rem;
+            }
         }
 
         /* 
@@ -2900,14 +2982,14 @@
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">AI導入・業務効率化支援</div>
+                    <div class="hero-badge">AIシステム受託開発・AIプロダクト提供</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
                         AIの力で<span class="text-gradient">人間らしい時間</span>を<br>取り戻す
                     </h1>
                     
                     <p class="hero-description">
-                        最先端のAI技術で企業の課題を解決し、ビジネスに新たな価値を創造します。<br>
+                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決します。<br>
                         プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
                     </p>
                     
@@ -2982,12 +3064,13 @@
         // === component-split: ServicesSection ===
         COMPONENT: サービスセクション - 提供サービス紹介
         機能: 提供サービスの概要と詳細への誘導
+        特徴: 新デザインの洗練されたカード型表示
         ==============================================
         -->
-        <section class="section section-bg-gradient" id="services">
+        <section class="services-section" id="services">
             <div class="container">
                 <div class="section-header text-center">
-                    <div class="section-subtitle">私たちのサービス</div>
+                    <div class="service-badge">ShinAIのソリューション</div>
                     <h2 class="heading-lg">
                         お客様の課題を解決する<br>
                         <span class="text-gradient">3つのAIソリューション</span>
@@ -2997,81 +3080,71 @@
                     </p>
                 </div>
                 
-                <!-- Services Grid Component -->
-                <div class="services-grid">
-                    <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                <!-- Services Container Component -->
+                <div class="services-container">
+                    <div class="services-grid">
+                        <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
+                        <div class="service-card">
+                            <span class="service-card-badge">人気 No.1</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
                             </div>
-                            <h3 class="service-title">新規事業企画書AIツール「アイプロ」</h3>
-                            <p class="service-description">
-                                AIが自動で新規事業企画書・プレゼン資料を作成。データドリブンで魅力的な企画を提案し、短時間で高品質な資料作成を実現します。アイデア創出からプレゼン資料まで一気通貫でサポート。
-                            </p>
-                            <div class="service-tags">
-                                <span class="service-tag">企画提案</span>
-                                <span class="service-tag">資料自動作成</span>
-                                <span class="service-tag">アイデア創出</span>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                </div>
                             </div>
-                            <div class="service-footer">
+                            <div class="service-content">
+                                <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
+                                <p class="service-description">
+                                    データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。
+                                </p>
                                 <a href="services.html#aipro" class="service-link">
                                     詳しく見る
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Service 2: オーダーメイドAIアプリケーション開発 -->
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1581472723648-909f4851d4ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-code" aria-hidden="true"></i>
+                        
+                        <!-- Service 2: オーダーメイドAIアプリケーション開発 -->
+                        <div class="service-card">
+                            <span class="service-card-badge">カスタマイズ</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
                             </div>
-                            <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
-                            <p class="service-description">
-                                貴社の業務に最適化したAIアプリケーションを開発。社内データや業務フローを活用し、業務効率化や顧客体験の向上を実現するオーダーメイドのAIソリューションを提供します。
-                            </p>
-                            <div class="service-tags">
-                                <span class="service-tag">カスタム開発</span>
-                                <span class="service-tag">業務効率化</span>
-                                <span class="service-tag">データ活用</span>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-robot" aria-hidden="true"></i>
+                                </div>
                             </div>
-                            <div class="service-footer">
+                            <div class="service-content">
+                                <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
+                                <p class="service-description">
+                                    御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。
+                                </p>
                                 <a href="services.html#custom" class="service-link">
                                     詳しく見る
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Service 3: AI導入(DX/AX)コンサルティング -->
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-brain" aria-hidden="true"></i>
+                        
+                        <!-- Service 3: AI導入(DX/AX)コンサルティング -->
+                        <div class="service-card">
+                            <span class="service-card-badge">伴走支援</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
                             </div>
-                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
-                            <p class="service-description">
-                                AI導入の戦略立案から実装まで一貫してサポート。DX(デジタルトランスフォーメーション)からAX(AIトランスフォーメーション)へ進化するための最適なロードマップを提案します。
-                            </p>
-                            <div class="service-tags">
-                                <span class="service-tag">戦略立案</span>
-                                <span class="service-tag">DX/AX支援</span>
-                                <span class="service-tag">伴走型支援</span>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                </div>
                             </div>
-                            <div class="service-footer">
+                            <div class="service-content">
+                                <h3 class="service-title">AI導入<br>コンサルティング</h3>
+                                <p class="service-description">
+                                    戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。
+                                </p>
                                 <a href="services.html#consulting" class="service-link">
                                     詳しく見る
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
@@ -3197,12 +3270,12 @@
                     <section class="swiper-slide-section hero" style="min-height: auto; padding-top: 0;">
                         <div class="container">
                             <div class="hero-content">
-                                <div class="hero-badge">AI導入・業務効率化支援</div>
+                                <div class="hero-badge">AIシステム受託開発・AIプロダクト</div>
                                 <h1 class="hero-title heading-xl">
                                     AIの力で<br><span class="text-gradient">人間らしい時間</span>を<br>取り戻す
                                 </h1>
                                 <p class="hero-description">
-                                    最先端のAI技術で企業の課題を解決し<br>確実な成果を実現します
+                                    AIエージェント開発やRAG構築など<br>最先端のAI技術で企業の課題を解決
                                 </p>
                                 <div class="hero-buttons">
                                     <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
@@ -3219,7 +3292,7 @@
                 </div>
             </div>
             
-            <!-- Slide 2: About + Features -->
+            <!-- Slide 2: ShinAIの強み -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
                     <section class="swiper-slide-section" id="mobile-about">
@@ -3230,10 +3303,6 @@
                                     プロトタイプから始める<br>
                                     <span class="text-gradient">伴走型AI開発</span>
                                 </h2>
-                                <p class="section-description">
-                                    「小さく始めて、大きく育てる」<br>
-                                    初期投資を抑えて確実な成果を実現
-                                </p>
                             </div>
                             
                             <!-- Feature Cards - モバイル最適化 -->
@@ -3242,7 +3311,7 @@
                                     <i class="fas fa-rocket" aria-hidden="true"></i>
                                 </div>
                                 <h3 class="feature-title">最短2週間で効果実感</h3>
-                                <p class="feature-description">プロトタイプを素早く作成し、実際の業務での効果を体感できます。</p>
+                                <p class="feature-description">プロトタイプを素早く作成し、実際の業務での効果を体感。段階的な開発で確実な成果を追求します。</p>
                             </div>
                             
                             <div class="feature-card" style="margin-top: 1.5rem;">
@@ -3250,7 +3319,7 @@
                                     <i class="fas fa-handshake" aria-hidden="true"></i>
                                 </div>
                                 <h3 class="feature-title">伴走型の開発スタイル</h3>
-                                <p class="feature-description">貴社の状況に合わせて一緒に最適解を見つけます。</p>
+                                <p class="feature-description">押し付けではなく、共創。貴社の状況に合わせて一緒に最適解を見つけ、持続可能な成功を実現します。</p>
                             </div>
                             
                             <div class="feature-card" style="margin-top: 1.5rem;">
@@ -3258,20 +3327,20 @@
                                     <i class="fas fa-chart-line" aria-hidden="true"></i>
                                 </div>
                                 <h3 class="feature-title">内製化まで支援</h3>
-                                <p class="feature-description">貴社チームの育成と知識移転で、自走できる組織づくりをサポート。</p>
+                                <p class="feature-description">開発だけで終わらない。貴社チームの育成と知識移転で、自走できる組織づくりまでサポートします。</p>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
             
-            <!-- Slide 3: Services -->
+            <!-- Slide 3: 3つのAIソリューション -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="swiper-slide-section section-bg-gradient" id="mobile-services">
+                    <section class="swiper-slide-section" id="mobile-services">
                         <div class="container">
                             <div class="section-header text-center">
-                                <div class="section-subtitle">私たちのサービス</div>
+                                <div class="service-badge">ShinAIのソリューション</div>
                                 <h2 class="heading-lg">
                                     お客様の課題を解決する<br>
                                     <span class="text-gradient">3つのAIソリューション</span>
@@ -3279,73 +3348,61 @@
                             </div>
                             
                             <!-- Service 1 -->
-                            <div class="service-card" style="margin-top: 2rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
+                            <div class="service-mobile-card">
+                                <div class="service-mobile-header">
+                                    <span class="service-mobile-badge">人気 No.1</span>
+                                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="service-mobile-image">
+                                    <div class="service-mobile-icon">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
                                 </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">新規事業企画書AIツール「アイプロ」</h3>
-                                    <p class="service-description">
-                                        AIが自動で新規事業企画書・プレゼン資料を作成。アイデア創出から提案まで一気通貫でサポート。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#aipro" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
+                                <div class="service-mobile-content">
+                                    <h3 class="service-mobile-title">新規事業企画書AIツール「アイプロ」</h3>
+                                    <p class="service-mobile-desc">データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。</p>
+                                    <a href="services.html#aipro" class="service-mobile-link">
+                                        詳しく見る <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                             
                             <!-- Service 2 -->
-                            <div class="service-card" style="margin-top: 1.5rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1581472723648-909f4851d4ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
+                            <div class="service-mobile-card">
+                                <div class="service-mobile-header">
+                                    <span class="service-mobile-badge">カスタマイズ</span>
+                                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発" class="service-mobile-image">
+                                    <div class="service-mobile-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
                                 </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-code" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
-                                    <p class="service-description">
-                                        貴社の業務に最適化したAIアプリケーションを開発。効率化と顧客体験向上を実現します。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#custom" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
+                                <div class="service-mobile-content">
+                                    <h3 class="service-mobile-title">オーダーメイドAIアプリケーション開発</h3>
+                                    <p class="service-mobile-desc">御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。</p>
+                                    <a href="services.html#custom" class="service-mobile-link">
+                                        詳しく見る <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                             
                             <!-- Service 3 -->
-                            <div class="service-card" style="margin-top: 1.5rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
+                            <div class="service-mobile-card">
+                                <div class="service-mobile-header">
+                                    <span class="service-mobile-badge">伴走支援</span>
+                                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入コンサルティング" class="service-mobile-image">
+                                    <div class="service-mobile-icon">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
                                 </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-brain" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
-                                    <p class="service-description">
-                                        AI導入の戦略立案から実装まで一貫サポート。DXからAXへの進化を実現します。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#consulting" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
+                                <div class="service-mobile-content">
+                                    <h3 class="service-mobile-title">AI導入コンサルティング</h3>
+                                    <p class="service-mobile-desc">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。</p>
+                                    <a href="services.html#consulting" class="service-mobile-link">
+                                        詳しく見る <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                             
                             <div class="text-center mt-8">
-                                <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
+                                <a href="services.html" class="btn btn-primary btn-icon-right">
                                     すべてのサービスを見る
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
@@ -3355,7 +3412,7 @@
                 </div>
             </div>
             
-            <!-- Slide 4: Benefits -->
+            <!-- Slide 4: 導入メリット -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
                     <section class="swiper-slide-section" id="mobile-benefits">
@@ -3365,9 +3422,6 @@
                                 <h2 class="heading-lg">
                                     なぜShinAIが<span class="text-gradient">選ばれるのか</span>
                                 </h2>
-                                <p class="section-description">
-                                    従来の重厚な開発から、アジャイルな伴走型開発へ
-                                </p>
                             </div>
                             
                             <!-- Benefits - モバイル最適化 -->
@@ -3388,7 +3442,7 @@
                                     <i class="fas fa-bolt" aria-hidden="true"></i>
                                 </div>
                                 <h3>柔軟な方向転換が可能</h3>
-                                <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
+                                <p>プロトタイプを見ながら一緒に方向性を決定。柔軟に最適解を追求します。</p>
                                 <div class="benefit-stat">
                                     <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
                                     <div class="stat-label">最短導入期間</div>
@@ -3400,7 +3454,7 @@
                                     <i class="fas fa-users" aria-hidden="true"></i>
                                 </div>
                                 <h3>共創型の開発体制</h3>
-                                <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
+                                <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして共に成長します。</p>
                                 <div class="benefit-stat">
                                     <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
                                     <div class="stat-label">顧客満足度</div>
@@ -3450,7 +3504,7 @@
                                 <span class="footer-logo-text">ShinAI</span>
                             </div>
                             <p class="footer-description" style="margin-bottom: 1.5rem;">
-                                最先端のAI技術で企業の課題を解決し、新たな価値を創造します。
+                                AIシステム受託開発・AIプロダクト提供。AIエージェント開発やRAG構築、最先端技術で企業の課題を解決します。
                             </p>
                             <div class="footer-contact-item">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -3498,7 +3552,7 @@
                         <span class="footer-logo-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
-                        最先端のAI技術で企業の課題を解決し、新たな価値を創造します。大切な人と関わる時間を創るために、真の価値を追求し続けます。
+                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
                     </p>
                     <div class="footer-social">
                         <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
@@ -3591,7 +3645,7 @@
             
             <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="チャットメッセージ">
                 <div class="chat-message bot">
-                    こんにちは！ShinAIアシスタントです。AI導入について、どのようなご質問でもお気軽にどうぞ。
+                    こんにちは！ShinAIアシスタントです。AIシステム受託開発やAIプロダクトについて、どのようなご質問でもお気軽にどうぞ。
                 </div>
             </div>
             
@@ -3765,47 +3819,51 @@
                             chatMessages.appendChild(loadingMsg);
                             chatMessages.scrollTop = chatMessages.scrollHeight;
                             
-                            // ボットのレスポンス（改善: インテリジェントな応答パターン）
+                            // AIの応答内容（キーワードによる適切な応答）
                             setTimeout(function() {
                                 // ローディング削除
                                 chatMessages.removeChild(loadingMsg);
                                 
-                                // キーワードに基づいたよりインテリジェントな応答
+                                // より専門的なAIシステム受託開発会社としての応答
                                 let response = '';
+                                const messageLower = message.toLowerCase();
                                 
-                                // キーワードによる応答分岐
-                                if (message.toLowerCase().includes('費用') || message.toLowerCase().includes('料金') || message.toLowerCase().includes('価格')) {
-                                    response = "ShinAIのサービスは、プロジェクトの規模や内容によって料金が異なります。プロトタイプ開発からスタートすることで、初期費用を30万円〜からご用意しております。段階的な開発により、投資対効果を確認しながら進められるのが特徴です。詳細な費用については、無料相談でお気軽にご相談ください。";
-                                } else if (message.toLowerCase().includes('期間') || message.toLowerCase().includes('納期') || message.toLowerCase().includes('時間')) {
-                                    response = "最短2週間でプロトタイプの開発が可能です。お客様の課題や要件に応じて、段階的に開発を進めていくため、柔軟なスケジュール調整が可能です。初回の効果検証から本格的な導入まで、最適なタイムラインをご提案いたします。";
-                                } else if (message.toLowerCase().includes('事例') || message.toLowerCase().includes('実績')) {
-                                    response = "製造業、小売業、サービス業など様々な業界でAI導入の実績があります。例えば、製造業では検品工程の自動化により不良品検出率を98%に向上、小売業では顧客行動分析により売上を25%増加させた事例があります。御社のビジネスに近い事例をもとに、最適なAI活用方法をご提案します。";
-                                } else if (message.toLowerCase().includes('AI') || message.toLowerCase().includes('人工知能')) {
-                                    response = "ShinAIでは、生成AI（ChatGPT/GPT-4等）、画像認識AI、予測分析AIなど、様々な最先端AI技術を活用したソリューションを提供しています。御社の課題や目的に合わせて、最適なAI技術を選定・カスタマイズし、業務効率化や新たな価値創出をサポートします。";
-                                } else if (message.toLowerCase().includes('相談') || message.toLowerCase().includes('問い合わせ')) {
-                                    response = "無料相談は、オンラインまたは対面でお受けしております。まずはお客様の課題やニーズをお聞かせいただき、最適なAI活用方法をご提案します。お問い合わせフォームからご連絡いただくか、このチャットで「相談予約」とお送りいただければ、日程調整のご案内をいたします。";
-                                } else if (message.toLowerCase().includes('アイプロ') || message.toLowerCase().includes('企画書')) {
-                                    response = "「アイプロ」は、AIが自動で新規事業企画書やプレゼン資料を作成するツールです。市場分析、競合調査、収益予測などのデータに基づいた説得力のある企画書を短時間で作成できます。資料作成の工数を最大90%削減し、より本質的な企画検討に時間を使えるようになります。";
+                                if (messageLower.includes('エージェント') || messageLower.includes('agent')) {
+                                    response = "ShinAIではAIエージェント開発を得意としています。社内向けシステムへの導入から、特定業務の自動化まで、様々なAIエージェントを開発してきました。ChatGPT/GPT-4などのLLMを活用し、御社の業務フローに最適化したAIエージェントを構築します。まずは無料相談で、どのような課題に対して活用できるか、ご相談ください。";
+                                } else if (messageLower.includes('rag') || messageLower.includes('検索') || messageLower.includes('retrieval')) {
+                                    response = "RAG(Retrieval Augmented Generation)は社内データを活用したAIシステム構築の鍵となる技術です。ShinAIではベクトルデータベースを活用した高度なRAGシステムを構築し、御社の知識ベースを効率的に活用できるようにします。社内文書や過去のナレッジを活用したAIシステムをご検討の場合は、ぜひご相談ください。";
+                                } else if (messageLower.includes('料金') || messageLower.includes('費用') || messageLower.includes('価格')) {
+                                    response = "ShinAIのサービスは、プロジェクトの規模や内容によって料金が異なります。プロトタイプ開発からスタートすることで、初期費用を30万円〜からご用意しております。AIエージェント開発やRAG構築など、具体的なシステムの内容や規模に応じて最適なプランをご提案します。詳細な費用については、無料相談でお気軽にお問い合わせください。";
+                                } else if (messageLower.includes('期間') || messageLower.includes('納期') || messageLower.includes('時間')) {
+                                    response = "AIシステム開発の期間は、プロジェクトの複雑さによって異なりますが、最短2週間でプロトタイプの開発が可能です。小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。プロトタイプから段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
+                                } else if (messageLower.includes('事例') || messageLower.includes('実績')) {
+                                    response = "ShinAIでは、製造業向けのAI検査システム構築や、金融業界向けの取引分析AIエージェント開発、さらに不動産業界向けの顧客対応自動化システムなど、多数の実績があります。例えば、ある製造業のお客様では、AI導入により検品工程の効率が38%向上、不良品検出率が98%に達するなどの成果を上げています。御社の業界や課題に合わせた事例をお知りになりたい場合は、お気軽にお問い合わせください。";
+                                } else if (messageLower.includes('アイプロ') || messageLower.includes('企画書')) {
+                                    response = "「アイプロ」は、AIが自動で新規事業企画書やプレゼン資料を作成するツールです。市場分析、競合調査、収益予測などのデータを活用し、短時間で説得力のある提案資料を作成できます。既存のExcelやWordと連携し、デザイン性の高い資料を5分程度で作成可能です。新規事業立案や企画提案業務の効率化にお役立てください。詳細はサービスページをご覧いただくか、お問い合わせください。";
+                                } else if (messageLower.includes('オーダーメイド') || messageLower.includes('カスタム') || messageLower.includes('開発')) {
+                                    response = "ShinAIのオーダーメイドAIアプリケーション開発は、御社の業務フローや課題に合わせて完全カスタマイズしたAIシステムを構築します。AIエージェント開発、RAG構築、画像認識AI、予測分析AIなど、様々なAI技術を組み合わせて最適なソリューションを提供します。段階的な開発アプローチにより、初期投資を抑えながら確実な効果を実感いただけます。";
+                                } else if (messageLower.includes('コンサル') || messageLower.includes('導入支援')) {
+                                    response = "AI導入コンサルティングでは、戦略立案から実装、内製化支援まで一貫してサポートします。初期の課題分析からAI導入の最適なロードマップ策定、必要なデータ整備、システム選定、社内チーム育成まで、伴走型で支援します。「やりっぱなし」にならないAI導入を実現し、持続的な成果創出を目指します。";
                                 } else {
-                                    // 一般的な質問への返答（改善: より具体的で親しみやすい応答）
+                                    // AI受託開発会社としての汎用的な応答
                                     const responses = [
-                                        "AIの導入についてご興味をお持ちいただき、ありがとうございます。ShinAIでは「小さく始めて、大きく育てる」をモットーに、初期投資を抑えながら確実な成果を実現するアプローチをとっています。具体的なご相談は無料で承っておりますので、お気軽にお問い合わせください。",
-                                        "AIの活用方法はビジネスの内容や課題によって大きく異なります。ShinAIでは、御社の業務フローや既存システムを詳しく分析した上で、最適なAIソリューションをご提案いたします。まずは無料相談で、どのような課題解決が可能か、ぜひご相談ください。",
-                                        "AIの導入は難しいと思われがちですが、ShinAIのアプローチなら専門知識がなくても安心です。プロトタイプから始めて効果を確認しながら、段階的に開発を進めていきます。御社に最適なAI活用方法について、無料相談でご提案させていただきます。",
-                                        "ShinAIは「伴走型AI開発」を特徴としています。単なる開発・納品で終わらず、社内での活用方法や内製化までサポートするため、持続可能なAI活用が実現します。具体的な進め方については、無料相談でお気軽にご相談ください。"
+                                        "ShinAIでは、AIエージェント開発やRAG構築などの社内向けAIシステム開発から、業務効率化AIツールの提供まで幅広くサポートしています。プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
+                                        "最先端のAI技術を活用して企業の課題を解決するShinAIです。ChatGPT/GPT-4などのLLMを活用したAIエージェント開発や、社内データを活用したRAGシステム構築が得意分野です。小さく始めて効果を確認する段階的アプローチで、リスクを最小化しながら最大の成果を目指します。",
+                                        "AIの導入は難しいと思われがちですが、ShinAIのアプローチなら専門知識がなくても安心です。プロトタイプから始めて効果を確認しながら、段階的に開発を進めていきます。経験豊富なAI専門家が、御社に最適なAI活用方法について無料相談でご提案させていただきます。",
+                                        "ShinAIは「伴走型AI開発」を特徴としています。単なる開発・納品で終わらず、社内での活用方法や内製化までサポートするため、持続可能なAI活用が実現します。AIエージェント開発やRAG構築など、最新のAI技術を駆使した具体的な進め方については、無料相談でお気軽にご相談ください。"
                                     ];
                                     
                                     response = responses[Math.floor(Math.random() * responses.length)];
                                 }
                                 
-                                // レスポンス追加（タイピング効果付き - 改善: スムーズな表示）
+                                // レスポンス追加（タイピング効果付き - 改善: よりスムーズな表示）
                                 const botMessage = document.createElement('div');
                                 botMessage.classList.add('chat-message', 'bot');
                                 botMessage.textContent = '';
                                 chatMessages.appendChild(botMessage);
                                 
                                 let i = 0;
-                                const typingSpeed = 20; // 高速化: 20ms毎に1文字表示
+                                const typingSpeed = 15; // 高速化: 15ms毎に1文字表示
                                 
                                 const typingEffect = setInterval(function() {
                                     if (i < response.length) {
@@ -3815,7 +3873,7 @@
                                     } else {
                                         clearInterval(typingEffect);
                                         
-                                        // CTAボタンを追加（改善: より明確なCTA）
+                                        // CTAボタンを追加
                                         setTimeout(function() {
                                             const ctaButton = document.createElement('div');
                                             ctaButton.classList.add('chat-message', 'bot');
@@ -3848,7 +3906,7 @@
                 }
             }
             
-            // モバイルスワイパー初期化（改善: より最適化したスワイプ体験）
+            // モバイルスワイパー初期化（改善版）
             const initSwiper = function() {
                 if (window.innerWidth <= 992) {
                     // viewportの高さを取得（モバイルブラウザのアドレスバー対策）
@@ -3933,60 +3991,47 @@
                     const earthMaterial = new THREE.MeshBasicMaterial({
                         color: 0x3A5FEB,
                         transparent: true,
-                        opacity: 0.1
+                        opacity: 0.05
                     });
                     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
                     scene.add(earth);
                     
-                    // パーティクル設定（改善: 四角形パーティクル、少ない色、滑らかな動き）
-                    const particlesCount = window.innerWidth < 768 ? 400 : 800;
+                    // パーティクル設定（改善: よりシンプルで美しい表現）
+                    const particlesCount = window.innerWidth < 768 ? 200 : 400;
                     const particles = [];
                     
-                    // パーティクル共通のマテリアルカラー（青系の2色に絞る）
-                    const particleColors = [
-                        new THREE.Color(0x3A5FEB), // 青
-                        new THREE.Color(0x00C9A7)  // ターコイズ
-                    ];
+                    // パーティクル共通のマテリアルカラー（青系色のみに絞る）
+                    const particleColor = new THREE.Color(0x3A5FEB);
                     
-                    // パーティクル作成（四角形パーティクル）
+                    // 四角形ジオメトリの作成（一度だけ作成して再利用）
+                    const geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+                    
+                    // パーティクル作成
                     for (let i = 0; i < particlesCount; i++) {
-                        // パーティクルサイズ（小さめ）
-                        const size = 0.03 + Math.random() * 0.08;
-                        
-                        // 四角形ジオメトリ
-                        const geometry = new THREE.BoxGeometry(size, size, size);
-                        
-                        // 2色からランダムに選択
-                        const colorIndex = Math.floor(Math.random() * 2);
+                        // 透明度をランダムに
                         const material = new THREE.MeshBasicMaterial({ 
-                            color: particleColors[colorIndex],
+                            color: particleColor,
                             transparent: true,
-                            opacity: 0.2 + Math.random() * 0.3
+                            opacity: 0.1 + Math.random() * 0.2
                         });
                         
                         // パーティクルメッシュ作成
                         const particle = new THREE.Mesh(geometry, material);
                         
                         // 衛星軌道のパラメータ
-                        const radius = 8 + Math.random() * 15; // 軌道半径
-                        const inclination = Math.random() * Math.PI / 6; // 軌道傾斜角（小さく抑える）
-                        const orbitSpeed = 0.0002 + Math.random() * 0.0008; // 速度（遅め）
+                        const orbitRadius = 10 + Math.random() * 15; // 軌道半径
+                        const orbitSpeed = 0.0002 + Math.random() * 0.0003; // より均一な速度（遅め）
                         const startAngle = Math.random() * Math.PI * 2; // 初期位置
                         
-                        // 軌道の軸ベクトル（ほぼ統一方向に）
-                        const axisX = Math.random() * 0.2;
-                        const axisY = Math.random() * 0.2;
-                        const axisZ = 1; // z軸を主軸とする
-                        
-                        const orbitAxis = new THREE.Vector3(axisX, axisY, axisZ).normalize();
+                        // 軌道傾斜角（ほぼ同一平面に）
+                        const inclination = Math.random() * Math.PI / 20;
                         
                         // パーティクルのプロパティを保存
                         particles.push({
                             mesh: particle,
                             orbitSpeed,
-                            radius,
+                            radius: orbitRadius,
                             angle: startAngle,
-                            axis: orbitAxis,
                             inclination
                         });
                         
@@ -4013,40 +4058,30 @@
                         }
                     });
                     
-                    // アニメーション設定（改善: 滑らかなアニメーション）
+                    // アニメーション設定（改善: 滑らかで統一感のあるアニメーション）
                     const animate = () => {
                         requestAnimationFrame(animate);
                         
                         // LERP（線形補間）によるカメラの滑らかな動き
-                        targetX = mouseX * 8;
-                        targetY = mouseY * 8;
-                        camera.position.x += (targetX - camera.position.x) * 0.02;
-                        camera.position.y += (targetY - camera.position.y) * 0.02;
+                        targetX = mouseX * 5;
+                        targetY = mouseY * 5;
+                        camera.position.x += (targetX - camera.position.x) * 0.01;
+                        camera.position.y += (targetY - camera.position.y) * 0.01;
                         camera.lookAt(scene.position);
                         
                         // 地球のゆっくり回転
-                        earth.rotation.y += 0.0005;
-                        earth.rotation.x += 0.0002;
+                        earth.rotation.y += 0.0002;
                         
-                        // パーティクル位置更新（衛星軌道に沿った動き）
+                        // パーティクル位置更新（統一感のある衛星軌道に）
                         particles.forEach(p => {
                             p.angle += p.orbitSpeed;
                             
-                            // 回転行列による軌道計算（滑らかな楕円/円形軌道）
+                            // 軌道計算（シンプルな円形軌道）
                             const x = p.radius * Math.cos(p.angle);
                             const y = p.radius * Math.sin(p.angle) * Math.sin(p.inclination);
                             const z = p.radius * Math.sin(p.angle) * Math.cos(p.inclination);
                             
-                            // 軌道軸に沿って回転
-                            const rotationMatrix = new THREE.Matrix4().makeRotationAxis(p.axis, p.angle);
-                            const position = new THREE.Vector3(x, y, z);
-                            position.applyMatrix4(rotationMatrix);
-                            
-                            p.mesh.position.copy(position);
-                            
-                            // 粒子自体のゆっくりした回転
-                            p.mesh.rotation.x += 0.001;
-                            p.mesh.rotation.y += 0.001;
+                            p.mesh.position.set(x, y, z);
                         });
                         
                         renderer.render(scene, camera);
@@ -4082,7 +4117,7 @@
                 gsap.registerPlugin(ScrollTrigger);
                 
                 // アニメーション要素の設定（改善: より洗練されたアニメーション）
-                const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons');
+                const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .service-icon-wrapper');
                 
                 animateElements.forEach((element, index) => {
                     // 要素ごとに最適なアニメーションを設定
@@ -4094,11 +4129,18 @@
                     if (element.classList.contains('section-header')) {
                         animation = { y: 30, opacity: 0 };
                         duration = 0.9;
-                    } else if (element.classList.contains('feature-card') || 
-                              element.classList.contains('service-card') || 
-                              element.classList.contains('benefit-card')) {
+                    } else if (element.classList.contains('feature-card')) {
                         animation = { y: 40, opacity: 0 };
                         delay = index * 0.1; // カード要素に連続的な遅延
+                    } else if (element.classList.contains('service-card')) {
+                        animation = { y: 40, opacity: 0, scale: 0.95 };
+                        delay = index * 0.15; // より顕著な連続アニメーション
+                    } else if (element.classList.contains('service-icon-wrapper')) {
+                        animation = { y: -20, scale: 0.8, opacity: 0 };
+                        delay = 0.2 + index * 0.1;
+                    } else if (element.classList.contains('benefit-card')) {
+                        animation = { y: 40, opacity: 0 };
+                        delay = index * 0.1;
                     } else if (element.classList.contains('cta-content')) {
                         animation = { scale: 0.95, opacity: 0 };
                         duration = 1;
