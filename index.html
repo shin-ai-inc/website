@@ -385,12 +385,15 @@
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             
-            /* Z-index階層 - 重なり順の管理 */
+            /* Z-index階層 - 重なり順の管理（パーティクル問題修正） */
+            --z-background: -10;
+            --z-particles: -5;
             --z-negative: -1;
+            --z-base: 0;
             --z-elevate: 1;
-            --z-drawer: 10;
-            --z-dropdown: 20;
-            --z-sticky: 30;
+            --z-dropdown: 10;
+            --z-sticky: 20;
+            --z-drawer: 30;
             --z-fixed: 40;
             --z-modal: 50;
             --z-popover: 60;
@@ -615,13 +618,12 @@
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, #5B7BFF, #00C9A7);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
             display: inline-block;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
         .text-center {
@@ -674,11 +676,11 @@
         
         .line-clamp-2 {
             display: -webkit-box;
-            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-clamp: 2;
         }
         
         .truncate {
@@ -1100,7 +1102,7 @@
             padding: calc(var(--header-height) + var(--space-8)) 0 var(--space-16);
             overflow: hidden;
             background: var(--gradient-hero);
-            z-index: 1; /* コンテンツを背景パーティクルの上に表示 */
+            z-index: var(--z-base);
         }
         
         .hero-content {
@@ -1109,46 +1111,29 @@
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
-            /* 背景を透明にしてパーティクルを見えるようにする */
-            background: transparent;
-        }
-        
-        /* ヒーローセクションのテキスト視認性向上 */
-        .hero-title, .hero-description {
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
         }
         
         .hero-badge {
             display: inline-block;
-            background: rgba(58, 95, 235, 0.2); /* より透明に */
+            background: rgba(58, 95, 235, 0.1);
             color: var(--primary);
-            font-weight: var(--font-weight-bold); /* 太字に変更 */
+            font-weight: var(--font-weight-semibold);
             padding: 0.5rem 1.25rem;
             border-radius: var(--radius-full);
             margin-bottom: var(--space-6);
             font-size: 0.95rem;
             animation: fadeInDown 1s ease forwards;
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            border: 1px solid rgba(58, 95, 235, 0.3);
-            box-shadow: 0 4px 15px rgba(58, 95, 235, 0.2);
         }
         
         .hero-title {
             margin-bottom: var(--space-6);
             animation: fadeInUp 1s ease 0.3s forwards;
             opacity: 0;
-            font-size: clamp(2.8rem, 5vw, 4.2rem); /* フォントサイズ拡大 */
-            color: var(--white); /* 白色に変更 */
-            font-weight: var(--font-weight-black);
-            letter-spacing: -0.03em;
         }
         
         .hero-description {
             font-size: clamp(1.1rem, 2vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.9); /* 白色を少し透過 */
+            color: var(--gray);
             margin-bottom: var(--space-8);
             line-height: var(--line-height-relaxed);
             max-width: 800px;
@@ -1156,11 +1141,6 @@
             margin-right: auto;
             animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            padding: 1rem;
-            border-radius: var(--radius-lg);
-            background: rgba(0, 0, 0, 0.2); /* 薄暗い背景を追加 */
         }
         
         .hero-buttons {
@@ -1170,19 +1150,6 @@
             flex-wrap: wrap;
             animation: fadeInUp 1s ease 0.9s forwards;
             opacity: 0;
-            position: relative;
-            z-index: 5;
-        }
-        
-        .hero-buttons .btn {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .hero-buttons .btn:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         /* 浮遊エフェクト - 水玉 */
@@ -1199,12 +1166,9 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
+            backdrop-filter: blur(5px);
             animation: float-orb 20s infinite ease-in-out;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(58, 95, 235, 0.2);
         }
         
         .orb-1 {
@@ -1254,16 +1218,27 @@
             }
         }
         
-        /* パーティクルエフェクトのコンテナ修正 - 前面に表示 */
+        /* パーティクルコンテナ修正 - 確実に背景に配置 */
         #three-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* 前後関係調整 */
+            z-index: var(--z-particles);
             pointer-events: none;
-            opacity: 1; /* 完全に見えるようにする */
+            opacity: 0.7;
+        }
+        
+        /* すべてのセクションがパーティクルの上に表示されるように */
+        main {
+            position: relative;
+            z-index: var(--z-base);
+        }
+        
+        section {
+            position: relative;
+            z-index: var(--z-base);
         }
         
         @keyframes fadeInDown {
@@ -1301,18 +1276,7 @@
             background: linear-gradient(to bottom, rgba(248, 250, 252, 0.8), white);
             overflow: hidden;
             padding: var(--section-padding) 0;
-            z-index: 1; /* コンテンツを背景パーティクルの上に表示 */
-        }
-        
-        .services-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            z-index: -1;
+            z-index: var(--z-base);
         }
         
         .service-badge {
@@ -1504,18 +1468,7 @@
         .features-section {
             position: relative;
             overflow: hidden;
-            z-index: 1; /* コンテンツを背景パーティクルの上に表示 */
-        }
-        
-        .features-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            z-index: -1;
+            z-index: var(--z-base);
         }
         
         .features-bg {
@@ -1613,22 +1566,6 @@
         特徴: カード形式、アイコン表示、数値の可視化
         ==============================================
         */
-        .benefits-section {
-            position: relative;
-            z-index: 1; /* コンテンツを背景パーティクルの上に表示 */
-        }
-        
-        .benefits-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            z-index: -1;
-        }
-        
         .benefits-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1750,7 +1687,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            z-index: 2; /* 他のコンテンツより前面に表示 */
+            z-index: var(--z-base);
         }
         
         .cta-content {
@@ -1897,7 +1834,7 @@
             color: var(--white);
             padding: 5rem 0 2rem;
             position: relative;
-            z-index: 2; /* 他のコンテンツより前面に表示 */
+            z-index: var(--z-base);
         }
         
         .footer-grid {
@@ -2531,7 +2468,7 @@
             }
             
             .hero-content {
-                padding: 1.5rem;
+                padding: 0 1rem;
             }
             
             .hero-title {
@@ -2964,30 +2901,9 @@
             }
         }
         
-        /* アニメーションクラス - GSAPが読み込まれない場合の代替 - 高速化 */
+        /* アニメーションクラス - GSAPが読み込まれない場合の代替 */
         .animate-in {
-            animation: fadeInUp 0.5s ease forwards; /* より短いアニメーション */
-        }
-        
-        /* モバイルヘッダー改善 */
-        .header.visible {
-            transform: translateY(0);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .hamburger {
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-bounce);
-            z-index: 1010;
-        }
-        
-        .hamburger:hover {
-            transform: scale(1.1);
-            background: var(--gradient-primary);
-            color: var(--white);
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
@@ -3349,7 +3265,7 @@
         機能: AI導入のメリットを数値とともに説明
         ==============================================
         -->
-        <section class="section benefits-section" id="benefits">
+        <section class="section" id="benefits">
             <div class="container">
                 <div class="section-header text-center">
                     <div class="section-subtitle">導入のメリット</div>
@@ -3857,7 +3773,7 @@
                 }
             });
             
-            // Three.jsパーティクル背景（サマーウォーズ風のデジタル空間）- 修正版
+            // Three.jsパーティクル背景（美しく滑らかな動き）
             if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
                 const initThreeJS = function() {
                     const container = document.getElementById('three-container');
@@ -3867,9 +3783,9 @@
                     
                     // カメラ設定
                     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    camera.position.z = 50;
+                    camera.position.z = 30;
                     
-                    // レンダラー設定 - アルファ値を明示的に設定して透明度を確保
+                    // レンダラー設定
                     const renderer = new THREE.WebGLRenderer({ 
                         alpha: true, 
                         antialias: true,
@@ -3877,97 +3793,63 @@
                     });
                     renderer.setSize(window.innerWidth, window.innerHeight);
                     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    renderer.setClearColor(0x0f172a, 0.3); // 暗めの背景色を設定して視認性向上
                     container.appendChild(renderer.domElement);
                     
-                    // 中心の球体（デジタルコア）
-                    const coreGeometry = new THREE.IcosahedronGeometry(5, 2);
-                    const coreMaterial = new THREE.MeshBasicMaterial({
-                        color: 0x3A5FEB,
-                        transparent: true,
-                        opacity: 0.3, // 透明度を上げる
-                        wireframe: true
-                    });
-                    const core = new THREE.Mesh(coreGeometry, coreMaterial);
-                    scene.add(core);
-                    
-                    // パーティクル設定（数を大幅増加）
-                    const particlesCount = window.innerWidth < 768 ? 500 : 1000;
+                    // パーティクル設定（滑らかな動き）
+                    const particlesCount = window.innerWidth < 768 ? 400 : 800;
                     const particles = [];
                     
-                    // パーティクルの形状（キューブ、球体、ピラミッド）- サイズ拡大
-                    const geometries = [
-                        new THREE.BoxGeometry(0.2, 0.2, 0.2),
-                        new THREE.SphereGeometry(0.1, 8, 8),
-                        new THREE.TetrahedronGeometry(0.15, 0)
-                    ];
-                    
-                    // カラーパレット（青をベースに、アクセントでオレンジを追加）- 彩度向上
+                    // カラーパレット（美しいグラデーション）
                     const colors = [
                         0x3A5FEB, // 青
                         0x5B7BFF, // 明るい青
                         0x00C9A7, // 青緑
                         0x20E7C4, // 明るい青緑
                         0xFF8A00, // オレンジ（アクセント）
-                        0xFFA94D  // 明るいオレンジ（アクセント）
                     ];
                     
-                    // パーティクル作成
+                    // パーティクルグループ作成
                     for (let i = 0; i < particlesCount; i++) {
-                        // ランダムな形状を選択
-                        const geometry = geometries[Math.floor(Math.random() * geometries.length)].clone();
+                        const geometry = new THREE.SphereGeometry(0.15, 12, 12);
                         
-                        // ランダムなカラーを選択（オレンジは低確率）
-                        const colorIndex = Math.random() < 0.75 ? Math.floor(Math.random() * 4) : 4 + Math.floor(Math.random() * 2);
+                        // カラー選択（オレンジは低確率）
+                        const colorIndex = Math.random() < 0.9 ? Math.floor(Math.random() * 4) : 4;
                         const material = new THREE.MeshBasicMaterial({ 
                             color: colors[colorIndex],
                             transparent: true,
-                            opacity: 0.7 + Math.random() * 0.3 // 透明度を下げて鮮明に
+                            opacity: 0.4 + Math.random() * 0.3
                         });
                         
-                        // パーティクルメッシュ作成
                         const particle = new THREE.Mesh(geometry, material);
                         
-                        // 初期位置（球体状に配置）
-                        const radius = 15 + Math.random() * 35;
+                        // 球体状に均等配置
+                        const radius = 20 + Math.random() * 30;
                         const theta = Math.random() * Math.PI * 2;
-                        const phi = Math.random() * Math.PI;
+                        const phi = Math.acos(Math.random() * 2 - 1);
                         
                         particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
                         particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
                         particle.position.z = radius * Math.cos(phi);
                         
-                        // 初期回転
-                        particle.rotation.x = Math.random() * Math.PI * 2;
-                        particle.rotation.y = Math.random() * Math.PI * 2;
-                        particle.rotation.z = Math.random() * Math.PI * 2;
-                        
-                        // パーティクルのパラメータを保存
+                        // パーティクル情報を保存
                         particles.push({
                             mesh: particle,
-                            velocity: {
-                                x: (Math.random() - 0.5) * 0.03, // 動きを速く
-                                y: (Math.random() - 0.5) * 0.03,
-                                z: (Math.random() - 0.5) * 0.03
+                            originalPosition: {
+                                x: particle.position.x,
+                                y: particle.position.y,
+                                z: particle.position.z
                             },
-                            rotation: {
-                                x: (Math.random() - 0.5) * 0.02, // 回転を速く
-                                y: (Math.random() - 0.5) * 0.02,
-                                z: (Math.random() - 0.5) * 0.02
-                            },
-                            orbit: {
-                                speed: 0.0002 + Math.random() * 0.0005, // 軌道速度を速く
-                                radius: radius,
-                                angle: Math.random() * Math.PI * 2
-                            }
+                            floatSpeed: 0.0003 + Math.random() * 0.0003,
+                            floatRange: 2 + Math.random() * 3,
+                            phase: Math.random() * Math.PI * 2
                         });
                         
                         scene.add(particle);
                     }
                     
-                    // 接続線（データストリーム）
+                    // 接続線（より繊細に）
                     const connectionLines = [];
-                    const lineCount = 80; // 線の数を増やす
+                    const lineCount = 30;
                     
                     for (let i = 0; i < lineCount; i++) {
                         const geometry = new THREE.BufferGeometry();
@@ -3975,9 +3857,9 @@
                         geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
                         
                         const material = new THREE.LineBasicMaterial({
-                            color: Math.random() < 0.7 ? 0x3A5FEB : 0xFF8A00, // 青とオレンジをランダムに
+                            color: 0x3A5FEB,
                             transparent: true,
-                            opacity: 0.3 // 透明度を下げて視認性向上
+                            opacity: 0.05
                         });
                         
                         const line = new THREE.Line(geometry, material);
@@ -3985,77 +3867,57 @@
                         connectionLines.push(line);
                     }
                     
-                    // カメラ制御用変数
+                    // マウス追跡
                     let mouseX = 0;
                     let mouseY = 0;
-                    let targetX = 0;
-                    let targetY = 0;
                     
-                    // マウス追跡
                     document.addEventListener('mousemove', function(event) {
                         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
                         mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
                     });
                     
-                    // タッチ追跡
-                    document.addEventListener('touchmove', function(event) {
-                        if (event.touches.length > 0) {
-                            mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-                            mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
-                        }
-                    });
-                    
-                    // アニメーション - 動きを活発に
+                    // アニメーション（より滑らかに）
                     const animate = () => {
                         requestAnimationFrame(animate);
                         
-                        // カメラの滑らかな動き
-                        targetX = mouseX * 15; // 動きを活発に
-                        targetY = mouseY * 15;
-                        camera.position.x += (targetX - camera.position.x) * 0.02; // 適度な速さに
-                        camera.position.y += (targetY - camera.position.y) * 0.02;
+                        // カメラの微妙な動き
+                        camera.position.x += (mouseX * 5 - camera.position.x) * 0.02;
+                        camera.position.y += (mouseY * 5 - camera.position.y) * 0.02;
                         camera.lookAt(scene.position);
                         
-                        // コアの回転
-                        core.rotation.y += 0.001;
-                        core.rotation.x += 0.0007;
+                        // 時間ベースのアニメーション
+                        const time = Date.now() * 0.001;
                         
-                        // パーティクルアニメーション
+                        // パーティクルの浮遊アニメーション
                         particles.forEach((p, index) => {
-                            // 軌道運動
-                            p.orbit.angle += p.orbit.speed;
-                            const newX = p.orbit.radius * Math.cos(p.orbit.angle);
-                            const newZ = p.orbit.radius * Math.sin(p.orbit.angle);
+                            // ゆっくりとした浮遊運動
+                            const floatY = Math.sin(time * p.floatSpeed + p.phase) * p.floatRange;
+                            const floatX = Math.cos(time * p.floatSpeed * 0.7 + p.phase) * p.floatRange * 0.5;
                             
-                            // 上下運動
-                            p.mesh.position.x = newX + p.velocity.x * Math.sin(Date.now() * 0.001 + index); // 速くする
-                            p.mesh.position.y += p.velocity.y;
-                            p.mesh.position.z = newZ + p.velocity.z * Math.cos(Date.now() * 0.001 + index);
+                            p.mesh.position.x = p.originalPosition.x + floatX;
+                            p.mesh.position.y = p.originalPosition.y + floatY;
+                            p.mesh.position.z = p.originalPosition.z + Math.sin(time * p.floatSpeed * 0.5) * p.floatRange * 0.3;
                             
-                            // 自転
-                            p.mesh.rotation.x += p.rotation.x;
-                            p.mesh.rotation.y += p.rotation.y;
-                            p.mesh.rotation.z += p.rotation.z;
+                            // ゆっくりとした回転
+                            p.mesh.rotation.y = time * 0.05;
+                            p.mesh.rotation.x = time * 0.03;
                             
-                            // 境界での反転
-                            if (Math.abs(p.mesh.position.x) > 60) p.velocity.x *= -1;
-                            if (Math.abs(p.mesh.position.y) > 40) p.velocity.y *= -1;
-                            if (Math.abs(p.mesh.position.z) > 60) p.velocity.z *= -1;
+                            // パルス効果
+                            const scale = 1 + Math.sin(time * 2 + index) * 0.05;
+                            p.mesh.scale.setScalar(scale);
                         });
                         
-                        // 接続線のアニメーション
-                        connectionLines.forEach((line, index) => {
+                        // 接続線の更新（距離に基づく接続）
+                        connectionLines.forEach(line => {
                             const positions = line.geometry.attributes.position.array;
                             
-                            // ランダムに2つのパーティクルを選んで接続
                             const p1 = particles[Math.floor(Math.random() * particles.length)];
                             const p2 = particles[Math.floor(Math.random() * particles.length)];
                             
                             if (p1 && p2) {
                                 const distance = p1.mesh.position.distanceTo(p2.mesh.position);
                                 
-                                // 近いパーティクル同士を接続
-                                if (distance < 25) { // 接続距離を長くする
+                                if (distance < 15) {
                                     positions[0] = p1.mesh.position.x;
                                     positions[1] = p1.mesh.position.y;
                                     positions[2] = p1.mesh.position.z;
@@ -4064,7 +3926,7 @@
                                     positions[5] = p2.mesh.position.z;
                                     
                                     line.geometry.attributes.position.needsUpdate = true;
-                                    line.material.opacity = 0.3 * (1 - distance / 25); // 透明度を調整
+                                    line.material.opacity = 0.08 * (1 - distance / 15);
                                 }
                             }
                         });
@@ -4101,46 +3963,46 @@
                 // GSAPのScrollTriggerを登録
                 gsap.registerPlugin(ScrollTrigger);
                 
-                // スクロールアニメーションの高速化 - 短い遅延と高速化したアニメーション
+                // アニメーション要素の設定
                 const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .service-icon-wrapper, .mobile-card');
                 
                 animateElements.forEach((element, index) => {
-                    // 要素ごとに最適なアニメーションを設定（短い遅延で高速化）
+                    // 要素ごとに最適なアニメーションを設定
                     let animation;
-                    let duration = 0.5; // 短い期間
+                    let duration = 0.8;
                     let delay = 0;
                     
                     // 要素の種類に応じてアニメーションを分岐
                     if (element.classList.contains('section-header')) {
                         animation = { y: 30, opacity: 0 };
-                        duration = 0.6;
+                        duration = 0.9;
                     } else if (element.classList.contains('feature-card')) {
                         animation = { y: 40, opacity: 0 };
-                        delay = index * 0.05; // 遅延を短く
+                        delay = index * 0.1;
                     } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
                         animation = { y: 40, opacity: 0, scale: 0.95 };
-                        delay = index * 0.08;
+                        delay = index * 0.15;
                     } else if (element.classList.contains('service-icon-wrapper')) {
                         animation = { y: -20, scale: 0.8, opacity: 0 };
-                        delay = 0.1 + index * 0.05;
+                        delay = 0.2 + index * 0.1;
                     } else if (element.classList.contains('benefit-card')) {
                         animation = { y: 40, opacity: 0 };
-                        delay = index * 0.05;
+                        delay = index * 0.1;
                     } else if (element.classList.contains('cta-content')) {
                         animation = { scale: 0.95, opacity: 0 };
-                        duration = 0.7;
+                        duration = 1;
                     } else if (element.classList.contains('hero-badge')) {
                         animation = { y: -20, opacity: 0 };
-                        duration = 0.5;
+                        duration = 0.7;
                     } else if (element.classList.contains('hero-title')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.2;
+                        delay = 0.3;
                     } else if (element.classList.contains('hero-description')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.3;
+                        delay = 0.5;
                     } else if (element.classList.contains('hero-buttons')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.4;
+                        delay = 0.7;
                     } else {
                         animation = { opacity: 0 };
                     }
@@ -4152,13 +4014,13 @@
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: element,
-                            start: 'top 90%', // より早めにアニメーション開始
+                            start: 'top 85%',
                             toggleActions: 'play none none none'
                         }
                     });
                 });
             } else {
-                // GSAPが読み込まれていない場合はシンプルな表示に、高速化
+                // GSAPが読み込まれていない場合はシンプルな表示に
                 const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .mobile-card');
                 
                 const observer = new IntersectionObserver((entries) => {
@@ -4169,8 +4031,8 @@
                         }
                     });
                 }, {
-                    threshold: 0.05, // より早めに検出
-                    rootMargin: '0px 0px -30px 0px' // マージン調整
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
                 });
                 
                 animateElements.forEach(el => {
