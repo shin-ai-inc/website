@@ -615,12 +615,13 @@
         }
         
         .text-gradient {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #5B7BFF, #00C9A7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
             display: inline-block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
         .text-center {
@@ -1108,34 +1109,46 @@
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
-            backdrop-filter: blur(5px); /* 背景パーティクルの上に微かなぼかし効果 */
-            -webkit-backdrop-filter: blur(5px);
             padding: 2rem;
-            border-radius: var(--radius-lg);
-            background: rgba(255, 255, 255, 0.7); /* 半透明の背景色を追加 */
+            /* 背景を透明にしてパーティクルを見えるようにする */
+            background: transparent;
+        }
+        
+        /* ヒーローセクションのテキスト視認性向上 */
+        .hero-title, .hero-description {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
         
         .hero-badge {
             display: inline-block;
-            background: rgba(58, 95, 235, 0.1);
+            background: rgba(58, 95, 235, 0.2); /* より透明に */
             color: var(--primary);
-            font-weight: var(--font-weight-semibold);
+            font-weight: var(--font-weight-bold); /* 太字に変更 */
             padding: 0.5rem 1.25rem;
             border-radius: var(--radius-full);
             margin-bottom: var(--space-6);
             font-size: 0.95rem;
             animation: fadeInDown 1s ease forwards;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border: 1px solid rgba(58, 95, 235, 0.3);
+            box-shadow: 0 4px 15px rgba(58, 95, 235, 0.2);
         }
         
         .hero-title {
             margin-bottom: var(--space-6);
             animation: fadeInUp 1s ease 0.3s forwards;
             opacity: 0;
+            font-size: clamp(2.8rem, 5vw, 4.2rem); /* フォントサイズ拡大 */
+            color: var(--white); /* 白色に変更 */
+            font-weight: var(--font-weight-black);
+            letter-spacing: -0.03em;
         }
         
         .hero-description {
             font-size: clamp(1.1rem, 2vw, 1.25rem);
-            color: var(--gray);
+            color: rgba(255, 255, 255, 0.9); /* 白色を少し透過 */
             margin-bottom: var(--space-8);
             line-height: var(--line-height-relaxed);
             max-width: 800px;
@@ -1143,6 +1156,11 @@
             margin-right: auto;
             animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            background: rgba(0, 0, 0, 0.2); /* 薄暗い背景を追加 */
         }
         
         .hero-buttons {
@@ -1152,6 +1170,19 @@
             flex-wrap: wrap;
             animation: fadeInUp 1s ease 0.9s forwards;
             opacity: 0;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .hero-buttons .btn {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         /* 浮遊エフェクト - 水玉 */
@@ -1168,9 +1199,12 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, rgba(58, 95, 235, 0.15), rgba(0, 201, 167, 0.15));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             animation: float-orb 20s infinite ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(58, 95, 235, 0.2);
         }
         
         .orb-1 {
@@ -1220,16 +1254,16 @@
             }
         }
         
-        /* パーティクルエフェクトのコンテナ修正 - 固定背景化 */
+        /* パーティクルエフェクトのコンテナ修正 - 前面に表示 */
         #three-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2; /* コンテンツの後ろに表示 */
+            z-index: -1; /* 前後関係調整 */
             pointer-events: none;
-            opacity: 0.6; /* 透明度を下げて視認性向上 */
+            opacity: 1; /* 完全に見えるようにする */
         }
         
         @keyframes fadeInDown {
@@ -2930,9 +2964,30 @@
             }
         }
         
-        /* アニメーションクラス - GSAPが読み込まれない場合の代替 */
+        /* アニメーションクラス - GSAPが読み込まれない場合の代替 - 高速化 */
         .animate-in {
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.5s ease forwards; /* より短いアニメーション */
+        }
+        
+        /* モバイルヘッダー改善 */
+        .header.visible {
+            transform: translateY(0);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .hamburger {
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-bounce);
+            z-index: 1010;
+        }
+        
+        .hamburger:hover {
+            transform: scale(1.1);
+            background: var(--gradient-primary);
+            color: var(--white);
         }
     </style>
 </head>
@@ -3822,7 +3877,7 @@
                     });
                     renderer.setSize(window.innerWidth, window.innerHeight);
                     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    renderer.setClearColor(0x000000, 0); // 完全な透明背景
+                    renderer.setClearColor(0x0f172a, 0.3); // 暗めの背景色を設定して視認性向上
                     container.appendChild(renderer.domElement);
                     
                     // 中心の球体（デジタルコア）
@@ -3830,24 +3885,24 @@
                     const coreMaterial = new THREE.MeshBasicMaterial({
                         color: 0x3A5FEB,
                         transparent: true,
-                        opacity: 0.1,
+                        opacity: 0.3, // 透明度を上げる
                         wireframe: true
                     });
                     const core = new THREE.Mesh(coreGeometry, coreMaterial);
                     scene.add(core);
                     
-                    // パーティクル設定（数を減少して軽量化）
-                    const particlesCount = window.innerWidth < 768 ? 200 : 400;
+                    // パーティクル設定（数を大幅増加）
+                    const particlesCount = window.innerWidth < 768 ? 500 : 1000;
                     const particles = [];
                     
-                    // パーティクルの形状（キューブ、球体、ピラミッド）
+                    // パーティクルの形状（キューブ、球体、ピラミッド）- サイズ拡大
                     const geometries = [
-                        new THREE.BoxGeometry(0.1, 0.1, 0.1),
-                        new THREE.SphereGeometry(0.05, 8, 8),
-                        new THREE.TetrahedronGeometry(0.08, 0)
+                        new THREE.BoxGeometry(0.2, 0.2, 0.2),
+                        new THREE.SphereGeometry(0.1, 8, 8),
+                        new THREE.TetrahedronGeometry(0.15, 0)
                     ];
                     
-                    // カラーパレット（青をベースに、アクセントでオレンジを追加）
+                    // カラーパレット（青をベースに、アクセントでオレンジを追加）- 彩度向上
                     const colors = [
                         0x3A5FEB, // 青
                         0x5B7BFF, // 明るい青
@@ -3863,11 +3918,11 @@
                         const geometry = geometries[Math.floor(Math.random() * geometries.length)].clone();
                         
                         // ランダムなカラーを選択（オレンジは低確率）
-                        const colorIndex = Math.random() < 0.85 ? Math.floor(Math.random() * 4) : 4 + Math.floor(Math.random() * 2);
+                        const colorIndex = Math.random() < 0.75 ? Math.floor(Math.random() * 4) : 4 + Math.floor(Math.random() * 2);
                         const material = new THREE.MeshBasicMaterial({ 
                             color: colors[colorIndex],
                             transparent: true,
-                            opacity: 0.2 + Math.random() * 0.2 // 透明度を下げる
+                            opacity: 0.7 + Math.random() * 0.3 // 透明度を下げて鮮明に
                         });
                         
                         // パーティクルメッシュ作成
@@ -3891,17 +3946,17 @@
                         particles.push({
                             mesh: particle,
                             velocity: {
-                                x: (Math.random() - 0.5) * 0.01, // 動きを遅くする
-                                y: (Math.random() - 0.5) * 0.01,
-                                z: (Math.random() - 0.5) * 0.01
+                                x: (Math.random() - 0.5) * 0.03, // 動きを速く
+                                y: (Math.random() - 0.5) * 0.03,
+                                z: (Math.random() - 0.5) * 0.03
                             },
                             rotation: {
-                                x: (Math.random() - 0.5) * 0.005, // 回転を遅くする
-                                y: (Math.random() - 0.5) * 0.005,
-                                z: (Math.random() - 0.5) * 0.005
+                                x: (Math.random() - 0.5) * 0.02, // 回転を速く
+                                y: (Math.random() - 0.5) * 0.02,
+                                z: (Math.random() - 0.5) * 0.02
                             },
                             orbit: {
-                                speed: 0.00005 + Math.random() * 0.0001, // 軌道速度を遅くする
+                                speed: 0.0002 + Math.random() * 0.0005, // 軌道速度を速く
                                 radius: radius,
                                 angle: Math.random() * Math.PI * 2
                             }
@@ -3912,7 +3967,7 @@
                     
                     // 接続線（データストリーム）
                     const connectionLines = [];
-                    const lineCount = 20; // 線の数を減らす
+                    const lineCount = 80; // 線の数を増やす
                     
                     for (let i = 0; i < lineCount; i++) {
                         const geometry = new THREE.BufferGeometry();
@@ -3920,9 +3975,9 @@
                         geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
                         
                         const material = new THREE.LineBasicMaterial({
-                            color: 0x3A5FEB,
+                            color: Math.random() < 0.7 ? 0x3A5FEB : 0xFF8A00, // 青とオレンジをランダムに
                             transparent: true,
-                            opacity: 0.05 // 透明度を上げる
+                            opacity: 0.3 // 透明度を下げて視認性向上
                         });
                         
                         const line = new THREE.Line(geometry, material);
@@ -3950,20 +4005,20 @@
                         }
                     });
                     
-                    // アニメーション
+                    // アニメーション - 動きを活発に
                     const animate = () => {
                         requestAnimationFrame(animate);
                         
                         // カメラの滑らかな動き
-                        targetX = mouseX * 10; // 動きを抑える
-                        targetY = mouseY * 10;
-                        camera.position.x += (targetX - camera.position.x) * 0.01; // 遅くする
-                        camera.position.y += (targetY - camera.position.y) * 0.01;
+                        targetX = mouseX * 15; // 動きを活発に
+                        targetY = mouseY * 15;
+                        camera.position.x += (targetX - camera.position.x) * 0.02; // 適度な速さに
+                        camera.position.y += (targetY - camera.position.y) * 0.02;
                         camera.lookAt(scene.position);
                         
                         // コアの回転
-                        core.rotation.y += 0.0005; // 遅くする
-                        core.rotation.x += 0.0003;
+                        core.rotation.y += 0.001;
+                        core.rotation.x += 0.0007;
                         
                         // パーティクルアニメーション
                         particles.forEach((p, index) => {
@@ -3973,9 +4028,9 @@
                             const newZ = p.orbit.radius * Math.sin(p.orbit.angle);
                             
                             // 上下運動
-                            p.mesh.position.x = newX + p.velocity.x * Math.sin(Date.now() * 0.0005 + index); // 遅くする
+                            p.mesh.position.x = newX + p.velocity.x * Math.sin(Date.now() * 0.001 + index); // 速くする
                             p.mesh.position.y += p.velocity.y;
-                            p.mesh.position.z = newZ + p.velocity.z * Math.cos(Date.now() * 0.0005 + index);
+                            p.mesh.position.z = newZ + p.velocity.z * Math.cos(Date.now() * 0.001 + index);
                             
                             // 自転
                             p.mesh.rotation.x += p.rotation.x;
@@ -4000,7 +4055,7 @@
                                 const distance = p1.mesh.position.distanceTo(p2.mesh.position);
                                 
                                 // 近いパーティクル同士を接続
-                                if (distance < 15) { // 短くする
+                                if (distance < 25) { // 接続距離を長くする
                                     positions[0] = p1.mesh.position.x;
                                     positions[1] = p1.mesh.position.y;
                                     positions[2] = p1.mesh.position.z;
@@ -4009,7 +4064,7 @@
                                     positions[5] = p2.mesh.position.z;
                                     
                                     line.geometry.attributes.position.needsUpdate = true;
-                                    line.material.opacity = 0.05 * (1 - distance / 15); // 透明度を上げる
+                                    line.material.opacity = 0.3 * (1 - distance / 25); // 透明度を調整
                                 }
                             }
                         });
@@ -4046,46 +4101,46 @@
                 // GSAPのScrollTriggerを登録
                 gsap.registerPlugin(ScrollTrigger);
                 
-                // アニメーション要素の設定
+                // スクロールアニメーションの高速化 - 短い遅延と高速化したアニメーション
                 const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .service-icon-wrapper, .mobile-card');
                 
                 animateElements.forEach((element, index) => {
-                    // 要素ごとに最適なアニメーションを設定
+                    // 要素ごとに最適なアニメーションを設定（短い遅延で高速化）
                     let animation;
-                    let duration = 0.8;
+                    let duration = 0.5; // 短い期間
                     let delay = 0;
                     
                     // 要素の種類に応じてアニメーションを分岐
                     if (element.classList.contains('section-header')) {
                         animation = { y: 30, opacity: 0 };
-                        duration = 0.9;
+                        duration = 0.6;
                     } else if (element.classList.contains('feature-card')) {
                         animation = { y: 40, opacity: 0 };
-                        delay = index * 0.1;
+                        delay = index * 0.05; // 遅延を短く
                     } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
                         animation = { y: 40, opacity: 0, scale: 0.95 };
-                        delay = index * 0.15;
+                        delay = index * 0.08;
                     } else if (element.classList.contains('service-icon-wrapper')) {
                         animation = { y: -20, scale: 0.8, opacity: 0 };
-                        delay = 0.2 + index * 0.1;
+                        delay = 0.1 + index * 0.05;
                     } else if (element.classList.contains('benefit-card')) {
                         animation = { y: 40, opacity: 0 };
-                        delay = index * 0.1;
+                        delay = index * 0.05;
                     } else if (element.classList.contains('cta-content')) {
                         animation = { scale: 0.95, opacity: 0 };
-                        duration = 1;
+                        duration = 0.7;
                     } else if (element.classList.contains('hero-badge')) {
                         animation = { y: -20, opacity: 0 };
-                        duration = 0.7;
+                        duration = 0.5;
                     } else if (element.classList.contains('hero-title')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.3;
+                        delay = 0.2;
                     } else if (element.classList.contains('hero-description')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.5;
+                        delay = 0.3;
                     } else if (element.classList.contains('hero-buttons')) {
                         animation = { y: 30, opacity: 0 };
-                        delay = 0.7;
+                        delay = 0.4;
                     } else {
                         animation = { opacity: 0 };
                     }
@@ -4097,13 +4152,13 @@
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: element,
-                            start: 'top 85%',
+                            start: 'top 90%', // より早めにアニメーション開始
                             toggleActions: 'play none none none'
                         }
                     });
                 });
             } else {
-                // GSAPが読み込まれていない場合はシンプルな表示に
+                // GSAPが読み込まれていない場合はシンプルな表示に、高速化
                 const animateElements = document.querySelectorAll('.section-header, .feature-card, .service-card, .benefit-card, .cta-content, .mobile-card');
                 
                 const observer = new IntersectionObserver((entries) => {
@@ -4114,8 +4169,8 @@
                         }
                     });
                 }, {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
+                    threshold: 0.05, // より早めに検出
+                    rootMargin: '0px 0px -30px 0px' // マージン調整
                 });
                 
                 animateElements.forEach(el => {
