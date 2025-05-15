@@ -47,6 +47,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="assets/images/logo.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/images/hero-bg.jpg" as="image" type="image/jpeg">
     <link rel="preload" href="assets/css/style.css" as="style">
     <link rel="preload" href="assets/css/responsive.css" as="style">
     
@@ -262,6 +263,44 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0;
+        }
+        
+        /* 画像プリロード用の非表示要素 */
+        .preload-images {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        /* ページ読み込み中のローディングインジケーター */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        }
+        
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(58, 95, 235, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
     
@@ -807,6 +846,28 @@
             margin-left: var(--space-4);
         }
         
+        /* 無料相談ボタンをヘッダー内に収める */
+        .btn-header-consultation {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-semibold);
+            font-size: 0.9rem;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-button);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .btn-header-consultation:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-button-hover);
+            color: var(--white);
+        }
+        
         .hamburger {
             display: none;
             background: none;
@@ -873,16 +934,23 @@
             line-height: 1.4;
         }
         
+        /* ボタンホバーエフェクト強化 - 波紋アニメーション */
         .btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: var(--transition-normal);
-            z-index: -1;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease-out, height 0.6s ease-out;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-primary {
@@ -927,13 +995,33 @@
             background: transparent;
             color: var(--primary);
             border: 1.5px solid var(--primary);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .btn-outline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
         }
         
         .btn-outline:hover {
-            background: rgba(58, 95, 235, 0.05);
+            color: var(--white);
             transform: translateY(-2px);
             box-shadow: var(--shadow-xs);
-            color: var(--primary);
+            border-color: transparent;
+        }
+        
+        .btn-outline:hover::after {
+            opacity: 1;
         }
         
         .btn-outline:active {
@@ -972,7 +1060,7 @@
         }
         
         .btn-icon-right:hover i {
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
         
         .btn-icon-pulse i {
@@ -980,14 +1068,11 @@
         }
         
         @keyframes pulse {
-            0% {
+            0%, 100% {
                 transform: scale(1);
             }
             50% {
                 transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
             }
         }
         
@@ -1082,58 +1167,15 @@
             opacity: 0;
         }
         
-        .floating-elements {
-            position: absolute;
+        /* パーティクルが背景に留まるように修正 */
+        #three-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: var(--z-negative);
             pointer-events: none;
-        }
-        
-        .floating-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(154, 174, 255, 0.08);
-            will-change: transform; /* パフォーマンス最適化 */
-        }
-        
-        .floating-circle:nth-child(1) {
-            width: clamp(150px, 20vw, 300px);
-            height: clamp(150px, 20vw, 300px);
-            top: 15%;
-            left: 10%;
-            animation: floatAnimation 15s ease-in-out infinite;
-        }
-        
-        .floating-circle:nth-child(2) {
-            width: clamp(200px, 25vw, 400px);
-            height: clamp(200px, 25vw, 400px);
-            top: 50%;
-            right: 10%;
-            animation: floatAnimation 20s ease-in-out infinite reverse;
-        }
-        
-        .floating-circle:nth-child(3) {
-            width: clamp(100px, 15vw, 200px);
-            height: clamp(100px, 15vw, 200px);
-            bottom: 15%;
-            left: 20%;
-            animation: floatAnimation 18s ease-in-out infinite 2s;
-        }
-        
-        @keyframes floatAnimation {
-            0%, 100% {
-                transform: translate(0, 0);
-            }
-            33% {
-                transform: translate(30px, -30px);
-            }
-            66% {
-                transform: translate(-20px, 20px);
-            }
         }
         
         @keyframes fadeInDown {
@@ -1568,6 +1610,17 @@
         .cta-title {
             margin-bottom: 1.5rem;
             color: var(--white);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* CTAテキストが背景と同化しないよう調整 */
+        .cta-title .text-gradient {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
         }
         
         .cta-description {
@@ -1588,12 +1641,34 @@
             gap: 0.75rem;
             transition: var(--transition-bounce);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transition: left 0.5s ease;
         }
         
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             color: var(--primary);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
         }
         
         .cta-patterns {
@@ -1973,6 +2048,37 @@
         .chatbot-send:hover {
             transform: scale(1.1);
         }
+        
+        /* チャットボットローディングアニメーション */
+        .loading-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .loading-dots i {
+            font-size: 5px;
+            animation: dotPulse 1.5s infinite;
+        }
+        
+        .loading-dots i:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loading-dots i:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
 
         /* 
         ==============================================
@@ -2197,15 +2303,6 @@
             }
         }
         
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
         @keyframes float {
             0%, 100% {
                 transform: translateY(0);
@@ -2248,6 +2345,7 @@
                 display: flex;
                 flex-direction: column;
                 position: relative;
+                padding-bottom: 2rem; /* スライド下部に余白を追加 */
             }
             
             .swiper-pagination {
@@ -2287,26 +2385,15 @@
                 min-height: calc(100% - var(--header-height-mobile));
                 display: flex;
                 flex-direction: column;
-                overflow: hidden;
+                overflow: auto; /* スクロールを許可 */
             }
-        }
-
-        /* 
-        ==============================================
-        // === component-split: Three.js Styles ===
-        COMPONENT: Three.jsスタイル - パーティクル背景
-        機能: インタラクティブ背景、視覚的深み
-        特徴: キャンバス配置、パフォーマンス最適化
-        ==============================================
-        */
-        #three-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            
+            /* スワイプ時にコンテンツが切れないようスクロール可能に */
+            .swiper-slide-inner {
+                overflow-y: auto;
+                flex: 1;
+                padding-bottom: 2rem;
+            }
         }
 
         /* 
@@ -2411,9 +2498,10 @@
                 width: 100%;
             }
             
-            .btn-consultation {
+            .btn-header-consultation {
                 width: 100%;
                 justify-content: center;
+                padding: 0.8rem 1.5rem;
             }
             
             .desktop-layout {
@@ -2507,6 +2595,21 @@
                 max-width: 400px;
                 margin: 0 auto;
             }
+            
+            /* スワイプ挙動改善 */
+            .swiper-slide {
+                overflow-y: auto;
+            }
+            
+            .swiper-slide-content {
+                min-height: auto;
+                height: auto;
+            }
+            
+            /* 各セクションをよりコンパクトに */
+            .section {
+                padding: 2.5rem 0;
+            }
         }
         
         @media (max-width: 576px) {
@@ -2555,7 +2658,7 @@
             .cta-section {
                 padding: 3rem 0;
             }
-            
+
             .cta-title {
                 font-size: 1.8rem;
             }
@@ -2656,6 +2759,20 @@
     </style>
 </head>
 <body>
+    <!-- 画像プリロード用の非表示要素 -->
+    <div class="preload-images">
+        <img src="assets/images/logo.svg" alt="">
+        <img src="assets/images/hero-bg.jpg" alt="">
+        <img src="assets/images/service1.jpg" alt="">
+        <img src="assets/images/service2.jpg" alt="">
+        <img src="assets/images/service3.jpg" alt="">
+    </div>
+    
+    <!-- ページロード時のローディングインジケーター -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-circle"></div>
+    </div>
+    
     <!-- 
     ==============================================
     // === component-split: AccessibilityNav ===
@@ -2712,7 +2829,7 @@
                             <a href="contact.html" class="nav-link">お問い合わせ</a>
                         </li>
                         <li class="nav-cta">
-                            <a href="contact.html" class="btn-consultation">
+                            <a href="contact.html" class="btn-header-consultation">
                                 <i class="fas fa-comment-dots"></i>
                                 <span>無料相談</span>
                             </a>
@@ -2736,7 +2853,7 @@
     機能: PCサイズ画面用のコンテンツ表示
     ==============================================
     -->
-    <div class="desktop-layout">
+    <div class="desktop-layout" id="main-content">
         <!-- 
         ==============================================
         // === component-split: HeroSection ===
@@ -2745,12 +2862,6 @@
         ==============================================
         -->
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
-            <div class="floating-elements">
-                <div class="floating-circle"></div>
-                <div class="floating-circle"></div>
-                <div class="floating-circle"></div>
-            </div>
-            
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-badge">AI導入・業務効率化支援</div>
@@ -2852,50 +2963,23 @@
                 
                 <!-- Services Grid Component -->
                 <div class="services-grid" data-aos="fade-up" data-aos-delay="200">
-                    <!-- Service 1: 業務自動化ソリューション -->
+                    <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
                     <div class="service-card">
                         <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="業務自動化ソリューションのイメージ" loading="lazy" width="800" height="400">
+                            <img src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
                         </div>
                         <div class="service-content">
                             <div class="service-icon">
-                                <i class="fas fa-robot" aria-hidden="true"></i>
+                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
-                            <h3 class="service-title">業務自動化ソリューション</h3>
+                            <h3 class="service-title">新規事業企画書AIツール「アイプロ」</h3>
                             <p class="service-description">
-                                社内の定型業務をAIで効率化・自動化。データ入力、ドキュメント処理、メール対応など、時間のかかる単純作業から解放され、より創造的な業務に集中できる環境を構築します。
+                                AIが自動で新規事業企画書・プレゼン資料を作成。データドリブンで魅力的な企画を提案し、短時間で高品質な資料作成を実現します。アイデア創出からプレゼン資料まで一気通貫でサポート。
                             </p>
                             <div class="service-tags">
-                                <span class="service-tag">業務効率化</span>
-                                <span class="service-tag">コスト削減</span>
-                                <span class="service-tag">作業精度向上</span>
-                            </div>
-                            <div class="service-footer">
-                                <a href="services.html#automation" class="service-link">
-                                    詳しく見る
-                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 2: アイプロ -->
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="企画書資料作成AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-content">
-                            <div class="service-icon">
-                                <i class="fas fa-file-invoice" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="service-title">企画書資料作成AIツール「アイプロ」</h3>
-                            <p class="service-description">
-                                AIが自動でビジネス企画書・プレゼン資料を作成。データドリブンで魅力的な企画を提案し、短時間で高品質な資料作成を実現します。資料作成の時間を大幅に削減できます。
-                            </p>
-                            <div class="service-tags">
-                                <span class="service-tag">資料自動作成</span>
                                 <span class="service-tag">企画提案</span>
-                                <span class="service-tag">時間短縮</span>
+                                <span class="service-tag">資料自動作成</span>
+                                <span class="service-tag">アイデア創出</span>
                             </div>
                             <div class="service-footer">
                                 <a href="services.html#aipro" class="service-link">
@@ -2906,22 +2990,49 @@
                         </div>
                     </div>
                     
-                    <!-- Service 3: AI導入戦略・実装支援 -->
+                    <!-- Service 2: オーダーメイドAIアプリケーション開発 -->
                     <div class="service-card">
                         <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入戦略・実装支援のイメージ" loading="lazy" width="800" height="400">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
                         </div>
                         <div class="service-content">
                             <div class="service-icon">
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                <i class="fas fa-code" aria-hidden="true"></i>
                             </div>
-                            <h3 class="service-title">AI導入戦略・実装支援</h3>
+                            <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
                             <p class="service-description">
-                                AI導入の戦略立案から実装まで一貫してサポート。貴社の課題や目標に合わせた最適なAI活用方法を提案し、実装から運用まで伴走します。
+                                貴社の業務に最適化したAIアプリケーションを開発。社内データや業務フローを活用し、業務効率化や顧客体験の向上を実現するオーダーメイドのAIソリューションを提供します。
+                            </p>
+                            <div class="service-tags">
+                                <span class="service-tag">カスタム開発</span>
+                                <span class="service-tag">業務効率化</span>
+                                <span class="service-tag">データ活用</span>
+                            </div>
+                            <div class="service-footer">
+                                <a href="services.html#custom" class="service-link">
+                                    詳しく見る
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3: AI導入(DX/AX)コンサルティング -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
+                            <p class="service-description">
+                                AI導入の戦略立案から実装まで一貫してサポート。DX(デジタルトランスフォーメーション)からAX(AIトランスフォーメーション)へ進化するための最適なロードマップを提案します。
                             </p>
                             <div class="service-tags">
                                 <span class="service-tag">戦略立案</span>
-                                <span class="service-tag">実装支援</span>
+                                <span class="service-tag">DX/AX支援</span>
                                 <span class="service-tag">伴走型支援</span>
                             </div>
                             <div class="service-footer">
@@ -2946,7 +3057,7 @@
         <!-- 
         ==============================================
         // === component-split: BenefitsSection ===
-        COMPONENT: メリットセクション - 導入効果
+        COMPONENT: メリットセクション - 価値提案
         機能: AI導入のメリットを数値とともに説明
         ==============================================
         -->
@@ -3041,263 +3152,268 @@
     機能: モバイル端末での最適化された表示
     ==============================================
     -->
-    <div class="swiper-container main-swiper">
+    <div class="swiper-container main-swiper" id="mobile-content">
         <div class="swiper-wrapper">
             <!-- Slide 1: Hero -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="hero" style="min-height: auto; padding-top: 0;">
-                        <div class="floating-elements">
-                            <div class="floating-circle"></div>
-                            <div class="floating-circle"></div>
-                        </div>
-                        
-                        <div class="container">
-                            <div class="hero-content">
-                                <div class="hero-badge">AI導入・業務効率化支援</div>
-                                <h1 class="hero-title heading-xl">
-                                    AIの力で<br><span class="text-gradient">人間らしい時間</span>を<br>取り戻す
-                                </h1>
-                                <p class="hero-description">
-                                    プロトタイプから始める伴走型開発で<br>初期投資を抑えて確実な成果を実現
-                                </p>
-                                <div class="hero-buttons">
-                                    <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                                        サービスを見る
-                                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                    </a>
-                                    <a href="contact.html" class="btn btn-outline btn-lg">
-                                        無料相談する
-                                    </a>
+                    <div class="swiper-slide-inner">
+                        <section class="hero" style="min-height: auto; padding-top: 0;">
+                            <div class="container">
+                                <div class="hero-content">
+                                    <div class="hero-badge">AI導入・業務効率化支援</div>
+                                    <h1 class="hero-title heading-xl">
+                                        AIの力で<br><span class="text-gradient">人間らしい時間</span>を<br>取り戻す
+                                    </h1>
+                                    <p class="hero-description">
+                                        プロトタイプから始める伴走型開発で<br>初期投資を抑えて確実な成果を実現
+                                    </p>
+                                    <div class="hero-buttons">
+                                        <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
+                                            サービスを見る
+                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="contact.html" class="btn btn-outline btn-lg">
+                                            無料相談する
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
             
             <!-- Slide 2: About -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="section" style="padding-top: 2rem; padding-bottom: 4rem;">
-                        <div class="container">
-                            <div class="section-header text-center">
-                                <div class="section-subtitle">ShinAIの強み</div>
-                                <h2 class="heading-lg">
-                                    プロトタイプから始める<br>
-                                    <span class="text-gradient">伴走型AI開発</span>
-                                </h2>
-                                <p class="section-description">
-                                    「小さく始めて、大きく育てる」<br>
-                                    初期投資を抑えて確実な成果を実現
-                                </p>
-                            </div>
-                            
-                            <div class="features-grid" style="margin-top: 2rem;">
-                                <div class="feature-card">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-rocket" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="feature-title">最短2週間で効果実感</h3>
-                                    <p class="feature-description">プロトタイプを素早く作成し、実際の業務での効果を体感。段階的な開発で確実な成果を追求します。</p>
+                    <div class="swiper-slide-inner">
+                        <section class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
+                            <div class="container">
+                                <div class="section-header text-center">
+                                    <div class="section-subtitle">ShinAIの強み</div>
+                                    <h2 class="heading-lg">
+                                        プロトタイプから始める<br>
+                                        <span class="text-gradient">伴走型AI開発</span>
+                                    </h2>
+                                    <p class="section-description">
+                                        「小さく始めて、大きく育てる」<br>
+                                        初期投資を抑えて確実な成果を実現
+                                    </p>
                                 </div>
                                 
-                                <div class="feature-card" style="margin-top: 1.5rem;">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-handshake" aria-hidden="true"></i>
+                                <div class="features-grid" style="margin-top: 2rem;">
+                                    <div class="feature-card">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-rocket" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="feature-title">最短2週間で効果実感</h3>
+                                        <p class="feature-description">プロトタイプを素早く作成し、実際の業務での効果を体感できます。</p>
                                     </div>
-                                    <h3 class="feature-title">伴走型の開発スタイル</h3>
-                                    <p class="feature-description">押し付けではなく、共創。貴社の状況に合わせて一緒に最適解を見つけ、持続可能な成功を実現します。</p>
-                                </div>
-                                
-                                <div class="feature-card" style="margin-top: 1.5rem;">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                    
+                                    <div class="feature-card" style="margin-top: 1.5rem;">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-handshake" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="feature-title">伴走型の開発スタイル</h3>
+                                        <p class="feature-description">貴社の状況に合わせて一緒に最適解を見つけます。</p>
                                     </div>
-                                    <h3 class="feature-title">内製化まで支援</h3>
-                                    <p class="feature-description">開発だけで終わらない。貴社チームの育成と知識移転で、自走できる組織づくりまでサポートします。</p>
+                                    
+                                    <div class="feature-card" style="margin-top: 1.5rem;">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="feature-title">内製化まで支援</h3>
+                                        <p class="feature-description">貴社チームの育成と知識移転で、自走できる組織づくりをサポート。</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
             
             <!-- Slide 3: Services -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="section section-bg-gradient" style="padding-top: 2rem; padding-bottom: 4rem;">
-                        <div class="container">
-                            <div class="section-header text-center">
-                                <div class="section-subtitle">私たちのサービス</div>
-                                <h2 class="heading-lg">
-                                    お客様の課題を解決する<br>
-                                    <span class="text-gradient">3つのAIソリューション</span>
-                                </h2>
+                    <div class="swiper-slide-inner">
+                        <section class="section section-bg-gradient" style="padding-top: 2rem; padding-bottom: 2rem;">
+                            <div class="container">
+                                <div class="section-header text-center">
+                                    <div class="section-subtitle">私たちのサービス</div>
+                                    <h2 class="heading-lg">
+                                        お客様の課題を解決する<br>
+                                        <span class="text-gradient">3つのAIソリューション</span>
+                                    </h2>
+                                </div>
+                                
+                                <!-- Service 1 -->
+                                <div class="service-card" style="margin-top: 2rem;">
+                                    <div class="service-image">
+                                        <img src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
+                                    </div>
+                                    <div class="service-content">
+                                        <div class="service-icon">
+                                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="service-title">新規事業企画書AIツール「アイプロ」</h3>
+                                        <p class="service-description">
+                                            AIが自動で新規事業企画書・プレゼン資料を作成。アイデア創出から提案まで一気通貫でサポート。
+                                        </p>
+                                        <div class="service-footer">
+                                            <a href="services.html#aipro" class="service-link">
+                                                詳しく見る
+                                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Service 2 -->
+                                <div class="service-card" style="margin-top: 1.5rem;">
+                                    <div class="service-image">
+                                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
+                                    </div>
+                                    <div class="service-content">
+                                        <div class="service-icon">
+                                            <i class="fas fa-code" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="service-title">オーダーメイドAIアプリケーション開発</h3>
+                                        <p class="service-description">
+                                            貴社の業務に最適化したAIアプリケーションを開発。効率化と顧客体験向上を実現します。
+                                        </p>
+                                        <div class="service-footer">
+                                            <a href="services.html#custom" class="service-link">
+                                                詳しく見る
+                                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Service 3 -->
+                                <div class="service-card" style="margin-top: 1.5rem;">
+                                    <div class="service-image">
+                                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
+                                    </div>
+                                    <div class="service-content">
+                                        <div class="service-icon">
+                                            <i class="fas fa-brain" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="service-title">AI導入(DX/AX)コンサルティング</h3>
+                                        <p class="service-description">
+                                            AI導入の戦略立案から実装まで一貫サポート。DXからAXへの進化を実現します。
+                                        </p>
+                                        <div class="service-footer">
+                                            <a href="services.html#consulting" class="service-link">
+                                                詳しく見る
+                                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-8">
+                                    <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
+                                        すべてのサービスを見る
+                                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
-                            
-                            <!-- Service 1 -->
-                            <div class="service-card" style="margin-top: 2rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="業務自動化ソリューションのイメージ" loading="lazy" width="800" height="400">
-                                </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-robot" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">業務自動化ソリューション</h3>
-                                    <p class="service-description">
-                                        社内の定型業務をAIで効率化・自動化。より創造的な業務に集中できる環境を構築します。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#automation" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Service 2 -->
-                            <div class="service-card" style="margin-top: 1.5rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1551503766-ac63dfa6401c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="企画書資料作成AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
-                                </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-file-invoice" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">企画書資料作成AIツール「アイプロ」</h3>
-                                    <p class="service-description">
-                                        AIが自動でビジネス企画書・プレゼン資料を作成。短時間で高品質な資料作成を実現します。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#aipro" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Service 3 -->
-                            <div class="service-card" style="margin-top: 1.5rem;">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入戦略・実装支援のイメージ" loading="lazy" width="800" height="400">
-                                </div>
-                                <div class="service-content">
-                                    <div class="service-icon">
-                                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                                    </div>
-                                    <h3 class="service-title">AI導入戦略・実装支援</h3>
-                                    <p class="service-description">
-                                        AI導入の戦略立案から実装まで一貫してサポート。貴社の課題や目標に合わせた最適なAI活用方法を提案します。
-                                    </p>
-                                    <div class="service-footer">
-                                        <a href="services.html#consulting" class="service-link">
-                                            詳しく見る
-                                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="text-center mt-8">
-                                <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                                    すべてのサービスを見る
-                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
             
             <!-- Slide 4: Benefits -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="section" style="padding-top: 2rem; padding-bottom: 4rem;">
-                        <div class="container">
-                            <div class="section-header text-center">
-                                <div class="section-subtitle">導入のメリット</div>
-                                <h2 class="heading-lg">
-                                    なぜShinAIが<span class="text-gradient">選ばれるのか</span>
-                                </h2>
-                                <p class="section-description">
-                                    従来の重厚な開発から、アジャイルな伴走型開発へ
-                                </p>
-                            </div>
-                            
-                            <div class="benefits-container" style="margin-top: 2rem;">
-                                <div class="benefit-card">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-coins" aria-hidden="true"></i>
-                                    </div>
-                                    <h3>初期投資を最小限に</h3>
-                                    <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。段階的な投資で確実にROIを実現します。</p>
-                                    <div class="benefit-stat">
-                                        <div class="stat-value">70<span style="font-size: 1.5rem;">%</span></div>
-                                        <div class="stat-label">初期コスト削減</div>
-                                    </div>
+                    <div class="swiper-slide-inner">
+                        <section class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
+                            <div class="container">
+                                <div class="section-header text-center">
+                                    <div class="section-subtitle">導入のメリット</div>
+                                    <h2 class="heading-lg">
+                                        なぜShinAIが<span class="text-gradient">選ばれるのか</span>
+                                    </h2>
+                                    <p class="section-description">
+                                        従来の重厚な開発から、アジャイルな伴走型開発へ
+                                    </p>
                                 </div>
                                 
-                                <div class="benefit-card" style="margin-top: 1.5rem;">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                                <div class="benefits-container" style="margin-top: 2rem;">
+                                    <div class="benefit-card">
+                                        <div class="benefit-icon">
+                                            <i class="fas fa-coins" aria-hidden="true"></i>
+                                        </div>
+                                        <h3>初期投資を最小限に</h3>
+                                        <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。段階的な投資で確実にROIを実現します。</p>
+                                        <div class="benefit-stat">
+                                            <div class="stat-value">70<span style="font-size: 1.5rem;">%</span></div>
+                                            <div class="stat-label">初期コスト削減</div>
+                                        </div>
                                     </div>
-                                    <h3>柔軟な方向転換が可能</h3>
-                                    <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
-                                    <div class="benefit-stat">
-                                        <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
-                                        <div class="stat-label">最短導入期間</div>
+                                    
+                                    <div class="benefit-card" style="margin-top: 1.5rem;">
+                                        <div class="benefit-icon">
+                                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                                        </div>
+                                        <h3>柔軟な方向転換が可能</h3>
+                                        <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
+                                        <div class="benefit-stat">
+                                            <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
+                                            <div class="stat-label">最短導入期間</div>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div class="benefit-card" style="margin-top: 1.5rem;">
-                                    <div class="benefit-icon">
-                                        <i class="fas fa-users" aria-hidden="true"></i>
-                                    </div>
-                                    <h3>共創型の開発体制</h3>
-                                    <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
-                                    <div class="benefit-stat">
-                                        <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
-                                        <div class="stat-label">顧客満足度</div>
+                                    
+                                    <div class="benefit-card" style="margin-top: 1.5rem;">
+                                        <div class="benefit-icon">
+                                            <i class="fas fa-users" aria-hidden="true"></i>
+                                        </div>
+                                        <h3>共創型の開発体制</h3>
+                                        <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
+                                        <div class="benefit-stat">
+                                            <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
+                                            <div class="stat-label">顧客満足度</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
             
             <!-- Slide 5: CTA -->
             <div class="swiper-slide">
                 <div class="swiper-slide-content">
-                    <section class="cta-section" style="padding: 4rem 0; min-height: calc(100vh - 60px);">
-                        <div class="cta-patterns">
-                            <div class="cta-pattern"></div>
-                            <div class="cta-pattern"></div>
-                            <div class="cta-pattern"></div>
-                        </div>
-                        
-                        <div class="container">
-                            <div class="cta-content text-center">
-                                <h2 class="heading-lg cta-title">
-                                    AIでビジネスの<br>
-                                    <span class="text-gradient">可能性</span>を<br>
-                                    広げませんか？
-                                </h2>
-                                <p class="cta-description">
-                                    まずは小さく始めて<br>
-                                    大きな成果を実現
-                                </p>
-                                <a href="contact.html" class="cta-button">
-                                    無料相談を始める
-                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                </a>
+                    <div class="swiper-slide-inner">
+                        <section class="cta-section" style="padding: 3rem 0; min-height: auto;">
+                            <div class="cta-patterns">
+                                <div class="cta-pattern"></div>
+                                <div class="cta-pattern"></div>
+                                <div class="cta-pattern"></div>
                             </div>
-                        </div>
-                    </section>
+                            
+                            <div class="container">
+                                <div class="cta-content text-center">
+                                    <h2 class="heading-lg cta-title">
+                                        AIでビジネスの<br>
+                                        <span class="text-gradient">可能性</span>を<br>
+                                        広げませんか？
+                                    </h2>
+                                    <p class="cta-description">
+                                        まずは小さく始めて<br>
+                                        大きな成果を実現
+                                    </p>
+                                    <a href="contact.html" class="cta-button">
+                                        無料相談を始める
+                                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3345,10 +3461,10 @@
                 <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html#automation">業務自動化ソリューション</a></li>
-                        <li><a href="services.html#aipro">企画書資料作成AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#consulting">AI導入戦略・実装支援</a></li>
-                        <li><a href="services.html#custom">オーダーメイド型AI開発</a></li>
+                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#custom">オーダーメイドAIアプリケーション開発</a></li>
+                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
+                        <li><a href="services.html#seminar">AI活用セミナー・研修</a></li>
                     </ul>
                 </div>
                 
@@ -3450,6 +3566,17 @@
     -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // ページロード完了時にローディングを非表示
+            const pageLoader = document.getElementById('page-loader');
+            if (pageLoader) {
+                setTimeout(() => {
+                    pageLoader.style.opacity = '0';
+                    setTimeout(() => {
+                        pageLoader.style.visibility = 'hidden';
+                    }, 300);
+                }, 500);
+            }
+            
             // カレントイヤーの更新
             const currentYearElement = document.getElementById('current-year');
             if (currentYearElement) {
@@ -3666,7 +3793,11 @@
                         slidesPerView: 1,
                         spaceBetween: 0,
                         speed: 800,
-                        mousewheel: true,
+                        mousewheel: {
+                            releaseOnEdges: true,
+                            sensitivity: 1,
+                            thresholdDelta: 5
+                        },
                         keyboard: {
                             enabled: true,
                         },
@@ -3682,6 +3813,17 @@
                                 setTimeout(() => {
                                     this.update();
                                 }, 300);
+                            }
+                        }
+                    });
+                    
+                    // スワイプ切り替え時にスクロール位置をリセット
+                    mySwiper.on('slideChangeTransitionStart', function() {
+                        const activeSlide = this.slides[this.activeIndex];
+                        if (activeSlide) {
+                            const slideContent = activeSlide.querySelector('.swiper-slide-inner');
+                            if (slideContent) {
+                                slideContent.scrollTop = 0;
                             }
                         }
                     });
@@ -3706,77 +3848,126 @@
                     const scene = new THREE.Scene();
                     
                     // カメラ設定
-                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    camera.position.z = 25;
+                    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    camera.position.z = 30;
                     
                     // レンダラー設定
-                    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                    const renderer = new THREE.WebGLRenderer({ 
+                        alpha: true, 
+                        antialias: true,
+                        powerPreference: 'high-performance'
+                    });
                     renderer.setSize(window.innerWidth, window.innerHeight);
                     renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
                     container.appendChild(renderer.domElement);
                     
+                    // 中心点となる仮想の地球を作成
+                    const centerSphere = new THREE.Mesh(
+                        new THREE.SphereGeometry(5, 32, 32),
+                        new THREE.MeshBasicMaterial({ 
+                            color: 0x3a5feb,
+                            transparent: true,
+                            opacity: 0.0 // 不可視
+                        })
+                    );
+                    scene.add(centerSphere);
+                    
                     // パーティクル設定
-                    const particlesGeometry = new THREE.BufferGeometry();
-                    const particleCount = window.innerWidth < 768 ? 1000 : 2000;
+                    const particlesCount = window.innerWidth < 768 ? 600 : 1200;
+                    const particles = [];
                     
-                    const positionArray = new Float32Array(particleCount * 3);
-                    const speedArray = new Float32Array(particleCount);
-                    const sizeArray = new Float32Array(particleCount);
-                    
-                    for (let i = 0; i < particleCount; i++) {
-                        // ランダムな3D位置
-                        positionArray[i * 3] = (Math.random() - 0.5) * 50;
-                        positionArray[i * 3 + 1] = (Math.random() - 0.5) * 50;
-                        positionArray[i * 3 + 2] = (Math.random() - 0.5) * 50;
+                    // パーティクル作成
+                    for (let i = 0; i < particlesCount; i++) {
+                        // パーティクルのジオメトリ
+                        const geometry = new THREE.SphereGeometry(0.05 + Math.random() * 0.1, 8, 8);
                         
-                        // 動きの速度をランダム設定
-                        speedArray[i] = 0.01 + Math.random() * 0.02;
+                        // パーティクルのマテリアル（サイズと色をランダムに）
+                        const material = new THREE.MeshBasicMaterial({ 
+                            color: new THREE.Color(
+                                0.2 + Math.random() * 0.5, 
+                                0.5 + Math.random() * 0.5, 
+                                0.8 + Math.random() * 0.2
+                            ),
+                            transparent: true,
+                            opacity: 0.2 + Math.random() * 0.4
+                        });
                         
-                        // サイズもランダム設定
-                        sizeArray[i] = Math.random() * 0.1 + 0.05;
+                        // パーティクルメッシュ作成
+                        const particle = new THREE.Mesh(geometry, material);
+                        
+                        // 極座標でのランダムな位置
+                        const radius = 10 + Math.random() * 15;
+                        const theta = Math.random() * Math.PI * 2;
+                        const phi = Math.random() * Math.PI;
+                        
+                        // 極座標から直交座標に変換
+                        particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                        particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                        particle.position.z = radius * Math.cos(phi);
+                        
+                        // パーティクルの移動速度を設定（軌道を描くように）
+                        const orbitSpeed = 0.0005 + Math.random() * 0.0015;
+                        const orbitRadius = radius;
+                        const orbitCenter = new THREE.Vector3(0, 0, 0);
+                        const initialAngle = Math.random() * Math.PI * 2;
+                        const orbitAxis = new THREE.Vector3(
+                            Math.random() - 0.5,
+                            Math.random() - 0.5,
+                            Math.random() - 0.5
+                        ).normalize();
+                        
+                        // パーティクルのプロパティを保存
+                        particles.push({
+                            mesh: particle,
+                            orbitSpeed,
+                            orbitRadius,
+                            orbitCenter,
+                            angle: initialAngle,
+                            axis: orbitAxis
+                        });
+                        
+                        scene.add(particle);
                     }
                     
-                    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
-                    particlesGeometry.setAttribute('speed', new THREE.BufferAttribute(speedArray, 1));
-                    particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizeArray, 1));
+                    // カメラ回転用トラッカー
+                    let mouseX = 0;
+                    let mouseY = 0;
                     
-                    // シェーダーマテリアル定義
-                    const particlesMaterial = new THREE.PointsMaterial({
-                        size: 0.15,
-                        color: new THREE.Color(0x3a5feb),
-                        transparent: true,
-                        opacity: 0.6,
-                        alphaMap: null
+                    // マウス追跡
+                    document.addEventListener('mousemove', function(event) {
+                        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
                     });
                     
-                    // パーティクルメッシュ作成
-                    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-                    scene.add(particlesMesh);
+                    // タッチ追跡
+                    document.addEventListener('touchmove', function(event) {
+                        if (event.touches.length > 0) {
+                            mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+                            mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+                        }
+                    });
                     
                     // アニメーション設定
-                    let time = 0;
                     const animate = () => {
                         requestAnimationFrame(animate);
-                        time += 0.001;
                         
-                        // パーティクルの位置を更新
-                        const positions = particlesGeometry.attributes.position.array;
-                        const speeds = particlesGeometry.attributes.speed.array;
+                        // カメラの緩やかな回転（マウス/タッチ対応）
+                        camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+                        camera.position.y += (mouseY * 10 - camera.position.y) * 0.05;
+                        camera.lookAt(scene.position);
                         
-                        for (let i = 0; i < particleCount; i++) {
-                            // 一定の範囲内を動くように
-                            positions[i * 3 + 1] += speeds[i];
+                        // パーティクル位置更新（衛星のような軌道）
+                        particles.forEach(p => {
+                            p.angle += p.orbitSpeed;
                             
-                            // 画面外に出たら上に戻す
-                            if (positions[i * 3 + 1] > 25) {
-                                positions[i * 3 + 1] = -25;
-                            }
-                        }
-                        
-                        particlesGeometry.attributes.position.needsUpdate = true;
-                        
-                        // マウスとの連動
-                        particlesMesh.rotation.y = time * 0.1;
+                            // 回転行列を使用して軌道上の新しい位置を計算
+                            const rotationMatrix = new THREE.Matrix4().makeRotationAxis(p.axis, p.angle);
+                            const position = new THREE.Vector3(p.orbitRadius, 0, 0);
+                            position.applyMatrix4(rotationMatrix);
+                            position.add(p.orbitCenter);
+                            
+                            p.mesh.position.copy(position);
+                        });
                         
                         renderer.render(scene, camera);
                     };
