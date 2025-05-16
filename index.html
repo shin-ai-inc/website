@@ -5,7 +5,7 @@
     ▼ MetaInformation Component
     ======================================================== -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="ShinAI - AIエージェント開発やRAG構築などの社内向けAIシステム開発からAIプロダクト提供まで。プロトタイプから始める伴走型AI開発で初期投資を抑えて確実な成果を実現。">
     <meta name="keywords" content="AI導入支援, AIエージェント, RAG構築, プロトタイプ開発, 伴走型開発, 生成AI, LLM, DX推進">
     <meta name="robots" content="index, follow">
@@ -142,15 +142,15 @@
         top: 15px;
         left: 15px;
         z-index: 1002;
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 10px;
+        width: 46px;
+        height: 46px;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
@@ -166,7 +166,7 @@
         -webkit-backdrop-filter: blur(10px);
         height: 72px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     /* Three.jsパーティクルコンテナ */
@@ -181,12 +181,40 @@
         overflow: hidden;
     }
     
+    /* スキップリンク - アクセシビリティ向上 */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #3A5FEB;
+        color: white;
+        padding: 8px 16px;
+        z-index: 9999;
+        transition: top 0.3s;
+        text-decoration: none;
+        border-radius: 0 0 4px 0;
+        font-weight: 600;
+    }
+    
+    .skip-link:focus {
+        top: 0;
+        outline: none;
+    }
+    
     @media (max-width: 768px) {
         .header {
             height: 60px;
             background: rgba(255, 255, 255, 0.98);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             transform: translateY(-100%); /* 初期状態で非表示 */
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
         
         .mobile-logo-trigger {
@@ -199,13 +227,15 @@
             top: 15px;
             right: 15px;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            width: 40px;
-            height: 40px;
+            border-radius: 14px;
+            width: 46px;
+            height: 46px;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 1002;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
     }
     </style>
@@ -238,7 +268,7 @@
         --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
         --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
         --gradient-accent: linear-gradient(135deg, #FF8A00, #FFA94D);
-        --gradient-hero: linear-gradient(to right, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        --gradient-hero: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
         --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
@@ -580,7 +610,7 @@
         -webkit-backdrop-filter: blur(10px);
         box-shadow: var(--shadow-header);
         height: var(--header-height);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
     
@@ -607,30 +637,59 @@
         font-size: 1.25rem;
         color: var(--dark);
         z-index: var(--z-elevate);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
     }
     
     .logo:hover {
-        transform: translateY(-1px);
+        transform: translateY(-2px);
+    }
+    
+    /* フォーカス状態改善 */
+    .logo:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4);
+        border-radius: 8px;
     }
     
     .logo-icon {
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px;
+        border-radius: 12px;
         position: relative;
         overflow: hidden;
         background: var(--primary);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .logo-icon:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+        z-index: 1;
     }
     
     .logo-icon img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform-origin: center;
+        position: relative;
+        z-index: 0;
+    }
+    
+    .logo:hover .logo-icon {
+        transform: rotate(5deg);
+        box-shadow: var(--shadow-md);
     }
     
     .logo:hover .logo-icon img {
@@ -640,7 +699,7 @@
     .nav {
         display: flex;
         align-items: center;
-        gap: 1.2rem;
+        gap: 1.5rem;
         margin: 0;
         padding: 0;
         height: 100%;
@@ -658,30 +717,53 @@
         color: var(--dark);
         font-weight: var(--font-weight-medium);
         transition: all 0.3s ease;
-        padding: 0.5rem 0;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.2rem;
+        font-size: 0.95rem;
         letter-spacing: -0.01em;
         font-family: var(--font-en);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
-    .nav-link::after {
-        content: '';
+    /* ナビリンク改善 - 新しいホバー効果 */
+    .nav-text {
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-indicator {
         position: absolute;
         bottom: -3px;
-        left: 0;
-        width: 0;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 100%;
         height: 2px;
         background: var(--gradient-primary);
-        transition: all 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         border-radius: var(--radius-full);
+        transform-origin: center;
+        z-index: 1;
     }
     
-    .nav-link:hover, .nav-link.active {
+    .nav-link:hover .nav-text, 
+    .nav-link.active .nav-text {
         color: var(--primary);
+        transform: translateY(-2px);
     }
     
-    .nav-link:hover::after, .nav-link.active::after {
-        width: 100%;
+    .nav-link:hover .nav-indicator, 
+    .nav-link.active .nav-indicator {
+        transform: translateX(-50%) scaleX(1);
+    }
+    
+    /* フォーカス状態改善 */
+    .nav-link:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4);
+        border-radius: 8px;
     }
     
     .nav-cta {
@@ -691,21 +773,22 @@
     .btn-header-consultation {
         background: var(--gradient-primary);
         color: var(--white);
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.2rem;
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         box-shadow: var(--shadow-button);
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.5rem;
         white-space: nowrap;
         position: relative;
         overflow: hidden;
     }
     
-    .btn-header-consultation::before {
+    /* 新しいボタンホバーエフェクト */
+    .btn-hover-effect {
         content: '';
         position: absolute;
         top: 50%;
@@ -719,23 +802,33 @@
         z-index: 1;
     }
     
-    .btn-header-consultation:hover {
-        transform: translateY(-2px);
+    .btn-header-consultation:hover,
+    .btn-header-consultation:focus-visible {
+        transform: translateY(-3px) scale(1.03);
         box-shadow: var(--shadow-button-hover);
         color: var(--white);
         background: var(--gradient-accent);
     }
     
-    .btn-header-consultation:hover::before {
-        width: 200px;
-        height: 200px;
+    .btn-header-consultation:hover .btn-hover-effect,
+    .btn-header-consultation:focus-visible .btn-hover-effect {
+        width: 300px;
+        height: 300px;
     }
     
-    .btn-header-consultation span, .btn-header-consultation i {
+    .btn-header-consultation span, 
+    .btn-header-consultation i {
         position: relative;
         z-index: 2;
     }
     
+    /* フォーカス状態改善 */
+    .btn-header-consultation:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.5), var(--shadow-button);
+    }
+    
+    /* ハンバーガーメニュー改善 */
     .hamburger {
         display: none;
         background: none;
@@ -746,14 +839,38 @@
         padding: 0.5rem;
         z-index: var(--z-elevate);
         transition: all 0.3s ease;
+        width: 40px;
+        height: 40px;
+        position: relative;
     }
     
-    .hamburger:hover {
-        color: var(--primary);
-    }
-    
-    .hamburger:focus {
+    .hamburger:focus-visible {
         outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4);
+        border-radius: 8px;
+    }
+    
+    .hamburger-line {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--dark);
+        margin: 5px auto;
+        transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        border-radius: 2px;
+    }
+    
+    .hamburger[aria-expanded="true"] .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger[aria-expanded="true"] .hamburger-line:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    
+    .hamburger[aria-expanded="true"] .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
     }
     
     .header-backdrop {
@@ -762,12 +879,12 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(15, 23, 42, 0.5);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: var(--z-drawer);
     }
     
@@ -776,25 +893,128 @@
         visibility: visible;
     }
     
+    /* モバイルロゴトリガー改善 */
+    .mobile-logo-trigger {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1002;
+        width: 46px;
+        height: 46px;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+    }
+    
+    .mobile-logo-wrapper {
+        position: relative;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .mobile-logo-trigger:active {
+        transform: scale(0.95);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    /* リップルエフェクト */
+    .mobile-logo-ripple {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(58, 95, 235, 0.1);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(2.5);
+            opacity: 0;
+        }
+    }
+    
+    /* モバイルハンバーガー改善 */
+    .hamburger-visible {
+        display: none;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 14px;
+        width: 46px;
+        height: 46px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1002;
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 12px;
+    }
+    
+    .hamburger-visible:active {
+        transform: scale(0.95);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .hamburger-visible.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-visible.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    
+    .hamburger-visible.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    /* モバイルレスポンシブ改善 */
     @media (max-width: 768px) {
         .hamburger {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .nav {
             position: fixed;
             top: 0;
-            right: -300px;
+            right: -100%;
             width: 300px;
             height: 100vh;
             background: var(--white);
             flex-direction: column;
             gap: 0;
-            transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
             z-index: var(--z-drawer);
             overflow-y: auto;
-            padding: calc(var(--header-height-mobile) + 1rem) 1.5rem 1.5rem;
+            padding: calc(var(--header-height-mobile) + 1rem) 1.5rem 2rem;
         }
         
         .nav.active {
@@ -810,6 +1030,28 @@
             width: 100%;
             padding: 1rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        
+        .nav-indicator {
+            left: 0;
+            bottom: auto;
+            top: 50%;
+            transform: translateY(-50%) scaleY(0);
+            width: 3px;
+            height: 70%;
+            transform-origin: left;
+        }
+        
+        .nav-link:hover .nav-text, 
+        .nav-link.active .nav-text {
+            transform: translateX(8px);
+        }
+        
+        .nav-link:hover .nav-indicator, 
+        .nav-link.active .nav-indicator {
+            transform: translateY(-50%) scaleY(1);
         }
         
         .nav-cta {
@@ -820,7 +1062,46 @@
         .btn-header-consultation {
             width: 100%;
             justify-content: center;
-            padding: 0.8rem 1.5rem;
+            padding: 0.9rem 1.5rem;
+        }
+        
+        /* モバイルナビゲーション最適化 */
+        .header {
+            height: var(--header-height-mobile);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-logo-trigger {
+            display: flex;
+        }
+        
+        .hamburger-visible {
+            display: none; 
+        }
+        
+        /* モバイルロゴクリック→ハンバーガー表示の流れ改善 */
+        .hamburger-visible.visible {
+            display: flex;
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     }
     
@@ -831,18 +1112,23 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.75rem 1.5rem;
+        padding: 0.9rem 1.8rem;
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
-        transition: all 0.3s ease;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         text-align: center;
         cursor: pointer;
         position: relative;
         overflow: hidden;
         border: none;
-        font-size: 0.95rem;
+        font-size: 1rem;
         gap: 0.5rem;
         line-height: 1.4;
+    }
+    
+    .btn-text {
+        position: relative;
+        z-index: 2;
     }
     
     /* ボタンホバーエフェクト強化 - 波紋アニメーション */
@@ -876,11 +1162,17 @@
         box-shadow: var(--shadow-button);
     }
     
-    .btn-primary:hover {
-        transform: translateY(-2px) scale(1.02);
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+        transform: translateY(-5px) scale(1.03);
         box-shadow: var(--shadow-button-hover);
         background: var(--gradient-primary-hover);
         color: var(--white);
+    }
+    
+    .btn-primary:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4), var(--shadow-button-hover);
     }
     
     .btn-primary:active {
@@ -894,11 +1186,17 @@
         box-shadow: var(--shadow-accent);
     }
     
-    .btn-accent:hover {
-        transform: translateY(-2px) scale(1.02);
+    .btn-accent:hover,
+    .btn-accent:focus-visible {
+        transform: translateY(-5px) scale(1.03);
         box-shadow: var(--shadow-accent-hover);
         filter: brightness(1.1);
         color: var(--white);
+    }
+    
+    .btn-accent:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.4), var(--shadow-accent-hover);
     }
     
     .btn-secondary {
@@ -950,7 +1248,7 @@
     }
     
     .btn-lg {
-        padding: 1rem 2rem;
+        padding: 1rem 2.2rem;
         font-size: 1.05rem;
     }
     
@@ -960,11 +1258,13 @@
     }
     
     .btn-icon-right i {
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        margin-left: 0.3rem;
     }
     
-    .btn-icon-right:hover i {
-        transform: translateX(6px);
+    .btn-icon-right:hover i,
+    .btn-icon-right:focus-visible i {
+        transform: translateX(8px);
     }
     
     @media (max-width: 768px) {
@@ -984,7 +1284,7 @@
         align-items: center;
         padding: calc(var(--header-height) + var(--space-8)) 0 var(--space-16);
         overflow: hidden;
-        background: var(--gradient-hero);
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
     }
     
     .hero-content {
@@ -995,6 +1295,7 @@
         margin: 0 auto;
     }
     
+    /* 美しい視覚的なバッジ */
     .hero-badge {
         display: inline-block;
         background: rgba(58, 95, 235, 0.12);
@@ -1004,13 +1305,57 @@
         border-radius: var(--radius-full);
         margin-bottom: var(--space-6);
         font-size: 0.95rem;
-        animation: fadeInDown 0.5s ease forwards;
+        animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(58, 95, 235, 0.15);
+        border: 1px solid rgba(58, 95, 235, 0.2);
     }
     
+    .badge-text {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .badge-glow {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            90deg, 
+            rgba(255, 255, 255, 0) 0%, 
+            rgba(255, 255, 255, 0.4) 50%, 
+            rgba(255, 255, 255, 0) 100%
+        );
+        z-index: 1;
+        animation: badgeGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes badgeGlow {
+        0% {
+            left: -100%;
+        }
+        50% {
+            left: 100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+    
+    /* 洗練されたヘッドライン */
     .hero-title {
         margin-bottom: var(--space-6);
-        animation: fadeInUp 0.6s ease 0.2s forwards;
+        animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
         opacity: 0;
+        line-height: 1.3;
+    }
+    
+    .title-line {
+        display: block;
+        margin-bottom: 0.2em;
     }
     
     .hero-title .text-gradient {
@@ -1036,6 +1381,17 @@
         opacity: 0.6;
     }
     
+    .hero-title .text-accent {
+        display: inline;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        padding: 0 0.1em;
+        position: relative;
+    }
+    
     .hero-description {
         font-size: clamp(1.1rem, 2vw, 1.25rem);
         color: var(--gray);
@@ -1044,17 +1400,22 @@
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
-        animation: fadeInUp 0.6s ease 0.3s forwards;
+        animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
         opacity: 0;
     }
     
-    /* ヒーローセクション差別化ポイント */
+    .hero-description strong {
+        color: var(--primary);
+        font-weight: var(--font-weight-semibold);
+    }
+    
+    /* 差別化ポイント改善 */
     .hero-differentiators {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin: 2rem 0 3rem;
-        animation: fadeInUp 0.6s ease 0.4s forwards;
+        gap: 2.5rem;
+        margin: 2.5rem 0 3.5rem;
+        animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
         opacity: 0;
     }
     
@@ -1065,54 +1426,148 @@
         max-width: 220px;
         position: relative;
         z-index: 1;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        padding: 1rem;
+        border-radius: var(--radius-lg);
+    }
+    
+    .differentiator-item:hover,
+    .differentiator-item:focus-visible {
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .differentiator-item:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4), var(--shadow-lg);
     }
     
     .differentiator-icon {
-        width: 68px;
-        height: 68px;
+        width: 72px;
+        height: 72px;
         background: var(--white);
-        border-radius: 16px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         font-size: 1.8rem;
         box-shadow: var(--shadow-md);
         color: var(--primary);
-        transition: all 0.3s ease;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         position: relative;
+        overflow: hidden;
     }
     
-    .differentiator-item:hover .differentiator-icon {
-        transform: translateY(-5px);
-        color: var(--white);
+    .icon-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 0;
+    }
+    
+    .differentiator-icon i {
+        position: relative;
+        z-index: 1;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .differentiator-item:hover .differentiator-icon,
+    .differentiator-item:focus-visible .differentiator-icon {
+        transform: rotate(10deg) scale(1.1);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .differentiator-item:hover .icon-glow,
+    .differentiator-item:focus-visible .icon-glow {
+        opacity: 1;
+    }
+    
+    .differentiator-item:hover .differentiator-icon i,
+    .differentiator-item:focus-visible .differentiator-icon i {
+        color: var(--white);
+        transform: scale(1.1);
     }
     
     .differentiator-title {
         font-weight: var(--font-weight-bold);
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
         color: var(--dark);
+        transition: color 0.3s ease;
+    }
+    
+    .differentiator-item:hover .differentiator-title,
+    .differentiator-item:focus-visible .differentiator-title {
+        color: var(--primary);
     }
     
     .differentiator-text {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: var(--gray);
         text-align: center;
         line-height: 1.6;
     }
     
+    /* ボタン改善 */
     .hero-buttons {
         display: flex;
-        gap: 1rem;
+        gap: 1.2rem;
         justify-content: center;
         flex-wrap: wrap;
-        animation: fadeInUp 0.6s ease 0.5s forwards;
+        animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         opacity: 0;
     }
     
-    /* 浮遊オーブ */
+    /* スクロールダウンインジケーター */
+    .scroll-indicator {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary);
+        animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards, 
+                   bounceDown 2s ease-in-out 2s infinite;
+        opacity: 0;
+    }
+    
+    .scroll-icon {
+        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: var(--shadow-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .scroll-text {
+        font-size: 0.9rem;
+        font-weight: var(--font-weight-medium);
+    }
+    
+    @keyframes bounceDown {
+        0%, 100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        50% {
+            transform: translateX(-50%) translateY(10px);
+        }
+    }
+    
+    /* 浮遊オーブ - 黄金比配置 */
     .floating-orbs {
         position: absolute;
         top: 0;
@@ -1127,60 +1582,89 @@
         position: absolute;
         border-radius: 50%;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-        animation: float-orb 20s infinite ease-in-out;
+        animation: float-orb 25s infinite ease-in-out;
     }
     
+    /* 黄金比を活用したオーブサイズと配置 */
     .orb-1 {
-        width: 180px;
-        height: 180px;
+        width: 250px;
+        height: 250px;
         top: 10%;
         left: 5%;
         animation-delay: 0s;
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
     }
     
     .orb-2 {
-        width: 220px;
-        height: 220px;
+        width: 350px;
+        height: 350px;
         top: 60%;
         right: 10%;
         animation-delay: 5s;
+        background: linear-gradient(135deg, rgba(0, 201, 167, 0.1), rgba(58, 95, 235, 0.1));
     }
     
     .orb-3 {
-        width: 140px;
-        height: 140px;
+        width: 154px; /* 250/1.618 ≈ 154 (黄金比) */
+        height: 154px;
         bottom: 20%;
         left: 15%;
         animation-delay: 10s;
+        background: linear-gradient(135deg, rgba(255, 138, 0, 0.05), rgba(58, 95, 235, 0.05));
     }
     
     .orb-4 {
-        width: 200px;
-        height: 200px;
+        width: 216px; /* 350/1.618 ≈ 216 (黄金比) */
+        height: 216px;
         top: 40%;
         right: 25%;
         animation-delay: 15s;
     }
     
+    /* 新規追加: 黄金比配置の小さなオーブ */
+    .orb-5 {
+        width: 95px; /* 154/1.618 ≈ 95 (黄金比) */
+        height: 95px;
+        top: 25%;
+        left: 40%;
+        animation-delay: 7s;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(255, 138, 0, 0.08));
+        animation-duration: 20s;
+    }
+    
+    .orb-6 {
+        width: 134px; /* 216/1.618 ≈ 134 (黄金比) */
+        height: 134px;
+        bottom: 15%;
+        right: 40%;
+        animation-delay: 3s;
+        background: linear-gradient(135deg, rgba(0, 201, 167, 0.08), rgba(58, 95, 235, 0.08));
+        animation-duration: 15s;
+    }
+    
     @keyframes float-orb {
-        0%, 100% {
-            transform: translate(0, 0) scale(1);
+        0% {
+            transform: translate(0, 0) rotate(0deg);
         }
         25% {
-            transform: translate(30px, -30px) scale(1.1);
+            transform: translate(20px, -20px) rotate(5deg) scale(1.05);
         }
         50% {
-            transform: translate(-30px, 30px) scale(0.9);
+            transform: translate(-20px, 30px) rotate(-5deg) scale(0.95);
         }
         75% {
-            transform: translate(20px, 20px) scale(1.05);
+            transform: translate(10px, 10px) rotate(3deg) scale(1.02);
+        }
+        100% {
+            transform: translate(0, 0) rotate(0deg);
         }
     }
     
     @keyframes fadeInDown {
         from {
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateY(-30px);
         }
         to {
             opacity: 1;
@@ -1191,7 +1675,7 @@
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(20px);
         }
         to {
             opacity: 1;
@@ -1199,91 +1683,118 @@
         }
     }
     
+    /* モバイルレスポンシブ最適化 */
     @media (max-width: 992px) {
         .hero-differentiators {
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 2rem;
             justify-content: center;
         }
         
         .differentiator-item {
             max-width: 45%;
         }
+        
+        .orb {
+            opacity: 0.8;
+            transform: scale(0.9);
+        }
     }
     
     @media (max-width: 768px) {
         .hero {
-            padding: calc(var(--header-height-mobile) + 1rem) 0 3rem;
+            padding: calc(var(--header-height-mobile) + 2rem) 0 4rem;
             min-height: calc(100vh - var(--header-height-mobile));
         }
         
         .hero-badge {
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 1.2rem;
             font-size: 0.85rem;
             margin-bottom: var(--space-4);
         }
         
         .hero-title {
+            font-size: clamp(2.2rem, 8vw, 3rem);
             margin-bottom: var(--space-4);
+            line-height: 1.2;
         }
         
         .hero-description {
             font-size: 1rem;
             margin-bottom: var(--space-6);
+            padding: 0 1rem;
         }
         
         .hero-buttons {
             flex-direction: column;
             width: 100%;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
         }
         
         .hero-buttons .btn {
             width: 100%;
-            max-width: 300px;
+            max-width: 280px;
         }
         
         .hero-differentiators {
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0 2rem;
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem;
         }
         
         .differentiator-item {
-            max-width: 100%;
-            width: 80%;
+            max-width: 85%;
         }
         
-        /* 浮遊オーブの調整 */
+        .differentiator-icon {
+            width: 65px;
+            height: 65px;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            border-radius: 18px;
+        }
+        
+        /* モバイルでのオーブ調整 */
         .orb {
-            opacity: 0.7;
+            opacity: 0.65;
+            transform: scale(0.8);
         }
         
         .orb-1 {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
         }
         
         .orb-2 {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .orb-3, .orb-5 {
+            display: none; /* 小さなオーブは非表示にして視覚的ノイズを減らす */
+        }
+        
+        .orb-4 {
             width: 120px;
             height: 120px;
         }
         
-        .orb-3 {
-            width: 80px;
-            height: 80px;
+        .orb-6 {
+            width: 100px;
+            height: 100px;
+            left: 60%;
+            top: 70%;
         }
         
-        .orb-4 {
-            width: 110px;
-            height: 110px;
+        .scroll-indicator {
+            bottom: -60px;
         }
     }
     
     /* ========================================================
-    ▼ プロトタイプセクション Component
+    ▼ プロトタイプアプローチセクション Component
     ======================================================== */
     .prototype-approach-section {
         position: relative;
@@ -1417,8 +1928,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 5px;
+        width: 5px;
+        height: 100%;
         background: var(--gradient-primary);
         transition: all 0.3s ease;
         z-index: 0;
@@ -2235,17 +2746,24 @@
         z-index: 0;
     }
     
-    .cta-button:hover {
+    .cta-button:hover,
+    .cta-button:focus-visible {
         transform: translateY(-3px) scale(1.03);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         color: var(--white);
+    }
+    
+    .cta-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.2);
     }
     
     .cta-button:hover::before {
         left: 100%;
     }
     
-    .cta-button:hover::after {
+    .cta-button:hover::after,
+    .cta-button:focus-visible::after {
         opacity: 1;
     }
     
@@ -2395,16 +2913,24 @@
         transition: transform 0.3s ease;
     }
     
-    .footer-social-link:hover {
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
         transform: translateY(-3px);
         color: var(--white);
     }
     
-    .footer-social-link:hover::before {
+    .footer-social-link:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.6);
+    }
+    
+    .footer-social-link:hover::before,
+    .footer-social-link:focus-visible::before {
         opacity: 1;
     }
     
-    .footer-social-link:hover i {
+    .footer-social-link:hover i,
+    .footer-social-link:focus-visible i {
         transform: scale(1.2);
     }
     
@@ -2456,12 +2982,20 @@
         transition: width 0.3s ease;
     }
     
-    .footer-links a:hover {
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
         color: var(--white);
         padding-left: 5px;
     }
     
-    .footer-links a:hover::before {
+    .footer-links a:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.6);
+        border-radius: 4px;
+    }
+    
+    .footer-links a:hover::before,
+    .footer-links a:focus-visible::before {
         width: 100%;
     }
     
@@ -2483,8 +3017,15 @@
         transition: color 0.3s ease;
     }
     
-    .footer-contact-item a:hover {
+    .footer-contact-item a:hover,
+    .footer-contact-item a:focus-visible {
         color: var(--white);
+    }
+    
+    .footer-contact-item a:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 201, 167, 0.6);
+        border-radius: 4px;
     }
     
     .footer-bottom {
@@ -2524,11 +3065,19 @@
         transition: width 0.3s ease;
     }
     
-    .footer-links-inline a:hover {
+    .footer-links-inline a:hover,
+    .footer-links-inline a:focus-visible {
         color: var(--white);
     }
     
-    .footer-links-inline a:hover::before {
+    .footer-links-inline a:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+    }
+    
+    .footer-links-inline a:hover::before,
+    .footer-links-inline a:focus-visible::before {
         width: 100%;
     }
     
@@ -2621,16 +3170,24 @@
         z-index: 0;
     }
     
-    .chatbot-button:hover {
+    .chatbot-button:hover,
+    .chatbot-button:focus-visible {
         transform: scale(1.1);
         box-shadow: var(--shadow-xl);
     }
     
-    .chatbot-button:hover::after {
+    .chatbot-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4), var(--shadow-xl);
+    }
+    
+    .chatbot-button:hover::after,
+    .chatbot-button:focus-visible::after {
         opacity: 1;
     }
     
-    .chatbot-button:hover i {
+    .chatbot-button:hover i,
+    .chatbot-button:focus-visible i {
         transform: scale(1.2);
     }
     
@@ -2694,9 +3251,15 @@
         transition: all 0.3s ease;
     }
     
-    .chatbot-close:hover {
+    .chatbot-close:hover,
+    .chatbot-close:focus-visible {
         background: rgba(255, 255, 255, 0.3);
         transform: rotate(90deg);
+    }
+    
+    .chatbot-close:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
     }
     
     .chatbot-messages {
@@ -2798,11 +3361,18 @@
         z-index: 1;
     }
     
-    .chatbot-send:hover {
+    .chatbot-send:hover,
+    .chatbot-send:focus-visible {
         transform: scale(1.1);
     }
     
-    .chatbot-send:hover::before {
+    .chatbot-send:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4);
+    }
+    
+    .chatbot-send:hover::before,
+    .chatbot-send:focus-visible::before {
         opacity: 1;
     }
     
@@ -2909,16 +3479,24 @@
         z-index: 1;
     }
     
-    .back-to-top:hover {
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
         transform: translateY(-3px);
         box-shadow: var(--shadow-lg);
     }
     
-    .back-to-top:hover::before {
+    .back-to-top:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.4), var(--shadow-lg);
+    }
+    
+    .back-to-top:hover::before,
+    .back-to-top:focus-visible::before {
         opacity: 1;
     }
     
-    .back-to-top:hover i {
+    .back-to-top:hover i,
+    .back-to-top:focus-visible i {
         transform: translateY(-2px);
     }
     
@@ -2987,6 +3565,163 @@
     
     .animate-in {
         animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    /* ========================================================
+    ▼ アクセシビリティ強化 Component
+    ======================================================== */
+    .keyboard-navigation :focus-visible {
+        outline: 3px solid rgba(58, 95, 235, 0.5) !important;
+        outline-offset: 3px !important;
+        border-radius: 4px;
+        box-shadow: none !important;
+    }
+    
+    .keyboard-navigation .btn:focus-visible,
+    .keyboard-navigation .nav-link:focus-visible,
+    .keyboard-navigation .logo:focus-visible {
+        outline: 3px solid rgba(58, 95, 235, 0.5) !important;
+        outline-offset: 3px !important;
+    }
+    
+    /* フォーカス時のスキップリンク */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary);
+        color: white;
+        padding: 8px 16px;
+        z-index: 9999;
+        transition: top 0.3s;
+        text-decoration: none;
+        border-radius: 0 0 4px 0;
+        font-weight: var(--font-weight-semibold);
+    }
+    
+    .skip-link:focus {
+        top: 0;
+        outline: none;
+    }
+    
+    /* ========================================================
+    ▼ ビジュアルフィードバック強化 Component
+    ======================================================== */
+    /* ボタンタップ状態の視覚的フィードバック */
+    .btn:active,
+    .btn-header-consultation:active {
+        transform: scale(0.97) !important;
+        transition: transform 0.1s ease !important;
+    }
+    
+    /* アイコン振動アニメーション - 注目を集める */
+    @keyframes iconShake {
+        0%, 100% {
+            transform: rotate(0);
+        }
+        25% {
+            transform: rotate(8deg);
+        }
+        50% {
+            transform: rotate(0);
+        }
+        75% {
+            transform: rotate(-8deg);
+        }
+    }
+    
+    .differentiator-item.active .differentiator-icon i {
+        animation: iconShake 0.4s ease-in-out;
+    }
+    
+    /* 波紋エフェクト - ボタンとアイコン */
+    .btn-ripple {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: btnRipple 0.6s ease-out;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    @keyframes btnRipple {
+        to {
+            transform: scale(2.5);
+            opacity: 0;
+        }
+    }
+    
+    /* リンクホバーエフェクトの改善 */
+    .link-hover-effect {
+        display: inline-block;
+        position: relative;
+    }
+    
+    .link-hover-effect::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .link-hover-effect:hover::after {
+        width: 100%;
+    }
+    
+    /* ========================================================
+    ▼ スマートフォン特有の最適化
+    ======================================================== */
+    /* iPhoneノッチ対応 */
+    @supports (padding-top: env(safe-area-inset-top)) {
+        .header {
+            padding-top: env(safe-area-inset-top);
+            height: calc(var(--header-height) + env(safe-area-inset-top));
+        }
+        
+        .mobile-logo-trigger {
+            top: calc(15px + env(safe-area-inset-top));
+        }
+        
+        .hamburger-visible {
+            top: calc(15px + env(safe-area-inset-top));
+        }
+        
+        .hero {
+            padding-top: calc(var(--header-height) + var(--space-8) + env(safe-area-inset-top));
+        }
+    }
+    
+    /* 低性能デバイス向けのアニメーション軽減 */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+        
+        .floating-orbs {
+            display: none;
+        }
+        
+        .badge-glow,
+        .icon-glow,
+        .btn-hover-effect {
+            display: none;
+        }
+        
+        #three-container {
+            display: none;
+        }
     }
     
     /* ========================================================
@@ -3096,6 +3831,9 @@
     </style>
 </head>
 <body>
+    <!-- スキップリンク - アクセシビリティ向上 -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    
     <!-- ========================================================
     ▼ プリローダー Component
     ======================================================== -->
@@ -3104,15 +3842,21 @@
     </div>
     
     <!-- ========================================================
-    ▼ モバイルロゴトリガー Component
+    ▼ モバイルロゴトリガー Component - 改善版
     ======================================================== -->
     <div class="mobile-logo-trigger" id="mobile-logo-trigger" aria-label="メニューを開く">
-        <img src="assets/images/logo.svg" alt="ShinAI" width="28" height="28">
+        <div class="mobile-logo-wrapper">
+            <img src="assets/images/logo.svg" alt="ShinAI" width="32" height="32">
+        </div>
     </div>
     
-    <!-- ハンバーガーボタン（モバイル用） -->
-    <div class="hamburger-visible" id="hamburger-visible" aria-label="メニューを開く">
-        <i class="fas fa-bars" aria-hidden="true"></i>
+    <!-- モバイルハンバーガーメニュー - 改善版 -->
+    <div class="hamburger-visible" id="hamburger-visible" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+        <div class="hamburger-icon">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </div>
     </div>
     
     <!-- ========================================================
@@ -3128,7 +3872,7 @@
             <div class="header-inner">
                 <a href="index.html" class="logo" aria-label="ShinAIホームページ">
                     <div class="logo-icon">
-                        <img src="assets/images/logo.svg" alt="ShinAI" width="38" height="38">
+                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
                     </div>
                     <span class="logo-text">ShinAI</span>
                 </a>
@@ -3136,34 +3880,55 @@
                 <nav aria-label="メインナビゲーション">
                     <ul class="nav" id="nav">
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link active" aria-current="page">ホーム</a>
+                            <a href="index.html" class="nav-link active" aria-current="page">
+                                <span class="nav-text">ホーム</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="about.html" class="nav-link">会社紹介</a>
+                            <a href="about.html" class="nav-link">
+                                <span class="nav-text">会社紹介</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="services.html" class="nav-link">サービス</a>
+                            <a href="services.html" class="nav-link">
+                                <span class="nav-text">サービス</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="industries.html" class="nav-link">業界別活用</a>
+                            <a href="industries.html" class="nav-link">
+                                <span class="nav-text">業界別活用</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="faq.html" class="nav-link">よくある質問</a>
+                            <a href="faq.html" class="nav-link">
+                                <span class="nav-text">よくある質問</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="contact.html" class="nav-link">お問い合わせ</a>
+                            <a href="contact.html" class="nav-link">
+                                <span class="nav-text">お問い合わせ</span>
+                                <span class="nav-indicator"></span>
+                            </a>
                         </li>
                         <li class="nav-cta">
                             <a href="contact.html" class="btn-header-consultation">
                                 <i class="fas fa-comment-dots"></i>
                                 <span>無料相談</span>
+                                <span class="btn-hover-effect"></span>
                             </a>
                         </li>
                     </ul>
                 </nav>
                 
                 <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                 </button>
                 
                 <div class="header-backdrop" id="header-backdrop"></div>
@@ -3176,65 +3941,89 @@
     ======================================================== -->
     <main id="main-content">
         <!-- ========================================================
-        ▼ ヒーローセクション Component
+        ▼ ヒーローセクション Component - 改善版
         ======================================================== -->
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
-            <!-- 浮遊オーブ -->
+            <!-- 浮遊オーブ - 黄金比配置 -->
             <div class="floating-orbs">
                 <div class="orb orb-1"></div>
                 <div class="orb orb-2"></div>
                 <div class="orb orb-3"></div>
                 <div class="orb orb-4"></div>
+                <!-- 新規追加: 黄金比配置の小さなオーブ -->
+                <div class="orb orb-5"></div>
+                <div class="orb orb-6"></div>
             </div>
             
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">AIシステム受託開発・AIプロダクト提供</div>
+                    <!-- 美しい視覚的なバッジ -->
+                    <div class="hero-badge">
+                        <span class="badge-text">AIシステム受託開発・AIプロダクト提供</span>
+                        <span class="badge-glow"></span>
+                    </div>
                     
+                    <!-- 洗練されたヘッドライン - 読みやすく改善 -->
                     <h1 class="hero-title heading-xl" id="hero-title">
-                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br>取り戻す
+                        <span class="title-line">AIの力で<span class="text-gradient">人間らしい時間</span>を</span>
+                        <span class="title-line">取り戻す<span class="text-accent">新しい開発アプローチ</span></span>
                     </h1>
                     
+                    <!-- 読みやすさを向上した説明文 -->
                     <p class="hero-description">
-                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決します。<br>
-                        プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
+                        AIエージェント開発やRAG構築など、最先端の技術で企業の課題を解決します。<br>
+                        <strong>プロトタイプから始める伴走型開発</strong>で、初期投資を抑えて確実な成果を実現。
                     </p>
                     
-                    <!-- 差別化ポイント追加 -->
+                    <!-- 差別化ポイント - 視覚的フィードバック強化 -->
                     <div class="hero-differentiators">
-                        <div class="differentiator-item">
+                        <div class="differentiator-item" tabindex="0">
                             <div class="differentiator-icon">
                                 <i class="fas fa-rocket"></i>
+                                <span class="icon-glow"></span>
                             </div>
                             <h3 class="differentiator-title">小さく始める</h3>
                             <p class="differentiator-text">最短2週間のプロトタイプで効果検証。初期投資リスクを最小化します。</p>
                         </div>
                         
-                        <div class="differentiator-item">
+                        <div class="differentiator-item" tabindex="0">
                             <div class="differentiator-icon">
                                 <i class="fas fa-handshake"></i>
+                                <span class="icon-glow"></span>
                             </div>
                             <h3 class="differentiator-title">伴走支援</h3>
                             <p class="differentiator-text">共創型の開発で方向修正も柔軟。最適解を一緒に見つけます。</p>
                         </div>
                         
-                        <div class="differentiator-item">
+                        <div class="differentiator-item" tabindex="0">
                             <div class="differentiator-icon">
                                 <i class="fas fa-chart-line"></i>
+                                <span class="icon-glow"></span>
                             </div>
                             <h3 class="differentiator-title">段階的成長</h3>
                             <p class="differentiator-text">効果を確認しながら拡張。確実な成果で組織の自走化を実現します。</p>
                         </div>
                     </div>
                     
+                    <!-- インタラクティブなボタン - 視覚的フィードバック強化 -->
                     <div class="hero-buttons">
                         <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                            <span>サービスを見る</span>
+                            <span class="btn-text">サービスを見る</span>
                             <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            <span class="btn-hover-effect"></span>
                         </a>
                         <a href="contact.html" class="btn btn-accent btn-lg">
-                            <span>無料相談する</span>
+                            <span class="btn-text">無料相談する</span>
+                            <span class="btn-hover-effect"></span>
                         </a>
+                    </div>
+                    
+                    <!-- スクロールダウンインジケーター -->
+                    <div class="scroll-indicator" aria-hidden="true">
+                        <div class="scroll-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="scroll-text">詳しく見る</div>
                     </div>
                 </div>
             </div>
@@ -3484,8 +4273,9 @@
                 
                 <div class="text-center" style="margin-top: 3rem;">
                     <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                        <span>すべてのサービスを見る</span>
+                        <span class="btn-text">すべてのサービスを見る</span>
                         <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        <span class="btn-hover-effect"></span>
                     </a>
                 </div>
             </div>
@@ -3736,25 +4526,44 @@
         const nav = document.getElementById('nav');
         const headerBackdrop = document.getElementById('header-backdrop');
         
-        // モバイルロゴトリガーのクリックイベント - ハンバーガーメニュー表示
+        // モバイルロゴトリガーのクリックイベント - ハンバーガーメニュー表示改善
         if (mobileLogoTrigger) {
             mobileLogoTrigger.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
-                    // ハンバーガーボタンを表示
-                    if (hamburgerVisible) {
-                        hamburgerVisible.style.display = 'flex';
-                    }
+                    // リップルエフェクト追加
+                    const mobileLogo = this.querySelector('.mobile-logo-wrapper');
+                    const ripple = document.createElement('span');
+                    ripple.className = 'mobile-logo-ripple';
+                    mobileLogo.appendChild(ripple);
+                    
+                    // 500ms後にリップルを削除
+                    setTimeout(() => {
+                        if (ripple && ripple.parentNode) {
+                            ripple.parentNode.removeChild(ripple);
+                        }
+                    }, 600);
+                    
                     // ヘッダーを表示
                     if (header) {
-                        header.style.transform = 'translateY(0)';
+                        header.classList.add('visible');
                     }
+                    
+                    // ハンバーガーボタンを表示 - 段階的アニメーション
+                    setTimeout(() => {
+                        if (hamburgerVisible) {
+                            hamburgerVisible.classList.add('visible');
+                        }
+                    }, 100);
                 }
             });
         }
         
-        // ハンバーガーボタン表示版のクリックイベント
+        // ハンバーガーボタン表示版のクリックイベント - 視覚的フィードバック強化
         if (hamburgerVisible) {
             hamburgerVisible.addEventListener('click', function() {
+                // アクティブ状態のトグル
+                this.classList.toggle('active');
+                
                 if (hamburger) {
                     // 内部のハンバーガーボタンと同じ動作をさせる
                     const expanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -3763,91 +4572,139 @@
                     if (nav) nav.classList.toggle('active');
                     if (headerBackdrop) headerBackdrop.classList.toggle('active');
                     
-                    // アイコン変更
-                    if (expanded) {
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    } else {
-                        hamburger.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    }
+                    // ARIA状態の更新
+                    this.setAttribute('aria-expanded', !expanded);
+                    this.setAttribute('aria-label', expanded ? 'メニューを開く' : 'メニューを閉じる');
                 }
             });
         }
         
-        // スクロールイベント
+        // スクロールイベント - ヘッダー動作改善
         let lastScrollTop = 0;
+        let scrollTimer;
+        
         window.addEventListener('scroll', function() {
             const currentScrollTop = window.scrollY;
             
-            // ヘッダースクロール効果
+            // ヘッダースクロール効果 - 最適化
             if (header) {
                 if (currentScrollTop > 10) {
                     header.classList.add('scrolled');
+                    
+                    // モバイル時、上スクロールでヘッダー表示
+                    if (window.innerWidth <= 768) {
+                        if (currentScrollTop < lastScrollTop && currentScrollTop > 100) {
+                            // 上スクロール時
+                            header.classList.add('visible');
+                            
+                            // 一定時間スクロールがなければヘッダーを隠す
+                            clearTimeout(scrollTimer);
+                            scrollTimer = setTimeout(() => {
+                                header.classList.remove('visible');
+                                if (hamburgerVisible) {
+                                    hamburgerVisible.classList.remove('visible');
+                                }
+                            }, 3000);
+                        } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+                            // 下スクロール時
+                            header.classList.remove('visible');
+                            if (hamburgerVisible) {
+                                hamburgerVisible.classList.remove('visible');
+                            }
+                        }
+                    }
                 } else {
                     header.classList.remove('scrolled');
+                    
+                    // 先頭位置ではロゴトリガーを表示
+                    if (window.innerWidth <= 768) {
+                        header.classList.remove('visible');
+                        if (hamburgerVisible) {
+                            hamburgerVisible.classList.remove('visible');
+                        }
+                    }
                 }
             }
             
-            // Back to Topボタンの表示制御
+            // Back to Topボタンの表示制御 - スムーズなトランジション
             const backToTopButton = document.getElementById('back-to-top');
             if (backToTopButton) {
                 if (currentScrollTop > 300) {
-                    backToTopButton.classList.add('active');
+                    if (!backToTopButton.classList.contains('active')) {
+                        backToTopButton.classList.add('active');
+                    }
                 } else {
-                    backToTopButton.classList.remove('active');
+                    if (backToTopButton.classList.contains('active')) {
+                        backToTopButton.classList.remove('active');
+                    }
                 }
             }
             
             lastScrollTop = currentScrollTop;
         });
         
-        // モバイルメニュー
+        // モバイルメニュー - アニメーション強化
         if (hamburger && nav) {
             hamburger.addEventListener('click', function() {
                 const expanded = this.getAttribute('aria-expanded') === 'true';
                 this.setAttribute('aria-expanded', !expanded);
                 
+                // ARIA状態の更新
+                this.setAttribute('aria-label', expanded ? 'メニューを開く' : 'メニューを閉じる');
+                
                 nav.classList.toggle('active');
                 if (headerBackdrop) headerBackdrop.classList.toggle('active');
                 
-                // アイコン変更（ハンバーガーボタン両方）
-                if (expanded) {
-                    this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                } else {
-                    this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                // ハンバーガーボタン表示版の状態も同期
+                if (hamburgerVisible) {
+                    hamburgerVisible.classList.toggle('active');
+                    hamburgerVisible.setAttribute('aria-expanded', !expanded);
+                    hamburgerVisible.setAttribute('aria-label', expanded ? 'メニューを開く' : 'メニューを閉じる');
                 }
             });
             
-            // 背景クリックでメニューを閉じる
+            // 背景クリックでメニューを閉じる - アクセシビリティ強化
             if (headerBackdrop) {
                 headerBackdrop.addEventListener('click', function() {
                     nav.classList.remove('active');
                     headerBackdrop.classList.remove('active');
+                    
+                    // ARIA状態の更新
                     hamburger.setAttribute('aria-expanded', 'false');
-                    hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    hamburger.setAttribute('aria-label', 'メニューを開く');
+                    
+                    if (hamburgerVisible) {
+                        hamburgerVisible.classList.remove('active');
+                        hamburgerVisible.setAttribute('aria-expanded', 'false');
+                        hamburgerVisible.setAttribute('aria-label', 'メニューを開く');
+                    }
                 });
             }
             
-            // ナビリンククリックでメニューを閉じる
+            // ナビリンククリックでメニューを閉じる - ユーザー体験向上
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 768) {
+                        // メニュークローズアニメーション
                         nav.classList.remove('active');
                         if (headerBackdrop) headerBackdrop.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                         
-                        // リンククリック後にヘッダーを非表示
+                        // ARIA状態の更新
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.setAttribute('aria-label', 'メニューを開く');
+                        
+                        if (hamburgerVisible) {
+                            hamburgerVisible.classList.remove('active');
+                            hamburgerVisible.setAttribute('aria-expanded', 'false');
+                            hamburgerVisible.setAttribute('aria-label', 'メニューを開く');
+                        }
+                        
+                        // リンククリック後にヘッダーをスムーズに非表示
                         setTimeout(() => {
-                            if (header) header.style.transform = 'translateY(-100%)';
-                            if (hamburgerVisible) hamburgerVisible.style.display = 'none';
-                        }, 500);
+                            if (header) header.classList.remove('visible');
+                            if (hamburgerVisible) hamburgerVisible.classList.remove('visible');
+                        }, 300);
                     }
                 });
             });
@@ -3923,7 +4780,7 @@
                             } else if (messageLower.includes('期間') || messageLower.includes('納期') || messageLower.includes('時間')) {
                                 response = "AIシステム開発の期間は、プロジェクトの複雑さによって異なりますが、最短2週間でプロトタイプの開発が可能です。小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。プロトタイプから段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
                             } else if (messageLower.includes('事例') || messageLower.includes('実績')) {
-                                response = "ShinAIでは、製造業向けのAI検査システム構築や、金融業界向けの取引分析AIエージェント開発、さらに不動産業界向けの顧客対応自動化システムなど、多数の実績があります。例えば、ある製造業のお客様では、AI導入により検品工程の効率が38%向上、不良品検出率が98%に達するなどの成果を上げています。御社の業界や課題に合わせた事例をお知りになりたい場合は、お気軽にお問い合わせください。";
+                                response = "御社の業界や課題に合わせた事例をお知りになりたい場合は、お気軽にお問い合わせください。";
                             } else if (messageLower.includes('プロトタイプ') || messageLower.includes('小さく始める') || messageLower.includes('伴走')) {
                                 response = "ShinAIでは「プロトタイプからの伴走型開発」を採用しています。まず2週間程度で小規模な試作品を構築し、実際に使っていただきながら効果を確認。方向性が合っていることを確認しながら段階的に拡張していきます。このアプローチにより、初期投資リスクを最小限に抑えながら、確実に成果を出すことが可能です。まずは無料相談で、御社の課題に対するプロトタイプのアイデアをご提案させてください。";
                             } else {
@@ -4002,105 +4859,74 @@
                     if (headerBackdrop) headerBackdrop.classList.remove('active');
                     if (hamburger) {
                         hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                        hamburger.setAttribute('aria-label', 'メニューを開く');
+                    }
+                    if (hamburgerVisible) {
+                        hamburgerVisible.classList.remove('active'); 
+                        hamburgerVisible.setAttribute('aria-expanded', 'false');
+                        hamburgerVisible.setAttribute('aria-label', 'メニューを開く');
                     }
                 }
             }
+            
+            // タブキーでのフォーカス管理
+            if (e.key === 'Tab') {
+                // フォーカス状態をハイライト - CSSでの管理を強化
+                document.body.classList.add('keyboard-navigation');
+            }
         });
         
-        // Three.jsパーティクル背景
+        // マウス操作時のフォーカス表示を削除
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
+        });
+        
+        // 差別化ポイントのアクセシビリティ強化
+        const differentiatorItems = document.querySelectorAll('.differentiator-item');
+        differentiatorItems.forEach(item => {
+            // タブ操作で正しくフォーカスできるようにキーボードイベント追加
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault(); // スペースキーのスクロール防止
+                    
+                    // アクティブ効果
+                    this.classList.add('active');
+                    setTimeout(() => {
+                        this.classList.remove('active');
+                    }, 200);
+                }
+            });
+        });
+        
+        // Three.jsパーティクル背景 - パフォーマンス最適化
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
-            initThreeJSParticles();
+            // リソース消費を抑えるため、ビジブルな場合のみ初期化
+            let isInitialized = false;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isInitialized) {
+                        initThreeJSParticles();
+                        isInitialized = true;
+                        observer.disconnect(); // 一度初期化したら監視終了
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            observer.observe(document.getElementById('three-container'));
         }
         
-        // スクロールアニメーション
-        if (typeof gsap !== 'undefined') {
-            // GSAPのScrollTriggerを使用
-            if (typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                
-                // アニメーション要素
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card');
-                
-                animElements.forEach((element, index) => {
-                    // 要素タイプに応じたアニメーション
-                    let animation;
-                    let duration = 0.4; // より高速化
-                    let delay = index * 0.03; // 遅延をほぼなしに
-                    
-                    if (element.classList.contains('section-header')) {
-                        animation = { y: 20, opacity: 0 };
-                        duration = 0.5;
-                    } else if (element.classList.contains('prototype-step')) {
-                        animation = { x: -15, opacity: 0 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('benefit-card') || element.classList.contains('benefit-container-card')) {
-                        animation = { y: 15, opacity: 0, scale: 0.97 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
-                        animation = { y: 15, opacity: 0, scale: 0.97 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('cta-content')) {
-                        animation = { scale: 0.97, opacity: 0 };
-                        duration = 0.5;
-                    } else if (element.classList.contains('hero-badge')) {
-                        animation = { y: -10, opacity: 0 };
-                        duration = 0.4;
-                    } else if (element.classList.contains('hero-title')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.1;
-                    } else if (element.classList.contains('hero-description')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.2;
-                    } else if (element.classList.contains('hero-buttons')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.3;
-                    } else if (element.classList.contains('hero-differentiators')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.25;
-                    } else {
-                        animation = { y: 15, opacity: 0 };
-                    }
-                    
-                    // モバイルでさらに高速化
-                    if (window.innerWidth <= 768) {
-                        duration = duration * 0.7;
-                        delay = delay * 0.3;
-                    }
-                    
-                    gsap.from(element, {
-                        ...animation,
-                        duration: duration,
-                        delay: delay,
-                        ease: "power1.out", // よりシンプルなイージング
-                        scrollTrigger: {
-                            trigger: element,
-                            start: 'top 95%', // より早く開始
-                            toggleActions: 'play none none none'
-                        }
-                    });
-                });
-            } else {
-                // ScrollTriggerがない場合はgsapだけで
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card');
-                
-                animElements.forEach((element, index) => {
-                    gsap.from(element, {
-                        y: 30,
-                        opacity: 0,
-                        duration: 0.7,
-                        delay: index * 0.1 % 0.5, // 遅延の上限を設定
-                        ease: "power2.out"
-                    });
-                });
-            }
-        } else {
-            // GSAPがない場合のフォールバック
-            const observer = new IntersectionObserver((entries) => {
+        // アニメーション最適化 - Intersection Observer APIを活用
+        if ('IntersectionObserver' in window) {
+            const animationElements = document.querySelectorAll('.prototype-step, .benefit-card, .service-card, .benefit-container-card, .mobile-card');
+            
+            const animationObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
+                        animationObserver.unobserve(entry.target);
                     }
                 });
             }, {
@@ -4108,21 +4934,64 @@
                 rootMargin: '0px 0px -50px 0px'
             });
             
-            document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card').forEach(el => {
-                observer.observe(el);
+            animationElements.forEach(el => {
+                animationObserver.observe(el);
+            });
+        }
+        
+        // ボタンクリック波紋エフェクト
+        const buttons = document.querySelectorAll('.btn, .btn-header-consultation, .chatbot-button, .back-to-top');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // 既存の波紋を削除
+                const ripples = this.querySelectorAll('.btn-ripple');
+                ripples.forEach(ripple => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                });
+                
+                // 新しい波紋を作成
+                const ripple = document.createElement('span');
+                ripple.className = 'btn-ripple';
+                this.appendChild(ripple);
+                
+                // 600ms後に波紋を削除
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 600);
+            });
+        });
+        
+        // スクロールインジケーターのクリックイベント - ユーザー体験向上
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', function() {
+                // プロトタイプセクションまでスクロール
+                const prototypeSection = document.getElementById('prototype-approach');
+                if (prototypeSection) {
+                    prototypeSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         }
     });
     
-    // Three.jsパーティクルエフェクト
+    // ========================================================
+    // ▼ Three.jsパーティクル Component - 黄金比活用版
+    // ========================================================
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
         
         // シーン設定
         const scene = new THREE.Scene();
         
-        // カメラ設定
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // カメラ設定 - 黄金比を活用した視野角
+        const PHI = 1.618033988749895; // 黄金比
+        const camera = new THREE.PerspectiveCamera(60 * (1/PHI), window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 50;
         
         // レンダラー設定
@@ -4146,29 +5015,29 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
-        // 装飾用の内側コア
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
+        // 装飾用の内側コア - 球体化（楕円形ではなく）
+        const innerCoreGeometry = new THREE.SphereGeometry(3, 16, 16); // より滑らかな球体
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
-            color: 0x00C9A7,
+            color: 0x00C9A7, // 指定色を維持
             transparent: true,
-            opacity: 0.2,
+            opacity: 0.2,    // 指定透明度を維持
             wireframe: true
         });
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
         
-        // パーティクル設定（サマーウォーズ風デジタル空間）
+        // パーティクル設定（サマーウォーズ風デジタル空間）- 黄金比を活用
         const particlesCount = window.innerWidth < 768 ? 500 : 1000;
         const particles = [];
         
         // パーティクルの形状（立方体、球体、ピラミッド）
         const geometries = [
             new THREE.BoxGeometry(0.12, 0.12, 0.12),
-            new THREE.SphereGeometry(0.06, 8, 8),
+            new THREE.SphereGeometry(0.06 * PHI, 8, 8), // 黄金比を適用したサイズ
             new THREE.TetrahedronGeometry(0.1, 0)
         ];
         
-        // カラーパレット（サマーウォーズ風 - 青/白/緑系）
+        // サマーウォーズ風の最適化カラーパレット（青/緑/白系）
         const colors = [
             0x4A8FFF, // 明るい青
             0x3A5FEB, // 青
@@ -4178,7 +5047,7 @@
             0xB4F2FF  // 水色
         ];
         
-        // パーティクル作成
+        // パーティクル作成 - 黄金比を活用した配置
         for (let i = 0; i < particlesCount; i++) {
             // 形状をランダム選択
             const geometryIndex = Math.floor(Math.random() * geometries.length);
@@ -4195,21 +5064,31 @@
             // パーティクルメッシュ作成
             const particle = new THREE.Mesh(geometry, material);
             
-            // サマーウォーズ風の初期配置（より立体的な空間分布）
-            const radius = 15 + Math.random() * 40;
+            // 黄金比を活用した初期配置（より調和のとれた空間分布）
+            const radius = 15 + Math.random() * 40 * (1/PHI);
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
             
-            particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
-            particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
-            particle.position.z = radius * Math.cos(phi);
+            // 黄金螺旋に基づく配置を一部に適用
+            if (i % 3 === 0) {
+                const goldenAngle = Math.PI * (3 - Math.sqrt(5)); // ≈ 137.5°
+                const t = i * goldenAngle;
+                const r = Math.sqrt(i) * 0.5;
+                particle.position.x = r * Math.cos(t) * 5;
+                particle.position.y = r * Math.sin(t) * 5;
+                particle.position.z = i * 0.1;
+            } else {
+                particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                particle.position.z = radius * Math.cos(phi);
+            }
             
             // 初期回転
             particle.rotation.x = Math.random() * Math.PI * 2;
             particle.rotation.y = Math.random() * Math.PI * 2;
             particle.rotation.z = Math.random() * Math.PI * 2;
             
-            // パーティクルのパラメータを保存（より複雑な軌道運動）
+            // パーティクルのパラメータを保存（より調和のとれた軌道運動）
             particles.push({
                 mesh: particle,
                 velocity: {
@@ -4246,9 +5125,9 @@
             const vertices = new Float32Array(6);
             geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
             
-            // 青みがかった線カラー
+            // 青みがかった線カラー - より洗練された色調
             const material = new THREE.LineBasicMaterial({
-                color: 0x4A8FFF,
+                color: i % 2 === 0 ? 0x4A8FFF : 0x00C9A7, // 2色交互
                 transparent: true,
                 opacity: 0.04
             });
@@ -4264,91 +5143,122 @@
         let targetX = 0;
         let targetY = 0;
         
-        // マウス追跡
+        // マウス追跡 - インタラクティブ性向上
         document.addEventListener('mousemove', function(event) {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
         
-        // タッチ追跡
+        // タッチ追跡 - モバイル対応強化
         document.addEventListener('touchmove', function(event) {
             if (event.touches.length > 0) {
                 mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
                 mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+                event.preventDefault(); // スクロール干渉防止
             }
         });
         
         // 時間変数
         let time = 0;
         
-        // アニメーション
+        // アニメーション - 黄金比を取り入れた動きの調和
         const animate = () => {
             requestAnimationFrame(animate);
             time += 0.01;
             
-            // カメラの滑らかな動き
+            // カメラの滑らかな動き - 黄金比を活用した移動量
             targetX = mouseX * 15;
             targetY = mouseY * 15;
             camera.position.x += (targetX - camera.position.x) * 0.02;
             camera.position.y += (targetY - camera.position.y) * 0.02;
             camera.lookAt(scene.position);
             
-            // コアのアニメーション（サマーウォーズ風の脈動）
+            // コアのアニメーション（サマーウォーズ風の脈動）- 黄金比を適用
             core.rotation.y += 0.0015;
-            core.rotation.x += 0.0007;
+            core.rotation.x += 0.0007; // 回転比が約1:2に近づくよう調整
             const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
-            // 内側コアの逆回転
+            // 内側コアの逆回転 - 完全な球体を維持
             innerCore.rotation.y -= 0.002;
             innerCore.rotation.z += 0.001;
-            innerCore.scale.set(scalePulse * 1.1, scalePulse * 0.9, scalePulse * 1.05);
+            const innerScalePulse = 1 + 0.05 * Math.sin(time * 0.3); // 脈動を調整
+            innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse); // 同じスケールで球体を維持
             
-            // パーティクルアニメーション（サマーウォーズ風の美しい動き）
+            // パーティクルアニメーション（サマーウォーズ風の美しい動き）- 黄金比による調和
             particles.forEach((p, index) => {
                 // より複雑な軌道運動
                 p.orbit.angle += p.orbit.speed;
                 
-                // 楕円軌道的な動き
-                const orbitX = p.orbit.radius * Math.cos(p.orbit.angle);
-                const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle);
+                // 黄金比を活用した軌道計算
+                const orbitFactor = 1 + (index % 3) * (1/PHI - 1);
+                const orbitX = p.orbit.radius * Math.cos(p.orbit.angle) * orbitFactor;
+                const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle) * orbitFactor;
                 const orbitY = p.orbit.radius * 0.5 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
                 
-                // 波形的な変動を加える
+                // 波形的な変動を加える - より自然な揺らぎ
                 const waveX = Math.sin(time + index * 0.1) * 1.5;
                 const waveY = Math.cos(time * 0.7 + index * 0.2) * 1.2;
                 const waveZ = Math.sin(time * 0.5 + index * 0.15) * 1.8;
                 
-                // 位置更新
+                // 位置更新 - より有機的な動き
                 p.mesh.position.x = orbitX + p.velocity.x * waveX;
                 p.mesh.position.y = orbitY + p.velocity.y * waveY;
                 p.mesh.position.z = orbitZ + p.velocity.z * waveZ;
                 
-                // サイズの呼吸（より生命感）
-                const sizePulse = Math.sin(time * p.pulse.speed + index) * p.pulse.size + 1;
+                // サイズの呼吸（より生命感）- 黄金比を加味
+                const sizePulse = 1 + Math.sin(time * p.pulse.speed + index) * p.pulse.size * (index % 2 ? 1 : 1/PHI);
                 p.mesh.scale.set(sizePulse, sizePulse, sizePulse);
                 
-                // 自転
+                // 自転 - 個性的な回転を維持
                 p.mesh.rotation.x += p.rotation.x;
                 p.mesh.rotation.y += p.rotation.y;
                 p.mesh.rotation.z += p.rotation.z;
                 
-                // 範囲外に出たら反対側から再登場
-                if (Math.abs(p.mesh.position.x) > 70) p.mesh.position.x *= -0.9;
-                if (Math.abs(p.mesh.position.y) > 50) p.mesh.position.y *= -0.9;
-                if (Math.abs(p.mesh.position.z) > 70) p.mesh.position.z *= -0.9;
+                // 範囲外に出たら反対側から再登場 - スムーズな遷移
+                if (Math.abs(p.mesh.position.x) > 70) {
+                    // フェードアウト/インの効果
+                    p.mesh.material.opacity *= 0.95;
+                    if (p.mesh.material.opacity < 0.1) {
+                        p.mesh.position.x *= -0.9;
+                        p.mesh.material.opacity = 0.3 + Math.random() * 0.5;
+                    }
+                }
+                if (Math.abs(p.mesh.position.y) > 50) {
+                    p.mesh.material.opacity *= 0.95;
+                    if (p.mesh.material.opacity < 0.1) {
+                        p.mesh.position.y *= -0.9;
+                        p.mesh.material.opacity = 0.3 + Math.random() * 0.5;
+                    }
+                }
+                if (Math.abs(p.mesh.position.z) > 70) {
+                    p.mesh.material.opacity *= 0.95;
+                    if (p.mesh.material.opacity < 0.1) {
+                        p.mesh.position.z *= -0.9;
+                        p.mesh.material.opacity = 0.3 + Math.random() * 0.5;
+                    }
+                }
             });
             
-            // 接続線のアニメーション - サマーウォーズ風
+            // 接続線のアニメーション - サマーウォーズ風データストリーム強化
             connectionLines.forEach((line, index) => {
                 // フレーム間引きで流動感を維持しながら負荷軽減
                 if (index % 3 !== Math.floor(time * 5) % 3) return;
                 
                 const positions = line.geometry.attributes.position.array;
                 
-                // 近くのパーティクルをペアで選択してより自然な接続
+                // 黄金比を活用した距離判定
                 const p1Index = Math.floor(Math.random() * particles.length);
-                let p2Index = (p1Index + 1 + Math.floor(Math.random() * 20)) % particles.length;
+                let p2Index;
+                
+                // 黄金螺旋に沿った接続を試みる
+                if (index % 5 === 0) {
+                    // 黄金比に基づく接続
+                    p2Index = Math.floor(p1Index + particles.length / PHI) % particles.length;
+                } else {
+                    // 近接パーティクルへの接続
+                    p2Index = (p1Index + 1 + Math.floor(Math.random() * 20)) % particles.length;
+                }
                 
                 const p1 = particles[p1Index];
                 const p2 = particles[p2Index];
@@ -4357,7 +5267,7 @@
                     const distance = p1.mesh.position.distanceTo(p2.mesh.position);
                     
                     // より短い距離での接続（サマーウォーズのデジタル空間のように）
-                    if (distance < 15) {
+                    if (distance < 15 * (index % 2 ? 1 : 1/PHI)) { // 黄金比を活用
                         positions[0] = p1.mesh.position.x;
                         positions[1] = p1.mesh.position.y;
                         positions[2] = p1.mesh.position.z;
@@ -4367,27 +5277,107 @@
                         
                         line.geometry.attributes.position.needsUpdate = true;
                         
-                        // 時間変化も加えた透明度変化（流れる感覚）
+                        // 時間変化も加えた透明度変化（流れる感覚）- よりダイナミックに
                         const opacity = 0.03 * (1 - distance / 15) * (0.7 + 0.3 * Math.sin(time * 2 + index));
                         line.material.opacity = opacity;
+                        
+                        // 線のカラー変化を追加
+                        if (Math.random() > 0.99) {
+                            // 稀に色が変化する効果
+                            line.material.color.setHex(Math.random() > 0.5 ? 0x4A8FFF : 0x00C9A7);
+                        }
                     } else {
                         line.material.opacity = 0;
                     }
                 }
             });
             
+            // マウス位置に基づく特殊効果 - インタラクティブ性強化
+            if (Math.abs(mouseX) > 0.1 || Math.abs(mouseY) > 0.1) {
+                // マウスの動きに反応して近くのパーティクルを活性化
+                const cameraVector = new THREE.Vector3(
+                    camera.position.x + mouseX * 20,
+                    camera.position.y + mouseY * 20,
+                    camera.position.z - 30
+                );
+                
+                particles.forEach((p, index) => {
+                    if (index % 5 === 0) { // 処理負荷軽減のため一部のみ処理
+                        const distToCameraVector = p.mesh.position.distanceTo(cameraVector);
+                        if (distToCameraVector < 15) {
+                            // カーソル近くのパーティクルを活性化
+                            p.mesh.material.opacity = Math.min(1, p.mesh.material.opacity + 0.05);
+                            p.mesh.scale.multiplyScalar(1.01);
+                            
+                            // 回転も活性化
+                            p.rotation.x *= 1.1;
+                            p.rotation.y *= 1.1;
+                            p.rotation.z *= 1.1;
+                            
+                            // 最大値制限
+                            p.rotation.x = Math.min(p.rotation.x, 0.03);
+                            p.rotation.y = Math.min(p.rotation.y, 0.03);
+                            p.rotation.z = Math.min(p.rotation.z, 0.03);
+                        }
+                    }
+                });
+            }
+            
             renderer.render(scene, camera);
         };
         
         animate();
         
-        // リサイズイベント処理
+        // リサイズイベント処理 - レスポンシブ対応強化
         window.addEventListener('resize', function() {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // パーティクル数の動的調整
+            const newParticleCount = window.innerWidth < 768 ? 500 : 1000;
+            if (newParticleCount < particles.length) {
+                // 小さい画面ではパーティクル削減
+                for (let i = newParticleCount; i < particles.length; i++) {
+                    scene.remove(particles[i].mesh);
+                }
+                particles.splice(newParticleCount);
+            }
         });
+        
+        // パフォーマンスモニタリングと自動調整
+        let frameCounter = 0;
+        let lastTime = performance.now();
+        let fps = 60;
+        
+        function checkPerformance() {
+            frameCounter++;
+            const currentTime = performance.now();
+            const elapsed = currentTime - lastTime;
+            
+            if (elapsed >= 1000) { // 1秒ごとに計測
+                fps = frameCounter;
+                frameCounter = 0;
+                lastTime = currentTime;
+                
+                // パフォーマンスが低い場合は自動調整
+                if (fps < 30 && particles.length > 100) {
+                    // パーティクル数削減
+                    const reduceCount = Math.min(100, Math.ceil(particles.length * 0.1));
+                    for (let i = 0; i < reduceCount; i++) {
+                        if (particles.length > 100) {
+                            scene.remove(particles[particles.length - 1].mesh);
+                            particles.pop();
+                        }
+                    }
+                }
+            }
+            
+            requestAnimationFrame(checkPerformance);
+        }
+        
+        checkPerformance();
     }
     </script>
 </body>
