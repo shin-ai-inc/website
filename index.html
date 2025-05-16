@@ -144,7 +144,7 @@
         z-index: 1001;
         width: 40px;
         height: 40px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         border-radius: 10px;
         display: none;
         align-items: center;
@@ -161,7 +161,7 @@
         left: 0;
         right: 0;
         z-index: 1000;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.97);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         height: 72px;
@@ -183,12 +183,9 @@
     
     @media (max-width: 768px) {
         .header {
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .header.visible {
-            transform: translateY(0);
+            height: 60px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
         
         .mobile-logo-trigger {
@@ -228,6 +225,7 @@
         --gradient-hero: linear-gradient(to right, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
         
         /* シャドウ */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -241,6 +239,7 @@
         --shadow-accent: 0 4px 12px rgba(255, 138, 0, 0.25);
         --shadow-accent-hover: 0 8px 20px rgba(255, 138, 0, 0.35);
         --shadow-header: 0 4px 20px rgba(15, 23, 42, 0.08);
+        --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.1);
         
         /* フォント */
         --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -290,6 +289,11 @@
         --z-toast: 80;
         --z-overlay: 90;
         --z-max: 999;
+        
+        /* アニメーション時間 */
+        --transition-fast: 0.2s;
+        --transition-normal: 0.3s;
+        --transition-slow: 0.5s;
     }
 
     /* ========================================================
@@ -540,6 +544,11 @@
         text-align: right;
     }
     
+    /* テキストシャドウ強化 */
+    .text-shadow {
+        text-shadow: var(--shadow-text);
+    }
+    
     /* ========================================================
     ▼ ヘッダー Component
     ======================================================== -->
@@ -676,6 +685,22 @@
         align-items: center;
         gap: 0.4rem;
         white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-header-consultation::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease-out, height 0.6s ease-out;
+        z-index: 1;
     }
     
     .btn-header-consultation:hover {
@@ -683,6 +708,16 @@
         box-shadow: var(--shadow-button-hover);
         color: var(--white);
         background: var(--gradient-accent);
+    }
+    
+    .btn-header-consultation:hover::before {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .btn-header-consultation span, .btn-header-consultation i {
+        position: relative;
+        z-index: 2;
     }
     
     .hamburger {
@@ -732,10 +767,10 @@
         
         .nav {
             position: fixed;
-            top: var(--header-height);
+            top: 0;
             right: -300px;
             width: 300px;
-            height: calc(100vh - var(--header-height));
+            height: 100vh;
             background: var(--white);
             flex-direction: column;
             gap: 0;
@@ -743,7 +778,7 @@
             box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
             z-index: var(--z-drawer);
             overflow-y: auto;
-            padding: 1.5rem;
+            padding: calc(var(--header-height-mobile) + 1rem) 1.5rem 1.5rem;
         }
         
         .nav.active {
@@ -806,11 +841,17 @@
         border-radius: 50%;
         transform: translate(-50%, -50%);
         transition: width 0.6s ease-out, height 0.6s ease-out;
+        z-index: 1;
     }
     
     .btn:hover::before {
         width: 300px;
         height: 300px;
+    }
+    
+    .btn span, .btn i {
+        position: relative;
+        z-index: 2;
     }
     
     .btn-primary {
@@ -940,7 +981,7 @@
     
     .hero-badge {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.1);
+        background: rgba(58, 95, 235, 0.12);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
         padding: 0.5rem 1.25rem;
@@ -948,12 +989,38 @@
         margin-bottom: var(--space-6);
         font-size: 0.95rem;
         animation: fadeInDown 1s ease forwards;
+        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.15);
+        border: 1px solid rgba(58, 95, 235, 0.15);
     }
     
     .hero-title {
         margin-bottom: var(--space-6);
         animation: fadeInUp 1s ease 0.3s forwards;
         opacity: 0;
+        text-shadow: var(--shadow-text);
+    }
+    
+    .hero-title .text-gradient {
+        display: inline;
+        background: var(--gradient-brand);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        padding: 0 0.1em;
+        position: relative;
+    }
+    
+    .hero-title .text-gradient::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gradient-brand);
+        border-radius: var(--radius-full);
+        opacity: 0.6;
     }
     
     .hero-description {
@@ -983,11 +1050,13 @@
         flex-direction: column;
         align-items: center;
         max-width: 220px;
+        position: relative;
+        z-index: 1;
     }
     
     .differentiator-icon {
-        width: 64px;
-        height: 64px;
+        width: 68px;
+        height: 68px;
         background: var(--white);
         border-radius: 16px;
         display: flex;
@@ -998,13 +1067,32 @@
         box-shadow: var(--shadow-md);
         color: var(--primary);
         transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .differentiator-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
     }
     
     .differentiator-item:hover .differentiator-icon {
-        transform: translateY(-5px) rotate(5deg);
-        background: var(--gradient-primary);
-        color: var(--white);
+        transform: translateY(-5px);
         box-shadow: var(--shadow-lg);
+        color: var(--white);
+    }
+    
+    .differentiator-item:hover .differentiator-icon::before {
+        opacity: 1;
     }
     
     .differentiator-title {
@@ -1030,7 +1118,7 @@
         opacity: 0;
     }
     
-    /* 浮遊オーブ */
+    /* 浮遊オーブ強化 */
     .floating-orbs {
         position: absolute;
         top: 0;
@@ -1044,8 +1132,11 @@
     .orb {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
-        backdrop-filter: blur(5px);
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.12), rgba(0, 201, 167, 0.12));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(58, 95, 235, 0.1);
         animation: float-orb 20s infinite ease-in-out;
     }
     
@@ -1122,28 +1213,40 @@
         .hero-differentiators {
             flex-wrap: wrap;
             gap: 1.5rem;
+            justify-content: center;
         }
         
         .differentiator-item {
-            max-width: 40%;
+            max-width: 45%;
         }
     }
     
     @media (max-width: 768px) {
         .hero {
-            padding: 3rem 0 2rem;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 3rem;
             min-height: calc(100vh - var(--header-height-mobile));
         }
         
         .hero-badge {
             padding: 0.4rem 1rem;
             font-size: 0.85rem;
+            margin-bottom: var(--space-4);
+        }
+        
+        .hero-title {
+            margin-bottom: var(--space-4);
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+            margin-bottom: var(--space-6);
         }
         
         .hero-buttons {
             flex-direction: column;
             width: 100%;
             align-items: center;
+            gap: 0.75rem;
         }
         
         .hero-buttons .btn {
@@ -1154,16 +1257,18 @@
         .hero-differentiators {
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2rem;
         }
         
         .differentiator-item {
             max-width: 100%;
+            width: 80%;
         }
         
         /* 浮遊オーブの調整 */
         .orb {
-            opacity: 0.6;
+            opacity: 0.7;
         }
         
         .orb-1 {
@@ -1201,6 +1306,7 @@
         position: relative;
         max-width: 800px;
         margin: 4rem auto;
+        z-index: 1;
     }
     
     .prototype-step {
@@ -1208,16 +1314,21 @@
         margin-bottom: 3rem;
         position: relative;
         z-index: 1;
+        transition: all 0.4s ease;
     }
     
     .prototype-step:last-child {
         margin-bottom: 0;
     }
     
+    .prototype-step:hover {
+        transform: translateX(5px);
+    }
+    
     .step-number {
         flex-shrink: 0;
-        width: 70px;
-        height: 70px;
+        width: 72px;
+        height: 72px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
@@ -1229,7 +1340,9 @@
         font-family: var(--font-en);
         box-shadow: var(--shadow-md);
         margin-right: 1.5rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        z-index: 2;
     }
     
     .prototype-step:hover .step-number {
@@ -1241,12 +1354,19 @@
     .step-content {
         flex: 1;
         padding-top: 0.5rem;
+        position: relative;
+        z-index: 1;
     }
     
     .step-content h3 {
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
         font-weight: var(--font-weight-bold);
+        transition: color 0.3s ease;
+    }
+    
+    .prototype-step:hover .step-content h3 {
+        color: var(--primary);
     }
     
     .step-duration {
@@ -1258,6 +1378,12 @@
         padding: 0.2rem 0.8rem;
         background: rgba(58, 95, 235, 0.1);
         border-radius: var(--radius-full);
+        transition: all 0.3s ease;
+    }
+    
+    .prototype-step:hover .step-duration {
+        background: rgba(255, 138, 0, 0.1);
+        color: var(--accent);
     }
     
     .step-content p {
@@ -1288,9 +1414,24 @@
         border-radius: var(--radius-lg);
         padding: 2rem;
         box-shadow: var(--shadow-md);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         text-align: center;
         border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        z-index: 0;
     }
     
     .benefit-card:hover {
@@ -1298,35 +1439,68 @@
         box-shadow: var(--shadow-lg);
     }
     
+    .benefit-card:hover::before {
+        background: var(--gradient-accent);
+    }
+    
     .benefit-icon {
-        width: 60px;
-        height: 60px;
+        width: 64px;
+        height: 64px;
         background: var(--gradient-primary);
         color: var(--white);
-        border-radius: 16px;
+        border-radius: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
         margin: 0 auto 1.5rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.2);
     }
     
     .benefit-card:hover .benefit-icon {
         transform: rotate(15deg) scale(1.1);
         background: var(--gradient-accent);
+        box-shadow: 0 8px 25px rgba(255, 138, 0, 0.25);
     }
     
     .benefit-card h4 {
         font-size: 1.2rem;
         margin-bottom: 1rem;
         font-weight: var(--font-weight-bold);
+        transition: color 0.3s ease;
+    }
+    
+    .benefit-card:hover h4 {
+        color: var(--accent);
     }
     
     .benefit-card p {
         font-size: 0.95rem;
         color: var(--gray);
         line-height: 1.6;
+    }
+    
+    /* プロトタイプセクション背景アクセント */
+    .prototype-bg-accent {
+        position: absolute;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        border-radius: 50%;
+        z-index: 0;
+    }
+    
+    .prototype-bg-accent-1 {
+        width: 500px;
+        height: 500px;
+        top: -150px;
+        right: -100px;
+    }
+    
+    .prototype-bg-accent-2 {
+        width: 400px;
+        height: 400px;
+        bottom: -200px;
+        left: -150px;
     }
     
     @media (max-width: 992px) {
@@ -1341,11 +1515,11 @@
         }
         
         .prototype-steps {
-            margin: 3rem auto;
+            margin: 2.5rem auto;
         }
         
         .prototype-step {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
         
         .step-number {
@@ -1368,6 +1542,12 @@
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
+        
+        .benefit-card {
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
     
     /* ========================================================
@@ -1376,17 +1556,25 @@
     .section-header {
         text-align: center;
         margin-bottom: 3.5rem;
+        position: relative;
+        z-index: 1;
     }
     
     .section-subtitle {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.1);
+        background: rgba(58, 95, 235, 0.12);
         padding: 0.6rem 1.8rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
         margin-bottom: 1.2rem;
         font-size: 0.9rem;
+        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
+        border: 1px solid rgba(58, 95, 235, 0.12);
+    }
+    
+    .section-header .heading-lg {
+        margin-bottom: 1.2rem;
     }
     
     .section-description {
@@ -1400,6 +1588,11 @@
     @media (max-width: 768px) {
         .section-header {
             margin-bottom: 2.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 0.85rem;
+            padding: 0.5rem 1.5rem;
         }
         
         .section-description {
@@ -1419,13 +1612,15 @@
     
     .service-badge {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.1);
+        background: rgba(58, 95, 235, 0.12);
         padding: 0.4rem 1rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
         font-size: 0.85rem;
         margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
+        border: 1px solid rgba(58, 95, 235, 0.12);
     }
     
     .services-container {
@@ -1449,11 +1644,13 @@
         position: relative;
         height: 100%;
         border: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1;
     }
     
     .service-card:hover {
         transform: translateY(-8px);
         box-shadow: var(--shadow-xl);
+        border-color: rgba(58, 95, 235, 0.2);
     }
     
     /* サービスカードバッジ */
@@ -1469,6 +1666,11 @@
         font-weight: var(--font-weight-semibold);
         z-index: 5;
         box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .service-card:hover .service-card-badge {
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
     }
     
     .service-image {
@@ -1486,6 +1688,11 @@
         height: 100%;
         background: linear-gradient(0deg, rgba(15, 23, 42, 0.3), transparent);
         z-index: 1;
+        transition: opacity 0.3s ease;
+    }
+    
+    .service-card:hover .service-image::before {
+        opacity: 0.7;
     }
     
     .service-image img {
@@ -1496,7 +1703,7 @@
     }
     
     .service-card:hover .service-image img {
-        transform: scale(1.05);
+        transform: scale(1.08);
     }
     
     .service-content {
@@ -1530,6 +1737,7 @@
     
     .service-icon i {
         font-size: 1.8rem;
+        transition: all 0.3s ease;
     }
     
     .service-card:hover .service-icon {
@@ -1554,7 +1762,7 @@
         background: var(--gradient-primary);
         margin: 0.8rem auto 0;
         border-radius: var(--radius-full);
-        transition: width 0.3s ease;
+        transition: all 0.3s ease;
     }
     
     .service-card:hover .service-title::after {
@@ -1582,8 +1790,7 @@
         transition: all 0.3s ease;
     }
     
-    .service-link:hover {
-        gap: 0.75rem;
+    .service-card:hover .service-link {
         color: var(--accent);
     }
     
@@ -1593,6 +1800,28 @@
     
     .service-link:hover i {
         transform: translateX(3px);
+    }
+    
+    /* サービスセクション背景アクセント */
+    .services-bg-accent {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        z-index: 0;
+    }
+    
+    .services-bg-accent-1 {
+        width: 600px;
+        height: 600px;
+        top: -200px;
+        left: -200px;
+    }
+    
+    .services-bg-accent-2 {
+        width: 500px;
+        height: 500px;
+        bottom: -100px;
+        right: -100px;
     }
     
     @media (max-width: 992px) {
@@ -1626,6 +1855,9 @@
         margin-bottom: 1.5rem;
         border: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .mobile-card:active {
@@ -1637,6 +1869,17 @@
         position: relative;
         height: 180px;
         overflow: hidden;
+    }
+    
+    .mobile-card-header::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+        z-index: 1;
     }
     
     .mobile-card-badge {
@@ -1651,12 +1894,18 @@
         font-weight: var(--font-weight-semibold);
         z-index: 2;
         box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .mobile-card-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .mobile-card:active .mobile-card-image {
+        transform: scale(1.05);
     }
     
     .mobile-card-icon {
@@ -1675,6 +1924,12 @@
         transform: translateX(-50%);
         box-shadow: var(--shadow-md);
         z-index: 3;
+        transition: all 0.3s ease;
+        border: 2px solid white;
+    }
+    
+    .mobile-card:active .mobile-card-icon {
+        background: var(--gradient-accent);
     }
     
     .mobile-card-content {
@@ -1693,7 +1948,7 @@
         font-size: 0.95rem;
         color: var(--gray);
         line-height: 1.6;
-        margin-b: 1rem;
+        margin-bottom: 1rem;
     }
     
     .mobile-card-link {
@@ -1703,10 +1958,11 @@
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
         font-size: 0.9rem;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
+        transition: all 0.3s ease;
     }
     
-    .mobile-card-link:active {
+    .mobile-card:active .mobile-card-link {
         color: var(--accent);
     }
     
@@ -1733,16 +1989,34 @@
         text-align: center;
         position: relative;
         overflow: hidden;
+        z-index: 1;
+    }
+    
+    .benefit-container-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        z-index: 0;
     }
     
     .benefit-container-card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-10px);
         box-shadow: var(--shadow-lg);
+        border-color: rgba(58, 95, 235, 0.1);
+    }
+    
+    .benefit-container-card:hover::before {
+        background: var(--gradient-accent);
     }
     
     .benefit-container-icon {
-        width: 80px;
-        height: 80px;
+        width: 84px;
+        height: 84px;
         background: var(--gradient-primary);
         color: var(--white);
         border-radius: 20px;
@@ -1770,6 +2044,11 @@
         color: var(--dark);
         position: relative;
         z-index: 1;
+        transition: color 0.3s ease;
+    }
+    
+    .benefit-container-card:hover h3 {
+        color: var(--accent);
     }
     
     .benefit-container-card p {
@@ -1784,15 +2063,17 @@
         margin-top: auto;
         background: var(--gradient-card);
         padding: 1.2rem;
-        border-radius: var(--radius);
+        border-radius: var(--radius-md);
         transition: all 0.3s ease;
         position: relative;
         z-index: 1;
+        border: 1px solid rgba(58, 95, 235, 0.05);
     }
     
     .benefit-container-card:hover .benefit-stat {
         background: rgba(255, 138, 0, 0.08);
         transform: scale(1.05);
+        border-color: rgba(255, 138, 0, 0.1);
     }
     
     .stat-value {
@@ -1819,6 +2100,28 @@
         font-size: 0.95rem;
     }
     
+    /* メリットセクション背景アクセント */
+    .benefits-bg-accent {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        z-index: 0;
+    }
+    
+    .benefits-bg-accent-1 {
+        width: 500px;
+        height: 500px;
+        top: -100px;
+        right: -150px;
+    }
+    
+    .benefits-bg-accent-2 {
+        width: 600px;
+        height: 600px;
+        bottom: -200px;
+        left: -200px;
+    }
+    
     @media (max-width: 992px) {
         .benefits-container {
             grid-template-columns: repeat(2, 1fr);
@@ -1832,8 +2135,20 @@
         }
         
         .benefit-container-card {
-            max-width: 400px;
+            max-width: 350px;
             margin: 0 auto;
+            padding: 1.75rem;
+        }
+        
+        .benefit-container-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .benefit-container-card h3 {
+            font-size: 1.3rem;
         }
     }
     
@@ -1859,7 +2174,7 @@
     .cta-title {
         margin-bottom: 1.5rem;
         color: var(--white);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
     
     .cta-title .text-gradient {
@@ -1895,6 +2210,11 @@
         overflow: hidden;
     }
     
+    .cta-button span, .cta-button i {
+        position: relative;
+        z-index: 2;
+    }
+    
     .cta-button::before {
         content: '';
         position: absolute;
@@ -1909,17 +2229,34 @@
             rgba(255, 255, 255, 0) 100%
         );
         transition: left 0.5s ease;
+        z-index: 1;
+    }
+    
+    .cta-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
     }
     
     .cta-button:hover {
         transform: translateY(-3px) scale(1.03);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        background: var(--gradient-accent);
         color: var(--white);
     }
     
     .cta-button:hover::before {
         left: 100%;
+    }
+    
+    .cta-button:hover::after {
+        opacity: 1;
     }
     
     .cta-patterns {
@@ -1929,7 +2266,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        opacity: 0.1;
+        opacity: 0.15;
         z-index: var(--z-negative);
     }
     
@@ -1937,6 +2274,7 @@
         position: absolute;
         background: var(--white);
         border-radius: 50%;
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
     }
     
     .cta-pattern:nth-child(1) {
@@ -2035,8 +2373,8 @@
     }
     
     .footer-social-link {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
         color: var(--white);
@@ -2044,12 +2382,40 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .footer-social-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }
+    
+    .footer-social-link i {
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease;
     }
     
     .footer-social-link:hover {
-        background: var(--primary);
         transform: translateY(-3px);
         color: var(--white);
+    }
+    
+    .footer-social-link:hover::before {
+        opacity: 1;
+    }
+    
+    .footer-social-link:hover i {
+        transform: scale(1.2);
     }
     
     .footer-heading {
@@ -2057,6 +2423,19 @@
         margin-bottom: 1.5rem;
         color: var(--white);
         font-weight: var(--font-weight-semibold);
+        position: relative;
+        padding-bottom: 0.75rem;
+    }
+    
+    .footer-heading::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-full);
     }
     
     .footer-links {
@@ -2109,6 +2488,15 @@
         margin-top: 0.25rem;
     }
     
+    .footer-contact-item a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.3s ease;
+    }
+    
+    .footer-contact-item a:hover {
+        color: var(--white);
+    }
+    
     .footer-bottom {
         padding-top: 2rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -2132,10 +2520,26 @@
     .footer-links-inline a {
         color: rgba(255, 255, 255, 0.5);
         transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .footer-links-inline a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 1px;
+        background: var(--white);
+        transition: width 0.3s ease;
     }
     
     .footer-links-inline a:hover {
         color: var(--white);
+    }
+    
+    .footer-links-inline a:hover::before {
+        width: 100%;
     }
     
     @media (max-width: 992px) {
@@ -2177,8 +2581,8 @@
     }
     
     .chatbot-button {
-        width: 60px;
-        height: 60px;
+        width: 64px;
+        height: 64px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
@@ -2192,6 +2596,13 @@
         position: relative;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         z-index: 2;
+        overflow: hidden;
+    }
+    
+    .chatbot-button i {
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease;
     }
     
     .chatbot-button::before {
@@ -2207,10 +2618,30 @@
         z-index: -1;
     }
     
+    .chatbot-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }
+    
     .chatbot-button:hover {
         transform: scale(1.1);
         box-shadow: var(--shadow-xl);
-        background: var(--gradient-accent);
+    }
+    
+    .chatbot-button:hover::after {
+        opacity: 1;
+    }
+    
+    .chatbot-button:hover i {
+        transform: scale(1.2);
     }
     
     .chatbot-window {
@@ -2230,6 +2661,7 @@
         transform-origin: bottom right;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         z-index: var(--z-popover);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .chatbot-window.active {
@@ -2354,11 +2786,34 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .chatbot-send::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 0;
+    }
+    
+    .chatbot-send i {
+        position: relative;
+        z-index: 1;
     }
     
     .chatbot-send:hover {
         transform: scale(1.1);
-        background: var(--gradient-accent);
+    }
+    
+    .chatbot-send:hover::before {
+        opacity: 1;
     }
     
     /* チャットボットローディングアニメーション */
@@ -2399,8 +2854,8 @@
         }
         
         .chatbot-button {
-            width: 54px;
-            height: 54px;
+            width: 56px;
+            height: 56px;
             font-size: 1.3rem;
         }
         
@@ -2420,8 +2875,8 @@
         position: fixed;
         bottom: 110px;
         right: 30px;
-        width: 45px;
-        height: 45px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
@@ -2436,6 +2891,7 @@
         transition: all 0.3s ease;
         box-shadow: var(--shadow-md);
         border: none;
+        overflow: hidden;
     }
     
     .back-to-top.active {
@@ -2444,18 +2900,44 @@
         transform: translateY(0);
     }
     
+    .back-to-top i {
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease;
+    }
+    
+    .back-to-top::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+    
     .back-to-top:hover {
         transform: translateY(-3px);
         box-shadow: var(--shadow-lg);
-        background: var(--gradient-accent);
+    }
+    
+    .back-to-top:hover::before {
+        opacity: 1;
+    }
+    
+    .back-to-top:hover i {
+        transform: translateY(-2px);
     }
     
     @media (max-width: 768px) {
         .back-to-top {
             bottom: 90px;
             right: 20px;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
         }
     }
     
@@ -2531,6 +3013,15 @@
             transform: scale(0.98);
             transition: transform 0.1s ease;
         }
+        
+        /* モバイルでのアイコン色変化対応 */
+        .differentiator-item:active .differentiator-icon {
+            color: var(--white);
+        }
+        
+        .differentiator-item:active .differentiator-icon::before {
+            opacity: 1;
+        }
     }
     
     /* iPhoneシリーズ専用の調整 */
@@ -2563,8 +3054,8 @@
         }
         
         .differentiator-icon {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             font-size: 1.5rem;
         }
         
@@ -2579,6 +3070,26 @@
         .cta-button {
             padding: 0.8rem 1.5rem;
             font-size: 0.95rem;
+        }
+        
+        /* iPhoneでのスクロールパフォーマンス最適化 */
+        .orb {
+            opacity: 0.5;
+            transform: scale(0.8);
+        }
+        
+        /* ヘッダー領域サイズの調整 */
+        .header {
+            height: calc(var(--header-height-mobile) * 0.9);
+        }
+        
+        /* フッターサイズの調整 */
+        .footer {
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-grid {
+            gap: 1.5rem;
         }
     }
     
@@ -2701,503 +3212,515 @@
                     <div class="hero-differentiators">
                         <div class="differentiator-item">
                             <div class="differentiator-icon">
-                            <i class="fas fa-rocket"></i>
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="differentiator-title">小さく始める</h3>
+                            <p class="differentiator-text">最短2週間のプロトタイプで効果検証。初期投資リスクを最小化します。</p>
                         </div>
-                        <h3 class="differentiator-title">小さく始める</h3>
-                        <p class="differentiator-text">最短2週間のプロトタイプで効果検証。初期投資リスクを最小化します。</p>
+                        
+                        <div class="differentiator-item">
+                            <div class="differentiator-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3 class="differentiator-title">伴走支援</h3>
+                            <p class="differentiator-text">共創型の開発で方向修正も柔軟。最適解を一緒に見つけます。</p>
+                        </div>
+                        
+                        <div class="differentiator-item">
+                            <div class="differentiator-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="differentiator-title">段階的成長</h3>
+                            <p class="differentiator-text">効果を確認しながら拡張。確実な成果で組織の自走化を実現します。</p>
+                        </div>
                     </div>
                     
-                    <div class="differentiator-item">
-                        <div class="differentiator-icon">
-                            <i class="fas fa-handshake"></i>
+                    <div class="hero-buttons">
+                        <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
+                            <span>サービスを見る</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-accent btn-lg">
+                            <span>無料相談する</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================
+        ▼ プロトタイプアプローチセクション Component
+        ======================================================== -->
+        <section class="prototype-approach-section" id="prototype-approach">
+            <!-- 背景アクセント -->
+            <div class="prototype-bg-accent prototype-bg-accent-1"></div>
+            <div class="prototype-bg-accent prototype-bg-accent-2"></div>
+            
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">ShinAIの強み</div>
+                    <h2 class="heading-lg">
+                        プロトタイプから始める<br>
+                        <span class="text-gradient">伴走型AI開発</span>
+                    </h2>
+                    <p class="section-description">
+                        「小さく始めて、大きく育てる」<br>
+                        初期投資を抑えて確実な成果を実現する新しい開発スタイル
+                    </p>
+                </div>
+                
+                <!-- プロトタイプの段階的アプローチ可視化 -->
+                <div class="prototype-steps">
+                    <div class="prototype-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>ニーズ分析・プロトタイプ設計</h3>
+                            <p class="step-duration">期間: 1週間</p>
+                            <p>御社の課題をヒアリングし、AIでの解決方法を提案。小規模なプロトタイプを設計します。</p>
                         </div>
-                        <h3 class="differentiator-title">伴走支援</h3>
-                        <p class="differentiator-text">共創型の開発で方向修正も柔軟。最適解を一緒に見つけます。</p>
+                        <div class="step-connector"></div>
                     </div>
                     
-                    <div class="differentiator-item">
-                        <div class="differentiator-icon">
-                            <i class="fas fa-chart-line"></i>
+                    <div class="prototype-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>プロトタイプ開発・検証</h3>
+                            <p class="step-duration">期間: 2週間</p>
+                            <p>最小限の機能を実装し、実際の業務で効果検証。方向性の確認と改善点を見極めます。</p>
                         </div>
-                        <h3 class="differentiator-title">段階的成長</h3>
-                        <p class="differentiator-text">効果を確認しながら拡張。確実な成果で組織の自走化を実現します。</p>
+                        <div class="step-connector"></div>
+                    </div>
+                    
+                    <div class="prototype-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>本実装・拡張</h3>
+                            <p class="step-duration">期間: 2〜4週間</p>
+                            <p>検証結果に基づき、本格的な機能実装。御社業務に最適化した形に調整します。</p>
+                        </div>
+                        <div class="step-connector"></div>
+                    </div>
+                    
+                    <div class="prototype-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>伴走支援・内製化</h3>
+                            <p class="step-duration">期間: 継続的</p>
+                            <p>運用サポートと社内チーム育成を並行し、AIの効果を最大化。将来的な自走化を実現します。</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="hero-buttons">
+                <div class="prototype-benefits">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <h4>初期投資リスク最小化</h4>
+                        <p>最初は小規模投資で開始、効果を確認しながら段階的に投資を拡大できます。</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h4>迅速な価値実現</h4>
+                        <p>2週間で初期プロトタイプが完成、すぐに効果検証が可能です。</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h4>柔軟な方向転換</h4>
+                        <p>早期検証により、方向性の軌道修正が容易で追加コストを最小限に抑えられます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================
+        ▼ サービスセクション Component
+        ======================================================== -->
+        <section class="services-section" id="services">
+            <!-- 背景アクセント -->
+            <div class="services-bg-accent services-bg-accent-1"></div>
+            <div class="services-bg-accent services-bg-accent-2"></div>
+            
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">ShinAIのソリューション</div>
+                    <h2 class="heading-lg">
+                        お客様の課題を解決する<br>
+                        <span class="text-gradient">3つのAIソリューション</span>
+                    </h2>
+                    <p class="section-description">
+                        最先端のAI技術で、業務効率化から新規事業創出まで幅広くサポート
+                    </p>
+                </div>
+                
+                <!-- デスクトップ用サービスカード -->
+                <div class="services-container hide-mobile">
+                    <div class="services-grid">
+                        <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
+                        <div class="service-card">
+                            <span class="service-card-badge">人気 No.1</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
+                            </div>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
+                                <p class="service-description">
+                                    データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。
+                                </p>
+                                <a href="services.html#aipro" class="service-link">
+                                    詳しく見る
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 2: オーダーメイドAIアプリケーション開発 -->
+                        <div class="service-card">
+                            <span class="service-card-badge">カスタマイズ</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
+                            </div>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-robot" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
+                                <p class="service-description">
+                                    御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。
+                                </p>
+                                <a href="services.html#custom" class="service-link">
+                                    詳しく見る
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3: AI導入(DX/AX)コンサルティング -->
+                        <div class="service-card">
+                            <span class="service-card-badge">伴走支援</span>
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
+                            </div>
+                            <div class="service-icon-wrapper">
+                                <div class="service-icon">
+                                    <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3 class="service-title">AI導入<br>コンサルティング</h3>
+                                <p class="service-description">
+                                    戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。
+                                </p>
+                                <a href="services.html#consulting" class="service-link">
+                                    詳しく見る
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- モバイル用サービスカード -->
+                <div class="services-container-mobile show-mobile">
+                    <!-- モバイルカード1 -->
+                    <div class="mobile-card">
+                        <div class="mobile-card-header">
+                            <span class="mobile-card-badge">人気 No.1</span>
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
+                            <div class="mobile-card-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                        </div>
+                        <div class="mobile-card-content">
+                            <h3 class="mobile-card-title">新規事業企画書AIツール「アイプロ」</h3>
+                            <p class="mobile-card-description">データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。</p>
+                            <a href="services.html#aipro" class="mobile-card-link">
+                                詳しく見る <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- モバイルカード2 -->
+                    <div class="mobile-card">
+                        <div class="mobile-card-header">
+                            <span class="mobile-card-badge">カスタマイズ</span>
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発" class="mobile-card-image" loading="lazy">
+                            <div class="mobile-card-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                        </div>
+                        <div class="mobile-card-content">
+                            <h3 class="mobile-card-title">オーダーメイドAIアプリケーション開発</h3>
+                            <p class="mobile-card-description">御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。</p>
+                            <a href="services.html#custom" class="mobile-card-link">
+                                詳しく見る <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- モバイルカード3 -->
+                    <div class="mobile-card">
+                        <div class="mobile-card-header">
+                            <span class="mobile-card-badge">伴走支援</span>
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入コンサルティング" class="mobile-card-image" loading="lazy">
+                            <div class="mobile-card-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                        </div>
+                        <div class="mobile-card-content">
+                            <h3 class="mobile-card-title">AI導入コンサルティング</h3>
+                            <p class="mobile-card-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。</p>
+                            <a href="services.html#consulting" class="mobile-card-link">
+                                詳しく見る <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 3rem;">
                     <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                        サービスを見る
+                        <span>すべてのサービスを見る</span>
                         <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
-                    <a href="contact.html" class="btn btn-accent btn-lg">
-                        無料相談する
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================
+        ▼ メリットセクション Component
+        ======================================================== -->
+        <section class="section" id="benefits">
+            <!-- 背景アクセント -->
+            <div class="benefits-bg-accent benefits-bg-accent-1"></div>
+            <div class="benefits-bg-accent benefits-bg-accent-2"></div>
+            
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">導入のメリット</div>
+                    <h2 class="heading-lg">
+                        なぜShinAIが<span class="text-gradient">選ばれるのか</span>
+                    </h2>
+                    <p class="section-description">
+                        従来の重厚な開発から、アジャイルな伴走型開発へ。<br>
+                        確実な成果と長期的な成長を実現します。
+                    </p>
+                </div>
+                
+                <!-- メリットカード -->
+                <div class="benefits-container">
+                    <!-- メリット1 -->
+                    <div class="benefit-container-card">
+                        <div class="benefit-container-icon">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                        </div>
+                        <h3>初期投資を最小限に</h3>
+                        <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。段階的な投資で確実にROIを実現します。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">70<span style="font-size: 1.5rem;">%</span></div>
+                            <div class="stat-label">初期コスト削減</div>
+                        </div>
+                    </div>
+                    
+                    <!-- メリット2 -->
+                    <div class="benefit-container-card">
+                        <div class="benefit-container-icon">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                        </div>
+                        <h3>柔軟な方向転換が可能</h3>
+                        <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
+                            <div class="stat-label">最短導入期間</div>
+                        </div>
+                    </div>
+                    
+                    <!-- メリット3 -->
+                    <div class="benefit-container-card">
+                        <div class="benefit-container-icon">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                        </div>
+                        <h3>共創型の開発体制</h3>
+                        <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
+                        <div class="benefit-stat">
+                            <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
+                            <div class="stat-label">顧客満足度</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================
+        ▼ CTA (Call To Action) Component
+        ======================================================== -->
+        <section class="cta-section" id="cta">
+            <div class="cta-patterns">
+                <div class="cta-pattern"></div>
+                <div class="cta-pattern"></div>
+                <div class="cta-pattern"></div>
+            </div>
+            
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="heading-lg cta-title">AIで<span class="text-gradient">ビジネスの可能性</span>を広げませんか？</h2>
+                    <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br>プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
+                    <a href="contact.html" class="cta-button">
+                        <span>無料相談を始める</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- ========================================================
-    ▼ プロトタイプアプローチセクション Component
-    ======================================================== -->
-    <section class="prototype-approach-section" id="prototype-approach">
-        <div class="container">
-            <div class="section-header text-center">
-                <div class="section-subtitle">ShinAIの強み</div>
-                <h2 class="heading-lg">
-                    プロトタイプから始める<br>
-                    <span class="text-gradient">伴走型AI開発</span>
-                </h2>
-                <p class="section-description">
-                    「小さく始めて、大きく育てる」<br>
-                    初期投資を抑えて確実な成果を実現する新しい開発スタイル
-                </p>
-            </div>
-            
-            <!-- プロトタイプの段階的アプローチ可視化 -->
-            <div class="prototype-steps">
-                <div class="prototype-step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>ニーズ分析・プロトタイプ設計</h3>
-                        <p class="step-duration">期間: 1週間</p>
-                        <p>御社の課題をヒアリングし、AIでの解決方法を提案。小規模なプロトタイプを設計します。</p>
-                    </div>
-                    <div class="step-connector"></div>
-                </div>
-                
-                <div class="prototype-step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>プロトタイプ開発・検証</h3>
-                        <p class="step-duration">期間: 2週間</p>
-                        <p>最小限の機能を実装し、実際の業務で効果検証。方向性の確認と改善点を見極めます。</p>
-                    </div>
-                    <div class="step-connector"></div>
-                </div>
-                
-                <div class="prototype-step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>本実装・拡張</h3>
-                        <p class="step-duration">期間: 2〜4週間</p>
-                        <p>検証結果に基づき、本格的な機能実装。御社業務に最適化した形に調整します。</p>
-                    </div>
-                    <div class="step-connector"></div>
-                </div>
-                
-                <div class="prototype-step">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>伴走支援・内製化</h3>
-                        <p class="step-duration">期間: 継続的</p>
-                        <p>運用サポートと社内チーム育成を並行し、AIの効果を最大化。将来的な自走化を実現します。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="prototype-benefits">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-piggy-bank"></i>
-                    </div>
-                    <h4>初期投資リスク最小化</h4>
-                    <p>最初は小規模投資で開始、効果を確認しながら段階的に投資を拡大できます。</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
-                    <h4>迅速な価値実現</h4>
-                    <p>2週間で初期プロトタイプが完成、すぐに効果検証が可能です。</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h4>柔軟な方向転換</h4>
-                    <p>早期検証により、方向性の軌道修正が容易で追加コストを最小限に抑えられます。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================================
-    ▼ サービスセクション Component
-    ======================================================== -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <div class="section-header text-center">
-                <div class="service-badge">ShinAIのソリューション</div>
-                <h2 class="heading-lg">
-                    お客様の課題を解決する<br>
-                    <span class="text-gradient">3つのAIソリューション</span>
-                </h2>
-                <p class="section-description">
-                    最先端のAI技術で、業務効率化から新規事業創出まで幅広くサポート
-                </p>
-            </div>
-            
-            <!-- デスクトップ用サービスカード -->
-            <div class="services-container hide-mobile">
-                <div class="services-grid">
-                    <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
-                    <div class="service-card">
-                        <span class="service-card-badge">人気 No.1</span>
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-icon-wrapper">
-                            <div class="service-icon">
-                                <i class="fas fa-file-alt" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
-                            <p class="service-description">
-                                データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。
-                            </p>
-                            <a href="services.html#aipro" class="service-link">
-                                詳しく見る
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 2: オーダーメイドAIアプリケーション開発 -->
-                    <div class="service-card">
-                        <span class="service-card-badge">カスタマイズ</span>
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-icon-wrapper">
-                            <div class="service-icon">
-                                <i class="fas fa-robot" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
-                            <p class="service-description">
-                                御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。
-                            </p>
-                            <a href="services.html#custom" class="service-link">
-                                詳しく見る
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 3: AI導入(DX/AX)コンサルティング -->
-                    <div class="service-card">
-                        <span class="service-card-badge">伴走支援</span>
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
-                        </div>
-                        <div class="service-icon-wrapper">
-                            <div class="service-icon">
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">AI導入<br>コンサルティング</h3>
-                            <p class="service-description">
-                                戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。
-                            </p>
-                            <a href="services.html#consulting" class="service-link">
-                                詳しく見る
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- モバイル用サービスカード -->
-            <div class="services-container-mobile show-mobile">
-                <!-- モバイルカード1 -->
-                <div class="mobile-card">
-                    <div class="mobile-card-header">
-                        <span class="mobile-card-badge">人気 No.1</span>
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
-                        <div class="mobile-card-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                    </div>
-                    <div class="mobile-card-content">
-                        <h3 class="mobile-card-title">新規事業企画書AIツール「アイプロ」</h3>
-                        <p class="mobile-card-description">データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。</p>
-                        <a href="services.html#aipro" class="mobile-card-link">
-                            詳しく見る <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- モバイルカード2 -->
-                <div class="mobile-card">
-                    <div class="mobile-card-header">
-                        <span class="mobile-card-badge">カスタマイズ</span>
-                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発" class="mobile-card-image" loading="lazy">
-                        <div class="mobile-card-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                    </div>
-                    <div class="mobile-card-content">
-                        <h3 class="mobile-card-title">オーダーメイドAIアプリケーション開発</h3>
-                        <p class="mobile-card-description">御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。</p>
-                        <a href="services.html#custom" class="mobile-card-link">
-                            詳しく見る <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- モバイルカード3 -->
-                <div class="mobile-card">
-                    <div class="mobile-card-header">
-                        <span class="mobile-card-badge">伴走支援</span>
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入コンサルティング" class="mobile-card-image" loading="lazy">
-                        <div class="mobile-card-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                    </div>
-                    <div class="mobile-card-content">
-                        <h3 class="mobile-card-title">AI導入コンサルティング</h3>
-                        <p class="mobile-card-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。</p>
-                        <a href="services.html#consulting" class="mobile-card-link">
-                            詳しく見る <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
-                    すべてのサービスを見る
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================================
-    ▼ メリットセクション Component
-    ======================================================== -->
-    <section class="section" id="benefits">
-        <div class="container">
-            <div class="section-header text-center">
-                <div class="section-subtitle">導入のメリット</div>
-                <h2 class="heading-lg">
-                    なぜShinAIが<span class="text-gradient">選ばれるのか</span>
-                </h2>
-                <p class="section-description">
-                    従来の重厚な開発から、アジャイルな伴走型開発へ。<br>
-                    確実な成果と長期的な成長を実現します。
-                </p>
-            </div>
-            
-            <!-- メリットカード -->
-            <div class="benefits-container">
-                <!-- メリット1 -->
-                <div class="benefit-container-card">
-                    <div class="benefit-container-icon">
-                        <i class="fas fa-coins" aria-hidden="true"></i>
-                    </div>
-                    <h3>初期投資を最小限に</h3>
-                    <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。段階的な投資で確実にROIを実現します。</p>
-                    <div class="benefit-stat">
-                        <div class="stat-value">70<span style="font-size: 1.5rem;">%</span></div>
-                        <div class="stat-label">初期コスト削減</div>
-                    </div>
-                </div>
-                
-                <!-- メリット2 -->
-                <div class="benefit-container-card">
-                    <div class="benefit-container-icon">
-                        <i class="fas fa-bolt" aria-hidden="true"></i>
-                    </div>
-                    <h3>柔軟な方向転換が可能</h3>
-                    <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
-                    <div class="benefit-stat">
-                        <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
-                        <div class="stat-label">最短導入期間</div>
-                    </div>
-                </div>
-                
-                <!-- メリット3 -->
-                <div class="benefit-container-card">
-                    <div class="benefit-container-icon">
-                        <i class="fas fa-users" aria-hidden="true"></i>
-                    </div>
-                    <h3>共創型の開発体制</h3>
-                    <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
-                    <div class="benefit-stat">
-                        <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
-                        <div class="stat-label">顧客満足度</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ========================================================
-    ▼ CTA (Call To Action) Component
-    ======================================================== -->
-    <section class="cta-section" id="cta">
-        <div class="cta-patterns">
-            <div class="cta-pattern"></div>
-            <div class="cta-pattern"></div>
-            <div class="cta-pattern"></div>
-        </div>
-        
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="heading-lg cta-title">AIで<span class="text-gradient">ビジネスの可能性</span>を広げませんか？</h2>
-                <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br>プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
-                <a href="contact.html" class="cta-button">
-                    無料相談を始める
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
-<!-- ========================================================
-▼ フッター Component
-======================================================== -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">
-                    <div class="footer-logo-icon">
-                        <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
+    <!-- ========================================================
+    ▼ フッター Component
+    ======================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <img src="assets/images/logo.svg" alt="ShinAI" width="40" height="40">
+                        </div>
+                        <span class="footer-logo-text">ShinAI</span>
                     </div>
-                    <span class="footer-logo-text">ShinAI</span>
+                    <p class="footer-description">
+                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.facebook.com/ShinAI.tech" class="footer-social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/shinai-tech" class="footer-social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/shinai.tech" class="footer-social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
-                <p class="footer-description">
-                    AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
-                </p>
-                <div class="footer-social">
-                    <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
-                        <i class="fab fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.facebook.com/ShinAI.tech" class="footer-social-link" aria-label="Facebook">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/company/shinai-tech" class="footer-social-link" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.instagram.com/shinai.tech" class="footer-social-link" aria-label="Instagram">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
-                    </a>
+                
+                <div>
+                    <h4 class="footer-heading">サービス</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
+                        <li><a href="services.html#custom">オーダーメイドAIアプリケーション開発</a></li>
+                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">会社情報</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">会社概要</a></li>
+                        <li><a href="about.html#philosophy">企業理念</a></li>
+                        <li><a href="industries.html">AI活用事例</a></li>
+                        <li><a href="faq.html">よくある質問</a></li>
+                        <li><a href="about.html#careers">採用情報</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-heading">お問い合わせ</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:contact@shinai.tech">shinai.life@gmail.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <span>平日 9:00〜18:00（土日祝休）</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-file-alt" aria-hidden="true"></i>
+                        <a href="contact.html">お問い合わせフォーム</a>
+                    </div>
                 </div>
             </div>
             
-            <div>
-                <h4 class="footer-heading">サービス</h4>
-                <ul class="footer-links">
-                    <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
-                    <li><a href="services.html#custom">オーダーメイドAIアプリケーション開発</a></li>
-                    <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="footer-heading">会社情報</h4>
-                <ul class="footer-links">
-                    <li><a href="about.html">会社概要</a></li>
-                    <li><a href="about.html#philosophy">企業理念</a></li>
-                    <li><a href="industries.html">AI活用事例</a></li>
-                    <li><a href="faq.html">よくある質問</a></li>
-                    <li><a href="about.html#careers">採用情報</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="footer-heading">お問い合わせ</h4>
-                <div class="footer-contact-item">
-                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                    <span>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                    <a href="mailto:contact@shinai.tech">shinai.life@gmail.com</a>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-clock" aria-hidden="true"></i>
-                    <span>平日 9:00〜18:00（土日祝休）</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-file-alt" aria-hidden="true"></i>
-                    <a href="contact.html">お問い合わせフォーム</a>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-links-inline">
+                    <a href="privacy-policy.html">プライバシーポリシー</a>
+                    <a href="terms.html">利用規約</a>
+                    <a href="legal.html">特定商取引法に基づく表記</a>
                 </div>
             </div>
         </div>
+    </footer>
+
+    <!-- ========================================================
+    ▼ チャットボット Component
+    ======================================================== -->
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
+            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+        </button>
         
-        <div class="footer-bottom">
-            <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
-            <div class="footer-links-inline">
-                <a href="privacy-policy.html">プライバシーポリシー</a>
-                <a href="terms.html">利用規約</a>
-                <a href="legal.html">特定商取引法に基づく表記</a>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot" aria-hidden="true"></i> AIアシスタント</h3>
+                <button class="chatbot-close" id="chatbot-close" aria-label="閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="チャットメッセージ">
+                <div class="chat-message bot">
+                    こんにちは！ShinAIアシスタントです。AIシステム受託開発やAIプロダクトについて、どのようなご質問でもお気軽にどうぞ。
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chat-input" placeholder="メッセージを入力..." aria-label="メッセージ" autocomplete="off">
+                <button class="chatbot-send" id="chat-send" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
-</footer>
 
-<!-- ========================================================
-▼ チャットボット Component
-======================================================== -->
-<div class="chatbot" aria-label="AIアシスタント">
-    <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
-        <i class="fas fa-comment-dots" aria-hidden="true"></i>
+    <!-- ========================================================
+    ▼ Back to Top ボタン Component
+    ======================================================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="ページの先頭へ戻る">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
-    
-    <div class="chatbot-window" id="chatbot-window">
-        <div class="chatbot-header">
-            <h3><i class="fas fa-robot" aria-hidden="true"></i> AIアシスタント</h3>
-            <button class="chatbot-close" id="chatbot-close" aria-label="閉じる">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-        </div>
-        
-        <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="チャットメッセージ">
-            <div class="chat-message bot">
-                こんにちは！ShinAIアシスタントです。AIシステム受託開発やAIプロダクトについて、どのようなご質問でもお気軽にどうぞ。
-            </div>
-        </div>
-        
-        <div class="chatbot-input">
-            <input type="text" id="chat-input" placeholder="メッセージを入力..." aria-label="メッセージ" autocomplete="off">
-            <button class="chatbot-send" id="chat-send" aria-label="送信">
-                <i class="fas fa-paper-plane" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-</div>
 
-<!-- ========================================================
-▼ Back to Top ボタン Component
-======================================================== -->
-<button id="back-to-top" class="back-to-top" aria-label="ページの先頭へ戻る">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-</button>
-
-<!-- ========================================================
-▼ メインスクリプト Component
-======================================================== -->
-<script>
+    <!-- ========================================================
+    ▼ メインスクリプト Component
+    ======================================================== -->
+    <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ページロード完了時にローディングを非表示
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
             setTimeout(() => {
-                pageLoader.style.opacity = '0';
+                pageLoader.classList.add('loaded');
                 setTimeout(() => {
-                    pageLoader.style.visibility = 'hidden';
-                }, 300);
+                    pageLoader.style.display = 'none';
+                }, 500);
             }, 500);
         }
         
@@ -3216,37 +3739,39 @@
         // ヘッダースクロール効果
         const header = document.getElementById('header');
         const mobileLogoTrigger = document.getElementById('mobile-logo-trigger');
-        let lastScrollTop = 0;
-        let headerVisible = false;
         
-        // モバイルロゴトリガーのクリックイベント
-        if (mobileLogoTrigger) {
+        // モバイルロゴトリガーのクリックイベント - モバイルでヘッダーを表示
+        if (mobileLogoTrigger && header) {
             mobileLogoTrigger.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
-                    headerVisible = true;
-                    header.classList.add('visible');
+                    header.style.transform = 'translateY(0)';
+                    header.style.boxShadow = 'var(--shadow-header)';
                 }
             });
         }
         
+        // スクロールイベント
+        let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
             const currentScrollTop = window.scrollY;
             
-            // デスクトップでのスクロール効果
-            if (window.innerWidth > 768) {
+            // ヘッダースクロール効果
+            if (header) {
                 if (currentScrollTop > 10) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
                 }
-            } else {
-                // モバイルでヘッダーが表示されている場合の自動非表示
-                if (headerVisible && currentScrollTop > lastScrollTop && currentScrollTop > 100) {
-                    headerVisible = false;
-                    header.classList.remove('visible');
-                } else if (currentScrollTop < lastScrollTop && currentScrollTop < lastScrollTop - 20) {
-                    headerVisible = true;
-                    header.classList.add('visible');
+                
+                // モバイルでの表示/非表示
+                if (window.innerWidth <= 768) {
+                    if (currentScrollTop > lastScrollTop && currentScrollTop > 50) {
+                        // 下にスクロール - ヘッダー非表示
+                        header.style.transform = 'translateY(-100%)';
+                    } else if (currentScrollTop < lastScrollTop || currentScrollTop <= 50) {
+                        // 上にスクロール - ヘッダー表示
+                        header.style.transform = 'translateY(0)';
+                    }
                 }
             }
             
@@ -3274,7 +3799,7 @@
                 this.setAttribute('aria-expanded', !expanded);
                 
                 nav.classList.toggle('active');
-                headerBackdrop.classList.toggle('active');
+                if (headerBackdrop) headerBackdrop.classList.toggle('active');
                 
                 if (expanded) {
                     this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
@@ -3299,7 +3824,7 @@
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 768) {
                         nav.classList.remove('active');
-                        headerBackdrop.classList.remove('active');
+                        if (headerBackdrop) headerBackdrop.classList.remove('active');
                         hamburger.setAttribute('aria-expanded', 'false');
                         hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                     }
@@ -3359,7 +3884,7 @@
                         chatMessages.appendChild(loadingMsg);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                         
-                        // AIの応答内容
+                        // AIの応答内容 - タイプライター効果で表示速度を最適化
                         setTimeout(function() {
                             // ローディング削除
                             chatMessages.removeChild(loadingMsg);
@@ -3398,7 +3923,7 @@
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 15;
+                            const typingSpeed = 12; // 高速化
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -3418,7 +3943,7 @@
                                     }, 500);
                                 }
                             }, typingSpeed);
-                        }, 1000);
+                        }, 800); // ローディング表示時間を短縮
                     }
                 };
                 
@@ -3447,7 +3972,7 @@
                 // チャットボットを閉じる
                 if (chatbotWindow && chatbotWindow.classList.contains('active')) {
                     chatbotWindow.classList.remove('active');
-                    chatbotButton.setAttribute('aria-expanded', 'false');
+                    if (chatbotButton) chatbotButton.setAttribute('aria-expanded', 'false');
                 }
                 
                 // モバイルメニューを閉じる
@@ -3468,73 +3993,88 @@
         }
         
         // スクロールアニメーション
-        if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+        if (typeof gsap !== 'undefined') {
             // GSAPのScrollTriggerを使用
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // アニメーション要素
-            const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card');
-            
-            animElements.forEach((element, index) => {
-                // 要素タイプに応じたアニメーション
-                let animation;
-                let duration = 0.8;
-                let delay = index * 0.1;
+            if (typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
                 
-                if (element.classList.contains('section-header')) {
-                    animation = { y: 30, opacity: 0 };
-                    duration = 0.9;
-                } else if (element.classList.contains('prototype-step')) {
-                    animation = { x: -30, opacity: 0 };
-                    delay = index * 0.15;
-                } else if (element.classList.contains('benefit-card') || element.classList.contains('benefit-container-card')) {
-                    animation = { y: 40, opacity: 0, scale: 0.95 };
-                    delay = index * 0.15;
-                } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
-                    animation = { y: 40, opacity: 0, scale: 0.95 };
-                    delay = index * 0.15;
-                } else if (element.classList.contains('cta-content')) {
-                    animation = { scale: 0.95, opacity: 0 };
-                    duration = 1;
-                } else if (element.classList.contains('hero-badge')) {
-                    animation = { y: -20, opacity: 0 };
-                    duration = 0.7;
-                } else if (element.classList.contains('hero-title')) {
-                    animation = { y: 30, opacity: 0 };
-                    delay = 0.3;
-                } else if (element.classList.contains('hero-description')) {
-                    animation = { y: 30, opacity: 0 };
-                    delay = 0.5;
-                } else if (element.classList.contains('hero-buttons')) {
-                    animation = { y: 30, opacity: 0 };
-                    delay = 0.7;
-                } else if (element.classList.contains('hero-differentiators')) {
-                    animation = { y: 30, opacity: 0 };
-                    delay = 0.8;
-                } else {
-                    animation = { y: 30, opacity: 0 };
-                }
+                // アニメーション要素
+                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card');
                 
-                // モバイルでアニメーション時間短縮
-                if (window.innerWidth <= 768) {
-                    duration = duration * 0.8;
-                    delay = delay * 0.5;
-                }
-                
-                gsap.from(element, {
-                    ...animation,
-                    duration: duration,
-                    delay: delay,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: element,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
+                animElements.forEach((element, index) => {
+                    // 要素タイプに応じたアニメーション
+                    let animation;
+                    let duration = 0.7; // 高速化
+                    let delay = index * 0.08; // 遅延時間を短縮
+                    
+                    if (element.classList.contains('section-header')) {
+                        animation = { y: 25, opacity: 0 };
+                        duration = 0.8;
+                    } else if (element.classList.contains('prototype-step')) {
+                        animation = { x: -25, opacity: 0 };
+                        delay = index * 0.1;
+                    } else if (element.classList.contains('benefit-card') || element.classList.contains('benefit-container-card')) {
+                        animation = { y: 30, opacity: 0, scale: 0.95 };
+                        delay = index * 0.1;
+                    } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
+                        animation = { y: 30, opacity: 0, scale: 0.95 };
+                        delay = index * 0.1;
+                    } else if (element.classList.contains('cta-content')) {
+                        animation = { scale: 0.95, opacity: 0 };
+                        duration = 0.9;
+                    } else if (element.classList.contains('hero-badge')) {
+                        animation = { y: -15, opacity: 0 };
+                        duration = 0.6;
+                    } else if (element.classList.contains('hero-title')) {
+                        animation = { y: 25, opacity: 0 };
+                        delay = 0.2;
+                    } else if (element.classList.contains('hero-description')) {
+                        animation = { y: 25, opacity: 0 };
+                        delay = 0.4;
+                    } else if (element.classList.contains('hero-buttons')) {
+                        animation = { y: 25, opacity: 0 };
+                        delay = 0.6;
+                    } else if (element.classList.contains('hero-differentiators')) {
+                        animation = { y: 25, opacity: 0 };
+                        delay = 0.5;
+                    } else {
+                        animation = { y: 25, opacity: 0 };
                     }
+                    
+                    // モバイルでアニメーション時間短縮
+                    if (window.innerWidth <= 768) {
+                        duration = duration * 0.7;
+                        delay = delay * 0.5;
+                    }
+                    
+                    gsap.from(element, {
+                        ...animation,
+                        duration: duration,
+                        delay: delay,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 90%', // 少し手前で発火
+                            toggleActions: 'play none none none'
+                        }
+                    });
                 });
-            });
+            } else {
+                // ScrollTriggerがない場合はgsapだけで
+                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card');
+                
+                animElements.forEach((element, index) => {
+                    gsap.from(element, {
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.7,
+                        delay: index * 0.1 % 0.5, // 遅延の上限を設定
+                        ease: "power2.out"
+                    });
+                });
+            }
         } else {
-            // ScrollTriggerがない場合のフォールバック
+            // GSAPがない場合のフォールバック
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -3579,14 +4119,15 @@
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x3A5FEB,
             transparent: true,
-            opacity: 0.1,
+            opacity: 0.12,
             wireframe: true
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
-        // パーティクル設定（数を増加）
-        const particlesCount = window.innerWidth < 768 ? 500 : 1000;
+        // パーティクル設定（数をデバイスに応じて最適化）
+        const isMobile = window.innerWidth < 768;
+        const particlesCount = isMobile ? 300 : 700; // モバイルでは少なめに
         const particles = [];
         
         // パーティクルの形状（キューブ、球体、ピラミッド）
@@ -3659,9 +4200,9 @@
             scene.add(particle);
         }
         
-        // 接続線（データストリーム）
+        // 接続線（データストリーム）- パフォーマンス最適化
         const connectionLines = [];
-        const lineCount = 50;
+        const lineCount = isMobile ? 30 : 50; // モバイルでは少なめに
         
         for (let i = 0; i < lineCount; i++) {
             const geometry = new THREE.BufferGeometry();
@@ -3685,6 +4226,15 @@
         let targetX = 0;
         let targetY = 0;
         
+        // モバイルでのパフォーマンス最適化
+        const isLowPerfDevice = 
+            isMobile || 
+            (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) ||
+            window.navigator.userAgent.indexOf("Android") > -1;
+        
+        // モバイルの場合、カメラの動きを制限
+        const cameraMovementFactor = isLowPerfDevice ? 0.01 : 0.02;
+        
         // マウス追跡
         document.addEventListener('mousemove', function(event) {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
@@ -3699,15 +4249,23 @@
             }
         });
         
+        // フレームスキップカウンター (パフォーマンス最適化)
+        let frameCount = 0;
+        
         // アニメーション
         const animate = () => {
             requestAnimationFrame(animate);
             
+            // ローエンドデバイスでフレームスキップ
+            if (isLowPerfDevice && frameCount++ % 2 !== 0) {
+                return;
+            }
+            
             // カメラの滑らかな動き
             targetX = mouseX * 15;
             targetY = mouseY * 15;
-            camera.position.x += (targetX - camera.position.x) * 0.02;
-            camera.position.y += (targetY - camera.position.y) * 0.02;
+            camera.position.x += (targetX - camera.position.x) * cameraMovementFactor;
+            camera.position.y += (targetY - camera.position.y) * cameraMovementFactor;
             camera.lookAt(scene.position);
             
             // コアの回転
@@ -3737,31 +4295,35 @@
                 if (Math.abs(p.mesh.position.z) > 60) p.velocity.z *= -1;
             });
             
-            // 接続線のアニメーション
-            connectionLines.forEach((line, index) => {
-                const positions = line.geometry.attributes.position.array;
-                
-                // ランダムに2つのパーティクルを選んで接続
-                const p1 = particles[Math.floor(Math.random() * particles.length)];
-                const p2 = particles[Math.floor(Math.random() * particles.length)];
-                
-                if (p1 && p2) {
-                    const distance = p1.mesh.position.distanceTo(p2.mesh.position);
+            // 接続線のアニメーション（パフォーマンス最適化）
+            if (!isLowPerfDevice || frameCount % 3 === 0) {
+                connectionLines.forEach((line, index) => {
+                    const positions = line.geometry.attributes.position.array;
                     
-                    // 近いパーティクル同士を接続
-                    if (distance < 20) {
-                        positions[0] = p1.mesh.position.x;
-                        positions[1] = p1.mesh.position.y;
-                        positions[2] = p1.mesh.position.z;
-                        positions[3] = p2.mesh.position.x;
-                        positions[4] = p2.mesh.position.y;
-                        positions[5] = p2.mesh.position.z;
+                    // ランダムに2つのパーティクルを選んで接続
+                    const p1Index = Math.floor(Math.random() * particles.length);
+                    const p2Index = Math.floor(Math.random() * particles.length);
+                    const p1 = particles[p1Index];
+                    const p2 = particles[p2Index];
+                    
+                    if (p1 && p2) {
+                        const distance = p1.mesh.position.distanceTo(p2.mesh.position);
                         
-                        line.geometry.attributes.position.needsUpdate = true;
-                        line.material.opacity = 0.1 * (1 - distance / 20);
+                        // 近いパーティクル同士を接続
+                        if (distance < 20) {
+                            positions[0] = p1.mesh.position.x;
+                            positions[1] = p1.mesh.position.y;
+                            positions[2] = p1.mesh.position.z;
+                            positions[3] = p2.mesh.position.x;
+                            positions[4] = p2.mesh.position.y;
+                            positions[5] = p2.mesh.position.z;
+                            
+                            line.geometry.attributes.position.needsUpdate = true;
+                            line.material.opacity = 0.1 * (1 - distance / 20);
+                        }
                     }
-                }
-            });
+                });
+            }
             
             renderer.render(scene, camera);
         };
@@ -3769,13 +4331,18 @@
         animate();
         
         // リサイズイベント処理
+        let resizeTimeout;
         window.addEventListener('resize', function() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            // デバウンス処理
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            }, 250);
         });
     }
-</script>
+    </script>
 </body>
 </html>
