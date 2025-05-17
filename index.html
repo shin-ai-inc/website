@@ -148,13 +148,13 @@
         overflow: hidden;
     }
     
-        /* ハンバーガーボタン - モバイルUI/UX改善 */
+    /* ハンバーガーボタン - モバイルUI/UX改善 */
     .hamburger-visible {
         display: none; /* 初期状態で非表示 */
         position: fixed;
         top: 15px;
         right: 15px;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.7); /* 半透明に調整 */
         border-radius: 10px;
         width: 40px;
         height: 40px;
@@ -261,7 +261,7 @@
         --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         /* 新しいアクセントグラデーション - CTAテキスト用に最適化 */
-        --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
+        --gradient-accent-text: linear-gradient(135deg, #FF6B00, #FF3A30); /* さらに鮮やかに調整 */
         
         /* シャドウ */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -327,9 +327,9 @@
         --z-max: 999;
         
         /* アニメーション時間 - 高速化 */
-        --transition-fast: 0.15s; /* 高速化 */
-        --transition-normal: 0.25s; /* 高速化 */
-        --transition-slow: 0.4s; /* 高速化 */
+        --transition-fast: 0.13s; /* さらに高速化 */
+        --transition-normal: 0.22s; /* さらに高速化 */
+        --transition-slow: 0.35s; /* さらに高速化 */
     }
 
     /* ========================================================
@@ -560,7 +560,7 @@
     }
     
     .text-accent {
-        background: var(--gradient-accent);
+        background: var(--gradient-accent-text); /* より鮮やかなグラデーションに変更 */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -810,21 +810,30 @@
             display: none; /* モバイルではハンバーガーボタン非表示 */
         }
         
+        .header-inner {
+            padding: 0;
+            justify-content: center; /* ロゴを中央に配置 */
+        }
+        
+        .logo {
+            margin: 0; /* ロゴのマージンをリセット */
+            padding-left: 1rem; /* 左側に少しスペースを追加 */
+        }
+        
         .hamburger-visible {
             display: flex; /* 常に表示 */
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            box-shadow: none;
-            color: var(--dark);
+            position: absolute; /* 絶対配置に変更 */
+            top: 50%; /* 垂直中央 */
+            right: 1rem; /* 右端から少し離す */
+            transform: translateY(-50%); /* 垂直中央調整 */
+            background: rgba(255, 255, 255, 0.7); /* 半透明背景 */
         }
         
         .nav {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 70%; /* 画面の1/3程度の面積に調整 */
+            width: 70%; /* 画面の70%の幅に設定 */
             height: 100vh;
             background: var(--white);
             flex-direction: column;
@@ -2379,7 +2388,7 @@
     }
     
     /* ========================================================
-    ▼ フッター Component
+    ▼ フッター Component - モバイル表示を最適化
     ======================================================== */
     .footer {
         background: var(--dark);
@@ -2608,612 +2617,650 @@
     }
     
     @media (max-width: 768px) {
-        .footer {
-            padding: 4rem 0 2rem;
-        }
-        
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        .footer-bottom {
-            flex-direction: column;
-            text-align: center;
-        }
-        
-        .footer-links-inline {
-            justify-content: center;
-            gap: 1rem;
-        }
+    .footer {
+        padding: 3rem 0 1.5rem; /* パディングを減らしてコンパクトに */
     }
     
-    /* ========================================================
-    ▼ チャットボット Component
-    ======================================================== */
-    .chatbot {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: var(--z-max);
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .chatbot-button {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: var(--white);
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        box-shadow: var(--shadow-lg);
-        cursor: pointer;
-        position: relative;
-        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        z-index: 2;
-        overflow: hidden;
-    }
-    
-    .chatbot-button i {
-        position: relative;
-        z-index: 2;
-        transition: transform var(--transition-normal) ease;
-    }
-    
-    .chatbot-button::before {
-        content: '';
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        bottom: -8px;
-        left: -8px;
-        border-radius: 50%;
-        background: rgba(58, 95, 235, 0.3);
-        animation: pulse 2s infinite;
-        z-index: -1;
-    }
-    
-    .chatbot-button::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-accent);
-        opacity: 0;
-        transition: opacity var(--transition-normal) ease;
-        z-index: 0;
-    }
-    
-    .chatbot-button:hover {
-        transform: scale(1.1);
-        box-shadow: var(--shadow-xl);
-    }
-    
-    .chatbot-button:hover::after {
-        opacity: 1;
-    }
-    
-    .chatbot-button:hover i {
-        transform: scale(1.2);
-    }
-    
-    .chatbot-window {
-        position: absolute;
-        bottom: 80px;
-        right: 0;
-        width: 360px;
-        height: 500px;
-        background: var(--white);
-        border-radius: 20px;
-        box-shadow: var(--shadow-xl);
-        overflow: hidden;
-        display: none;
+    .footer-bottom {
         flex-direction: column;
-        opacity: 0;
-        transform: scale(0.9);
-        transform-origin: bottom right;
-        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        z-index: var(--z-popover);
-        border: 1px solid rgba(0, 0, 0, 0.05);
+        text-align: center;
+        padding-top: 1.5rem; /* パディングを減らす */
     }
     
-    .chatbot-window.active {
-        display: flex;
-        opacity: 1;
-        transform: scale(1);
-    }
-    
-    .chatbot-header {
-        background: var(--gradient-primary);
-        color: var(--white);
-        padding: 1rem 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .chatbot-header h3 {
-        margin: 0;
-        font-size: 1.1rem;
-        font-weight: var(--font-weight-semibold);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        color: var(--white);
-    }
-    
-    .chatbot-close {
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
+    .footer-links-inline {
         justify-content: center;
-        color: var(--white);
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all var(--transition-normal) ease;
-    }
-    
-    .chatbot-close:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: rotate(90deg);
-    }
-    
-    .chatbot-messages {
-        flex: 1;
-        padding: 1.5rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
         gap: 1rem;
     }
     
-    .chat-message {
-        max-width: 80%;
-        padding: 0.75rem 1rem;
-        border-radius: 15px;
-        line-height: 1.5;
+    /* フッターのテキストをコンパクトに */
+    .footer-heading {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-description {
         font-size: 0.95rem;
-        animation: fadeInMessage 0.3s ease-out forwards;
+        line-height: 1.6;
+        margin-bottom: 1rem;
     }
     
-    @keyframes fadeInMessage {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .footer-contact-item {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
     }
     
-    .bot {
-        border-bottom-left-radius: 3px;
-        background: var(--light-gray);
-        color: var(--dark);
-        align-self: flex-start;
+    .footer-links li {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ========================================================
+▼ チャットボット Component - 改善版
+======================================================== */
+.chatbot {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: var(--z-max);
+}
+
+.chatbot-button {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.chatbot-button i {
+    position: relative;
+    z-index: 2;
+    transition: transform var(--transition-normal) ease;
+}
+
+.chatbot-button::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -8px;
+    border-radius: 50%;
+    background: rgba(58, 95, 235, 0.3);
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+.chatbot-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity var(--transition-normal) ease;
+    z-index: 0;
+}
+
+.chatbot-button:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.chatbot-button:hover::after {
+    opacity: 1;
+}
+
+.chatbot-button:hover i {
+    transform: scale(1.2);
+}
+
+.chatbot-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 360px;
+    height: 500px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transform: scale(0.9);
+    transform-origin: bottom right;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: var(--z-popover);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chatbot-window.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.chatbot-header {
+    background: var(--gradient-primary);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--white);
+}
+
+.chatbot-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-normal) ease;
+}
+
+.chatbot-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-message {
+    max-width: 80%;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    animation: fadeInMessage 0.3s ease-out forwards;
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bot {
+    border-bottom-left-radius: 3px;
+    background: var(--light-gray);
+    color: var(--dark);
+    align-self: flex-start;
+}
+
+.user {
+    border-bottom-right-radius: 3px;
+    background: var(--primary);
+    color: var(--white);
+    align-self: flex-end;
+}
+
+.chatbot-input {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chatbot-input input {
+    flex: 1;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-full);
+    outline: none;
+    transition: all var(--transition-normal) ease;
+}
+
+.chatbot-input input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+}
+
+.chatbot-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* モバイルチャットボット最適化 */
+@media (max-width: 768px) {
+    .chatbot-window {
+        position: fixed;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 70%; /* 70%に変更 - 改善ポイント */
+        border-radius: 20px 20px 0 0;
+        transform-origin: bottom center;
     }
     
-    .user {
-        border-bottom-right-radius: 3px;
-        background: var(--primary);
-        color: var(--white);
-        align-self: flex-end;
-    }
-    
-    .chatbot-input {
-        display: flex;
-        align-items: center;
+    .chatbot-messages {
         padding: 1rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* キーボード表示時も形が崩れない対応 */
+    .chatbot-input {
+        padding: 0.75rem;
+        background: var(--white);
+        position: relative;
+        z-index: 10;
+        min-height: 60px; /* 最小高さを設定 */
+        box-sizing: border-box;
     }
     
     .chatbot-input input {
-        flex: 1;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 0.75rem 1rem;
-        border-radius: var(--radius-full);
-        outline: none;
-        transition: all var(--transition-normal) ease;
-    }
-    
-    .chatbot-input input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+        height: 42px;
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 21px; /* 高さの半分の値 */
     }
     
     .chatbot-send {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: var(--white);
-        border: none;
-        margin-left: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all var(--transition-normal) ease;
-        position: relative;
-        overflow: hidden;
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 21px; /* 高さの半分の値 */
+        margin-left: 8px; /* 間隔を調整 */
     }
     
-    /* モバイルチャットボット最適化 */
-    @media (max-width: 768px) {
-        .chatbot-window {
-            position: fixed;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 80%; /* 80%に変更 - 改善ポイント */
-            border-radius: 20px 20px 0 0;
-            transform-origin: bottom center;
-        }
-        
-        .chatbot-messages {
-            padding: 1rem;
-        }
-        
-        /* キーボード表示時も形が崩れない対応 */
-        .chatbot-input {
-            padding: 0.75rem;
-            background: var(--white);
-            position: relative;
-            z-index: 10;
-        }
-        
-        .chatbot-input input {
-            height: 42px;
-            padding: 0.5rem 1rem;
-            font-size: 0.95rem;
-        }
-        
-        .chatbot-send {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
-        }
-        
-        /* スマホでのチャット表示領域を確保 */
-        .chat-message {
-            max-width: 85%;
-            font-size: 0.9rem;
-            padding: 0.6rem 0.9rem;
-        }
+    /* スマホでのチャット表示領域を確保 */
+    .chat-message {
+        max-width: 85%;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.9rem;
     }
     
-    .chatbot-send::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-accent);
-        opacity: 0;
-        transition: opacity var(--transition-normal) ease;
-        z-index: 0;
+    /* iPhoneでの送信ボタンが途切れる問題を修正 */
+    .chatbot {
+        bottom: 20px;
+        right: 20px;
     }
-    
-    .chatbot-send i {
-        position: relative;
-        z-index: 1;
+}
+
+.chatbot-send::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity var(--transition-normal) ease;
+    z-index: 0;
+}
+
+.chatbot-send i {
+    position: relative;
+    z-index: 1;
+}
+
+.chatbot-send:hover {
+    transform: scale(1.1);
+}
+
+.chatbot-send:hover::before {
+    opacity: 1;
+}
+
+/* チャットボットローディングアニメーション */
+.loading-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loading-dots i {
+    font-size: 5px;
+    animation: dotPulse 1.5s infinite;
+}
+
+.loading-dots i:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots i:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
     }
-    
-    .chatbot-send:hover {
-        transform: scale(1.1);
-    }
-    
-    .chatbot-send:hover::before {
+    50% {
+        transform: scale(1.5);
         opacity: 1;
     }
-    
-    /* チャットボットローディングアニメーション */
-    .loading-dots {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
-    
-    .loading-dots i {
-        font-size: 5px;
-        animation: dotPulse 1.5s infinite;
-    }
-    
-    .loading-dots i:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-    
-    .loading-dots i:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-    
-    @keyframes dotPulse {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 0.4;
-        }
-        50% {
-            transform: scale(1.5);
-            opacity: 1;
-        }
-    }
-    
-    /* ========================================================
-    ▼ Back to Top ボタン Component - 改善版
-    ======================================================== */
+}
+
+/* ========================================================
+▼ Back to Top ボタン Component - 改善版
+======================================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    cursor: pointer;
+    z-index: var(--z-fixed);
+    transition: all var(--transition-normal) ease;
+    box-shadow: var(--shadow-md);
+    border: none;
+    overflow: hidden;
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top i {
+    position: relative;
+    z-index: 2;
+    transition: transform var(--transition-normal) ease;
+}
+
+.back-to-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity var(--transition-normal) ease;
+    z-index: 1;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.back-to-top:hover::before {
+    opacity: 1;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
     .back-to-top {
-        position: fixed;
-        bottom: 110px;
-        right: 30px;
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: var(--white);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px);
-        cursor: pointer;
-        z-index: var(--z-fixed);
-        transition: all var(--transition-normal) ease;
-        box-shadow: var(--shadow-md);
-        border: none;
-        overflow: hidden;
+        bottom: 90px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
     }
-    
-    .back-to-top.active {
+}
+
+/* ========================================================
+▼ アニメーション Component - 速度向上
+======================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
         opacity: 1;
-        visibility: visible;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(25px); /* 距離を短くして速度向上 */
+        opacity: 0;
+    }
+    to {
         transform: translateY(0);
-    }
-    
-    .back-to-top i {
-        position: relative;
-        z-index: 2;
-        transition: transform var(--transition-normal) ease;
-    }
-    
-    .back-to-top::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-accent);
-        opacity: 0;
-        transition: opacity var(--transition-normal) ease;
-        z-index: 1;
-    }
-    
-    .back-to-top:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .back-to-top:hover::before {
         opacity: 1;
     }
-    
-    .back-to-top:hover i {
-        transform: translateY(-2px);
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-25px); /* 距離を短くして速度向上 */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.7s ease forwards; /* アニメーション時間短縮 */
+}
+
+/* ========================================================
+▼ フォーカス状態の改善 Component
+======================================================== */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
+}
+
+/* キーボードナビゲーション中の視覚的フィードバック */
+.keyboard-focus *:focus {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
+}
+
+/* ========================================================
+▼ モバイル・デバイスごとの対応 Component
+======================================================== */
+/* タッチデバイス対応の最適化 */
+@media (hover: none) {
+    .btn:hover, .service-card:hover, .benefit-container-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-md);
     }
     
-    @media (max-width: 768px) {
-        .back-to-top {
-            bottom: 90px;
-            right: 20px;
-            width: 42px;
-            height: 42px;
-        }
+    .btn:active, .service-card:active, .benefit-container-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
     
-    /* ========================================================
-    ▼ アニメーション Component
-    ======================================================== */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-        }
-    }
-    
-    @keyframes slideInUp {
-        from {
-            transform: translateY(30px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideInDown {
-        from {
-            transform: translateY(-30px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 0.5;
-        }
-        50% {
-            transform: scale(1.2);
-            opacity: 0;
-        }
-    }
-    
-    .animate-in {
-        animation: fadeInUp 0.8s ease forwards;
-    }
-    
-    /* ========================================================
-    ▼ フォーカス状態の改善 Component
-    ======================================================== */
-    a:focus-visible, 
-    button:focus-visible, 
-    input:focus-visible, 
-    textarea:focus-visible,
-    select:focus-visible {
-        outline: 2px solid var(--primary);
-        outline-offset: 3px;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
-    }
-    
-    /* キーボードナビゲーション中の視覚的フィードバック */
-    .keyboard-focus *:focus {
-        outline: 2px solid var(--primary) !important;
-        outline-offset: 3px !important;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
-    }
-    
-    /* ========================================================
-    ▼ モバイル・デバイスごとの対応 Component
-    ======================================================== */
     /* タッチデバイス対応の最適化 */
-    @media (hover: none) {
-        .btn:hover, .service-card:hover, .benefit-container-card:hover {
-            transform: none;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn:active, .service-card:active, .benefit-container-card:active {
-            transform: scale(0.98);
-            transition: transform 0.1s ease;
-        }
-        
-        /* タッチデバイス対応の最適化 */
-        .differentiator-item:active .differentiator-icon {
-            color: var(--white);
-            background: var(--gradient-primary);
-        }
+    .differentiator-item:active .differentiator-icon {
+        color: var(--white);
+        background: var(--gradient-primary);
+    }
+}
+
+/* iPhoneシリーズ専用の調整 */
+@media only screen and (max-width: 428px) and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        -webkit-text-size-adjust: 100%;
     }
     
-    /* iPhoneシリーズ専用の調整 */
-    @media only screen and (max-width: 428px) and (-webkit-min-device-pixel-ratio: 2) {
-        body {
-            -webkit-text-size-adjust: 100%;
-        }
-        
-        .header {
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        
-        .hero-badge {
-            padding: 0.3rem 0.9rem;
-            font-size: 0.8rem;
-        }
-        
-        .hero-title {
-            margin-bottom: 1rem;
-        }
-        
-        .hero-description {
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .differentiator-item {
-            padding: 0 0.5rem;
-        }
-        
-        .differentiator-icon {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
-        }
-        
-        .service-title {
-            font-size: 1.2rem;
-        }
-        
-        .service-description, .benefit-container-card p, .mobile-card-description {
-            font-size: 0.95rem;
-        }
-        
-        .cta-button {
-            padding: 0.8rem 1.5rem;
-            font-size: 0.95rem;
-        }
-        
-        /* iPhoneでのスクロールパフォーマンス最適化 */
-        .orb {
-            opacity: 0.5;
-            transform: scale(0.8);
-        }
-        
-        /* ヘッダー領域サイズの調整 */
-        .header {
-            height: calc(var(--header-height-mobile) * 0.9);
-        }
-        
-        /* フッターサイズの調整 */
-        .footer {
-            padding: 3rem 0 1.5rem;
-        }
-        
-        .footer-grid {
-            gap: 1.5rem;
-        }
-        
-        /* サービスカードアイコンの視認性向上 */
-        .mobile-card-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.8rem;
-            border: 3px solid white;
-        }
+    .header {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
     
-    /* デスクトップのみ表示 */
-    @media (max-width: 768px) {
-        .hide-mobile {
-            display: none !important;
-        }
+    .hero-badge {
+        padding: 0.3rem 0.9rem;
+        font-size: 0.8rem;
     }
     
-    /* モバイルのみ表示 */
-    @media (min-width: 769px) {
-        .show-mobile {
-            display: none !important;
-        }
+    .hero-title {
+        margin-bottom: 1rem;
     }
-    </style>
+    
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .differentiator-item {
+        padding: 0 0.5rem;
+    }
+    
+    .differentiator-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .service-title {
+        font-size: 1.2rem;
+    }
+    
+    .service-description, .benefit-container-card p, .mobile-card-description {
+        font-size: 0.95rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    /* iPhoneでのスクロールパフォーマンス最適化 */
+    .orb {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+    
+    /* ヘッダー領域サイズの調整 */
+    .header {
+        height: calc(var(--header-height-mobile) * 0.9);
+    }
+    
+    /* フッターサイズの調整 - さらにコンパクトに */
+    .footer {
+        padding: 2.5rem 0 1rem;
+    }
+    
+    .footer-grid {
+        gap: 1.2rem;
+    }
+    
+    /* サービスカードアイコンの視認性向上 */
+    .mobile-card-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        border: 3px solid white;
+    }
+    
+    /* iPhoneでのチャットボット表示調整 */
+    .chatbot-input {
+        padding-bottom: env(safe-area-inset-bottom, 0.75rem);
+    }
+}
+
+/* デスクトップのみ表示 */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* モバイルのみ表示 */
+@media (min-width: 769px) {
+    .show-mobile {
+        display: none !important;
+    }
+}
+</style>
 </head>
 <body>
     <!-- ========================================================
@@ -4529,6 +4576,8 @@
                 if (Math.abs(p.mesh.position.y) > 50) p.mesh.position.y *= -0.9;
                 if (Math.abs(p.mesh.position.z) > 70) p.mesh.position.z *= -0.9;
             });
+            
+            
             
             // 接続線のアニメーション - 最適化
             const updateLineInterval = isMobile ? 5 : 3; // モバイルではさらに間引き
