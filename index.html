@@ -31,7 +31,7 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     
     <!-- ========================================================
-    ▼ リソース読み込み Component
+    ▼ リソース読み込み Component - パフォーマンス最適化
     ======================================================== -->
     <!-- フォント - パフォーマンス最適化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     
-    <!-- アニメーションライブラリ - 最適化版 -->
+    <!-- アニメーションライブラリ - 最適化版：非同期読み込み -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -92,16 +92,16 @@
     ▼ クリティカルパスCSS（高速初期表示のための最小限のスタイル）
     ======================================================== -->
     <style>
-    /* ページ読み込み中のフラッシュ防止 */
+    /* ページ読み込み中のフラッシュ防止 - 即時表示のための最適化 */
     html {
         visibility: hidden;
     }
     html.loaded {
         visibility: visible;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.2s ease; /* 高速化のため時間短縮 */
     }
     
-    /* プリローダースタイル */
+    /* プリローダースタイル - 高速化 */
     .page-loader {
         position: fixed;
         top: 0;
@@ -113,7 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease; /* 短縮 */
     }
     
     .page-loader.loaded {
@@ -127,7 +127,7 @@
         border: 3px solid rgba(58, 95, 235, 0.2);
         border-top-color: #3A5FEB;
         border-radius: 50%;
-        animation: spin 1s linear infinite;
+        animation: spin 0.8s linear infinite; /* アニメーション高速化 */
     }
     
     @keyframes spin {
@@ -163,6 +163,12 @@
         z-index: 1002;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         cursor: pointer;
+        transition: all 0.3s ease; /* ホバーエフェクト用 */
+    }
+    
+    .hamburger-visible:hover {
+        transform: scale(1.05); /* ホバー時の視覚的フィードバック強化 */
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
     }
     
     /* フッターのテキスト改行調整 */
@@ -184,6 +190,7 @@
         white-space: normal; /* 必要に応じて改行 */
     }
     
+    /* モバイル表示の最適化 - ヘッダーとヒーローの最初表示調整 */
     @media (max-width: 768px) {
         .header {
             height: 60px;
@@ -196,13 +203,9 @@
             display: flex; /* モバイルでは表示 */
         }
         
-        /* モバイルメニューの差別化ポイント表示調整 */
+        /* モバイルでもヒーローの差別化ポイントをデフォルト表示（改善）*/
         .hero-differentiators {
-            display: none; /* スクロール後に表示 */
-        }
-        
-        .hero-differentiators.visible {
-            display: flex;
+            display: flex; /* 常に表示するよう修正 */
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
@@ -246,7 +249,7 @@
         /* スクリーンショットから新しいグラデーション */
         --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
-        /* 新しいアクセントグラデーション */
+        /* 新しいアクセントグラデーション - CTAテキスト用に最適化 */
         --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
         
         /* シャドウ */
@@ -312,10 +315,10 @@
         --z-overlay: 90;
         --z-max: 999;
         
-        /* アニメーション時間 */
-        --transition-fast: 0.2s;
-        --transition-normal: 0.3s;
-        --transition-slow: 0.5s;
+        /* アニメーション時間 - 高速化 */
+        --transition-fast: 0.15s; /* 高速化 */
+        --transition-normal: 0.25s; /* 高速化 */
+        --transition-slow: 0.4s; /* 高速化 */
     }
 
     /* ========================================================
@@ -355,7 +358,7 @@
     a {
         text-decoration: none;
         color: var(--primary);
-        transition: all 0.3s ease;
+        transition: all var(--transition-fast) ease;
     }
     
     a:hover {
@@ -586,7 +589,7 @@
         -webkit-backdrop-filter: blur(10px);
         box-shadow: var(--shadow-header);
         height: var(--header-height);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
     
@@ -614,7 +617,7 @@
         font-size: 1.25rem;
         color: var(--dark);
         z-index: var(--z-elevate);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         margin-right: 2rem;
     }
     
@@ -638,7 +641,7 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .logo:hover .logo-icon img {
@@ -668,7 +671,7 @@
         position: relative;
         color: var(--dark);
         font-weight: var(--font-weight-medium);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         padding: 0.5rem 0;
         font-size: 0.9rem;
         letter-spacing: -0.01em;
@@ -683,7 +686,7 @@
         width: 0;
         height: 2px;
         background: var(--gradient-primary);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         border-radius: var(--radius-full);
     }
     
@@ -699,7 +702,7 @@
         margin-left: var(--space-2);
     }
     
-    /* ヘッダーボタン改善 */
+    /* ヘッダーボタン改善 - 視覚的フィードバック強化 */
     .btn-header-consultation {
         background: var(--gradient-primary);
         color: var(--white);
@@ -748,7 +751,7 @@
         z-index: 2;
     }
     
-    /* ハンバーガーメニュー改善 */
+    /* ハンバーガーメニュー改善 - 視覚的フィードバック強化 */
     .hamburger {
         display: none;
         background: none;
@@ -758,11 +761,12 @@
         cursor: pointer;
         padding: 0.5rem;
         z-index: var(--z-elevate);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .hamburger:hover {
         color: var(--primary);
+        transform: scale(1.05); /* 視覚的フィードバック強化 */
     }
     
     .hamburger:focus {
@@ -780,7 +784,7 @@
         -webkit-backdrop-filter: blur(4px);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         z-index: var(--z-drawer);
     }
     
@@ -789,7 +793,7 @@
         visibility: visible;
     }
     
-    /* モバイルメニュー改善 */
+    /* モバイルメニュー改善 - UI/UX強化 */
     @media (max-width: 768px) {
         .hamburger {
             display: block;
@@ -839,7 +843,7 @@
     }
     
     /* ========================================================
-    ▼ ボタン Component
+    ▼ ボタン Component - 視覚的フィードバック強化
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -848,7 +852,7 @@
         padding: 0.75rem 1.5rem;
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         text-align: center;
         cursor: pointer;
         position: relative;
@@ -949,7 +953,7 @@
         background: var(--gradient-primary);
         opacity: 0;
         z-index: -1;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
     }
     
     .btn-outline:hover {
@@ -974,7 +978,7 @@
     }
     
     .btn-icon-right i {
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-normal) ease;
     }
     
     .btn-icon-right:hover i {
@@ -989,7 +993,7 @@
     }
     
     /* ========================================================
-    ▼ ヒーローセクション Component
+    ▼ ヒーローセクション Component - 差別化ポイント表示改善
     ======================================================== */
     .hero {
         position: relative;
@@ -1055,7 +1059,7 @@
         opacity: 0;
     }
     
-    /* ヒーローセクション差別化ポイント */
+    /* ヒーローセクション差別化ポイント - 常に表示される改善版 */
     .hero-differentiators {
         display: flex;
         justify-content: center;
@@ -1086,7 +1090,7 @@
         font-size: 1.8rem;
         box-shadow: var(--shadow-md);
         color: var(--primary);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
     }
     
@@ -1381,7 +1385,7 @@
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
         font-weight: var(--font-weight-bold);
-        transition: color 0.3s ease;
+        transition: color var(--transition-normal) ease;
     }
     
     .prototype-step:hover .step-content h3 {
@@ -1397,7 +1401,7 @@
         padding: 0.2rem 0.8rem;
         background: rgba(58, 95, 235, 0.1);
         border-radius: var(--radius-full);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .prototype-step:hover .step-duration {
@@ -1449,7 +1453,7 @@
         width: 100%;
         height: 5px;
         background: var(--gradient-primary);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         z-index: 0;
     }
     
@@ -1487,7 +1491,7 @@
         font-size: 1.2rem;
         margin-bottom: 1rem;
         font-weight: var(--font-weight-bold);
-        transition: color 0.3s ease;
+        transition: color var(--transition-normal) ease;
     }
     
     .benefit-card:hover h4 {
@@ -1707,7 +1711,7 @@
         height: 100%;
         background: linear-gradient(0deg, rgba(15, 23, 42, 0.3), transparent);
         z-index: 1;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
     }
     
     .service-card:hover .service-image::before {
@@ -1756,7 +1760,7 @@
     
     .service-icon i {
         font-size: 1.8rem;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .service-card:hover .service-icon {
@@ -1781,7 +1785,7 @@
         background: var(--gradient-primary);
         margin: 0.8rem auto 0;
         border-radius: var(--radius-full);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .service-card:hover .service-title::after {
@@ -1806,7 +1810,7 @@
         font-weight: var(--font-weight-semibold);
         align-items: center;
         gap: 0.5rem;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .service-card:hover .service-link {
@@ -1814,7 +1818,7 @@
     }
     
     .service-link i {
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .service-link:hover i {
@@ -1873,7 +1877,7 @@
         box-shadow: var(--shadow-md);
         margin-bottom: 1.5rem;
         border: 1px solid rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         max-width: 350px;
         margin-left: auto;
         margin-right: auto;
@@ -1943,7 +1947,7 @@
         transform: translateX(-50%);
         box-shadow: var(--shadow-md);
         z-index: 3;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         border: 2px solid white;
     }
     
@@ -1978,7 +1982,7 @@
         font-weight: var(--font-weight-semibold);
         font-size: 0.9rem;
         margin-top: 0.5rem;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .mobile-card:active .mobile-card-link {
@@ -2019,7 +2023,7 @@
         width: 5px;
         height: 100%;
         background: var(--gradient-primary);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         z-index: 0;
     }
     
@@ -2063,7 +2067,7 @@
         color: var(--dark);
         position: relative;
         z-index: 1;
-        transition: color 0.3s ease;
+        transition: color var(--transition-normal) ease;
     }
     
     .benefit-container-card:hover h3 {
@@ -2083,7 +2087,7 @@
         background: var(--gradient-card);
         padding: 1.2rem;
         border-radius: var(--radius-md);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
         z-index: 1;
         border: 1px solid rgba(58, 95, 235, 0.05);
@@ -2197,8 +2201,9 @@
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
     
-    .cta-title .text-gradient {
-        background: var(--gradient-accent);
+    /* デザイン改善: アクセントテキストを背景が水色でも目立つようにする */
+    .cta-title .text-accent {
+        background: var(--gradient-accent-text); /* より明るく鮮明なグラデーション */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -2206,6 +2211,8 @@
         text-shadow: none;
         position: relative;
         z-index: 2;
+        /* テキストのエッジに薄い輪郭を追加して視認性向上 */
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
     }
     
     .cta-description {
@@ -2261,7 +2268,7 @@
         height: 100%;
         background: var(--gradient-accent);
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
         z-index: 0;
     }
     
@@ -2401,7 +2408,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
         overflow: hidden;
     }
@@ -2415,14 +2422,14 @@
         height: 100%;
         background: var(--gradient-primary);
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
         z-index: 0;
     }
     
     .footer-social-link i {
         position: relative;
         z-index: 1;
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-normal) ease;
     }
     
     .footer-social-link:hover {
@@ -2469,7 +2476,7 @@
     
     .footer-links a {
         color: rgba(255, 255, 255, 0.7);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
         padding-left: 0;
         display: inline-block;
@@ -2483,7 +2490,7 @@
         width: 0;
         height: 2px;
         background: var(--gradient-accent);
-        transition: width 0.3s ease;
+        transition: width var(--transition-normal) ease;
     }
     
     .footer-links a:hover {
@@ -2510,7 +2517,7 @@
     
     .footer-contact-item a {
         color: rgba(255, 255, 255, 0.7);
-        transition: color 0.3s ease;
+        transition: color var(--transition-normal) ease;
     }
     
     .footer-contact-item a:hover {
@@ -2539,7 +2546,7 @@
     
     .footer-links-inline a {
         color: rgba(255, 255, 255, 0.5);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
     }
     
@@ -2551,7 +2558,7 @@
         width: 0;
         height: 1px;
         background: var(--white);
-        transition: width 0.3s ease;
+        transition: width var(--transition-normal) ease;
     }
     
     .footer-links-inline a:hover {
@@ -2622,7 +2629,7 @@
     .chatbot-button i {
         position: relative;
         z-index: 2;
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-normal) ease;
     }
     
     .chatbot-button::before {
@@ -2647,7 +2654,7 @@
         height: 100%;
         background: var(--gradient-accent);
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
         z-index: 0;
     }
     
@@ -2721,7 +2728,7 @@
         color: var(--white);
         font-size: 0.9rem;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .chatbot-close:hover {
@@ -2785,7 +2792,7 @@
         padding: 0.75rem 1rem;
         border-radius: var(--radius-full);
         outline: none;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
     }
     
     .chatbot-input input:focus {
@@ -2805,7 +2812,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         position: relative;
         overflow: hidden;
     }
@@ -2819,7 +2826,7 @@
         height: 100%;
         background: var(--gradient-accent);
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
         z-index: 0;
     }
     
@@ -2887,7 +2894,7 @@
         transform: translateY(20px);
         cursor: pointer;
         z-index: var(--z-fixed);
-        transition: all 0.3s ease;
+        transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-md);
         border: none;
         overflow: hidden;
@@ -2902,7 +2909,7 @@
     .back-to-top i {
         position: relative;
         z-index: 2;
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-normal) ease;
     }
     
     .back-to-top::before {
@@ -2914,7 +2921,7 @@
         height: 100%;
         background: var(--gradient-accent);
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity var(--transition-normal) ease;
         z-index: 1;
     }
     
@@ -3406,7 +3413,7 @@
                         <div class="service-card">
                             <span class="service-card-badge">人気 No.1</span>
                             <div class="service-image">
-                                <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
+                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
                             </div>
                             <div class="service-icon-wrapper">
                                 <div class="service-icon">
@@ -3429,7 +3436,7 @@
                         <div class="service-card">
                             <span class="service-card-badge">カスタマイズ</span>
                             <div class="service-image">
-                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
+                                <img src="https://images.unsplash.com/photo-1560732488-7b5f5bb683ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発のイメージ" loading="lazy" width="800" height="400">
                             </div>
                             <div class="service-icon-wrapper">
                                 <div class="service-icon">
@@ -3452,7 +3459,7 @@
                         <div class="service-card">
                             <span class="service-card-badge">伴走支援</span>
                             <div class="service-image">
-                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入(DX/AX)コンサルティングのイメージ" loading="lazy" width="800" height="400">
                             </div>
                             <div class="service-icon-wrapper">
                                 <div class="service-icon">
@@ -3479,7 +3486,7 @@
                     <div class="mobile-card">
                         <div class="mobile-card-header">
                             <span class="mobile-card-badge">人気 No.1</span>
-                            <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
                             <div class="mobile-card-icon">
                                 <i class="fas fa-file-alt"></i>
                             </div>
@@ -3497,7 +3504,7 @@
                     <div class="mobile-card">
                         <div class="mobile-card-header">
                             <span class="mobile-card-badge">カスタマイズ</span>
-                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発" class="mobile-card-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1560732488-7b5f5bb683ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="オーダーメイドAIアプリケーション開発" class="mobile-card-image" loading="lazy">
                             <div class="mobile-card-icon">
                                 <i class="fas fa-robot"></i>
                             </div>
@@ -3515,7 +3522,7 @@
                     <div class="mobile-card">
                         <div class="mobile-card-header">
                             <span class="mobile-card-badge">伴走支援</span>
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入コンサルティング" class="mobile-card-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400&q=80" alt="AI導入コンサルティング" class="mobile-card-image" loading="lazy">
                             <div class="mobile-card-icon">
                                 <i class="fas fa-lightbulb"></i>
                             </div>
@@ -3624,6 +3631,8 @@
                 </div>
             </div>
         </section>
+    </main>
+
     <!-- ========================================================
     ▼ フッター Component
     ======================================================== -->
@@ -3709,7 +3718,7 @@
     </footer>
 
     <!-- ========================================================
-    ▼ チャットボット Component - 改善バージョン
+    ▼ チャットボット Component
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
@@ -3740,7 +3749,14 @@
     </div>
 
     <!-- ========================================================
-    ▼ メインスクリプト Component - 改善バージョン（モバイル対応強化）
+    ▼ Back to Top ボタン
+    ======================================================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="ページトップへ戻る">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ========================================================
+    ▼ メインスクリプト Component - パフォーマンス向上・最適化
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -3748,15 +3764,15 @@
         // ▼ 初期化処理 Component
         // ========================================================
         
-        // ページロード完了時にローディングを非表示
+        // ページロード完了時にローディングを非表示 - 高速化
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
             setTimeout(() => {
                 pageLoader.classList.add('loaded');
                 setTimeout(() => {
                     pageLoader.style.display = 'none';
-                }, 500);
-            }, 500);
+                }, 300); // 高速化のため時間短縮
+            }, 300); // 高速化のため時間短縮
         }
         
         // 可視性とアクセシビリティの改善
@@ -3821,34 +3837,40 @@
             });
         }
         
-        // スクロールイベント - 改善版
+        // スクロールイベント - 最適化版（リクエストアニメーションフレーム使用）
         let lastScrollTop = 0;
+        let ticking = false;
+        
         window.addEventListener('scroll', function() {
-            const currentScrollTop = window.scrollY;
-            
-            // ヘッダースクロール効果
-            if (header) {
-                if (currentScrollTop > 10) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-            
-            // モバイルUI/UX改善 - スクロール位置に基づいて差別化ポイントを表示
-            const heroDifferentiators = document.querySelector('.hero-differentiators');
-            if (heroDifferentiators && window.innerWidth <= 768) {
-                const heroSection = document.getElementById('hero');
-                const showDifferentiatorsOnScroll = function() {
-                    // ヒーローセクションの終わり付近でスクロールした時に表示
-                    if (window.scrollY > (heroSection.offsetHeight / 2)) {
-                        heroDifferentiators.classList.add('visible');
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    const currentScrollTop = window.scrollY;
+                    
+                    // ヘッダースクロール効果
+                    if (header) {
+                        if (currentScrollTop > 10) {
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
                     }
-                };
-                window.addEventListener('scroll', showDifferentiatorsOnScroll);
+                    
+                    // Back to Topボタン表示制御
+                    const backToTop = document.getElementById('back-to-top');
+                    if (backToTop) {
+                        if (currentScrollTop > 300) {
+                            backToTop.classList.add('active');
+                        } else {
+                            backToTop.classList.remove('active');
+                        }
+                    }
+                    
+                    lastScrollTop = currentScrollTop;
+                    ticking = false;
+                });
+                
+                ticking = true;
             }
-            
-            lastScrollTop = currentScrollTop;
         });
         
         // モバイルメニュー - 改善版
@@ -3917,7 +3939,7 @@
             });
         }
         
-        // チャットボット機能
+        // チャットボット機能 - パフォーマンス改善版
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
         const chatbotClose = document.getElementById('chatbot-close');
@@ -3942,7 +3964,7 @@
                 chatbotButton.setAttribute('aria-expanded', 'false');
             });
             
-            // チャット送信処理 - 改善版
+            // チャット送信処理 - 高速化版
             if (chatSend && chatInput && chatMessages) {
                 const handleSend = function() {
                     const message = chatInput.value.trim();
@@ -3990,14 +4012,14 @@
                                 response = responses[Math.floor(Math.random() * responses.length)];
                             }
                             
-                            // レスポンス追加（タイピング効果付き）
+                            // レスポンス追加（タイピング効果付き - 高速化）
                             const botMessage = document.createElement('div');
                             botMessage.classList.add('chat-message', 'bot');
                             botMessage.textContent = '';
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 12; // 高速化
+                            const typingSpeed = 8; // 高速化
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -4014,10 +4036,10 @@
                                         ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 500);
+                                    }, 300); // 高速化
                                 }
                             }, typingSpeed);
-                        }, 800);
+                        }, 400); // 高速化
                     }
                 };
                 
@@ -4083,103 +4105,104 @@
         });
         
         // ========================================================
-        // ▼ Three.jsパーティクル背景 Component - 内側球体を修正
+        // ▼ Three.jsパーティクル背景 Component - 最適化版
         // ========================================================
         
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
+            // Three.js関数を呼び出す - 新しいスクリプトで分離
             initThreeJSParticles();
         }
         
         // ========================================================
-        // ▼ アニメーション設定 Component
+        // ▼ アニメーション設定 Component - 高速化版
         // ========================================================
         
-        // スクロールアニメーション
+        // スクロールアニメーション - パフォーマンス最適化版
         if (typeof gsap !== 'undefined') {
-            // GSAPのScrollTriggerを使用
-            if (typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
-                
-                // アニメーション要素
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card, .mission-text');
-                
-                animElements.forEach((element, index) => {
-                    // 要素タイプに応じたアニメーション
-                    let animation;
-                    let duration = 0.4; // より高速化
-                    let delay = index * 0.03; // 遅延をほぼなしに
+            // GSAPのScrollTriggerを使用（遅延読み込み対応）
+            const initGSAPAnimations = function() {
+                if (typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
                     
-                    if (element.classList.contains('section-header')) {
-                        animation = { y: 20, opacity: 0 };
-                        duration = 0.5;
-                    } else if (element.classList.contains('prototype-step')) {
-                        animation = { x: -15, opacity: 0 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('benefit-card') || element.classList.contains('benefit-container-card')) {
-                        animation = { y: 15, opacity: 0, scale: 0.97 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
-                        animation = { y: 15, opacity: 0, scale: 0.97 };
-                        delay = index * 0.05;
-                    } else if (element.classList.contains('cta-content')) {
-                        animation = { scale: 0.97, opacity: 0 };
-                        duration = 0.5;
-                    } else if (element.classList.contains('hero-badge')) {
-                        animation = { y: -10, opacity: 0 };
-                        duration = 0.4;
-                    } else if (element.classList.contains('hero-title')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.1;
-                    } else if (element.classList.contains('hero-description')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.2;
-                    } else if (element.classList.contains('hero-buttons')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.3;
-                    } else if (element.classList.contains('hero-differentiators')) {
-                        animation = { y: 15, opacity: 0 };
-                        delay = 0.25;
-                    } else if (element.classList.contains('mission-text')) {
-                        animation = { y: 10, opacity: 0 };
-                        duration = 0.6;
-                    } else {
-                        animation = { y: 15, opacity: 0 };
-                    }
+                    // アニメーション要素 - モバイルではアニメーション数を削減
+                    const isMobile = window.innerWidth <= 768;
+                    const selectorList = isMobile ? 
+                        '.section-header, .prototype-step, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text' :
+                        '.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card, .mission-text';
                     
-                    // モバイルでさらに高速化
-                    if (window.innerWidth <= 768) {
-                        duration = duration * 0.7;
-                        delay = delay * 0.3;
-                    }
+                    const animElements = document.querySelectorAll(selectorList);
                     
-                    gsap.from(element, {
-                        ...animation,
-                        duration: duration,
-                        delay: delay,
-                        ease: "power1.out", // よりシンプルなイージング
-                        scrollTrigger: {
-                            trigger: element,
-                            start: 'top 95%', // より早く開始
-                            toggleActions: 'play none none none'
+                    animElements.forEach((element, index) => {
+                        // 要素タイプに応じたアニメーション
+                        let animation;
+                        let duration = 0.3; // より高速化
+                        let delay = index * 0.02; // 高速化のため遅延最小化
+                        
+                        if (element.classList.contains('section-header')) {
+                            animation = { y: 15, opacity: 0 };
+                            duration = 0.4;
+                        } else if (element.classList.contains('prototype-step')) {
+                            animation = { x: -10, opacity: 0 };
+                            delay = index * 0.03;
+                        } else if (element.classList.contains('benefit-card') || element.classList.contains('benefit-container-card')) {
+                            animation = { y: 10, opacity: 0, scale: 0.98 };
+                            delay = index * 0.03;
+                        } else if (element.classList.contains('service-card') || element.classList.contains('mobile-card')) {
+                            animation = { y: 10, opacity: 0, scale: 0.98 };
+                            delay = index * 0.03;
+                        } else if (element.classList.contains('cta-content')) {
+                            animation = { scale: 0.98, opacity: 0 };
+                            duration = 0.4;
+                        } else if (element.classList.contains('hero-badge')) {
+                            animation = { y: -8, opacity: 0 };
+                            duration = 0.3;
+                        } else if (element.classList.contains('hero-title')) {
+                            animation = { y: 10, opacity: 0 };
+                            delay = 0.08;
+                        } else if (element.classList.contains('hero-description')) {
+                            animation = { y: 10, opacity: 0 };
+                            delay = 0.15;
+                        } else if (element.classList.contains('hero-buttons')) {
+                            animation = { y: 10, opacity: 0 };
+                            delay = 0.2;
+                        } else if (element.classList.contains('hero-differentiators')) {
+                            animation = { y: 10, opacity: 0 };
+                            delay = 0.18;
+                        } else if (element.classList.contains('mission-text')) {
+                            animation = { y: 8, opacity: 0 };
+                            duration = 0.4;
+                        } else {
+                            animation = { y: 10, opacity: 0 };
                         }
+                        
+                        // モバイルでさらに高速化
+                        if (isMobile) {
+                            duration = duration * 0.6;
+                            delay = delay * 0.2;
+                        }
+                        
+                        gsap.from(element, {
+                            ...animation,
+                            duration: duration,
+                            delay: delay,
+                            ease: "power1.out", // よりシンプルなイージング
+                            scrollTrigger: {
+                                trigger: element,
+                                start: 'top 90%', // より早く開始
+                                toggleActions: 'play none none none'
+                            }
+                        });
                     });
-                });
-            } else {
-                // ScrollTriggerがない場合はgsapだけで
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text');
-                
-                animElements.forEach((element, index) => {
-                    gsap.from(element, {
-                        y: 30,
-                        opacity: 0,
-                        duration: 0.7,
-                        delay: index * 0.1 % 0.5, // 遅延の上限を設定
-                        ease: "power2.out"
-                    });
-                });
-            }
+                } else {
+                    // ScrollTriggerが読み込まれていない場合は500ms後に再試行
+                    setTimeout(initGSAPAnimations, 500);
+                }
+            };
+            
+            // アニメーション初期化
+            initGSAPAnimations();
         } else {
-            // GSAPがない場合のフォールバック
+            // GSAPがない場合のフォールバック - IntersectionObserver
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -4198,9 +4221,10 @@
         }
     });
     
-    // Three.jsパーティクルエフェクト - 内側球体を修正（球形を維持）
+    // Three.jsパーティクルエフェクト - 高速化版（低スペックモバイル対応）
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
+        const isMobile = window.innerWidth < 768;
         
         // シーン設定
         const scene = new THREE.Scene();
@@ -4209,18 +4233,18 @@
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 50;
         
-        // レンダラー設定
+        // レンダラー設定 - モバイルでは解像度を下げてパフォーマンス向上
         const renderer = new THREE.WebGLRenderer({ 
             alpha: true, 
-            antialias: true,
+            antialias: !isMobile, // モバイルではアンチエイリアスを無効化
             powerPreference: 'high-performance'
         });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
         container.appendChild(renderer.domElement);
         
-        // 中心の球体（デジタルコア - サマーウォーズ風）
-        const coreGeometry = new THREE.IcosahedronGeometry(6, 2);
+        // 中心の球体
+        const coreGeometry = new THREE.IcosahedronGeometry(6, isMobile ? 1 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x4A8FFF,
             transparent: true,
@@ -4230,7 +4254,7 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
-        // 装飾用の内側コア - 改善：球形を維持（楕円形ではなく）
+        // 装飾用の内側コア
         const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
@@ -4241,18 +4265,18 @@
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
         
-        // パーティクル設定（サマーウォーズ風デジタル空間）
-        const particlesCount = window.innerWidth < 768 ? 500 : 1000;
+        // パーティクル設定 - モバイルでは数を削減
+        const particlesCount = isMobile ? 300 : 800;
         const particles = [];
         
-        // パーティクルの形状（立方体、球体、ピラミッド）
+        // パーティクルの形状
         const geometries = [
             new THREE.BoxGeometry(0.12, 0.12, 0.12),
             new THREE.SphereGeometry(0.06, 8, 8),
             new THREE.TetrahedronGeometry(0.1, 0)
         ];
         
-        // カラーパレット（サマーウォーズ風 - 青/白/緑系）
+        // カラーパレット
         const colors = [
             0x4A8FFF, // 明るい青
             0x3A5FEB, // 青
@@ -4262,13 +4286,11 @@
             0xB4F2FF  // 水色
         ];
         
-        // パーティクル作成
+        // パーティクル作成 - 最適化版
         for (let i = 0; i < particlesCount; i++) {
-            // 形状をランダム選択
             const geometryIndex = Math.floor(Math.random() * geometries.length);
             const geometry = geometries[geometryIndex].clone();
             
-            // カラーをランダム選択（青/白系を多めに）
             const colorIndex = Math.floor(Math.random() * colors.length);
             const material = new THREE.MeshBasicMaterial({ 
                 color: colors[colorIndex],
@@ -4276,10 +4298,8 @@
                 opacity: 0.3 + Math.random() * 0.5
             });
             
-            // パーティクルメッシュ作成
             const particle = new THREE.Mesh(geometry, material);
             
-            // サマーウォーズ風の初期配置（より立体的な空間分布）
             const radius = 15 + Math.random() * 40;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
@@ -4288,12 +4308,10 @@
             particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
             particle.position.z = radius * Math.cos(phi);
             
-            // 初期回転
             particle.rotation.x = Math.random() * Math.PI * 2;
             particle.rotation.y = Math.random() * Math.PI * 2;
             particle.rotation.z = Math.random() * Math.PI * 2;
             
-            // パーティクルのパラメータを保存（より複雑な軌道運動）
             particles.push({
                 mesh: particle,
                 velocity: {
@@ -4310,7 +4328,7 @@
                     speed: 0.0001 + Math.random() * 0.0004,
                     radius: radius,
                     angle: Math.random() * Math.PI * 2,
-                    yFactor: Math.random() * 2 - 1 // Y軸変化の係数
+                    yFactor: Math.random() * 2 - 1
                 },
                 pulse: {
                     speed: 0.01 + Math.random() * 0.02,
@@ -4321,16 +4339,15 @@
             scene.add(particle);
         }
         
-        // 接続線（サマーウォーズ風データストリーム - より繊細に）
+        // 接続線 - モバイルでは数を削減
         const connectionLines = [];
-        const lineCount = 25;
+        const lineCount = isMobile ? 10 : 25;
         
         for (let i = 0; i < lineCount; i++) {
             const geometry = new THREE.BufferGeometry();
             const vertices = new Float32Array(6);
             geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
             
-            // 青みがかった線カラー
             const material = new THREE.LineBasicMaterial({
                 color: 0x4A8FFF,
                 transparent: true,
@@ -4348,24 +4365,44 @@
         let targetX = 0;
         let targetY = 0;
         
-        // マウス追跡
-        document.addEventListener('mousemove', function(event) {
+        // マウス追跡 - パフォーマンス最適化
+        const handleMouseMove = function(event) {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        };
+        
+        // スロットリング関数
+        let throttleTimeout;
+        const throttle = function(callback, limit) {
+            if (!throttleTimeout) {
+                throttleTimeout = setTimeout(function() {
+                    callback();
+                    throttleTimeout = null;
+                }, limit);
+            }
+        };
+        
+        // スロットリングされたマウスムーブハンドラ
+        document.addEventListener('mousemove', function(event) {
+            throttle(function() {
+                handleMouseMove(event);
+            }, 25); // 40fps相当
         });
         
-        // タッチ追跡
+        // タッチ追跡 - パフォーマンス最適化
         document.addEventListener('touchmove', function(event) {
             if (event.touches.length > 0) {
-                mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+                throttle(function() {
+                    mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+                }, 50); // タッチデバイスはさらに制限
             }
         });
         
         // 時間変数
         let time = 0;
         
-        // アニメーション
+        // アニメーション - パフォーマンス最適化
         const animate = () => {
             requestAnimationFrame(animate);
             time += 0.01;
@@ -4377,61 +4414,59 @@
             camera.position.y += (targetY - camera.position.y) * 0.02;
             camera.lookAt(scene.position);
             
-            // コアのアニメーション（サマーウォーズ風の脈動）
+            // コアのアニメーション
             core.rotation.y += 0.0015;
             core.rotation.x += 0.0007;
             const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
-            // 内側コアの逆回転 - 改善: 球形を維持
+            // 内側コアの逆回転
             innerCore.rotation.y -= 0.002;
             innerCore.rotation.z += 0.001;
             const innerScalePulse = Math.sin(time * 0.7) * 0.1 + 1;
-            innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse); // 全て同じ値で球形を維持
+            innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
             
-            // パーティクルアニメーション（サマーウォーズ風の美しい動き）
+            // パーティクルアニメーション - モバイルではスキップレートを導入
+            const skipRate = isMobile ? 2 : 1; // モバイルでは半分のパーティクルのみ更新
+            
             particles.forEach((p, index) => {
-                // より複雑な軌道運動
+                // モバイル最適化: 一部のパーティクルのみを更新
+                if (isMobile && index % skipRate !== 0) return;
+                
                 p.orbit.angle += p.orbit.speed;
                 
-                // 楕円軌道的な動き
                 const orbitX = p.orbit.radius * Math.cos(p.orbit.angle);
                 const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle);
                 const orbitY = p.orbit.radius * 0.5 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
                 
-                // 波形的な変動を加える
                 const waveX = Math.sin(time + index * 0.1) * 1.5;
                 const waveY = Math.cos(time * 0.7 + index * 0.2) * 1.2;
                 const waveZ = Math.sin(time * 0.5 + index * 0.15) * 1.8;
                 
-                // 位置更新
                 p.mesh.position.x = orbitX + p.velocity.x * waveX;
                 p.mesh.position.y = orbitY + p.velocity.y * waveY;
                 p.mesh.position.z = orbitZ + p.velocity.z * waveZ;
                 
-                // サイズの呼吸（より生命感）
                 const sizePulse = Math.sin(time * p.pulse.speed + index) * p.pulse.size + 1;
                 p.mesh.scale.set(sizePulse, sizePulse, sizePulse);
                 
-                // 自転
                 p.mesh.rotation.x += p.rotation.x;
                 p.mesh.rotation.y += p.rotation.y;
                 p.mesh.rotation.z += p.rotation.z;
                 
-                // 範囲外に出たら反対側から再登場
                 if (Math.abs(p.mesh.position.x) > 70) p.mesh.position.x *= -0.9;
                 if (Math.abs(p.mesh.position.y) > 50) p.mesh.position.y *= -0.9;
                 if (Math.abs(p.mesh.position.z) > 70) p.mesh.position.z *= -0.9;
             });
             
-            // 接続線のアニメーション - サマーウォーズ風
+            // 接続線のアニメーション - 最適化
+            const updateLineInterval = isMobile ? 5 : 3; // モバイルではさらに間引き
+            
             connectionLines.forEach((line, index) => {
-                // フレーム間引きで流動感を維持しながら負荷軽減
-                if (index % 3 !== Math.floor(time * 5) % 3) return;
+                if (index % updateLineInterval !== Math.floor(time * 5) % updateLineInterval) return;
                 
                 const positions = line.geometry.attributes.position.array;
                 
-                // 近くのパーティクルをペアで選択してより自然な接続
                 const p1Index = Math.floor(Math.random() * particles.length);
                 let p2Index = (p1Index + 1 + Math.floor(Math.random() * 20)) % particles.length;
                 
@@ -4441,7 +4476,6 @@
                 if (p1 && p2) {
                     const distance = p1.mesh.position.distanceTo(p2.mesh.position);
                     
-                    // より短い距離での接続（サマーウォーズのデジタル空間のように）
                     if (distance < 15) {
                         positions[0] = p1.mesh.position.x;
                         positions[1] = p1.mesh.position.y;
@@ -4452,7 +4486,6 @@
                         
                         line.geometry.attributes.position.needsUpdate = true;
                         
-                        // 時間変化も加えた透明度変化（流れる感覚）
                         const opacity = 0.03 * (1 - distance / 15) * (0.7 + 0.3 * Math.sin(time * 2 + index));
                         line.material.opacity = opacity;
                     } else {
@@ -4464,14 +4497,19 @@
             renderer.render(scene, camera);
         };
         
+        // アニメーション開始
         animate();
         
-        // リサイズイベント処理
+        // リサイズイベント処理 - スロットリング適用
+        let resizeTimeout;
         window.addEventListener('resize', function() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
+            }, 250);
         });
     }
     </script>
