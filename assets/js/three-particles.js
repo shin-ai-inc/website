@@ -381,9 +381,6 @@ function initThreeJSParticles() {
     };
 }
 
-// グローバルスコープで関数を利用可能に
-window.initThreeJSParticles = initThreeJSParticles;
-
 // DOMContentLoadedでThree.jsパーティクルエフェクトを初期化
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
