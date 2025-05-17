@@ -136,7 +136,7 @@
         }
     }
     
-    /* モバイルロゴトリガー - モバイルUI/UX改善 */
+    /* モバイルロゴトリガー - 改善版 */
     .mobile-logo-trigger {
         position: fixed;
         top: 15px;
@@ -146,7 +146,7 @@
         height: 40px;
         background: rgba(255, 255, 255, 0.95);
         border-radius: 10px;
-        display: none; /* デスクトップでは非表示 */
+        display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
@@ -154,21 +154,31 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
-    /* ハンバーガーボタン - モバイルUI/UX改善 */
-    .hamburger-visible {
-        display: none; /* 初期状態で非表示 */
+    /* ヘッダー初期設定 - 改善版 */
+    .header {
         position: fixed;
-        top: 15px;
-        right: 15px;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 10px;
-        width: 40px;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-        z-index: 1002;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        height: 72px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    /* Three.jsパーティクルコンテナ */
+    #three-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3;
+        pointer-events: none;
+        overflow: hidden;
     }
     
     @media (max-width: 768px) {
@@ -180,20 +190,22 @@
         }
         
         .mobile-logo-trigger {
-            display: flex; /* モバイルでは表示 */
-        }
-        
-        /* モバイルメニューの差別化ポイント表示調整 */
-        .hero-differentiators {
-            display: none; /* スクロール後に表示 */
-        }
-        
-        .hero-differentiators.visible {
             display: flex;
-            flex-direction: column;
+        }
+        
+        .hamburger-visible {
+            display: none; /* 初期状態で非表示 */
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
             align-items: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0 2rem;
+            justify-content: center;
+            z-index: 1002;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
     }
     </style>
@@ -203,10 +215,10 @@
     ======================================================== -->
     <style>
     /* ========================================================
-    ▼ 変数定義 Component - カラーパレット - 鮮やかなグラデーション
+    ▼ 変数定義 Component - カラーパレット
     ======================================================== */
     :root {
-        /* 主要カラー - 改善版 */
+        /* 主要カラー */
         --primary: #3A5FEB;
         --primary-dark: #2C49C7;
         --primary-light: #5B7BFF;
@@ -221,7 +233,7 @@
         --light-gray: #f8fafc;
         --white: #ffffff;
         
-        /* グラデーション - 鮮やかなバージョンに更新 */
+        /* グラデーション - 視覚的深み */
         --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
         --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
         --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
@@ -230,11 +242,6 @@
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
         --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
-        /* スクリーンショットから新しいグラデーション */
-        --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
-        --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
-        /* 新しいアクセントグラデーション */
-        --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
         
         /* シャドウ */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -559,7 +566,7 @@
     }
     
     /* ========================================================
-    ▼ ヘッダー Component - 改善バージョン（バランス調整）
+    ▼ ヘッダー Component
     ======================================================== -->
     ======================================================== */
     .header {
@@ -590,7 +597,6 @@
         justify-content: space-between;
         height: 100%;
         position: relative;
-        padding: 0 1rem;
     }
     
     .logo {
@@ -602,7 +608,6 @@
         color: var(--dark);
         z-index: var(--z-elevate);
         transition: all 0.3s ease;
-        margin-right: 2rem;
     }
     
     .logo:hover {
@@ -632,16 +637,13 @@
         transform: scale(1.1);
     }
     
-    /* ナビゲーション改善 - ヘッダー内のバランス調整 */
     .nav {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 1.2rem;
         margin: 0;
         padding: 0;
         height: 100%;
-        justify-content: flex-end;
-        flex: 1;
     }
     
     .nav-item {
@@ -686,7 +688,6 @@
         margin-left: var(--space-2);
     }
     
-    /* ヘッダーボタン改善 */
     .btn-header-consultation {
         background: var(--gradient-primary);
         color: var(--white);
@@ -735,7 +736,6 @@
         z-index: 2;
     }
     
-    /* ハンバーガーメニュー改善 */
     .hamburger {
         display: none;
         background: none;
@@ -776,7 +776,6 @@
         visibility: visible;
     }
     
-    /* モバイルメニュー改善 */
     @media (max-width: 768px) {
         .hamburger {
             display: block;
@@ -785,7 +784,7 @@
         .nav {
             position: fixed;
             top: 0;
-            right: -100%;
+            right: -300px;
             width: 300px;
             height: 100vh;
             background: var(--white);
@@ -1025,9 +1024,16 @@
         position: relative;
     }
     
-    /* ヒーローセクションの下線を削除 */
     .hero-title .text-gradient::after {
-        display: none;
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gradient-brand);
+        border-radius: var(--radius-full);
+        opacity: 0.6;
     }
     
     .hero-description {
@@ -1193,23 +1199,6 @@
         }
     }
     
-    /* 企業理念セクション - 新規追加 */
-    .mission-section {
-        padding: 3rem 0;
-        text-align: center;
-        background: var(--gradient-mission);
-    }
-    
-    .mission-text {
-        font-weight: var(--font-weight-bold);
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        color: white;
-        margin: 0;
-        padding: 2rem 0;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    
     @media (max-width: 992px) {
         .hero-differentiators {
             flex-wrap: wrap;
@@ -1290,11 +1279,6 @@
         .orb-4 {
             width: 110px;
             height: 110px;
-        }
-        
-        .mission-text {
-            font-size: 1.3rem;
-            padding: 1.5rem 1rem;
         }
     }
     
@@ -1607,7 +1591,7 @@
     }
     
     /* ========================================================
-    ▼ サービスセクション Component - 改善バージョン
+    ▼ サービスセクション Component
     ======================================================== */
     .services-section {
         position: relative;
@@ -1852,7 +1836,7 @@
         }
     }
     
-    /* モバイルカードデザイン - 改善版 */
+    /* モバイルカードデザイン */
     .mobile-card {
         background: var(--white);
         border-radius: var(--radius-lg);
@@ -2159,11 +2143,10 @@
     }
     
     /* ========================================================
-    ▼ CTA (Call To Action) Component - 改善バージョン
+    ▼ CTA (Call To Action) Component
     ======================================================== */
     .cta-section {
-        /* 新しいグラデーションを適用 */
-        background: var(--gradient-cta-new);
+        background: var(--gradient-primary);
         color: var(--white);
         padding: 5rem 0;
         position: relative;
@@ -2854,8 +2837,29 @@
         }
     }
     
+    @media (max-width: 768px) {
+        .chatbot {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .chatbot-button {
+            width: 56px;
+            height: 56px;
+            font-size: 1.3rem;
+        }
+        
+        .chatbot-window {
+            width: calc(100vw - 40px);
+            max-width: 340px;
+            height: 450px;
+            bottom: 65px;
+            right: 20px;
+        }
+    }
+    
     /* ========================================================
-    ▼ Back to Top ボタン Component - 改善版
+    ▼ Back to Top ボタン Component
     ======================================================== */
     .back-to-top {
         position: fixed;
@@ -2986,26 +2990,6 @@
     }
     
     /* ========================================================
-    ▼ フォーカス状態の改善 Component
-    ======================================================== */
-    a:focus-visible, 
-    button:focus-visible, 
-    input:focus-visible, 
-    textarea:focus-visible,
-    select:focus-visible {
-        outline: 2px solid var(--primary);
-        outline-offset: 3px;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
-    }
-    
-    /* キーボードナビゲーション中の視覚的フィードバック */
-    .keyboard-focus *:focus {
-        outline: 2px solid var(--primary) !important;
-        outline-offset: 3px !important;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
-    }
-    
-    /* ========================================================
     ▼ モバイル・デバイスごとの対応 Component
     ======================================================== */
     /* タッチデバイス対応の最適化 */
@@ -3094,14 +3078,6 @@
         .footer-grid {
             gap: 1.5rem;
         }
-        
-        /* サービスカードアイコンの視認性向上 */
-        .mobile-card-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.8rem;
-            border: 3px solid white;
-        }
     }
     
     /* デスクトップのみ表示 */
@@ -3145,7 +3121,7 @@
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ ヘッダー Component - 改善バージョン
+    ▼ ヘッダー Component
     ======================================================== -->
     <header class="header" id="header">
         <div class="container">
@@ -3200,7 +3176,7 @@
     ======================================================== -->
     <main id="main-content">
         <!-- ========================================================
-        ▼ ヒーローセクション Component - 改善バージョン
+        ▼ ヒーローセクション Component
         ======================================================== -->
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <!-- 浮遊オーブ -->
@@ -3216,8 +3192,7 @@
                     <div class="hero-badge">AIシステム受託開発・AIプロダクト提供</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
-                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br>
-                        取り戻す
+                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br>取り戻す
                     </h1>
                     
                     <p class="hero-description">
@@ -3262,15 +3237,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- ========================================================
-        ▼ 企業理念セクション - 新規追加
-        ======================================================== -->
-        <section class="mission-section">
-            <div class="container">
-                <h2 class="mission-text">「真の価値を信じ、次世代のために新たな未来を創る。」</h2>
             </div>
         </section>
         
@@ -3340,8 +3306,7 @@
                 <div class="prototype-benefits">
                     <div class="benefit-card">
                         <div class="benefit-icon">
-                            <!-- ブタアイコンの変更 -->
-                            <i class="fas fa-wallet"></i>
+                            <i class="fas fa-piggy-bank"></i>
                         </div>
                         <h4>初期投資リスク最小化</h4>
                         <p>最初は小規模投資で開始、効果を確認しながら段階的に投資を拡大できます。</p>
@@ -3367,7 +3332,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ サービスセクション Component - 改善バージョン
+        ▼ サービスセクション Component
         ======================================================== -->
         <section class="services-section" id="services">
             <!-- 背景アクセント -->
@@ -3389,11 +3354,11 @@
                 <!-- デスクトップ用サービスカード -->
                 <div class="services-container hide-mobile">
                     <div class="services-grid">
-                        <!-- Service 1: 新規事業企画書AIツール「アイプロ」 - 画像変更 (より創造性を感じさせる) -->
+                        <!-- Service 1: 新規事業企画書AIツール「アイプロ」 -->
                         <div class="service-card">
                             <span class="service-card-badge">人気 No.1</span>
                             <div class="service-image">
-                                <img src="https://images.unsplash.com/photo-1517245386807-9b4756c6d68f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」のイメージ" loading="lazy" width="800" height="400">
                             </div>
                             <div class="service-icon-wrapper">
                                 <div class="service-icon">
@@ -3460,13 +3425,13 @@
                     </div>
                 </div>
                 
-                <!-- モバイル用サービスカード - 改善バージョン -->
+                <!-- モバイル用サービスカード -->
                 <div class="services-container-mobile show-mobile">
-                    <!-- モバイルカード1 - 画像変更 (よりクリエイティブなイメージ) -->
+                    <!-- モバイルカード1 -->
                     <div class="mobile-card">
                         <div class="mobile-card-header">
                             <span class="mobile-card-badge">人気 No.1</span>
-                            <img src="https://images.unsplash.com/photo-1517245386807-9b4756c6d68f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=400&q=80" alt="新規事業企画書AIツール「アイプロ」" class="mobile-card-image" loading="lazy">
                             <div class="mobile-card-icon">
                                 <i class="fas fa-file-alt"></i>
                             </div>
@@ -3518,7 +3483,7 @@
                 </div>
                 
                 <div class="text-center" style="margin-top: 3rem;">
-                    <a href="services.html" class="btn btn-accent btn-lg btn-icon-right">
+                    <a href="services.html" class="btn btn-primary btn-lg btn-icon-right">
                         <span>すべてのサービスを見る</span>
                         <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
@@ -3527,7 +3492,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ メリットセクション Component - 改善バージョン
+        ▼ メリットセクション Component
         ======================================================== -->
         <section class="section" id="benefits">
             <!-- 背景アクセント -->
@@ -3591,7 +3556,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ CTA (Call To Action) Component - 改善バージョン（新しいグラデーション適用）
+        ▼ CTA (Call To Action) Component
         ======================================================== -->
         <section class="cta-section" id="cta">
             <div class="cta-patterns">
@@ -3602,7 +3567,7 @@
             
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を広げませんか？</h2>
+                    <h2 class="heading-lg cta-title">AIで<span class="text-gradient">ビジネスの可能性</span>を広げませんか？</h2>
                     <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br>プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
                     <a href="contact.html" class="cta-button">
                         <span>無料相談を始める</span>
@@ -3611,6 +3576,8 @@
                 </div>
             </div>
         </section>
+    </main>
+
     <!-- ========================================================
     ▼ フッター Component
     ======================================================== -->
@@ -3671,7 +3638,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a>
+                        <a href="mailto:contact@shinai.tech">shinai.life@gmail.com</a>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-clock" aria-hidden="true"></i>
@@ -3696,7 +3663,7 @@
     </footer>
 
     <!-- ========================================================
-    ▼ チャットボット Component - 改善バージョン
+    ▼ チャットボット Component
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
@@ -3727,14 +3694,17 @@
     </div>
 
     <!-- ========================================================
-    ▼ メインスクリプト Component - 改善バージョン（モバイル対応強化）
+    ▼ Back to Top ボタン Component
+    ======================================================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="ページの先頭へ戻る">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ========================================================
+    ▼ メインスクリプト Component
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // ========================================================
-        // ▼ 初期化処理 Component
-        // ========================================================
-        
         // ページロード完了時にローディングを非表示
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
@@ -3758,10 +3728,7 @@
             currentYearElement.textContent = currentYear;
         }
         
-        // ========================================================
-        // ▼ モバイルUI/UXの全面改善 Component
-        // ========================================================
-        
+        // モバイル表示の改善
         const header = document.getElementById('header');
         const mobileLogoTrigger = document.getElementById('mobile-logo-trigger');
         const hamburgerVisible = document.getElementById('hamburger-visible');
@@ -3769,7 +3736,7 @@
         const nav = document.getElementById('nav');
         const headerBackdrop = document.getElementById('header-backdrop');
         
-        // モバイルロゴトリガーのクリックイベント - 改善版
+        // モバイルロゴトリガーのクリックイベント - ハンバーガーメニュー表示
         if (mobileLogoTrigger) {
             mobileLogoTrigger.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
@@ -3785,7 +3752,7 @@
             });
         }
         
-        // ハンバーガーボタン表示版のクリックイベント - 改善版
+        // ハンバーガーボタン表示版のクリックイベント
         if (hamburgerVisible) {
             hamburgerVisible.addEventListener('click', function() {
                 if (hamburger) {
@@ -3808,7 +3775,7 @@
             });
         }
         
-        // スクロールイベント - 改善版
+        // スクロールイベント
         let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
             const currentScrollTop = window.scrollY;
@@ -3822,23 +3789,20 @@
                 }
             }
             
-            // モバイルUI/UX改善 - スクロール位置に基づいて差別化ポイントを表示
-            const heroDifferentiators = document.querySelector('.hero-differentiators');
-            if (heroDifferentiators && window.innerWidth <= 768) {
-                const heroSection = document.getElementById('hero');
-                const showDifferentiatorsOnScroll = function() {
-                    // ヒーローセクションの終わり付近でスクロールした時に表示
-                    if (window.scrollY > (heroSection.offsetHeight / 2)) {
-                        heroDifferentiators.classList.add('visible');
-                    }
-                };
-                window.addEventListener('scroll', showDifferentiatorsOnScroll);
+            // Back to Topボタンの表示制御
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                if (currentScrollTop > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
             }
             
             lastScrollTop = currentScrollTop;
         });
         
-        // モバイルメニュー - 改善版
+        // モバイルメニュー
         if (hamburger && nav) {
             hamburger.addEventListener('click', function() {
                 const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -3868,7 +3832,7 @@
                 });
             }
             
-            // ナビリンククリックでメニューを閉じる - 改善版（自動的に非表示に）
+            // ナビリンククリックでメニューを閉じる
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -3888,10 +3852,6 @@
                 });
             });
         }
-        
-        // ========================================================
-        // ▼ UI要素のイベント処理 Component
-        // ========================================================
         
         // Back to Top ボタンのクリックイベント
         const backToTopButton = document.getElementById('back-to-top');
@@ -3929,7 +3889,7 @@
                 chatbotButton.setAttribute('aria-expanded', 'false');
             });
             
-            // チャット送信処理 - 改善版
+            // チャット送信処理
             if (chatSend && chatInput && chatMessages) {
                 const handleSend = function() {
                     const message = chatInput.value.trim();
@@ -4004,7 +3964,7 @@
                                     }, 500);
                                 }
                             }, typingSpeed);
-                        }, 800);
+                        }, 800); // ローディング表示時間を短縮
                     }
                 };
                 
@@ -4027,25 +3987,7 @@
             }
         }
         
-        // ========================================================
-        // ▼ アクセシビリティ改善 Component
-        // ========================================================
-        
-        // キーボードナビゲーション対応（Tab）
-        let usingKeyboard = false;
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                usingKeyboard = true;
-                document.body.classList.add('keyboard-focus');
-            }
-        });
-        
-        document.addEventListener('mousedown', function() {
-            usingKeyboard = false;
-            document.body.classList.remove('keyboard-focus');
-        });
-        
-        // ESCでモーダルを閉じる
+        // アクセシビリティサポート: ESCでモーダルを閉じる
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' || e.keyCode === 27) {
                 // チャットボットを閉じる
@@ -4062,24 +4004,14 @@
                         hamburger.setAttribute('aria-expanded', 'false');
                         hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                     }
-                    if (hamburgerVisible) {
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
                 }
             }
         });
         
-        // ========================================================
-        // ▼ Three.jsパーティクル背景 Component - 内側球体を修正
-        // ========================================================
-        
+        // Three.jsパーティクル背景
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
             initThreeJSParticles();
         }
-        
-        // ========================================================
-        // ▼ アニメーション設定 Component
-        // ========================================================
         
         // スクロールアニメーション
         if (typeof gsap !== 'undefined') {
@@ -4088,7 +4020,7 @@
                 gsap.registerPlugin(ScrollTrigger);
                 
                 // アニメーション要素
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card, .mission-text');
+                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators, .mobile-card');
                 
                 animElements.forEach((element, index) => {
                     // 要素タイプに応じたアニメーション
@@ -4126,9 +4058,6 @@
                     } else if (element.classList.contains('hero-differentiators')) {
                         animation = { y: 15, opacity: 0 };
                         delay = 0.25;
-                    } else if (element.classList.contains('mission-text')) {
-                        animation = { y: 10, opacity: 0 };
-                        duration = 0.6;
                     } else {
                         animation = { y: 15, opacity: 0 };
                     }
@@ -4153,7 +4082,7 @@
                 });
             } else {
                 // ScrollTriggerがない場合はgsapだけで
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text');
+                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card');
                 
                 animElements.forEach((element, index) => {
                     gsap.from(element, {
@@ -4179,13 +4108,13 @@
                 rootMargin: '0px 0px -50px 0px'
             });
             
-            document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text').forEach(el => {
+            document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card').forEach(el => {
                 observer.observe(el);
             });
         }
     });
     
-    // Three.jsパーティクルエフェクト - 内側球体を修正（球形を維持）
+    // Three.jsパーティクルエフェクト
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
         
@@ -4217,7 +4146,7 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
-        // 装飾用の内側コア - 改善：球形を維持（楕円形ではなく）
+        // 装飾用の内側コア
         const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
@@ -4370,11 +4299,10 @@
             const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
-            // 内側コアの逆回転 - 改善: 球形を維持
+            // 内側コアの逆回転
             innerCore.rotation.y -= 0.002;
             innerCore.rotation.z += 0.001;
-            const innerScalePulse = Math.sin(time * 0.7) * 0.1 + 1;
-            innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse); // 全て同じ値で球形を維持
+            innerCore.scale.set(scalePulse * 1.1, scalePulse * 0.9, scalePulse * 1.05);
             
             // パーティクルアニメーション（サマーウォーズ風の美しい動き）
             particles.forEach((p, index) => {
