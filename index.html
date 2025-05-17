@@ -98,7 +98,7 @@
     }
     html.loaded {
         visibility: visible;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.2s ease;
     }
     
     /* プリローダースタイル */
@@ -113,7 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     
     .page-loader.loaded {
@@ -122,12 +122,12 @@
     }
     
     .loader-circle {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         border: 3px solid rgba(58, 95, 235, 0.2);
         border-top-color: #3A5FEB;
         border-radius: 50%;
-        animation: spin 1s linear infinite;
+        animation: spin 0.8s linear infinite;
     }
     
     @keyframes spin {
@@ -161,7 +161,6 @@
         align-items: center;
         justify-content: center;
         z-index: 1002;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         cursor: pointer;
     }
     
@@ -188,7 +187,6 @@
         .header {
             height: 60px;
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             transform: translateY(-100%); /* 初期状態で非表示 */
         }
         
@@ -198,11 +196,7 @@
         
         /* モバイルメニューの差別化ポイント表示調整 */
         .hero-differentiators {
-            display: none; /* スクロール後に表示 */
-        }
-        
-        .hero-differentiators.visible {
-            display: flex;
+            display: flex; /* 常に表示するように変更 */
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
@@ -247,31 +241,7 @@
         --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         /* 新しいアクセントグラデーション */
-        --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
-        
-        /* シャドウ */
-        --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-        --shadow-sm: 0 2px 5px rgba(15, 23, 42, 0.07);
-        --shadow-md: 0 5px 15px rgba(15, 23, 42, 0.08);
-        --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
-        --shadow-xl: 0 20px 50px rgba(15, 23, 42, 0.12);
-        --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.05);
-        --shadow-button: 0 4px 12px rgba(58, 95, 235, 0.25);
-        --shadow-button-hover: 0 8px 20px rgba(58, 95, 235, 0.35);
-        --shadow-accent: 0 4px 12px rgba(255, 138, 0, 0.25);
-        --shadow-accent-hover: 0 8px 20px rgba(255, 138, 0, 0.35);
-        --shadow-header: 0 4px 20px rgba(15, 23, 42, 0.08);
-        --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.1);
-        
-        /* フォント */
-        --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        --font-weight-normal: 400;
-        --font-weight-medium: 500;
-        --font-weight-semibold: 600;
-        --font-weight-bold: 700;
-        --font-weight-extrabold: 800;
-        --font-weight-black: 900;
+        --gradient-accent-text: linear-gradient(135deg, #FF5630, #FF8A00);
         
         /* スペーシング */
         --space-1: 0.25rem;
@@ -316,6 +286,16 @@
         --transition-fast: 0.2s;
         --transition-normal: 0.3s;
         --transition-slow: 0.5s;
+        
+        /* フォント */
+        --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-weight-normal: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+        --font-weight-extrabold: 800;
+        --font-weight-black: 900;
     }
 
     /* ========================================================
@@ -546,7 +526,7 @@
     }
     
     .text-accent {
-        background: var(--gradient-accent);
+        background: var(--gradient-accent-text);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -566,11 +546,6 @@
         text-align: right;
     }
     
-    /* テキストシャドウ強化 */
-    .text-shadow {
-        text-shadow: var(--shadow-text);
-    }
-    
     /* ========================================================
     ▼ ヘッダー Component - 改善バージョン（バランス調整）
     ======================================================== -->
@@ -582,9 +557,6 @@
         right: 0;
         z-index: var(--z-fixed);
         background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-header);
         height: var(--header-height);
         transition: all 0.3s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -594,7 +566,6 @@
         --header-height: 64px;
         --header-height-mobile: 56px;
         background: rgba(255, 255, 255, 0.98);
-        box-shadow: var(--shadow-lg);
     }
     
     .header-inner {
@@ -708,7 +679,6 @@
         font-weight: var(--font-weight-semibold);
         font-size: 0.85rem;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: var(--shadow-button);
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
@@ -733,7 +703,6 @@
     
     .btn-header-consultation:hover {
         transform: translateY(-2px);
-        box-shadow: var(--shadow-button-hover);
         color: var(--white);
         background: var(--gradient-accent);
     }
@@ -776,8 +745,6 @@
         width: 100%;
         height: 100vh;
         background: rgba(15, 23, 42, 0.5);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -805,7 +772,6 @@
             flex-direction: column;
             gap: 0;
             transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
             z-index: var(--z-drawer);
             overflow-y: auto;
             padding: calc(var(--header-height-mobile) + 1rem) 1.5rem 1.5rem;
@@ -887,30 +853,25 @@
     .btn-primary {
         background: var(--gradient-primary);
         color: var(--white);
-        box-shadow: var(--shadow-button);
     }
     
     .btn-primary:hover {
         transform: translateY(-2px) scale(1.02);
-        box-shadow: var(--shadow-button-hover);
         background: var(--gradient-primary-hover);
         color: var(--white);
     }
     
     .btn-primary:active {
         transform: translateY(1px) scale(0.98);
-        box-shadow: var(--shadow-xs);
     }
     
     .btn-accent {
         background: var(--gradient-accent);
         color: var(--white);
-        box-shadow: var(--shadow-accent);
     }
     
     .btn-accent:hover {
         transform: translateY(-2px) scale(1.02);
-        box-shadow: var(--shadow-accent-hover);
         filter: brightness(1.1);
         color: var(--white);
     }
@@ -919,14 +880,12 @@
         background: var(--light-gray);
         color: var(--primary);
         border: 1px solid rgba(58, 95, 235, 0.2);
-        box-shadow: var(--shadow-xs);
     }
     
     .btn-secondary:hover {
         background: var(--white);
         border-color: var(--primary);
         transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
         color: var(--primary);
     }
     
@@ -955,7 +914,6 @@
     .btn-outline:hover {
         color: var(--white);
         transform: translateY(-2px);
-        box-shadow: var(--shadow-xs);
         border-color: transparent;
     }
     
@@ -989,11 +947,11 @@
     }
     
     /* ========================================================
-    ▼ ヒーローセクション Component
+    ▼ ヒーローセクション Component - モバイル表示最適化
     ======================================================== */
     .hero {
         position: relative;
-        min-height: 100vh;
+        min-height: 90vh; /* モバイル表示最適化 */
         display: flex;
         align-items: center;
         padding: calc(var(--header-height) + var(--space-8)) 0 var(--space-16);
@@ -1016,13 +974,13 @@
         font-weight: var(--font-weight-semibold);
         padding: 0.5rem 1.25rem;
         border-radius: var(--radius-full);
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--space-4); /* 余白調整 */
         font-size: 0.95rem;
         animation: fadeInDown 0.5s ease forwards;
     }
     
     .hero-title {
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--space-4); /* 余白調整 */
         animation: fadeInUp 0.6s ease 0.2s forwards;
         opacity: 0;
     }
@@ -1046,7 +1004,7 @@
     .hero-description {
         font-size: clamp(1.1rem, 2vw, 1.25rem);
         color: var(--gray);
-        margin-bottom: var(--space-8);
+        margin-bottom: var(--space-4); /* 余白調整 */
         line-height: 1.8;
         max-width: 800px;
         margin-left: auto;
@@ -1055,12 +1013,12 @@
         opacity: 0;
     }
     
-    /* ヒーローセクション差別化ポイント */
+    /* ヒーローセクション差別化ポイント - モバイル最適化 */
     .hero-differentiators {
         display: flex;
         justify-content: center;
         gap: 2rem;
-        margin: 2rem 0 3rem;
+        margin: 1.5rem 0 2rem; /* 余白調整 */
         animation: fadeInUp 0.6s ease 0.4s forwards;
         opacity: 0;
     }
@@ -1075,16 +1033,15 @@
     }
     
     .differentiator-icon {
-        width: 68px;
-        height: 68px;
+        width: 60px; /* サイズ調整 */
+        height: 60px; /* サイズ調整 */
         background: var(--white);
         border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
-        font-size: 1.8rem;
-        box-shadow: var(--shadow-md);
+        margin-bottom: 0.75rem; /* 余白調整 */
+        font-size: 1.5rem; /* サイズ調整 */
         color: var(--primary);
         transition: all 0.3s ease;
         position: relative;
@@ -1099,7 +1056,7 @@
     .differentiator-title {
         font-weight: var(--font-weight-bold);
         font-size: 1rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem; /* 余白調整 */
         color: var(--dark);
     }
     
@@ -1208,7 +1165,7 @@
     
     /* 企業理念セクション - 新規追加 */
     .mission-section {
-        padding: 3rem 0;
+        padding: 2.5rem 0; /* 余白調整 */
         text-align: center;
         background: var(--gradient-mission);
     }
@@ -1237,23 +1194,29 @@
     
     @media (max-width: 768px) {
         .hero {
-            padding: calc(var(--header-height-mobile) + 1rem) 0 3rem;
-            min-height: calc(100vh - var(--header-height-mobile));
+            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem; /* パディング調整 */
+            min-height: 100vh; /* 高さ調整 - フルスクリーン */
+            height: auto; /* 自動高さに変更 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .hero-badge {
             padding: 0.4rem 1rem;
             font-size: 0.85rem;
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
         }
         
         .hero-title {
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
+            font-size: clamp(2rem, 8vw, 2.5rem); /* フォントサイズ調整 */
         }
         
         .hero-description {
             font-size: 1rem;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-4);
+            padding: 0 0.5rem; /* パディング追加 */
         }
         
         .hero-buttons {
@@ -1261,6 +1224,7 @@
             width: 100%;
             align-items: center;
             gap: 0.75rem;
+            margin-bottom: 1.5rem; /* 余白追加 */
         }
         
         .hero-buttons .btn {
@@ -1271,13 +1235,31 @@
         .hero-differentiators {
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0 2rem;
+            gap: 1.2rem; /* 余白調整 */
+            margin: 0.5rem 0 1rem; /* 余白調整 */
         }
         
         .differentiator-item {
             max-width: 100%;
-            width: 80%;
+            width: 90%; /* 幅調整 */
+            padding: 0.5rem; /* パディング追加 */
+        }
+        
+        .differentiator-icon {
+            width: 50px; /* サイズ調整 */
+            height: 50px; /* サイズ調整 */
+            font-size: 1.3rem; /* サイズ調整 */
+            margin-bottom: 0.5rem; /* 余白調整 */
+        }
+        
+        .differentiator-title {
+            font-size: 0.95rem; /* サイズ調整 */
+            margin-bottom: 0.25rem; /* 余白調整 */
+        }
+        
+        .differentiator-text {
+            font-size: 0.85rem; /* サイズ調整 */
+            line-height: 1.5; /* 行間調整 */
         }
         
         /* 浮遊オーブの調整 */
@@ -1357,7 +1339,6 @@
         font-size: 1.8rem;
         font-weight: var(--font-weight-bold);
         font-family: var(--font-en);
-        box-shadow: var(--shadow-md);
         margin-right: 1.5rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         position: relative;
@@ -1367,7 +1348,6 @@
     .prototype-step:hover .step-number {
         transform: scale(1.1) rotate(5deg);
         background: var(--gradient-accent);
-        box-shadow: var(--shadow-lg);
     }
     
     .step-content {
@@ -1432,7 +1412,6 @@
         background: var(--white);
         border-radius: var(--radius-lg);
         padding: 2rem;
-        box-shadow: var(--shadow-md);
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         text-align: center;
         border: 1px solid rgba(0, 0, 0, 0.05);
@@ -1455,7 +1434,6 @@
     
     .benefit-card:hover {
         transform: translateY(-10px);
-        box-shadow: var(--shadow-lg);
     }
     
     .benefit-card:hover::before {
@@ -1474,13 +1452,11 @@
         font-size: 1.5rem;
         margin: 0 auto 1.5rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.2);
     }
     
     .benefit-card:hover .benefit-icon {
         transform: rotate(15deg) scale(1.1);
         background: var(--gradient-accent);
-        box-shadow: 0 8px 25px rgba(255, 138, 0, 0.25);
     }
     
     .benefit-card h4 {
@@ -1588,7 +1564,6 @@
         font-weight: var(--font-weight-semibold);
         margin-bottom: 1.2rem;
         font-size: 0.9rem;
-        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
         border: 1px solid rgba(58, 95, 235, 0.12);
     }
     
@@ -1638,7 +1613,6 @@
         font-weight: var(--font-weight-semibold);
         font-size: 0.85rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
         border: 1px solid rgba(58, 95, 235, 0.12);
     }
     
@@ -1656,7 +1630,6 @@
         background: var(--white);
         border-radius: var(--radius-lg);
         overflow: hidden;
-        box-shadow: var(--shadow-md);
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         display: flex;
         flex-direction: column;
@@ -1668,7 +1641,6 @@
     
     .service-card:hover {
         transform: translateY(-8px);
-        box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.2);
     }
     
@@ -1684,7 +1656,6 @@
         font-size: 0.8rem;
         font-weight: var(--font-weight-semibold);
         z-index: 5;
-        box-shadow: var(--shadow-sm);
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
@@ -1748,7 +1719,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: var(--shadow-lg);
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         background: var(--gradient-primary);
         color: var(--white);
@@ -1870,7 +1840,6 @@
         background: var(--white);
         border-radius: var(--radius-lg);
         overflow: hidden;
-        box-shadow: var(--shadow-md);
         margin-bottom: 1.5rem;
         border: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
@@ -1881,7 +1850,6 @@
     
     .mobile-card:active {
         transform: scale(0.98);
-        box-shadow: var(--shadow-sm);
     }
     
     .mobile-card-header {
@@ -1912,7 +1880,6 @@
         font-size: 0.75rem;
         font-weight: var(--font-weight-semibold);
         z-index: 2;
-        box-shadow: var(--shadow-sm);
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
@@ -1941,7 +1908,6 @@
         bottom: -30px;
         left: 50%;
         transform: translateX(-50%);
-        box-shadow: var(--shadow-md);
         z-index: 3;
         transition: all 0.3s ease;
         border: 2px solid white;
@@ -1998,7 +1964,6 @@
     .benefit-container-card {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-md);
         padding: 2.5rem;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         border: 1px solid rgba(0, 0, 0, 0.05);
@@ -2025,7 +1990,6 @@
     
     .benefit-container-card:hover {
         transform: translateY(-10px);
-        box-shadow: var(--shadow-lg);
         border-color: rgba(58, 95, 235, 0.1);
     }
     
@@ -2045,14 +2009,12 @@
         font-size: 2rem;
         margin: 0 auto 1.5rem;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.2);
         position: relative;
         z-index: 1;
     }
     
     .benefit-container-card:hover .benefit-container-icon {
         transform: rotate(10deg) scale(1.05);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.3);
         background: var(--gradient-accent);
     }
     
@@ -2194,16 +2156,14 @@
     .cta-title {
         margin-bottom: 1.5rem;
         color: var(--white);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
     
-    .cta-title .text-gradient {
-        background: var(--gradient-accent);
+    .cta-title .text-accent {
+        background: var(--gradient-accent-text);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         color: transparent;
-        text-shadow: none;
         position: relative;
         z-index: 2;
     }
@@ -2225,7 +2185,6 @@
         align-items: center;
         gap: 0.75rem;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
     }
@@ -2267,7 +2226,6 @@
     
     .cta-button:hover {
         transform: translateY(-3px) scale(1.03);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         color: var(--white);
     }
     
@@ -2294,7 +2252,6 @@
         position: absolute;
         background: var(--white);
         border-radius: 50%;
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
     }
     
     .cta-pattern:nth-child(1) {
@@ -2611,7 +2568,6 @@
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        box-shadow: var(--shadow-lg);
         cursor: pointer;
         position: relative;
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2653,7 +2609,6 @@
     
     .chatbot-button:hover {
         transform: scale(1.1);
-        box-shadow: var(--shadow-xl);
     }
     
     .chatbot-button:hover::after {
@@ -2672,7 +2627,6 @@
         height: 500px;
         background: var(--white);
         border-radius: 20px;
-        box-shadow: var(--shadow-xl);
         overflow: hidden;
         display: none;
         flex-direction: column;
@@ -2868,7 +2822,7 @@
     }
     
     /* ========================================================
-    ▼ Back to Top ボタン Component - 改善版
+    ▼ Back to Top ボタン Component
     ======================================================== */
     .back-to-top {
         position: fixed;
@@ -2888,7 +2842,6 @@
         cursor: pointer;
         z-index: var(--z-fixed);
         transition: all 0.3s ease;
-        box-shadow: var(--shadow-md);
         border: none;
         overflow: hidden;
     }
@@ -2920,7 +2873,6 @@
     
     .back-to-top:hover {
         transform: translateY(-3px);
-        box-shadow: var(--shadow-lg);
     }
     
     .back-to-top:hover::before {
@@ -2941,7 +2893,7 @@
     }
     
     /* ========================================================
-    ▼ アニメーション Component
+    ▼ アニメーション Component - 高速化
     ======================================================== */
     @keyframes fadeIn {
         from {
@@ -2963,7 +2915,7 @@
     
     @keyframes slideInUp {
         from {
-            transform: translateY(30px);
+            transform: translateY(20px);
             opacity: 0;
         }
         to {
@@ -2974,7 +2926,7 @@
     
     @keyframes slideInDown {
         from {
-            transform: translateY(-30px);
+            transform: translateY(-20px);
             opacity: 0;
         }
         to {
@@ -2995,7 +2947,7 @@
     }
     
     .animate-in {
-        animation: fadeInUp 0.8s ease forwards;
+        animation: fadeInUp 0.6s ease forwards;
     }
     
     /* ========================================================
@@ -3008,24 +2960,21 @@
     select:focus-visible {
         outline: 2px solid var(--primary);
         outline-offset: 3px;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
     }
     
     /* キーボードナビゲーション中の視覚的フィードバック */
     .keyboard-focus *:focus {
         outline: 2px solid var(--primary) !important;
         outline-offset: 3px !important;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
     }
     
     /* ========================================================
-    ▼ モバイル・デバイスごとの対応 Component
+    ▼ モバイル・デバイスごとの対応 Component - 改善版
     ======================================================== */
     /* タッチデバイス対応の最適化 */
     @media (hover: none) {
         .btn:hover, .service-card:hover, .benefit-container-card:hover {
             transform: none;
-            box-shadow: var(--shadow-md);
         }
         
         .btn:active, .service-card:active, .benefit-container-card:active {
@@ -3046,23 +2995,18 @@
             -webkit-text-size-adjust: 100%;
         }
         
-        .header {
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        
         .hero-badge {
             padding: 0.3rem 0.9rem;
             font-size: 0.8rem;
         }
         
         .hero-title {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
         
         .hero-description {
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
         
         .differentiator-item {
@@ -3070,9 +3014,9 @@
         }
         
         .differentiator-icon {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
         }
         
         .service-title {
@@ -3110,10 +3054,10 @@
         
         /* サービスカードアイコンの視認性向上 */
         .mobile-card-icon {
-            width: 70px;
-            height: 70px;
-            font-size: 1.8rem;
-            border: 3px solid white;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            border: 2px solid white;
         }
     }
     
@@ -3234,8 +3178,10 @@
                     </h1>
                     
                     <p class="hero-description">
-                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決します。<br>
-                        プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
+                        AIエージェント開発やRAG構築など、最先端のAI技術で
+                        企業の課題を解決します。<br>
+                        プロトタイプから始める伴走型開発で、初期投資を抑えて
+                        確実な成果を実現。
                     </p>
                     
                     <!-- 差別化ポイント追加 -->
@@ -3245,7 +3191,8 @@
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3 class="differentiator-title">小さく始める</h3>
-                            <p class="differentiator-text">最短2週間のプロトタイプで効果検証。初期投資リスクを最小化します。</p>
+                            <p class="differentiator-text">最短2週間のプロトタイプで効果検証。
+                            初期投資リスクを最小化します。</p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -3253,7 +3200,8 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h3 class="differentiator-title">伴走支援</h3>
-                            <p class="differentiator-text">共創型の開発で方向修正も柔軟。最適解を一緒に見つけます。</p>
+                            <p class="differentiator-text">共創型の開発で方向修正も柔軟。
+                            最適解を一緒に見つけます。</p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -3261,7 +3209,8 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <h3 class="differentiator-title">段階的成長</h3>
-                            <p class="differentiator-text">効果を確認しながら拡張。確実な成果で組織の自走化を実現します。</p>
+                            <p class="differentiator-text">効果を確認しながら拡張。
+                            確実な成果で組織の自走化を実現します。</p>
                         </div>
                     </div>
                     
@@ -3315,7 +3264,8 @@
                         <div class="step-content">
                             <h3>ニーズ分析・プロトタイプ設計</h3>
                             <p class="step-duration">期間: 1週間</p>
-                            <p>御社の課題をヒアリングし、AIでの解決方法を提案。小規模なプロトタイプを設計します。</p>
+                            <p>御社の課題をヒアリングし、AIでの解決方法を提案。
+                            小規模なプロトタイプを設計します。</p>
                         </div>
                         <div class="step-connector"></div>
                     </div>
@@ -3325,7 +3275,8 @@
                         <div class="step-content">
                             <h3>プロトタイプ開発・検証</h3>
                             <p class="step-duration">期間: 2週間</p>
-                            <p>最小限の機能を実装し、実際の業務で効果検証。方向性の確認と改善点を見極めます。</p>
+                            <p>最小限の機能を実装し、実際の業務で効果検証。
+                            方向性の確認と改善点を見極めます。</p>
                         </div>
                         <div class="step-connector"></div>
                     </div>
@@ -3335,7 +3286,8 @@
                         <div class="step-content">
                             <h3>本実装・拡張</h3>
                             <p class="step-duration">期間: 2〜4週間</p>
-                            <p>検証結果に基づき、本格的な機能実装。御社業務に最適化した形に調整します。</p>
+                            <p>検証結果に基づき、本格的な機能実装。
+                            御社業務に最適化した形に調整します。</p>
                         </div>
                         <div class="step-connector"></div>
                     </div>
@@ -3345,7 +3297,8 @@
                         <div class="step-content">
                             <h3>伴走支援・内製化</h3>
                             <p class="step-duration">期間: 継続的</p>
-                            <p>運用サポートと社内チーム育成を並行し、AIの効果を最大化。将来的な自走化を実現します。</p>
+                            <p>運用サポートと社内チーム育成を並行し、AIの効果を最大化。
+                            将来的な自走化を実現します。</p>
                         </div>
                     </div>
                 </div>
@@ -3353,11 +3306,11 @@
                 <div class="prototype-benefits">
                     <div class="benefit-card">
                         <div class="benefit-icon">
-                            <!-- ブタアイコンの変更 -->
                             <i class="fas fa-wallet"></i>
                         </div>
                         <h4>初期投資リスク最小化</h4>
-                        <p>最初は小規模投資で開始、効果を確認しながら段階的に投資を拡大できます。</p>
+                        <p>最初は小規模投資で開始、効果を確認しながら
+                        段階的に投資を拡大できます。</p>
                     </div>
                     
                     <div class="benefit-card">
@@ -3365,7 +3318,8 @@
                             <i class="fas fa-tachometer-alt"></i>
                         </div>
                         <h4>迅速な価値実現</h4>
-                        <p>2週間で初期プロトタイプが完成、すぐに効果検証が可能です。</p>
+                        <p>2週間で初期プロトタイプが完成、
+                        すぐに効果検証が可能です。</p>
                     </div>
                     
                     <div class="benefit-card">
@@ -3373,7 +3327,8 @@
                             <i class="fas fa-sync-alt"></i>
                         </div>
                         <h4>柔軟な方向転換</h4>
-                        <p>早期検証により、方向性の軌道修正が容易で追加コストを最小限に抑えられます。</p>
+                        <p>早期検証により、方向性の軌道修正が容易で
+                        追加コストを最小限に抑えられます。</p>
                     </div>
                 </div>
             </div>
@@ -3395,7 +3350,8 @@
                         <span class="text-gradient">3つのAIソリューション</span>
                     </h2>
                     <p class="section-description">
-                        最先端のAI技術で、業務効率化から新規事業創出まで幅広くサポート
+                        最先端のAI技術で、業務効率化から新規事業創出まで
+                        幅広くサポート
                     </p>
                 </div>
                 
@@ -3416,7 +3372,8 @@
                             <div class="service-content">
                                 <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
                                 <p class="service-description">
-                                    データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。
+                                    データドリブンで魅力的な企画書を自動作成。
+                                    最短5分で高品質な提案資料が完成します。
                                 </p>
                                 <a href="services.html#aipro" class="service-link">
                                     詳しく見る
@@ -3439,7 +3396,8 @@
                             <div class="service-content">
                                 <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
                                 <p class="service-description">
-                                    御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。
+                                    御社独自の課題に最適化されたAIソリューション。
+                                    完全オリジナルのAIシステムを構築します。
                                 </p>
                                 <a href="services.html#custom" class="service-link">
                                     詳しく見る
@@ -3462,7 +3420,8 @@
                             <div class="service-content">
                                 <h3 class="service-title">AI導入<br>コンサルティング</h3>
                                 <p class="service-description">
-                                    戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。
+                                    戦略立案から社内チーム育成まで伴走支援。
+                                    「やりっぱなし」にしないAI導入を実現します。
                                 </p>
                                 <a href="services.html#consulting" class="service-link">
                                     詳しく見る
@@ -3486,7 +3445,8 @@
                         </div>
                         <div class="mobile-card-content">
                             <h3 class="mobile-card-title">新規事業企画書AIツール「アイプロ」</h3>
-                            <p class="mobile-card-description">データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。</p>
+                            <p class="mobile-card-description">データドリブンで魅力的な企画書を自動作成。
+                            最短5分で高品質な提案資料が完成します。</p>
                             <a href="services.html#aipro" class="mobile-card-link">
                                 詳しく見る <i class="fas fa-arrow-right"></i>
                             </a>
@@ -3504,7 +3464,8 @@
                         </div>
                         <div class="mobile-card-content">
                             <h3 class="mobile-card-title">オーダーメイドAIアプリケーション開発</h3>
-                            <p class="mobile-card-description">御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。</p>
+                            <p class="mobile-card-description">御社独自の課題に最適化されたAIソリューション。
+                            完全オリジナルのAIシステムを構築します。</p>
                             <a href="services.html#custom" class="mobile-card-link">
                                 詳しく見る <i class="fas fa-arrow-right"></i>
                             </a>
@@ -3522,7 +3483,8 @@
                         </div>
                         <div class="mobile-card-content">
                             <h3 class="mobile-card-title">AI導入コンサルティング</h3>
-                            <p class="mobile-card-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。</p>
+                            <p class="mobile-card-description">戦略立案から社内チーム育成まで伴走支援。
+                            「やりっぱなし」にしないAI導入を実現します。</p>
                             <a href="services.html#consulting" class="mobile-card-link">
                                 詳しく見る <i class="fas fa-arrow-right"></i>
                             </a>
@@ -3567,7 +3529,8 @@
                             <i class="fas fa-coins" aria-hidden="true"></i>
                         </div>
                         <h3>初期投資を最小限に</h3>
-                        <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。段階的な投資で確実にROIを実現します。</p>
+                        <p>従来の1000万円規模の開発ではなく、小さく始めて効果を確認。
+                        段階的な投資で確実にROIを実現します。</p>
                         <div class="benefit-stat">
                             <div class="stat-value">70<span style="font-size: 1.5rem;">%</span></div>
                             <div class="stat-label">初期コスト削減</div>
@@ -3580,7 +3543,8 @@
                             <i class="fas fa-bolt" aria-hidden="true"></i>
                         </div>
                         <h3>柔軟な方向転換が可能</h3>
-                        <p>プロトタイプを見ながら一緒に方向性を決定。AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
+                        <p>プロトタイプを見ながら一緒に方向性を決定。
+                        AIの可能性は無限大だからこそ、柔軟に最適解を追求します。</p>
                         <div class="benefit-stat">
                             <div class="stat-value">2<span style="font-size: 1.5rem;">週間</span></div>
                             <div class="stat-label">最短導入期間</div>
@@ -3593,7 +3557,8 @@
                             <i class="fas fa-users" aria-hidden="true"></i>
                         </div>
                         <h3>共創型の開発体制</h3>
-                        <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。共に成長し、成功を実現します。</p>
+                        <p>開発会社と発注者の関係を超えて、同じ目標に向かうパートナーとして。
+                        共に成長し、成功を実現します。</p>
                         <div class="benefit-stat">
                             <div class="stat-value">100<span style="font-size: 1.5rem;">%</span></div>
                             <div class="stat-label">顧客満足度</div>
@@ -3624,6 +3589,8 @@
                 </div>
             </div>
         </section>
+    </main>
+
     <!-- ========================================================
     ▼ フッター Component
     ======================================================== -->
@@ -3638,7 +3605,8 @@
                         <span class="footer-logo-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
-                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
+                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。
+                        プロトタイプから始める伴走型開発で、確実な成果を実現します。
                     </p>
                     <div class="footer-social">
                         <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
@@ -3680,7 +3648,8 @@
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span>〒100-0001 東京都千代田区丸の内3-8-3 
+                        Tokyo Innovation Base</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -3709,7 +3678,7 @@
     </footer>
 
     <!-- ========================================================
-    ▼ チャットボット Component - 改善バージョン
+    ▼ チャットボット Component
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
@@ -3740,29 +3709,34 @@
     </div>
 
     <!-- ========================================================
-    ▼ メインスクリプト Component - 改善バージョン（モバイル対応強化）
+    ▼ Back to Top ボタン Component
+    ======================================================== -->
+    <button class="back-to-top" id="back-to-top" aria-label="ページトップへ">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ========================================================
+    ▼ メインスクリプト Component - 最適化版
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ========================================================
-        // ▼ 初期化処理 Component
+        // ▼ 初期化処理 Component - 高速化
         // ========================================================
         
         // ページロード完了時にローディングを非表示
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
+            // 読み込み時間を短縮
             setTimeout(() => {
                 pageLoader.classList.add('loaded');
                 setTimeout(() => {
                     pageLoader.style.display = 'none';
-                }, 500);
-            }, 500);
+                    // ページの可視性を高速化
+                    document.documentElement.classList.add('loaded');
+                }, 300);
+            }, 300);
         }
-        
-        // 可視性とアクセシビリティの改善
-        setTimeout(() => {
-            document.documentElement.classList.add('loaded');
-        }, 100);
         
         // カレントイヤーの更新
         const currentYearElement = document.getElementById('current-year');
@@ -3782,18 +3756,12 @@
         const nav = document.getElementById('nav');
         const headerBackdrop = document.getElementById('header-backdrop');
         
-        // モバイルロゴトリガーのクリックイベント - 改善版
+        // モバイルロゴトリガーのクリックイベント - 改善版（ヘッダーの代わりにハンバーガーメニューのみを操作）
         if (mobileLogoTrigger) {
             mobileLogoTrigger.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
-                    // ハンバーガーボタンを表示
-                    if (hamburgerVisible) {
-                        hamburgerVisible.style.display = 'flex';
-                    }
-                    // ヘッダーを表示
-                    if (header) {
-                        header.style.transform = 'translateY(0)';
-                    }
+                    // トップページへ移動
+                    window.location.href = 'index.html';
                 }
             });
         }
@@ -3801,109 +3769,84 @@
         // ハンバーガーボタン表示版のクリックイベント - 改善版
         if (hamburgerVisible) {
             hamburgerVisible.addEventListener('click', function() {
-                if (hamburger) {
-                    // 内部のハンバーガーボタンと同じ動作をさせる
-                    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-                    hamburger.setAttribute('aria-expanded', !expanded);
-                    
-                    if (nav) nav.classList.toggle('active');
-                    if (headerBackdrop) headerBackdrop.classList.toggle('active');
-                    
-                    // アイコン変更
-                    if (expanded) {
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    } else {
-                        hamburger.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    }
-                }
+                toggleMobileMenu();
             });
         }
         
-        // スクロールイベント - 改善版
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            const currentScrollTop = window.scrollY;
+        // モバイルメニュー切り替え機能
+        function toggleMobileMenu() {
+            if (nav) {
+                nav.classList.toggle('active');
+            }
             
+            if (headerBackdrop) {
+                headerBackdrop.classList.toggle('active');
+            }
+            
+            const menuActive = nav.classList.contains('active');
+            
+            if (hamburger) {
+                hamburger.setAttribute('aria-expanded', menuActive);
+                hamburger.innerHTML = menuActive ? 
+                    '<i class="fas fa-times" aria-hidden="true"></i>' : 
+                    '<i class="fas fa-bars" aria-hidden="true"></i>';
+            }
+            
+            if (hamburgerVisible) {
+                hamburgerVisible.innerHTML = menuActive ? 
+                    '<i class="fas fa-times" aria-hidden="true"></i>' : 
+                    '<i class="fas fa-bars" aria-hidden="true"></i>';
+            }
+        }
+        
+        // スクロールイベント - モバイル最適化
+        window.addEventListener('scroll', function() {
             // ヘッダースクロール効果
             if (header) {
-                if (currentScrollTop > 10) {
+                if (window.scrollY > 10) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
                 }
             }
             
-            // モバイルUI/UX改善 - スクロール位置に基づいて差別化ポイントを表示
-            const heroDifferentiators = document.querySelector('.hero-differentiators');
-            if (heroDifferentiators && window.innerWidth <= 768) {
-                const heroSection = document.getElementById('hero');
-                const showDifferentiatorsOnScroll = function() {
-                    // ヒーローセクションの終わり付近でスクロールした時に表示
-                    if (window.scrollY > (heroSection.offsetHeight / 2)) {
-                        heroDifferentiators.classList.add('visible');
-                    }
-                };
-                window.addEventListener('scroll', showDifferentiatorsOnScroll);
+            // Back to Topボタン表示制御
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
             }
-            
-            lastScrollTop = currentScrollTop;
         });
         
         // モバイルメニュー - 改善版
-        if (hamburger && nav) {
+        if (hamburger) {
             hamburger.addEventListener('click', function() {
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-                
-                nav.classList.toggle('active');
-                if (headerBackdrop) headerBackdrop.classList.toggle('active');
-                
-                // アイコン変更（ハンバーガーボタン両方）
-                if (expanded) {
-                    this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                } else {
-                    this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                }
+                toggleMobileMenu();
             });
             
             // 背景クリックでメニューを閉じる
             if (headerBackdrop) {
                 headerBackdrop.addEventListener('click', function() {
-                    nav.classList.remove('active');
-                    headerBackdrop.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    toggleMobileMenu();
                 });
             }
             
-            // ナビリンククリックでメニューを閉じる - 改善版（自動的に非表示に）
+            // ナビリンククリックでメニューを閉じる - 改善版
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
-                        nav.classList.remove('active');
-                        if (headerBackdrop) headerBackdrop.classList.remove('active');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        
-                        // リンククリック後にヘッダーを非表示
-                        setTimeout(() => {
-                            if (header) header.style.transform = 'translateY(-100%)';
-                            if (hamburgerVisible) hamburgerVisible.style.display = 'none';
-                        }, 500);
+                    if (window.innerWidth <= 768 && nav.classList.contains('active')) {
+                        toggleMobileMenu();
                     }
                 });
             });
         }
         
         // ========================================================
-        // ▼ UI要素のイベント処理 Component
+        // ▼ UI要素のイベント処理 Component - 最適化
         // ========================================================
         
         // Back to Top ボタンのクリックイベント
@@ -3928,11 +3871,9 @@
         if (chatbotButton && chatbotWindow && chatbotClose) {
             chatbotButton.addEventListener('click', function() {
                 chatbotWindow.classList.toggle('active');
+                this.setAttribute('aria-expanded', chatbotWindow.classList.contains('active'));
                 
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-                
-                if (!expanded) {
+                if (chatbotWindow.classList.contains('active') && chatInput) {
                     chatInput.focus();
                 }
             });
@@ -3958,7 +3899,7 @@
                         chatMessages.appendChild(loadingMsg);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                         
-                        // AIの応答内容 - タイプライター効果で表示速度を最適化
+                        // AIの応答内容 - タイプライター効果を高速化
                         setTimeout(function() {
                             // ローディング削除
                             chatMessages.removeChild(loadingMsg);
@@ -3990,14 +3931,14 @@
                                 response = responses[Math.floor(Math.random() * responses.length)];
                             }
                             
-                            // レスポンス追加（タイピング効果付き）
+                            // レスポンス追加（タイピング効果を高速化）
                             const botMessage = document.createElement('div');
                             botMessage.classList.add('chat-message', 'bot');
                             botMessage.textContent = '';
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 12; // 高速化
+                            const typingSpeed = 8; // 大幅に高速化
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -4014,10 +3955,10 @@
                                         ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 500);
+                                    }, 300);
                                 }
                             }, typingSpeed);
-                        }, 800);
+                        }, 500);
                     }
                 };
                 
@@ -4069,35 +4010,61 @@
                 
                 // モバイルメニューを閉じる
                 if (nav && nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    if (headerBackdrop) headerBackdrop.classList.remove('active');
-                    if (hamburger) {
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
-                    if (hamburgerVisible) {
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
+                    toggleMobileMenu();
                 }
             }
         });
         
         // ========================================================
-        // ▼ Three.jsパーティクル背景 Component - 内側球体を修正
+        // ▼ Three.jsパーティクルエフェクト初期化
         // ========================================================
-        
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
-            initThreeJSParticles();
+            if (typeof window.initThreeJSParticles === 'function') {
+                window.initThreeJSParticles();
+            }
         }
         
         // ========================================================
-        // ▼ アニメーション設定 Component
+        // ▼ アニメーション設定 Component - 高速化
         // ========================================================
         
-        // スクロールアニメーション
+        // アニメーション要素をデバイスパフォーマンスに応じて最適化
         if (typeof gsap !== 'undefined') {
-            // GSAPのScrollTriggerを使用
-            if (typeof ScrollTrigger !== 'undefined') {
+            // モバイルデバイスではGSAPアニメーションを最小限に
+            const isMobile = window.innerWidth <= 768;
+            
+            // リソース消費を抑えたアニメーション設定
+            if (typeof ScrollTrigger === 'undefined' || isMobile) {
+                // ScrollTriggerがない、またはモバイルの場合は簡易的なアニメーションのみ
+                const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .hero-description, .hero-buttons, .hero-differentiators');
+                heroElements.forEach((el, i) => {
+                    gsap.to(el, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        delay: i * 0.1
+                    });
+                });
+                
+                // 他の要素は簡易的な交差監視のみ
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text').forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // デスクトップ向け完全版アニメーション
+                // GSAPのScrollTriggerを使用
                 gsap.registerPlugin(ScrollTrigger);
                 
                 // アニメーション要素
@@ -4106,7 +4073,7 @@
                 animElements.forEach((element, index) => {
                     // 要素タイプに応じたアニメーション
                     let animation;
-                    let duration = 0.4; // より高速化
+                    let duration = 0.4; // 高速化
                     let delay = index * 0.03; // 遅延をほぼなしに
                     
                     if (element.classList.contains('section-header')) {
@@ -4146,12 +4113,6 @@
                         animation = { y: 15, opacity: 0 };
                     }
                     
-                    // モバイルでさらに高速化
-                    if (window.innerWidth <= 768) {
-                        duration = duration * 0.7;
-                        delay = delay * 0.3;
-                    }
-                    
                     gsap.from(element, {
                         ...animation,
                         duration: duration,
@@ -4164,316 +4125,9 @@
                         }
                     });
                 });
-            } else {
-                // ScrollTriggerがない場合はgsapだけで
-                const animElements = document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text');
-                
-                animElements.forEach((element, index) => {
-                    gsap.from(element, {
-                        y: 30,
-                        opacity: 0,
-                        duration: 0.7,
-                        delay: index * 0.1 % 0.5, // 遅延の上限を設定
-                        ease: "power2.out"
-                    });
-                });
             }
-        } else {
-            // GSAPがない場合のフォールバック
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            document.querySelectorAll('.section-header, .prototype-step, .benefit-card, .service-card, .benefit-container-card, .cta-content, .mobile-card, .mission-text').forEach(el => {
-                observer.observe(el);
-            });
         }
     });
-    
-    // Three.jsパーティクルエフェクト - 内側球体を修正（球形を維持）
-    function initThreeJSParticles() {
-        const container = document.getElementById('three-container');
-        
-        // シーン設定
-        const scene = new THREE.Scene();
-        
-        // カメラ設定
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 50;
-        
-        // レンダラー設定
-        const renderer = new THREE.WebGLRenderer({ 
-            alpha: true, 
-            antialias: true,
-            powerPreference: 'high-performance'
-        });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-        
-        // 中心の球体（デジタルコア - サマーウォーズ風）
-        const coreGeometry = new THREE.IcosahedronGeometry(6, 2);
-        const coreMaterial = new THREE.MeshBasicMaterial({
-            color: 0x4A8FFF,
-            transparent: true,
-            opacity: 0.15,
-            wireframe: true
-        });
-        const core = new THREE.Mesh(coreGeometry, coreMaterial);
-        scene.add(core);
-        
-        // 装飾用の内側コア - 改善：球形を維持（楕円形ではなく）
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
-        const innerCoreMaterial = new THREE.MeshBasicMaterial({
-            color: 0x00C9A7,
-            transparent: true,
-            opacity: 0.2,
-            wireframe: true
-        });
-        const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
-        scene.add(innerCore);
-        
-        // パーティクル設定（サマーウォーズ風デジタル空間）
-        const particlesCount = window.innerWidth < 768 ? 500 : 1000;
-        const particles = [];
-        
-        // パーティクルの形状（立方体、球体、ピラミッド）
-        const geometries = [
-            new THREE.BoxGeometry(0.12, 0.12, 0.12),
-            new THREE.SphereGeometry(0.06, 8, 8),
-            new THREE.TetrahedronGeometry(0.1, 0)
-        ];
-        
-        // カラーパレット（サマーウォーズ風 - 青/白/緑系）
-        const colors = [
-            0x4A8FFF, // 明るい青
-            0x3A5FEB, // 青
-            0x00C9A7, // 青緑
-            0x20E7C4, // 明るい青緑
-            0xFFFFFF, // 白
-            0xB4F2FF  // 水色
-        ];
-        
-        // パーティクル作成
-        for (let i = 0; i < particlesCount; i++) {
-            // 形状をランダム選択
-            const geometryIndex = Math.floor(Math.random() * geometries.length);
-            const geometry = geometries[geometryIndex].clone();
-            
-            // カラーをランダム選択（青/白系を多めに）
-            const colorIndex = Math.floor(Math.random() * colors.length);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: colors[colorIndex],
-                transparent: true,
-                opacity: 0.3 + Math.random() * 0.5
-            });
-            
-            // パーティクルメッシュ作成
-            const particle = new THREE.Mesh(geometry, material);
-            
-            // サマーウォーズ風の初期配置（より立体的な空間分布）
-            const radius = 15 + Math.random() * 40;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.random() * Math.PI;
-            
-            particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
-            particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
-            particle.position.z = radius * Math.cos(phi);
-            
-            // 初期回転
-            particle.rotation.x = Math.random() * Math.PI * 2;
-            particle.rotation.y = Math.random() * Math.PI * 2;
-            particle.rotation.z = Math.random() * Math.PI * 2;
-            
-            // パーティクルのパラメータを保存（より複雑な軌道運動）
-            particles.push({
-                mesh: particle,
-                velocity: {
-                    x: (Math.random() - 0.5) * 0.02,
-                    y: (Math.random() - 0.5) * 0.02,
-                    z: (Math.random() - 0.5) * 0.02
-                },
-                rotation: {
-                    x: (Math.random() - 0.5) * 0.01,
-                    y: (Math.random() - 0.5) * 0.01,
-                    z: (Math.random() - 0.5) * 0.01
-                },
-                orbit: {
-                    speed: 0.0001 + Math.random() * 0.0004,
-                    radius: radius,
-                    angle: Math.random() * Math.PI * 2,
-                    yFactor: Math.random() * 2 - 1 // Y軸変化の係数
-                },
-                pulse: {
-                    speed: 0.01 + Math.random() * 0.02,
-                    size: 0.05 + Math.random() * 0.1
-                }
-            });
-            
-            scene.add(particle);
-        }
-        
-        // 接続線（サマーウォーズ風データストリーム - より繊細に）
-        const connectionLines = [];
-        const lineCount = 25;
-        
-        for (let i = 0; i < lineCount; i++) {
-            const geometry = new THREE.BufferGeometry();
-            const vertices = new Float32Array(6);
-            geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-            
-            // 青みがかった線カラー
-            const material = new THREE.LineBasicMaterial({
-                color: 0x4A8FFF,
-                transparent: true,
-                opacity: 0.04
-            });
-            
-            const line = new THREE.Line(geometry, material);
-            scene.add(line);
-            connectionLines.push(line);
-        }
-        
-        // カメラ制御用変数
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        
-        // マウス追跡
-        document.addEventListener('mousemove', function(event) {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-        
-        // タッチ追跡
-        document.addEventListener('touchmove', function(event) {
-            if (event.touches.length > 0) {
-                mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
-            }
-        });
-        
-        // 時間変数
-        let time = 0;
-        
-        // アニメーション
-        const animate = () => {
-            requestAnimationFrame(animate);
-            time += 0.01;
-            
-            // カメラの滑らかな動き
-            targetX = mouseX * 15;
-            targetY = mouseY * 15;
-            camera.position.x += (targetX - camera.position.x) * 0.02;
-            camera.position.y += (targetY - camera.position.y) * 0.02;
-            camera.lookAt(scene.position);
-            
-            // コアのアニメーション（サマーウォーズ風の脈動）
-            core.rotation.y += 0.0015;
-            core.rotation.x += 0.0007;
-            const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
-            core.scale.set(scalePulse, scalePulse, scalePulse);
-            
-            // 内側コアの逆回転 - 改善: 球形を維持
-            innerCore.rotation.y -= 0.002;
-            innerCore.rotation.z += 0.001;
-            const innerScalePulse = Math.sin(time * 0.7) * 0.1 + 1;
-            innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse); // 全て同じ値で球形を維持
-            
-            // パーティクルアニメーション（サマーウォーズ風の美しい動き）
-            particles.forEach((p, index) => {
-                // より複雑な軌道運動
-                p.orbit.angle += p.orbit.speed;
-                
-                // 楕円軌道的な動き
-                const orbitX = p.orbit.radius * Math.cos(p.orbit.angle);
-                const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle);
-                const orbitY = p.orbit.radius * 0.5 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
-                
-                // 波形的な変動を加える
-                const waveX = Math.sin(time + index * 0.1) * 1.5;
-                const waveY = Math.cos(time * 0.7 + index * 0.2) * 1.2;
-                const waveZ = Math.sin(time * 0.5 + index * 0.15) * 1.8;
-                
-                // 位置更新
-                p.mesh.position.x = orbitX + p.velocity.x * waveX;
-                p.mesh.position.y = orbitY + p.velocity.y * waveY;
-                p.mesh.position.z = orbitZ + p.velocity.z * waveZ;
-                
-                // サイズの呼吸（より生命感）
-                const sizePulse = Math.sin(time * p.pulse.speed + index) * p.pulse.size + 1;
-                p.mesh.scale.set(sizePulse, sizePulse, sizePulse);
-                
-                // 自転
-                p.mesh.rotation.x += p.rotation.x;
-                p.mesh.rotation.y += p.rotation.y;
-                p.mesh.rotation.z += p.rotation.z;
-                
-                // 範囲外に出たら反対側から再登場
-                if (Math.abs(p.mesh.position.x) > 70) p.mesh.position.x *= -0.9;
-                if (Math.abs(p.mesh.position.y) > 50) p.mesh.position.y *= -0.9;
-                if (Math.abs(p.mesh.position.z) > 70) p.mesh.position.z *= -0.9;
-            });
-            
-            // 接続線のアニメーション - サマーウォーズ風
-            connectionLines.forEach((line, index) => {
-                // フレーム間引きで流動感を維持しながら負荷軽減
-                if (index % 3 !== Math.floor(time * 5) % 3) return;
-                
-                const positions = line.geometry.attributes.position.array;
-                
-                // 近くのパーティクルをペアで選択してより自然な接続
-                const p1Index = Math.floor(Math.random() * particles.length);
-                let p2Index = (p1Index + 1 + Math.floor(Math.random() * 20)) % particles.length;
-                
-                const p1 = particles[p1Index];
-                const p2 = particles[p2Index];
-                
-                if (p1 && p2) {
-                    const distance = p1.mesh.position.distanceTo(p2.mesh.position);
-                    
-                    // より短い距離での接続（サマーウォーズのデジタル空間のように）
-                    if (distance < 15) {
-                        positions[0] = p1.mesh.position.x;
-                        positions[1] = p1.mesh.position.y;
-                        positions[2] = p1.mesh.position.z;
-                        positions[3] = p2.mesh.position.x;
-                        positions[4] = p2.mesh.position.y;
-                        positions[5] = p2.mesh.position.z;
-                        
-                        line.geometry.attributes.position.needsUpdate = true;
-                        
-                        // 時間変化も加えた透明度変化（流れる感覚）
-                        const opacity = 0.03 * (1 - distance / 15) * (0.7 + 0.3 * Math.sin(time * 2 + index));
-                        line.material.opacity = opacity;
-                    } else {
-                        line.material.opacity = 0;
-                    }
-                }
-            });
-            
-            renderer.render(scene, camera);
-        };
-        
-        animate();
-        
-        // リサイズイベント処理
-        window.addEventListener('resize', function() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        });
-    }
     </script>
 </body>
 </html>
