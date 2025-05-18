@@ -358,6 +358,7 @@
         scroll-behavior: smooth;
         font-size: 16px;
         height: 100%;
+        scroll-padding-top: 90px; /* スムーススクロール時のヘッダー分オフセット */
     }
     
     body {
@@ -1051,7 +1052,12 @@
         font-size: clamp(2.5rem, 5vw, 3.5rem);
         font-weight: var(--font-weight-black);
         margin-bottom: 1.5rem;
-        color: var(--dark);
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
     }
 
     .faq-hero-description {
@@ -1062,7 +1068,7 @@
         line-height: 1.7;
     }
 
-    /* FAQ検索機能 */
+    /* FAQ検索機能 - 強化版 */
     .faq-search {
         position: relative;
         max-width: 700px;
@@ -1079,11 +1085,16 @@
         pointer-events: none;
     }
 
+    .faq-search-wrapper {
+        position: relative;
+        display: flex;
+    }
+
     #faq-search-input {
         width: 100%;
         padding: 1.25rem 1.5rem 1.25rem 4rem;
         border: 2px solid rgba(58, 95, 235, 0.1);
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius-lg) 0 0 var(--radius-lg);
         font-size: 1.1rem;
         transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-md);
@@ -1094,6 +1105,43 @@
         outline: none;
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1), var(--shadow-md);
+    }
+
+    .faq-search-button {
+        background: var(--gradient-primary);
+        color: var(--white);
+        border: none;
+        padding: 0 1.5rem;
+        border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        font-weight: var(--font-weight-semibold);
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        box-shadow: var(--shadow-button);
+    }
+
+    .faq-search-button:hover {
+        background: var(--gradient-primary-hover);
+        box-shadow: var(--shadow-button-hover);
+    }
+
+    /* 検索結果表示 */
+    .search-results-info {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--primary);
+        height: 1.5rem;
+        display: none;
+    }
+
+    .search-results-info.active {
+        display: block;
+        animation: fadeInUp 0.3s ease forwards;
+    }
+
+    .search-highlight {
+        background-color: rgba(255, 138, 0, 0.2);
+        padding: 0 2px;
+        border-radius: 3px;
     }
 
     /* FAQ浮遊背景要素 */
@@ -1146,7 +1194,7 @@
         }
     }
 
-    /* FAQカテゴリー */
+    /* FAQカテゴリー - スクロールナビゲーション強化 */
     .faq-categories {
         display: flex;
         flex-wrap: wrap;
@@ -1190,6 +1238,7 @@
 
     .faq-group {
         margin-bottom: 3.5rem;
+        scroll-margin-top: 100px; /* スムーススクロール位置調整 */
     }
 
     .faq-group-title {
@@ -1220,6 +1269,7 @@
         overflow: hidden;
         transition: all var(--transition-normal) ease;
         border: 1px solid rgba(58, 95, 235, 0.05);
+        scroll-margin-top: 100px; /* スムーススクロール位置調整 */
     }
 
     .faq-item:hover {
@@ -1234,6 +1284,7 @@
         justify-content: space-between;
         align-items: center;
         transition: all var(--transition-normal) ease;
+        position: relative;
     }
 
     .faq-question-text {
@@ -1387,7 +1438,7 @@
         font-weight: var(--font-weight-semibold);
     }
 
-    /* 社会的証明コンポーネント */
+    /* 社会的証明コンポーネント - 改善版 */
     .social-proof {
         background: var(--white);
         border-radius: var(--radius-xl);
@@ -1565,6 +1616,48 @@
         line-height: 1.6;
     }
 
+    /* 検索で表示なし状態のスタイル */
+    .faq-group.hidden, .faq-item.hidden {
+        display: none;
+    }
+
+    /* スクロールインジケーター */
+    .faq-scroll-indicator {
+        position: fixed;
+        top: calc(var(--header-height) + 10px);
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: var(--z-fixed);
+        background-color: white;
+        padding: 0.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.3s ease;
+    }
+
+    .faq-scroll-indicator.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .indicator-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(58, 95, 235, 0.2);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .indicator-dot.active {
+        background-color: var(--primary);
+        transform: scale(1.2);
+    }
+
     /* レスポンシブ対応 */
     @media (max-width: 992px) {
         .faq-benefits-grid {
@@ -1590,8 +1683,20 @@
             margin-bottom: 2rem;
         }
 
+        .faq-search-wrapper {
+            flex-direction: column;
+        }
+
         #faq-search-input {
+            border-radius: var(--radius-lg);
             padding: 1rem 1rem 1rem 3.5rem;
+        }
+
+        .faq-search-button {
+            margin-top: 0.8rem;
+            border-radius: var(--radius-full);
+            padding: 0.8rem 1.5rem;
+            width: 100%;
         }
 
         .faq-search-icon {
@@ -1655,6 +1760,10 @@
 
         .faq-cta-buttons .btn {
             width: 100%;
+        }
+
+        .faq-scroll-indicator {
+            display: none;
         }
     }
 
@@ -2378,6 +2487,17 @@
     .animate-in {
         animation: fadeInUp 0.8s ease forwards;
     }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
     
     /* ========================================================
     ▼ フォーカス状態の改善 Component
@@ -2498,27 +2618,27 @@
                 </a>
                 
                 <nav aria-label="メインナビゲーション">
-                    <ul class="nav" id="nav">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">ホーム</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">会社紹介</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="services.html" class="nav-link">サービス</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="industries.html" class="nav-link">業界別活用</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="faq.html" class="nav-link active" aria-current="page">よくある質問</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" class="nav-link">お問い合わせ</a>
-                        </li>
-                        <li class="nav-cta">
-                            <a href="contact.html" class="btn-header-consultation">
+                <ul class="nav" id="nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">会社紹介</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">サービス</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="industries.html" class="nav-link">業界別活用</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="faq.html" class="nav-link active" aria-current="page">よくある質問</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">お問い合わせ</a>
+                    </li>
+                    <li class="nav-cta">
+                        <a href="contact.html" class="btn-header-consultation">
                             <i class="fas fa-comment-dots"></i>
                             <span>無料相談</span>
                         </a>
@@ -2558,17 +2678,23 @@
             </p>
             
             <div class="faq-search">
-                <i class="fas fa-search faq-search-icon" aria-hidden="true"></i>
-                <input type="text" id="faq-search-input" placeholder="知りたいことを入力してください（例：費用、期間、プロセスなど）" aria-label="質問を検索">
+                <form id="faq-search-form">
+                    <div class="faq-search-wrapper">
+                        <i class="fas fa-search faq-search-icon" aria-hidden="true"></i>
+                        <input type="text" id="faq-search-input" placeholder="知りたいことを入力してください（例：費用、期間、プロセスなど）" aria-label="質問を検索">
+                        <button type="submit" class="faq-search-button">検索</button>
+                    </div>
+                </form>
+                <div id="search-results-info" class="search-results-info"></div>
             </div>
             
             <div class="faq-categories">
                 <button class="faq-category active" data-category="all">すべて</button>
-                <button class="faq-category" data-category="beginner">初めての方向け</button>
-                <button class="faq-category" data-category="cost">費用・導入</button>
-                <button class="faq-category" data-category="development">開発手法</button>
-                <button class="faq-category" data-category="industry">業界別</button>
-                <button class="faq-category" data-category="service">サービス内容</button>
+                <button class="faq-category" data-category="beginner" data-target="beginner-faq">初めての方向け</button>
+                <button class="faq-category" data-category="cost" data-target="cost-faq">費用・導入</button>
+                <button class="faq-category" data-category="development" data-target="development-faq">開発手法</button>
+                <button class="faq-category" data-category="industry" data-target="industry-faq">業界別</button>
+                <button class="faq-category" data-category="service" data-target="service-faq">サービス内容</button>
             </div>
         </div>
     </section>
@@ -2579,10 +2705,19 @@
     <section class="section">
         <div class="container">
             <div class="faq-content">
+                <!-- スクロールインジケーター -->
+                <div class="faq-scroll-indicator" id="faq-scroll-indicator">
+                    <div class="indicator-dot" data-target="beginner-faq" title="初めての方向け"></div>
+                    <div class="indicator-dot" data-target="cost-faq" title="費用・導入"></div>
+                    <div class="indicator-dot" data-target="development-faq" title="開発手法"></div>
+                    <div class="indicator-dot" data-target="industry-faq" title="業界別"></div>
+                    <div class="indicator-dot" data-target="service-faq" title="サービス内容"></div>
+                </div>
+                
                 <!-- ========================================================
                 ▼ 初めての方向け FAQ Component
                 ======================================================== -->
-                <div class="faq-group" data-category="beginner">
+                <div id="beginner-faq" class="faq-group" data-category="beginner">
                     <h2 class="faq-group-title">初めての方向け</h2>
                     
                     <div class="faq-item active">
@@ -2669,7 +2804,7 @@
                 <!-- ========================================================
                 ▼ 費用・導入FAQ Component
                 ======================================================== -->
-                <div class="faq-group" data-category="cost">
+                <div id="cost-faq" class="faq-group" data-category="cost">
                     <h2 class="faq-group-title">費用・導入について</h2>
                     
                     <div class="faq-item">
@@ -2719,10 +2854,10 @@
                 </div>
                 
                 <!-- ========================================================
-                ▼ 社会的証明セクション Component
+                ▼ 社会的証明セクション Component - 改善版（導入企業数削除）
                 ======================================================== -->
                 <div class="social-proof">
-                    <h2 class="social-proof-title">多くの企業が選ぶShinAI</h2>
+                    <h2 class="social-proof-title">顧客から選ばれる理由</h2>
                     <p class="social-proof-text">
                         プロトタイプから始める伴走型AI開発で、確実な成果を実現しています。
                     </p>
@@ -2734,8 +2869,8 @@
                         </div>
                         
                         <div class="proof-metric">
-                            <div class="metric-value">100+</div>
-                            <div class="metric-label">導入企業数</div>
+                            <div class="metric-value">60%</div>
+                            <div class="metric-label">コスト削減率</div>
                         </div>
                         
                         <div class="proof-metric">
@@ -2748,7 +2883,7 @@
                 <!-- ========================================================
                 ▼ 開発手法FAQ Component
                 ======================================================== -->
-                <div class="faq-group" data-category="development">
+                <div id="development-faq" class="faq-group" data-category="development">
                     <h2 class="faq-group-title">開発手法について</h2>
                     
                     <div class="faq-item">
@@ -2800,7 +2935,7 @@
                 <!-- ========================================================
                 ▼ 業界別FAQ Component
                 ======================================================== -->
-                <div class="faq-group" data-category="industry">
+                <div id="industry-faq" class="faq-group" data-category="industry">
                     <h2 class="faq-group-title">業界別活用について</h2>
                     
                     <div class="faq-item">
@@ -2852,7 +2987,7 @@
                 <!-- ========================================================
                 ▼ サービス内容FAQ Component
                 ======================================================== -->
-                <div class="faq-group" data-category="service">
+                <div id="service-faq" class="faq-group" data-category="service">
                     <h2 class="faq-group-title">サービス内容について</h2>
                     
                     <div class="faq-item">
@@ -3197,6 +3332,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         backToTop.classList.remove('active');
                     }
                 }
+
+                // スクロールインジケーター表示制御
+                const scrollIndicator = document.getElementById('faq-scroll-indicator');
+                if (scrollIndicator) {
+                    if (currentScrollTop > 300) {
+                        scrollIndicator.classList.add('active');
+                    } else {
+                        scrollIndicator.classList.remove('active');
+                    }
+                }
+                
+                // スクロールインジケーターのアクティブ状態更新
+                updateScrollIndicator();
                 
                 lastScrollTop = currentScrollTop;
                 ticking = false;
@@ -3256,14 +3404,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ========================================================
-    // ▼ FAQ機能 Component
+    // ▼ FAQ機能 Component - 強化版
     // ========================================================
     
     // FAQアコーディオン機能
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
         
         question.addEventListener('click', () => {
             // 現在の状態を取得
@@ -3291,49 +3438,167 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // FAQ検索機能
+    // FAQ検索機能 - 強化版
+    const searchForm = document.getElementById('faq-search-form');
     const searchInput = document.getElementById('faq-search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
+    const searchResultsInfo = document.getElementById('search-results-info');
+    
+    if (searchForm && searchInput) {
+        // フォーム送信イベント
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+        
+        // 入力イベント（リアルタイム検索）
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 1) {
+                performSearch();
+            } else if (this.value.length === 0) {
+                // 検索ボックスが空の場合、すべての項目を表示
+                resetSearch();
+            }
+        });
+        
+        // 検索実行関数
+        function performSearch() {
             const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm.length < 1) return;
+            
+            let matchCount = 0;
+            let firstMatchId = null;
             
             // 各FAQアイテムをチェック
             faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question-text').textContent.toLowerCase();
-                const answer = item.querySelector('.faq-answer-inner').textContent.toLowerCase();
+                const questionText = item.querySelector('.faq-question-text').textContent.toLowerCase();
+                const answerText = item.querySelector('.faq-answer-inner').textContent.toLowerCase();
                 
                 // 検索語が質問または回答に含まれているかチェック
-                if (searchTerm === '' || question.includes(searchTerm) || answer.includes(searchTerm)) {
-                    item.style.display = '';
+                if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                    
+                    // 検索語をハイライト
+                    highlightText(item, searchTerm);
+                    
+                    matchCount++;
+                    
+                    // 最初に見つかったアイテムのIDを記録
+                    if (firstMatchId === null) {
+                        firstMatchId = item.id || item.closest('.faq-group').id;
+                    }
+                    
+                    // アイテムを展開
+                    item.classList.add('active');
+                    item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
                 } else {
-                    item.style.display = 'none';
+                    item.classList.add('hidden');
+                    item.classList.remove('active');
+                    item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 }
             });
             
             // カテゴリー別に表示するアイテムがあるかチェック
             document.querySelectorAll('.faq-group').forEach(group => {
                 const visibleItems = Array.from(group.querySelectorAll('.faq-item')).filter(
-                    item => item.style.display !== 'none'
+                    item => !item.classList.contains('hidden')
                 );
                 
                 if (visibleItems.length === 0) {
-                    group.style.display = 'none';
+                    group.classList.add('hidden');
                 } else {
-                    group.style.display = '';
+                    group.classList.remove('hidden');
                 }
             });
             
-            // すべてのカテゴリーボタンの選択状態をリセット
+            // カテゴリーボタンの選択状態をリセット
             document.querySelectorAll('.faq-category').forEach(btn => {
                 btn.classList.remove('active');
             });
             
             // 「すべて」カテゴリーを選択状態に
             document.querySelector('.faq-category[data-category="all"]').classList.add('active');
-        });
+            
+            // 検索結果情報を表示
+            if (searchResultsInfo) {
+                searchResultsInfo.textContent = matchCount > 0 
+                    ? `${matchCount}件の検索結果が見つかりました` 
+                    : `「${searchTerm}」に一致する結果が見つかりませんでした`;
+                searchResultsInfo.classList.add('active');
+            }
+            
+            // 最初に見つかった項目までスクロール
+            if (firstMatchId && matchCount > 0) {
+                const element = document.getElementById(firstMatchId);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        }
+        
+        // テキストのハイライト関数
+        function highlightText(item, searchTerm) {
+            const questionText = item.querySelector('.faq-question-text');
+            const answerInner = item.querySelector('.faq-answer-inner');
+            
+            // 元のテキストを保存
+            if (!questionText.dataset.originalText) {
+                questionText.dataset.originalText = questionText.innerHTML;
+            }
+            
+            if (!answerInner.dataset.originalText) {
+                answerInner.dataset.originalText = answerInner.innerHTML;
+            }
+            
+            // 質問テキストをハイライト
+            const questionHTML = questionText.dataset.originalText.replace(
+                new RegExp(searchTerm, 'gi'),
+                match => `<span class="search-highlight">${match}</span>`
+            );
+            questionText.innerHTML = questionHTML;
+            
+            // 回答テキストをハイライト
+            const answerHTML = answerInner.dataset.originalText.replace(
+                new RegExp(searchTerm, 'gi'),
+                match => `<span class="search-highlight">${match}</span>`
+            );
+            answerInner.innerHTML = answerHTML;
+        }
+        
+        // 検索リセット関数
+        function resetSearch() {
+            // すべてのFAQアイテムを表示
+            faqItems.forEach(item => {
+                item.classList.remove('hidden');
+                
+                // ハイライトをリセット
+                const questionText = item.querySelector('.faq-question-text');
+                const answerInner = item.querySelector('.faq-answer-inner');
+                
+                if (questionText.dataset.originalText) {
+                    questionText.innerHTML = questionText.dataset.originalText;
+                }
+                
+                if (answerInner.dataset.originalText) {
+                    answerInner.innerHTML = answerInner.dataset.originalText;
+                }
+            });
+            
+            // すべてのグループを表示
+            document.querySelectorAll('.faq-group').forEach(group => {
+                group.classList.remove('hidden');
+            });
+            
+            // 検索結果情報を非表示
+            if (searchResultsInfo) {
+                searchResultsInfo.classList.remove('active');
+            }
+        }
     }
     
-    // FAQカテゴリー機能
+    // FAQカテゴリー機能 - スクロールナビゲーション強化
     const categoryButtons = document.querySelectorAll('.faq-category');
     if (categoryButtons.length > 0) {
         categoryButtons.forEach(button => {
@@ -3341,6 +3606,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 検索ボックスをクリア
                 if (searchInput) {
                     searchInput.value = '';
+                }
+                
+                // 検索結果情報を非表示
+                if (searchResultsInfo) {
+                    searchResultsInfo.classList.remove('active');
                 }
                 
                 // アクティブボタンを切り替え
@@ -3351,24 +3621,123 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const category = this.getAttribute('data-category');
                 
-                // すべてのアイテムを表示
-                faqItems.forEach(item => {
-                    item.style.display = '';
+                // すべてのFAQグループとアイテムを表示状態にリセット
+                document.querySelectorAll('.faq-group, .faq-item').forEach(el => {
+                    el.classList.remove('hidden');
                 });
                 
                 // カテゴリー別の表示制御
                 if (category === 'all') {
-                    document.querySelectorAll('.faq-group').forEach(group => {
-                        group.style.display = '';
+                    // すべてのカテゴリを表示、先頭にスクロール
+                    window.scrollTo({
+                        top: document.querySelector('.faq-content').offsetTop - 100,
+                        behavior: 'smooth'
                     });
                 } else {
+                    // 特定のカテゴリのみ表示
                     document.querySelectorAll('.faq-group').forEach(group => {
                         const groupCategory = group.getAttribute('data-category');
-                        group.style.display = (groupCategory === category) ? '' : 'none';
+                        if (groupCategory === category) {
+                            // スクロール
+                            const targetElement = document.getElementById(this.getAttribute('data-target'));
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        }
                     });
+                }
+                
+                // スクロールインジケータの更新
+                updateScrollIndicator();
+            });
+        });
+    }
+    
+    // スクロールインジケーター機能
+    const scrollIndicator = document.getElementById('faq-scroll-indicator');
+    const indicatorDots = document.querySelectorAll('.indicator-dot');
+    
+    if (scrollIndicator && indicatorDots.length > 0) {
+        // インジケータードットのクリックイベント
+        indicatorDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // スムーススクロール
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // アクティブ状態の更新
+                    indicatorDots.forEach(d => d.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // カテゴリボタンの選択状態も更新
+                    const category = targetElement.getAttribute('data-category');
+                    if (category) {
+                        document.querySelectorAll('.faq-category').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        const categoryBtn = document.querySelector(`.faq-category[data-category="${category}"]`);
+                        if (categoryBtn) {
+                            categoryBtn.classList.add('active');
+                        }
+                    }
+                }
+            });
+            
+            // ホバー時のツールチップ表示（タイトル属性で対応）
+            dot.addEventListener('mouseover', function() {
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const groupTitle = targetElement.querySelector('.faq-group-title').textContent;
+                    this.setAttribute('title', groupTitle);
                 }
             });
         });
+    }
+    
+    // スクロール位置に基づいてインジケータを更新する関数
+    function updateScrollIndicator() {
+        if (!indicatorDots || indicatorDots.length === 0) return;
+        
+        const faqGroups = document.querySelectorAll('.faq-group');
+        if (faqGroups.length === 0) return;
+        
+        const scrollPosition = window.scrollY + 150; // オフセット追加
+        
+        // 表示されているグループの中で、現在のスクロール位置に最も近いものを見つける
+        let activeGroupId = null;
+        let minDistance = Infinity;
+        
+        faqGroups.forEach(group => {
+            if (group.classList.contains('hidden')) return;
+            
+            const groupTop = group.getBoundingClientRect().top + window.scrollY;
+            const distance = Math.abs(scrollPosition - groupTop);
+            
+            if (distance < minDistance) {
+                minDistance = distance;
+                activeGroupId = group.id;
+            }
+        });
+        
+        // アクティブなインジケーターを更新
+        if (activeGroupId) {
+            indicatorDots.forEach(dot => {
+                const targetId = dot.getAttribute('data-target');
+                dot.classList.toggle('active', targetId === activeGroupId);
+            });
+        }
     }
     
     // ========================================================
