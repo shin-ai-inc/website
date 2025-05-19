@@ -218,49 +218,50 @@
     ======================================================== -->
     <style>
     /* ========================================================
-    ▼ 変数定義 Component - カラーパレット - 洗練されたグラデーション
+    ▼ 変数定義 Component - 画像に合わせたカラーグラデーション
     ======================================================== */
     :root {
-        /* 主要カラー - 洗練版 */
-        --primary: #3A5FEB;
-        --primary-dark: #2C49C7;
-        --primary-light: #5B7BFF;
-        --secondary: #00C9A7;
-        --secondary-dark: #00A689;
-        --secondary-light: #20E7C4;
-        --accent: #FF8A00;
-        --accent-light: #FFA94D;
-        --accent-dark: #E67900;
-        --dark: #0f172a;
-        --gray: #4B5563;          /* より暗いグレーに変更 - プロフェッショナル感向上 */
-        --light-gray: #f8fafc;
+        /* 主要カラー - 画像のグラデーションに合わせた調整 */
+        --primary: #4A85FF;         /* より鮮やかな青 - 画像の右側カラー */
+        --primary-dark: #3964C8;    /* 暗めの青 */
+        --primary-light: #5B96FF;   /* 明るい青 */
+        --secondary: #00DBB4;       /* 鮮やかなターコイズ - 画像の左側カラー */
+        --secondary-dark: #00B496;  /* 暗めのターコイズ */
+        --secondary-light: #20F0CB; /* 明るいターコイズ */
+        --accent: #FF8A00;          /* アクセントオレンジ */
+        --accent-light: #FFA94D;    /* 明るいオレンジ */
+        --accent-dark: #E67900;     /* 暗めのオレンジ */
+        --dark: #0E1938;            /* より深い紺色 - 画像のフッター部分 */
+        --gray: #4B5563;            /* 控えめなグレー */
+        --light-gray: #f8fafc;      /* 薄いグレー */
         --white: #ffffff;
         
-        /* グラデーション - より洗練されたバージョン */
-        --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
-        --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
-        --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
+        /* グラデーション - 画像に合わせて調整 */
+        --gradient-primary: linear-gradient(135deg, #00DBB4, #4A85FF);  /* 画像のグラデーションを反映 */
+        --gradient-primary-hover: linear-gradient(135deg, #00B496, #3964C8);
+        --gradient-secondary: linear-gradient(135deg, #4A85FF, #20F0CB);
         --gradient-accent: linear-gradient(135deg, #FF8A00, #FFA94D);
-        --gradient-hero: linear-gradient(to right, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05)); /* より繊細に */
-        --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02)); /* より繊細に */
-        --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05)); /* より繊細に */
-        --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
-        --gradient-cta-new: linear-gradient(90deg, #00A689 0%, #3A5FEB 100%); /* より落ち着いた色調に */
-        --gradient-mission: linear-gradient(90deg, #00A689 0%, #3A5FEB 100%); /* より落ち着いた色調に */
+        --gradient-hero: linear-gradient(to right, rgba(0, 219, 180, 0.05), rgba(74, 133, 255, 0.05));
+        --gradient-section: linear-gradient(to bottom, rgba(0, 219, 180, 0.02), rgba(74, 133, 255, 0.02));
+        --gradient-card: linear-gradient(135deg, rgba(0, 219, 180, 0.05), rgba(74, 133, 255, 0.05));
+        --gradient-brand: linear-gradient(135deg, #4A85FF 0%, #1E90FF 45%, #00DBB4 100%);
+        --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%); /* 画像のグラデーションを反映 */
+        --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%); /* 画像のグラデーションを反映 */
         --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
+        --gradient-footer: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);  /* フッターグラデーション */
         
         /* シャドウ - より洗練された繊細な影に */
-        --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
-        --shadow-sm: 0 2px 5px rgba(15, 23, 42, 0.05);
-        --shadow-md: 0 5px 15px rgba(15, 23, 42, 0.06);
-        --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.08);
-        --shadow-xl: 0 20px 50px rgba(15, 23, 42, 0.1);
-        --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.03);
-        --shadow-button: 0 4px 12px rgba(58, 95, 235, 0.15);
-        --shadow-button-hover: 0 8px 20px rgba(58, 95, 235, 0.25);
+        --shadow-xs: 0 1px 2px rgba(14, 25, 56, 0.03);
+        --shadow-sm: 0 2px 5px rgba(14, 25, 56, 0.05);
+        --shadow-md: 0 5px 15px rgba(14, 25, 56, 0.06);
+        --shadow-lg: 0 10px 25px rgba(14, 25, 56, 0.08);
+        --shadow-xl: 0 20px 50px rgba(14, 25, 56, 0.1);
+        --shadow-inner: inset 0 2px 4px rgba(14, 25, 56, 0.03);
+        --shadow-button: 0 4px 12px rgba(0, 219, 180, 0.15);
+        --shadow-button-hover: 0 8px 20px rgba(0, 219, 180, 0.25);
         --shadow-accent: 0 4px 12px rgba(255, 138, 0, 0.15);
         --shadow-accent-hover: 0 8px 20px rgba(255, 138, 0, 0.25);
-        --shadow-header: 0 4px 20px rgba(15, 23, 42, 0.05);
+        --shadow-header: 0 4px 20px rgba(14, 25, 56, 0.05);
         --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.05);
         
         /* フォント - より権威性を感じさせるフォント設定 */
