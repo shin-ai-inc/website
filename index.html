@@ -255,7 +255,9 @@
         }
     }
     
-    /* Three.jsパーティクルコンテナ - 維持 */
+    /* ========================================================
+    ▼ Three.jsパーティクルコンテナ Component - 改善版維持
+    ======================================================== */
     #three-container {
         position: fixed;
         top: 0;
@@ -2244,7 +2246,7 @@
     </div>
     
     <!-- ========================================================
-    ▼ Three.js Particle Container Component - 維持
+    ▼ Three.js Particle Container Component - 改善版維持
     ======================================================== -->
     <div id="three-container"></div>
     
@@ -2937,7 +2939,7 @@
         });
         
         // ========================================================
-        // ▼ Three.js Particle Background Component - 維持
+        // ▼ Three.js Particle Background Component - 改善版最適化
         // ========================================================
         
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
@@ -2968,7 +2970,9 @@
         });
     });
     
-    // Three.js particle effect - optimized version (maintain original)
+    /* ========================================================
+    ▼ Three.js Particle Effect Function - 改善版最適化パーティクルエフェクト
+    ======================================================== */
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
         const isMobile = window.innerWidth < 768;
@@ -2978,7 +2982,7 @@
         
         // Camera setup
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 45;
+        camera.position.z = 50;
         
         // Renderer setup - optimized for performance
         const renderer = new THREE.WebGLRenderer({ 
@@ -2991,41 +2995,46 @@
         container.appendChild(renderer.domElement);
         
         // Core sphere
-        const coreGeometry = new THREE.IcosahedronGeometry(5, isMobile ? 1 : 2);
+        const coreGeometry = new THREE.IcosahedronGeometry(6, isMobile ? 1 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x4A8FFF,
             transparent: true,
-            opacity: 0.12,
+            opacity: 0.15,
             wireframe: true
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
         // Inner decorative core
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(2.5, 1);
+        const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
             transparent: true,
-            opacity: 0.18,
+            opacity: 0.2,
             wireframe: true
         });
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
         
-        // Particle setup - reduced count for performance
-        const particlesCount = isMobile ? 200 : 400;
+        // Particle setup - モバイルでは数を増やす
+        const particlesCount = isMobile ? 400 : 800;
         const particles = [];
         
         // Particle shapes
         const geometries = [
-            new THREE.BoxGeometry(0.08, 0.08, 0.08),
-            new THREE.SphereGeometry(0.04, 6, 6),
-            new THREE.TetrahedronGeometry(0.06, 0)
+            new THREE.BoxGeometry(0.12, 0.12, 0.12),
+            new THREE.SphereGeometry(0.06, 8, 8),
+            new THREE.TetrahedronGeometry(0.1, 0)
         ];
         
         // Color palette
         const colors = [
-            0x4A8FFF, 0x3A5FEB, 0x00C9A7, 0x20E7C4, 0xFFFFFF, 0xB4F2FF
+            0x4A8FFF, // 明るい青
+            0x3A5FEB, // 青
+            0x00C9A7, // 青緑
+            0x20E7C4, // 明るい青緑
+            0xFFFFFF, // 白
+            0xB4F2FF  // 水色
         ];
         
         // Create particles - optimized
@@ -3037,12 +3046,12 @@
             const material = new THREE.MeshBasicMaterial({ 
                 color: colors[colorIndex],
                 transparent: true,
-                opacity: 0.2 + Math.random() * 0.3
+                opacity: 0.3 + Math.random() * 0.5
             });
             
             const particle = new THREE.Mesh(geometry, material);
             
-            const radius = 10 + Math.random() * 30;
+            const radius = 15 + Math.random() * 40;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
             
@@ -3057,35 +3066,63 @@
             particles.push({
                 mesh: particle,
                 velocity: {
+                    x: (Math.random() - 0.5) * 0.02,
+                    y: (Math.random() - 0.5) * 0.02,
+                    z: (Math.random() - 0.5) * 0.02
+                },
+                rotation: {
                     x: (Math.random() - 0.5) * 0.01,
                     y: (Math.random() - 0.5) * 0.01,
                     z: (Math.random() - 0.5) * 0.01
                 },
-                rotation: {
-                    x: (Math.random() - 0.5) * 0.006,
-                    y: (Math.random() - 0.5) * 0.006,
-                    z: (Math.random() - 0.5) * 0.006
-                },
                 orbit: {
-                    speed: 0.0001 + Math.random() * 0.0002,
+                    speed: 0.0001 + Math.random() * 0.0004,
                     radius: radius,
                     angle: Math.random() * Math.PI * 2,
                     yFactor: Math.random() * 2 - 1
                 },
                 pulse: {
-                    speed: 0.006 + Math.random() * 0.012,
-                    size: 0.03 + Math.random() * 0.06
+                    speed: 0.01 + Math.random() * 0.02,
+                    size: 0.05 + Math.random() * 0.1
                 }
             });
             
             scene.add(particle);
         }
         
+        // Connection lines - モバイルでは数を削減
+        const connectionLines = [];
+        const lineCount = isMobile ? 15 : 25; // モバイルでも15本に増加
+        
+        for (let i = 0; i < lineCount; i++) {
+            const geometry = new THREE.BufferGeometry();
+            const vertices = new Float32Array(6);
+            geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            
+            const material = new THREE.LineBasicMaterial({
+                color: 0x4A8FFF,
+                transparent: true,
+                opacity: 0.04
+            });
+            
+            const line = new THREE.Line(geometry, material);
+            scene.add(line);
+            connectionLines.push(line);
+        }
+        
         // Camera control variables
         let mouseX = 0;
         let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
         
-        // Mouse tracking - throttled
+        // Mouse tracking - performance optimized
+        const handleMouseMove = function(event) {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        };
+        
+        // Throttling function
         let throttleTimeout;
         const throttle = function(callback, limit) {
             if (!throttleTimeout) {
@@ -3096,65 +3133,66 @@
             }
         };
         
+        // Throttled mouse move handler
         document.addEventListener('mousemove', function(event) {
             throttle(function() {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            }, 25);
+                handleMouseMove(event);
+            }, 25); // 40fps equivalent
         });
         
-        // Touch tracking - optimized
+        // Touch tracking - performance optimized
         document.addEventListener('touchmove', function(event) {
             if (event.touches.length > 0) {
                 throttle(function() {
                     mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
                     mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
-                }, 50);
+                }, 50); // Touch devices are more restricted
             }
         });
         
         // Time variable
         let time = 0;
         
-        // Animation - optimized
+        // Animation - performance optimized
         const animate = () => {
             requestAnimationFrame(animate);
-            time += 0.006;
+            time += 0.01;
             
             // Smooth camera movement
-            const targetX = mouseX * 10;
-            const targetY = mouseY * 10;
-            camera.position.x += (targetX - camera.position.x) * 0.01;
-            camera.position.y += (targetY - camera.position.y) * 0.01;
+            targetX = mouseX * 15;
+            targetY = mouseY * 15;
+            camera.position.x += (targetX - camera.position.x) * 0.02;
+            camera.position.y += (targetY - camera.position.y) * 0.02;
             camera.lookAt(scene.position);
             
             // Core animation
-            core.rotation.y += 0.0008;
-            core.rotation.x += 0.0004;
-            const scalePulse = Math.sin(time * 0.3) * 0.03 + 1;
+            core.rotation.y += 0.0015;
+            core.rotation.x += 0.0007;
+            const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
             // Inner core reverse rotation
-            innerCore.rotation.y -= 0.001;
-            innerCore.rotation.z += 0.0006;
-            const innerScalePulse = Math.sin(time * 0.5) * 0.06 + 1;
+            innerCore.rotation.y -= 0.002;
+            innerCore.rotation.z += 0.001;
+            const innerScalePulse = Math.sin(time * 0.7) * 0.1 + 1;
             innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
             
-            // Particle animation - optimized for mobile
-            const skipRate = isMobile ? 4 : 2;
+            // Particle animation - mobile skip rate optimization
+            const skipRate = isMobile ? 2 : 1; // Only update half of particles on mobile
             
             particles.forEach((p, index) => {
+                // Mobile optimization: only update subset of particles
                 if (isMobile && index % skipRate !== 0) return;
                 
                 p.orbit.angle += p.orbit.speed;
                 
                 const orbitX = p.orbit.radius * Math.cos(p.orbit.angle);
                 const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle);
-                const orbitY = p.orbit.radius * 0.3 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
+                const orbitY = p.orbit.radius * 0.5 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
                 
-                const waveX = Math.sin(time + index * 0.06) * 1;
-                const waveY = Math.cos(time * 0.5 + index * 0.12) * 0.8;
-                const waveZ = Math.sin(time * 0.3 + index * 0.1) * 1.2;
+                const waveX = Math.sin(time + index * 0.1) * 1.5;
+                const waveY = Math.cos(time * 0.7 + index * 0.2) * 1.2;
+                const waveZ = Math.sin(time * 0.5 + index * 0.15) * 1.8;
                 
                 p.mesh.position.x = orbitX + p.velocity.x * waveX;
                 p.mesh.position.y = orbitY + p.velocity.y * waveY;
@@ -3163,24 +3201,65 @@
                 const sizePulse = Math.sin(time * p.pulse.speed + index) * p.pulse.size + 1;
                 p.mesh.scale.set(sizePulse, sizePulse, sizePulse);
                 
-                // Rotation
-                p.mesh.rotation.x += p.rotation.x;
-                p.mesh.rotation.y += p.rotation.y;
-                p.mesh.rotation.z += p.rotation.z;
+                if (isMobile) {
+                    // Mobile: stop rotation for smoother flow
+                    p.mesh.rotation.x = Math.sin(time * 0.2 + index * 0.1) * 0.2;
+                    p.mesh.rotation.y = Math.cos(time * 0.3 + index * 0.05) * 0.2;
+                    p.mesh.rotation.z = Math.sin(time * 0.1 + index * 0.2) * 0.2;
+                } else {
+                    // Desktop: normal rotation
+                    p.mesh.rotation.x += p.rotation.x;
+                    p.mesh.rotation.y += p.rotation.y;
+                    p.mesh.rotation.z += p.rotation.z;
+                }
                 
-                // Boundary check
-                if (Math.abs(p.mesh.position.x) > 50) p.mesh.position.x *= -0.9;
-                if (Math.abs(p.mesh.position.y) > 40) p.mesh.position.y *= -0.9;
-                if (Math.abs(p.mesh.position.z) > 50) p.mesh.position.z *= -0.9;
+                if (Math.abs(p.mesh.position.x) > 70) p.mesh.position.x *= -0.9;
+                if (Math.abs(p.mesh.position.y) > 50) p.mesh.position.y *= -0.9;
+                if (Math.abs(p.mesh.position.z) > 70) p.mesh.position.z *= -0.9;
             });
 
+            // Connection line animation - optimized
+            const updateLineInterval = isMobile ? 5 : 3; // Further thinning on mobile
+            
+            connectionLines.forEach((line, index) => {
+                if (index % updateLineInterval !== Math.floor(time * 5) % updateLineInterval) return;
+                
+                const positions = line.geometry.attributes.position.array;
+                
+                const p1Index = Math.floor(Math.random() * particles.length);
+                let p2Index = (p1Index + 1 + Math.floor(Math.random() * 20)) % particles.length;
+                
+                const p1 = particles[p1Index];
+                const p2 = particles[p2Index];
+                
+                if (p1 && p2) {
+                    const distance = p1.mesh.position.distanceTo(p2.mesh.position);
+                    
+                    if (distance < 15) {
+                        positions[0] = p1.mesh.position.x;
+                        positions[1] = p1.mesh.position.y;
+                        positions[2] = p1.mesh.position.z;
+                        positions[3] = p2.mesh.position.x;
+                        positions[4] = p2.mesh.position.y;
+                        positions[5] = p2.mesh.position.z;
+                        
+                        line.geometry.attributes.position.needsUpdate = true;
+                        
+                        const opacity = 0.03 * (1 - distance / 15) * (0.7 + 0.3 * Math.sin(time * 2 + index));
+                        line.material.opacity = opacity;
+                    } else {
+                        line.material.opacity = 0;
+                    }
+                }
+            });
+            
             renderer.render(scene, camera);
         };
         
         // Start animation
         animate();
         
-        // Resize event handling - optimized
+        // Resize event handling - throttling applied
         let resizeTimeout;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimeout);
