@@ -1765,18 +1765,18 @@
     }
 
     /* ========================================================
-    ▼ Chatbot Component - コンパクト化
+    ▼ Chatbot Component - 完全版（元ファイル準拠）
     ======================================================== */
     .chatbot {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
+        bottom: 30px;
+        right: 30px;
         z-index: var(--z-max);
     }
     
     .chatbot-button {
-        width: 50px;
-        height: 50px;
+        width: 64px;
+        height: 64px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
@@ -1784,11 +1784,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         box-shadow: var(--shadow-lg);
         cursor: pointer;
         position: relative;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         z-index: 2;
         overflow: hidden;
     }
@@ -1802,13 +1802,13 @@
     .chatbot-button::before {
         content: '';
         position: absolute;
-        top: -4px;
-        right: -4px;
-        bottom: -4px;
-        left: -4px;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        left: -8px;
         border-radius: 50%;
-        background: rgba(58, 95, 235, 0.2);
-        animation: pulse 2s infinite;
+        background: rgba(58, 95, 235, 0.3);
+        animation: pulse 2.5s infinite;
         z-index: -1;
     }
     
@@ -1826,7 +1826,7 @@
     }
     
     .chatbot-button:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
         box-shadow: var(--shadow-xl);
     }
     
@@ -1835,27 +1835,294 @@
     }
     
     .chatbot-button:hover i {
+        transform: scale(1.2);
+    }
+    
+    .chatbot-window {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 360px;
+        height: 500px;
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+        display: none;
+        flex-direction: column;
+        opacity: 0;
+        transform: scale(0.9);
+        transform-origin: bottom right;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        z-index: var(--z-popover);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .chatbot-window.active {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .chatbot-header {
+        background: var(--gradient-primary);
+        color: var(--white);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: var(--font-weight-semibold);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--white);
+    }
+    
+    .chatbot-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .chatbot-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+    }
+    
+    .chatbot-messages {
+        flex: 1;
+        padding: 1.5rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .chat-message {
+        max-width: 80%;
+        padding: 0.75rem 1rem;
+        border-radius: 15px;
+        line-height: 1.5;
+        font-size: 0.95rem;
+        animation: fadeInMessage 0.3s ease-out forwards;
+    }
+    
+    @keyframes fadeInMessage {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .bot {
+        border-bottom-left-radius: 3px;
+        background: var(--light-gray);
+        color: var(--dark);
+        align-self: flex-start;
+    }
+    
+    .user {
+        border-bottom-right-radius: 3px;
+        background: var(--primary);
+        color: var(--white);
+        align-self: flex-end;
+    }
+    
+    .chatbot-input {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .chatbot-input input {
+        flex: 1;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-full);
+        outline: none;
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .chatbot-input input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+    }
+    
+    .chatbot-send {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: var(--white);
+        border: none;
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .chatbot-send::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity var(--transition-normal) ease;
+        z-index: 0;
+    }
+    
+    .chatbot-send i {
+        position: relative;
+        z-index: 1;
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .chatbot-send:hover {
         transform: scale(1.1);
     }
     
-    @keyframes pulse {
+    .chatbot-send:hover::before {
+        opacity: 1;
+    }
+    
+    .chatbot-send:hover i {
+        transform: translateX(2px);
+    }
+    
+    /* チャットボットローディングアニメーション */
+    .loading-dots {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .loading-dots i {
+        font-size: 5px;
+        animation: dotPulse 1.5s infinite;
+    }
+    
+    .loading-dots i:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .loading-dots i:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes dotPulse {
         0%, 100% {
             transform: scale(1);
             opacity: 0.4;
         }
         50% {
-            transform: scale(1.1);
+            transform: scale(1.5);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1.2);
             opacity: 0;
         }
     }
     
-    /* Back to Top Button - コンパクト化 */
+    /* モバイルチャットボット最適化 */
+    @media (max-width: 768px) {
+        .chatbot {
+            bottom: 20px;
+            right: 20px;
+        }
+        
+        .chatbot-button {
+            width: 56px;
+            height: 56px;
+            font-size: 1.3rem;
+        }
+        
+        .chatbot-window {
+            position: fixed;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 70%; /* 改善: 高さ最適化 */
+            border-radius: 20px 20px 0 0;
+            transform-origin: bottom center;
+        }
+        
+        .chatbot-messages {
+            padding: 1rem;
+        }
+        
+        .chatbot-input {
+            padding: 0.75rem;
+            background: var(--white);
+            position: relative;
+            z-index: 10;
+            /* 送信ボタンが見切れないようスペースを確保 */
+            padding-bottom: 1rem;
+        }
+        
+        .chatbot-input input {
+            height: 42px;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .chatbot-send {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+        }
+        
+        /* スマホでのチャット表示領域を確保 */
+        .chat-message {
+            max-width: 85%;
+            font-size: 0.9rem;
+            padding: 0.6rem 0.9rem;
+        }
+    }
+    
+    /* ========================================================
+    ▼ Back to Top Button Component - 完全版（元ファイル準拠）
+    ======================================================== */
     .back-to-top {
         position: fixed;
-        bottom: 80px;
-        right: 20px;
-        width: 38px;
-        height: 38px;
+        bottom: 110px;
+        right: 30px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
@@ -1864,14 +2131,13 @@
         justify-content: center;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(10px);
+        transform: translateY(20px);
         cursor: pointer;
         z-index: var(--z-fixed);
         transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-md);
         border: none;
         overflow: hidden;
-        font-size: 0.8rem;
     }
     
     .back-to-top.active {
@@ -1880,29 +2146,44 @@
         transform: translateY(0);
     }
     
+    .back-to-top i {
+        position: relative;
+        z-index: 2;
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .back-to-top::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-accent);
+        opacity: 0;
+        transition: opacity var(--transition-normal) ease;
+        z-index: 1;
+    }
+    
     .back-to-top:hover {
-        transform: translateY(-2px);
+        transform: translateY(-3px);
         box-shadow: var(--shadow-lg);
     }
     
+    .back-to-top:hover::before {
+        opacity: 1;
+    }
+    
+    .back-to-top:hover i {
+        transform: translateY(-2px);
+    }
+    
     @media (max-width: 768px) {
-        .chatbot {
-            bottom: 15px;
-            right: 15px;
-        }
-        
-        .chatbot-button {
-            width: 45px;
-            height: 45px;
-            font-size: 1.1rem;
-        }
-        
         .back-to-top {
-            bottom: 70px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            font-size: 0.75rem;
+            bottom: 90px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
         }
     }
 
@@ -2487,7 +2768,7 @@
             });
         }
         
-        // Chatbot functionality - optimized for mobile
+        // Chatbot functionality - 完全版（元ファイル準拠）
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
         const chatbotClose = document.getElementById('chatbot-close');
@@ -2503,7 +2784,7 @@
                 this.setAttribute('aria-expanded', !expanded);
                 
                 if (!expanded) {
-                    setTimeout(() => chatInput.focus(), 200);
+                    chatInput.focus();
                 }
             });
             
@@ -2512,62 +2793,64 @@
                 chatbotButton.setAttribute('aria-expanded', 'false');
             });
             
-            // Chat send processing - optimized AI responses
+            // Chat send processing - 完全版（元ファイル準拠）
             if (chatSend && chatInput && chatMessages) {
                 const handleSend = function() {
                     const message = chatInput.value.trim();
                     if (message) {
-                        // Add user message
+                        // ユーザーメッセージを追加
                         addChatMessage(message, 'user');
                         chatInput.value = '';
                         
-                        // Display loading indicator
+                        // ローディングインジケーター表示
                         const loadingMsg = document.createElement('div');
                         loadingMsg.classList.add('chat-message', 'bot', 'loading');
                         loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
                         chatMessages.appendChild(loadingMsg);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                         
-                        // AI response content - professional AI system development company
+                        // AIの応答内容 - タイプライター効果で表示速度を最適化
                         setTimeout(function() {
-                            // Remove loading
+                            // ローディング削除
                             chatMessages.removeChild(loadingMsg);
                             
-                            // Professional AI system development company response
+                            // 専門的なAIシステム受託開発会社としての応答
                             let response = '';
                             const messageLower = message.toLowerCase();
                             
                             if (messageLower.includes('エージェント') || messageLower.includes('agent')) {
-                                response = "ShinAIではAIエージェント開発を得意としています。ChatGPT/GPT-4などのLLMを活用し、御社の業務フローに最適化したAIエージェントを構築します。最短2週間のプロトタイプから始めて、段階的に本格導入を進めることで確実な成果を実現します。";
-                            } else if (messageLower.includes('rag') || messageLower.includes('検索')) {
-                                response = "RAG(Retrieval Augmented Generation)は社内データを活用したAIシステム構築の鍵となる技術です。ShinAIではベクトルデータベースを活用した高度なRAGシステムを構築し、御社の知識ベースを効率的に活用できるようにします。";
+                                response = "ShinAIではAIエージェント開発を得意としています。社内向けシステムへの導入から、特定業務の自動化まで、様々なAIエージェントを開発してきました。ChatGPT/GPT-4などのLLMを活用し、御社の業務フローに最適化したAIエージェントを構築します。まずは無料相談で、どのような課題に対して活用できるか、ご相談ください。";
+                            } else if (messageLower.includes('rag') || messageLower.includes('検索') || messageLower.includes('retrieval')) {
+                                response = "RAG(Retrieval Augmented Generation)は社内データを活用したAIシステム構築の鍵となる技術です。ShinAIではベクトルデータベースを活用した高度なRAGシステムを構築し、御社の知識ベースを効率的に活用できるようにします。社内文書や過去のナレッジを活用したAIシステムをご検討の場合は、ぜひご相談ください。";
                             } else if (messageLower.includes('料金') || messageLower.includes('費用') || messageLower.includes('価格')) {
-                                response = "プロトタイプ開発は30万円からご利用いただけます。段階的投資により初期費用を抑え、効果を確認しながら本格開発に進むことで確実なROIを実現します。詳細な費用については、無料相談でお気軽にお問い合わせください。";
-                            } else if (messageLower.includes('期間') || messageLower.includes('納期')) {
-                                response = "最短2週間でプロトタイプの開発が可能です。小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。プロトタイプから段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
+                                response = "ShinAIのサービスは、プロジェクトの規模や内容によって料金が異なります。プロトタイプ開発からスタートすることで、初期費用を30万円〜からご用意しております。AIエージェント開発やRAG構築など、具体的なシステムの内容や規模に応じて最適なプランをご提案します。詳細な費用については、無料相談でお気軽にお問い合わせください。";
+                            } else if (messageLower.includes('期間') || messageLower.includes('納期') || messageLower.includes('時間')) {
+                                response = "AIシステム開発の期間は、プロジェクトの複雑さによって異なりますが、最短2週間でプロトタイプの開発が可能です。小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。プロトタイプから段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
+                            } else if (messageLower.includes('事例') || messageLower.includes('実績')) {
+                                response = "御社の業界や課題に合わせた事例をお知りになりたい場合は、お気軽にお問い合わせください。";
+                            } else if (messageLower.includes('プロトタイプ') || messageLower.includes('小さく始める') || messageLower.includes('伴走')) {
+                                response = "ShinAIでは「プロトタイプからの伴走型開発」を採用しています。まず2週間程度で小規模な試作品を構築し、実際に使っていただきながら効果を確認。方向性が合っていることを確認しながら段階的に拡張していきます。このアプローチにより、初期投資リスクを最小限に抑えながら、確実に成果を出すことが可能です。まずは無料相談で、御社の課題に対するプロトタイプのアイデアをご提案させてください。";
                             } else if (messageLower.includes('アイプロ')) {
-                                response = "新規事業企画書AIツール「アイプロ」は、AIが自動でビジネス企画書・プレゼン資料を作成するツールです。最短5分で高品質な資料作成を実現し、中小企業を中心に営業・企画部門の生産性向上に貢献しています。";
-                            } else if (messageLower.includes('伴走') || messageLower.includes('サポート')) {
-                                response = "ShinAIでは「プロトタイプからの伴走型開発」を採用しています。企画から実装、運用、自走化まで一貫してサポートし、「やりっぱなし」にならないAI導入を実現します。お客様と共に方向性を確認しながら段階的に開発を進めます。";
+                                response = "新規事業企画書AIツール「アイプロ」は、AIが自動でビジネス企画書・プレゼン資料を作成するツールです。入力情報をもとにデータドリブンで魅力的な企画を提案し、最短5分で高品質な資料作成を実現。中小企業を中心に営業・企画部門の生産性を大幅に向上させます。具体的な活用方法については、デモンストレーションも可能ですので、お気軽にお問い合わせください。";
                             } else {
-                                // General response for AI development company
+                                // AI受託開発会社としての汎用的な応答
                                 const responses = [
-                                    "ShinAIでは、AIエージェント開発やRAG構築などの社内向けAIシステム開発から、業務効率化AIツールの提供まで幅広くサポートしています。プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。",
-                                    "最先端のAI技術を活用して企業の課題を解決するShinAIです。ChatGPT/GPT-4などのLLMを活用したAIエージェント開発や、社内データを活用したRAGシステム構築が得意分野です。",
-                                    "AIの導入は難しいと思われがちですが、ShinAIのアプローチなら専門知識がなくても安心です。プロトタイプから始めて効果を確認しながら、段階的に開発を進めていきます。"
+                                    "ShinAIでは、AIエージェント開発やRAG構築などの社内向けAIシステム開発から、業務効率化AIツールの提供まで幅広くサポートしています。プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
+                                    "最先端のAI技術を活用して企業の課題を解決するShinAIです。ChatGPT/GPT-4などのLLMを活用したAIエージェント開発や、社内データを活用したRAGシステム構築が得意分野です。小さく始めて効果を確認する段階的アプローチで、リスクを最小化しながら最大の成果を目指します。",
+                                    "AIの導入は難しいと思われがちですが、ShinAIのアプローチなら専門知識がなくても安心です。プロトタイプから始めて効果を確認しながら、段階的に開発を進めていきます。経験豊富なAI専門家が、御社に最適なAI活用方法について無料相談でご提案させていただきます。"
                                 ];
                                 
                                 response = responses[Math.floor(Math.random() * responses.length)];
                             }
                             
-                            // Add response (with typing effect - optimized)
+                            // レスポンス追加（タイピング効果付き）
                             const botMessage = document.createElement('div');
                             botMessage.classList.add('chat-message', 'bot');
                             botMessage.textContent = '';
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 5;
+                            const typingSpeed = 8; // 高速化
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -2577,17 +2860,17 @@
                                 } else {
                                     clearInterval(typingEffect);
                                     
-                                    // Add CTA button
+                                    // CTAボタンを追加
                                     setTimeout(function() {
                                         const ctaButton = document.createElement('div');
                                         ctaButton.classList.add('chat-message', 'bot');
-                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.4rem; font-size: 0.8rem;">お問い合わせ・無料相談予約</a>';
+                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 150);
+                                    }, 300);
                                 }
                             }, typingSpeed);
-                        }, 250);
+                        }, 400);
                     }
                 };
                 
