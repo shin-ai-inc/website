@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <!-- ========================================================
-    ▼ MetaInformation Component
+    ▼ Meta Information Component
     ======================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- ========================================================
-    ▼ OGP設定 Component
+    ▼ OGP Settings Component
     ======================================================== -->
     <meta property="og:title" content="ShinAI - サービス｜AIシステム受託開発・AIプロダクト提供">
     <meta property="og:description" content="AIエージェント開発やRAG構築など最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で初期投資を抑えて確実な成果を実現します。">
@@ -31,9 +31,9 @@
     <meta name="twitter:site" content="@ShinAI_JP">
     
     <!-- ========================================================
-    ▼ リソース読み込み Component - パフォーマンス最適化
+    ▼ Resource Loading Component - Performance Optimization
     ======================================================== -->
-    <!-- フォント - パフォーマンス最適化 -->
+    <!-- Fonts - Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -41,21 +41,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     </noscript>
     
-    <!-- アイコン - パフォーマンス最適化 -->
+    <!-- Icons - Performance Optimization -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     
-    <!-- アニメーションライブラリ - 最適化版：非同期読み込み -->
+    <!-- Animation Libraries - Optimized: Async Loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     
-    <!-- ファビコン Component -->
+    <!-- Favicon Component -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
     <link rel="apple-touch-icon" href="assets/images/logo.svg">
     
     <!-- ========================================================
-    ▼ 構造化データ Component
+    ▼ Structured Data Component
     ======================================================== -->
     <script type="application/ld+json">
     {
@@ -99,10 +99,10 @@
     <title>サービス | ShinAI - AIシステム受託開発・AIプロダクト提供｜プロトタイプから始める伴走型AI開発</title>
     
     <!-- ========================================================
-    ▼ クリティカルパスCSS（高速初期表示のための最小限のスタイル）
+    ▼ Critical Path CSS Component - Instant Display Optimization
     ======================================================== -->
     <style>
-    /* ページ読み込み中のフラッシュ防止 - 即時表示のための最適化 */
+    /* Flash Prevention - Instant Display Optimization */
     html {
         visibility: hidden;
     }
@@ -111,7 +111,7 @@
         transition: opacity 0.2s ease;
     }
     
-    /* プリローダースタイル - 高速化 */
+    /* Preloader Styles - Acceleration */
     .page-loader {
         position: fixed;
         top: 0;
@@ -146,7 +146,7 @@
         }
     }
     
-    /* Three.jsパーティクルコンテナ - 常に表示を維持 */
+    /* Three.js Particle Container - Always Display */
     #three-container {
         position: fixed;
         top: 0;
@@ -158,30 +158,7 @@
         overflow: hidden;
     }
     
-    /* ハンバーガーボタン - モバイルUI/UX改善 */
-    .hamburger-visible {
-        display: none;
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        background: white;
-        border-radius: 10px;
-        width: 40px;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-        z-index: 1002;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .hamburger-visible:hover {
-        transform: scale(1.05);
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* モバイル表示の最適化 - ヘッダーとヒーローの最初表示調整（改善版） */
+    /* Mobile Display Optimization - Improved Header/Hero Initial Display */
     @media (max-width: 768px) {
         .header {
             height: 60px;
@@ -192,25 +169,18 @@
             top: 0;
             width: 100%;
         }
-        
-        /* ハンバーガーボタンを常に表示 */
-        .hamburger-visible {
-            display: flex;
-            top: 10px;
-            right: 10px;
-        }
     }
     </style>
 
     <!-- ========================================================
-    ▼ メインスタイル
+    ▼ Main Styles Component
     ======================================================== -->
     <style>
     /* ========================================================
-    ▼ 変数定義 Component - index.htmlと完全統一
+    ▼ Variable Definition Component - Complete Unification with index.html
     ======================================================== */
     :root {
-        /* 主要カラー - 改善版 */
+        /* Primary Colors - Improved Version */
         --primary: #3A5FEB;
         --primary-dark: #2C49C7;
         --primary-light: #5B7BFF;
@@ -225,7 +195,7 @@
         --light-gray: #f8fafc;
         --white: #ffffff;
         
-        /* グラデーション - 鮮やかなバージョンに更新 */
+        /* Gradients - Updated to Vibrant Version */
         --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
         --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
         --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
@@ -238,7 +208,7 @@
         --gradient-mission: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         --gradient-accent-text: linear-gradient(135deg, #FF8A00, #FF5630);
         
-        /* シャドウ */
+        /* Shadows */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
         --shadow-sm: 0 2px 5px rgba(15, 23, 42, 0.07);
         --shadow-md: 0 5px 15px rgba(15, 23, 42, 0.08);
@@ -252,7 +222,7 @@
         --shadow-header: 0 4px 20px rgba(15, 23, 42, 0.08);
         --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.1);
         
-        /* フォント */
+        /* Fonts */
         --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         --font-weight-normal: 400;
@@ -262,7 +232,7 @@
         --font-weight-extrabold: 800;
         --font-weight-black: 900;
         
-        /* スペーシング */
+        /* Spacing */
         --space-1: 0.25rem;
         --space-2: 0.5rem;
         --space-3: 0.75rem;
@@ -274,12 +244,12 @@
         --space-12: 3rem;
         --space-16: 4rem;
         
-        /* サイズシステム */
+        /* Size System */
         --header-height: 72px;
         --header-height-mobile: 60px;
         --container-width: 1200px;
         
-        /* ボーダーラジウス */
+        /* Border Radius */
         --radius-sm: 6px;
         --radius-md: 8px;
         --radius-lg: 12px;
@@ -287,7 +257,7 @@
         --radius-2xl: 24px;
         --radius-full: 9999px;
         
-        /* Z-index階層 */
+        /* Z-index Hierarchy */
         --z-negative: -1;
         --z-elevate: 1;
         --z-drawer: 10;
@@ -301,14 +271,14 @@
         --z-overlay: 90;
         --z-max: 999;
         
-        /* アニメーション時間 - 高速化 */
+        /* Animation Times - Acceleration */
         --transition-fast: 0.12s;
         --transition-normal: 0.2s;
         --transition-slow: 0.35s;
     }
 
     /* ========================================================
-    ▼ リセットとベーススタイル Component
+    ▼ Reset and Base Styles Component
     ======================================================== */
     *, *::before, *::after {
         margin: 0;
@@ -374,7 +344,7 @@
     }
     
     /* ========================================================
-    ▼ レイアウトシステム Component
+    ▼ Layout System Component
     ======================================================== */
     .container {
         width: 100%;
@@ -479,7 +449,7 @@
     }
     
     /* ========================================================
-    ▼ タイポグラフィシステム Component
+    ▼ Typography System Component
     ======================================================== */
     .heading-xl {
         font-size: clamp(2.5rem, 5vw, 4rem);
@@ -560,7 +530,7 @@
     }
     
     /* ========================================================
-    ▼ ヘッダー Component - index.htmlと完全統一
+    ▼ Header Component - Complete Unification with index.html + Mobile Improvements
     ======================================================== */
     .header {
         position: fixed;
@@ -632,7 +602,7 @@
         transform: scale(1.1);
     }
     
-    /* ナビゲーション改善 - ヘッダー内のバランス調整 */
+    /* Navigation Improvement - Header Balance Adjustment */
     .nav {
         display: flex;
         align-items: center;
@@ -686,7 +656,7 @@
         margin-left: var(--space-2);
     }
     
-    /* ヘッダーボタン改善 - 視覚的フィードバック強化 */
+    /* Header Button Improvement - Enhanced Visual Feedback */
     .btn-header-consultation {
         background: var(--gradient-primary);
         color: var(--white);
@@ -735,7 +705,7 @@
         z-index: 2;
     }
     
-    /* ハンバーガーメニュー改善 - モバイルUI/UX向上 */
+    /* Hamburger Menu Improvement - Mobile UI/UX Enhancement */
     .hamburger {
         display: none;
         background: none;
@@ -777,36 +747,38 @@
         visibility: visible;
     }
     
-    /* モバイルメニュー改善 - UI/UX強化 */
+    /* Mobile Menu Improvement - UI/UX Enhancement + Fixed Layout */
     @media (max-width: 768px) {
         .hamburger {
-            display: none;
+            display: flex; /* Always visible on mobile */
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         .header-inner {
-            justify-content: center;
-            padding-left: 2rem;
+            justify-content: flex-start; /* Logo to left */
+            padding-left: 1rem;
+            padding-right: 70px; /* Space for hamburger */
         }
         
         .logo {
             margin: 0;
         }
         
-        .hamburger-visible {
-            display: flex;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            color: var(--dark);
-        }
-        
         .nav {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 70%;
+            width: 75%; /* Increased width for better usability */
             height: 100vh;
             background: var(--white);
             flex-direction: column;
@@ -849,7 +821,7 @@
     }
     
     /* ========================================================
-    ▼ ボタン Component - 視覚的フィードバック強化
+    ▼ Button Component - Enhanced Visual Feedback
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -998,17 +970,17 @@
     }
 
     /* ========================================================
-    ▼ ページヒーロー Component - AI企業らしい未来感のあるデザイン
+    ▼ Page Hero Component - Futuristic AI Company Design
     ======================================================== */
     .page-hero {
         position: relative;
-        min-height: 75vh;
+        min-height: 80vh; /* Increased for better mobile display */
         display: flex;
         align-items: center;
         padding: calc(var(--header-height) + 4rem) 0 4rem;
         overflow: hidden;
         background: linear-gradient(135deg, 
-            rgba(58, 95, 235, 0.05) 0%, 
+            rgba(58, 95, 235, 0.06) 0%, 
             rgba(0, 201, 167, 0.08) 50%, 
             rgba(255, 138, 0, 0.05) 100%);
     }
@@ -1032,7 +1004,7 @@
         position: relative;
         z-index: 1;
         text-align: center;
-        max-width: 900px;
+        max-width: 1000px; /* Increased for better text layout */
         margin: 0 auto;
     }
     
@@ -1043,10 +1015,11 @@
         margin-bottom: 2rem;
         font-size: 0.9rem;
         color: var(--gray);
-        background: rgba(255, 255, 255, 0.8);
-        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 0.6rem 1.2rem;
         border-radius: var(--radius-full);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px);
+        box-shadow: var(--shadow-sm);
     }
     
     .breadcrumb-item {
@@ -1060,6 +1033,7 @@
     
     .breadcrumb-separator {
         color: var(--gray);
+        margin: 0 0.3rem;
     }
     
     .breadcrumb-current {
@@ -1068,10 +1042,10 @@
     }
     
     .page-hero-title {
-        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
         font-weight: var(--font-weight-black);
         line-height: 1.1;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
         letter-spacing: -0.02em;
         background: var(--gradient-brand);
         -webkit-background-clip: text;
@@ -1082,16 +1056,17 @@
     }
     
     .page-hero-description {
-        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
         color: var(--gray);
         line-height: 1.7;
-        max-width: 700px;
-        margin: 0 auto 2rem;
+        max-width: 800px;
+        margin: 0 auto 2.5rem;
         background: rgba(255, 255, 255, 0.9);
-        padding: 1.5rem 2rem;
-        border-radius: var(--radius-lg);
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-sm);
+        padding: 2rem 2.5rem;
+        border-radius: var(--radius-xl);
+        backdrop-filter: blur(15px);
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(58, 95, 235, 0.1);
     }
     
     .page-hero-description strong {
@@ -1106,26 +1081,33 @@
     @media (max-width: 768px) {
         .page-hero {
             padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
-            min-height: 70vh;
+            min-height: 75vh;
         }
         
         .page-hero-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
         }
         
         .page-hero-description {
             font-size: 1rem;
-            padding: 1rem 1.5rem;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumb {
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
         }
     }
 
     /* ========================================================
-    ▼ セクション共通スタイル Component
+    ▼ Section Common Styles Component
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 3.5rem;
+        margin-bottom: 4rem;
         position: relative;
         z-index: 1;
     }
@@ -1133,16 +1115,17 @@
     .section-subtitle {
         display: inline-block;
         background: rgba(58, 95, 235, 0.12);
-        padding: 0.6rem 1.8rem;
+        padding: 0.7rem 2rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 1.2rem;
-        font-size: 0.9rem;
-        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
-        border: 1px solid rgba(58, 95, 235, 0.12);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.1);
+        border: 1px solid rgba(58, 95, 235, 0.15);
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
     }
     
     .section-subtitle::before {
@@ -1152,7 +1135,7 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         transform: rotate(45deg);
         transition: all 0.6s ease;
         opacity: 0;
@@ -1164,13 +1147,13 @@
     }
     
     .section-header .heading-lg {
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.5rem;
     }
     
     .section-description {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         color: var(--gray);
-        max-width: 700px;
+        max-width: 750px;
         margin: 0 auto;
         line-height: 1.7;
     }
@@ -1181,13 +1164,14 @@
         font-weight: 500;
         display: inline-block;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
-        padding: 0.8rem 1.8rem;
+        padding: 1rem 2rem;
         border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
         border-left: 4px solid var(--primary);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
+        box-shadow: var(--shadow-sm);
     }
     
     .brand-catchphrase::before {
@@ -1207,17 +1191,18 @@
     
     @media (max-width: 768px) {
         .section-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
         
         .section-subtitle {
             font-size: 0.85rem;
-            padding: 0.5rem 1.5rem;
+            padding: 0.6rem 1.5rem;
+            margin-bottom: 1.2rem;
         }
         
         .section-description {
             font-size: 1rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .section-description br {
@@ -1225,27 +1210,28 @@
         }
         
         .brand-catchphrase {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
         }
     }
 
     /* ========================================================
-    ▼ サービスカード Component - 革新的AIデザイン強化版
+    ▼ Service Card Component - Revolutionary AI Design Enhanced Version
     ======================================================== */
     .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
+        gap: 3rem;
         margin-top: 4rem;
     }
     
     .service-card {
         background: var(--white);
         border-radius: var(--radius-2xl);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
         overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -1260,25 +1246,25 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
+        height: 5px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: var(--z-elevate);
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
     }
     
     .service-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
         border-color: rgba(58, 95, 235, 0.2);
     }
     
     .service-card:hover::before {
-        height: 6px;
+        height: 8px;
         background: linear-gradient(90deg, var(--accent), var(--accent-light));
     }
     
     .service-image {
-        height: 240px;
+        height: 260px;
         position: relative;
         overflow: hidden;
         background: linear-gradient(135deg, #f8f9fa, #e9ecef);
@@ -1290,8 +1276,8 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 50%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+        height: 60%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
         z-index: 1;
     }
     
@@ -1299,16 +1285,15 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.7s ease;
-        opacity: 1;
+        transition: transform 0.8s ease;
     }
     
     .service-card:hover .service-image img {
-        transform: scale(1.1);
+        transform: scale(1.15);
     }
     
     .service-content {
-        padding: 2.5rem 2rem;
+        padding: 3rem 2.5rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -1316,38 +1301,38 @@
     }
     
     .service-icon-circle {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         background: var(--gradient-primary);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--white);
-        font-size: 2rem;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        margin: -40px auto 2rem;
+        font-size: 2.2rem;
+        box-shadow: 0 12px 25px rgba(58, 95, 235, 0.3);
+        margin: -45px auto 2.5rem;
         position: relative;
-        transition: all 0.4s ease;
+        transition: all 0.5s ease;
         z-index: 2;
-        border: 3px solid var(--white);
+        border: 4px solid var(--white);
     }
     
     .service-card:hover .service-icon-circle {
-        transform: translateY(-8px) rotate(5deg);
-        box-shadow: 0 15px 30px rgba(58, 95, 235, 0.35);
+        transform: translateY(-10px) rotate(10deg) scale(1.1);
+        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.4);
         background: var(--gradient-accent);
     }
     
     .service-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: var(--font-weight-bold);
-        margin-bottom: 1.3rem;
+        margin-bottom: 1.5rem;
         color: var(--dark);
         position: relative;
         display: block;
         transition: color 0.3s ease;
-        line-height: 1.35;
+        line-height: 1.3;
         letter-spacing: -0.02em;
         text-align: center;
     }
@@ -1355,14 +1340,14 @@
     .service-title::after {
         content: '';
         position: absolute;
-        bottom: -8px;
+        bottom: -10px;
         left: 50%;
         transform: translateX(-50%);
-        width: 50px;
-        height: 3px;
+        width: 60px;
+        height: 4px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
     }
     
     .service-card:hover .service-title {
@@ -1370,16 +1355,16 @@
     }
     
     .service-card:hover .service-title::after {
-        width: 120px;
+        width: 140px;
         background: var(--gradient-accent);
     }
     
     .service-description {
         color: var(--gray);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         flex-grow: 1;
-        line-height: 1.75;
-        font-size: 1rem;
+        line-height: 1.8;
+        font-size: 1.05rem;
         letter-spacing: 0.01em;
         text-align: center;
     }
@@ -1387,19 +1372,19 @@
     .service-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.8rem;
-        margin-bottom: 2rem;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
         justify-content: center;
     }
     
     .service-tag {
         background: rgba(58, 95, 235, 0.08);
         color: var(--primary);
-        padding: 0.5rem 1.2rem;
+        padding: 0.6rem 1.4rem;
         border-radius: 50px;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         font-weight: 600;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         border: 1px solid rgba(58, 95, 235, 0.1);
         position: relative;
         overflow: hidden;
@@ -1413,7 +1398,7 @@
         width: 100%;
         height: 100%;
         background: var(--gradient-primary);
-        transition: left 0.3s ease;
+        transition: left 0.4s ease;
         z-index: 0;
     }
     
@@ -1425,7 +1410,8 @@
     .service-tag:hover {
         color: var(--white);
         border-color: var(--primary);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-sm);
     }
     
     .service-tag:hover::before {
@@ -1439,12 +1425,12 @@
     .service-footer .btn {
         width: 100%;
         justify-content: center;
-        padding: 1.1rem;
+        padding: 1.2rem;
         font-weight: 600;
         border: 2px solid var(--primary);
         background: transparent;
         color: var(--primary);
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         position: relative;
         overflow: hidden;
     }
@@ -1458,7 +1444,7 @@
         height: 100%;
         background: var(--gradient-primary);
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.4s ease;
         z-index: 0;
     }
 
@@ -1469,8 +1455,8 @@
 
     .service-footer .btn:hover {
         color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
         border-color: var(--primary);
     }
     
@@ -1483,16 +1469,16 @@
     }
     
     .service-footer .btn:hover i {
-        transform: translateX(5px);
+        transform: translateX(8px);
     }
 
     /* ========================================================
-    ▼ 特徴カード Component - 未来的デザイン強化版
+    ▼ Feature Card Component - Enhanced Futuristic Design
     ======================================================== */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 3rem;
+        gap: 3.5rem;
         margin-top: 4rem;
     }
     
@@ -1500,8 +1486,8 @@
         background: var(--white);
         border-radius: var(--radius-2xl);
         box-shadow: var(--shadow-md);
-        padding: 3rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        padding: 3.5rem;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 1px solid rgba(0, 0, 0, 0.04);
         position: relative;
         overflow: hidden;
@@ -1526,44 +1512,44 @@
     }
     
     .feature-card:hover::before {
-        opacity: 0.03;
+        opacity: 0.04;
         transform: rotate(45deg) translate(0, 0);
     }
     
     .feature-card:hover {
-        transform: translateY(-15px);
+        transform: translateY(-18px);
         box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.15);
     }
     
     .feature-icon {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
         background: var(--gradient-primary);
         color: var(--white);
-        border-radius: 20px;
+        border-radius: 22px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 2rem;
-        font-size: 2.5rem;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
+        margin: 0 auto 2.5rem;
+        font-size: 2.8rem;
+        box-shadow: 0 15px 30px rgba(58, 95, 235, 0.25);
         position: relative;
         z-index: 1;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     .feature-card:hover .feature-icon {
-        transform: rotateY(180deg) scale(1.1);
-        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.35);
+        transform: rotateY(180deg) scale(1.15);
+        box-shadow: 0 25px 50px rgba(58, 95, 235, 0.4);
         border-radius: 50%;
         background: var(--gradient-accent);
     }
     
     .feature-card h3 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 1.3rem;
+        margin-bottom: 1.5rem;
         color: var(--dark);
         position: relative;
         z-index: 1;
@@ -1579,15 +1565,15 @@
         line-height: 1.8;
         position: relative;
         z-index: 1;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
     }
 
     /* ========================================================
-    ▼ プロセスタイムライン Component - AI企業らしい改善版
+    ▼ Process Timeline Component - AI Company Enhanced Version
     ======================================================== */
     .process-timeline {
         position: relative;
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 4rem auto 0;
         padding: 0 3rem;
     }
@@ -1597,8 +1583,8 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: calc(3rem + 30px);
-        width: 4px;
+        left: calc(3rem + 35px);
+        width: 5px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
         z-index: 1;
@@ -1607,11 +1593,11 @@
     .process-step {
         display: flex;
         position: relative;
-        margin-bottom: 4rem;
+        margin-bottom: 4.5rem;
         z-index: 2;
         opacity: 0;
-        transform: translateX(-50px);
-        animation: slideInLeft 0.6s forwards;
+        transform: translateX(-60px);
+        animation: slideInLeft 0.7s forwards;
     }
     
     .process-step:nth-child(1) { animation-delay: 0.1s; }
@@ -1632,53 +1618,53 @@
     }
     
     .process-step-number {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         background: var(--gradient-primary);
         color: var(--white);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 700;
-        margin-right: 3rem;
-        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.25);
+        margin-right: 3.5rem;
+        box-shadow: 0 15px 30px rgba(58, 95, 235, 0.3);
         position: relative;
         z-index: 2;
-        transition: all 0.4s ease;
-        border: 4px solid var(--white);
+        transition: all 0.5s ease;
+        border: 5px solid var(--white);
     }
     
     .process-step-number::before {
         content: '';
         position: absolute;
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
-        background: rgba(58, 95, 235, 0.1);
+        background: rgba(58, 95, 235, 0.15);
         z-index: -1;
-        animation: pulse 2s infinite;
+        animation: pulse 2.5s infinite;
     }
     
     @keyframes pulse {
         0% {
             transform: scale(1);
-            opacity: 0.7;
+            opacity: 0.8;
         }
         50% {
-            transform: scale(1.3);
+            transform: scale(1.4);
             opacity: 0;
         }
         100% {
             transform: scale(1);
-            opacity: 0.7;
+            opacity: 0.8;
         }
     }
     
     .process-step:hover .process-step-number {
-        transform: scale(1.15);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.35);
+        transform: scale(1.2);
+        box-shadow: 0 20px 40px rgba(58, 95, 235, 0.4);
         background: var(--gradient-accent);
     }
     
@@ -1686,15 +1672,15 @@
         flex: 1;
         background: var(--white);
         border-radius: var(--radius-xl);
-        padding: 2.5rem;
+        padding: 3rem;
         box-shadow: var(--shadow-md);
         position: relative;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         border: 1px solid rgba(0, 0, 0, 0.04);
     }
     
     .process-step:hover .process-step-content {
-        transform: translateX(10px);
+        transform: translateX(15px);
         box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.15);
     }
@@ -1702,21 +1688,21 @@
     .process-step-content::before {
         content: '';
         position: absolute;
-        top: 30px;
-        left: -12px;
-        width: 24px;
-        height: 24px;
+        top: 35px;
+        left: -15px;
+        width: 30px;
+        height: 30px;
         background: var(--white);
         transform: rotate(45deg);
-        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: -8px 8px 15px rgba(0, 0, 0, 0.08);
         border-left: 1px solid rgba(0, 0, 0, 0.04);
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
     
     .process-step-content h3 {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         color: var(--dark);
         position: relative;
     }
@@ -1724,17 +1710,17 @@
     .process-step-content h3::after {
         content: '';
         position: absolute;
-        bottom: -8px;
+        bottom: -10px;
         left: 0;
-        width: 40px;
-        height: 3px;
+        width: 50px;
+        height: 4px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
-        transition: width 0.3s ease;
+        transition: width 0.4s ease;
     }
     
     .process-step:hover .process-step-content h3::after {
-        width: 100px;
+        width: 120px;
         background: var(--gradient-accent);
     }
     
@@ -1742,17 +1728,17 @@
         color: var(--gray);
         margin-bottom: 0;
         line-height: 1.8;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
     }
 
     /* ========================================================
-    ▼ AI伴走型開発セクション Component - 強化版
+    ▼ AI Escort Development Section Component - Enhanced Version
     ======================================================== */
     .escort-development {
         background: var(--gradient-primary);
-        padding: 6rem 0;
-        border-radius: 30px;
-        margin: 6rem 0;
+        padding: 7rem 0;
+        border-radius: 35px;
+        margin: 7rem 0;
         position: relative;
         overflow: hidden;
         box-shadow: var(--shadow-xl);
@@ -1765,7 +1751,7 @@
         width: 100%;
         height: 100%;
         z-index: 0;
-        opacity: 0.1;
+        opacity: 0.12;
         background-size: cover;
         background-position: center;
         mix-blend-mode: overlay;
@@ -1778,113 +1764,113 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 4rem;
+        gap: 5rem;
     }
 
     .escort-text {
         flex: 1;
-        min-width: 300px;
-        padding: 0 2rem;
+        min-width: 350px;
+        padding: 0 2.5rem;
         color: white;
     }
 
     .escort-text h2 {
-        font-size: 2.8rem;
+        font-size: 3.2rem;
         font-weight: 800;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         color: white;
         position: relative;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
         line-height: 1.2;
     }
 
     .escort-text h2:after {
         content: '';
         position: absolute;
-        bottom: -1rem;
+        bottom: -1.5rem;
         left: 0;
-        width: 120px;
-        height: 5px;
+        width: 140px;
+        height: 6px;
         background: rgba(255, 255, 255, 0.8);
         border-radius: var(--radius-full);
     }
 
     .escort-text p {
         color: rgba(255, 255, 255, 0.9);
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         line-height: 1.8;
-        margin-bottom: 2rem;
-        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 2.5rem;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .escort-image {
         flex: 1;
-        min-width: 300px;
+        min-width: 350px;
         position: relative;
     }
 
     .escort-image img {
         width: 100%;
-        border-radius: var(--radius-xl);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-        transition: all 0.5s ease;
+        border-radius: var(--radius-2xl);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        transition: all 0.6s ease;
     }
 
     .escort-image:hover img {
-        transform: scale(1.05) rotate(1deg);
-        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        transform: scale(1.08) rotate(2deg);
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
     }
 
     .escort-icons {
         display: flex;
-        gap: 3rem;
-        margin-top: 3rem;
+        gap: 4rem;
+        margin-top: 3.5rem;
     }
 
     .escort-icon {
         text-align: center;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
     }
 
     .escort-icon i {
-        font-size: 3.5rem;
+        font-size: 4rem;
         color: white;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         display: block;
-        transition: all 0.3s ease;
-        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.3));
+        transition: all 0.4s ease;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
     }
 
     .escort-icon:hover {
-        transform: translateY(-10px);
+        transform: translateY(-12px);
     }
 
     .escort-icon:hover i {
-        transform: scale(1.3) rotate(10deg);
+        transform: scale(1.4) rotate(15deg);
     }
 
     .escort-icon span {
         display: block;
         font-weight: 600;
         color: white;
-        font-size: 1.1rem;
-        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        font-size: 1.2rem;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     /* ========================================================
-    ▼ CTA Component - 革新的デザイン強化版
+    ▼ CTA Component - Revolutionary Design Enhanced Version
     ======================================================== */
     .cta-container {
         background: var(--white);
-        border-radius: 30px;
-        padding: 5rem 4rem;
+        border-radius: 35px;
+        padding: 6rem 5rem;
         box-shadow: var(--shadow-xl);
         position: relative;
         overflow: hidden;
         z-index: var(--z-elevate);
         border: 2px solid rgba(58, 95, 235, 0.1);
         text-align: center;
-        margin: 4rem 0;
+        margin: 5rem 0;
     }
     
     .cta-container::before {
@@ -1893,7 +1879,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 10px;
+        height: 12px;
         background: var(--gradient-primary);
         z-index: var(--z-elevate);
     }
@@ -1911,11 +1897,11 @@
     }
     
     .cta-title {
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
     
     .cta-title h2 {
-        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        font-size: clamp(2.8rem, 4vw, 4rem);
         font-weight: 800;
         color: var(--dark);
         line-height: 1.3;
@@ -1931,24 +1917,24 @@
     }
     
     .cta-description {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         color: var(--gray);
-        max-width: 800px;
-        margin: 0 auto 3rem;
+        max-width: 850px;
+        margin: 0 auto 3.5rem;
         line-height: 1.8;
     }
     
     .cta-buttons {
         display: flex;
-        gap: 1.5rem;
+        gap: 2rem;
         justify-content: center;
         flex-wrap: wrap;
     }
     
     .cta-buttons .btn {
-        min-width: 250px;
-        padding: 1.3rem 2rem;
-        font-size: 1.1rem;
+        min-width: 280px;
+        padding: 1.4rem 2.5rem;
+        font-size: 1.15rem;
         font-weight: 600;
     }
     
@@ -1965,12 +1951,12 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         background: rgba(255, 255, 255, 0.3);
         transform: translate(-50%, -50%) scale(0);
         border-radius: 50%;
-        animation: glowPulse 3s ease-out infinite;
+        animation: glowPulse 3.5s ease-out infinite;
     }
 
     @keyframes glowPulse {
@@ -1979,7 +1965,7 @@
             opacity: 0.8;
         }
         70% {
-            transform: translate(-50%, -50%) scale(1.5);
+            transform: translate(-50%, -50%) scale(1.8);
             opacity: 0;
         }
         100% {
@@ -1993,7 +1979,7 @@
     ======================================================== */
     .bottom-banner {
         background: var(--gradient-mission);
-        padding: 3rem 0;
+        padding: 3.5rem 0;
         text-align: center;
         color: var(--white);
         position: relative;
@@ -2001,23 +1987,23 @@
     }
     
     .bottom-banner-content {
-        font-size: clamp(1.3rem, 3vw, 1.8rem);
+        font-size: clamp(1.4rem, 3vw, 2rem);
         font-weight: var(--font-weight-bold);
         margin: 0;
         padding: 0 1rem;
         position: relative;
         z-index: 1;
-        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
     
     @media (max-width: 768px) {
         .bottom-banner-content {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
     }
 
     /* ========================================================
-    ▼ フッター Component - index.htmlと完全統一
+    ▼ Footer Component - Complete Unification with index.html
     ======================================================== */
     .footer {
         background: var(--dark);
@@ -2277,7 +2263,7 @@
     }
 
     /* ========================================================
-    ▼ チャットボット Component - index.htmlと統一
+    ▼ Chatbot Component - Unified with index.html
     ======================================================== */
     .chatbot {
         position: fixed;
@@ -2522,7 +2508,7 @@
         opacity: 1;
     }
     
-    /* チャットボットローディングアニメーション */
+    /* Chatbot Loading Animation */
     .loading-dots {
         display: flex;
         align-items: center;
@@ -2554,7 +2540,7 @@
     }
 
     /* ========================================================
-    ▼ Back to Top ボタン Component
+    ▼ Back to Top Button Component
     ======================================================== */
     .back-to-top {
         position: fixed;
@@ -2616,13 +2602,276 @@
     .back-to-top:hover i {
         transform: translateY(-2px);
     }
+
+    /* ========================================================
+    ▼ Animation Component
+    ======================================================== */
+    @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @keyframes floatAnimation {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .floating-animation {
+        animation: floatAnimation 4.5s ease-in-out infinite;
+    }
+
+    .animate-in {
+        animation: fadeInUp 0.8s forwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0;
+        }
+    }
+
+    /* ========================================================
+    ▼ Focus State Improvement Component
+    ======================================================== */
+    a:focus-visible, 
+    button:focus-visible, 
+    input:focus-visible, 
+    textarea:focus-visible,
+    select:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 3px;
+        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
+    }
+    
+    /* Visual Feedback During Keyboard Navigation */
+    .keyboard-focus *:focus {
+        outline: 2px solid var(--primary) !important;
+        outline-offset: 3px !important;
+        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
+    }
+
+    /* ========================================================
+    ▼ Responsive Adjustment Component - Enhanced Mobile Optimization
+    ======================================================== */
+    @media (max-width: 1199px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            padding: 0.6rem 0.65rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-header-consultation {
+            padding: 0.6rem 1.1rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+        
+        .cta-title h2 {
+            font-size: 2.6rem;
+        }
+        
+        .process-timeline::before {
+            left: calc(2rem + 30px);
+        }
+        
+        .process-step-number {
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
+            margin-right: 2.5rem;
+        }
+
+        .escort-content {
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .escort-text, .escort-image {
+            width: 100%;
+        }
+        
+        .escort-text {
+            padding: 0 1.5rem;
+        }
+    }
     
     @media (max-width: 768px) {
-        .back-to-top {
-            bottom: 90px;
-            right: 20px;
-            width: 42px;
-            height: 42px;
+        .features-grid,
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .cta-title h2 {
+            font-size: 2.2rem;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+        }
+        
+        .process-timeline {
+            padding: 0 1.5rem;
+        }
+        
+        .process-timeline::before {
+            display: none;
+        }
+        
+        .process-step {
+            flex-direction: column;
+            margin-bottom: 3.5rem;
+            transform: none;
+            opacity: 1;
+            animation: none;
+        }
+        
+        .process-step-number {
+            margin-bottom: 1.5rem;
+            margin-right: 0;
+            align-self: flex-start;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .process-step-content {
+            padding: 2rem;
+        }
+        
+        .process-step-content::before {
+            display: none;
+        }
+        
+        .process-step-content h3 {
+            font-size: 1.4rem;
+        }
+        
+        .cta-container {
+            padding: 4rem 2.5rem;
+        }
+
+        .escort-development {
+            padding: 5rem 0;
+            margin: 5rem 0;
+        }
+
+        .escort-icons {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .escort-text h2 {
+            font-size: 2.4rem;
+        }
+
+        .escort-text p {
+            font-size: 1.1rem;
+        }
+
+        .escort-icon i {
+            font-size: 3rem;
+        }
+
+        .escort-icon span {
+            font-size: 1rem;
+        }
+        
+        .hide-mobile {
+            display: none;
+        }
+        
+        .service-title {
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .service-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .service-content {
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        
+        .service-icon-circle {
+            margin: -45px auto 2.5rem;
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        
+        .service-image {
+            height: 220px;
+        }
+        
+        .feature-card {
+            padding: 2.5rem;
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            font-size: 2.2rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .cta-buttons .btn {
+            min-width: auto;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        
+        .service-tag {
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
         }
         
         .chatbot {
@@ -2636,7 +2885,7 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 70%;
+            height: 75%;
             border-radius: 20px 20px 0 0;
             transform-origin: bottom center;
         }
@@ -2670,188 +2919,44 @@
             font-size: 0.9rem;
             padding: 0.6rem 0.9rem;
         }
-    }
-
-    /* ========================================================
-    ▼ アニメーション Component
-    ======================================================== */
-    @keyframes gradientBG {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    @keyframes floatAnimation {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-15px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    .floating-animation {
-        animation: floatAnimation 4s ease-in-out infinite;
-    }
-
-    .animate-in {
-        animation: fadeInUp 0.8s forwards;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        
+        .back-to-top {
+            bottom: 90px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
         }
     }
 
     /* ========================================================
-    ▼ フォーカス状態の改善 Component
+    ▼ iPhone Specialized Optimization Component
     ======================================================== */
-    a:focus-visible, 
-    button:focus-visible, 
-    input:focus-visible, 
-    textarea:focus-visible,
-    select:focus-visible {
-        outline: 2px solid var(--primary);
-        outline-offset: 3px;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2);
-    }
-    
-    /* キーボードナビゲーション中の視覚的フィードバック */
-    .keyboard-focus *:focus {
-        outline: 2px solid var(--primary) !important;
-        outline-offset: 3px !important;
-        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.2) !important;
-    }
-
-    /* ========================================================
-    ▼ レスポンシブ調整 Component - モバイル最適化強化版
-    ======================================================== */
-    @media (max-width: 1199px) {
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 812px) 
+    and (-webkit-min-device-pixel-ratio: 3) {
+        body {
+            -webkit-text-size-adjust: 100%;
         }
 
-        .nav-link {
-            padding: 0.6rem 0.65rem;
-            font-size: 0.9rem;
-        }
-        
-        .btn-header-consultation {
-            padding: 0.6rem 1.1rem;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .features-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-        
-        .cta-title h2 {
-            font-size: 2.4rem;
-        }
-        
-        .process-timeline::before {
-            left: calc(2rem + 25px);
-        }
-        
-        .process-step-number {
-            width: 60px;
-            height: 60px;
-            font-size: 1.6rem;
-            margin-right: 2rem;
+        .header {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
-        .escort-content {
-            flex-direction: column;
+        .service-card {
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
 
-        .escort-text, .escort-image {
-            width: 100%;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .features-grid,
-        .services-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
 
-        .cta-title h2 {
-            font-size: 2rem;
-        }
-        
-        .cta-description {
-            font-size: 1.1rem;
-        }
-        
-        .process-timeline {
-            padding: 0 1rem;
-        }
-        
-        .process-timeline::before {
-            display: none;
-        }
-        
-        .process-step {
-            flex-direction: column;
-            margin-bottom: 3rem;
-        }
-        
-        .process-step-number {
-            margin-bottom: 1rem;
-            margin-right: 0;
-            align-self: flex-start;
-            width: 50px;
-            height: 50px;
-            font-size: 1.4rem;
-        }
-        
-        .process-step-content {
-            padding: 1.5rem;
-        }
-        
-        .process-step-content::before {
-            display: none;
-        }
-        
-        .process-step-content h3 {
-            font-size: 1.3rem;
-        }
-        
-        .cta-container {
-            padding: 3rem 2rem;
-        }
-
-        .escort-development {
-            padding: 4rem 0;
-        }
-
-        .escort-icons {
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .escort-text {
-            padding: 0 1rem;
+        .service-tag {
+            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
         }
 
         .escort-text h2 {
@@ -2868,109 +2973,6 @@
 
         .escort-icon span {
             font-size: 0.9rem;
-        }
-        
-        .hide-mobile {
-            display: none;
-        }
-        
-        .service-title {
-            font-size: 1.3rem;
-            text-align: center;
-        }
-        
-        .service-title::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .service-content {
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-        
-        .service-icon-circle {
-            margin: -40px auto 2rem;
-            width: 70px;
-            height: 70px;
-            font-size: 1.7rem;
-        }
-        
-        .service-image {
-            height: 200px;
-        }
-        
-        .feature-card {
-            padding: 2rem;
-        }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            font-size: 2rem;
-        }
-        
-        .cta-buttons {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .cta-buttons .btn {
-            min-width: auto;
-            width: 100%;
-        }
-        
-        .service-tag {
-            font-size: 0.8rem;
-            padding: 0.4rem 1rem;
-        }
-    }
-
-    /* ========================================================
-    ▼ iPhone特化最適化 Component
-    ======================================================== */
-    @media only screen 
-    and (min-device-width: 375px) 
-    and (max-device-width: 812px) 
-    and (-webkit-min-device-pixel-ratio: 3) {
-        body {
-            -webkit-text-size-adjust: 100%;
-        }
-
-        .header {
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-
-        .service-card {
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-tag {
-            font-size: 0.75rem;
-            padding: 0.35rem 0.9rem;
-        }
-
-        .escort-text h2 {
-            font-size: 1.8rem;
-        }
-
-        .escort-text p {
-            font-size: 1rem;
-        }
-
-        .escort-icon i {
-            font-size: 2.2rem;
-        }
-
-        .escort-icon span {
-            font-size: 0.85rem;
         }
 
         .nav {
@@ -2992,10 +2994,18 @@
             transform: none;
             animation: none;
         }
+        
+        .page-hero-title {
+            font-size: 2rem;
+        }
+        
+        .page-hero-description {
+            padding: 1.2rem 1.5rem;
+        }
     }
 
     /* ========================================================
-    ▼ タッチデバイス対応の最適化 Component
+    ▼ Touch Device Optimization Component
     ======================================================== */
     @media (hover: none) {
         .btn:hover, .service-card:hover, .feature-card:hover {
@@ -3015,29 +3025,37 @@
         .feature-card:active .feature-icon {
             transform: scale(1.05);
         }
+        
+        .process-step:hover .process-step-number,
+        .process-step:hover .process-step-content {
+            transform: none;
+        }
+        
+        .escort-icon:hover {
+            transform: none;
+        }
+        
+        .escort-icon:active {
+            transform: scale(0.95);
+        }
     }
     </style>
 </head>
 <body>
     <!-- ========================================================
-    ▼ プリローダー Component
+    ▼ Preloader Component
     ======================================================== -->
     <div class="page-loader" id="page-loader">
         <div class="loader-circle"></div>
     </div>
     
-    <!-- ハンバーガーボタン（モバイル用） -->
-    <div class="hamburger-visible" id="hamburger-visible" aria-label="メニューを開く">
-        <i class="fas fa-bars" aria-hidden="true"></i>
-    </div>
-    
     <!-- ========================================================
-    ▼ Three.jsパーティクルコンテナ Component
+    ▼ Three.js Particle Container Component
     ======================================================== -->
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ ヘッダー Component - index.htmlと完全統一
+    ▼ Header Component - Complete Unification with index.html + Mobile Improvements
     ======================================================== -->
     <header class="header" id="header">
         <div class="container">
@@ -3088,11 +3106,11 @@
     </header>
     
     <!-- ========================================================
-    ▼ メインコンテンツ
+    ▼ Main Content
     ======================================================== -->
     <main id="main-content">
         <!-- ========================================================
-        ▼ ページヒーロー Component - AI企業らしい未来感
+        ▼ Page Hero Component - Futuristic AI Company Design
         ======================================================== -->
         <section class="page-hero">
             <div class="container">
@@ -3111,7 +3129,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ サービス一覧 Component - 3つのサービスに厳選
+        ▼ Service List Component - Selected 3 Services
         ======================================================== -->
         <section class="section" id="services">
             <div class="container">
@@ -3138,7 +3156,7 @@
                                 <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとにデータドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、営業・企画部門の生産性を劇的に向上させます。</p>
+                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとに<br>データドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、<br>営業・企画部門の生産性を劇的に向上させます。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>時間短縮</span></span>
                                 <span class="service-tag"><span>データ活用</span></span>
@@ -3168,7 +3186,7 @@
                                 <i class="fas fa-robot" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
-                            <p class="service-description">AIエージェント開発やRAG構築など、お客様の業種・業態特有の課題に対応したカスタムAIソリューション。独自データを活用した特化型AIシステムで競争優位性を実現します。</p>
+                            <p class="service-description">AIエージェント開発やRAG構築など、お客様の業種・業態特有の課題に対応した<br>カスタムAIソリューション。独自データを活用した特化型AIシステムで<br>競争優位性を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>AIエージェント</span></span>
                                 <span class="service-tag"><span>RAG構築</span></span>
@@ -3198,7 +3216,7 @@
                                 <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">AI導入(DX/AX)<br>コンサルティング</h3>
-                            <p class="service-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を徹底し、成果定着と自走化を実現。DX/AXの推進パートナーとして長期的な成長をサポートします。</p>
+                            <p class="service-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を徹底し、<br>成果定着と自走化を実現。DX/AXの推進パートナーとして<br>長期的な成長をサポートします。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>伴走支援</span></span>
                                 <span class="service-tag"><span>内製化支援</span></span>
@@ -3217,7 +3235,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ サービス特徴 Component
+        ▼ Service Features Component
         ======================================================== -->
         <section class="section section-bg-gradient">
             <div class="container">
@@ -3233,7 +3251,7 @@
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>短期間での導入と効果実証</h3>
-                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の開発が可能。小さく始めて段階的に拡張する確実なアプローチを採用しています。</p>
+                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、<br>最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の開発が可能。<br>小さく始めて段階的に拡張する確実なアプローチを採用しています。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3241,7 +3259,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3>社内チーム育成と自走化支援</h3>
-                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力。技術だけでなく、企画から運用までのノウハウを共有し、自社でAI活用を推進できる体制構築を支援します。</p>
+                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力。<br>技術だけでなく、企画から運用までのノウハウを共有し、<br>自社でAI活用を推進できる体制構築を支援します。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3249,14 +3267,14 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>安全なAI活用の実現</h3>
-                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築。データガバナンス対策とAI倫理を遵守した安全なAI活用で、ユーザーからの信頼を獲得します。</p>
+                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築。<br>データガバナンス対策とAI倫理を遵守した安全なAI活用で、<br>ユーザーからの信頼を獲得します。</p>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- ========================================================
-        ▼ AI伴走型開発セクション Component
+        ▼ AI Escort Development Section Component
         ======================================================== -->
         <section class="section">
             <div class="container">
@@ -3266,8 +3284,8 @@
                         <div class="escort-content">
                             <div class="escort-text">
                                 <h2>AI伴走型開発で<br>確実な成果を実現</h2>
-                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。企画から実装、運用、そして自走化まで一貫して伴走することで、「やりっぱなしにならない」AI導入を実現。</p>
-                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、真の価値を共に創造します。</p>
+                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。<br>企画から実装、運用、そして自走化まで一貫して伴走することで、<br>「やりっぱなしにならない」AI導入を実現。</p>
+                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、<br>真の価値を共に創造します。</p>
                                 <div class="escort-icons">
                                     <div class="escort-icon">
                                         <i class="fas fa-chart-line"></i>
@@ -3293,7 +3311,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ AI導入プロセス Component
+        ▼ AI Implementation Process Component
         ======================================================== -->
         <section class="section">
             <div class="container">
@@ -3308,7 +3326,7 @@
                         <div class="process-step-number">1</div>
                         <div class="process-step-content">
                             <h3>課題分析・企画</h3>
-                            <p>お客様の現状課題をヒアリングし、AI導入の目的とKPIを明確化。ROI（投資対効果）を最大化するための企画立案を行います。</p>
+                            <p>お客様の現状課題をヒアリングし、AI導入の目的とKPIを明確化。<br>ROI（投資対効果）を最大化するための企画立案を行います。</p>
                         </div>
                     </div>
                     
@@ -3316,7 +3334,7 @@
                         <div class="process-step-number">2</div>
                         <div class="process-step-content">
                             <h3>PoC（実証実験）</h3>
-                            <p>小規模な範囲で短期間のテスト運用を実施。AIソリューションの技術的な実現性と期待される効果を検証します。</p>
+                            <p>小規模な範囲で短期間のテスト運用を実施。<br>AIソリューションの技術的な実現性と期待される効果を検証します。</p>
                         </div>
                     </div>
                     
@@ -3324,7 +3342,7 @@
                         <div class="process-step-number">3</div>
                         <div class="process-step-content">
                             <h3>システム開発・導入</h3>
-                            <p>PoCの結果をもとに、本格的なシステム開発と実装を行います。お客様の既存システムとの連携や、セキュリティ対策も含めて設計します。</p>
+                            <p>PoCの結果をもとに、本格的なシステム開発と実装を行います。<br>お客様の既存システムとの連携や、セキュリティ対策も含めて設計します。</p>
                         </div>
                     </div>
                     
@@ -3332,7 +3350,7 @@
                         <div class="process-step-number">4</div>
                         <div class="process-step-content">
                             <h3>社内チーム育成</h3>
-                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転を実施。運用ノウハウを共有します。</p>
+                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転を実施。<br>運用ノウハウを共有します。</p>
                         </div>
                     </div>
                     
@@ -3340,7 +3358,7 @@
                         <div class="process-step-number">5</div>
                         <div class="process-step-content">
                             <h3>運用サポート・拡張</h3>
-                            <p>導入後の運用をサポートし、定期的な改善提案と機能拡張を行います。AIの性能向上とビジネス成果の最大化を継続的に支援します。</p>
+                            <p>導入後の運用をサポートし、定期的な改善提案と機能拡張を行います。<br>AIの性能向上とビジネス成果の最大化を継続的に支援します。</p>
                         </div>
                     </div>
                 </div>
@@ -3348,7 +3366,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ CTA Component - 革新的デザイン
+        ▼ CTA Component - Revolutionary Design
         ======================================================== -->
         <section class="section">
             <div class="container">
@@ -3384,7 +3402,7 @@
     </div>
     
     <!-- ========================================================
-    ▼ フッター Component - index.htmlと完全統一
+    ▼ Footer Component - Complete Unification with index.html
     ======================================================== -->
     <footer class="footer">
         <div class="container">
@@ -3397,7 +3415,7 @@
                         <span class="footer-logo-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
-                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
+                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。<br>プロトタイプから始める伴走型開発で、確実な成果を実現します。
                     </p>
                     <div class="footer-social">
                         <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
@@ -3439,7 +3457,7 @@
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span>〒100-0001 東京都千代田区丸の内3-8-3<br>Tokyo Innovation Base</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -3468,7 +3486,7 @@
     </footer>
 
     <!-- ========================================================
-    ▼ チャットボット Component
+    ▼ Chatbot Component
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
@@ -3499,22 +3517,22 @@
     </div>
 
     <!-- ========================================================
-    ▼ Back to Top ボタン
+    ▼ Back to Top Button
     ======================================================== -->
     <button id="back-to-top" class="back-to-top" aria-label="ページトップへ戻る">
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </button>
 
     <!-- ========================================================
-    ▼ メインスクリプト Component - パフォーマンス向上・最適化
+    ▼ Main Script Component - Performance Enhancement & Optimization
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ========================================================
-        // ▼ 初期化処理 Component
+        // ▼ Initialization Process Component
         // ========================================================
         
-        // ページロード完了時にローディングを非表示
+        // Hide loading when page load completes
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
             setTimeout(() => {
@@ -3525,12 +3543,12 @@
             }, 300);
         }
         
-        // 可視性とアクセシビリティの改善
+        // Visibility and accessibility improvement
         setTimeout(() => {
             document.documentElement.classList.add('loaded');
         }, 100);
         
-        // カレントイヤーの更新
+        // Current year update
         const currentYearElement = document.getElementById('current-year');
         if (currentYearElement) {
             const currentYear = new Date().getFullYear();
@@ -3538,38 +3556,15 @@
         }
         
         // ========================================================
-        // ▼ モバイルUI/UXの全面改善 Component
+        // ▼ Mobile UI/UX Complete Improvement Component
         // ========================================================
         
         const header = document.getElementById('header');
-        const hamburgerVisible = document.getElementById('hamburger-visible');
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('nav');
         const headerBackdrop = document.getElementById('header-backdrop');
         
-        // ハンバーガーボタン表示版のクリックイベント
-        if (hamburgerVisible) {
-            hamburgerVisible.addEventListener('click', function() {
-                if (hamburger) {
-                    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-                    hamburger.setAttribute('aria-expanded', !expanded);
-                    
-                    if (nav) nav.classList.toggle('active');
-                    if (headerBackdrop) headerBackdrop.classList.toggle('active');
-                    
-                    // アイコン変更
-                    if (expanded) {
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    } else {
-                        hamburger.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                        hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    }
-                }
-            });
-        }
-        
-        // スクロールイベント - 最適化版
+        // Optimized scroll event
         let lastScrollTop = 0;
         let ticking = false;
         
@@ -3578,7 +3573,7 @@
                 window.requestAnimationFrame(function() {
                     const currentScrollTop = window.scrollY;
                     
-                    // ヘッダースクロール効果
+                    // Header scroll effect
                     if (header) {
                         if (currentScrollTop > 10) {
                             header.classList.add('scrolled');
@@ -3587,7 +3582,7 @@
                         }
                     }
                     
-                    // Back to Topボタン表示制御
+                    // Back to Top button display control
                     const backToTop = document.getElementById('back-to-top');
                     if (backToTop) {
                         if (currentScrollTop > 300) {
@@ -3605,7 +3600,7 @@
             }
         });
         
-        // モバイルメニュー - 改善版
+        // Mobile menu - improved version
         if (hamburger && nav) {
             hamburger.addEventListener('click', function() {
                 const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -3614,28 +3609,25 @@
                 nav.classList.toggle('active');
                 if (headerBackdrop) headerBackdrop.classList.toggle('active');
                 
-                // アイコン変更
+                // Icon change
                 if (expanded) {
                     this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 } else {
                     this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
                 }
             });
             
-            // 背景クリックでメニューを閉じる
+            // Close menu by clicking background
             if (headerBackdrop) {
                 headerBackdrop.addEventListener('click', function() {
                     nav.classList.remove('active');
                     headerBackdrop.classList.remove('active');
                     hamburger.setAttribute('aria-expanded', 'false');
                     hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 });
             }
             
-            // ナビリンククリックでメニューを閉じる
+            // Close menu by clicking nav links
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -3646,19 +3638,16 @@
                             hamburger.setAttribute('aria-expanded', 'false');
                             hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                         }
-                        if (hamburgerVisible) {
-                            hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                        }
                     }
                 });
             });
         }
         
         // ========================================================
-        // ▼ UI要素のイベント処理 Component
+        // ▼ UI Element Event Processing Component
         // ========================================================
         
-        // Back to Top ボタンのクリックイベント
+        // Back to Top button click event
         const backToTopButton = document.getElementById('back-to-top');
         if (backToTopButton) {
             backToTopButton.addEventListener('click', function() {
@@ -3669,7 +3658,7 @@
             });
         }
         
-        // チャットボット機能
+        // Chatbot functionality
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
         const chatbotClose = document.getElementById('chatbot-close');
@@ -3694,28 +3683,28 @@
                 chatbotButton.setAttribute('aria-expanded', 'false');
             });
             
-            // チャット送信処理
+            // Chat send processing
             if (chatSend && chatInput && chatMessages) {
                 const handleSend = function() {
                     const message = chatInput.value.trim();
                     if (message) {
-                        // ユーザーメッセージを追加
+                        // Add user message
                         addChatMessage(message, 'user');
                         chatInput.value = '';
                         
-                        // ローディングインジケーター表示
+                        // Display loading indicator
                         const loadingMsg = document.createElement('div');
                         loadingMsg.classList.add('chat-message', 'bot', 'loading');
                         loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
                         chatMessages.appendChild(loadingMsg);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                         
-                        // AIの応答内容
+                        // AI response content
                         setTimeout(function() {
-                            // ローディング削除
+                            // Remove loading
                             chatMessages.removeChild(loadingMsg);
                             
-                            // 専門的なAIシステム受託開発会社としての応答
+                            // Professional AI system development company response
                             let response = '';
                             const messageLower = message.toLowerCase();
                             
@@ -3732,7 +3721,7 @@
                             } else if (messageLower.includes('プロトタイプ') || messageLower.includes('小さく始める') || messageLower.includes('伴走')) {
                                 response = "ShinAIでは「プロトタイプからの伴走型開発」を採用しています。まず2週間程度で小規模な試作品を構築し、実際に使っていただきながら効果を確認。方向性が合っていることを確認しながら段階的に拡張していきます。このアプローチにより、初期投資リスクを最小限に抑えながら、確実に成果を出すことが可能です。";
                             } else {
-                                // AI受託開発会社としての汎用的な応答
+                                // General response for AI development company
                                 const responses = [
                                     "ShinAIでは、AIエージェント開発やRAG構築などの社内向けAIシステム開発から、業務効率化AIツールの提供まで幅広くサポートしています。プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。",
                                     "最先端のAI技術を活用して企業の課題を解決するShinAIです。ChatGPT/GPT-4などのLLMを活用したAIエージェント開発や、社内データを活用したRAGシステム構築が得意分野です。小さく始めて効果を確認する段階的アプローチで、リスクを最小化しながら最大の成果を目指します。",
@@ -3742,7 +3731,7 @@
                                 response = responses[Math.floor(Math.random() * responses.length)];
                             }
                             
-                            // レスポンス追加（タイピング効果付き）
+                            // Add response (with typing effect)
                             const botMessage = document.createElement('div');
                             botMessage.classList.add('chat-message', 'bot');
                             botMessage.textContent = '';
@@ -3759,7 +3748,7 @@
                                 } else {
                                     clearInterval(typingEffect);
                                     
-                                    // CTAボタンを追加
+                                    // Add CTA button
                                     setTimeout(function() {
                                         const ctaButton = document.createElement('div');
                                         ctaButton.classList.add('chat-message', 'bot');
@@ -3793,10 +3782,10 @@
         }
         
         // ========================================================
-        // ▼ アクセシビリティ改善 Component
+        // ▼ Accessibility Improvement Component
         // ========================================================
         
-        // キーボードナビゲーション対応
+        // Keyboard navigation support
         let usingKeyboard = false;
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
@@ -3810,16 +3799,16 @@
             document.body.classList.remove('keyboard-focus');
         });
         
-        // ESCでモーダルを閉じる
+        // Close modal with ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' || e.keyCode === 27) {
-                // チャットボットを閉じる
+                // Close chatbot
                 if (chatbotWindow && chatbotWindow.classList.contains('active')) {
                     chatbotWindow.classList.remove('active');
                     if (chatbotButton) chatbotButton.setAttribute('aria-expanded', 'false');
                 }
                 
-                // モバイルメニューを閉じる
+                // Close mobile menu
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     if (headerBackdrop) headerBackdrop.classList.remove('active');
@@ -3827,15 +3816,12 @@
                         hamburger.setAttribute('aria-expanded', 'false');
                         hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                     }
-                    if (hamburgerVisible) {
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
                 }
             }
         });
         
         // ========================================================
-        // ▼ Three.jsパーティクル背景 Component - 最適化版
+        // ▼ Three.js Particle Background Component - Optimized Version
         // ========================================================
         
         if (typeof THREE !== 'undefined' && document.getElementById('three-container')) {
@@ -3843,10 +3829,10 @@
         }
         
         // ========================================================
-        // ▼ アニメーション設定 Component - 高速化版
+        // ▼ Animation Settings Component - Accelerated Version
         // ========================================================
         
-        // スクロールアニメーション - IntersectionObserver使用
+        // Scroll animation - Using IntersectionObserver
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -3866,19 +3852,19 @@
         });
     });
     
-    // Three.jsパーティクルエフェクト - 最適化版
+    // Three.js particle effect - optimized version
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
         const isMobile = window.innerWidth < 768;
         
-        // シーン設定
+        // Scene setup
         const scene = new THREE.Scene();
         
-        // カメラ設定
+        // Camera setup
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 50;
         
-        // レンダラー設定 - モバイルでは解像度を下げてパフォーマンス向上
+        // Renderer setup - lower resolution on mobile for performance
         const renderer = new THREE.WebGLRenderer({ 
             alpha: true, 
             antialias: !isMobile,
@@ -3888,7 +3874,7 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
         container.appendChild(renderer.domElement);
         
-        // 中心の球体
+        // Core sphere
         const coreGeometry = new THREE.IcosahedronGeometry(6, isMobile ? 1 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x4A8FFF,
@@ -3899,7 +3885,7 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
-        // 装飾用の内側コア
+        // Inner decorative core
         const innerCoreGeometry = new THREE.IcosahedronGeometry(3, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
@@ -3910,28 +3896,28 @@
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
         
-        // パーティクル設定 - モバイルでは数を調整
+        // Particle setup - adjust count for mobile
         const particlesCount = isMobile ? 300 : 600;
         const particles = [];
         
-        // パーティクルの形状
+        // Particle shapes
         const geometries = [
             new THREE.BoxGeometry(0.12, 0.12, 0.12),
             new THREE.SphereGeometry(0.06, 8, 8),
             new THREE.TetrahedronGeometry(0.1, 0)
         ];
         
-        // カラーパレット
+        // Color palette
         const colors = [
-            0x4A8FFF, // 明るい青
-            0x3A5FEB, // 青
-            0x00C9A7, // 青緑
-            0x20E7C4, // 明るい青緑
-            0xFFFFFF, // 白
-            0xB4F2FF  // 水色
+            0x4A8FFF, // bright blue
+            0x3A5FEB, // blue
+            0x00C9A7, // blue-green
+            0x20E7C4, // bright blue-green
+            0xFFFFFF, // white
+            0xB4F2FF  // light blue
         ];
         
-        // パーティクル作成
+        // Create particles
         for (let i = 0; i < particlesCount; i++) {
             const geometryIndex = Math.floor(Math.random() * geometries.length);
             const geometry = geometries[geometryIndex].clone();
@@ -3984,19 +3970,19 @@
             scene.add(particle);
         }
         
-        // カメラ制御用変数
+        // Camera control variables
         let mouseX = 0;
         let mouseY = 0;
         let targetX = 0;
         let targetY = 0;
         
-        // マウス追跡
+        // Mouse tracking
         const handleMouseMove = function(event) {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
             mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
         };
         
-        // スロットリング関数
+        // Throttling function
         let throttleTimeout;
         const throttle = function(callback, limit) {
             if (!throttleTimeout) {
@@ -4013,7 +3999,7 @@
             }, 25);
         });
         
-        // タッチ追跡
+        // Touch tracking
         document.addEventListener('touchmove', function(event) {
             if (event.touches.length > 0) {
                 throttle(function() {
@@ -4023,34 +4009,34 @@
             }
         });
         
-        // 時間変数
+        // Time variable
         let time = 0;
         
-        // アニメーション
+        // Animation
         const animate = () => {
             requestAnimationFrame(animate);
             time += 0.01;
             
-            // カメラの滑らかな動き
+            // Smooth camera movement
             targetX = mouseX * 15;
             targetY = mouseY * 15;
             camera.position.x += (targetX - camera.position.x) * 0.02;
             camera.position.y += (targetY - camera.position.y) * 0.02;
             camera.lookAt(scene.position);
             
-            // コアのアニメーション
+            // Core animation
             core.rotation.y += 0.0015;
             core.rotation.x += 0.0007;
             const scalePulse = Math.sin(time * 0.5) * 0.05 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
-            // 内側コアの逆回転
+            // Inner core reverse rotation
             innerCore.rotation.y -= 0.002;
             innerCore.rotation.z += 0.001;
             const innerScalePulse = Math.sin(time * 0.7) * 0.1 + 1;
             innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
             
-            // パーティクルアニメーション - モバイルではスキップレートを導入
+            // Particle animation - introduce skip rate for mobile
             const skipRate = isMobile ? 2 : 1;
             
             particles.forEach((p, index) => {
@@ -4091,10 +4077,10 @@
             renderer.render(scene, camera);
         };
         
-        // アニメーション開始
+        // Start animation
         animate();
         
-        // リサイズイベント処理
+        // Resize event handling
         let resizeTimeout;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimeout);
