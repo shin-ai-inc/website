@@ -286,7 +286,7 @@
     <title>ShinAI｜日本最先端のAIエージェント開発・RAG構築｜プロトタイプから始める伴走型AI開発で確実な成果を実現</title>
     
     <!-- ========================================================
-    ▼ Critical Path CSS Component - 完全レスポンシブ対応 & モバイル最適化・about.html統一版
+    ▼ Critical Path CSS Component - 完全レスポンシブ対応 & モバイル最適化・改善版
     ======================================================== -->
     <style>
     /* ページ読み込み最適化 - AI Crawler対応 */
@@ -299,7 +299,7 @@
     }
     
     /* ========================================================
-    ▼ Preloader Component - 高速化・about.html統一版
+    ▼ Preloader Component - 高速化・改善版
     ======================================================== */
     .page-loader {
         position: fixed;
@@ -350,7 +350,7 @@
     }
     
     /* ========================================================
-    ▼ Perfect Responsive Header Component - about.html統一版・PC/モバイル完全対応
+    ▼ Perfect Responsive Header Component - 改善版・PC/モバイル完全対応
     ======================================================== */
     .header {
         position: fixed;
@@ -384,7 +384,7 @@
     }
     
     /* ========================================================
-    ▼ Logo Component - 左端中央配置・about.html統一版
+    ▼ Logo Component - 左端中央配置・改善版
     ======================================================== */
     .logo {
         display: flex;
@@ -421,7 +421,7 @@
     }
     
     /* ========================================================
-    ▼ Desktop Navigation Component - PC専用表示・about.html統一版
+    ▼ Desktop Navigation Component - PC専用表示・改善版
     ======================================================== */
     .nav {
         display: none; /* 初期状態は非表示 */
@@ -494,7 +494,7 @@
     }
     
     /* ========================================================
-    ▼ Mobile Hamburger Component - about.html統一版・コンパクト化
+    ▼ Mobile Hamburger Component - 改善版・コンパクト化
     ======================================================== */
     .hamburger {
         display: none; /* PC画面では完全非表示 */
@@ -527,7 +527,7 @@
     }
     
     /* ========================================================
-    ▼ Mobile Navigation Component - about.html統一版・モバイル専用メニュー
+    ▼ Mobile Navigation Component - 改善版・モバイル専用メニュー
     ======================================================== */
     @media (max-width: 768px) {
         .header {
@@ -599,11 +599,11 @@
     </style>
 
     <!-- ========================================================
-    ▼ Main Styles Component - AI最適化 & 100点満点対応・about.html統一版・全体像把握最適化
+    ▼ Main Styles Component - AI最適化 & 100点満点対応・改善版・全体像把握最適化
     ======================================================== -->
     <style>
     /* ========================================================
-    ▼ CSS Variables Component - 完全カラーシステム定義・about.html統一版
+    ▼ CSS Variables Component - 完全カラーシステム定義・改善版
     ======================================================== */
     :root {
         /* Primary Colors */
@@ -690,7 +690,7 @@
     }
 
     /* ========================================================
-    ▼ Base Styles Component - AI Crawler最適化・about.html統一版
+    ▼ Base Styles Component - AI Crawler最適化・改善版
     ======================================================== */
     *, *::before, *::after {
         margin: 0;
@@ -756,7 +756,7 @@
     }
     
     /* ========================================================
-    ▼ Layout System Component - モバイル情報密度最適化・全体像把握向上・about.html統一版
+    ▼ Layout System Component - モバイル情報密度最適化・全体像把握向上・改善版
     ======================================================== */
     .container {
         width: 100%;
@@ -808,7 +808,7 @@
     }
     
     /* ========================================================
-    ▼ Typography System Component - 視認性向上・全体像把握最適化・about.html統一版
+    ▼ Typography System Component - 視認性向上・全体像把握最適化・改善版
     ======================================================== */
     .heading-xl {
         font-size: clamp(1.5rem, 3.5vw, 2.5rem);
@@ -873,7 +873,7 @@
     }
 
     /* ========================================================
-    ▼ Button Component - コンパクト化・全体像把握最適化・about.html統一版
+    ▼ Button Component - コンパクト化・全体像把握最適化・改善版
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -970,7 +970,7 @@
     }
     
     /* ========================================================
-    ▼ Hero Section Component - 全体像把握向上（75vh）・モバイル最適化
+    ▼ Hero Section Component - 改善版・全体像把握向上（75vh）・モバイル最適化・余白改善
     ======================================================== */
     .hero {
         position: relative;
@@ -1002,6 +1002,9 @@
         animation: fadeInDown 0.4s ease forwards;
     }
     
+    /* ========================================================
+    ▼ Hero Title Component - モバイル改行改善版
+    ======================================================== */
     .hero-title {
         margin-bottom: var(--space-4);
         animation: fadeInUp 0.5s ease 0.1s forwards;
@@ -1017,6 +1020,26 @@
         color: transparent;
     }
     
+    /* PC版タイトル表示 */
+    .hero-title-pc {
+        display: block;
+    }
+    
+    /* モバイル版タイトル表示 */
+    .hero-title-mobile {
+        display: none;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title-pc {
+            display: none;
+        }
+        
+        .hero-title-mobile {
+            display: block;
+        }
+    }
+    
     .hero-description {
         font-size: clamp(0.85rem, 1.6vw, 1rem);
         color: var(--gray);
@@ -1030,13 +1053,13 @@
     }
     
     /* ========================================================
-    ▼ Hero Differentiators Component - 差別化ポイント横一列表示最適化・モバイル横一列強化版
+    ▼ Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC大型化・モバイル余白改善
     ======================================================== */
     .hero-differentiators {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        margin: 1rem 0 1.8rem;
+        gap: 1.5rem;
+        margin: 2rem 0 2.5rem;
         animation: fadeInUp 0.5s ease 0.3s forwards;
         opacity: 0;
     }
@@ -1045,21 +1068,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 160px;
+        max-width: 200px;
         position: relative;
         z-index: 1;
     }
     
     .differentiator-icon {
-        width: 42px;
-        height: 42px;
+        width: 50px;
+        height: 50px;
         background: var(--white);
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0.6rem;
-        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.3rem;
         box-shadow: var(--shadow-md);
         color: var(--primary);
         transition: all var(--transition-normal) ease;
@@ -1073,16 +1096,27 @@
     
     .differentiator-title {
         font-weight: var(--font-weight-bold);
-        font-size: 0.8rem;
-        margin-bottom: 0.25rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
         color: var(--dark);
     }
     
-    .differentiator-text {
-        font-size: 0.7rem;
+    /* PC版差別化ポイントテキスト */
+    .differentiator-text-pc {
+        font-size: 0.8rem;
+        color: var(--gray);
+        text-align: center;
+        line-height: 1.6;
+        display: block;
+    }
+    
+    /* モバイル版差別化ポイントテキスト */
+    .differentiator-text-mobile {
+        font-size: 0.75rem;
         color: var(--gray);
         text-align: center;
         line-height: 1.5;
+        display: none;
     }
     
     .hero-buttons {
@@ -1118,48 +1152,62 @@
     
     @media (max-width: 768px) {
         .hero {
-            min-height: 65vh;
-            padding: calc(var(--header-height-mobile) + 0.8rem) 0 1.2rem;
+            min-height: 70vh;
+            padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
         }
         
-        /* ★重要★ モバイルでも横一列表示維持・コンパクト化 */
+        /* ★重要★ モバイル版余白大幅改善・スッキリデザイン */
         .hero-differentiators {
-            gap: 0.6rem;
-            margin: 0.8rem 0 1.5rem;
+            gap: 1rem;
+            margin: 2.5rem 0 3rem;
+            flex-direction: column;
+            align-items: center;
         }
         
         .differentiator-item {
-            max-width: 100px;
-            min-width: 90px;
+            max-width: 280px;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
         }
         
         .differentiator-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 1rem;
-            margin-bottom: 0.4rem;
+            width: 42px;
+            height: 42px;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
         }
         
         .differentiator-title {
-            font-size: 0.7rem;
-            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
+            font-weight: var(--font-weight-extrabold);
         }
         
-        .differentiator-text {
-            font-size: 0.6rem;
-            line-height: 1.3;
+        /* モバイル版テキスト表示切替 */
+        .differentiator-text-pc {
+            display: none;
+        }
+        
+        .differentiator-text-mobile {
+            display: block;
+            font-size: 0.75rem;
+            line-height: 1.6;
         }
         
         .hero-buttons {
             flex-direction: column;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.6rem;
         }
     }
 
     /* ========================================================
-    ▼ Company Mission Component - コンパクト化・about.html統一版
+    ▼ Company Mission Component - 改善版・コンパクト化・モバイル改行改善
     ======================================================== */
     .mission-section {
         padding: 1.2rem 0;
@@ -1167,7 +1215,8 @@
         background: var(--gradient-cta-new);
     }
     
-    .mission-text {
+    /* PC版企業理念テキスト */
+    .mission-text-pc {
         font-weight: var(--font-weight-bold);
         font-size: clamp(1rem, 2.2vw, 1.3rem);
         color: white;
@@ -1175,6 +1224,20 @@
         padding: 1rem 0;
         max-width: 800px;
         margin: 0 auto;
+        display: block;
+    }
+    
+    /* モバイル版企業理念テキスト */
+    .mission-text-mobile {
+        font-weight: var(--font-weight-bold);
+        font-size: 0.9rem;
+        color: white;
+        margin: 0;
+        padding: 0.8rem;
+        max-width: 800px;
+        margin: 0 auto;
+        display: none;
+        line-height: 1.5;
     }
     
     @media (max-width: 768px) {
@@ -1182,14 +1245,17 @@
             padding: 1rem 0;
         }
         
-        .mission-text {
-            font-size: 0.9rem;
-            padding: 0.8rem;
+        .mission-text-pc {
+            display: none;
+        }
+        
+        .mission-text-mobile {
+            display: block;
         }
     }
 
     /* ========================================================
-    ▼ Services Section Component - 横一列表示最適化・全体像把握向上・about.html統一版
+    ▼ Services Section Component - 横一列表示最適化・全体像把握向上・改善版
     ======================================================== */
     .services-section {
         position: relative;
@@ -1418,7 +1484,7 @@
     }
 
     /* ========================================================
-    ▼ Section Header Component - コンパクト化・全体像把握最適化・about.html統一版
+    ▼ Section Header Component - コンパクト化・全体像把握最適化・改善版
     ======================================================== */
     .section-header {
         text-align: center;
@@ -1474,7 +1540,7 @@
     }
 
     /* ========================================================
-    ▼ FAQ Section Component - AI最適化・全体像把握最適化・about.html統一版
+    ▼ FAQ Section Component - AI最適化・全体像把握最適化・改善版
     ======================================================== */
     .faq-section {
         background: var(--gradient-section);
@@ -1533,63 +1599,89 @@
     }
 
     /* ========================================================
-    ▼ CTA Section Component - コンパクト化・全体像把握最適化・about.html統一版
-    ======================================================== -->
+    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版
+    ======================================================== */
     .cta-section {
         background: var(--gradient-cta-new);
         color: var(--white);
-        padding: 2rem 0;
+        padding: 3rem 0;
         position: relative;
         overflow: hidden;
         text-align: center;
     }
     
+    /* 美しい背景エフェクト追加 */
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(58, 95, 235, 0.1) 0%, transparent 50%);
+        z-index: 0;
+    }
+    
     .cta-content {
         position: relative;
         z-index: var(--z-elevate);
-        max-width: 650px;
+        max-width: 700px;
         margin: 0 auto;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
     
     .cta-title {
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         color: var(--white);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         line-height: 1.3;
+        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
     }
     
     .cta-title .text-accent {
         color: #FFDD00;
         background: none;
         -webkit-text-fill-color: #FFDD00;
-        text-shadow: none;
+        text-shadow: 0 0 20px rgba(255, 221, 0, 0.3);
         font-weight: var(--font-weight-black);
     }
     
     .cta-description {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 2rem;
         opacity: 0.95;
         line-height: 1.7;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
     
     .cta-button {
         background: var(--white);
         color: var(--primary);
-        font-weight: var(--font-weight-semibold);
-        padding: 0.7rem 1.4rem;
+        font-weight: var(--font-weight-bold);
+        padding: 1rem 2rem;
         border-radius: var(--radius-full);
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.5rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
+        min-width: 200px;
+        justify-content: center;
     }
     
     .cta-button span, .cta-button i {
@@ -1604,15 +1696,15 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--gradient-accent);
+        background: var(--gradient-primary);
         opacity: 0;
         transition: opacity var(--transition-normal) ease;
         z-index: 0;
     }
     
     .cta-button:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         color: var(--white);
     }
     
@@ -1620,32 +1712,44 @@
         opacity: 1;
     }
     
+    .cta-button i {
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .cta-button:hover i {
+        transform: translateX(3px);
+    }
+    
     @media (max-width: 768px) {
         .cta-section {
-            padding: 1.5rem 0;
+            padding: 2rem 0;
+        }
+        
+        .cta-content {
+            padding: 1.2rem;
+            margin: 0 0.75rem;
         }
         
         .cta-title {
             font-size: 1.2rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
         
         .cta-description {
-            font-size: 0.8rem;
-            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
         }
         
         .cta-button {
             width: 100%;
-            max-width: 240px;
-            padding: 0.6rem 1.2rem;
-            justify-content: center;
-            font-size: 0.75rem;
+            max-width: 280px;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.8rem;
         }
     }
 
     /* ========================================================
-    ▼ Footer Component - about.html統一版・コンパクト化
+    ▼ Footer Component - 改善版・コンパクト化
     ======================================================== */
     .footer {
         background: var(--dark);
@@ -1904,7 +2008,7 @@
     }
 
     /* ========================================================
-    ▼ Chatbot Component - about.html統一版・モバイル最適化
+    ▼ Chatbot Component - 改善版・モバイル最適化
     ======================================================== */
     .chatbot {
         position: fixed;
@@ -2252,7 +2356,7 @@
     }
     
     /* ========================================================
-    ▼ Back to Top Button Component - about.html統一版
+    ▼ Back to Top Button Component - 改善版
     ======================================================== */
     .back-to-top {
         position: fixed;
@@ -2326,7 +2430,7 @@
     }
 
     /* ========================================================
-    ▼ Utility Classes Component - about.html統一版
+    ▼ Utility Classes Component - 改善版
     ======================================================== */
     .hide-mobile {
         display: block;
@@ -2351,7 +2455,7 @@
     }
     
     /* ========================================================
-    ▼ Accessibility Component - about.html統一版
+    ▼ Accessibility Component - 改善版
     ======================================================== */
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -2378,7 +2482,7 @@
 </head>
 <body>
     <!-- ========================================================
-    ▼ Preloader Component - about.html統一版
+    ▼ Preloader Component - 改善版
     ======================================================== -->
     <div class="page-loader" id="page-loader">
         <div class="loader-circle"></div>
@@ -2390,7 +2494,7 @@
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ Perfect Responsive Header Component - about.html統一版・PC/モバイル完全対応
+    ▼ Perfect Responsive Header Component - 改善版・PC/モバイル完全対応
     ======================================================== -->
     <header class="header" id="header">
         <div class="header-inner">
@@ -2444,16 +2548,24 @@
     ======================================================== -->
     <main id="main-content">
         <!-- ========================================================
-        ▼ Hero Section Component - 全体像把握向上（75vh）・モバイル最適化
+        ▼ Hero Section Component - 改善版・全体像把握向上（75vh）・モバイル最適化・余白改善
         ======================================================== -->
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-badge">AIシステム受託開発・AIプロダクト提供</div>
                     
+                    <!-- Hero Title Component - モバイル改行改善版 -->
                     <h1 class="hero-title heading-xl" id="hero-title">
-                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br class="hide-mobile">
-                        取り戻す
+                        <span class="hero-title-pc">
+                            AIの力で<span class="text-gradient">人間らしい時間</span>を<br class="hide-mobile">
+                            取り戻す
+                        </span>
+                        <span class="hero-title-mobile">
+                            AIの力で<br>
+                            <span class="text-gradient">人間らしい時間</span>を<br>
+                            取り戻す
+                        </span>
                     </h1>
                     
                     <p class="hero-description">
@@ -2461,15 +2573,27 @@
                         プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
                     </p>
                     
-                    <!-- Hero Differentiators Component - 差別化ポイント横一列表示最適化・モバイル横一列強化版 -->
+                    <!-- Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC大型化・モバイル余白改善 -->
                     <div class="hero-differentiators">
                         <div class="differentiator-item">
                             <div class="differentiator-icon">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3 class="differentiator-title">小さく始める</h3>
-                            <p class="differentiator-text hide-mobile">最短2週間のプロトタイプで<br>効果検証。<br>初期投資リスクを最小化。</p>
-                            <p class="differentiator-text show-mobile">最短2週間の<br>プロトタイプで<br>効果検証。<br>初期投資リスクを<br>最小化。</p>
+                            <!-- PC版差別化ポイントテキスト -->
+                            <p class="differentiator-text-pc">
+                                最短2週間のプロトタイプで<br>
+                                効果検証。<br>
+                                初期投資リスクを最小化。
+                            </p>
+                            <!-- モバイル版差別化ポイントテキスト -->
+                            <p class="differentiator-text-mobile">
+                                最短2週間の<br>
+                                プロトタイプで<br>
+                                効果検証。<br>
+                                初期投資リスクを<br>
+                                最小化。
+                            </p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -2477,8 +2601,19 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h3 class="differentiator-title">伴走支援</h3>
-                            <p class="differentiator-text hide-mobile">共創型の開発で<br>方向修正も柔軟。<br>最適解を一緒に見つけます。</p>
-                            <p class="differentiator-text show-mobile">共創型の開発で<br>方向修正も柔軟。<br>最適解を一緒に<br>見つけます。</p>
+                            <!-- PC版差別化ポイントテキスト -->
+                            <p class="differentiator-text-pc">
+                                共創型の開発で<br>
+                                方向修正も柔軟。<br>
+                                最適解を一緒に見つけます。
+                            </p>
+                            <!-- モバイル版差別化ポイントテキスト -->
+                            <p class="differentiator-text-mobile">
+                                共創型の開発で<br>
+                                方向修正も柔軟。<br>
+                                最適解を一緒に<br>
+                                見つけます。
+                            </p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -2486,8 +2621,19 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <h3 class="differentiator-title">段階的成長</h3>
-                            <p class="differentiator-text hide-mobile">効果を確認しながら拡張。<br>確実な成果で<br>組織の自走化を実現。</p>
-                            <p class="differentiator-text show-mobile">効果を確認しながら<br>拡張。確実な成果で<br>組織の自走化を<br>実現。</p>
+                            <!-- PC版差別化ポイントテキスト -->
+                            <p class="differentiator-text-pc">
+                                効果を確認しながら拡張。<br>
+                                確実な成果で<br>
+                                組織の自走化を実現。
+                            </p>
+                            <!-- モバイル版差別化ポイントテキスト -->
+                            <p class="differentiator-text-mobile">
+                                効果を確認しながら<br>
+                                拡張。確実な成果で<br>
+                                組織の自走化を<br>
+                                実現。
+                            </p>
                         </div>
                     </div>
                     
@@ -2505,11 +2651,17 @@
         </section>
         
         <!-- ========================================================
-        ▼ Company Mission Component - コンパクト化・about.html統一版
+        ▼ Company Mission Component - 改善版・コンパクト化・モバイル改行改善
         ======================================================== -->
         <section class="mission-section">
             <div class="container">
-                <h2 class="mission-text">「真の価値を信じ、次世代のために新たな未来を創る。」</h2>
+                <!-- PC版企業理念テキスト -->
+                <h2 class="mission-text-pc">「真の価値を信じ、次世代のために新たな未来を創る。」</h2>
+                <!-- モバイル版企業理念テキスト -->
+                <h2 class="mission-text-mobile">
+                    「真の価値を信じ、次世代のために<br>
+                    新たな未来を創る。」
+                </h2>
             </div>
         </section>
         
@@ -2613,7 +2765,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ FAQ Section Component - AI最適化・全体像把握最適化・about.html統一版 Q&A形式
+        ▼ FAQ Section Component - AI最適化・全体像把握最適化・改善版 Q&A形式
         ======================================================== -->
         <section class="faq-section" id="faq">
             <div class="container">
@@ -2658,7 +2810,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ CTA Section Component - AI最適化・全体像把握最適化・about.html統一版
+        ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版
         ======================================================== -->
         <section class="cta-section" id="cta">
             <div class="container">
@@ -2675,7 +2827,7 @@
     </main>
 
     <!-- ========================================================
-    ▼ Footer Component - about.html統一版・コンパクト化 & AI最適化
+    ▼ Footer Component - 改善版・コンパクト化 & AI最適化
     ======================================================== -->
     <footer class="footer">
         <div class="container">
@@ -2764,7 +2916,7 @@
     </footer>
 
     <!-- ========================================================
-    ▼ Chatbot Component - about.html統一版・モバイル最適化
+    ▼ Chatbot Component - 改善版・モバイル最適化
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
@@ -2795,19 +2947,19 @@
     </div>
 
     <!-- ========================================================
-    ▼ Back to Top Button Component - about.html統一版・コンパクト化
+    ▼ Back to Top Button Component - 改善版・コンパクト化
     ======================================================== -->
     <button id="back-to-top" class="back-to-top" aria-label="ページトップへ戻る">
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </button>
 
     <!-- ========================================================
-    ▼ Main JavaScript Component - about.html統一版・AI最適化 & パフォーマンス向上
+    ▼ Main JavaScript Component - 改善版・AI最適化 & パフォーマンス向上
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ========================================================
-        // ▼ Initialization Process Component - about.html統一版
+        // ▼ Initialization Process Component - 改善版
         // ========================================================
         
         // Page loader management - optimized
@@ -2834,7 +2986,7 @@
         }
         
         // ========================================================
-        // ▼ Perfect Responsive Header & Navigation Component - about.html統一版・PC/モバイル完全対応
+        // ▼ Perfect Responsive Header & Navigation Component - 改善版・PC/モバイル完全対応
         // ========================================================
         
         const header = document.getElementById('header');
@@ -2909,7 +3061,7 @@
         }
         
         // ========================================================
-        // ▼ UI Element Event Processing Component - about.html統一版
+        // ▼ UI Element Event Processing Component - 改善版
         // ========================================================
         
         // Back to Top button click event
@@ -2924,7 +3076,7 @@
         }
 
         // ========================================================
-        // ▼ Advanced Chatbot Component - about.html統一版・AI最適化完全版
+        // ▼ Advanced Chatbot Component - 改善版・AI最適化完全版
         // ========================================================
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
@@ -3051,7 +3203,7 @@
         }
         
         // ========================================================
-        // ▼ Accessibility Enhancement Component - about.html統一版
+        // ▼ Accessibility Enhancement Component - 改善版
         // ========================================================
         
         // Keyboard navigation support
