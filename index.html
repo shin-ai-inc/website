@@ -1156,35 +1156,34 @@
             padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
         }
         
-        /* ★重要★ モバイル版余白大幅改善・スッキリデザイン */
+        /* ★重要★ モバイル版横一列表示・コンパクト版 */
         .hero-differentiators {
-            gap: 1rem;
+            gap: 0.4rem;
             margin: 2.5rem 0 3rem;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            justify-content: center;
         }
         
         .differentiator-item {
-            max-width: 280px;
-            min-width: 280px;
+            max-width: 100px;
+            min-width: 100px;
             background: rgba(255, 255, 255, 0.8);
-            padding: 1.5rem;
-            border-radius: 12px;
+            padding: 0.8rem 0.3rem;
+            border-radius: 10px;
             box-shadow: var(--shadow-sm);
-            margin-bottom: 1rem;
         }
         
         .differentiator-icon {
-            width: 42px;
-            height: 42px;
-            font-size: 1.1rem;
-            margin-bottom: 0.6rem;
+            width: 32px;
+            height: 32px;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
         }
         
         .differentiator-title {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
+            font-size: 0.7rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.1;
             font-weight: var(--font-weight-extrabold);
         }
         
@@ -1195,8 +1194,8 @@
         
         .differentiator-text-mobile {
             display: block;
-            font-size: 0.75rem;
-            line-height: 1.6;
+            font-size: 0.55rem;
+            line-height: 1.3;
         }
         
         .hero-buttons {
@@ -1599,7 +1598,7 @@
     }
 
     /* ========================================================
-    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版
+    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版・フローティングアニメーション強化
     ======================================================== */
     .cta-section {
         background: var(--gradient-cta-new);
@@ -1663,25 +1662,65 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
     
+    /* ========================================================
+    ▼ Premium Floating CTA Button Component - 魅力的フローティングアニメーション
+    ======================================================== */
     .cta-button {
-        background: var(--white);
-        color: var(--primary);
+        background: linear-gradient(45deg, #3A5FEB, #8B5CF6, #F59E0B, #10B981, #F97316);
+        background-size: 400% 400%;
+        animation: gradientShift 4s ease infinite, float 3s ease-in-out infinite;
+        color: var(--white);
         font-weight: var(--font-weight-bold);
-        padding: 1rem 2rem;
+        padding: 1.2rem 2.5rem;
         border-radius: var(--radius-full);
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.6rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 
+            0 8px 25px rgba(0, 0, 0, 0.15),
+            0 0 0 0 rgba(255, 255, 255, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
         position: relative;
         overflow: hidden;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        font-size: 0.9rem;
-        min-width: 200px;
+        font-size: 0.95rem;
+        min-width: 220px;
         justify-content: center;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 動的背景パーティクルエフェクト */
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+        z-index: 1;
+    }
+    
+    /* フローティングパーティクル */
+    .cta-button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%;
+        height: 200%;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        transform: translate(-50%, -50%) rotate(0deg);
+        animation: particleRotate 6s linear infinite;
+        z-index: 0;
+        pointer-events: none;
     }
     
     .cta-button span, .cta-button i {
@@ -1689,35 +1728,73 @@
         z-index: 2;
     }
     
-    .cta-button::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-primary);
-        opacity: 0;
-        transition: opacity var(--transition-normal) ease;
-        z-index: 0;
-    }
-    
     .cta-button:hover {
-        transform: translateY(-4px) scale(1.05);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-        color: var(--white);
+        transform: translateY(-6px) scale(1.08);
+        box-shadow: 
+            0 20px 50px rgba(0, 0, 0, 0.3),
+            0 0 0 8px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        animation: gradientShift 2s ease infinite, floatHover 1.5s ease-in-out infinite;
     }
     
-    .cta-button:hover::after {
-        opacity: 1;
+    .cta-button:hover::before {
+        left: 100%;
     }
     
     .cta-button i {
-        transition: transform var(--transition-normal) ease;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     
     .cta-button:hover i {
-        transform: translateX(3px);
+        transform: translateX(5px) rotate(15deg);
+    }
+    
+    /* フローティングアニメーション */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+    
+    @keyframes floatHover {
+        0%, 100% {
+            transform: translateY(-6px) scale(1.08);
+        }
+        50% {
+            transform: translateY(-12px) scale(1.08);
+        }
+    }
+    
+    /* 動的グラデーションアニメーション */
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    /* パーティクル回転アニメーション */
+    @keyframes particleRotate {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+    
+    /* プルス効果 */
+    .cta-button:active {
+        transform: translateY(-4px) scale(1.05);
+        transition: all 0.1s ease;
     }
     
     @media (max-width: 768px) {
@@ -1742,9 +1819,31 @@
         
         .cta-button {
             width: 100%;
-            max-width: 280px;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.8rem;
+            max-width: 300px;
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        @keyframes floatHover {
+            0%, 100% {
+                transform: translateY(-3px) scale(1.05);
+            }
+            50% {
+                transform: translateY(-6px) scale(1.05);
+            }
         }
     }
 
@@ -2659,8 +2758,8 @@
                 <h2 class="mission-text-pc">「真の価値を信じ、次世代のために新たな未来を創る。」</h2>
                 <!-- モバイル版企業理念テキスト -->
                 <h2 class="mission-text-mobile">
-                    「真の価値を信じ、次世代のために<br>
-                    新たな未来を創る。」
+                    「真の価値を信じ、<br>
+                    次世代のために新たな未来を創る。」
                 </h2>
             </div>
         </section>
