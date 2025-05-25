@@ -300,7 +300,7 @@
     
     /* ========================================================
     ▼ Preloader Component - 高速化・改善版
-    ======================================================== -->
+    ======================================================== */
     .page-loader {
         position: fixed;
         top: 0;
@@ -1060,7 +1060,7 @@
     }
     
     /* ========================================================
-    ▼ Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC版拡大対応
+    ▼ Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC版拡大対応 ★改善★
     ======================================================== */
     .hero-differentiators {
         display: flex;
@@ -1080,10 +1080,11 @@
         z-index: 1;
     }
     
+    /* ★改善1: 差別化ポイントアイコンの色を逆に変更★ */
     .differentiator-icon {
         width: 80px; /* PC版拡大: 50px → 80px */
         height: 80px; /* PC版拡大: 50px → 80px */
-        background: var(--white);
+        background: var(--gradient-primary); /* ★改善: 通常時を青系グラデーションに変更★ */
         border-radius: 16px; /* PC版拡大: 10px → 16px */
         display: flex;
         align-items: center;
@@ -1091,14 +1092,15 @@
         margin-bottom: 1.2rem; /* PC版拡大: 0.8rem → 1.2rem */
         font-size: 2rem; /* PC版拡大: 1.3rem → 2rem */
         box-shadow: var(--shadow-md);
-        color: var(--primary);
+        color: var(--white); /* ★改善: 通常時を白文字に変更★ */
         transition: all var(--transition-normal) ease;
     }
     
+    /* ★改善1: ホバー時をアクセントカラーに変更★ */
     .differentiator-item:hover .differentiator-icon {
         transform: translateY(-3px);
-        color: var(--white);
-        background: var(--gradient-primary);
+        color: var(--white); /* ★改善: ホバー時も白文字維持★ */
+        background: var(--gradient-accent); /* ★改善: ホバー時をアクセント系に変更★ */
     }
     
     .differentiator-title {
@@ -1180,11 +1182,22 @@
             box-shadow: var(--shadow-sm);
         }
         
+        /* ★改善1: モバイル版アイコンも色変更適用★ */
         .differentiator-icon {
             width: 32px; /* モバイルサイズ維持 */
             height: 32px;
             font-size: 0.9rem;
             margin-bottom: 0.4rem;
+            background: var(--gradient-primary); /* ★改善: モバイルでも通常時青系★ */
+            color: var(--white); /* ★改善: モバイルでも通常時白文字★ */
+        }
+        
+        /* ★改善1: モバイル版ホバー効果をタッチ効果に変更★ */
+        .differentiator-item:active .differentiator-icon,
+        .differentiator-item:focus .differentiator-icon {
+            transform: translateY(-2px);
+            background: var(--gradient-accent); /* ★改善: タッチ時アクセント系★ */
+            color: var(--white);
         }
         
         .differentiator-title {
@@ -1909,7 +1922,7 @@
     }
 
     /* ========================================================
-    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版・フローティングアニメーション強化・PC版拡大対応
+    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版・フローティングアニメーション強化・PC版拡大対応 ★改善★
     ======================================================== */
     .cta-section {
         background: var(--gradient-cta-new);
@@ -1961,7 +1974,6 @@
         color: #ffbb00;
         background: none;
         -webkit-text-fill-color: #FFDD00;
-
         font-weight: var(--font-weight-black);
     }
     
@@ -1974,7 +1986,7 @@
     }
     
     /* ========================================================
-    ▼ Premium Floating CTA Button Component - 魅力的フローティングアニメーション・PC版拡大対応・モバイル対応強化
+    ▼ Premium Floating CTA Button Component - 魅力的フローティングアニメーション・PC版拡大対応・モバイル対応強化 ★改善★
     ======================================================== */
     .cta-button {
         background: linear-gradient(45deg, #3A5FEB, #8B5CF6, #F59E0B, #10B981, #F97316);
@@ -2039,6 +2051,7 @@
         z-index: 2;
     }
     
+    /* ★改善2: PC版ホバーエフェクト★ */
     .cta-button:hover {
         transform: translateY(-6px) scale(1.08);
         box-shadow: 
@@ -2047,6 +2060,7 @@
             inset 0 1px 0 rgba(255, 255, 255, 0.3);
         animation: gradientShift 2s ease infinite, floatHover 1.5s ease-in-out infinite;
         color: #FFFFFF;
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FECA57); /* ★改善: ホバー時は異なるグラデーション★ */
     }
     
     .cta-button:hover::before {
@@ -2059,6 +2073,22 @@
     
     .cta-button:hover i {
         transform: translateX(4px) rotate(0deg);
+    }
+    
+    /* ★改善2: モバイル版タッチエフェクト追加★ */
+    .cta-button:active,
+    .cta-button:focus {
+        transform: translateY(-4px) scale(1.05);
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FECA57); /* ★改善: タッチ時色変化★ */
+        color: #FFFFFF;
+        box-shadow: 
+            0 15px 40px rgba(0, 0, 0, 0.25),
+            0 0 0 6px rgba(255, 255, 255, 0.15);
+    }
+    
+    .cta-button:active i,
+    .cta-button:focus i {
+        transform: translateX(3px) rotate(0deg);
     }
     
     /* フローティングアニメーション */
@@ -2136,7 +2166,7 @@
             font-size: 0.85rem; /* モバイルサイズ維持 */
         }
         
-        /* モバイル版フローティングアニメーション対応 */
+        /* ★改善2: モバイル版フローティングアニメーション対応★ */
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px);
@@ -2162,6 +2192,14 @@
         
         .cta-button:hover i {
             transform: translateX(3px) rotate(0deg);
+        }
+        
+        /* ★改善2: モバイル版タッチ効果強化★ */
+        .cta-button:active,
+        .cta-button:focus {
+            transform: translateY(-2px) scale(1.03);
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FECA57); /* ★改善: モバイルでもタッチ時色変化★ */
+            color: #FFFFFF;
         }
     }
 
@@ -3069,7 +3107,7 @@
                         プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
                     </p>
                     
-                    <!-- Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC大型化・モバイル余白改善 -->
+                    <!-- Hero Differentiators Component - 改善版・差別化ポイント横一列表示最適化・PC大型化・モバイル余白改善 ★改善★ -->
                     <div class="hero-differentiators">
                         <div class="differentiator-item">
                             <div class="differentiator-icon">
@@ -3393,12 +3431,12 @@
         </section>
         
         <!-- ========================================================
-        ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版
+        ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・改善版 ★改善★
         ======================================================== -->
         <section class="cta-section" id="cta">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を<br>広げませんか？
+                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を<br>広げませんか？</h2>
                     <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br class="hide-mobile">プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
                     <a href="contact.html" class="cta-button">
                         <span>無料相談を始める</span>
