@@ -139,7 +139,50 @@
         }
     }
     
-    /* ★★★ IMPROVEMENT 2.8: Dramatic Gradient Shift Animation - 劇的グラデーション変化アニメーション ★★★ */
+    /* ★★★ IMPROVEMENT 2.8: Fun Gradient Animations - 楽しいグラデーションアニメーション群 ★★★ */
+    
+    /* 常時楽しいグラデーションフロー - 通常状態 */
+    @keyframes enjoyableGradientFlow {
+        0% {
+            background-position: 0% 50%;
+        }
+        25% {
+            background-position: 50% 0%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        75% {
+            background-position: 50% 100%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    /* 興奮するグラデーションラッシュ - ホバー/タッチ状態 */
+    @keyframes excitingGradientRush {
+        0% {
+            background-position: 0% 0%;
+        }
+        20% {
+            background-position: 80% 20%;
+        }
+        40% {
+            background-position: 100% 80%;
+        }
+        60% {
+            background-position: 20% 100%;
+        }
+        80% {
+            background-position: 0% 60%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+    
+    /* ★★★ IMPROVEMENT 2.9: Dramatic Gradient Shift Animation - 劇的グラデーション変化アニメーション（保持） ★★★ */
     @keyframes dramaticGradientShift {
         0% {
             background-position: 0% 0%;
@@ -1314,22 +1357,22 @@
             border-radius: 8px; /* モバイル用に調整 */
         }
         
-            /* ★★★ IMPROVEMENT 1.7: Mobile Vivid Gradient Support - モバイル鮮やかグラデーションサポート ★★★ */
+            /* ★★★ IMPROVEMENT 1.7: Mobile Vivid Lime Green Gradient Support - モバイル鮮やか黄緑グラデーションサポート ★★★ */
         .differentiator-item:active .differentiator-icon {
             transform: translateY(-3px) scale(1.08); /* モバイル用強化 */
-            background: linear-gradient(135deg, #FF1744 0%, #FF6B35 50%, #FFA726 100%); /* 鮮やかなレッド-オレンジ-アンバーグラデーション */
-            color: var(--differentiator-icon-hover);
-            border-color: rgba(255, 23, 68, 0.4); /* 鮮やかな境界線 */
-            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.35); /* 鮮やかな影 */
+            background: linear-gradient(135deg, #7FFF00 0%, #32CD32 50%, #00FF7F 100%); /* 鮮やかな黄緑グラデーション：チャートリューズ→ライムグリーン→スプリンググリーン */
+            color: #FFFFFF; /* 純白でコントラスト強化 */
+            border-color: rgba(127, 255, 0, 0.5); /* 鮮やかな黄緑境界線 */
+            box-shadow: 0 8px 25px rgba(127, 255, 0, 0.4); /* 鮮やかな黄緑の影 */
         }
         
         /* ★★★ IMPROVEMENT 1.8: Mobile Title and Text Color Enhancement - モバイル文字色強化 ★★★ */
         .differentiator-item:active .differentiator-title {
-            color: #FF1744; /* 鮮やかなレッド */
+            color: #32CD32; /* 鮮やかなライムグリーン */
         }
         
         .differentiator-item:active .differentiator-text-mobile {
-            color: #424242; /* より濃いグレー */
+            color: #2E7D32; /* 深い緑でコントラスト確保 */
         }
         
         .differentiator-title {
@@ -2184,7 +2227,7 @@
         z-index: 2;
     }
     
-    /* ★★★ IMPROVEMENT 2.2: Universal Hover/Touch Support - 全デバイス対応ホバー効果 ★★★ */
+    /* ★★★ IMPROVEMENT 2.2: Universal Hover/Touch Support - 楽しいインタラクション強化版 ★★★ */
     .cta-button:hover,
     .cta-button:focus,
     .cta-button:active {
@@ -2193,11 +2236,11 @@
             0 20px 50px rgba(0, 0, 0, 0.3),
             0 0 0 8px rgba(255, 255, 255, 0.1),
             inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        animation: dramaticGradientShift 1.5s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* 高速化 */
+        animation: excitingGradientRush 2s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* より興奮するアニメーション */
         color: #FFFFFF;
     }
     
-    /* ★★★ IMPROVEMENT 2.3: Mobile/Touch Device Specific Support - モバイル/タッチデバイス専用サポート ★★★ */
+    /* ★★★ IMPROVEMENT 2.3: Mobile/Touch Device Specific Support - モバイル楽しいアニメーション対応 ★★★ */
     @media (hover: none) and (pointer: coarse) {
         .cta-button:active {
             transform: translateY(-4px) scale(1.05);
@@ -2205,7 +2248,7 @@
                 0 15px 40px rgba(0, 0, 0, 0.25),
                 0 0 0 6px rgba(255, 255, 255, 0.08),
                 inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            animation: dramaticGradientShift 1.5s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* 高速化 */
+            animation: excitingGradientRush 2s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* 楽しいアニメーション */
             color: #FFFFFF;
         }
         
@@ -2218,15 +2261,15 @@
         }
     }
     
-    /* ★★★ IMPROVEMENT 2.4: Enhanced Touch Event Animation - 強化タッチイベントアニメーション ★★★ */
+    /* ★★★ IMPROVEMENT 2.4: Enhanced Touch Event Animation - 楽しいモバイルアニメーション ★★★ */
     @media (max-width: 768px) {
         .cta-button:active {
             transform: translateY(-5px) scale(1.08); /* より大きな変化 */
             box-shadow: 
-                0 15px 40px rgba(255, 23, 68, 0.25), /* 鮮やかなピンク系の影 */
-                0 0 0 6px rgba(255, 107, 53, 0.15),
+                0 15px 40px rgba(255, 107, 107, 0.25), /* トロピカル系の影 */
+                0 0 0 6px rgba(78, 205, 196, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            animation: dramaticGradientShift 1s ease-in-out infinite, enhancedMobileFloat 1s ease-in-out infinite; /* 高速化 */
+            animation: excitingGradientRush 1.5s ease-in-out infinite, enhancedMobileFloat 1s ease-in-out infinite; /* 楽しい高速アニメーション */
             color: #FFFFFF;
         }
         
