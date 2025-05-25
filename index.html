@@ -1017,6 +1017,16 @@
         color: transparent;
     }
     
+    .hero-title-accent {
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        font-weight: var(--font-weight-black);
+    }
+    
     .hero-description {
         font-size: clamp(0.85rem, 1.6vw, 1rem);
         color: var(--gray);
@@ -1030,13 +1040,13 @@
     }
     
     /* ========================================================
-    ▼ Hero Differentiators Component - 差別化ポイント横一列表示最適化・モバイル横一列強化版
+    ▼ Hero Differentiators Component - 差別化ポイント横一列表示最適化・PC大きく・モバイル改行修正版
     ======================================================== */
     .hero-differentiators {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        margin: 1rem 0 1.8rem;
+        gap: 1.5rem;
+        margin: 1.2rem 0 2rem;
         animation: fadeInUp 0.5s ease 0.3s forwards;
         opacity: 0;
     }
@@ -1045,21 +1055,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 160px;
+        max-width: 180px;
         position: relative;
         z-index: 1;
     }
     
     .differentiator-icon {
-        width: 42px;
-        height: 42px;
+        width: 50px;
+        height: 50px;
         background: var(--white);
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0.6rem;
-        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.3rem;
         box-shadow: var(--shadow-md);
         color: var(--primary);
         transition: all var(--transition-normal) ease;
@@ -1073,16 +1083,16 @@
     
     .differentiator-title {
         font-weight: var(--font-weight-bold);
-        font-size: 0.8rem;
-        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
         color: var(--dark);
     }
     
     .differentiator-text {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
         color: var(--gray);
         text-align: center;
-        line-height: 1.5;
+        line-height: 1.6;
     }
     
     .hero-buttons {
@@ -1122,33 +1132,37 @@
             padding: calc(var(--header-height-mobile) + 0.8rem) 0 1.2rem;
         }
         
-        /* ★重要★ モバイルでも横一列表示維持・コンパクト化 */
-        .hero-differentiators {
-            gap: 0.6rem;
-            margin: 0.8rem 0 1.5rem;
-        }
-        
-        .differentiator-item {
-            max-width: 100px;
-            min-width: 90px;
-        }
-        
-        .differentiator-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 1rem;
-            margin-bottom: 0.4rem;
-        }
-        
-        .differentiator-title {
-            font-size: 0.7rem;
-            margin-bottom: 0.2rem;
+        .hero-title {
             line-height: 1.2;
         }
         
-        .differentiator-text {
-            font-size: 0.6rem;
+        /* ★重要★ モバイルでも横一列表示維持・コンパクト化・改行修正 */
+        .hero-differentiators {
+            gap: 0.8rem;
+            margin: 1rem 0 1.8rem;
+        }
+        
+        .differentiator-item {
+            max-width: 110px;
+            min-width: 100px;
+        }
+        
+        .differentiator-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .differentiator-title {
+            font-size: 0.75rem;
+            margin-bottom: 0.3rem;
             line-height: 1.3;
+        }
+        
+        .differentiator-text {
+            font-size: 0.65rem;
+            line-height: 1.4;
         }
         
         .hero-buttons {
@@ -1533,12 +1547,12 @@
     }
 
     /* ========================================================
-    ▼ CTA Section Component - コンパクト化・全体像把握最適化・about.html統一版
-    ======================================================== -->
+    ▼ CTA Section Component - 美しいデザイン改良版・全体像把握最適化・about.html統一版
+    ======================================================== */
     .cta-section {
         background: var(--gradient-cta-new);
         color: var(--white);
-        padding: 2rem 0;
+        padding: 3rem 0;
         position: relative;
         overflow: hidden;
         text-align: center;
@@ -1547,54 +1561,88 @@
     .cta-content {
         position: relative;
         z-index: var(--z-elevate);
-        max-width: 650px;
+        max-width: 700px;
         margin: 0 auto;
     }
     
     .cta-title {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         color: var(--white);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         line-height: 1.3;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: var(--font-weight-extrabold);
     }
     
     .cta-title .text-accent {
         color: #FFDD00;
         background: none;
         -webkit-text-fill-color: #FFDD00;
-        text-shadow: none;
+        text-shadow: 0 2px 8px rgba(255, 221, 0, 0.3);
         font-weight: var(--font-weight-black);
+        display: inline-block;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            text-shadow: 0 2px 8px rgba(255, 221, 0, 0.3);
+        }
+        to {
+            text-shadow: 0 2px 12px rgba(255, 221, 0, 0.6);
+        }
     }
     
     .cta-description {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        margin-bottom: 2.5rem;
         opacity: 0.95;
-        line-height: 1.7;
+        line-height: 1.8;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2.5rem;
+        font-weight: var(--font-weight-medium);
     }
     
     .cta-button {
         background: var(--white);
         color: var(--primary);
-        font-weight: var(--font-weight-semibold);
-        padding: 0.7rem 1.4rem;
+        font-weight: var(--font-weight-bold);
+        padding: 1rem 2rem;
         border-radius: var(--radius-full);
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.6rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        font-size: 0.8rem;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        min-width: 280px;
+        justify-content: center;
     }
     
     .cta-button span, .cta-button i {
         position: relative;
         z-index: 2;
+    }
+    
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        bottom: -2px;
+        left: -2px;
+        background: var(--gradient-accent);
+        border-radius: var(--radius-full);
+        opacity: 0;
+        transition: opacity var(--transition-normal) ease;
+        z-index: -1;
     }
     
     .cta-button::after {
@@ -1611,36 +1659,44 @@
     }
     
     .cta-button:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         color: var(--white);
+    }
+    
+    .cta-button:hover::before {
+        opacity: 1;
     }
     
     .cta-button:hover::after {
         opacity: 1;
     }
     
+    .cta-button:hover i {
+        transform: translateX(3px);
+    }
+    
     @media (max-width: 768px) {
         .cta-section {
-            padding: 1.5rem 0;
+            padding: 2.5rem 0;
         }
         
         .cta-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
         }
         
         .cta-description {
-            font-size: 0.8rem;
-            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
         }
         
         .cta-button {
             width: 100%;
-            max-width: 240px;
-            padding: 0.6rem 1.2rem;
-            justify-content: center;
-            font-size: 0.75rem;
+            max-width: 280px;
+            padding: 0.9rem 1.5rem;
+            font-size: 0.85rem;
         }
     }
 
@@ -2452,8 +2508,8 @@
                     <div class="hero-badge">AIシステム受託開発・AIプロダクト提供</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
-                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br class="hide-mobile">
-                        取り戻す
+                        AIの力で<span class="text-gradient">人間らしい時間</span>を<br class="hide-mobile"><br class="show-mobile">
+                        <span class="hero-title-accent">取り戻す</span>
                     </h1>
                     
                     <p class="hero-description">
@@ -2461,14 +2517,14 @@
                         プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現。
                     </p>
                     
-                    <!-- Hero Differentiators Component - 差別化ポイント横一列表示最適化・モバイル横一列強化版 -->
+                    <!-- Hero Differentiators Component - 差別化ポイント横一列表示最適化・PC大きく・モバイル改行修正版 -->
                     <div class="hero-differentiators">
                         <div class="differentiator-item">
                             <div class="differentiator-icon">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3 class="differentiator-title">小さく始める</h3>
-                            <p class="differentiator-text">最短2週間のプロトタイプで<br>効果検証。初期投資リスクを<br>最小化。</p>
+                            <p class="differentiator-text">最短2週間の<br>プロトタイプで効果検証。<br>初期投資リスクを最小化。</p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -2476,7 +2532,7 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h3 class="differentiator-title">伴走支援</h3>
-                            <p class="differentiator-text">共創型の開発で方向修正も<br>柔軟。最適解を一緒に<br>見つけます。</p>
+                            <p class="differentiator-text">共創型の開発で<br>方向修正も柔軟。<br>最適解を一緒に見つけます。</p>
                         </div>
                         
                         <div class="differentiator-item">
@@ -2506,7 +2562,7 @@
         ======================================================== -->
         <section class="mission-section">
             <div class="container">
-                <h2 class="mission-text">「真の価値を信じ、次世代のために新たな未来を創る。」</h2>
+                <h2 class="mission-text">「真の価値を信じ、<br class="show-mobile">次世代のために新たな未来を創る。」</h2>
             </div>
         </section>
         
