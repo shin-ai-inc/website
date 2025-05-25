@@ -104,131 +104,7 @@
         "url": "https://shin-ai-inc.github.io/website/assets/images/logo.svg",
         "width": 500,
         "height": 500
-      .cta-button:hover::before,
-    .cta-button:focus::before,
-    .cta-button:active::before {
-        left: 100%;
-    }
-    
-    .cta-button i {
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    .cta-button:hover i,
-    .cta-button:focus i,
-    .cta-button:active i {
-        transform: translateX(4px) rotate(0deg);
-    }
-    
-    /* フローティングアニメーション */
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-8px);
-        }
-    }
-    
-    @keyframes floatHover {
-        0%, 100% {
-            transform: translateY(-6px) scale(1.08);
-        }
-        50% {
-            transform: translateY(-12px) scale(1.08);
-        }
-    }
-    
-    /* ★★★ IMPROVEMENT 2.8: Fun Gradient Animations - 楽しいグラデーションアニメーション群 ★★★ */
-    
-    /* 常時楽しいグラデーションフロー - 通常状態 */
-    @keyframes enjoyableGradientFlow {
-        0% {
-            background-position: 0% 50%;
-        }
-        25% {
-            background-position: 50% 0%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        75% {
-            background-position: 50% 100%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-    
-    /* 興奮するグラデーションラッシュ - ホバー/タッチ状態 */
-    @keyframes excitingGradientRush {
-        0% {
-            background-position: 0% 0%;
-        }
-        20% {
-            background-position: 80% 20%;
-        }
-        40% {
-            background-position: 100% 80%;
-        }
-        60% {
-            background-position: 20% 100%;
-        }
-        80% {
-            background-position: 0% 60%;
-        }
-        100% {
-            background-position: 0% 0%;
-        }
-    }
-    
-    /* ★★★ IMPROVEMENT 2.9: Dramatic Gradient Shift Animation - 劇的グラデーション変化アニメーション（保持） ★★★ */
-    @keyframes dramaticGradientShift {
-        0% {
-            background-position: 0% 0%;
-        }
-        25% {
-            background-position: 100% 0%;
-        }
-        50% {
-            background-position: 100% 100%;
-        }
-        75% {
-            background-position: 0% 100%;
-        }
-        100% {
-            background-position: 0% 0%;
-        }
-    }
-    
-    /* 動的グラデーションアニメーション - 従来版維持 */
-    @keyframes gradientShift {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-    
-    /* パーティクル回転アニメーション */
-    @keyframes particleRotate {
-        0% {
-            transform: translate(-50%, -50%) rotate(0deg);
-        }
-        100% {
-            transform: translate(-50%, -50%) rotate(360deg);
-        }
-    }
-    
-    /* プルス効果 */
-    .cta-button:active {
-        transform: translateY(-4px) scale(1.05);
-        transition: all 0.1s ease;
-    },
+      },
       "image": {
         "@type": "ImageObject",
         "url": "https://shin-ai-inc.github.io/website/assets/images/ogp-ai-optimized.jpg",
@@ -1357,22 +1233,13 @@
             border-radius: 8px; /* モバイル用に調整 */
         }
         
-            /* ★★★ IMPROVEMENT 1.7: Mobile Vivid Lime Green Gradient Support - モバイル鮮やか黄緑グラデーションサポート ★★★ */
+        /* ★★★ IMPROVEMENT 1.7: Mobile Hover/Touch Support - モバイルタッチサポート ★★★ */
         .differentiator-item:active .differentiator-icon {
-            transform: translateY(-3px) scale(1.08); /* モバイル用強化 */
-            background: linear-gradient(135deg, #7FFF00 0%, #32CD32 50%, #00FF7F 100%); /* 鮮やかな黄緑グラデーション：チャートリューズ→ライムグリーン→スプリンググリーン */
-            color: #FFFFFF; /* 純白でコントラスト強化 */
-            border-color: rgba(127, 255, 0, 0.5); /* 鮮やかな黄緑境界線 */
-            box-shadow: 0 8px 25px rgba(127, 255, 0, 0.4); /* 鮮やかな黄緑の影 */
-        }
-        
-        /* ★★★ IMPROVEMENT 1.8: Mobile Title and Text Color Enhancement - モバイル文字色強化 ★★★ */
-        .differentiator-item:active .differentiator-title {
-            color: #32CD32; /* 鮮やかなライムグリーン */
-        }
-        
-        .differentiator-item:active .differentiator-text-mobile {
-            color: #2E7D32; /* 深い緑でコントラスト確保 */
+            transform: translateY(-2px) scale(1.05); /* モバイル用に調整 */
+            background: var(--differentiator-bg-hover);
+            color: var(--differentiator-icon-hover);
+            border-color: var(--differentiator-border-hover);
+            box-shadow: var(--differentiator-shadow-hover);
         }
         
         .differentiator-title {
@@ -2162,12 +2029,24 @@
     }
     
     /* ========================================================
-    ▼ IMPROVEMENT 2.1: Premium Universal CTA Button Component - 全デバイス対応魅力的アニメーション・PC版拡大対応
+    ▼ IMPROVEMENT 2.1: Premium Psychological CTA Button Component - 人間心理に基づく魅力的ボタン・PC版拡大対応
     ======================================================== */
     .cta-button {
-        background: linear-gradient(45deg, #3A5FEB, #8B5CF6, #F59E0B, #10B981, #F97316);
-        background-size: 400% 400%;
-        animation: gradientShift 4s ease infinite, float 3s ease-in-out infinite;
+        /* ★★★ 人間心理最適化カラーパレット - 紫除外・美しい配色 ★★★ */
+        background: linear-gradient(
+            135deg, 
+            #3A5FEB 0%,     /* 信頼のディープブルー */
+            #00DBB4 25%,    /* 成長のティール */
+            #FF8A00 50%,    /* 行動のオレンジ */
+            #FF6B95 75%,    /* 魅力のコーラルピンク */
+            #F7931E 100%    /* 成功のゴールドオレンジ */
+        );
+        background-size: 300% 300%;
+        /* ★★★ 常時動的アニメーション - 人間の注意を引く心理効果 ★★★ */
+        animation: 
+            psychologicalGradientFlow 6s ease-in-out infinite,
+            subtlePulse 3s ease-in-out infinite,
+            gentleFloat 4s ease-in-out infinite;
         color: var(--white);
         font-weight: var(--font-weight-bold);
         padding: 1.5rem 3rem; /* PC版拡大: 1.2rem 2.5rem → 1.5rem 3rem */
@@ -2176,10 +2055,13 @@
         align-items: center;
         gap: 0.8rem; /* PC版拡大: 0.6rem → 0.8rem */
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* ★★★ プレミアム多層シャドウ効果 ★★★ */
         box-shadow: 
-            0 8px 25px rgba(0, 0, 0, 0.15),
-            0 0 0 0 rgba(255, 255, 255, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            0 8px 25px rgba(255, 138, 0, 0.25),
+            0 4px 15px rgba(58, 95, 235, 0.2),
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.1);
         position: relative;
         overflow: hidden;
         text-decoration: none;
@@ -2188,23 +2070,32 @@
         font-size: 1.2rem; /* PC版拡大: 0.95rem → 1.2rem */
         min-width: 280px; /* PC版拡大: 220px → 280px */
         justify-content: center;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     
-    /* 動的背景パーティクルエフェクト */
+    /* ★★★ 魅惑的な光の反射効果 - 常時動作 ★★★ */
     .cta-button::before {
         content: '';
         position: absolute;
-        top: 0;
+        top: -50%;
         left: -100%;
         width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transition: left 0.5s ease;
-        z-index: 1;
+        height: 200%;
+        background: linear-gradient(
+            60deg, 
+            transparent 30%, 
+            rgba(255, 255, 255, 0.4) 50%, 
+            rgba(255, 219, 0, 0.3) 52%, 
+            rgba(255, 255, 255, 0.4) 54%, 
+            transparent 70%
+        );
+        animation: mesmerizingShine 4s linear infinite;
+        z-index: 2;
+        pointer-events: none;
+        transform: skewX(-25deg);
     }
     
-    /* フローティングパーティクル */
+    /* ★★★ 心理的魅力エフェクト - 微細な光のパーティクル ★★★ */
     .cta-button::after {
         content: '';
         position: absolute;
@@ -2213,85 +2104,199 @@
         width: 200%;
         height: 200%;
         background: 
-            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 75% 75%, rgba(255, 219, 0, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 50% 80%, rgba(0, 219, 180, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 138, 0, 0.08) 0%, transparent 50%);
         transform: translate(-50%, -50%) rotate(0deg);
-        animation: particleRotate 6s linear infinite;
-        z-index: 0;
+        animation: enchantingParticles 8s linear infinite;
+        z-index: 1;
         pointer-events: none;
     }
     
     .cta-button span, .cta-button i {
         position: relative;
-        z-index: 2;
+        z-index: 3;
     }
     
-    /* ★★★ IMPROVEMENT 2.2: Universal Hover/Touch Support - 楽しいインタラクション強化版 ★★★ */
+    /* ★★★ IMPROVEMENT 2.2: Psychological Hover/Touch Enhancement - 心理的魅力強化ホバー効果 ★★★ */
     .cta-button:hover,
     .cta-button:focus,
     .cta-button:active {
-        transform: translateY(-6px) scale(1.08);
+        transform: translateY(-6px) scale(1.05);
+        /* ★★★ 魅惑的な多層シャドウ強化 ★★★ */
         box-shadow: 
-            0 20px 50px rgba(0, 0, 0, 0.3),
-            0 0 0 8px rgba(255, 255, 255, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        animation: excitingGradientRush 2s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* より興奮するアニメーション */
+            0 20px 50px rgba(255, 138, 0, 0.4),
+            0 15px 35px rgba(58, 95, 235, 0.3),
+            0 8px 25px rgba(255, 107, 149, 0.25),
+            0 0 0 2px rgba(255, 255, 255, 0.2),
+            inset 0 2px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+        /* ★★★ ホバー時の加速アニメーション ★★★ */
+        animation: 
+            psychologicalGradientFlow 3s ease-in-out infinite,
+            intensePulse 1.5s ease-in-out infinite,
+            enchantedFloat 2s ease-in-out infinite;
         color: #FFFFFF;
     }
     
-    /* ★★★ IMPROVEMENT 2.3: Mobile/Touch Device Specific Support - モバイル楽しいアニメーション対応 ★★★ */
+    /* ★★★ IMPROVEMENT 2.3: Touch Device Optimization - タッチデバイス最適化 ★★★ */
     @media (hover: none) and (pointer: coarse) {
         .cta-button:active {
-            transform: translateY(-4px) scale(1.05);
+            transform: translateY(-4px) scale(1.03);
             box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.25),
-                0 0 0 6px rgba(255, 255, 255, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            animation: excitingGradientRush 2s ease-in-out infinite, floatHover 1.5s ease-in-out infinite; /* 楽しいアニメーション */
+                0 15px 40px rgba(255, 138, 0, 0.35),
+                0 10px 30px rgba(58, 95, 235, 0.25),
+                0 5px 20px rgba(255, 107, 149, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: 
+                psychologicalGradientFlow 3s ease-in-out infinite,
+                mobilePulse 1.8s ease-in-out infinite,
+                mobileFloat 2.5s ease-in-out infinite;
             color: #FFFFFF;
-        }
-        
-        .cta-button:active::before {
-            left: 100%;
-        }
-        
-        .cta-button:active i {
-            transform: translateX(4px) rotate(0deg);
         }
     }
     
-    /* ★★★ IMPROVEMENT 2.4: Enhanced Touch Event Animation - 楽しいモバイルアニメーション ★★★ */
-    @media (max-width: 768px) {
-        .cta-button:active {
-            transform: translateY(-5px) scale(1.08); /* より大きな変化 */
-            box-shadow: 
-                0 15px 40px rgba(255, 107, 107, 0.25), /* トロピカル系の影 */
-                0 0 0 6px rgba(78, 205, 196, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            animation: excitingGradientRush 1.5s ease-in-out infinite, enhancedMobileFloat 1s ease-in-out infinite; /* 楽しい高速アニメーション */
-            color: #FFFFFF;
-        }
-        
-        .cta-button:active::before {
-            left: 100%;
-        }
-        
-        .cta-button:active i {
-            transform: translateX(5px) rotate(0deg); /* より大きな移動 */
-        }
+    .cta-button i {
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     
-    /* ★★★ IMPROVEMENT 2.6: Enhanced Mobile Float Animation - 強化モバイル版フローティングアニメーション ★★★ */
-    @keyframes enhancedMobileFloat {
-        0%, 100% {
-            transform: translateY(-5px) scale(1.08);
+    .cta-button:hover i,
+    .cta-button:focus i,
+    .cta-button:active i {
+        transform: translateX(4px) rotate(0deg);
+    }
+    
+    /* ★★★ IMPROVEMENT 2.4: Psychological Animation Keyframes - 人間心理に基づくアニメーション ★★★ */
+    
+    /* メインの魅惑的グラデーション流動 - 常時動作で注意を引く */
+    @keyframes psychologicalGradientFlow {
+        0% {
+            background-position: 0% 50%;
+            filter: hue-rotate(0deg) saturate(1.2);
+        }
+        25% {
+            background-position: 50% 100%;
+            filter: hue-rotate(5deg) saturate(1.3);
         }
         50% {
-            transform: translateY(-8px) scale(1.08); /* より大きな浮遊効果 */
+            background-position: 100% 50%;
+            filter: hue-rotate(10deg) saturate(1.4);
+        }
+        75% {
+            background-position: 50% 0%;
+            filter: hue-rotate(5deg) saturate(1.3);
+        }
+        100% {
+            background-position: 0% 50%;
+            filter: hue-rotate(0deg) saturate(1.2);
         }
     }
     
+    /* 微細なパルス効果 - 心地よいリズム */
+    @keyframes subtlePulse {
+        0%, 100% {
+            filter: brightness(1) contrast(1);
+        }
+        50% {
+            filter: brightness(1.05) contrast(1.1);
+        }
+    }
+    
+    /* 優雅なフローティング - 自然な動き */
+    @keyframes gentleFloat {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        33% {
+            transform: translateY(-2px);
+        }
+        66% {
+            transform: translateY(-1px);
+        }
+    }
+    
+    /* 魅惑的な光の反射 - 高級感演出 */
+    @keyframes mesmerizingShine {
+        0% {
+            left: -100%;
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            left: 100%;
+            opacity: 0;
+        }
+    }
+    
+    /* 心理的魅力パーティクル - 神秘的な効果 */
+    @keyframes enchantingParticles {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            opacity: 0.8;
+        }
+        33% {
+            opacity: 1;
+        }
+        66% {
+            opacity: 0.9;
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+            opacity: 0.8;
+        }
+    }
+    
+    /* ホバー時の強化パルス */
+    @keyframes intensePulse {
+        0%, 100% {
+            filter: brightness(1) contrast(1) saturate(1.2);
+        }
+        50% {
+            filter: brightness(1.1) contrast(1.2) saturate(1.4);
+        }
+    }
+    
+    /* ホバー時の魅惑的フロート */
+    @keyframes enchantedFloat {
+        0%, 100% {
+            transform: translateY(-6px) scale(1.05);
+        }
+        50% {
+            transform: translateY(-8px) scale(1.05);
+        }
+    }
+    
+    /* モバイル専用パルス */
+    @keyframes mobilePulse {
+        0%, 100% {
+            filter: brightness(1) contrast(1) saturate(1.1);
+        }
+        50% {
+            filter: brightness(1.08) contrast(1.15) saturate(1.3);
+        }
+    }
+    
+    /* モバイル専用フロート */
+    @keyframes mobileFloat {
+        0%, 100% {
+            transform: translateY(-4px) scale(1.03);
+        }
+        50% {
+            transform: translateY(-6px) scale(1.03);
+        }
+    }
+    
+    /* プルス効果 */
+    .cta-button:active {
+        transform: translateY(-4px) scale(1.03);
+        transition: all 0.1s ease;
+    }
+    
+    /* ★★★ IMPROVEMENT 2.5: Mobile Responsive Optimization - モバイル最適化 ★★★ */
     @media (max-width: 768px) {
         .cta-section {
             padding: 2rem 0; /* モバイルサイズ維持 */
@@ -2317,15 +2322,26 @@
             max-width: 300px;
             padding: 1rem 2rem; /* モバイルサイズ維持 */
             font-size: 0.85rem; /* モバイルサイズ維持 */
+            /* ★★★ モバイル版心理的魅力最適化 ★★★ */
+            background-size: 250% 250%;
         }
         
-        /* ★★★ IMPROVEMENT 2.7: Mobile Base Float Animation - モバイル基本フローティングアニメーション ★★★ */
-        @keyframes float {
+        /* ★★★ モバイル専用アニメーション調整 ★★★ */
+        .cta-button::before {
+            animation: mesmerizingShine 5s linear infinite;
+        }
+        
+        .cta-button::after {
+            animation: enchantingParticles 10s linear infinite;
+        }
+        
+        /* ★★★ モバイル版フローティングアニメーション最適化 ★★★ */
+        @keyframes gentleFloat {
             0%, 100% {
                 transform: translateY(0px);
             }
             50% {
-                transform: translateY(-6px); /* より大きな基本浮遊 */
+                transform: translateY(-1px);
             }
         }
     }
