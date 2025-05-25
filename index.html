@@ -97,7 +97,7 @@
       "@type": "Organization",
       "name": "ShinAI",
       "legalName": "株式会社ShinAI",
-      "alternateName": ["シンアイ", "ShinAI Inc"],
+      "alternateName": ["シンエーアイ", "Shin AI Inc"],
       "url": "https://shin-ai-inc.github.io/website/",
       "logo": {
         "@type": "ImageObject",
@@ -300,7 +300,7 @@
     
     /* ========================================================
     ▼ Preloader Component - 高速化・改善版
-    ======================================================== -->
+    ======================================================== */
     .page-loader {
         position: fixed;
         top: 0;
@@ -461,13 +461,11 @@
         border-radius: 2px;
     }
     
-    .nav-link:hover,
-    .nav-link.active {
+    .nav-link:hover, .nav-link.active {
         color: #3A5FEB;
     }
     
-    .nav-link:hover::after,
-    .nav-link.active::after {
+    .nav-link:hover::after, .nav-link.active::after {
         width: 100%;
     }
     
@@ -871,7 +869,7 @@
     }
     
     .text-accent {
-        background: linear-gradient(135deg, #FF8A00, #FFA94D);
+        background: var(--gradient-accent);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -1261,20 +1259,20 @@
     }
 
     /* ========================================================
-    ▼ Prototype Approach Section Component - 改善版・全画面対応・縮小版・余白調整
+    ▼ Prototype Approach Section Component - 改善版・縮小&モバイル対応・余白調整
     ======================================================== */
     .prototype-approach-section {
         position: relative;
         overflow: hidden;
         padding: 2.5rem 0; /* 縮小: 4rem → 2.5rem */
         background: var(--gradient-section);
-        display: block; /* 全画面で表示 */
+        display: block; /* 常に表示に変更 */
     }
     
     .prototype-steps {
         position: relative;
-        max-width: 850px; /* 縮小: 1000px → 850px */
-        margin: 1.5rem auto; /* 縮小: 3rem → 1.5rem */
+        max-width: 900px; /* 縮小: 1000px → 900px */
+        margin: 2rem auto; /* 縮小: 3rem → 2rem */
         z-index: 1;
     }
     
@@ -1329,7 +1327,7 @@
     
     .step-content h3 {
         font-size: 1.4rem; /* 縮小: 1.8rem → 1.4rem */
-        margin-bottom: 0.5rem; /* 縮小: 0.8rem → 0.5rem */
+        margin-bottom: 0.6rem; /* 縮小: 0.8rem → 0.6rem */
         font-weight: var(--font-weight-bold);
         transition: color var(--transition-normal) ease;
     }
@@ -1342,7 +1340,7 @@
         font-size: 1rem; /* 縮小: 1.2rem → 1rem */
         color: var(--primary);
         font-weight: var(--font-weight-medium);
-        margin-bottom: 0.5rem; /* 縮小: 0.8rem → 0.5rem */
+        margin-bottom: 0.6rem; /* 縮小: 0.8rem → 0.6rem */
         display: inline-block;
         padding: 0.3rem 1rem; /* 縮小: 0.4rem 1.2rem → 0.3rem 1rem */
         background: rgba(58, 95, 235, 0.1);
@@ -1374,18 +1372,11 @@
     .prototype-benefits {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.2rem; /* 縮小維持: 1.5rem → 1.2rem */
+        gap: 1.2rem; /* 縮小: 1.5rem → 1.2rem */
         margin-top: 3rem; /* 縮小: 4rem → 3rem */
         max-width: 800px; /* 縮小: 900px → 800px */
         margin-left: auto;
         margin-right: auto;
-    }
-    
-    /* PC版のみ表示 - モバイルでは非表示 */
-    @media (max-width: 768px) {
-        .prototype-benefits {
-            display: none;
-        }
     }
     
     .benefit-card {
@@ -1399,11 +1390,10 @@
         position: relative;
         overflow: hidden;
         z-index: 1;
-        aspect-ratio: 3/4; /* 縦長比率維持 */
+        aspect-ratio: 3/4; /* 縦長比率を維持 */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 300px; /* 縮小: 追加で高さ制限 */
     }
     
     .benefit-card::before {
@@ -1471,82 +1461,95 @@
         text-align: center;
     }
     
-    /* ========================================================
-    ▼ Mobile Responsive Design for Prototype Section - モバイル対応追加
-    ======================================================== */
+    /* モバイル対応 */
     @media (max-width: 992px) {
-        .prototype-approach-section {
-            padding: 2rem 0; /* タブレット調整 */
-        }
-        
-        .prototype-steps {
-            max-width: 700px;
-            margin: 1.2rem auto;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
-            margin-right: 1.2rem;
-        }
-        
-        .step-connector {
-            left: 29px;
-            top: 58px;
-        }
-        
-        .step-content h3 {
-            font-size: 1.2rem;
-        }
-        
-        .step-duration {
-            font-size: 0.9rem;
-        }
-        
-        .step-content p {
-            font-size: 0.9rem;
-        }
-        
         .prototype-benefits {
+            grid-template-columns: 1fr;
             gap: 1rem;
-            max-width: 650px;
-            margin-top: 2.5rem;
+            max-width: 400px;
         }
         
         .benefit-card {
-            min-height: 280px;
-            padding: 1.3rem 1rem;
-        }
-        
-        .benefit-icon {
-            width: 50px;
-            height: 50px;
-            font-size: 1.3rem;
-        }
-        
-        .benefit-card h4 {
-            font-size: 1rem;
-        }
-        
-        .benefit-card p {
-            font-size: 0.8rem;
+            aspect-ratio: 4/3; /* タブレット版でより横長に */
+            min-height: 250px;
         }
     }
     
     @media (max-width: 768px) {
-        .step-number {
-            width: 38px;
-            height: 38px;
-            font-size: 1.05rem;
-            margin-right: 0.7rem;
+        .prototype-approach-section {
+            padding: 1.5rem 0; /* モバイル版縮小 */
         }
+        
+        .prototype-steps {
+            margin: 1.5rem auto;
+            max-width: 100%;
+        }
+        
+        .prototype-step {
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-content {
+            padding-top: 0;
+        }
+        
         .step-content h3 {
-            font-size: 0.98rem;
-            line-height: 1.1;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-duration {
+            font-size: 0.85rem;
+            padding: 0.2rem 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            font-size: 0.85rem;
+        }
+        
+        .step-connector {
+            display: none; /* モバイルでは非表示 */
+        }
+        
+        .prototype-benefits {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 300px;
+        }
+        
+        .benefit-card {
+            padding: 1.2rem 1rem;
+            aspect-ratio: 3/3.5; /* モバイル版でより正方形に近く */
+            min-height: 220px;
+        }
+        
+        .benefit-icon {
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        .benefit-card p {
+            font-size: 0.75rem;
         }
     }
-    
 
     /* ========================================================
     ▼ Services Section Component - 横一列表示最適化・全体像把握向上・改善版・PC版拡大対応
@@ -1565,8 +1568,8 @@
     .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem; /* 縮小: 1.2rem → 1rem */
-        max-width: 900px; /* 調整: 950px → 900px */
+        gap: 1.2rem; /* 縮小: 1.5rem → 1.2rem */
+        max-width: 950px; /* 全体幅を制限してカードを縦長に */
         margin: 0 auto;
     }
     
@@ -1582,8 +1585,8 @@
         height: 100%;
         border: 1px solid rgba(0, 0, 0, 0.03);
         z-index: 1;
-        aspect-ratio: 3/3.8; /* 縮小: 3/4.5 → 3/3.8 */
-        min-height: 360px; /* 縮小: 420px → 360px */
+        aspect-ratio: 3/4.5; /* 縦長比率を強制 - より縦長に */
+        min-height: 420px; /* 最小高さを確保 */
     }
     
     .service-card:hover {
@@ -1733,72 +1736,72 @@
     @media (max-width: 992px) {
         .services-grid {
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem; /* 縮小: 1rem → 0.8rem */
-            max-width: 750px; /* 縮小: 800px → 750px */
+            gap: 1rem; /* 縮小: 0.8rem → 1rem */
+            max-width: 800px; /* 中間サイズでも制限 */
         }
         
         .service-card {
-            min-height: 320px; /* 縮小: 380px → 320px */
+            min-height: 380px; /* タブレット版で縦長維持 */
         }
         
         .service-title {
-            font-size: 0.9rem; /* 調整: 1rem → 0.9rem */
+            font-size: 1rem; /* 調整: 0.8rem → 1rem */
         }
         
         .service-description {
-            font-size: 0.8rem; /* 調整: 0.85rem → 0.8rem */
+            font-size: 0.85rem; /* 調整: 0.7rem → 0.85rem */
         }
     }
     
     @media (max-width: 768px) {
         .services-grid {
             grid-template-columns: 1fr;
-            gap: 0.8rem; /* 縮小: 1rem → 0.8rem */
-            max-width: 280px; /* 縮小: 320px → 280px */
+            gap: 1rem; /* 拡大: 0.7rem → 1rem */
+            max-width: 320px; /* 拡大: 280px → 320px */
         }
         
         .service-card {
             max-width: 100%;
             margin: 0 auto;
-            min-height: 320px; /* 縮小: 400px → 320px */
-            aspect-ratio: 3/4; /* 調整: 3/5 → 3/4 */
+            min-height: 400px; /* モバイルで縦長強化: 追加 */
+            aspect-ratio: 3/5; /* モバイル版でより縦長に */
         }
         
         .service-image {
-            height: 100px; /* 縮小: 120px → 100px */
+            height: 120px; /* 拡大: 80px → 120px */
         }
         
         .service-content {
-            padding: 0.8rem; /* 縮小: 1rem → 0.8rem */
+            padding: 1rem; /* 拡大: 0.8rem → 1rem */
         }
         
         .service-icon-wrapper {
-            width: 40px; /* 縮小: 45px → 40px */
-            height: 40px; /* 縮小: 45px → 40px */
-            margin: -20px auto 0.6rem; /* 調整: -22px auto 0.8rem → -20px auto 0.6rem */
+            width: 45px; /* 拡大: 38px → 45px */
+            height: 45px; /* 拡大: 38px → 45px */
+            margin: -22px auto 0.8rem; /* 調整: -19px auto 0.5rem → -22px auto 0.8rem */
         }
         
         .service-icon i {
-            font-size: 1.1rem; /* 調整: 1.2rem → 1.1rem */
+            font-size: 1.2rem; /* 拡大: 1rem → 1.2rem */
         }
         
         .service-title {
-            font-size: 0.8rem; /* 縮小: 0.9rem → 0.8rem */
-            margin-bottom: 0.5rem; /* 縮小: 0.6rem → 0.5rem */
+            font-size: 0.9rem; /* 拡大: 0.8rem → 0.9rem */
+            margin-bottom: 0.6rem; /* 拡大: 0.4rem → 0.6rem */
         }
         
         .service-description {
-            font-size: 0.75rem; /* 調整: 0.8rem → 0.75rem */
-            margin-bottom: 0.6rem; /* 縮小: 0.8rem → 0.6rem */
+            font-size: 0.8rem; /* 拡大: 0.7rem → 0.8rem */
+            margin-bottom: 0.8rem; /* 拡大: 0.6rem → 0.8rem */
         }
     }
 
     /* ========================================================
-    ▼ Section Header Component - コンパクト化・全体像把握最適化・改善版・PC版拡大対応
+    ▼ Section Header Component - 余白調整・全体像把握最適化・改善版・PC版拡大対応
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 1.8rem; /* 縮小: 2.5rem → 1.8rem（余白調整） */
+        margin-bottom: 1.8rem; /* 余白調整: 2.5rem → 1.8rem */
         position: relative;
         z-index: 1;
     }
@@ -1810,14 +1813,14 @@
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 0.8rem; /* 縮小: 1rem → 0.8rem（余白調整） */
+        margin-bottom: 0.8rem; /* 余白調整: 1rem → 0.8rem */
         font-size: 0.9rem; /* PC版拡大: 0.7rem → 0.9rem */
         box-shadow: 0 2px 6px rgba(58, 95, 235, 0.08);
         border: 1px solid rgba(58, 95, 235, 0.1);
     }
     
     .section-header .heading-lg {
-        margin-bottom: 0.8rem; /* 縮小: 1rem → 0.8rem（余白調整） */
+        margin-bottom: 0.8rem; /* 余白調整: 1rem → 0.8rem */
     }
     
     .section-description {
@@ -1830,13 +1833,13 @@
     
     @media (max-width: 768px) {
         .section-header {
-            margin-bottom: 1rem; /* 縮小: 1.2rem → 1rem（モバイル余白調整） */
+            margin-bottom: 1rem; /* モバイル余白調整: 1.2rem → 1rem */
         }
         
         .section-subtitle {
             font-size: 0.65rem; /* モバイルサイズ維持 */
             padding: 0.25rem 0.8rem;
-            margin-bottom: 0.3rem; /* 縮小: 0.4rem → 0.3rem（モバイル余白調整） */
+            margin-bottom: 0.4rem;
         }
         
         .section-description {
@@ -1958,10 +1961,10 @@
     }
     
     .cta-title .text-accent {
-        color: #ffbb00;
+        color: #FFDD00;
         background: none;
         -webkit-text-fill-color: #FFDD00;
-
+        text-shadow: 0 0 20px rgba(255, 221, 0, 0.3);
         font-weight: var(--font-weight-black);
     }
     
@@ -3162,7 +3165,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ Prototype Approach Section Component - 改善版・全画面対応・縮小版・余白調整・モバイル対応追加
+        ▼ Prototype Approach Section Component - 改善版・縮小&モバイル対応・余白調整
         ======================================================== -->
         <section class="prototype-approach-section" id="prototype-approach">
             <div class="container">
@@ -3281,7 +3284,7 @@
                             <div class="service-content">
                                 <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
                                 <p class="service-description">
-                                    データドリブンで魅力的な<br>企画書を自動作成。<br>最短5分で高品質な<br>提案資料が完成します。
+                                    データドリブンで魅力的な企画書を自動作成。最短5分で高品質な提案資料が完成します。
                                 </p>
                                 <a href="services.html#aipro" class="service-link">
                                     詳しく見る
@@ -3304,7 +3307,7 @@
                             <div class="service-content">
                                 <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
                                 <p class="service-description">
-                                    御社独自の課題に<br>最適化されたAIソリューション。<br>完全オリジナルの<br>AIシステムを構築します。
+                                    御社独自の課題に最適化されたAIソリューション。完全オリジナルのAIシステムを構築します。
                                 </p>
                                 <a href="services.html#custom" class="service-link">
                                     詳しく見る
@@ -3327,7 +3330,7 @@
                             <div class="service-content">
                                 <h3 class="service-title">AI導入<br>コンサルティング</h3>
                                 <p class="service-description">
-                                    戦略立案から社内チーム<br>育成まで伴走支援。<br>「やりっぱなし」にしない<br>AI導入を実現します。
+                                    戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を実現します。
                                 </p>
                                 <a href="services.html#consulting" class="service-link">
                                     詳しく見る
@@ -3398,7 +3401,7 @@
         <section class="cta-section" id="cta">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を<br>広げませんか？
+                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を<br class="hide-mobile">広げませんか？</h2>
                     <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br class="hide-mobile">プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
                     <a href="contact.html" class="cta-button">
                         <span>無料相談を始める</span>
