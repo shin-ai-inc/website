@@ -1221,9 +1221,35 @@
     
     .shin-values-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
         margin-top: 2rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* 7つのカード専用レイアウト - 上3つ、下4つのバランス配置 */
+    .shin-values-grid .shin-value-card:nth-child(4) {
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+    
+    .shin-values-grid .shin-value-card:nth-child(5) {
+        grid-column: 2 / 3;
+        grid-row: 2;
+    }
+    
+    .shin-values-grid .shin-value-card:nth-child(6) {
+        grid-column: 3 / 4;
+        grid-row: 2;
+    }
+    
+    .shin-values-grid .shin-value-card:nth-child(7) {
+        grid-column: 1 / 4;
+        grid-row: 3;
+        max-width: 300px;
+        margin: 0 auto;
     }
     
     .shin-value-card {
@@ -1323,6 +1349,18 @@
         font-size: 0.75rem;
     }
     
+    @media (max-width: 992px) {
+        .shin-values-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 600px;
+        }
+        
+        .shin-values-grid .shin-value-card:nth-child(7) {
+            grid-column: 1 / 3;
+            max-width: 280px;
+        }
+    }
+    
     @media (max-width: 768px) {
         .philosophy-section {
             padding: 1.8rem 0;
@@ -1342,6 +1380,17 @@
             grid-template-columns: 1fr;
             gap: 0.8rem;
             margin-top: 1.5rem;
+        }
+        
+        /* モバイルでは通常の1列レイアウトにリセット */
+        .shin-values-grid .shin-value-card:nth-child(4),
+        .shin-values-grid .shin-value-card:nth-child(5),
+        .shin-values-grid .shin-value-card:nth-child(6),
+        .shin-values-grid .shin-value-card:nth-child(7) {
+            grid-column: auto;
+            grid-row: auto;
+            max-width: 100%;
+            margin: 0;
         }
         
         .shin-value-card {
@@ -1856,7 +1905,7 @@
         font-size: 0.75rem;
     }
     
-    /* スキルタグ - 通常オレンジ、タップで水色グラデーション */
+    /* スキルタグ - 通常オレンジ、タップで水色グラデーション（改善版） */
     .job-position-tag {
         display: inline-block;
         padding: 0.25rem 0.6rem;
@@ -1869,13 +1918,14 @@
         margin-bottom: 0.4rem;
         transition: all 0.3s ease;
         cursor: pointer;
+        box-shadow: var(--shadow-sm);
     }
     
     .job-position-tag:hover,
     .job-position-tag.active {
         background: var(--gradient-primary);
         transform: translateY(-1px);
-        box-shadow: var(--shadow-sm);
+        box-shadow: var(--shadow-md);
     }
     
     .job-position-footer {
@@ -1931,12 +1981,12 @@
     }
 
     /* ========================================================
-    ▼ CTA Section Component - 全体像把握最適化
-    ======================================================== -->
+    ▼ CTA Section Component - 表示改善・全体像把握最適化
+    ======================================================== */
     .cta-section {
         background: var(--gradient-cta-new);
         color: var(--white);
-        padding: 2rem 0;
+        padding: 2.5rem 0;
         position: relative;
         overflow: hidden;
         text-align: center;
@@ -1945,14 +1995,15 @@
     .cta-content {
         position: relative;
         z-index: var(--z-elevate);
-        max-width: 600px;
+        max-width: 650px;
         margin: 0 auto;
     }
     
     .cta-title {
-        margin-bottom: 0.8rem;
+        margin-bottom: 1.2rem;
         color: var(--white);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        line-height: 1.3;
     }
     
     .cta-title .text-accent {
@@ -1964,28 +2015,33 @@
     }
     
     .cta-description {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 2rem;
         opacity: 0.95;
-        line-height: 1.7;
+        line-height: 1.8;
+        max-width: 580px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2rem;
     }
     
     .cta-button {
         background: var(--white);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        padding: 0.7rem 1.4rem;
+        padding: 0.8rem 1.6rem;
         border-radius: var(--radius-full);
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.5rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         position: relative;
         overflow: hidden;
         text-decoration: none;
         border: none;
         cursor: pointer;
+        font-size: 0.9rem;
     }
     
     .cta-button span, .cta-button i {
@@ -2007,8 +2063,8 @@
     }
     
     .cta-button:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         color: var(--white);
     }
     
@@ -2018,24 +2074,26 @@
     
     @media (max-width: 768px) {
         .cta-section {
-            padding: 1.5rem 0;
+            padding: 2rem 0;
         }
         
         .cta-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
         }
         
         .cta-description {
-            font-size: 0.8rem;
-            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
         
         .cta-button {
             width: 100%;
-            max-width: 220px;
-            padding: 0.6rem 1.1rem;
+            max-width: 240px;
+            padding: 0.7rem 1.2rem;
             justify-content: center;
+            font-size: 0.8rem;
         }
     }
 
@@ -2962,15 +3020,15 @@
                     </div>
                     <div>
                         <div class="company-message">
-                            <p>ShinAIは、AI技術を通じて社会や人々が本当に必要とする価値を再定義し、誠実さと革新をもって、より良い未来の実現に貢献します。</p>
-                            <p>人と技術が共に生き、調和しながら成長していける社会のために、私たちは挑み続けます。</p>
+                            <p>ShinAIは、AI技術を通じて社会や人々が本当に必要とする<br class="hide-mobile">価値を再定義し、誠実さと革新をもって、<br>より良い未来の実現に貢献します。</p>
+                            <p>人と技術が共に生き、調和しながら成長していける社会のために、<br class="hide-mobile">私たちは挑み続けます。</p>
                         </div>
                         
                         <h3 class="heading-sm text-gradient">「真」に価値あるAIを追求する</h3>
-                        <p class="text-md">ShinAIという社名には、「真」の価値を追求し、「新」たな未来を創造するという理念が込められています。私たちは最先端のAI技術を駆使して、企業の本質的な課題解決を支援します。</p>
+                        <p class="text-md">ShinAIという社名には、「真」の価値を追求し、<br class="hide-mobile">「新」たな未来を創造するという理念が込められています。<br>私たちは最先端のAI技術を駆使して、<br class="hide-mobile">企業の本質的な課題解決を支援します。</p>
                         
                         <h3 class="heading-sm text-gradient">AIの力で人の時間を解放する</h3>
-                        <p class="text-md">私たちの使命は、AI技術を活用して定型業務や複雑な分析作業を自動化し、人々が創造的な仕事や大切な人との時間に集中できる環境を作ることです。テクノロジーは人間の可能性を広げるために存在すると考えています。</p>
+                        <p class="text-md">私たちの使命は、AI技術を活用して定型業務や<br class="hide-mobile">複雑な分析作業を自動化し、<br>人々が創造的な仕事や大切な人との時間に<br class="hide-mobile">集中できる環境を作ることです。<br>テクノロジーは人間の可能性を広げるために<br class="hide-mobile">存在すると考えています。</p>
                     </div>
                 </div>
                 
@@ -3019,10 +3077,12 @@
                 <div class="section-header animate-on-scroll">
                     <span class="section-subtitle">企業理念</span>
                     <h2 class="heading-lg">
-                        ShinAIの<span class="highlight">7つの"Shin"</span>に込めた精神
+                        ShinAIの<span class="highlight">7つの"Shin"</span>に<br class="hide-mobile">込めた精神
                     </h2>
                     <p class="section-description">
-                        ShinAIの名には、時代やテクノロジーの変化に左右されない<strong>7つの価値観</strong>が込められています。これらは私たちの行動指針であり、企業としての"芯"を形成するものです。
+                        ShinAIの名には、時代やテクノロジーの変化に左右されない<br class="hide-mobile">
+                        <strong>7つの価値観</strong>が込められています。<br>
+                        これらは私たちの行動指針であり、<br class="hide-mobile">企業としての"芯"を形成するものです。
                     </p>
                 </div>
                 
@@ -3030,8 +3090,8 @@
                 <div class="mission-statement animate-on-scroll">
                     <div class="mission-tagline">「真の価値を信じ、次世代のために新たな未来を創る。」</div>
                     <div class="mission-text">
-                        <p>私たちShinAIは、AIが人間の創造性を拡張し、より豊かな社会を作る触媒となると信じています。<br>
-                        技術の進化とともに、人々が真に大切にすべき時間や価値を取り戻すためのAIソリューションを提供します。</p>
+                        <p>私たちShinAIは、AIが人間の創造性を拡張し、<br class="hide-mobile">より豊かな社会を作る触媒となると信じています。<br>
+                        技術の進化とともに、人々が真に大切にすべき時間や価値を<br class="hide-mobile">取り戻すためのAIソリューションを提供します。</p>
                     </div>
                 </div>
                 
@@ -3042,7 +3102,7 @@
                             <i class="fas fa-heart"></i>
                         </div>
                         <h3 class="shin-value-title">心 <span class="en-text">(Heart)</span></h3>
-                        <p class="shin-value-description">感性を重んじ、心に触れるAIを創る。技術だけではなく、人の感情や価値観を大切にし、共感を生むソリューションを提供します。</p>
+                        <p class="shin-value-description">感性を重んじ、心に触れるAIを創る。<br>技術だけではなく、人の感情や価値観を大切にし、<br>共感を生むソリューションを提供します。</p>
                     </div>
                     
                     <!-- 真 (Truth) -->
@@ -3051,7 +3111,7 @@
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3 class="shin-value-title">真 <span class="en-text">(Truth)</span></h3>
-                        <p class="shin-value-description">本質を見抜き、誠実な技術で価値を届ける。表面的な流行に惑わされず、真に必要とされる解決策を追求し続けます。</p>
+                        <p class="shin-value-description">本質を見抜き、誠実な技術で価値を届ける。<br>表面的な流行に惑わされず、<br>真に必要とされる解決策を追求し続けます。</p>
                     </div>
                     
                     <!-- 新 (New) -->
@@ -3060,7 +3120,7 @@
                             <i class="fas fa-lightbulb"></i>
                         </div>
                         <h3 class="shin-value-title">新 <span class="en-text">(New)</span></h3>
-                        <p class="shin-value-description">常に変化に挑み、革新で未来を切り拓く。前例にとらわれず、新しい可能性に挑戦し続けることで、未来の扉を開きます。</p>
+                        <p class="shin-value-description">常に変化に挑み、革新で未来を切り拓く。<br>前例にとらわれず、新しい可能性に挑戦し続けることで、<br>未来の扉を開きます。</p>
                     </div>
                     
                     <!-- 芯 (Core) -->
@@ -3069,7 +3129,7 @@
                             <i class="fas fa-circle"></i>
                         </div>
                         <h3 class="shin-value-title">芯 <span class="en-text">(Core)</span></h3>
-                        <p class="shin-value-description">ぶれない軸を持ち、未来の中心を担う。時代の変化に左右されない強い理念と技術力を軸に、次世代を支える存在となります。</p>
+                        <p class="shin-value-description">ぶれない軸を持ち、未来の中心を担う。<br>時代の変化に左右されない強い理念と技術力を軸に、<br>次世代を支える存在となります。</p>
                     </div>
                     
                     <!-- 伸 (Growth) -->
@@ -3078,7 +3138,7 @@
                             <i class="fas fa-arrow-up"></i>
                         </div>
                         <h3 class="shin-value-title">伸 <span class="en-text">(Growth)</span></h3>
-                        <p class="shin-value-description">潜在力を引き出し、共に進化し続ける。クライアントの成長を支え、私たち自身も常に学び続けることで、共に未来へ伸びていきます。</p>
+                        <p class="shin-value-description">潜在力を引き出し、共に進化し続ける。<br>クライアントの成長を支え、私たち自身も常に学び続けることで、<br>共に未来へ伸びていきます。</p>
                     </div>
                     
                     <!-- 信 (Trust) -->
@@ -3087,7 +3147,7 @@
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h3 class="shin-value-title">信 <span class="en-text">(Trust)</span></h3>
-                        <p class="shin-value-description">信頼を築き、人と技術の絆を深める。透明性と誠実さを持って関係を構築し、「信じられる技術」を提供し続けます。</p>
+                        <p class="shin-value-description">信頼を築き、人と技術の絆を深める。<br>透明性と誠実さを持って関係を構築し、<br>「信じられる技術」を提供し続けます。</p>
                     </div>
                     
                     <!-- 紳 (Integrity) -->
@@ -3096,7 +3156,7 @@
                             <i class="fas fa-award"></i>
                         </div>
                         <h3 class="shin-value-title">紳 <span class="en-text">(Integrity)</span></h3>
-                        <p class="shin-value-description">美しく、敬意あるふるまいで信頼を導く。高い倫理観と品位を持って行動し、社会から尊敬される企業であり続けます。</p>
+                        <p class="shin-value-description">美しく、敬意あるふるまいで信頼を導く。<br>高い倫理観と品位を持って行動し、<br>社会から尊敬される企業であり続けます。</p>
                     </div>
                 </div>
             </div>
@@ -3115,7 +3175,7 @@
                 
                 <div class="vision-statement animate-on-scroll">
                     <h3>人と技術の共創する社会へ</h3>
-                    <p>ShinAIは、テクノロジーが人間の創造力や優しさと共に歩む未来を目指します。人の感性、社会の多様性、そして地球の持続性と共鳴するAIを通じて、私たちは「信じられる技術」で課題を解決し、「選ばれる存在」として価値を届け続けます。</p>
+                    <p>ShinAIは、テクノロジーが人間の創造力や優しさと<br class="hide-mobile">共に歩む未来を目指します。<br>人の感性、社会の多様性、そして地球の持続性と共鳴するAIを通じて、<br class="hide-mobile">私たちは「信じられる技術」で課題を解決し、<br>「選ばれる存在」として価値を届け続けます。</p>
                 </div>
                 
                 <!-- 3つのビジョンポイント -->
@@ -3125,7 +3185,7 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <h3 class="vision-point-title">時間の解放</h3>
-                        <p class="vision-point-description">AIによる定型業務の自動化で、創造的な仕事や大切な人との時間に集中できる環境を作ります。真に人間にしかできない価値創造に集中できる環境を目指します。</p>
+                        <p class="vision-point-description">AIによる定型業務の自動化で、創造的な仕事や<br>大切な人との時間に集中できる環境を作ります。<br>真に人間にしかできない価値創造に<br>集中できる環境を目指します。</p>
                     </div>
                     
                     <div class="vision-point">
@@ -3133,7 +3193,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3 class="vision-point-title">共感技術</h3>
-                        <p class="vision-point-description">人間の感情や価値観に共感し、寄り添うAI。技術だけでなく心のあるソリューションを通じて、人と技術の調和した未来を創ります。</p>
+                        <p class="vision-point-description">人間の感情や価値観に共感し、寄り添うAI。<br>技術だけでなく心のあるソリューションを通じて、<br>人と技術の調和した未来を創ります。</p>
                     </div>
                     
                     <div class="vision-point">
@@ -3141,7 +3201,7 @@
                             <i class="fas fa-globe"></i>
                         </div>
                         <h3 class="vision-point-title">社会貢献</h3>
-                        <p class="vision-point-description">AI技術を通じて社会課題の解決に貢献し、より良い未来を創造します。すべての人が享受できる価値あるテクノロジーで、持続可能な社会を目指します。</p>
+                        <p class="vision-point-description">AI技術を通じて社会課題の解決に貢献し、<br>より良い未来を創造します。<br>すべての人が享受できる価値あるテクノロジーで、<br>持続可能な社会を目指します。</p>
                     </div>
                 </div>
             </div>
@@ -3229,7 +3289,7 @@
                                 </div>
                                 <h4 class="careers-benefit-title">最先端技術に触れる機会</h4>
                             </div>
-                            <p class="careers-benefit-description">常に最新のAI技術にアクセスし、実際のプロジェクトで活用する環境があります。最新LLMやRAG技術を実践的に活用できます。</p>
+                            <p class="careers-benefit-description">常に最新のAI技術にアクセスし、<br>実際のプロジェクトで活用する環境があります。<br>最新LLMやRAG技術を実践的に活用できます。</p>
                         </div>
                         
                         <div class="careers-benefit-item" data-tap-toggle>
@@ -3239,7 +3299,7 @@
                                 </div>
                                 <h4 class="careers-benefit-title">アイデアを形にする自由</h4>
                             </div>
-                            <p class="careers-benefit-description">自分のアイデアを提案し、実現できる風土があります。クリエイティブな発想を尊重し、革新的なプロジェクトにチャレンジできます。</p>
+                            <p class="careers-benefit-description">自分のアイデアを提案し、実現できる風土があります。<br>クリエイティブな発想を尊重し、<br>革新的なプロジェクトにチャレンジできます。</p>
                         </div>
                         
                         <div class="careers-benefit-item" data-tap-toggle>
@@ -3249,7 +3309,7 @@
                                 </div>
                                 <h4 class="careers-benefit-title">柔軟な働き方</h4>
                             </div>
-                            <p class="careers-benefit-description">リモートワークや業務委託など、ライフスタイルに合わせた多様な協業形態に対応。プロジェクトや成果にフォーカスした関係を構築します。</p>
+                            <p class="careers-benefit-description">リモートワークや業務委託など、<br>ライフスタイルに合わせた多様な協業形態に対応。<br>プロジェクトや成果にフォーカスした関係を構築します。</p>
                         </div>
                         
                         <div class="careers-benefit-item" data-tap-toggle>
@@ -3259,7 +3319,7 @@
                                 </div>
                                 <h4 class="careers-benefit-title">社会的インパクト</h4>
                             </div>
-                            <p class="careers-benefit-description">自分の仕事が社会課題の解決や人々の生活向上に直接つながる実感を得られます。意義あるプロジェクトに携わる機会があります。</p>
+                            <p class="careers-benefit-description">自分の仕事が社会課題の解決や<br>人々の生活向上に直接つながる実感を得られます。<br>意義あるプロジェクトに携わる機会があります。</p>
                         </div>
                     </div>
                 </div>
@@ -3270,7 +3330,7 @@
                 <div class="job-positions animate-on-scroll">
                     <div class="job-position">
                         <h4 class="job-position-title">AIエンジニア</h4>
-                        <p class="job-position-description">生成AIモデルやRAGシステムの開発経験をお持ちの方。LLMの活用や自然言語処理、機械学習の知識を活かして最先端のAIソリューション開発に参画できます。</p>
+                        <p class="job-position-description">生成AIモデルやRAGシステムの開発経験をお持ちの方。<br>LLMの活用や自然言語処理、機械学習の知識を活かして<br>最先端のAIソリューション開発に参画できます。</p>
                         <div class="job-position-tags">
                             <span class="job-position-tag" data-skill-toggle>LLM</span>
                             <span class="job-position-tag" data-skill-toggle>RAG</span>
@@ -3284,7 +3344,7 @@
                     
                     <div class="job-position">
                         <h4 class="job-position-title">法人営業</h4>
-                        <p class="job-position-description">IT/AIソリューションの営業経験をお持ちの方。顧客の課題を理解し、ShinAIのソリューションを活用した提案ができる方を募集しています。</p>
+                        <p class="job-position-description">IT/AIソリューションの営業経験をお持ちの方。<br>顧客の課題を理解し、ShinAIのソリューションを活用した<br>提案ができる方を募集しています。</p>
                         <div class="job-position-tags">
                             <span class="job-position-tag" data-skill-toggle>ソリューション営業</span>
                             <span class="job-position-tag" data-skill-toggle>BtoB</span>
@@ -3297,7 +3357,7 @@
                     
                     <div class="job-position">
                         <h4 class="job-position-title">UX/UIデザイナー</h4>
-                        <p class="job-position-description">AIとユーザーをつなぐインターフェースのデザイン経験をお持ちの方。人間中心設計の思考でユーザビリティと美しさを両立させる提案ができる方を募集しています。</p>
+                        <p class="job-position-description">AIとユーザーをつなぐインターフェースの<br>デザイン経験をお持ちの方。<br>人間中心設計の思考でユーザビリティと美しさを<br>両立させる提案ができる方を募集しています。</p>
                         <div class="job-position-tags">
                             <span class="job-position-tag" data-skill-toggle>UXデザイン</span>
                             <span class="job-position-tag" data-skill-toggle>UIデザイン</span>
@@ -3321,8 +3381,13 @@
         <section class="cta-section" id="cta">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="heading-lg cta-title">AIで<span class="text-accent">ビジネスの可能性</span>を<br class="hide-mobile">広げませんか？</h2>
-                    <p class="cta-description">まずは小さく始めて、大きな成果を実現。<br class="hide-mobile">プロトタイプから始める伴走型AI開発で、確実な成功へ。</p>
+                    <h2 class="heading-lg cta-title">
+                        AIで<span class="text-accent">ビジネスの可能性</span>を<br class="hide-mobile">広げませんか？
+                    </h2>
+                    <p class="cta-description">
+                        まずは小さく始めて、大きな成果を実現。<br>
+                        プロトタイプから始める伴走型AI開発で、<br class="hide-mobile">確実な成功へ導きます。
+                    </p>
                     <a href="contact.html" class="cta-button">
                         <span>無料相談を始める</span>
                         <i class="fas fa-arrow-right" aria-hidden="true"></i>
