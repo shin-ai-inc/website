@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI格闘技試合予測記事生成ツール導入提案書</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    body {
+        font-family: 'Yu Gothic', 'Hiragino Sans', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .header .subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    
+    .date-info {
+        background: rgba(255,255,255,0.1);
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+    
+    .content {
+        padding: 40px;
+    }
+    
+    .executive-summary {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        border-left: 5px solid #ff6b6b;
+    }
+    
+    .executive-summary h2 {
+        color: #d63031;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .executive-summary h2::before {
+        content: "🎯";
+        margin-right: 10px;
+        font-size: 1.2em;
+    }
+    
+    .highlight-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    
+    .highlight-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-top: 4px solid;
+    }
+    
+    .highlight-card.efficiency { border-top-color: #00b894; }
+    .highlight-card.volume { border-top-color: #0984e3; }
+    .highlight-card.revenue { border-top-color: #e17055; }
+    .highlight-card.roi { border-top-color: #a29bfe; }
+    .highlight-card.price { border-top-color: #fd79a8; }
+    
+    .highlight-number {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .efficiency .highlight-number { color: #00b894; }
+    .volume .highlight-number { color: #0984e3; }
+    .revenue .highlight-number { color: #e17055; }
+    .roi .highlight-number { color: #a29bfe; }
+    .price .highlight-number { color: #fd79a8; }
+    
+    .section {
+        margin-bottom: 40px;
+    }
+    
+    .section h2 {
+        color: #2d3436;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #74b9ff;
+        display: flex;
+        align-items: center;
+    }
+    
+    .problem-analysis {
+        background: #fff5f5;
+        border-left: 5px solid #ff7675;
+        padding: 25px;
+        border-radius: 10px;
+    }
+    
+    .solution-box {
+        background: #f0fff4;
+        border-left: 5px solid #00b894;
+        padding: 25px;
+        border-radius: 10px;
+    }
+    
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .comparison-table th {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .comparison-table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .comparison-table tr:nth-child(even) {
+        background: #f8f9fa;
+    }
+    
+    .comparison-table tr:hover {
+        background: #e3f2fd;
+    }
+    
+    .before { background: #ffebee !important; color: #c62828; }
+    .after { background: #e8f5e8 !important; color: #2e7d32; }
+    
+    .workflow-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+        gap: 20px;
+    }
+    
+    .workflow-box {
+        flex: 1;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .workflow-before {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        border: 2px solid #ff6b6b;
+    }
+    
+    .workflow-after {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border: 2px solid #00b894;
+    }
+    
+    .workflow-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    
+    .workflow-steps {
+        font-size: 0.9em;
+        line-height: 1.8;
+    }
+    
+    .arrow {
+        font-size: 3em;
+        color: #00b894;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+    }
+    
+    .timeline {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+        position: relative;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(to right, #667eea, #764ba2);
+        z-index: 1;
+    }
+    
+    .timeline-item {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 3px solid #667eea;
+        position: relative;
+        z-index: 2;
+        min-width: 120px;
+    }
+    
+    .timeline-week {
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+    }
+    
+    .timeline-desc {
+        font-size: 0.85em;
+        color: #666;
+    }
+    
+    .pricing-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 30px 0;
+    }
+    
+    .pricing-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: 2px solid #ddd;
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    .pricing-card.featured {
+        border-color: #00b894;
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,184,148,0.3);
+    }
+    
+    .pricing-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    
+    .pricing-amount {
+        font-size: 3em;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 10px;
+    }
+    
+    .pricing-card.featured .pricing-amount {
+        color: #00b894;
+    }
+    
+    .pricing-original {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+    
+    .pricing-features {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+    
+    .pricing-features li {
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+    }
+    
+    .pricing-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #00b894;
+        font-weight: bold;
+    }
+    
+    .cta-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .cta-button:hover {
+        transform: translateY(-2px);
+    }
+    
+    .roi-visual {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .roi-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #2d3436;
+    }
+    
+    .roi-numbers {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+    
+    .roi-item {
+        text-align: center;
+    }
+    
+    .roi-value {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #e17055;
+    }
+    
+    .roi-label {
+        font-size: 0.9em;
+        color: #636e72;
+        margin-top: 5px;
+    }
+    
+    .guarantee-box {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 5px solid #00b894;
+        margin: 20px 0;
+    }
+    
+    .guarantee-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #00b894;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .guarantee-title::before {
+        content: "🛡️";
+        margin-right: 10px;
+    }
+    
+    .footer {
+        background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .footer h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+    }
+    
+    .footer p {
+        font-size: 1.1em;
+        line-height: 1.8;
+    }
+    
+    .urgent-notice {
+        background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 20px 0;
+        border: 2px solid #e84393;
+    }
+    
+    .urgent-notice h4 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        color: #2d3436;
+    }
+    
+    @media (max-width: 768px) {
+        .highlight-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .workflow-container {
+            flex-direction: column;
+        }
+        
+        .pricing-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .timeline {
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .timeline::before {
+            display: none;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI格闘技試合予測記事生成ツール導入提案書</h1>
+            <p class="subtitle">株式会社イーファイトスポーツ様</p>
+            <div class="date-info">
+                <strong>提案日：2025年5月26日</strong>
+            </div>
+        </div>
+    <div class="content">
+        <div class="executive-summary">
+            <h2>エグゼクティブサマリー</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                月間3,000万PVの実績を持つイーファイト様の事業をさらに加速させる、AI活用による<strong>収益最大化</strong>と<strong>業務効率化</strong>を同時実現するソリューションをご提案いたします。
+            </p>
+            
+            <div class="highlight-grid">
+                <div class="highlight-card efficiency">
+                    <div class="highlight-number">70%</div>
+                    <div>作業効率向上</div>
+                    <small>3-5時間 → 1時間</small>
+                </div>
+                <div class="highlight-card volume">
+                    <div class="highlight-number">3-4倍</div>
+                    <div>記事数拡大</div>
+                    <small>週10本 → 30-40本</small>
+                </div>
+                <div class="highlight-card revenue">
+                    <div class="highlight-number">108-228万円</div>
+                    <div>年間増収</div>
+                    <small>広告・スポンサー収益</small>
+                </div>
+                <div class="highlight-card roi">
+                    <div class="highlight-number">90-190%</div>
+                    <div>投資効率(ROI)</div>
+                    <small>6-13ヶ月で回収</small>
+                </div>
+                <div class="highlight-card price">
+                    <div class="highlight-number">120万円</div>
+                    <div>特別価格</div>
+                    <small>通常250万円から52%OFF</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 現状の課題分析</h2>
+            <div class="problem-analysis">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>現状の問題点</th>
+                            <th>具体的な影響</th>
+                            <th>機会損失</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="before">1記事3-5時間の制作時間</td>
+                            <td>週10本程度の配信限界</td>
+                            <td>速報性のある記事の取りこぼし</td>
+                        </tr>
+                        <tr>
+                            <td class="before">少数精鋭の編集体制</td>
+                            <td>人的リソースの逼迫</td>
+                            <td>戦略的業務への時間不足</td>
+                        </tr>
+                        <tr>
+                            <td class="before">手作業中心のワークフロー</td>
+                            <td>作業品質のばらつき</td>
+                            <td>一定品質の維持困難</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 ソリューション：作業フローの劇的変化</h2>
+            <div class="workflow-container">
+                <div class="workflow-box workflow-before">
+                    <div class="workflow-title">【現状】5時間/記事</div>
+                    <div class="workflow-steps">
+                        取材準備(30分)<br>
+                        ↓<br>
+                        データ収集(60分)<br>
+                        ↓<br>
+                        分析・構成(90分)<br>
+                        ↓<br>
+                        執筆(120分)<br>
+                        ↓<br>
+                        校正(30分)
+                    </div>
+                </div>
+                
+                <div class="arrow">→</div>
+                
+                <div class="workflow-box workflow-after">
+                    <div class="workflow-title">【AI導入後】1時間/記事</div>
+                    <div class="workflow-steps">
+                        AI生成確認(10分)<br>
+                        ↓<br>
+                        内容調整(30分)<br>
+                        ↓<br>
+                        独自性追加(15分)<br>
+                        ↓<br>
+                        最終校正(5分)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-box">
+                <h4>🚀 AI自動化される業務</h4>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>選手データの収集・分析</li>
+                    <li>過去戦績の統計的分析</li>
+                    <li>試合予測の根拠作成</li>
+                    <li>記事構成の自動生成</li>
+                    <li>基本文章の自動作成</li>
+                </ul>
+                
+                <h4>👨‍💼 人間が担当する付加価値業務</h4>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>最終的な品質チェック</li>
+                    <li>文体・トーンの調整</li>
+                    <li>独自視点の追加</li>
+                    <li>戦略的な企画立案</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 記事数拡大による収益インパクト</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>期間</th>
+                        <th>現状</th>
+                        <th>AI導入後</th>
+                        <th>拡大効果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>週間記事数</strong></td>
+                        <td class="before">10本</td>
+                        <td class="after">30-40本</td>
+                        <td><strong>3-4倍</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>月間記事数</strong></td>
+                        <td class="before">40本</td>
+                        <td class="after">120-160本</td>
+                        <td><strong>3-4倍</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>年間記事数</strong></td>
+                        <td class="before">480本</td>
+                        <td class="after">1,440-1,920本</td>
+                        <td><strong>3-4倍</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>編集工数/週</strong></td>
+                        <td class="before">50時間</td>
+                        <td class="after">30-40時間</td>
+                        <td><strong>20%削減</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📈 投資対効果（ROI）の魅力</h2>
+            <div class="roi-visual">
+                <div class="roi-title">年間収益増加と投資回収</div>
+                <div class="roi-numbers">
+                    <div class="roi-item">
+                        <div class="roi-value">108-228万円</div>
+                        <div class="roi-label">年間増収</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">90-190%</div>
+                        <div class="roi-label">投資効率(ROI)</div>
+                    </div>
+                    <div class="roi-item">
+                        <div class="roi-value">6-13ヶ月</div>
+                        <div class="roi-label">投資回収期間</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-weight: bold;">
+                    2年目以降は純利益として継続的に積み上がります
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 導入スケジュール</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 1</div>
+                    <div class="timeline-desc">要件定義<br>設計</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 2-3</div>
+                    <div class="timeline-desc">開発<br>実装</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 4</div>
+                    <div class="timeline-desc">検証<br>調整</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 5</div>
+                    <div class="timeline-desc">本番<br>リリース</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; font-weight: bold; color: #00b894;">
+                <strong>総開発期間：4-5週間で完全稼働</strong>
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>💰 特別価格プラン</h2>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <div class="pricing-title">通常価格</div>
+                    <div class="pricing-amount">250万円</div>
+                    <div class="pricing-original">エンジニア3名×1ヶ月</div>
+                    <ul class="pricing-features">
+                        <li>標準開発期間</li>
+                        <li>基本サポート</li>
+                        <li>通常保証</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-title">🎉 今回限定特別価格</div>
+                    <div class="pricing-amount">120万円</div>
+                    <div class="pricing-original">52%OFF！</div>
+                    <ul class="pricing-features">
+                        <li>3週間短縮開発</li>
+                        <li>1ヶ月専任サポート</li>
+                        <li>3ヶ月成果保証</li>
+                        <li>継続改善サポート</li>
+                        <li>緊急対応24時間</li>
+                    </ul>
+                    <button class="cta-button">この価格で申し込む</button>
+                </div>
+            </div>
+            
+            <div class="urgent-notice">
+                <h4>⚡ 限定条件</h4>
+                <p>この特別価格は<strong>AIエキスポでのご縁記念価格</strong>として、<strong>本日限り</strong>のご提案です。</p>
+                <p>開発リソースの関係で、期限後は通常価格での対応となります。</p>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0; padding: 15px; background: #e8f5e8; border-radius: 10px;">
+                <h4 style="color: #00b894; margin-bottom: 10px;">💡 さらなる優遇条件</h4>
+                <p>事例掲載にご協力いただける場合：<strong>追加5-10%割引</strong></p>
+                <p style="font-size: 1.2em; font-weight: bold; color: #e17055;">最終価格：108-114万円</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="guarantee-box">
+                <div class="guarantee-title">成功保証・リスク管理</div>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>3ヶ月間の成果保証</strong>：期待効果が得られない場合、追加カスタマイズを無償実施</li>
+                    <li><strong>24時間緊急対応</strong>：技術的問題を迅速解決</li>
+                    <li><strong>段階的導入</strong>：リスクを最小化しながら効果を実現</li>
+                    <li><strong>分割払い対応</strong>：資金負担を軽減（要相談）</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>🚀 イーファイト様の未来を共に創造しましょう</h3>
+        <p>
+            月間3,000万PVという素晴らしい基盤をお持ちのイーファイト様。<br>
+            本AIツールの導入により、この基盤を最大限活用し、<strong>持続可能な成長</strong>と<strong>収益拡大</strong>を実現できると確信しております。
+        </p>
+        <p style="margin-top: 20px; font-size: 1.2em; font-weight: bold;">
+            私たちは単なるツールベンダーではなく、<br>
+            <strong>イーファイト様の事業成長のパートナー</strong>として、<br>
+            長期的にサポートさせていただきます。
+        </p>
+    </div>
+</div>
+</body>
+</html>
