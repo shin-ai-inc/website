@@ -168,7 +168,9 @@
         overflow: hidden;
     }
     
-    /* ハンバーガーボタン - モバイルUI/UX改善 */
+    /* ========================================================
+    ▼ PC版ヘッダーハンバーガーメニュー削除 Component - 改善版
+    ======================================================== */
     .hamburger-visible {
         display: none; /* 初期状態で非表示 */
         position: fixed;
@@ -187,7 +189,7 @@
     }
     
     .hamburger-visible:hover {
-        transform: scale(1.05); /* ホバー時の視覚的フィードバック強化 */
+        background: rgba(255, 255, 255, 0.95); /* 控えめなホバー効果 */
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
     }
     
@@ -237,7 +239,7 @@
     </style>
 
     <!-- ========================================================
-    ▼ メインスタイル
+    ▼ メインスタイル Component - 改善版
     ======================================================== -->
     <style>
     /* ========================================================
@@ -516,10 +518,10 @@
     }
     
     /* ========================================================
-    ▼ タイポグラフィシステム Component
+    ▼ タイポグラフィシステム Component - モバイル文字サイズ拡大
     ======================================================== */
     .heading-xl {
-        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-size: clamp(2.8rem, 5vw, 4rem); /* モバイル最小値を2.5rem→2.8remに拡大 */
         font-weight: var(--font-weight-black);
         line-height: 1.1;
         margin-bottom: var(--space-6);
@@ -527,7 +529,7 @@
     }
     
     .heading-lg {
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: clamp(2.2rem, 4vw, 3rem); /* モバイル最小値を2rem→2.2remに拡大 */
         font-weight: var(--font-weight-extrabold);
         line-height: 1.2;
         margin-bottom: var(--space-5);
@@ -535,31 +537,31 @@
     }
     
     .heading-md {
-        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-size: clamp(1.7rem, 3vw, 2.25rem); /* モバイル最小値を1.5rem→1.7remに拡大 */
         font-weight: var(--font-weight-bold);
         line-height: 1.3;
         margin-bottom: var(--space-4);
     }
     
     .heading-sm {
-        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        font-size: clamp(1.4rem, 2vw, 1.5rem); /* モバイル最小値を1.25rem→1.4remに拡大 */
         font-weight: var(--font-weight-semibold);
         line-height: 1.4;
         margin-bottom: var(--space-3);
     }
     
     .text-lg {
-        font-size: 1.125rem;
+        font-size: clamp(1.25rem, 1.8vw, 1.125rem); /* モバイル最小値を拡大 */
         line-height: 1.8;
     }
     
     .text-md {
-        font-size: 1rem;
+        font-size: clamp(1.1rem, 1.4vw, 1rem); /* モバイル最小値を拡大 */
         line-height: 1.7;
     }
     
     .text-sm {
-        font-size: 0.875rem;
+        font-size: clamp(1rem, 1.1vw, 0.875rem); /* モバイル最小値を拡大 */
     }
     
     .text-gradient {
@@ -598,7 +600,7 @@
     }
     
     /* ========================================================
-    ▼ ヘッダー Component - 改善バージョン（バランス調整）
+    ▼ ヘッダー Component - PC版ハンバーガーメニュー削除改善版
     ======================================================== -->
     ======================================================== */
     .header {
@@ -645,7 +647,7 @@
     }
     
     .logo:hover {
-        transform: translateY(-1px);
+        color: var(--primary); /* 控えめなホバー効果：色変更のみ */
     }
     
     .logo-icon {
@@ -665,10 +667,6 @@
         height: 100%;
         object-fit: contain;
         transition: all var(--transition-normal) ease;
-    }
-    
-    .logo:hover .logo-icon img {
-        transform: scale(1.1);
     }
     
     /* ナビゲーション改善 - ヘッダー内のバランス調整 */
@@ -725,7 +723,7 @@
         margin-left: var(--space-2);
     }
     
-    /* ヘッダーボタン改善 - 視覚的フィードバック強化 */
+    /* ヘッダーボタン改善 - 控えめなホバーエフェクト */
     .btn-header-consultation {
         background: var(--gradient-primary);
         color: var(--white);
@@ -733,7 +731,7 @@
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
         font-size: 0.85rem;
-        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-button);
         display: inline-flex;
         align-items: center;
@@ -743,30 +741,10 @@
         overflow: hidden;
     }
     
-    .btn-header-consultation::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.6s ease-out, height 0.6s ease-out;
-        z-index: 1;
-    }
-    
     .btn-header-consultation:hover {
-        transform: translateY(-2px);
+        background: var(--gradient-primary-hover); /* 色変更のみ、動きを削除 */
         box-shadow: var(--shadow-button-hover);
         color: var(--white);
-        background: var(--gradient-accent);
-    }
-    
-    .btn-header-consultation:hover::before {
-        width: 200px;
-        height: 200px;
     }
     
     .btn-header-consultation span, .btn-header-consultation i {
@@ -774,9 +752,11 @@
         z-index: 2;
     }
     
-    /* ハンバーガーメニュー改善 - モバイルUI/UX向上 */
+    /* ========================================================
+    ▼ PC版ハンバーガーメニュー削除 Component - 改善版
+    ======================================================== */
     .hamburger {
-        display: none;
+        display: none; /* PC版では完全非表示 */
         background: none;
         border: none;
         color: var(--dark);
@@ -789,7 +769,6 @@
     
     .hamburger:hover {
         color: var(--primary);
-        transform: scale(1.05); /* 視覚的フィードバック強化 */
     }
     
     .hamburger:focus {
@@ -816,10 +795,10 @@
         visibility: visible;
     }
     
-    /* モバイルメニュー改善 - UI/UX強化 */
+    /* モバイルメニュー改善 - モバイルのみ表示 */
     @media (max-width: 768px) {
         .hamburger {
-            display: none; /* モバイルではハンバーガーボタン非表示 */
+            display: none; /* モバイルでもハンバーガーボタン非表示（代わりにhamburger-visibleを使用） */
         }
         
         .header-inner {
@@ -888,7 +867,7 @@
     }
     
     /* ========================================================
-    ▼ ボタン Component - 視覚的フィードバック強化
+    ▼ ボタン Component - CTA優先度改善版（無料相談強調、サービス詳細控えめ）
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -908,31 +887,7 @@
         line-height: 1.4;
     }
     
-    /* ボタンホバーエフェクト強化 - 波紋アニメーション */
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.6s ease-out, height 0.6s ease-out;
-        z-index: 1;
-    }
-    
-    .btn:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-    
-    .btn span, .btn i {
-        position: relative;
-        z-index: 2;
-    }
-    
+    /* 無料相談ボタン - 強調版 */
     .btn-primary {
         background: var(--gradient-primary);
         color: var(--white);
@@ -940,15 +895,24 @@
     }
     
     .btn-primary:hover {
-        transform: translateY(-2px) scale(1.02);
+        background: var(--gradient-primary-hover); /* 動きを削除、色変更のみ */
         box-shadow: var(--shadow-button-hover);
-        background: var(--gradient-primary-hover);
         color: var(--white);
     }
     
-    .btn-primary:active {
-        transform: translateY(1px) scale(0.98);
+    /* サービス詳細ボタン - 控えめ版 */
+    .btn-secondary {
+        background: rgba(58, 95, 235, 0.06); /* より控えめな背景 */
+        color: var(--primary);
+        border: 1px solid rgba(58, 95, 235, 0.15); /* より薄いボーダー */
         box-shadow: var(--shadow-xs);
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(58, 95, 235, 0.1);
+        border-color: rgba(58, 95, 235, 0.25);
+        color: var(--primary);
+        /* 動きを削除、色変更のみ */
     }
     
     .btn-accent {
@@ -958,25 +922,9 @@
     }
     
     .btn-accent:hover {
-        transform: translateY(-2px) scale(1.02);
+        background: linear-gradient(135deg, #E67900, #FF8A00); /* 控えめなホバー */
         box-shadow: var(--shadow-accent-hover);
-        filter: brightness(1.1);
         color: var(--white);
-    }
-    
-    .btn-secondary {
-        background: var(--light-gray);
-        color: var(--primary);
-        border: 1px solid rgba(58, 95, 235, 0.2);
-        box-shadow: var(--shadow-xs);
-    }
-    
-    .btn-secondary:hover {
-        background: var(--white);
-        border-color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-        color: var(--primary);
     }
     
     .btn-outline {
@@ -1003,8 +951,6 @@
     
     .btn-outline:hover {
         color: var(--white);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-xs);
         border-color: transparent;
     }
     
@@ -1022,23 +968,28 @@
         font-size: 0.875rem;
     }
     
+    /* アイコン付きボタン - 控えめなアニメーション */
     .btn-icon-right i {
         transition: transform var(--transition-normal) ease;
     }
     
     .btn-icon-right:hover i {
-        transform: translateX(6px);
+        transform: translateX(3px); /* 動きを控えめに */
     }
     
     @media (max-width: 768px) {
         .btn-lg {
             padding: 0.9rem 1.5rem;
-            width: 100%;
+            width: 100%; /* モバイルで横幅いっぱい */
+        }
+        
+        .btn-secondary {
+            width: 100%; /* モバイルで横幅いっぱい */
         }
     }
 
     /* ========================================================
-    ▼ FAQ専用スタイル Component - 高度なインタラクションUI
+    ▼ FAQ専用スタイル Component - 控えめなホバーエフェクト改善版
     ======================================================== */
     .faq-hero {
         position: relative;
@@ -1049,7 +1000,7 @@
     }
 
     .faq-hero-title {
-        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-size: clamp(2.8rem, 5vw, 3.5rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-black);
         margin-bottom: 1.5rem;
         background: var(--gradient-primary);
@@ -1061,11 +1012,18 @@
     }
 
     .faq-hero-description {
-        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        font-size: clamp(1.25rem, 3vw, 1.3rem); /* モバイル文字サイズ拡大 */
         color: var(--gray);
         max-width: 800px;
         margin: 0 auto 3rem;
         line-height: 1.7;
+        text-align: left; /* 長文テキストを左揃えに */
+    }
+
+    @media (max-width: 768px) {
+        .faq-hero-description {
+            text-align: center; /* モバイルでは中央揃え維持 */
+        }
     }
 
     /* FAQ検索機能 - 強化版 */
@@ -1194,7 +1152,7 @@
         }
     }
 
-    /* FAQカテゴリー - スクロールナビゲーション強化 */
+    /* FAQカテゴリー - 控えめなホバーエフェクト */
     .faq-categories {
         display: flex;
         flex-wrap: wrap;
@@ -1217,7 +1175,7 @@
     }
 
     .faq-category:hover {
-        transform: translateY(-3px);
+        /* 動きを削除、色変更のみ */
         box-shadow: var(--shadow-md);
         border-color: var(--primary);
         color: var(--primary);
@@ -1242,7 +1200,7 @@
     }
 
     .faq-group-title {
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 4vw, 2rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 2rem;
         color: var(--dark);
@@ -1273,7 +1231,7 @@
     }
 
     .faq-item:hover {
-        transform: translateY(-5px);
+        /* 動きを削除、影のみ変更 */
         box-shadow: var(--shadow-lg);
     }
 
@@ -1288,7 +1246,7 @@
     }
 
     .faq-question-text {
-        font-size: 1.15rem;
+        font-size: clamp(1.25rem, 2.5vw, 1.15rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-semibold);
         color: var(--dark);
         transition: color var(--transition-normal) ease;
@@ -1347,9 +1305,11 @@
         padding: 0 1.5rem 1.5rem;
         color: var(--gray);
         line-height: 1.8;
+        text-align: left; /* 長文回答を左揃えに */
+        font-size: clamp(1.1rem, 1.8vw, 1rem); /* モバイル文字サイズ拡大 */
     }
 
-    /* キーベネフィットセクション - 行動経済学要素の導入 */
+    /* キーベネフィットセクション - 控えめなホバーエフェクト */
     .faq-benefits {
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
         border-radius: var(--radius-xl);
@@ -1370,7 +1330,7 @@
     }
 
     .faq-benefits-title {
-        font-size: 1.8rem;
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 2rem;
         text-align: center;
@@ -1396,7 +1356,7 @@
     }
 
     .benefit-card:hover {
-        transform: translateY(-8px);
+        /* 動きを削除、影のみ変更 */
         box-shadow: var(--shadow-lg);
     }
 
@@ -1411,16 +1371,15 @@
         border-radius: 18px;
         font-size: 1.8rem;
         margin-bottom: 1.5rem;
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all var(--transition-normal) ease;
     }
 
     .benefit-card:hover .benefit-icon {
-        transform: rotate(10deg) scale(1.1);
-        background: var(--gradient-accent);
+        background: var(--gradient-accent); /* 色変更のみ */
     }
 
     .benefit-title {
-        font-size: 1.25rem;
+        font-size: clamp(1.3rem, 2.2vw, 1.25rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 1rem;
         color: var(--dark);
@@ -1430,12 +1389,15 @@
         color: var(--gray);
         line-height: 1.7;
         margin-bottom: 1rem;
+        text-align: left; /* 長文を左揃えに */
+        font-size: clamp(1.05rem, 1.5vw, 1rem); /* モバイル文字サイズ拡大 */
     }
 
     .benefit-highlight {
         margin-top: auto;
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
+        font-size: clamp(1rem, 1.3vw, 0.95rem); /* モバイル文字サイズ拡大 */
     }
 
     /* 社会的証明コンポーネント - 改善版 */
@@ -1461,7 +1423,7 @@
     }
 
     .social-proof-title {
-        font-size: 1.8rem;
+        font-size: clamp(1.6rem, 3.5vw, 1.8rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 1.5rem;
     }
@@ -1472,6 +1434,14 @@
         max-width: 700px;
         margin-left: auto;
         margin-right: auto;
+        text-align: left; /* 長文を左揃えに */
+        font-size: clamp(1.1rem, 1.8vw, 1rem); /* モバイル文字サイズ拡大 */
+    }
+
+    @media (max-width: 768px) {
+        .social-proof-text {
+            text-align: center; /* モバイルでは中央揃え維持 */
+        }
     }
 
     .proof-metrics {
@@ -1487,7 +1457,7 @@
     }
 
     .metric-value {
-        font-size: 3rem;
+        font-size: clamp(2.5rem, 5vw, 3rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-black);
         color: var(--primary);
         line-height: 1.2;
@@ -1499,12 +1469,12 @@
     }
 
     .metric-label {
-        font-size: 1.1rem;
+        font-size: clamp(1.15rem, 2vw, 1.1rem); /* モバイル文字サイズ拡大 */
         color: var(--gray);
         margin-top: 0.5rem;
     }
 
-    /* メインCTAセクション */
+    /* メインCTAセクション - 改善版 */
     .faq-cta {
         background: var(--gradient-cta-new);
         color: var(--white);
@@ -1517,7 +1487,7 @@
     }
 
     .faq-cta-title {
-        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-size: clamp(2rem, 4vw, 2.5rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 1.5rem;
         color: var(--white);
@@ -1525,12 +1495,19 @@
     }
 
     .faq-cta-text {
-        font-size: 1.2rem;
+        font-size: clamp(1.3rem, 2.5vw, 1.2rem); /* モバイル文字サイズ拡大 */
         margin-bottom: 2rem;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
         line-height: 1.7;
+        text-align: left; /* 長文を左揃えに */
+    }
+
+    @media (max-width: 768px) {
+        .faq-cta-text {
+            text-align: center; /* モバイルでは中央揃え維持 */
+        }
     }
 
     .faq-cta-buttons {
@@ -1579,7 +1556,7 @@
     }
 
     .faq-summary-title {
-        font-size: 1.6rem;
+        font-size: clamp(1.5rem, 3vw, 1.6rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-bold);
         margin-bottom: 1.5rem;
     }
@@ -1600,7 +1577,7 @@
     }
 
     .summary-item:hover {
-        transform: translateY(-5px);
+        /* 動きを削除、影のみ変更 */
         box-shadow: var(--shadow-md);
     }
 
@@ -1608,12 +1585,14 @@
         font-weight: var(--font-weight-semibold);
         margin-bottom: 0.5rem;
         color: var(--primary);
+        font-size: clamp(1.1rem, 1.8vw, 1rem); /* モバイル文字サイズ拡大 */
     }
 
     .summary-answer {
         color: var(--gray);
-        font-size: 0.95rem;
+        font-size: clamp(1.05rem, 1.5vw, 0.95rem); /* モバイル文字サイズ拡大 */
         line-height: 1.6;
+        text-align: left; /* 長文を左揃えに */
     }
 
     /* 検索で表示なし状態のスタイル */
@@ -1655,7 +1634,7 @@
 
     .indicator-dot.active {
         background-color: var(--primary);
-        transform: scale(1.2);
+        /* 動きを削除、色変更のみ */
     }
 
     /* レスポンシブ対応 */
@@ -1672,15 +1651,6 @@
     @media (max-width: 768px) {
         .faq-hero {
             padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
-        }
-
-        .faq-hero-title {
-            font-size: 2.2rem;
-        }
-
-        .faq-hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
         }
 
         .faq-search-wrapper {
@@ -1714,16 +1684,6 @@
             font-size: 0.9rem;
         }
 
-        .faq-group-title {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question-text {
-            font-size: 1.05rem;
-            padding-right: 1.5rem;
-        }
-
         .faq-benefits {
             padding: 2rem 1.5rem;
         }
@@ -1740,14 +1700,6 @@
             gap: 2rem;
         }
 
-        .metric-value {
-            font-size: 2.2rem;
-        }
-
-        .metric-label {
-            font-size: 1rem;
-        }
-
         .faq-cta {
             padding: 3rem 1.5rem;
         }
@@ -1759,7 +1711,7 @@
         }
 
         .faq-cta-buttons .btn {
-            width: 100%;
+            width: 100%; /* モバイルで横幅いっぱい */
         }
 
         .faq-scroll-indicator {
@@ -1768,14 +1720,6 @@
     }
 
     @media (max-width: 576px) {
-        .faq-hero-title {
-            font-size: 2rem;
-        }
-
-        .faq-hero-description {
-            font-size: 1rem;
-        }
-
         .benefit-icon {
             width: 60px;
             height: 60px;
@@ -1828,6 +1772,8 @@
         color: rgba(255, 255, 255, 0.7);
         margin-bottom: 1.5rem;
         line-height: 1.8;
+        text-align: left; /* 長文を左揃えに */
+        font-size: clamp(1.05rem, 1.5vw, 1rem); /* モバイル文字サイズ拡大 */
     }
     
     .footer-social {
@@ -1869,8 +1815,7 @@
     }
     
     .footer-social-link:hover {
-        transform: translateY(-3px);
-        color: var(--white);
+        color: var(--white); /* 色変更のみ */
     }
     
     .footer-social-link:hover::before {
@@ -1878,16 +1823,17 @@
     }
     
     .footer-social-link:hover i {
-        transform: scale(1.2);
+        transform: scale(1.05); /* 控えめな動き */
     }
     
     .footer-heading {
-        font-size: 1.2rem;
+        font-size: clamp(1.25rem, 2vw, 1.2rem); /* モバイル文字サイズ拡大 */
         margin-bottom: 1.5rem;
         color: var(--white);
         font-weight: var(--font-weight-semibold);
         position: relative;
         padding-bottom: 0.75rem;
+        white-space: nowrap; /* 改行を防止 */
     }
     
     .footer-heading::after {
@@ -1916,6 +1862,7 @@
         position: relative;
         padding-left: 0;
         display: inline-block;
+        font-size: clamp(1rem, 1.3vw, 0.95rem); /* モバイル文字サイズ拡大 */
     }
     
     .footer-links a::before {
@@ -1931,7 +1878,7 @@
     
     .footer-links a:hover {
         color: var(--white);
-        padding-left: 5px;
+        /* 動きを削除、padding削除 */
     }
     
     .footer-links a:hover::before {
@@ -1943,6 +1890,7 @@
         gap: 0.75rem;
         margin-bottom: 1rem;
         color: rgba(255, 255, 255, 0.7);
+        font-size: clamp(1rem, 1.3vw, 0.95rem); /* モバイル文字サイズ拡大 */
     }
     
     .footer-contact-item i {
@@ -1972,6 +1920,7 @@
     
     .footer-copyright {
         color: rgba(255, 255, 255, 0.5);
+        font-size: clamp(0.9rem, 1.1vw, 0.85rem); /* モバイル文字サイズ拡大 */
     }
     
     .footer-links-inline {
@@ -1984,6 +1933,7 @@
         color: rgba(255, 255, 255, 0.5);
         transition: all var(--transition-normal) ease;
         position: relative;
+        font-size: clamp(0.9rem, 1.1vw, 0.85rem); /* モバイル文字サイズ拡大 */
     }
     
     .footer-links-inline a::before {
@@ -2095,7 +2045,7 @@
     }
     
     .chatbot-button:hover {
-        transform: scale(1.1);
+        /* 動きを削除 */
         box-shadow: var(--shadow-xl);
     }
     
@@ -2104,7 +2054,7 @@
     }
     
     .chatbot-button:hover i {
-        transform: scale(1.2);
+        transform: scale(1.1); /* 控えめな動き */
     }
     
     .chatbot-window {
@@ -2144,7 +2094,7 @@
     
     .chatbot-header h3 {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: clamp(1.15rem, 2vw, 1.1rem); /* モバイル文字サイズ拡大 */
         font-weight: var(--font-weight-semibold);
         display: flex;
         align-items: center;
@@ -2169,7 +2119,7 @@
     
     .chatbot-close:hover {
         background: rgba(255, 255, 255, 0.3);
-        transform: rotate(90deg);
+        /* 動きを削除 */
     }
     
     .chatbot-messages {
@@ -2186,7 +2136,7 @@
         padding: 0.75rem 1rem;
         border-radius: 15px;
         line-height: 1.5;
-        font-size: 0.95rem;
+        font-size: clamp(1.05rem, 1.5vw, 0.95rem); /* モバイル文字サイズ拡大 */
         animation: fadeInMessage 0.3s ease-out forwards;
     }
     
@@ -2229,6 +2179,7 @@
         border-radius: var(--radius-full);
         outline: none;
         transition: all var(--transition-normal) ease;
+        font-size: clamp(1.05rem, 1.5vw, 0.95rem); /* モバイル文字サイズ拡大 */
     }
     
     .chatbot-input input:focus {
@@ -2319,7 +2270,7 @@
     }
     
     .chatbot-send:hover {
-        transform: scale(1.1);
+        background: var(--gradient-accent); /* 色変更のみ */
     }
     
     .chatbot-send:hover::before {
@@ -2409,7 +2360,7 @@
     }
     
     .back-to-top:hover {
-        transform: translateY(-3px);
+        /* 動きを削除 */
         box-shadow: var(--shadow-lg);
     }
     
@@ -2418,7 +2369,7 @@
     }
     
     .back-to-top:hover i {
-        transform: translateY(-2px);
+        transform: translateY(-1px); /* 控えめな動き */
     }
     
     @media (max-width: 768px) {
@@ -2524,12 +2475,23 @@
     ======================================================== */
     /* タッチデバイス対応の最適化 */
     @media (hover: none) {
-        .btn:hover, .service-card:hover, .benefit-container-card:hover {
+        .btn:hover, 
+        .service-card:hover, 
+        .benefit-container-card:hover,
+        .faq-item:hover,
+        .benefit-card:hover,
+        .summary-item:hover {
+            /* タッチデバイスでは動きを完全に削除 */
             transform: none;
             box-shadow: var(--shadow-md);
         }
         
-        .btn:active, .service-card:active, .benefit-container-card:active {
+        .btn:active, 
+        .service-card:active, 
+        .benefit-container-card:active,
+        .faq-item:active,
+        .benefit-card:active,
+        .summary-item:active {
             transform: scale(0.98);
             transition: transform 0.1s ease;
         }
@@ -2538,6 +2500,19 @@
         .differentiator-item:active .differentiator-icon {
             color: var(--white);
             background: var(--gradient-primary);
+        }
+        
+        /* FAQ要素のタッチ対応 */
+        .faq-category:hover {
+            transform: none;
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .faq-category:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
         }
     }
     
@@ -2605,7 +2580,7 @@
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ ヘッダー Component - モバイルでも常に表示する改善バージョン
+    ▼ ヘッダー Component - PC版ハンバーガーメニュー削除改善版
     ======================================================== -->
     <header class="header" id="header">
         <div class="container">
@@ -2646,9 +2621,8 @@
                 </ul>
             </nav>
             
-            <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
+            <!-- PC版ではハンバーガーボタンを完全削除 -->
+            <!-- ハンバーガーボタンはモバイルのみ表示（hamburger-visibleを使用） -->
             
             <div class="header-backdrop" id="header-backdrop"></div>
         </div>
@@ -2673,7 +2647,7 @@
             </h1>
             
             <p class="faq-hero-description">
-                AI活用に関するよくある質問と回答を掲載しています。<br>
+                AI活用に関するよくある質問と回答を掲載しています。<br class="hide-mobile">
                 専門知識がなくてもAIを活用して業務効率化、コスト削減、売上アップを実現する方法をご紹介します。
             </p>
             
@@ -3072,7 +3046,7 @@
                 </div>
                 
                 <!-- ========================================================
-                ▼ メインCTAセクション Component - 行動喚起強化
+                ▼ メインCTAセクション Component - CTA優先度改善版
                 ======================================================== -->
                 <div class="faq-cta">
                     <div class="faq-cta-pattern"></div>
@@ -3082,15 +3056,17 @@
                     <div class="faq-cta-content">
                         <h2 class="faq-cta-title">まずは無料相談から始めませんか？</h2>
                         <p class="faq-cta-text">
-                            貴社の課題に合わせたAI活用の提案をいたします。<br>
+                            貴社の課題に合わせたAI活用の提案をいたします。<br class="hide-mobile">
                             プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。
                         </p>
                         <div class="faq-cta-buttons">
+                            <!-- 無料相談を強調（プライマリボタン） -->
                             <a href="contact.html" class="btn btn-primary btn-lg btn-icon-right">
                                 <span>無料相談を申し込む</span>
                                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             </a>
-                            <a href="services.html" class="btn btn-outline btn-lg">
+                            <!-- サービス詳細を控えめに（セカンダリボタン） -->
+                            <a href="services.html" class="btn btn-secondary btn-lg">
                                 <span>サービス詳細を見る</span>
                             </a>
                         </div>
@@ -3224,7 +3200,7 @@
 </button>
 
 <!-- ========================================================
-▼ メインスクリプト Component - パフォーマンス向上・最適化
+▼ メインスクリプト Component - 改善版（PC版ハンバーガーメニュー削除対応）
 ======================================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -3256,13 +3232,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ========================================================
-    // ▼ モバイルUI/UXの全面改善 Component
+    // ▼ ヘッダー・ナビゲーション Component - PC版ハンバーガーメニュー削除改善版
     // ========================================================
     
     const header = document.getElementById('header');
     const mobileLogoTrigger = document.getElementById('mobile-logo-trigger');
     const hamburgerVisible = document.getElementById('hamburger-visible');
-    const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('nav');
     const headerBackdrop = document.getElementById('header-backdrop');
     
@@ -3285,22 +3260,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // ハンバーガーボタン表示版のクリックイベント - 改善版
     if (hamburgerVisible) {
         hamburgerVisible.addEventListener('click', function() {
-            if (hamburger) {
-                // 内部のハンバーガーボタンと同じ動作をさせる
-                const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-                hamburger.setAttribute('aria-expanded', !expanded);
-                
-                if (nav) nav.classList.toggle('active');
-                if (headerBackdrop) headerBackdrop.classList.toggle('active');
-                
-                // アイコン変更
-                if (expanded) {
-                    hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                } else {
-                    hamburger.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                    hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                }
+            // nav の表示状態を切り替え
+            const isNavActive = nav && nav.classList.contains('active');
+            
+            if (nav) nav.classList.toggle('active');
+            if (headerBackdrop) headerBackdrop.classList.toggle('active');
+            
+            // アイコン変更
+            if (isNavActive) {
+                hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+            } else {
+                hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
             }
         });
     }
@@ -3354,54 +3324,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // モバイルメニュー - 改善版
-    if (hamburger && nav) {
-        hamburger.addEventListener('click', function() {
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
-            
-            nav.classList.toggle('active');
-            if (headerBackdrop) headerBackdrop.classList.toggle('active');
-            
-            // アイコン変更（ハンバーガーボタン両方）
-            if (expanded) {
-                this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-            } else {
-                this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-                if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
-            }
-        });
-        
-        // 背景クリックでメニューを閉じる
-        if (headerBackdrop) {
-            headerBackdrop.addEventListener('click', function() {
-                nav.classList.remove('active');
-                headerBackdrop.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-            });
-        }
-        
-        // ナビリンククリックでメニューを閉じる - モバイル最適化版
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    nav.classList.remove('active');
-                    if (headerBackdrop) headerBackdrop.classList.remove('active');
-                    if (hamburger) {
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
-                    if (hamburgerVisible) {
-                        hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                    }
-                }
-            });
+    // 背景クリックでメニューを閉じる
+    if (headerBackdrop) {
+        headerBackdrop.addEventListener('click', function() {
+            if (nav) nav.classList.remove('active');
+            headerBackdrop.classList.remove('active');
+            if (hamburgerVisible) hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
         });
     }
+    
+    // ナビリンククリックでメニューを閉じる - モバイル最適化版
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                if (nav) nav.classList.remove('active');
+                if (headerBackdrop) headerBackdrop.classList.remove('active');
+                if (hamburgerVisible) {
+                    hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                }
+            }
+        });
+    });
     
     // ========================================================
     // ▼ FAQ機能 Component - 強化版
@@ -3909,10 +3853,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nav && nav.classList.contains('active')) {
                 nav.classList.remove('active');
                 if (headerBackdrop) headerBackdrop.classList.remove('active');
-                if (hamburger) {
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                }
                 if (hamburgerVisible) {
                     hamburgerVisible.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 }
