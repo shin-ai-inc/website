@@ -15,10 +15,10 @@
     <meta name="keywords" content="AI活用事例, 業界別AI, AIエージェント開発, RAG構築, 福祉AI, 教育AI, 建設AI, 製造業AI, 小売AI, 金融AI, AI導入事例, ビジネスAI, 業務効率化, ShinAI">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="ShinAI - AI System Development Company">
-    <meta name="theme-color" content="#3A5FEB">
+    <meta name="theme-color" content="#FFFFFF">
     <meta name="msapplication-TileColor" content="#3A5FEB">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="light-content">
     
     <!-- AI検索エンジン最適化強化 -->
     <meta name="google-site-verification" content="AI-optimized-verification-token">
@@ -213,7 +213,7 @@
     // === component-split: CriticalPathCSS ===
     COMPONENT: 高速表示最適化CSS
     機能: レスポンシブ完全対応、情報密度最適化
-    特徴: contact.html準拠、PC版ハンバーガー削除、パフォーマンス強化
+    特徴: FAQ準拠PC版ヘッダー、モバイル白背景、プロフェッショナル仕様
     ==============================================
     -->
     <style>
@@ -256,16 +256,7 @@
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06));
         --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
-        
-        /* 
-        ==============================================
-        // === component-split: ImprovedCTAGradient ===
-        COMPONENT: 楽しめるグラデーション強化
-        機能: CTAセクションの魅力的なカラーアニメーション
-        特徴: 色変化を活かした鮮やかで楽しいデザイン
-        ==============================================
-        */
-        --gradient-cta-enhanced: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD, #98D8C8);
+        --gradient-cta-magical: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
         
         /* 業界別カラーシステム */
         --welfare-primary: #4671FF;
@@ -323,17 +314,10 @@
         --space-12: 3rem;
         --space-16: 4rem;
         
-        /* 
-        ==============================================
-        // === component-split: ImprovedHeaderHeight ===
-        COMPONENT: ヘッダー高さ最適化
-        機能: PC版縦幅縮小、モバイル背景完全ホワイト化
-        特徴: PC版のみ高さ調整、モバイル視認性向上
-        ==============================================
-        */
-        --header-height: 58px; /* 【改善】PC版縦幅縮小：65px → 58px */
-        --header-height-mobile: 40px; /* モバイル版は維持 */
-        --container-width: 1400px;
+        /* Layout - FAQ準拠のヘッダー設定 */
+        --header-height: 70px;
+        --header-height-mobile: 40px;
+        --container-width: 1200px;
         
         /* Border Radius */
         --radius-sm: 4px;
@@ -479,7 +463,7 @@
     }
     
     /* ========================================================
-    ▼ Perfect Responsive Header Component - contact.html準拠・PC版ハンバーガー削除
+    ▼ Perfect Responsive Header Component - FAQ準拠・PC版標準幅
     ======================================================== */
     .header {
         position: fixed;
@@ -487,25 +471,17 @@
         left: 0;
         right: 0;
         z-index: 1000;
-        /* 
-        ==============================================
-        // === component-split: MobileWhiteBackground ===
-        COMPONENT: モバイル完全ホワイト背景
-        機能: スマホ上部時計・電波表示エリアホワイト化
-        特徴: ブルーカラー除去、完全ホワイト統一
-        ==============================================
-        */
-        background: rgba(255, 255, 255, 0.98); /* 完全ホワイト背景 */
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        height: var(--header-height); /* 【改善】PC版縦幅縮小 */
+        height: 70px;
         transition: all 0.2s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .header.scrolled {
-        height: calc(var(--header-height) - 5px); /* 【改善】スクロール時さらに縮小 */
+        height: 65px;
         background: rgba(255, 255, 255, 0.99);
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
     }
@@ -515,8 +491,8 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        padding: 0 1.5rem;
-        max-width: 1400px;
+        padding: 0 2rem;
+        max-width: 1200px;
         margin: 0 auto;
     }
     
@@ -659,11 +635,11 @@
         }
         
         .header {
-            height: var(--header-height-mobile);
+            height: 40px;
         }
         
         .header.scrolled {
-            height: calc(var(--header-height-mobile) - 2px);
+            height: 38px;
         }
         
         .header-inner {
@@ -969,202 +945,6 @@
         }
     }
 
-    /* 
-    ==============================================
-    // === component-split: ImprovedBenefitsContainer ===
-    COMPONENT: 改善された3つのカードコンテナ
-    機能: バランス改善、30万円表示削除、視覚的統一
-    特徴: レスポンシブ最適化、情報密度向上
-    ==============================================
-    */
-    .benefits-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-        align-items: stretch; /* 【改善】カード高さ統一 */
-    }
-
-    .benefit-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.08);
-        padding: 2.5rem 2rem; /* 【改善】パディング調整でバランス向上 */
-        position: relative;
-        transition: all 0.15s ease;
-        overflow: hidden;
-        border: 1px solid rgba(58, 95, 235, 0.08);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* 【改善】コンテンツ分散配置 */
-    }
-
-    .benefit-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--gradient-primary);
-        z-index: 1;
-    }
-
-    .benefit-card:hover {
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.12);
-        border-color: rgba(58, 95, 235, 0.15);
-        transform: translateY(-3px); /* 【改善】ホバー効果強化 */
-    }
-
-    .benefit-icon {
-        width: 60px;
-        height: 60px;
-        background: var(--gradient-primary);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 1.5rem;
-        color: var(--white);
-        position: relative;
-        z-index: 1;
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        transition: all 0.15s ease;
-    }
-
-    .benefit-card:hover .benefit-icon {
-        transform: scale(1.05); /* 【改善】控えめなスケール */
-    }
-
-    .benefit-content {
-        flex-grow: 1; /* 【改善】コンテンツ領域拡張 */
-        display: flex;
-        flex-direction: column;
-    }
-
-    .benefit-content h4 {
-        font-size: 1.3rem; /* 【改善】タイトルサイズ統一 */
-        font-weight: 700;
-        margin-bottom: 1rem; /* 【改善】間隔調整 */
-        color: var(--dark);
-        line-height: 1.3;
-    }
-
-    .benefit-content p {
-        color: var(--gray);
-        line-height: 1.7; /* 【改善】読みやすさ向上 */
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 0.95rem; /* 【改善】文字サイズ統一 */
-        text-align: left;
-        flex-grow: 1; /* 【改善】テキスト領域拡張 */
-    }
-
-    .benefit-stat {
-        background: var(--gradient-card);
-        padding: 1.2rem; /* 【改善】パディング調整 */
-        border-radius: var(--radius-md);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: auto;
-        min-height: 80px; /* 【改善】統計表示エリア高さ統一 */
-        justify-content: center;
-    }
-
-    /* 【改善】第1カード：プロトタイプ先行開発 */
-    .benefit-card:nth-child(1) .benefit-icon {
-        background: linear-gradient(135deg, #3A5FEB, #5B7BFF);
-    }
-
-    .benefit-card:nth-child(1) .benefit-stat {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(91, 123, 255, 0.1));
-    }
-
-    /* 【改善】第2カード：完全伴走型サポート */
-    .benefit-card:nth-child(2) .benefit-icon {
-        background: linear-gradient(135deg, #00C9A7, #20E7C4);
-    }
-
-    .benefit-card:nth-child(2) .benefit-stat {
-        background: linear-gradient(135deg, rgba(0, 201, 167, 0.1), rgba(32, 231, 196, 0.1));
-    }
-
-    /* 【改善】第3カード：業界特化カスタマイズ */
-    .benefit-card:nth-child(3) .benefit-icon {
-        background: linear-gradient(135deg, #FF8A00, #FFA94D);
-    }
-
-    .benefit-card:nth-child(3) .benefit-stat {
-        background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 77, 0.1));
-    }
-
-    .stat-value {
-        font-size: 2.2rem; /* 【改善】数値サイズ統一 */
-        font-weight: 800;
-        line-height: 1;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .stat-percent {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--primary);
-    }
-
-    .stat-label {
-        font-size: 0.85rem; /* 【改善】ラベルサイズ統一 */
-        color: var(--gray);
-        margin-top: 0.3rem;
-        text-align: center;
-        font-weight: 500;
-    }
-
-    .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        padding: 2rem;
-    }
-
-    /* モバイル対応改善 */
-    @media (max-width: 992px) {
-        .benefits-container {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .benefits-container {
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-        }
-        
-        .benefit-card {
-            padding: 2rem 1.5rem;
-        }
-        
-        .benefit-content h4 {
-            font-size: 1.2rem;
-        }
-        
-        .benefit-content p {
-            font-size: 0.9rem;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-        }
-    }
-
     /* ========================================================
     ▼ Industries Grid Component
     ======================================================== */
@@ -1175,14 +955,6 @@
         margin-top: 2rem;
     }
     
-    /* 
-    ==============================================
-    // === component-split: ImprovedIndustryCard ===
-    COMPONENT: 改善された業界カード
-    機能: 無料相談ボタン削除、視覚的統一
-    特徴: CTAボタン整理、情報密度向上
-    ==============================================
-    */
     .industry-card {
         background: var(--white);
         border-radius: var(--radius-lg);
@@ -1200,7 +972,7 @@
     .industry-card:hover {
         box-shadow: 0 12px 30px rgba(58, 95, 235, 0.12);
         border-color: rgba(58, 95, 235, 0.15);
-        transform: translateY(-2px); /* 【改善】控えめなホバー効果 */
+        transform: translateY(-5px);
     }
 
     .industry-card::before {
@@ -1306,7 +1078,7 @@
     .industry-description {
         color: var(--gray);
         line-height: 1.6;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        margin: 0 0 1.2rem 0;
         flex-grow: 1;
         font-size: 0.9rem;
         text-align: left;
@@ -1315,7 +1087,7 @@
     .industry-features {
         list-style: none;
         padding: 0;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        margin: 0 0 1.2rem 0;
     }
 
     .industry-feature {
@@ -1360,24 +1132,17 @@
         color: var(--finance-primary);
     }
 
-    /* 
-    ==============================================
-    // === component-split: SimplifiedIndustryFooter ===
-    COMPONENT: 簡略化された業界カードフッター
-    機能: 無料相談ボタン削除、シンプル化
-    特徴: 詳細ボタンのみ保持、視覚的統一
-    ==============================================
-    */
     .industry-footer {
         margin-top: auto;
         display: flex;
         gap: 0.8rem;
         align-items: center;
-        justify-content: center; /* 【改善】中央配置 */
+        justify-content: center;
+        padding-top: 1rem;
     }
 
     /* ========================================================
-    ▼ Button System Component - CTA優先度調整
+    ▼ Button System Component
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -1410,23 +1175,6 @@
         color: var(--white);
     }
     
-    /* CTA優先度調整: 無料相談を強調 */
-    .btn-consultation {
-        background: var(--gradient-primary);
-        color: var(--white);
-        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.25);
-        font-weight: 700;
-        font-size: 0.9rem;
-        padding: 0.7rem 1.4rem;
-    }
-    
-    .btn-consultation:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(58, 95, 235, 0.3);
-        color: var(--white);
-    }
-    
-    /* CTA優先度調整: サービス詳細を控えめに */
     .btn-outline {
         background: transparent;
         color: var(--gray);
@@ -1478,37 +1226,6 @@
     
     .btn-icon-right:hover i {
         transform: translateX(4px);
-    }
-
-    /* 業界別のボタンカラー */
-    .industry-card[data-industry="welfare"] .btn-outline {
-        color: var(--welfare-primary);
-        border-color: rgba(70, 113, 255, 0.25);
-    }
-
-    .industry-card[data-industry="education"] .btn-outline {
-        color: var(--education-primary);
-        border-color: rgba(255, 138, 0, 0.25);
-    }
-
-    .industry-card[data-industry="construction"] .btn-outline {
-        color: var(--construction-primary);
-        border-color: rgba(50, 168, 82, 0.25);
-    }
-
-    .industry-card[data-industry="manufacturing"] .btn-outline {
-        color: var(--manufacturing-primary);
-        border-color: rgba(0, 201, 167, 0.25);
-    }
-
-    .industry-card[data-industry="retail"] .btn-outline {
-        color: var(--retail-primary);
-        border-color: rgba(255, 87, 87, 0.25);
-    }
-
-    .industry-card[data-industry="finance"] .btn-outline {
-        color: var(--finance-primary);
-        border-color: rgba(255, 186, 0, 0.25);
     }
 
     /* ========================================================
@@ -1831,18 +1548,12 @@
         color: var(--accent);
     }
 
-    /* 
-    ==============================================
-    // === component-split: EnhancedCTASection ===
-    COMPONENT: 楽しめるグラデーションCTAセクション
-    機能: 色変化を活かした魅力的なデザイン
-    特徴: アニメーション強化、視覚的インパクト向上
-    ==============================================
-    */
+    /* ========================================================
+    ▼ Magical CTA Section Component - 改善版グラデーション
+    ======================================================== */
     .cta-section {
-        background: var(--gradient-cta-enhanced);
+        background: var(--gradient-cta-magical);
         background-size: 400% 400%;
-        animation: gradientAnimation 15s ease infinite;
         color: var(--white);
         padding: 4rem 0;
         position: relative;
@@ -1850,10 +1561,10 @@
         text-align: center;
         margin-top: 0;
         border-top: none;
+        animation: magicalGradient 15s ease infinite;
     }
 
-    /* 【改善】楽しめるグラデーションアニメーション */
-    @keyframes gradientAnimation {
+    @keyframes magicalGradient {
         0% {
             background-position: 0% 50%;
         }
@@ -1881,17 +1592,16 @@
     .cta-title {
         margin-bottom: 1.5rem;
         color: var(--white);
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 【改善】影強化 */
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         font-size: clamp(1.6rem, 4vw, 2.2rem);
         line-height: 1.3;
-        font-weight: 800; /* 【改善】フォントウェイト強化 */
     }
 
     .cta-title .text-accent {
-        color: #FFE4B5; /* 【改善】コントラスト向上 */
+        color: #FFB347;
         background: none;
-        -webkit-text-fill-color: #FFE4B5;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        -webkit-text-fill-color: #FFB347;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         font-weight: var(--font-weight-black);
     }
 
@@ -1900,7 +1610,7 @@
         margin-bottom: 2.5rem;
         opacity: 0.95;
         line-height: 1.8;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); /* 【改善】影強化 */
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .cta-buttons {
@@ -1980,7 +1690,6 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* 【改善】パーティクルエフェクト強化 */
     .cta-patterns {
         position: absolute;
         top: 0;
@@ -1988,7 +1697,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        opacity: 0.15; /* 【改善】透明度調整 */
+        opacity: 0.1;
         z-index: var(--z-negative);
     }
     
@@ -2000,29 +1709,29 @@
     }
     
     .cta-pattern:nth-child(1) {
-        width: 300px; /* 【改善】サイズ増加 */
-        height: 300px;
-        top: -150px;
-        left: -100px;
-        animation-duration: 12s;
+        width: 250px;
+        height: 250px;
+        top: -125px;
+        left: -75px;
+        animation-duration: 10s;
     }
     
     .cta-pattern:nth-child(2) {
-        width: 200px; /* 【改善】サイズ増加 */
-        height: 200px;
-        bottom: -100px;
-        right: 5%;
-        animation-delay: -4s;
-        animation-duration: 14s;
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+        right: 8%;
+        animation-delay: -3s;
+        animation-duration: 12s;
     }
     
     .cta-pattern:nth-child(3) {
-        width: 150px; /* 【改善】サイズ増加 */
-        height: 150px;
-        top: 20%;
-        right: -50px;
-        animation-delay: -8s;
-        animation-duration: 16s;
+        width: 120px;
+        height: 120px;
+        top: 25%;
+        right: -40px;
+        animation-delay: -6s;
+        animation-duration: 14s;
     }
 
     /* ========================================================
@@ -2851,10 +2560,6 @@
         .use-case-content {
             grid-template-columns: 1fr;
         }
-        
-        .benefits-container {
-            grid-template-columns: repeat(2, 1fr);
-        }
     }
 
     @media (max-width: 768px) {
@@ -2894,10 +2599,6 @@
         
         .step {
             gap: 1rem;
-        }
-        
-        .benefits-container {
-            grid-template-columns: 1fr;
         }
         
         .footer-grid {
@@ -3025,11 +2726,6 @@
             font-size: 0.7rem;
             padding: 0.3rem 1rem;
         }
-        
-        .benefit-icon {
-            width: 50px;
-            height: 50px;
-        }
     }
     
     @media (min-width: 1920px) {
@@ -3107,7 +2803,7 @@
     ==============================================
     // === component-split: PerfectResponsiveHeader ===
     COMPONENT: 完全レスポンシブヘッダー
-    機能: contact.html準拠・PC版ハンバーガー削除・モバイル完全対応
+    機能: FAQ準拠・PC版標準幅・モバイル白背景対応
     特徴: 左端ロゴ配置、極小モバイルヘッダー、クリアナビゲーション
     ==============================================
     -->
@@ -3190,323 +2886,6 @@
                         プロトタイプから始める伴走型開発で、確実な成果を実現。<br class="hide-mobile">
                         あらゆる業界の課題に最適化したAIエージェント開発・RAG構築をご提供します。
                     </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 
-        ==============================================
-        // === component-split: IntroSection ===
-        COMPONENT: 導入セクション - 差別化強化
-        ==============================================
-        -->
-        <section class="section" aria-labelledby="intro-title">
-            <div class="container">
-                <div class="section-header animate-in">
-                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
-                    <span class="section-subtitle">ShinAIの強み</span>
-                    <h2 class="heading-lg" id="intro-title">なぜ<span class="highlight">プロトタイプからの伴走型開発</span>が選ばれるのか</h2>
-                    <p class="section-description">
-                        段階的AI導入で、<br>リスクを最小化し確実な成果を実現します
-                    </p>
-                </div>
-                
-                <div class="section-content max-width-800 text-left animate-in">
-                    <p>多くのAI導入プロジェクトが失敗する理由は、いきなり大規模な開発を始めることにあります。ShinAIは「プロトタイプからの伴走型開発」により、以下の差別化された価値を提供します：</p>
-                    
-                    <!-- 
-                    ==============================================
-                    // === component-split: ImprovedBenefitsContainer ===
-                    COMPONENT: 改善された3つのカードコンテナ
-                    機能: バランス改善、30万円表示削除、視覚的統一
-                    特徴: レスポンシブ最適化、情報密度向上
-                    ==============================================
-                    -->
-                    <div class="benefits-container">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-seedling" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>プロトタイプ先行開発</h4>
-                                <p>最短2週間で動作する試作品を構築。実際に使って効果を確認してから本格導入を決定できるため、投資リスクを最小化します。プロジェクトの方向性を早期に確認し、成功への確実な道筋を描きます。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">2</span><span class="stat-label">週間で試作完成</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-handshake" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>完全伴走型サポート</h4>
-                                <p>技術導入だけでなく、組織への定着まで継続支援。専門知識がなくても安心してAI活用を進められる体制を構築し、長期的な成功をサポートします。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">100</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">継続支援率</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-industry" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>業界特化カスタマイズ</h4>
-                                <p>福祉・教育・建設・製造・小売・金融など、各業界の特性と規制に完全対応したAIソリューションを開発。業界固有の課題を深く理解した専門的アプローチを提供します。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">6</span><span class="stat-label">業界専門対応</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-card">
-                        <h3 class="heading-md text-center mb-4">自社プロダクト「<span class="text-gradient">アイプロ</span>」で実証済みの技術力</h3>
-                        <p class="text-center text-left">新規事業企画書作成AIツール「アイプロ」は、中小企業を中心に高い評価をいただいており、ShinAIの技術力とユーザビリティ設計の実力を証明しています。この実績をもとに、お客様の業界に最適化したAIソリューションを開発いたします。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 
-        ==============================================
-        // === component-split: IndustriesNavigation ===
-        COMPONENT: 業界ナビゲーション
-        ==============================================
-        -->
-        <section class="section section-bg-light" aria-labelledby="industries-title">
-            <div class="container">
-                <div class="section-header animate-in">
-                    <span class="section-subtitle">対応業界</span>
-                    <h2 class="heading-lg" id="industries-title">業界特化型<span class="highlight">AIソリューション</span></h2>
-                    <p class="section-description">各業界の特性を深く理解し、最適なAI活用方法をご提案します</p>
-                </div>
-                
-                <!-- 
-                ==============================================
-                // === component-split: IndustryTabs ===
-                COMPONENT: 業界タブナビゲーション
-                ==============================================
-                -->
-                <div class="industry-tabs animate-in" role="tablist" aria-label="業界カテゴリ">
-                    <a href="#welfare" class="industry-tab active" role="tab" aria-selected="true" aria-controls="welfare-content" id="welfare-tab">福祉・介護</a>
-                    <a href="#education" class="industry-tab" role="tab" aria-selected="false" aria-controls="education-content" id="education-tab">教育・研修</a>
-                    <a href="#construction" class="industry-tab" role="tab" aria-selected="false" aria-controls="construction-content" id="construction-tab">建設業</a>
-                    <a href="#manufacturing" class="industry-tab" role="tab" aria-selected="false" aria-controls="manufacturing-content" id="manufacturing-tab">製造業</a>
-                    <a href="#retail" class="industry-tab" role="tab" aria-selected="false" aria-controls="retail-content" id="retail-tab">小売・EC</a>
-                    <a href="#finance" class="industry-tab" role="tab" aria-selected="false" aria-controls="finance-content" id="finance-tab">金融・保険</a>
-                </div>
-                
-                <!-- 
-                ==============================================
-                // === component-split: IndustriesGrid ===
-                COMPONENT: 業界カードグリッド
-                ==============================================
-                -->
-                <div class="industries-grid animate-in" aria-label="業界別AIソリューション">
-                    <!-- 福祉・介護 -->
-                    <div class="industry-card" id="welfare" data-industry="welfare" role="tabpanel" aria-labelledby="welfare-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">福祉・介護</h3>
-                        </div>
-                        <p class="industry-description">人手不足と高齢化社会に直面する福祉・介護分野でのAI活用により、ケアの質向上と職員の負担軽減を両立します。</p>
-                        <ul class="industry-features" aria-label="福祉・介護分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                記録支援AI：介護記録や申請書類の作成を効率化
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                高齢者向け会話アシスタント：孤独軽減と見守り支援
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                介護スタッフ支援AI：業務効率化と負担軽減
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                異常検知・予測システム：事故予防と早期対応
-                            </li>
-                        </ul>
-                        <!-- 
-                        ==============================================
-                        // === component-split: SimplifiedIndustryFooter ===
-                        COMPONENT: 簡略化された業界カードフッター
-                        機能: 無料相談ボタン削除、シンプル化
-                        特徴: 詳細ボタンのみ保持、視覚的統一
-                        ==============================================
-                        -->
-                        <div class="industry-footer">
-                            <a href="#welfare-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 教育・研修 -->
-                    <div class="industry-card" id="education" data-industry="education" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">教育・研修</h3>
-                        </div>
-                        <p class="industry-description">個別最適化された学習体験を提供し、教育の質と効率を向上させるAIソリューションで、一人ひとりの可能性を最大化します。</p>
-                        <ul class="industry-features" aria-label="教育・研修分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                対話型学習支援：生徒一人ひとりに合わせた学習プラン
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                研修用AIメンター：企業研修の効率化と個別化
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                学習進捗分析ツール：効果測定と改善提案
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                教材作成支援：カリキュラム設計と教材開発の効率化
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#education-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 建設業 -->
-                    <div class="industry-card" id="construction" data-industry="construction" role="tabpanel" aria-labelledby="construction-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-hard-hat" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">建設業</h3>
-                        </div>
-                        <p class="industry-description">安全性向上と技術伝承を支援する建設業界向けAIソリューションで、現場の生産性向上と持続可能な発展を実現します。</p>
-                        <ul class="industry-features" aria-label="建設業分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                安全教育AI：事故事例学習と安全意識向上
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                マニュアル対話支援：現場での迅速な情報アクセス
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                現場情報共有AI：プロジェクト全体の効率化
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                技術伝承支援：熟練技術者のノウハウ継承
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#construction-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 製造業 -->
-                    <div class="industry-card" id="manufacturing" data-industry="manufacturing" role="tabpanel" aria-labelledby="manufacturing-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-industry" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">製造業</h3>
-                        </div>
-                        <p class="industry-description">工場の生産性向上と品質管理の自動化を実現するAIソリューションで、製造プロセスの効率化と競争力強化を支援します。</p>
-                        <ul class="industry-features" aria-label="製造業分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                品質検査AI：外観検査の自動化と不良品検出
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                設備予知保全：故障予測とメンテナンス最適化
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                生産スケジューリング：工場ラインの最適化
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                技術文書管理：製造ノウハウのデジタル化と活用
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#manufacturing-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 小売・EC -->
-                    <div class="industry-card" id="retail" data-industry="retail" role="tabpanel" aria-labelledby="retail-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">小売・EC</h3>
-                        </div>
-                        <p class="industry-description">顧客体験向上と販売効率化を実現する小売・EC業界向けAIソリューションで、パーソナライズされた買い物体験を提供します。</p>
-                        <ul class="industry-features" aria-label="小売・EC分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                パーソナライズ推薦：顧客ごとの最適な商品提案
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                需要予測AI：在庫最適化と欠品防止
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                顧客サポートAI：24時間対応の自動カスタマーサービス
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                価格最適化：競合分析に基づく価格戦略
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#retail-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 金融・保険 -->
-                    <div class="industry-card" id="finance" data-industry="finance" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">
-                        <div class="industry-header">
-                            <div class="industry-icon">
-                                <i class="fas fa-chart-line" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="industry-title">金融・保険</h3>
-                        </div>
-                        <p class="industry-description">リスク評価の精度向上と業務効率化を実現する金融・保険業界向けAIソリューションで、安全性と顧客満足度を高めます。</p>
-                        <ul class="industry-features" aria-label="金融・保険分野のAIソリューション">
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                与信審査AI：データ分析に基づく精度の高いリスク評価
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                不正検知システム：異常取引の早期発見
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                資産運用アドバイザー：最適な投資提案
-                            </li>
-                            <li class="industry-feature">
-                                <i class="fas fa-check" aria-hidden="true"></i>
-                                保険金査定自動化：迅速かつ正確な支払い判断
-                            </li>
-                        </ul>
-                        <div class="industry-footer">
-                            <a href="#finance-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -3851,7 +3230,7 @@
                         <div class="step-content">
                             <h4 class="step-title">プロトタイプ開発</h4>
                             <p class="step-duration">期間: 2週間</p>
-                            <p class="step-description">小規模な試作品を最短2週間で構築します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認。投資対効果を明確にしてから次のステップに進みます。</p>
+                            <p class="step-description">最短2週間で小規模な試作品を構築します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認。投資対効果を明確にしてから次のステップに進みます。</p>
                         </div>
                     </div>
                     
@@ -3887,10 +3266,8 @@
 
         <!-- 
         ==============================================
-        // === component-split: EnhancedCTASection ===
-        COMPONENT: 楽しめるグラデーションCTAセクション
-        機能: 色変化を活かした魅力的なデザイン
-        特徴: アニメーション強化、視覚的インパクト向上
+        // === component-split: MagicalCTASection ===
+        COMPONENT: マジカルグラデーションCTA強調セクション
         ==============================================
         -->
         <section class="cta-section">
@@ -4428,30 +3805,10 @@
                 });
             });
             
-            // ========================================================
-            // ▼ Form Enhancement Component
-            // ========================================================
-            
-            // コンタクトフォーム強化
-            const contactButtons = document.querySelectorAll('.btn-consultation, .btn-consultation-main');
-            contactButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // アニメーション効果
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 100);
-                });
-            });
-            
-            // ========================================================
-            // ▼ Mobile Optimization Component
-            // ========================================================
-            
             // モバイル向け最適化
             if (window.innerWidth <= 768) {
                 // タッチイベント最適化
-                document.querySelectorAll('.industry-card, .benefit-card, .use-case').forEach(card => {
+                document.querySelectorAll('.industry-card, .use-case').forEach(card => {
                     card.addEventListener('touchstart', function() {
                         this.style.transform = 'scale(0.98)';
                     });
@@ -4465,10 +3822,6 @@
                 document.body.style.webkitOverflowScrolling = 'touch';
             }
             
-            // ========================================================
-            // ▼ Analytics and Tracking Component
-            // ========================================================
-            
             // パフォーマンス計測
             if ('performance' in window) {
                 window.addEventListener('load', function() {
@@ -4481,32 +3834,20 @@
                 });
             }
             
-            // ========================================================
-            // ▼ Error Handling Component
-            // ========================================================
-            
             // グローバルエラーハンドリング
             window.addEventListener('error', function(event) {
                 console.error('JavaScript Error:', event.error);
-                // プロダクション環境では適切なエラーレポーティングサービスに送信
             });
             
-            // Promise rejection handling
             window.addEventListener('unhandledrejection', function(event) {
                 console.error('Unhandled Promise Rejection:', event.reason);
                 event.preventDefault();
             });
             
-            // ========================================================
-            // ▼ Final Initialization Component
-            // ========================================================
-            
             // 最終初期化処理
             setTimeout(() => {
-                // 全てのコンポーネントが読み込まれた後の処理
                 document.body.classList.add('fully-loaded');
                 
-                // カスタムイベント発火
                 const customEvent = new CustomEvent('pageFullyLoaded', {
                     detail: { timestamp: Date.now() }
                 });
@@ -4516,82 +3857,270 @@
             // ブラウザバック対応
             window.addEventListener('pageshow', function(event) {
                 if (event.persisted) {
-                    // ページキャッシュから復帰した場合の処理
                     document.documentElement.classList.add('loaded');
                     document.body.classList.add('fully-loaded');
                 }
             });
         });
-        
-        // ========================================================
-        // ▼ External API Integration Component
-        // ========================================================
-        
-        // サービスワーカー登録（PWA対応） - 本番環境でのみ実行
-        if ('serviceWorker' in navigator && location.protocol === 'https:' && !location.hostname.includes('claude.ai')) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-        
-        // ========================================================
-        // ▼ Theme and Preference Management Component
-        // ========================================================
-        
-        // ダークモード検出と対応
-        if (window.matchMedia) {
-            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            function handleThemeChange(e) {
-                if (e.matches) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                }
-            }
-            
-            mediaQuery.addListener(handleThemeChange);
-            handleThemeChange(mediaQuery);
-        }
-        
-        // ========================================================
-        // ▼ Browser Compatibility Component
-        // ========================================================
-        
-        // Internet Explorer対応（必要に応じて）
-        if (!Element.prototype.matches) {
-            Element.prototype.matches = Element.prototype.msMatchesSelector || 
-                                        Element.prototype.webkitMatchesSelector;
-        }
-        
-        if (!Element.prototype.closest) {
-            Element.prototype.closest = function(s) {
-                var el = this;
-                do {
-                    if (Element.prototype.matches.call(el, s)) return el;
-                    el = el.parentElement || el.parentNode;
-                } while (el !== null && el.nodeType === 1);
-                return null;
-            };
-        }
-        
-        // ========================================================
-        // ▼ Debug and Development Component
-        // ========================================================
-        
-        // 開発環境用デバッグ情報
-        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-            console.log('🚀 ShinAI Industries Page - Development Mode');
-            console.log('📊 Performance Monitoring: Enabled');
-            console.log('🎯 Accessibility Features: Active');
-            console.log('📱 Mobile Optimizations: Applied');
-        }
     </script>
 </body>
 </html>
+
+        <!-- 
+        ==============================================
+        // === component-split: IntroSection ===
+        COMPONENT: 導入セクション - 簡潔化・マーケティング強化
+        ==============================================
+        -->
+        <section class="section" aria-labelledby="intro-title">
+            <div class="container">
+                <div class="section-header animate-in">
+                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
+                    <span class="section-subtitle">ShinAIの強み</span>
+                    <h2 class="heading-lg" id="intro-title">なぜ<span class="highlight">プロトタイプからの伴走型開発</span>が選ばれるのか</h2>
+                    <p class="section-description">
+                        段階的AI導入で、<br>リスクを最小化し確実な成果を実現します
+                    </p>
+                </div>
+                
+                <div class="section-content max-width-800 text-left animate-in">
+                    <p>多くのAI導入プロジェクトが失敗する理由は、いきなり大規模な開発を始めることにあります。ShinAIは「プロトタイプからの伴走型開発」により、確実な成果を実現します。</p>
+                    
+                    <div class="glass-card">
+                        <h3 class="heading-md text-center mb-4">自社プロダクト「<span class="text-gradient">アイプロ</span>」で実証済みの技術力</h3>
+                        <p class="text-center text-left">新規事業企画書作成AIツール「アイプロ」は、中小企業を中心に高い評価をいただいており、ShinAIの技術力とユーザビリティ設計の実力を証明しています。この実績をもとに、お客様の業界に最適化したAIソリューションを開発いたします。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+        ==============================================
+        // === component-split: IndustriesNavigation ===
+        COMPONENT: 業界ナビゲーション
+        ==============================================
+        -->
+        <section class="section section-bg-light" aria-labelledby="industries-title">
+            <div class="container">
+                <div class="section-header animate-in">
+                    <span class="section-subtitle">対応業界</span>
+                    <h2 class="heading-lg" id="industries-title">業界特化型<span class="highlight">AIソリューション</span></h2>
+                    <p class="section-description">各業界の特性を深く理解し、最適なAI活用方法をご提案します</p>
+                </div>
+                
+                <!-- 
+                ==============================================
+                // === component-split: IndustryTabs ===
+                COMPONENT: 業界タブナビゲーション
+                ==============================================
+                -->
+                <div class="industry-tabs animate-in" role="tablist" aria-label="業界カテゴリ">
+                    <a href="#welfare" class="industry-tab active" role="tab" aria-selected="true" aria-controls="welfare-content" id="welfare-tab">福祉・介護</a>
+                    <a href="#education" class="industry-tab" role="tab" aria-selected="false" aria-controls="education-content" id="education-tab">教育・研修</a>
+                    <a href="#construction" class="industry-tab" role="tab" aria-selected="false" aria-controls="construction-content" id="construction-tab">建設業</a>
+                    <a href="#manufacturing" class="industry-tab" role="tab" aria-selected="false" aria-controls="manufacturing-content" id="manufacturing-tab">製造業</a>
+                    <a href="#retail" class="industry-tab" role="tab" aria-selected="false" aria-controls="retail-content" id="retail-tab">小売・EC</a>
+                    <a href="#finance" class="industry-tab" role="tab" aria-selected="false" aria-controls="finance-content" id="finance-tab">金融・保険</a>
+                </div>
+                
+                <!-- 
+                ==============================================
+                // === component-split: IndustriesGrid ===
+                COMPONENT: 業界カードグリッド - CTA削除版
+                ==============================================
+                -->
+                <div class="industries-grid animate-in" aria-label="業界別AIソリューション">
+                    <!-- 福祉・介護 -->
+                    <div class="industry-card" id="welfare" data-industry="welfare" role="tabpanel" aria-labelledby="welfare-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">福祉・介護</h3>
+                        </div>
+                        <p class="industry-description">人手不足と高齢化社会に直面する福祉・介護分野でのAI活用により、ケアの質向上と職員の負担軽減を両立します。</p>
+                        <ul class="industry-features" aria-label="福祉・介護分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                記録支援AI：介護記録や申請書類の作成を効率化
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                高齢者向け会話アシスタント：孤独軽減と見守り支援
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                介護スタッフ支援AI：業務効率化と負担軽減
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                異常検知・予測システム：事故予防と早期対応
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#welfare-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- 教育・研修 -->
+                    <div class="industry-card" id="education" data-industry="education" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">教育・研修</h3>
+                        </div>
+                        <p class="industry-description">個別最適化された学習体験を提供し、教育の質と効率を向上させるAIソリューションで、一人ひとりの可能性を最大化します。</p>
+                        <ul class="industry-features" aria-label="教育・研修分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                対話型学習支援：生徒一人ひとりに合わせた学習プラン
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                研修用AIメンター：企業研修の効率化と個別化
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                学習進捗分析ツール：効果測定と改善提案
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                教材作成支援：カリキュラム設計と教材開発の効率化
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#education-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- 建設業 -->
+                    <div class="industry-card" id="construction" data-industry="construction" role="tabpanel" aria-labelledby="construction-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-hard-hat" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">建設業</h3>
+                        </div>
+                        <p class="industry-description">安全性向上と技術伝承を支援する建設業界向けAIソリューションで、現場の生産性向上と持続可能な発展を実現します。</p>
+                        <ul class="industry-features" aria-label="建設業分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                安全教育AI：事故事例学習と安全意識向上
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                マニュアル対話支援：現場での迅速な情報アクセス
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                現場情報共有AI：プロジェクト全体の効率化
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                技術伝承支援：熟練技術者のノウハウ継承
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#construction-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- 製造業 -->
+                    <div class="industry-card" id="manufacturing" data-industry="manufacturing" role="tabpanel" aria-labelledby="manufacturing-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-industry" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">製造業</h3>
+                        </div>
+                        <p class="industry-description">工場の生産性向上と品質管理の自動化を実現するAIソリューションで、製造プロセスの効率化と競争力強化を支援します。</p>
+                        <ul class="industry-features" aria-label="製造業分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                品質検査AI：外観検査の自動化と不良品検出
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                設備予知保全：故障予測とメンテナンス最適化
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                生産スケジューリング：工場ラインの最適化
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                技術文書管理：製造ノウハウのデジタル化と活用
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#manufacturing-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- 小売・EC -->
+                    <div class="industry-card" id="retail" data-industry="retail" role="tabpanel" aria-labelledby="retail-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">小売・EC</h3>
+                        </div>
+                        <p class="industry-description">顧客体験向上と販売効率化を実現する小売・EC業界向けAIソリューションで、パーソナライズされた買い物体験を提供します。</p>
+                        <ul class="industry-features" aria-label="小売・EC分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                パーソナライズ推薦：顧客ごとの最適な商品提案
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                需要予測AI：在庫最適化と欠品防止
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                顧客サポートAI：24時間対応の自動カスタマーサービス
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                価格最適化：競合分析に基づく価格戦略
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#retail-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- 金融・保険 -->
+                    <div class="industry-card" id="finance" data-industry="finance" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">
+                        <div class="industry-header">
+                            <div class="industry-icon">
+                                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="industry-title">金融・保険</h3>
+                        </div>
+                        <p class="industry-description">リスク評価の精度向上と業務効率化を実現する金融・保険業界向けAIソリューションで、安全性と顧客満足度を高めます。</p>
+                        <ul class="industry-features" aria-label="金融・保険分野のAIソリューション">
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                与信審査AI：データ分析に基づく精度の高いリスク評価
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                不正検知システム：異常取引の早期発見
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                資産運用アドバイザー：最適な投資提案
+                            </li>
+                            <li class="industry-feature">
+                                <i class="fas fa-check" aria-hidden="true"></i>
+                                保険金査定自動化：迅速かつ正確な支払い判断
+                            </li>
+                        </ul>
+                        <div class="industry-footer">
+                            <a href="#finance-case" class="btn btn-outline btn-sm btn-icon-right">詳細を見る <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
