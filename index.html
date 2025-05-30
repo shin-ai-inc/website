@@ -1099,7 +1099,7 @@
     }
     
     /* ========================================================
-    ▼ Hero Differentiators Component - プロフェッショナル配色改善版・レスポンシブ対応・★★★動きを控えめ化★★★
+    ▼ Hero Differentiators Component - プロフェッショナル配色改善版・レスポンシブ対応・★★★動きを控えめ化★★★・透過処理改善版
     ======================================================== */
     .hero-differentiators {
         display: flex;
@@ -1144,6 +1144,8 @@
         background: var(--differentiator-bg-hover);
         border-color: var(--differentiator-border-hover);
         box-shadow: var(--differentiator-shadow-hover);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
     
     @media (hover: none) and (pointer: coarse) {
@@ -1152,6 +1154,8 @@
             color: var(--differentiator-icon-hover);
             border-color: var(--differentiator-border-hover);
             box-shadow: var(--differentiator-shadow-hover);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
     }
     
@@ -1241,6 +1245,8 @@
             padding: 0.9rem 0.4rem;
             border-radius: 10px;
             box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
         
         .differentiator-icon {
@@ -1256,6 +1262,8 @@
             color: var(--differentiator-icon-hover);
             border-color: var(--differentiator-border-hover);
             box-shadow: var(--differentiator-shadow-hover);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         
         .differentiator-title {
@@ -1451,10 +1459,13 @@
         }
     }
     
+    /* ========================================================
+    ▼ Benefit Card Component - 余白調整・改善版
+    ======================================================== */
     .benefit-card {
         background: var(--white);
         border-radius: var(--radius-xl);
-        padding: 1.5rem 1.2rem;
+        padding: 1.2rem 1rem; /* 改善: 1.5rem 1.2rem → 1.2rem 1rem */
         box-shadow: var(--shadow-md);
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         text-align: center;
@@ -1499,7 +1510,7 @@
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        margin: 0 auto 1.2rem;
+        margin: 0 auto 1rem; /* 改善: 0 auto 1.2rem → 0 auto 1rem */
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         box-shadow: 0 6px 20px rgba(58, 95, 235, 0.2);
         flex-shrink: 0;
@@ -1512,7 +1523,7 @@
     
     .benefit-card h4 {
         font-size: 1.1rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.6rem; /* 改善: 0.8rem → 0.6rem */
         font-weight: var(--font-weight-bold);
         transition: color var(--transition-normal) ease;
         flex-shrink: 0;
@@ -1525,11 +1536,12 @@
     .benefit-card p {
         font-size: 0.85rem;
         color: var(--gray);
-        line-height: 1.6;
+        line-height: 1.5; /* 改善: 1.6 → 1.5 */
         flex-grow: 1;
         display: flex;
         align-items: center;
         text-align: left;
+        padding: 0 0.2rem; /* 改善: 追加 */
     }
     
     @media (max-width: 992px) {
@@ -1574,21 +1586,24 @@
         
         .benefit-card {
             min-height: 280px;
-            padding: 1.3rem 1rem;
+            padding: 1rem 0.9rem; /* 改善: 1.3rem 1rem → 1rem 0.9rem */
         }
         
         .benefit-icon {
             width: 50px;
             height: 50px;
             font-size: 1.3rem;
+            margin-bottom: 0.8rem; /* 改善: 調整 */
         }
         
         .benefit-card h4 {
             font-size: 1rem;
+            margin-bottom: 0.5rem; /* 改善: 調整 */
         }
         
         .benefit-card p {
             font-size: 0.8rem;
+            line-height: 1.4; /* 改善: 調整 */
         }
     }
     
@@ -1886,7 +1901,7 @@
         max-width: 700px;
         margin: 0 auto;
         line-height: 1.6;
-        text-align: left;
+        text-align: center; /* 改善: left → center */
     }
     
     @media (max-width: 768px) {
@@ -2031,13 +2046,7 @@
         opacity: 0.95;
         line-height: 1.7;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        text-align: left;
-    }
-    
-    @media (max-width: 768px) {
-        .cta-description {
-            text-align: center;
-        }
+        text-align: center; /* 改善: left → center */
     }
     
     .cta-button {
