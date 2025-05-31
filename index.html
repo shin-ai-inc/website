@@ -382,13 +382,14 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        padding: 0 1.5rem;
+        padding: 0 2rem;
         max-width: 1400px;
         margin: 0 auto;
+        position: relative;
     }
     
     /* ========================================================
-    ▼ Logo Component - スタイリッシュ縮小版・デスクトップ専用改善・モバイル現状維持
+    ▼ Logo Component - スタイリッシュ縮小版・デスクトップ専用改善・モバイル現状維持・左端絶対配置
     ======================================================== */
     .logo {
         display: flex;
@@ -400,6 +401,8 @@
         transition: all 0.2s ease;
         cursor: pointer;
         text-decoration: none;
+        position: absolute;
+        left: 2rem;
     }
     
     .logo:hover {
@@ -424,20 +427,33 @@
     }
     
     /* ========================================================
-    ▼ Desktop Navigation Component - スタイリッシュ縮小版・デスクトップ専用改善・モバイル現状維持
+    ▼ Desktop Navigation Component - スタイリッシュ縮小版・デスクトップ専用改善・プロフェッショナルバランス調整・中央配置・無料相談ボタン分離
     ======================================================== */
     .nav {
         display: none;
         align-items: center;
-        gap: 1.4rem;
+        gap: 1.8rem;
         margin: 0;
         padding: 0;
         height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .nav-cta {
+        display: none;
     }
     
     @media (min-width: 769px) {
         .nav {
             display: flex;
+        }
+        
+        .nav-cta {
+            display: block;
+            position: absolute;
+            right: 2rem;
         }
     }
     
@@ -498,7 +514,7 @@
     }
     
     /* ========================================================
-    ▼ Mobile Hamburger Component - 現状維持・モバイルのみ表示
+    ▼ Mobile Hamburger Component - パソコン版完全非表示・モバイル専用表示
     ======================================================== -->
     .hamburger {
         display: none;
@@ -517,6 +533,12 @@
         justify-content: center;
     }
     
+    @media (min-width: 769px) {
+        .hamburger {
+            display: none !important;
+        }
+    }
+    
     @media (max-width: 768px) {
         .hamburger {
             display: flex;
@@ -532,15 +554,30 @@
         
         .header-inner {
             padding: 0 1rem;
+            justify-content: space-between;
         }
         
         .logo {
             font-size: 0.95rem;
+            position: static;
+            left: auto;
         }
         
         .logo-icon {
             width: 22px;
             height: 22px;
+        }
+        
+        .nav {
+            position: static;
+            left: auto;
+            transform: none;
+        }
+        
+        .nav-cta {
+            display: block;
+            position: static;
+            right: auto;
         }
     }
     
@@ -835,13 +872,13 @@
     }
     
     /* ========================================================
-    ▼ Typography System Component - 視認性向上・全体像把握最適化・改善版・PC版拡大対応・★★★モバイルフォント拡大★★★
+    ▼ Typography System Component - 視認性向上・全体像把握最適化・改善版・PC版拡大対応・★★★モバイルフォント拡大★★★・ヒーローバランス調整
     ======================================================== */
     .heading-xl {
-        font-size: clamp(2rem, 4.5vw, 3.2rem);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
         font-weight: var(--font-weight-black);
-        line-height: 1.1;
-        margin-bottom: var(--space-4);
+        line-height: 1.2;
+        margin-bottom: var(--space-6);
         letter-spacing: -0.02em;
     }
     
@@ -1084,12 +1121,12 @@
     }
     
     /* ========================================================
-    ▼ Hero Description Component - 中央配置完全改善版
+    ▼ Hero Description Component - 中央配置完全改善版・バランス調整
     ======================================================== */
     .hero-description {
         font-size: clamp(1.1rem, 2.2vw, 1.35rem);
         color: var(--gray);
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--space-8);
         line-height: 1.7;
         max-width: 900px;
         margin-left: auto;
@@ -1097,6 +1134,7 @@
         animation: fadeInUp 0.5s ease 0.2s forwards;
         opacity: 0;
         text-align: center;
+        margin-top: var(--space-4);
     }
     
     /* ========================================================
@@ -1106,7 +1144,7 @@
         display: flex;
         justify-content: center;
         gap: 2.5rem;
-        margin: 3rem 0 3.5rem;
+        margin: 3.5rem 0 4rem;
         animation: fadeInUp 0.5s ease 0.3s forwards;
         opacity: 0;
     }
@@ -1242,13 +1280,13 @@
         .differentiator-item {
             max-width: 110px;
             min-width: 110px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.75);
             padding: 0.9rem 0.4rem;
             border-radius: 10px;
             box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .differentiator-icon {
