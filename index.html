@@ -2374,7 +2374,7 @@
     }
 
     /* ========================================================
-    ▼ Footer Component - 改善版・コンパクト化・PC版拡大対応・★★★フォント拡大★★★
+    ▼ Footer Component - 改善版・コンパクト化・PC版拡大対応・★★★フォント拡大★★★・★★★PC版レイアウト修正★★★
     ======================================================== */
     .footer {
         background: var(--dark);
@@ -2566,19 +2566,18 @@
         gap: 1rem;
     }
     
+    /* ★★★ IMPROVEMENT: PC版でコピーライト（左）→リンク（右）の順番修正 ★★★ */
     .footer-copyright {
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.8rem;
-        /* ★★★ IMPROVEMENT: PC版でコピーライトを右下に固定 ★★★ */
-        order: 2;
+        order: 1;
     }
     
     .footer-links-inline {
         display: flex;
         gap: 1.2rem;
         flex-wrap: wrap;
-        /* ★★★ IMPROVEMENT: PC版でリンクを左下に固定 ★★★ */
-        order: 1;
+        order: 2;
     }
     
     .footer-links-inline a {
@@ -2676,7 +2675,12 @@
             text-align: center;
         }
         
+        .footer-copyright {
+            order: 2;
+        }
+        
         .footer-links-inline {
+            order: 1;
             justify-content: center;
             gap: 0.7rem;
         }
@@ -3190,7 +3194,7 @@
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ Perfect Responsive Header Component - FAQ準拠・改善版・PC/モバイル完全対応
+    ▼ Perfect Responsive Header Component - FAQ準拠・改善版・PC/モバイル完全対応・★★★会社紹介項目追加★★★
     ======================================================== -->
     <header class="header" id="header">
         <div class="header-inner">
@@ -3202,11 +3206,14 @@
                 <span>ShinAI</span>
             </a>
             
-            <!-- Desktop Navigation Component - PC専用 -->
+            <!-- Desktop Navigation Component - PC専用・★★★会社紹介項目追加★★★ -->
             <nav aria-label="メインナビゲーション">
                 <ul class="nav" id="nav">
                     <li class="nav-item">
                         <a href="index.html" class="nav-link active" aria-current="page">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">会社紹介</a>
                     </li>
                     <li class="nav-item">
                         <a href="services.html" class="nav-link">サービス</a>
@@ -3592,7 +3599,7 @@
     </main>
 
     <!-- ========================================================
-    ▼ Footer Component - 改善版・コンパクト化 & AI最適化
+    ▼ Footer Component - 改善版・コンパクト化 & AI最適化・★★★PC版レイアウト修正★★★
     ======================================================== -->
     <footer class="footer">
         <div class="container">
@@ -3635,6 +3642,7 @@
                 <div>
                     <h4 class="footer-heading">会社情報</h4>
                     <ul class="footer-links">
+                        <li><a href="about.html">会社紹介</a></li>
                         <li><a href="services.html">サービス一覧</a></li>
                         <li><a href="industries.html">AI活用事例</a></li>
                         <li><a href="faq.html">よくある質問</a></li>
