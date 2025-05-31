@@ -425,7 +425,7 @@
     }
     
     /* ========================================================
-    ▼ Desktop Navigation Component - プロフェッショナルバランス調整・中央配置改善
+    ▼ Desktop Navigation Component - プロフェッショナル右寄り配置・CTAボタン削除
     ======================================================== */
     .nav {
         display: none;
@@ -434,28 +434,11 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        flex: 1;
-        justify-content: center;
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-    
-    .nav-cta {
-        display: none;
-        align-items: center;
-        flex-shrink: 0;
-    }
-    
-    .mobile-cta {
-        display: none;
+        margin-left: auto;
     }
     
     @media (min-width: 769px) {
         .nav {
-            display: flex;
-        }
-        
-        .nav-cta {
             display: flex;
         }
     }
@@ -490,30 +473,6 @@
     .nav-link:hover::after,
     .nav-link.active::after {
         width: 100%;
-    }
-    
-    .btn-header-consultation {
-        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
-        color: white;
-        padding: 0.4rem 0.8rem;
-        border-radius: 18px;
-        font-weight: 600;
-        font-size: 0.8rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        white-space: nowrap;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-    }
-    
-    .btn-header-consultation:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.35);
-        color: white;
     }
     
     /* ========================================================
@@ -574,28 +533,6 @@
             justify-content: flex-start;
         }
         
-        .nav-cta {
-            display: none;
-        }
-        
-        .mobile-cta {
-            display: block;
-            margin: 1rem 0 0;
-            width: 100%;
-        }
-        
-        .mobile-cta .btn-header-consultation {
-            width: 100%;
-            justify-content: center;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.85rem;
-        }
-    }n-header-consultation {
-            width: 100%;
-            justify-content: center;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.85rem;
-        }
     }
     
     .hamburger:hover {
@@ -605,7 +542,7 @@
     }
     
     /* ========================================================
-    ▼ Mobile Navigation Component - 現状維持・モバイル専用メニュー・CTA調整
+    ▼ Mobile Navigation Component - モバイル専用メニュー・CTAボタン削除版
     ======================================================== -->
     @media (max-width: 768px) {
         .nav {
@@ -645,23 +582,6 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.03);
             font-size: 0.9rem;
             display: block;
-        }
-        
-        .nav-cta {
-            display: none;
-        }
-        
-        .mobile-cta {
-            display: block;
-            margin: 1rem 0 0;
-            width: 100%;
-        }
-        
-        .mobile-cta .btn-header-consultation {
-            width: 100%;
-            justify-content: center;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.85rem;
         }
     }
     </style>
@@ -3237,7 +3157,7 @@
                 <span>ShinAI</span>
             </a>
             
-            <!-- Desktop Navigation Component - プロフェッショナルバランス改善版 -->
+            <!-- Desktop Navigation Component - プロフェッショナル右寄り配置・CTAボタン削除版 -->
             <nav aria-label="メインナビゲーション">
                 <ul class="nav" id="nav">
                     <li class="nav-item">
@@ -3258,24 +3178,10 @@
                     <li class="nav-item">
                         <a href="contact.html" class="nav-link">お問い合わせ</a>
                     </li>
-                    <li class="mobile-cta">
-                        <a href="contact.html" class="btn-header-consultation">
-                            <i class="fas fa-comment-dots"></i>
-                            <span>無料相談</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             
-            <!-- CTA Button Component - デスクトップ専用・独立配置 -->
-            <div class="nav-cta">
-                <a href="contact.html" class="btn-header-consultation">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>無料相談</span>
-                </a>
-            </div>
-            
-            <!-- Mobile Hamburger Component - 現状維持・モバイル専用・コンパクト化 -->
+            <!-- Mobile Hamburger Component - モバイル専用・デスクトップ非表示 -->
             <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
