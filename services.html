@@ -10,10 +10,10 @@
     <meta name="keywords" content="AI導入支援, AIエージェント, RAG構築, プロトタイプ開発, 伴走型開発, 生成AI, LLM, DX推進">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ShinAI">
-    <meta name="theme-color" content="#3A5FEB">
-    <meta name="msapplication-TileColor" content="#3A5FEB">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- ========================================================
     ▼ OGP Settings Component
@@ -159,27 +159,254 @@
     }
     
     /* ========================================================
-    ▼ Mobile Header Optimization Component - Compact Design
+    ▼ Professional Header Component - Enhanced Stylish Design with Proper Balance
     ======================================================== */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        height: 50px;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .header.scrolled {
+        height: 45px;
+        background: rgba(255, 255, 255, 0.99);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 1.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    /* ========================================================
+    ▼ Logo Component - Professional Balance Enhancement
+    ======================================================== */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #0f172a;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .logo:hover {
+        color: #3A5FEB;
+    }
+    
+    .logo-icon {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        background: transparent;
+        overflow: hidden;
+    }
+    
+    .logo-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    /* ========================================================
+    ▼ Desktop Navigation Component - Stylish Enhanced Design
+    ======================================================== */
+    .nav {
+        display: none;
+        align-items: center;
+        gap: 1.4rem;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    
+    @media (min-width: 769px) {
+        .nav {
+            display: flex;
+        }
+    }
+    
+    .nav-link {
+        color: #0f172a;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        padding: 0.3rem 0;
+        font-size: 0.8rem;
+        position: relative;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        transition: width 0.2s ease;
+        border-radius: 2px;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        color: #3A5FEB;
+    }
+    
+    .nav-link:hover::after, .nav-link.active::after {
+        width: 100%;
+    }
+    
+    .btn-header-consultation {
+        background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        white-space: nowrap;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        letter-spacing: 0.01em;
+    }
+    
+    .btn-header-consultation:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(58, 95, 235, 0.35);
+        color: white;
+    }
+    
+    /* ========================================================
+    ▼ Mobile Hamburger Component - About.html Unified Design
+    ======================================================== -->
+    .hamburger {
+        display: none;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        color: #0f172a;
+        font-size: 0.85rem;
+        cursor: pointer;
+        padding: 0.3rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+    }
+    
+    .hamburger:hover {
+        color: #3A5FEB;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* ========================================================
+    ▼ Mobile Navigation Component - About.html Unified Design
+    ======================================================== -->
     @media (max-width: 768px) {
         .header {
-            height: 50px !important; /* 改善: ヘッダー高さを50pxに縮小 */
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            transform: translateY(0);
+            height: 40px;
+        }
+        
+        .header.scrolled {
+            height: 38px;
+        }
+        
+        .header-inner {
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            font-size: 0.85rem;
+        }
+        
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .nav {
             position: fixed;
             top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            flex-direction: column;
+            gap: 0;
+            transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 45px 1rem 1rem;
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav.active {
+            right: 0;
+            display: flex;
+        }
+        
+        .nav-item {
+            width: 100%;
+            margin-bottom: 0.2rem;
+        }
+        
+        .nav-link {
+            width: 100%;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            font-size: 0.85rem;
+            display: block;
+        }
+        
+        .nav-cta {
+            margin: 1rem 0 0;
             width: 100%;
         }
         
-        /* ハンバーガーメニューをコンパクトに */
-        .hamburger {
-            width: 36px !important; /* 改善: 36×36pxのコンパクト設計 */
-            height: 36px !important;
-            position: fixed;
-            top: 7px;
-            right: 10px;
-            z-index: 1003;
+        .btn-header-consultation {
+            width: 100%;
+            justify-content: center;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.8rem;
         }
     }
     </style>
@@ -223,15 +450,15 @@
         /* Shadows */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
         --shadow-sm: 0 2px 5px rgba(15, 23, 42, 0.07);
-        --shadow-md: 0 5px 12px rgba(15, 23, 42, 0.06); /* 改善: 軽量化 */
-        --shadow-lg: 0 8px 20px rgba(15, 23, 42, 0.08); /* 改善: 軽量化 */
-        --shadow-xl: 0 15px 35px rgba(15, 23, 42, 0.1); /* 改善: 軽量化 */
+        --shadow-md: 0 5px 12px rgba(15, 23, 42, 0.06);
+        --shadow-lg: 0 8px 20px rgba(15, 23, 42, 0.08);
+        --shadow-xl: 0 15px 35px rgba(15, 23, 42, 0.1);
         --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.05);
         --shadow-button: 0 4px 12px rgba(58, 95, 235, 0.25);
         --shadow-button-hover: 0 8px 20px rgba(58, 95, 235, 0.35);
         --shadow-accent: 0 4px 12px rgba(255, 138, 0, 0.25);
         --shadow-accent-hover: 0 8px 20px rgba(255, 138, 0, 0.35);
-        --shadow-header: 0 2px 12px rgba(15, 23, 42, 0.06); /* 改善: 軽量化 */
+        --shadow-header: 0 2px 12px rgba(15, 23, 42, 0.06);
         --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.1);
         
         /* Fonts */
@@ -244,7 +471,7 @@
         --font-weight-extrabold: 800;
         --font-weight-black: 900;
         
-        /* Spacing - Optimized for Compact Design */
+        /* Spacing */
         --space-1: 0.25rem;
         --space-2: 0.5rem;
         --space-3: 0.75rem;
@@ -256,9 +483,9 @@
         --space-12: 3rem;
         --space-16: 4rem;
         
-        /* Size System - Compact Mobile Design */
-        --header-height: 70px; /* 改善: デスクトップも軽量化 */
-        --header-height-mobile: 50px; /* 改善: モバイル50px */
+        /* Size System */
+        --header-height: 50px;
+        --header-height-mobile: 40px;
         --container-width: 1200px;
         
         /* Border Radius */
@@ -283,7 +510,7 @@
         --z-overlay: 90;
         --z-max: 999;
         
-        /* Animation Times - Acceleration */
+        /* Animation Times */
         --transition-fast: 0.12s;
         --transition-normal: 0.2s;
         --transition-slow: 0.35s;
@@ -367,7 +594,7 @@
     
     @media (max-width: 768px) {
         .container {
-            padding: 0 1rem; /* 改善: モバイルpadding縮小 */
+            padding: 0 1rem;
         }
     }
     
@@ -390,7 +617,7 @@
     
     @media (max-width: 992px) {
         .grid-3 {
-            grid-template-columns: repeat(3, 1fr); /* 改善: タブレットでも3列維持 */
+            grid-template-columns: repeat(3, 1fr);
         }
         
         .grid-4 {
@@ -444,14 +671,14 @@
     ▼ Section Layout Component - Compact Spacing
     ======================================================== */
     .section {
-        padding: 4rem 0; /* 改善: セクション間隔を縮小 */
+        padding: 4rem 0;
         position: relative;
         overflow: hidden;
     }
     
     @media (max-width: 768px) {
         .section {
-            padding: 2.5rem 0; /* 改善: モバイルでさらに縮小 */
+            padding: 2.5rem 0;
         }
     }
     
@@ -467,47 +694,47 @@
     ▼ Typography System Component - Optimized Text Hierarchy
     ======================================================== */
     .heading-xl {
-        font-size: clamp(2rem, 4vw, 3.2rem); /* 改善: サイズ縮小 */
+        font-size: clamp(2rem, 4vw, 3.2rem);
         font-weight: var(--font-weight-black);
         line-height: 1.1;
-        margin-bottom: var(--space-5); /* 改善: マージン縮小 */
+        margin-bottom: var(--space-5);
         letter-spacing: -0.02em;
     }
     
     .heading-lg {
-        font-size: clamp(1.75rem, 3.5vw, 2.5rem); /* 改善: サイズ縮小 */
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
         font-weight: var(--font-weight-extrabold);
         line-height: 1.2;
-        margin-bottom: var(--space-4); /* 改善: マージン縮小 */
+        margin-bottom: var(--space-4);
         letter-spacing: -0.02em;
     }
     
     .heading-md {
-        font-size: clamp(1.35rem, 2.5vw, 1.9rem); /* 改善: サイズ縮小 */
+        font-size: clamp(1.35rem, 2.5vw, 1.9rem);
         font-weight: var(--font-weight-bold);
         line-height: 1.3;
-        margin-bottom: var(--space-3); /* 改善: マージン縮小 */
+        margin-bottom: var(--space-3);
     }
     
     .heading-sm {
-        font-size: clamp(1.1rem, 1.8vw, 1.35rem); /* 改善: サイズ縮小 */
+        font-size: clamp(1.1rem, 1.8vw, 1.35rem);
         font-weight: var(--font-weight-semibold);
         line-height: 1.4;
         margin-bottom: var(--space-3);
     }
     
     .text-lg {
-        font-size: 1.05rem; /* 改善: サイズ縮小 */
-        line-height: 1.7; /* 改善: 行間縮小 */
+        font-size: 1.05rem;
+        line-height: 1.7;
     }
     
     .text-md {
-        font-size: 0.95rem; /* 改善: サイズ縮小 */
-        line-height: 1.6; /* 改善: 行間縮小 */
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     
     .text-sm {
-        font-size: 0.825rem; /* 改善: サイズ縮小 */
+        font-size: 0.825rem;
     }
     
     .text-gradient {
@@ -545,327 +772,13 @@
     }
     
     /* ========================================================
-    ▼ Header Component - Compact Mobile Design
-    ======================================================== */
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: var(--z-fixed);
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-header);
-        height: var(--header-height);
-        transition: all var(--transition-normal) ease;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .header.scrolled {
-        --header-height: 60px; /* 改善: スクロール時もコンパクト */
-        --header-height-mobile: 45px; /* 改善: モバイルスクロール時極小 */
-        background: rgba(255, 255, 255, 0.98);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .header-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 100%;
-        position: relative;
-        padding: 0 1rem;
-    }
-    
-    /* ========================================================
-    ▼ Logo Component - Left Alignment & Tap Navigation
-    ======================================================== */
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem; /* 改善: gap縮小 */
-        font-weight: var(--font-weight-bold);
-        font-size: 1.1rem; /* 改善: サイズ縮小 */
-        color: var(--dark);
-        z-index: var(--z-elevate);
-        transition: all var(--transition-normal) ease;
-        margin-right: 1.5rem; /* 改善: マージン縮小 */
-    }
-    
-    .logo:hover {
-        transform: translateY(-1px);
-    }
-    
-    .logo-icon {
-        width: 35px;
-        height: 35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        background: transparent;
-        overflow: hidden;
-    }
-    
-    .logo-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        transition: all var(--transition-normal) ease;
-    }
-    
-    .logo:hover .logo-icon img {
-        transform: scale(1.1);
-    }
-    
-    /* ========================================================
-    ▼ Navigation Component - Improved Mobile Layout
-    ======================================================== */
-    .nav {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem; /* 改善: gap縮小 */
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        justify-content: flex-end;
-        flex: 1;
-    }
-    
-    .nav-item {
-        position: relative;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
-    
-    .nav-link {
-        position: relative;
-        color: var(--dark);
-        font-weight: var(--font-weight-medium);
-        transition: all var(--transition-normal) ease;
-        padding: 0.4rem 0; /* 改善: padding縮小 */
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
-        letter-spacing: -0.01em;
-        font-family: var(--font-en);
-    }
-    
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: all var(--transition-normal) ease;
-        border-radius: var(--radius-full);
-    }
-    
-    .nav-link:hover, .nav-link.active {
-        color: var(--primary);
-    }
-    
-    .nav-link:hover::after, .nav-link.active::after {
-        width: 100%;
-    }
-    
-    .nav-cta {
-        margin-left: var(--space-2);
-    }
-    
-    /* ========================================================
-    ▼ Header Button Component - Compact Design
-    ======================================================== */
-    .btn-header-consultation {
-        background: var(--gradient-primary);
-        color: var(--white);
-        padding: 0.4rem 0.9rem; /* 改善: padding縮小 */
-        border-radius: var(--radius-full);
-        font-weight: var(--font-weight-semibold);
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
-        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: var(--shadow-button);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem; /* 改善: gap縮小 */
-        white-space: nowrap;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .btn-header-consultation::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.6s ease-out, height 0.6s ease-out;
-        z-index: 1;
-    }
-    
-    .btn-header-consultation:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-button-hover);
-        color: var(--white);
-        background: var(--gradient-accent);
-    }
-    
-    .btn-header-consultation:hover::before {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .btn-header-consultation span, .btn-header-consultation i {
-        position: relative;
-        z-index: 2;
-    }
-    
-    /* ========================================================
-    ▼ Hamburger Menu Component - 36×36px Compact Design
-    ======================================================== */
-    .hamburger {
-        display: none;
-        background: rgba(255, 255, 255, 0.95);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        color: var(--dark);
-        font-size: 1.1rem; /* 改善: サイズ縮小 */
-        cursor: pointer;
-        padding: 0.3rem; /* 改善: padding縮小 */
-        z-index: 1003;
-        transition: all var(--transition-normal) ease;
-        border-radius: 8px;
-        box-shadow: var(--shadow-sm);
-    }
-    
-    .hamburger:hover {
-        color: var(--primary);
-        transform: scale(1.05);
-        background: rgba(255, 255, 255, 1);
-        box-shadow: var(--shadow-md);
-    }
-    
-    .hamburger:focus {
-        outline: none;
-    }
-    
-    .header-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(15, 23, 42, 0.5);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        opacity: 0;
-        visibility: hidden;
-        transition: all var(--transition-normal) ease;
-        z-index: var(--z-drawer);
-    }
-    
-    .header-backdrop.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* ========================================================
-    ▼ Mobile Menu Component - Clear & Responsive Design
-    ======================================================== */
-    @media (max-width: 768px) {
-        .hamburger {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px; /* 改善: 36×36pxのコンパクト設計 */
-            height: 36px;
-            position: fixed;
-            top: 7px; /* 改善: ヘッダー内中央配置 */
-            right: 10px;
-        }
-        
-        .header-inner {
-            justify-content: flex-start; /* 改善: ロゴを左端に配置 */
-            padding-left: 1rem;
-            padding-right: 50px; /* ハンバーガーメニュー用スペース */
-        }
-        
-        .logo {
-            margin: 0; /* 改善: ロゴマージンリセット */
-            font-size: 1rem; /* 改善: モバイルでサイズ縮小 */
-        }
-        
-        .logo-icon {
-            width: 28px; /* 改善: モバイルでさらに小さく */
-            height: 28px;
-        }
-        
-        /* ========================================================
-        ▼ Mobile Navigation Menu Component - Clear Design
-        ======================================================== */
-        .nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%; /* 改善: 画面面積の80%を活用 */
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.98); /* 改善: クリアな背景 */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            flex-direction: column;
-            gap: 0;
-            transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
-            z-index: 1002;
-            overflow-y: auto;
-            padding: calc(var(--header-height-mobile) + 1rem) 1.5rem 1.5rem;
-            border-left: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav.active {
-            right: 0;
-        }
-        
-        .nav-item {
-            width: 100%;
-            height: auto;
-            margin-bottom: 0.3rem; /* 改善: アイテム間隔縮小 */
-        }
-        
-        .nav-link {
-            width: 100%;
-            padding: 0.8rem 0; /* 改善: padding縮小 */
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-            font-size: 0.9rem; /* 改善: サイズ統一 */
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .nav-cta {
-            margin: 1rem 0 0; /* 改善: マージン縮小 */
-            width: 100%;
-        }
-        
-        .btn-header-consultation {
-            width: 100%;
-            justify-content: center;
-            padding: 0.7rem 1.2rem; /* 改善: padding調整 */
-            font-size: 0.9rem;
-        }
-    }
-    
-    /* ========================================================
     ▼ Button Component - Enhanced Visual Feedback
     ======================================================== */
     .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.65rem 1.3rem; /* 改善: padding縮小 */
+        padding: 0.65rem 1.3rem;
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
         transition: all var(--transition-normal) ease;
@@ -874,8 +787,8 @@
         position: relative;
         overflow: hidden;
         border: none;
-        font-size: 0.9rem; /* 改善: サイズ縮小 */
-        gap: 0.4rem; /* 改善: gap縮小 */
+        font-size: 0.9rem;
+        gap: 0.4rem;
         line-height: 1.4;
     }
     
@@ -983,13 +896,13 @@
     }
     
     .btn-lg {
-        padding: 0.8rem 1.6rem; /* 改善: padding縮小 */
-        font-size: 0.95rem; /* 改善: サイズ縮小 */
+        padding: 0.8rem 1.6rem;
+        font-size: 0.95rem;
     }
     
     .btn-sm {
-        padding: 0.4rem 0.8rem; /* 改善: padding縮小 */
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
     
     .btn-icon-right i {
@@ -1002,20 +915,20 @@
     
     @media (max-width: 768px) {
         .btn-lg {
-            padding: 0.75rem 1.2rem; /* 改善: モバイル用padding */
+            padding: 0.75rem 1.2rem;
             width: 100%;
         }
     }
 
     /* ========================================================
-    ▼ Page Hero Component - Compact Design
+    ▼ Page Hero Component - Enhanced Balance Design
     ======================================================== */
     .page-hero {
         position: relative;
-        min-height: 65vh; /* 改善: 高さ縮小で全体像把握向上 */
+        min-height: 65vh;
         display: flex;
         align-items: center;
-        padding: calc(var(--header-height) + 2rem) 0 2.5rem; /* 改善: padding縮小 */
+        padding: calc(var(--header-height) + 2rem) 0 2.5rem;
         overflow: hidden;
         background: linear-gradient(135deg, 
             rgba(58, 95, 235, 0.06) 0%, 
@@ -1042,7 +955,7 @@
         position: relative;
         z-index: 1;
         text-align: center;
-        max-width: 900px; /* 改善: 幅縮小 */
+        max-width: 900px;
         margin: 0 auto;
     }
     
@@ -1052,12 +965,12 @@
     .breadcrumb {
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem; /* 改善: gap縮小 */
-        margin-bottom: 1.5rem; /* 改善: マージン縮小 */
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        gap: 0.4rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.8rem;
         color: var(--gray);
         background: rgba(255, 255, 255, 0.85);
-        padding: 0.5rem 1rem; /* 改善: padding縮小 */
+        padding: 0.5rem 1rem;
         border-radius: var(--radius-full);
         backdrop-filter: blur(15px);
         box-shadow: var(--shadow-sm);
@@ -1074,7 +987,7 @@
     
     .breadcrumb-separator {
         color: var(--gray);
-        margin: 0 0.2rem; /* 改善: マージン縮小 */
+        margin: 0 0.2rem;
     }
     
     .breadcrumb-current {
@@ -1083,13 +996,13 @@
     }
     
     /* ========================================================
-    ▼ Page Hero Title Component - Optimized Text Breaking
+    ▼ Page Hero Title Component - Enhanced Text Balance
     ======================================================== */
     .page-hero-title {
-        font-size: clamp(2rem, 4vw, 3.2rem); /* 改善: サイズ縮小 */
+        font-size: clamp(2rem, 4vw, 3.2rem);
         font-weight: var(--font-weight-black);
         line-height: 1.1;
-        margin-bottom: 1.5rem; /* 改善: マージン縮小 */
+        margin-bottom: 1.5rem;
         letter-spacing: -0.02em;
         background: var(--gradient-brand);
         -webkit-background-clip: text;
@@ -1100,13 +1013,13 @@
     }
     
     .page-hero-description {
-        font-size: clamp(1rem, 1.8vw, 1.2rem); /* 改善: サイズ縮小 */
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
         color: var(--gray);
-        line-height: 1.6; /* 改善: 行間縮小 */
-        max-width: 700px; /* 改善: 幅縮小 */
-        margin: 0 auto 2rem; /* 改善: マージン縮小 */
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto 2rem;
         background: rgba(255, 255, 255, 0.9);
-        padding: 1.5rem 2rem; /* 改善: padding縮小 */
+        padding: 1.5rem 2rem;
         border-radius: var(--radius-xl);
         backdrop-filter: blur(15px);
         box-shadow: var(--shadow-md);
@@ -1124,34 +1037,34 @@
     
     @media (max-width: 768px) {
         .page-hero {
-            padding: calc(var(--header-height-mobile) + 1.5rem) 0 2rem; /* 改善: padding縮小 */
-            min-height: 60vh; /* 改善: 高さ縮小 */
+            padding: calc(var(--header-height-mobile) + 1.5rem) 0 2rem;
+            min-height: 60vh;
         }
         
         .page-hero-title {
-            font-size: 1.8rem; /* 改善: モバイルサイズ調整 */
+            font-size: 1.8rem;
             margin-bottom: 1.2rem;
         }
         
         .page-hero-description {
-            font-size: 0.9rem; /* 改善: モバイルサイズ調整 */
-            padding: 1.2rem 1.5rem; /* 改善: padding縮小 */
+            font-size: 0.9rem;
+            padding: 1.2rem 1.5rem;
             margin-bottom: 1.5rem;
         }
         
         .breadcrumb {
-            font-size: 0.75rem; /* 改善: モバイルサイズ調整 */
+            font-size: 0.75rem;
             padding: 0.4rem 0.8rem;
             margin-bottom: 1.2rem;
         }
     }
 
     /* ========================================================
-    ▼ Section Header Component - Compact Design
+    ▼ Section Header Component - Enhanced Balance Text Design
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 3rem; /* 改善: マージン縮小 */
+        margin-bottom: 3rem;
         position: relative;
         z-index: 1;
     }
@@ -1159,12 +1072,12 @@
     .section-subtitle {
         display: inline-block;
         background: rgba(58, 95, 235, 0.12);
-        padding: 0.6rem 1.6rem; /* 改善: padding縮小 */
+        padding: 0.6rem 1.6rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        margin-bottom: 1.2rem;
+        font-size: 0.85rem;
         box-shadow: 0 3px 10px rgba(58, 95, 235, 0.1);
         border: 1px solid rgba(58, 95, 235, 0.15);
         position: relative;
@@ -1191,32 +1104,37 @@
     }
     
     .section-header .heading-lg {
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
+        margin-bottom: 1.2rem;
     }
     
     .section-description {
-        font-size: 1.05rem; /* 改善: サイズ縮小 */
+        font-size: 1.05rem;
         color: var(--gray);
-        max-width: 650px; /* 改善: 幅縮小 */
+        max-width: 700px;
         margin: 0 auto;
-        line-height: 1.6; /* 改善: 行間縮小 */
+        line-height: 1.7;
     }
     
+    /* ========================================================
+    ▼ Brand Catchphrase Component - Enhanced Centered Balance
+    ======================================================== */
     .brand-catchphrase {
         font-style: italic;
         color: var(--primary);
         font-weight: 500;
-        display: inline-block;
+        display: block;
+        text-align: center;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
-        padding: 0.8rem 1.6rem; /* 改善: padding縮小 */
-        border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-        border-left: 4px solid var(--primary);
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        padding: 1.2rem 2rem;
+        border-radius: var(--radius-xl);
+        margin: 0 auto 2.5rem;
+        max-width: 800px;
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
         box-shadow: var(--shadow-sm);
-        font-size: 0.95rem; /* 改善: サイズ縮小 */
+        font-size: 1.1rem;
+        border: 2px solid rgba(58, 95, 235, 0.1);
     }
     
     .brand-catchphrase::before {
@@ -1236,7 +1154,7 @@
     
     @media (max-width: 768px) {
         .section-header {
-            margin-bottom: 2.5rem; /* 改善: モバイルマージン縮小 */
+            margin-bottom: 2.5rem;
         }
         
         .section-subtitle {
@@ -1251,13 +1169,13 @@
         }
         
         .section-description br {
-            display: none; /* 改善: モバイルで改行を自動化 */
+            display: none;
         }
         
         .brand-catchphrase {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
         }
     }
 
@@ -1266,15 +1184,15 @@
     ======================================================== */
     .services-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 改善: 常に3列表示 */
-        gap: 2rem; /* 改善: gap縮小 */
-        margin-top: 3rem; /* 改善: マージン縮小 */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
     }
     
     .service-card {
         background: var(--white);
         border-radius: var(--radius-2xl);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05); /* 改善: シャドウ軽量化 */
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
         overflow: hidden;
         transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         height: 100%;
@@ -1291,15 +1209,15 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px; /* 改善: 高さ縮小 */
+        height: 4px;
         background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: var(--z-elevate);
         transition: all 0.4s ease;
     }
     
     .service-card:hover {
-        transform: translateY(-12px) scale(1.015); /* 改善: スケール軽量化 */
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12); /* 改善: シャドウ軽量化 */
+        transform: translateY(-12px) scale(1.015);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
         border-color: rgba(58, 95, 235, 0.15);
     }
     
@@ -1312,7 +1230,7 @@
     ▼ Service Image Component - Compact Design
     ======================================================== */
     .service-image {
-        height: 200px; /* 改善: 高さ縮小 */
+        height: 200px;
         position: relative;
         overflow: hidden;
         background: linear-gradient(135deg, #f8f9fa, #e9ecef);
@@ -1324,7 +1242,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 50%; /* 改善: グラデーション範囲縮小 */
+        height: 50%;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.12), transparent);
         z-index: 1;
     }
@@ -1337,14 +1255,14 @@
     }
     
     .service-card:hover .service-image img {
-        transform: scale(1.1); /* 改善: スケール軽量化 */
+        transform: scale(1.1);
     }
     
     /* ========================================================
     ▼ Service Content Component - Compact Layout
     ======================================================== */
     .service-content {
-        padding: 2.5rem 2rem; /* 改善: padding縮小 */
+        padding: 2.5rem 2rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -1352,7 +1270,7 @@
     }
     
     .service-icon-circle {
-        width: 75px; /* 改善: サイズ縮小 */
+        width: 75px;
         height: 75px;
         background: var(--gradient-primary);
         border-radius: 50%;
@@ -1360,25 +1278,25 @@
         align-items: center;
         justify-content: center;
         color: var(--white);
-        font-size: 1.9rem; /* 改善: サイズ縮小 */
-        box-shadow: 0 10px 20px rgba(58, 95, 235, 0.25); /* 改善: シャドウ軽量化 */
-        margin: -37px auto 2rem; /* 改善: マージン調整 */
+        font-size: 1.9rem;
+        box-shadow: 0 10px 20px rgba(58, 95, 235, 0.25);
+        margin: -37px auto 2rem;
         position: relative;
         transition: all 0.4s ease;
         z-index: 2;
-        border: 3px solid var(--white); /* 改善: ボーダー縮小 */
+        border: 3px solid var(--white);
     }
     
     .service-card:hover .service-icon-circle {
-        transform: translateY(-8px) rotate(8deg) scale(1.08); /* 改善: 効果軽量化 */
+        transform: translateY(-8px) rotate(8deg) scale(1.08);
         box-shadow: 0 16px 32px rgba(58, 95, 235, 0.35);
         background: var(--gradient-accent);
     }
     
     .service-title {
-        font-size: 1.4rem; /* 改善: サイズ縮小 */
+        font-size: 1.4rem;
         font-weight: var(--font-weight-bold);
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
+        margin-bottom: 1.2rem;
         color: var(--dark);
         position: relative;
         display: block;
@@ -1395,7 +1313,7 @@
         left: 50%;
         transform: translateX(-50%);
         width: 50px;
-        height: 3px; /* 改善: 高さ縮小 */
+        height: 3px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
         transition: all 0.4s ease;
@@ -1412,12 +1330,12 @@
     
     .service-description {
         color: var(--gray);
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        margin-bottom: 2rem;
         flex-grow: 1;
-        line-height: 1.6; /* 改善: 行間縮小 */
-        font-size: 0.95rem; /* 改善: サイズ縮小 */
+        line-height: 1.6;
+        font-size: 0.95rem;
         letter-spacing: 0.01em;
-        text-align: center;
+        text-align: left;
     }
     
     /* ========================================================
@@ -1426,17 +1344,17 @@
     .service-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.8rem; /* 改善: gap縮小 */
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        gap: 0.8rem;
+        margin-bottom: 2rem;
         justify-content: center;
     }
     
     .service-tag {
         background: rgba(58, 95, 235, 0.08);
         color: var(--primary);
-        padding: 0.5rem 1.2rem; /* 改善: padding縮小 */
+        padding: 0.5rem 1.2rem;
         border-radius: 40px;
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        font-size: 0.8rem;
         font-weight: 600;
         transition: all 0.4s ease;
         border: 1px solid rgba(58, 95, 235, 0.1);
@@ -1464,7 +1382,7 @@
     .service-tag:hover {
         color: var(--white);
         border-color: var(--primary);
-        transform: translateY(-2px); /* 改善: 移動距離縮小 */
+        transform: translateY(-2px);
         box-shadow: var(--shadow-sm);
     }
     
@@ -1482,7 +1400,7 @@
     .service-footer .btn {
         width: 100%;
         justify-content: center;
-        padding: 1rem; /* 改善: padding縮小 */
+        padding: 1rem;
         font-weight: 600;
         border: 2px solid var(--primary);
         background: transparent;
@@ -1490,7 +1408,7 @@
         transition: all 0.4s ease;
         position: relative;
         overflow: hidden;
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        font-size: 0.85rem;
     }
 
     .service-footer .btn::after {
@@ -1513,8 +1431,8 @@
 
     .service-footer .btn:hover {
         color: white;
-        transform: translateY(-2px); /* 改善: 移動距離縮小 */
-        box-shadow: 0 6px 16px rgba(58, 95, 235, 0.2); /* 改善: シャドウ軽量化 */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(58, 95, 235, 0.2);
         border-color: var(--primary);
     }
     
@@ -1531,20 +1449,20 @@
     }
 
     /* ========================================================
-    ▼ Feature Card Component - Compact Design
+    ▼ Feature Card Component - Enhanced Design
     ======================================================== */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem; /* 改善: gap縮小 */
-        margin-top: 3rem; /* 改善: マージン縮小 */
+        gap: 2.5rem;
+        margin-top: 3rem;
     }
     
     .feature-card {
         background: var(--white);
         border-radius: var(--radius-2xl);
         box-shadow: var(--shadow-md);
-        padding: 2.8rem; /* 改善: padding縮小 */
+        padding: 2.8rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 1px solid rgba(0, 0, 0, 0.04);
         position: relative;
@@ -1575,13 +1493,13 @@
     }
     
     .feature-card:hover {
-        transform: translateY(-15px); /* 改善: 移動距離縮小 */
+        transform: translateY(-15px);
         box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.15);
     }
     
     .feature-icon {
-        width: 90px; /* 改善: サイズ縮小 */
+        width: 90px;
         height: 90px;
         background: var(--gradient-primary);
         color: var(--white);
@@ -1589,9 +1507,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 2rem; /* 改善: マージン縮小 */
-        font-size: 2.4rem; /* 改善: サイズ縮小 */
-        box-shadow: 0 12px 25px rgba(58, 95, 235, 0.2); /* 改善: シャドウ軽量化 */
+        margin: 0 auto 2rem;
+        font-size: 2.4rem;
+        box-shadow: 0 12px 25px rgba(58, 95, 235, 0.2);
         position: relative;
         z-index: 1;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1605,9 +1523,9 @@
     }
     
     .feature-card h3 {
-        font-size: 1.6rem; /* 改善: サイズ縮小 */
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
+        margin-bottom: 1.2rem;
         color: var(--dark);
         position: relative;
         z-index: 1;
@@ -1620,10 +1538,11 @@
     
     .feature-card p {
         color: var(--gray);
-        line-height: 1.7; /* 改善: 行間縮小 */
+        line-height: 1.7;
         position: relative;
         z-index: 1;
-        font-size: 1rem; /* 改善: サイズ縮小 */
+        font-size: 1rem;
+        text-align: left;
     }
 
     /* ========================================================
@@ -1631,9 +1550,9 @@
     ======================================================== */
     .process-timeline {
         position: relative;
-        max-width: 1000px; /* 改善: 幅縮小 */
-        margin: 3rem auto 0; /* 改善: マージン縮小 */
-        padding: 0 2.5rem; /* 改善: padding縮小 */
+        max-width: 1000px;
+        margin: 3rem auto 0;
+        padding: 0 2.5rem;
     }
     
     .process-timeline::before {
@@ -1641,8 +1560,8 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: calc(2.5rem + 30px); /* 改善: 位置調整 */
-        width: 4px; /* 改善: 幅縮小 */
+        left: calc(2.5rem + 30px);
+        width: 4px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
         z-index: 1;
@@ -1651,11 +1570,11 @@
     .process-step {
         display: flex;
         position: relative;
-        margin-bottom: 3.5rem; /* 改善: マージン縮小 */
+        margin-bottom: 3.5rem;
         z-index: 2;
         opacity: 0;
-        transform: translateX(-50px); /* 改善: 移動距離縮小 */
-        animation: slideInLeft 0.6s forwards; /* 改善: アニメーション高速化 */
+        transform: translateX(-50px);
+        animation: slideInLeft 0.6s forwards;
     }
     
     .process-step:nth-child(1) { animation-delay: 0.1s; }
@@ -1676,7 +1595,7 @@
     }
     
     .process-step-number {
-        width: 65px; /* 改善: サイズ縮小 */
+        width: 65px;
         height: 65px;
         background: var(--gradient-primary);
         color: var(--white);
@@ -1684,20 +1603,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.8rem; /* 改善: サイズ縮小 */
+        font-size: 1.8rem;
         font-weight: 700;
-        margin-right: 2.5rem; /* 改善: マージン縮小 */
-        box-shadow: 0 12px 24px rgba(58, 95, 235, 0.25); /* 改善: シャドウ軽量化 */
+        margin-right: 2.5rem;
+        box-shadow: 0 12px 24px rgba(58, 95, 235, 0.25);
         position: relative;
         z-index: 2;
         transition: all 0.4s ease;
-        border: 4px solid var(--white); /* 改善: ボーダー縮小 */
+        border: 4px solid var(--white);
     }
     
     .process-step-number::before {
         content: '';
         position: absolute;
-        width: 85px; /* 改善: サイズ縮小 */
+        width: 85px;
         height: 85px;
         border-radius: 50%;
         background: rgba(58, 95, 235, 0.15);
@@ -1711,7 +1630,7 @@
             opacity: 0.8;
         }
         50% {
-            transform: scale(1.3); /* 改善: スケール縮小 */
+            transform: scale(1.3);
             opacity: 0;
         }
         100% {
@@ -1721,7 +1640,7 @@
     }
     
     .process-step:hover .process-step-number {
-        transform: scale(1.15); /* 改善: スケール縮小 */
+        transform: scale(1.15);
         box-shadow: 0 16px 32px rgba(58, 95, 235, 0.35);
         background: var(--gradient-accent);
     }
@@ -1730,7 +1649,7 @@
         flex: 1;
         background: var(--white);
         border-radius: var(--radius-xl);
-        padding: 2.5rem; /* 改善: padding縮小 */
+        padding: 2.5rem;
         box-shadow: var(--shadow-md);
         position: relative;
         transition: all 0.4s ease;
@@ -1738,7 +1657,7 @@
     }
     
     .process-step:hover .process-step-content {
-        transform: translateX(12px); /* 改善: 移動距離縮小 */
+        transform: translateX(12px);
         box-shadow: var(--shadow-xl);
         border-color: rgba(58, 95, 235, 0.15);
     }
@@ -1746,21 +1665,21 @@
     .process-step-content::before {
         content: '';
         position: absolute;
-        top: 30px; /* 改善: 位置調整 */
-        left: -12px; /* 改善: サイズ縮小 */
+        top: 30px;
+        left: -12px;
         width: 24px;
         height: 24px;
         background: var(--white);
         transform: rotate(45deg);
-        box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.06); /* 改善: シャドウ軽量化 */
+        box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.06);
         border-left: 1px solid rgba(0, 0, 0, 0.04);
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
     
     .process-step-content h3 {
-        font-size: 1.5rem; /* 改善: サイズ縮小 */
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 1rem; /* 改善: マージン縮小 */
+        margin-bottom: 1rem;
         color: var(--dark);
         position: relative;
     }
@@ -1770,8 +1689,8 @@
         position: absolute;
         bottom: -8px;
         left: 0;
-        width: 40px; /* 改善: 幅縮小 */
-        height: 3px; /* 改善: 高さ縮小 */
+        width: 40px;
+        height: 3px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
         transition: width 0.4s ease;
@@ -1785,8 +1704,9 @@
     .process-step-content p {
         color: var(--gray);
         margin-bottom: 0;
-        line-height: 1.7; /* 改善: 行間縮小 */
-        font-size: 1rem; /* 改善: サイズ縮小 */
+        line-height: 1.7;
+        font-size: 1rem;
+        text-align: left;
     }
 
     /* ========================================================
@@ -1794,9 +1714,9 @@
     ======================================================== */
     .escort-development {
         background: var(--gradient-primary);
-        padding: 5rem 0; /* 改善: padding縮小 */
-        border-radius: 30px; /* 改善: 角丸縮小 */
-        margin: 5rem 0; /* 改善: マージン縮小 */
+        padding: 5rem 0;
+        border-radius: 30px;
+        margin: 5rem 0;
         position: relative;
         overflow: hidden;
         box-shadow: var(--shadow-xl);
@@ -1809,7 +1729,7 @@
         width: 100%;
         height: 100%;
         z-index: 0;
-        opacity: 0.1; /* 改善: 透明度調整 */
+        opacity: 0.1;
         background-size: cover;
         background-position: center;
         mix-blend-mode: overlay;
@@ -1822,20 +1742,20 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 4rem; /* 改善: gap縮小 */
+        gap: 4rem;
     }
 
     .escort-text {
         flex: 1;
-        min-width: 320px; /* 改善: 最小幅縮小 */
-        padding: 0 2rem; /* 改善: padding縮小 */
+        min-width: 320px;
+        padding: 0 2rem;
         color: white;
     }
 
     .escort-text h2 {
-        font-size: 2.8rem; /* 改善: サイズ縮小 */
+        font-size: 2.8rem;
         font-weight: 800;
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        margin-bottom: 2rem;
         color: white;
         position: relative;
         text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
@@ -1845,44 +1765,45 @@
     .escort-text h2:after {
         content: '';
         position: absolute;
-        bottom: -1.2rem; /* 改善: 位置調整 */
+        bottom: -1.2rem;
         left: 0;
-        width: 120px; /* 改善: 幅縮小 */
-        height: 5px; /* 改善: 高さ縮小 */
+        width: 120px;
+        height: 5px;
         background: rgba(255, 255, 255, 0.8);
         border-radius: var(--radius-full);
     }
 
     .escort-text p {
         color: rgba(255, 255, 255, 0.9);
-        font-size: 1.15rem; /* 改善: サイズ縮小 */
-        line-height: 1.7; /* 改善: 行間縮小 */
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        font-size: 1.15rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        text-align: left;
     }
 
     .escort-image {
         flex: 1;
-        min-width: 320px; /* 改善: 最小幅縮小 */
+        min-width: 320px;
         position: relative;
     }
 
     .escort-image img {
         width: 100%;
         border-radius: var(--radius-2xl);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25); /* 改善: シャドウ軽量化 */
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
         transition: all 0.5s ease;
     }
 
     .escort-image:hover img {
-        transform: scale(1.06) rotate(1.5deg); /* 改善: スケール縮小 */
+        transform: scale(1.06) rotate(1.5deg);
         box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
     }
 
     .escort-icons {
         display: flex;
-        gap: 3rem; /* 改善: gap縮小 */
-        margin-top: 3rem; /* 改善: マージン縮小 */
+        gap: 3rem;
+        margin-top: 3rem;
     }
 
     .escort-icon {
@@ -1891,44 +1812,44 @@
     }
 
     .escort-icon i {
-        font-size: 3.2rem; /* 改善: サイズ縮小 */
+        font-size: 3.2rem;
         color: white;
-        margin-bottom: 1rem; /* 改善: マージン縮小 */
+        margin-bottom: 1rem;
         display: block;
         transition: all 0.4s ease;
         filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
     }
 
     .escort-icon:hover {
-        transform: translateY(-10px); /* 改善: 移動距離縮小 */
+        transform: translateY(-10px);
     }
 
     .escort-icon:hover i {
-        transform: scale(1.3) rotate(12deg); /* 改善: スケール縮小 */
+        transform: scale(1.3) rotate(12deg);
     }
 
     .escort-icon span {
         display: block;
         font-weight: 600;
         color: white;
-        font-size: 1.1rem; /* 改善: サイズ縮小 */
+        font-size: 1.1rem;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     /* ========================================================
-    ▼ CTA Component - Compact Design
+    ▼ CTA Component - Enhanced Design
     ======================================================== */
     .cta-container {
         background: var(--white);
-        border-radius: 30px; /* 改善: 角丸縮小 */
-        padding: 5rem 4rem; /* 改善: padding縮小 */
+        border-radius: 30px;
+        padding: 5rem 4rem;
         box-shadow: var(--shadow-xl);
         position: relative;
         overflow: hidden;
         z-index: var(--z-elevate);
         border: 2px solid rgba(58, 95, 235, 0.1);
         text-align: center;
-        margin: 4rem 0; /* 改善: マージン縮小 */
+        margin: 4rem 0;
     }
     
     .cta-container::before {
@@ -1937,7 +1858,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 10px; /* 改善: 高さ縮小 */
+        height: 10px;
         background: var(--gradient-primary);
         z-index: var(--z-elevate);
     }
@@ -1955,11 +1876,11 @@
     }
     
     .cta-title {
-        margin-bottom: 2rem; /* 改善: マージン縮小 */
+        margin-bottom: 2rem;
     }
     
     .cta-title h2 {
-        font-size: clamp(2.2rem, 3.5vw, 3.5rem); /* 改善: サイズ縮小 */
+        font-size: clamp(2.2rem, 3.5vw, 3.5rem);
         font-weight: 800;
         color: var(--dark);
         line-height: 1.3;
@@ -1975,24 +1896,24 @@
     }
     
     .cta-description {
-        font-size: 1.2rem; /* 改善: サイズ縮小 */
+        font-size: 1.2rem;
         color: var(--gray);
-        max-width: 750px; /* 改善: 幅縮小 */
-        margin: 0 auto 3rem; /* 改善: マージン縮小 */
-        line-height: 1.7; /* 改善: 行間縮小 */
+        max-width: 750px;
+        margin: 0 auto 3rem;
+        line-height: 1.7;
     }
     
     .cta-buttons {
         display: flex;
-        gap: 1.5rem; /* 改善: gap縮小 */
+        gap: 1.5rem;
         justify-content: center;
         flex-wrap: wrap;
     }
     
     .cta-buttons .btn {
-        min-width: 250px; /* 改善: 最小幅縮小 */
-        padding: 1.2rem 2rem; /* 改善: padding縮小 */
-        font-size: 1.05rem; /* 改善: サイズ縮小 */
+        min-width: 250px;
+        padding: 1.2rem 2rem;
+        font-size: 1.05rem;
         font-weight: 600;
     }
     
@@ -2009,7 +1930,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 100px; /* 改善: サイズ縮小 */
+        width: 100px;
         height: 100px;
         background: rgba(255, 255, 255, 0.3);
         transform: translate(-50%, -50%) scale(0);
@@ -2023,7 +1944,7 @@
             opacity: 0.8;
         }
         70% {
-            transform: translate(-50%, -50%) scale(1.6); /* 改善: スケール縮小 */
+            transform: translate(-50%, -50%) scale(1.6);
             opacity: 0;
         }
         100% {
@@ -2037,7 +1958,7 @@
     ======================================================== */
     .bottom-banner {
         background: var(--gradient-mission);
-        padding: 3rem 0; /* 改善: padding縮小 */
+        padding: 3rem 0;
         text-align: center;
         color: var(--white);
         position: relative;
@@ -2045,7 +1966,7 @@
     }
     
     .bottom-banner-content {
-        font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* 改善: サイズ縮小 */
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
         font-weight: var(--font-weight-bold);
         margin: 0;
         padding: 0 1rem;
@@ -2056,32 +1977,32 @@
     
     @media (max-width: 768px) {
         .bottom-banner-content {
-            font-size: 1.1rem; /* 改善: モバイルサイズ調整 */
+            font-size: 1.1rem;
         }
     }
 
     /* ========================================================
-    ▼ Footer Component - Inherited from index.html
+    ▼ Footer Component - Enhanced Order Control (PC: Left→Right, Mobile: Links→Copyright)
     ======================================================== */
     .footer {
         background: var(--dark);
         color: var(--white);
-        padding: 4rem 0 1.5rem; /* 改善: padding縮小 */
+        padding: 4rem 0 1.5rem;
         position: relative;
     }
     
     .footer-grid {
         display: grid;
         grid-template-columns: 1.5fr repeat(3, 1fr);
-        gap: 2.5rem; /* 改善: gap縮小 */
-        margin-bottom: 2.5rem; /* 改善: マージン縮小 */
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
     }
     
     .footer-logo {
         display: flex;
         align-items: center;
-        gap: 0.65rem; /* 改善: gap縮小 */
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
+        gap: 0.65rem;
+        margin-bottom: 1.2rem;
     }
     
     .footer-logo-icon {
@@ -2096,25 +2017,25 @@
     }
     
     .footer-logo-text {
-        font-size: 1.35rem; /* 改善: サイズ縮小 */
+        font-size: 1.35rem;
         font-weight: var(--font-weight-bold);
         font-family: var(--font-en);
     }
     
     .footer-description {
         color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
-        line-height: 1.7; /* 改善: 行間縮小 */
-        font-size: 0.9rem; /* 改善: サイズ縮小 */
+        margin-bottom: 1.2rem;
+        line-height: 1.7;
+        font-size: 0.9rem;
     }
     
     .footer-social {
         display: flex;
-        gap: 0.8rem; /* 改善: gap縮小 */
+        gap: 0.8rem;
     }
     
     .footer-social-link {
-        width: 34px; /* 改善: サイズ縮小 */
+        width: 34px;
         height: 34px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
@@ -2144,7 +2065,7 @@
         position: relative;
         z-index: 1;
         transition: transform var(--transition-normal) ease;
-        font-size: 0.9rem; /* 改善: サイズ縮小 */
+        font-size: 0.9rem;
     }
     
     .footer-social-link:hover {
@@ -2161,12 +2082,12 @@
     }
     
     .footer-heading {
-        font-size: 1.1rem; /* 改善: サイズ縮小 */
-        margin-bottom: 1.2rem; /* 改善: マージン縮小 */
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
         color: var(--white);
         font-weight: var(--font-weight-semibold);
         position: relative;
-        padding-bottom: 0.6rem; /* 改善: padding縮小 */
+        padding-bottom: 0.6rem;
         white-space: nowrap;
     }
     
@@ -2175,7 +2096,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 35px; /* 改善: 幅縮小 */
+        width: 35px;
         height: 2px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
@@ -2187,7 +2108,7 @@
     }
     
     .footer-links li {
-        margin-bottom: 0.6rem; /* 改善: マージン縮小 */
+        margin-bottom: 0.6rem;
     }
     
     .footer-links a {
@@ -2198,7 +2119,7 @@
         display: inline-block;
         word-break: keep-all;
         white-space: normal;
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        font-size: 0.85rem;
     }
     
     .footer-links a::before {
@@ -2223,10 +2144,10 @@
     
     .footer-contact-item {
         display: flex;
-        gap: 0.6rem; /* 改善: gap縮小 */
-        margin-bottom: 0.8rem; /* 改善: マージン縮小 */
+        gap: 0.6rem;
+        margin-bottom: 0.8rem;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        font-size: 0.85rem;
     }
     
     .footer-contact-item span,
@@ -2238,7 +2159,7 @@
     
     .footer-contact-item i {
         color: var(--secondary);
-        font-size: 1rem; /* 改善: サイズ縮小 */
+        font-size: 1rem;
         margin-top: 0.2rem;
     }
     
@@ -2251,8 +2172,11 @@
         color: var(--white);
     }
     
+    /* ========================================================
+    ▼ Footer Bottom Component - Enhanced Order Control for All Devices
+    ======================================================== */
     .footer-bottom {
-        padding-top: 1.5rem; /* 改善: padding縮小 */
+        padding-top: 1.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
         justify-content: space-between;
@@ -2261,22 +2185,28 @@
         gap: 1rem;
     }
     
+    /* PC版: コピーライト左下配置、リンク右下配置 */
     .footer-copyright {
         color: rgba(255, 255, 255, 0.5);
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        font-size: 0.8rem;
+        order: 1;
+        flex-shrink: 0;
     }
     
     .footer-links-inline {
         display: flex;
-        gap: 1.5rem; /* 改善: gap縮小 */
+        gap: 1.5rem;
         flex-wrap: wrap;
+        order: 2;
+        flex-grow: 1;
+        justify-content: flex-end;
     }
     
     .footer-links-inline a {
         color: rgba(255, 255, 255, 0.5);
         transition: all var(--transition-normal) ease;
         position: relative;
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        font-size: 0.8rem;
     }
     
     .footer-links-inline a::before {
@@ -2305,24 +2235,38 @@
         }
     }
     
+    /* ========================================================
+    ▼ Mobile Footer Component - リンク上部→コピーライト最下部の確実な順序制御
+    ======================================================== */
     @media (max-width: 768px) {
         .footer {
-            padding: 3rem 0 1.5rem; /* 改善: モバイルpadding縮小 */
+            padding: 3rem 0 1.5rem;
         }
         
         .footer-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem; /* 改善: gap縮小 */
+            gap: 1.5rem;
         }
         
+        /* モバイル版フッター最下部: 確実な順序制御 */
         .footer-bottom {
             flex-direction: column;
             text-align: center;
         }
         
+        /* モバイル版: リンクが上部に表示 */
         .footer-links-inline {
             justify-content: center;
             gap: 1rem;
+            order: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* モバイル版: コピーライトが最下部に表示 */
+        .footer-copyright {
+            font-size: 0.75rem;
+            order: 2;
+            margin-top: 0.5rem;
         }
     }
 
@@ -2331,13 +2275,13 @@
     ======================================================== */
     .chatbot {
         position: fixed;
-        bottom: 25px; /* 改善: 位置調整 */
+        bottom: 25px;
         right: 25px;
         z-index: var(--z-max);
     }
     
     .chatbot-button {
-        width: 58px; /* 改善: サイズ縮小 */
+        width: 58px;
         height: 58px;
         border-radius: 50%;
         background: var(--gradient-primary);
@@ -2346,7 +2290,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem; /* 改善: サイズ縮小 */
+        font-size: 1.3rem;
         box-shadow: var(--shadow-lg);
         cursor: pointer;
         position: relative;
@@ -2364,7 +2308,7 @@
     .chatbot-button::before {
         content: '';
         position: absolute;
-        top: -6px; /* 改善: サイズ縮小 */
+        top: -6px;
         right: -6px;
         bottom: -6px;
         left: -6px;
@@ -2388,7 +2332,7 @@
     }
     
     .chatbot-button:hover {
-        transform: scale(1.08); /* 改善: スケール縮小 */
+        transform: scale(1.08);
         box-shadow: var(--shadow-xl);
     }
     
@@ -2397,17 +2341,17 @@
     }
     
     .chatbot-button:hover i {
-        transform: scale(1.15); /* 改善: スケール縮小 */
+        transform: scale(1.15);
     }
     
     .chatbot-window {
         position: absolute;
-        bottom: 70px; /* 改善: 位置調整 */
+        bottom: 70px;
         right: 0;
-        width: 340px; /* 改善: 幅縮小 */
-        height: 480px; /* 改善: 高さ縮小 */
+        width: 340px;
+        height: 480px;
         background: var(--white);
-        border-radius: 18px; /* 改善: 角丸縮小 */
+        border-radius: 18px;
         box-shadow: var(--shadow-xl);
         overflow: hidden;
         display: none;
@@ -2429,7 +2373,7 @@
     .chatbot-header {
         background: var(--gradient-primary);
         color: var(--white);
-        padding: 0.8rem 1.2rem; /* 改善: padding縮小 */
+        padding: 0.8rem 1.2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -2437,25 +2381,25 @@
     
     .chatbot-header h3 {
         margin: 0;
-        font-size: 1rem; /* 改善: サイズ縮小 */
+        font-size: 1rem;
         font-weight: var(--font-weight-semibold);
         display: flex;
         align-items: center;
-        gap: 0.6rem; /* 改善: gap縮小 */
+        gap: 0.6rem;
         color: var(--white);
     }
     
     .chatbot-close {
         background: rgba(255, 255, 255, 0.2);
         border: none;
-        width: 26px; /* 改善: サイズ縮小 */
+        width: 26px;
         height: 26px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--white);
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        font-size: 0.8rem;
         cursor: pointer;
         transition: all var(--transition-normal) ease;
     }
@@ -2467,26 +2411,26 @@
     
     .chatbot-messages {
         flex: 1;
-        padding: 1.2rem; /* 改善: padding縮小 */
+        padding: 1.2rem;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 0.8rem; /* 改善: gap縮小 */
+        gap: 0.8rem;
     }
     
     .chat-message {
         max-width: 80%;
-        padding: 0.6rem 0.9rem; /* 改善: padding縮小 */
-        border-radius: 12px; /* 改善: 角丸縮小 */
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
         line-height: 1.5;
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        font-size: 0.85rem;
         animation: fadeInMessage 0.3s ease-out forwards;
     }
     
     @keyframes fadeInMessage {
         from {
             opacity: 0;
-            transform: translateY(8px); /* 改善: 移動距離縮小 */
+            transform: translateY(8px);
         }
         to {
             opacity: 1;
@@ -2511,18 +2455,18 @@
     .chatbot-input {
         display: flex;
         align-items: center;
-        padding: 0.8rem; /* 改善: padding縮小 */
+        padding: 0.8rem;
         border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .chatbot-input input {
         flex: 1;
         border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 0.6rem 0.9rem; /* 改善: padding縮小 */
+        padding: 0.6rem 0.9rem;
         border-radius: var(--radius-full);
         outline: none;
         transition: all var(--transition-normal) ease;
-        font-size: 0.85rem; /* 改善: サイズ縮小 */
+        font-size: 0.85rem;
     }
     
     .chatbot-input input:focus {
@@ -2531,13 +2475,13 @@
     }
     
     .chatbot-send {
-        width: 36px; /* 改善: サイズ縮小 */
+        width: 36px;
         height: 36px;
         border-radius: 50%;
         background: var(--gradient-primary);
         color: var(--white);
         border: none;
-        margin-left: 0.4rem; /* 改善: マージン縮小 */
+        margin-left: 0.4rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2563,26 +2507,25 @@
     .chatbot-send i {
         position: relative;
         z-index: 1;
-        font-size: 0.8rem; /* 改善: サイズ縮小 */
+        font-size: 0.8rem;
     }
     
     .chatbot-send:hover {
-        transform: scale(1.08); /* 改善: スケール縮小 */
+        transform: scale(1.08);
     }
     
     .chatbot-send:hover::before {
         opacity: 1;
     }
     
-    /* Chatbot Loading Animation */
     .loading-dots {
         display: flex;
         align-items: center;
-        gap: 3px; /* 改善: gap縮小 */
+        gap: 3px;
     }
     
     .loading-dots i {
-        font-size: 4px; /* 改善: サイズ縮小 */
+        font-size: 4px;
         animation: dotPulse 1.5s infinite;
     }
     
@@ -2600,7 +2543,7 @@
             opacity: 0.4;
         }
         50% {
-            transform: scale(1.4); /* 改善: スケール縮小 */
+            transform: scale(1.4);
             opacity: 1;
         }
     }
@@ -2610,9 +2553,9 @@
     ======================================================== */
     .back-to-top {
         position: fixed;
-        bottom: 95px; /* 改善: 位置調整 */
+        bottom: 95px;
         right: 25px;
-        width: 42px; /* 改善: サイズ縮小 */
+        width: 42px;
         height: 42px;
         border-radius: 50%;
         background: var(--gradient-primary);
@@ -2622,14 +2565,14 @@
         justify-content: center;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(15px); /* 改善: 移動距離縮小 */
+        transform: translateY(15px);
         cursor: pointer;
         z-index: var(--z-fixed);
         transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-md);
         border: none;
         overflow: hidden;
-        font-size: 0.9rem; /* 改善: サイズ縮小 */
+        font-size: 0.9rem;
     }
     
     .back-to-top.active {
@@ -2658,7 +2601,7 @@
     }
     
     .back-to-top:hover {
-        transform: translateY(-2px); /* 改善: 移動距離縮小 */
+        transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
     }
     
@@ -2667,7 +2610,7 @@
     }
     
     .back-to-top:hover i {
-        transform: translateY(-1px); /* 改善: 移動距離縮小 */
+        transform: translateY(-1px);
     }
 
     /* ========================================================
@@ -2690,7 +2633,7 @@
             transform: translateY(0);
         }
         50% {
-            transform: translateY(-15px); /* 改善: 移動距離縮小 */
+            transform: translateY(-15px);
         }
         100% {
             transform: translateY(0);
@@ -2698,17 +2641,17 @@
     }
 
     .floating-animation {
-        animation: floatAnimation 4s ease-in-out infinite; /* 改善: 高速化 */
+        animation: floatAnimation 4s ease-in-out infinite;
     }
 
     .animate-in {
-        animation: fadeInUp 0.6s forwards; /* 改善: 高速化 */
+        animation: fadeInUp 0.6s forwards;
     }
 
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(30px); /* 改善: 移動距離縮小 */
+            transform: translateY(30px);
         }
         to {
             opacity: 1;
@@ -2722,7 +2665,7 @@
             opacity: 0.5;
         }
         50% {
-            transform: scale(1.15); /* 改善: スケール縮小 */
+            transform: scale(1.15);
             opacity: 0;
         }
     }
@@ -2736,8 +2679,8 @@
     textarea:focus-visible,
     select:focus-visible {
         outline: 2px solid var(--primary);
-        outline-offset: 2px; /* 改善: オフセット縮小 */
-        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.15); /* 改善: シャドウ軽量化 */
+        outline-offset: 2px;
+        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.15);
     }
     
     /* Visual Feedback During Keyboard Navigation */
@@ -2752,18 +2695,18 @@
     ======================================================== */
     @media (max-width: 1199px) {
         .services-grid {
-            grid-template-columns: repeat(3, 1fr); /* 改善: タブレットでも3列維持 */
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.8rem;
         }
 
         .nav-link {
             padding: 0.5rem 0.6rem;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         
         .btn-header-consultation {
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.7rem;
         }
     }
 
@@ -2965,7 +2908,7 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 70%; /* 改善: 高さ最適化 */
+            height: 70%;
             border-radius: 18px 18px 0 0;
             transform-origin: bottom center;
         }
@@ -3136,53 +3079,49 @@
     <div id="three-container"></div>
     
     <!-- ========================================================
-    ▼ Header Component - Compact Mobile Design
+    ▼ Header Component - Enhanced Professional Design
     ======================================================== -->
     <header class="header" id="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.html" class="logo" aria-label="ShinAIホームページ">
-                    <div class="logo-icon">
-                        <img src="assets/images/logo.png" alt="ShinAI" width="32" height="32">
-                    </div>
-                    <span class="logo-text">ShinAI</span>
-                </a>
-                
-                <nav aria-label="メインナビゲーション">
-                    <ul class="nav" id="nav">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">ホーム</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">会社紹介</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="services.html" class="nav-link active" aria-current="page">サービス</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="industries.html" class="nav-link">業界別活用</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="faq.html" class="nav-link">よくある質問</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" class="nav-link">お問い合わせ</a>
-                        </li>
-                        <li class="nav-cta">
-                            <a href="contact.html" class="btn-header-consultation">
-                                <i class="fas fa-comment-dots"></i>
-                                <span>無料相談</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
-                
-                <div class="header-backdrop" id="header-backdrop"></div>
-            </div>
+        <div class="header-inner">
+            <a href="index.html" class="logo" aria-label="ShinAIホームページ">
+                <div class="logo-icon">
+                    <img src="assets/images/logo.png" alt="ShinAI" width="26" height="26">
+                </div>
+                <span class="logo-text">ShinAI</span>
+            </a>
+            
+            <nav aria-label="メインナビゲーション">
+                <ul class="nav" id="nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">会社紹介</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link active" aria-current="page">サービス</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="industries.html" class="nav-link">業界別活用</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="faq.html" class="nav-link">よくある質問</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">お問い合わせ</a>
+                    </li>
+                    <li class="nav-cta">
+                        <a href="contact.html" class="btn-header-consultation">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>無料相談</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
     </header>
     
@@ -3191,7 +3130,7 @@
     ======================================================== -->
     <main id="main-content">
         <!-- ========================================================
-        ▼ Page Hero Component - Compact Design with Optimized Text Breaking
+        ▼ Page Hero Component - Enhanced Balance Design
         ======================================================== -->
         <section class="page-hero">
             <div class="container">
@@ -3210,7 +3149,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ Service List Component - Horizontal Layout Optimization
+        ▼ Service List Component - Enhanced Text Balance
         ======================================================== -->
         <section class="section" id="services">
             <div class="container">
@@ -3221,7 +3160,6 @@
                     <p class="section-description">最先端のAI技術で企業の課題を解決し、<br class="hide-mobile">人間らしい時間を創出する厳選されたサービス</p>
                 </div>
                 
-                <!-- 改善: 横一列表示への最適化 -->
                 <div class="services-grid">
                     <!-- 新規事業企画書AIツール「アイプロ」 -->
                     <div class="service-card" id="aipro">
@@ -3238,7 +3176,7 @@
                                 <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。入力情報をもとに<br>データドリブンで魅力的な企画を提案。短時間で高品質な資料作成を実現し、<br>営業・企画部門の生産性を劇的に向上させます。</p>
+                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。<br>入力情報をもとにデータドリブンで魅力的な企画を提案。<br>短時間で高品質な資料作成を実現し、営業・企画部門の<br>生産性を劇的に向上させます。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>時間短縮</span></span>
                                 <span class="service-tag"><span>データ活用</span></span>
@@ -3268,7 +3206,7 @@
                                 <i class="fas fa-robot" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
-                            <p class="service-description">AIエージェント開発やRAG構築など、お客様の業種・業態特有の課題に対応した<br>カスタムAIソリューション。独自データを活用した特化型AIシステムで<br>競争優位性を実現します。</p>
+                            <p class="service-description">AIエージェント開発やRAG構築など、<br>お客様の業種・業態特有の課題に対応した<br>カスタムAIソリューション。独自データを活用した<br>特化型AIシステムで競争優位性を実現します。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>AIエージェント</span></span>
                                 <span class="service-tag"><span>RAG構築</span></span>
@@ -3298,7 +3236,7 @@
                                 <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">AI導入(DX/AX)<br>コンサルティング</h3>
-                            <p class="service-description">戦略立案から社内チーム育成まで伴走支援。「やりっぱなし」にしないAI導入を徹底し、<br>成果定着と自走化を実現。DX/AXの推進パートナーとして<br>長期的な成長をサポートします。</p>
+                            <p class="service-description">戦略立案から社内チーム育成まで伴走支援。<br>「やりっぱなし」にしないAI導入を徹底し、<br>成果定着と自走化を実現。DX/AXの推進パートナーとして<br>長期的な成長をサポートします。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>伴走支援</span></span>
                                 <span class="service-tag"><span>内製化支援</span></span>
@@ -3317,7 +3255,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ Service Features Component - Compact Design
+        ▼ Service Features Component - Enhanced Left-Aligned Text
         ======================================================== -->
         <section class="section section-bg-gradient">
             <div class="container">
@@ -3333,7 +3271,7 @@
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>短期間での導入と効果実証</h3>
-                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、<br>最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の開発が可能。<br>小さく始めて段階的に拡張する確実なアプローチを採用しています。</p>
+                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、<br>最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の<br>開発が可能。小さく始めて段階的に拡張する確実なアプローチを<br>採用しています。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3341,7 +3279,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3>社内チーム育成と自走化支援</h3>
-                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力。<br>技術だけでなく、企画から運用までのノウハウを共有し、<br>自社でAI活用を推進できる体制構築を支援します。</p>
+                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と<br>知識移転に注力。技術だけでなく、企画から運用までのノウハウを<br>共有し、自社でAI活用を推進できる体制構築を支援します。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3349,7 +3287,7 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>安全なAI活用の実現</h3>
-                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築。<br>データガバナンス対策とAI倫理を遵守した安全なAI活用で、<br>ユーザーからの信頼を獲得します。</p>
+                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠した<br>AIソリューションを構築。データガバナンス対策とAI倫理を遵守した<br>安全なAI活用で、ユーザーからの信頼を獲得します。</p>
                     </div>
                 </div>
             </div>
@@ -3366,7 +3304,7 @@
                         <div class="escort-content">
                             <div class="escort-text">
                                 <h2>AI伴走型開発で<br>確実な成果を実現</h2>
-                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。<br>企画から実装、運用、そして自走化まで一貫して伴走することで、<br>「やりっぱなしにならない」AI導入を実現。</p>
+                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた<br>最適なAI導入をご支援します。企画から実装、運用、そして自走化まで<br>一貫して伴走することで、「やりっぱなしにならない」AI導入を実現。</p>
                                 <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、<br>真の価値を共に創造します。</p>
                                 <div class="escort-icons">
                                     <div class="escort-icon">
@@ -3432,7 +3370,7 @@
                         <div class="process-step-number">4</div>
                         <div class="process-step-content">
                             <h3>社内チーム育成</h3>
-                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転を実施。<br>運用ノウハウを共有します。</p>
+                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と<br>知識移転を実施。運用ノウハウを共有します。</p>
                         </div>
                     </div>
                     
@@ -3448,7 +3386,7 @@
         </section>
         
         <!-- ========================================================
-        ▼ CTA Component - Compact Design
+        ▼ CTA Component - Enhanced Design
         ======================================================== -->
         <section class="section">
             <div class="container">
@@ -3484,7 +3422,7 @@
     </div>
     
     <!-- ========================================================
-    ▼ Footer Component - Inherited from index.html
+    ▼ Footer Component - Enhanced Order Control
     ======================================================== -->
     <footer class="footer">
         <div class="container">
@@ -3606,7 +3544,7 @@
     </button>
 
     <!-- ========================================================
-    ▼ Main Script Component - Performance Enhancement & Optimization
+    ▼ Main Script Component - Enhanced Professional Design
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -3621,8 +3559,8 @@
                 pageLoader.classList.add('loaded');
                 setTimeout(() => {
                     pageLoader.style.display = 'none';
-                }, 250); // 改善: 高速化
-            }, 250); // 改善: 高速化
+                }, 250);
+            }, 250);
         }
         
         // Visibility and accessibility improvement
@@ -3638,13 +3576,12 @@
         }
         
         // ========================================================
-        // ▼ Mobile UI/UX Complete Improvement Component
+        // ▼ Professional Header & Navigation Component
         // ========================================================
         
         const header = document.getElementById('header');
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('nav');
-        const headerBackdrop = document.getElementById('header-backdrop');
         
         // Optimized scroll event - throttled for performance
         let lastScrollTop = 0;
@@ -3657,7 +3594,7 @@
                     
                     // Header scroll effect
                     if (header) {
-                        if (currentScrollTop > 8) { // 改善: トリガー軽量化
+                        if (currentScrollTop > 8) {
                             header.classList.add('scrolled');
                         } else {
                             header.classList.remove('scrolled');
@@ -3667,7 +3604,7 @@
                     // Back to Top button display control
                     const backToTop = document.getElementById('back-to-top');
                     if (backToTop) {
-                        if (currentScrollTop > 250) { // 改善: トリガー軽量化
+                        if (currentScrollTop > 250) {
                             backToTop.classList.add('active');
                         } else {
                             backToTop.classList.remove('active');
@@ -3682,14 +3619,13 @@
             }
         });
         
-        // Mobile menu - improved version with clear design
+        // Mobile menu - improved version with about.html unified design
         if (hamburger && nav) {
             hamburger.addEventListener('click', function() {
                 const expanded = this.getAttribute('aria-expanded') === 'true';
                 this.setAttribute('aria-expanded', !expanded);
                 
                 nav.classList.toggle('active');
-                if (headerBackdrop) headerBackdrop.classList.toggle('active');
                 
                 // Icon change - smooth transition
                 if (expanded) {
@@ -3699,23 +3635,12 @@
                 }
             });
             
-            // Close menu by clicking background
-            if (headerBackdrop) {
-                headerBackdrop.addEventListener('click', function() {
-                    nav.classList.remove('active');
-                    headerBackdrop.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-                });
-            }
-            
             // Close menu by clicking nav links - mobile optimization
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
                     if (window.innerWidth <= 768) {
                         nav.classList.remove('active');
-                        if (headerBackdrop) headerBackdrop.classList.remove('active');
                         if (hamburger) {
                             hamburger.setAttribute('aria-expanded', 'false');
                             hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
@@ -3740,7 +3665,9 @@
             });
         }
         
-        // Chatbot functionality - optimized for mobile
+        // ========================================================
+        // ▼ Enhanced Chatbot Component - Professional Design
+        // ========================================================
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
         const chatbotClose = document.getElementById('chatbot-close');
@@ -3756,7 +3683,7 @@
                 this.setAttribute('aria-expanded', !expanded);
                 
                 if (!expanded) {
-                    setTimeout(() => chatInput.focus(), 300); // 改善: フォーカス最適化
+                    setTimeout(() => chatInput.focus(), 300);
                 }
             });
             
@@ -3820,7 +3747,7 @@
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 6; // 改善: より高速化
+                            const typingSpeed = 6;
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -3837,10 +3764,10 @@
                                         ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.4rem; font-size: 0.8rem;">お問い合わせ・無料相談予約</a>';
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 200); // 改善: 高速化
+                                    }, 200);
                                 }
                             }, typingSpeed);
-                        }, 300); // 改善: 高速化
+                        }, 300);
                     }
                 };
                 
@@ -3893,7 +3820,6 @@
                 // Close mobile menu
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
-                    if (headerBackdrop) headerBackdrop.classList.remove('active');
                     if (hamburger) {
                         hamburger.setAttribute('aria-expanded', 'false');
                         hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
@@ -3917,7 +3843,7 @@
         // Scroll animation - Using IntersectionObserver for better performance
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px' // 改善: マージン最適化
+            rootMargin: '0px 0px -40px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
@@ -3934,7 +3860,7 @@
         });
     });
     
-    // Three.js particle effect - optimized version for compact design
+    // Three.js particle effect - optimized version for professional design
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
         const isMobile = window.innerWidth < 768;
@@ -3944,7 +3870,7 @@
         
         // Camera setup
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 45; // 改善: カメラ位置調整
+        camera.position.z = 45;
         
         // Renderer setup - optimized for performance
         const renderer = new THREE.WebGLRenderer({ 
@@ -3956,19 +3882,19 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
         container.appendChild(renderer.domElement);
         
-        // Core sphere - compact design
-        const coreGeometry = new THREE.IcosahedronGeometry(5, isMobile ? 1 : 2); // 改善: サイズ縮小
+        // Core sphere - professional design
+        const coreGeometry = new THREE.IcosahedronGeometry(5, isMobile ? 1 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x4A8FFF,
             transparent: true,
-            opacity: 0.12, // 改善: 透明度調整
+            opacity: 0.12,
             wireframe: true
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
         
         // Inner decorative core
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(2.5, 1); // 改善: サイズ縮小
+        const innerCoreGeometry = new THREE.IcosahedronGeometry(2.5, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
             transparent: true,
@@ -3979,13 +3905,13 @@
         scene.add(innerCore);
         
         // Particle setup - reduced count for performance
-        const particlesCount = isMobile ? 250 : 500; // 改善: 数量削減
+        const particlesCount = isMobile ? 250 : 500;
         const particles = [];
         
         // Particle shapes
         const geometries = [
-            new THREE.BoxGeometry(0.1, 0.1, 0.1), // 改善: サイズ縮小
-            new THREE.SphereGeometry(0.05, 6, 6), // 改善: 解像度縮小
+            new THREE.BoxGeometry(0.1, 0.1, 0.1),
+            new THREE.SphereGeometry(0.05, 6, 6),
             new THREE.TetrahedronGeometry(0.08, 0)
         ];
         
@@ -4003,12 +3929,12 @@
             const material = new THREE.MeshBasicMaterial({ 
                 color: colors[colorIndex],
                 transparent: true,
-                opacity: 0.25 + Math.random() * 0.4 // 改善: 透明度範囲調整
+                opacity: 0.25 + Math.random() * 0.4
             });
             
             const particle = new THREE.Mesh(geometry, material);
             
-            const radius = 12 + Math.random() * 35; // 改善: 範囲縮小
+            const radius = 12 + Math.random() * 35;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.random() * Math.PI;
             
@@ -4023,23 +3949,23 @@
             particles.push({
                 mesh: particle,
                 velocity: {
-                    x: (Math.random() - 0.5) * 0.015, // 改善: 速度軽量化
+                    x: (Math.random() - 0.5) * 0.015,
                     y: (Math.random() - 0.5) * 0.015,
                     z: (Math.random() - 0.5) * 0.015
                 },
                 rotation: {
-                    x: (Math.random() - 0.5) * 0.008, // 改善: 回転軽量化
+                    x: (Math.random() - 0.5) * 0.008,
                     y: (Math.random() - 0.5) * 0.008,
                     z: (Math.random() - 0.5) * 0.008
                 },
                 orbit: {
-                    speed: 0.0001 + Math.random() * 0.0003, // 改善: 軌道速度軽量化
+                    speed: 0.0001 + Math.random() * 0.0003,
                     radius: radius,
                     angle: Math.random() * Math.PI * 2,
                     yFactor: Math.random() * 2 - 1
                 },
                 pulse: {
-                    speed: 0.008 + Math.random() * 0.015, // 改善: パルス軽量化
+                    speed: 0.008 + Math.random() * 0.015,
                     size: 0.04 + Math.random() * 0.08
                 }
             });
@@ -4073,7 +3999,7 @@
         document.addEventListener('mousemove', function(event) {
             throttle(function() {
                 handleMouseMove(event);
-            }, 30); // 改善: スロットリング調整
+            }, 30);
         });
         
         // Touch tracking - optimized
@@ -4082,39 +4008,39 @@
                 throttle(function() {
                     mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
                     mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
-                }, 60); // 改善: タッチデバイスではさらに制限
+                }, 60);
             }
         });
         
         // Time variable
         let time = 0;
         
-        // Animation - optimized for compact design
+        // Animation - optimized for professional design
         const animate = () => {
             requestAnimationFrame(animate);
-            time += 0.008; // 改善: 時間進行軽量化
+            time += 0.008;
             
             // Smooth camera movement
-            targetX = mouseX * 12; // 改善: 移動範囲縮小
+            targetX = mouseX * 12;
             targetY = mouseY * 12;
-            camera.position.x += (targetX - camera.position.x) * 0.015; // 改善: 追従軽量化
+            camera.position.x += (targetX - camera.position.x) * 0.015;
             camera.position.y += (targetY - camera.position.y) * 0.015;
             camera.lookAt(scene.position);
             
             // Core animation
-            core.rotation.y += 0.001; // 改善: 回転軽量化
+            core.rotation.y += 0.001;
             core.rotation.x += 0.0005;
-            const scalePulse = Math.sin(time * 0.4) * 0.04 + 1; // 改善: パルス軽量化
+            const scalePulse = Math.sin(time * 0.4) * 0.04 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
             
             // Inner core reverse rotation
-            innerCore.rotation.y -= 0.0015; // 改善: 回転軽量化
+            innerCore.rotation.y -= 0.0015;
             innerCore.rotation.z += 0.0008;
             const innerScalePulse = Math.sin(time * 0.6) * 0.08 + 1;
             innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
             
             // Particle animation - further optimized for mobile
-            const skipRate = isMobile ? 3 : 2; // 改善: スキップレート調整
+            const skipRate = isMobile ? 3 : 2;
             
             particles.forEach((p, index) => {
                 if (isMobile && index % skipRate !== 0) return;
@@ -4125,7 +4051,7 @@
                 const orbitZ = p.orbit.radius * Math.sin(p.orbit.angle);
                 const orbitY = p.orbit.radius * 0.4 * p.orbit.yFactor * Math.sin(p.orbit.angle * 0.5);
                 
-                const waveX = Math.sin(time + index * 0.08) * 1.2; // 改善: 波動軽量化
+                const waveX = Math.sin(time + index * 0.08) * 1.2;
                 const waveY = Math.cos(time * 0.6 + index * 0.15) * 1;
                 const waveZ = Math.sin(time * 0.4 + index * 0.12) * 1.5;
                 
@@ -4169,7 +4095,7 @@
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
-            }, 300); // 改善: デバウンス調整
+            }, 300);
         });
     }
     </script>
