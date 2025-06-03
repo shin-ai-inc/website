@@ -1186,7 +1186,279 @@
     }
 
     /* ========================================================
-    ▼ Service Card Component - Horizontal Layout Optimization - テキスト左揃え改善
+    ▼ Competitor Comparison Table Component - 新規追加・プロフェッショナルデザイン
+    ======================================================== */
+    .comparison-section {
+        background: linear-gradient(135deg, 
+            rgba(58, 95, 235, 0.03) 0%, 
+            rgba(0, 201, 167, 0.04) 50%, 
+            rgba(255, 138, 0, 0.02) 100%);
+        border-radius: 30px;
+        padding: 4rem 0;
+        margin: 3rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .comparison-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 15% 20%, rgba(58, 95, 235, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 85% 80%, rgba(0, 201, 167, 0.06) 0%, transparent 40%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .comparison-container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .comparison-table {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .comparison-header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1.5rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .comparison-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+        0%, 100% {
+            transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        }
+        50% {
+            transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+    }
+    
+    .comparison-header h3 {
+        font-size: 1.6rem;
+        font-weight: var(--font-weight-extrabold);
+        color: white;
+        margin: 0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .comparison-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .comparison-row:hover {
+        background: rgba(58, 95, 235, 0.02);
+        transform: scale(1.01);
+    }
+    
+    .comparison-row:hover::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--gradient-primary);
+        animation: slideDown 0.4s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            height: 0;
+        }
+        to {
+            height: 100%;
+        }
+    }
+    
+    .comparison-row:last-child {
+        border-bottom: none;
+    }
+    
+    .comparison-labels {
+        background: rgba(58, 95, 235, 0.08);
+        font-weight: var(--font-weight-semibold);
+        color: var(--primary);
+    }
+    
+    .comparison-cell {
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .comparison-cell:not(:last-child) {
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    
+    .comparison-item {
+        font-weight: var(--font-weight-medium);
+        color: var(--dark);
+        font-size: 0.95rem;
+    }
+    
+    .comparison-competitor {
+        color: var(--gray);
+        font-size: 0.9rem;
+        position: relative;
+    }
+    
+    .comparison-shinai {
+        color: var(--primary);
+        font-weight: var(--font-weight-semibold);
+        font-size: 0.95rem;
+        position: relative;
+    }
+    
+    /* Status Icons Styling */
+    .status-negative {
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: var(--font-weight-medium);
+    }
+    
+    .status-negative::before {
+        content: '✕';
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 18px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+    }
+    
+    .status-positive {
+        color: #10b981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-weight: var(--font-weight-semibold);
+        position: relative;
+    }
+    
+    .status-positive::before {
+        content: '✓';
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background: #10b981;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 18px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+        animation: checkPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes checkPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+        }
+        50% {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+        }
+    }
+    
+    /* ShinAI優位性の強調 */
+    .comparison-shinai.status-positive {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(58, 95, 235, 0.1));
+        border-radius: 8px;
+        padding: 0.8rem;
+        margin: 0.2rem;
+        box-shadow: 0 3px 10px rgba(58, 95, 235, 0.15);
+        border: 1px solid rgba(58, 95, 235, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+        .comparison-section {
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table {
+            margin: 0 1rem;
+        }
+        
+        .comparison-row {
+            grid-template-columns: 1fr;
+            text-align: left;
+        }
+        
+        .comparison-cell {
+            padding: 1rem;
+            border-right: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .comparison-cell:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-labels .comparison-cell {
+            background: rgba(58, 95, 235, 0.08);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary);
+        }
+        
+        .status-positive, .status-negative {
+            justify-content: flex-start;
+        }
+        
+        .comparison-header h3 {
+            font-size: 1.3rem;
+        }
+    }
+
+    /* ========================================================
+    ▼ Service Card Component - 改善版・左揃えテキスト・読みやすさ向上
     ======================================================== */
     .services-grid {
         display: grid;
@@ -1265,7 +1537,7 @@
     }
     
     /* ========================================================
-    ▼ Service Content Component - テキスト左揃え・改行バランス調整・完全実装
+    ▼ Service Content Component - 改善版・左揃えテキスト・読みやすさ向上
     ======================================================== */
     .service-content {
         padding: 2.5rem 2rem;
@@ -1335,24 +1607,27 @@
     }
     
     /* ========================================================
-    ▼ Service Description Component - 中央揃え・改行バランス調整・完全実装
+    ▼ Service Description Component - 改善版・左揃え・読みやすさ大幅向上
     ======================================================== */
     .service-description {
         color: var(--gray);
         margin-bottom: 2rem;
         flex-grow: 1;
-        line-height: 1.7; /* 改善: 行間を広めに */
-        font-size: 0.95rem;
-        letter-spacing: 0.01em;
-        text-align: center; /* 改善: 中央揃えに変更 */
-        padding: 0 0.5rem; /* 改善: 左右に軽いpadding */
+        line-height: 1.8; /* 改善: 行間をさらに広げて読みやすく */
+        font-size: 1rem; /* 改善: フォントサイズを若干大きく */
+        letter-spacing: 0.02em; /* 改善: 文字間隔を調整 */
+        text-align: left; /* 改善: 左揃えに変更 */
+        padding: 0.5rem 1rem; /* 改善: 内側余白を調整 */
+        background: rgba(248, 250, 252, 0.7); /* 改善: 背景色で読みやすさ向上 */
+        border-radius: var(--radius-lg);
+        border-left: 3px solid rgba(58, 95, 235, 0.2); /* 改善: アクセントライン */
     }
     
-    /* 改善: サービス説明文の改行調整 */
+    /* 改善: サービス説明文の改行調整・自然な文章流れ */
     .service-description br {
         display: block;
         content: "";
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.4rem; /* 改善: 段落間隔を調整 */
     }
     
     /* ========================================================
@@ -1554,16 +1829,19 @@
     }
     
     /* ========================================================
-    ▼ Feature Card Text - 中央揃え・改行バランス調整・完全実装
+    ▼ Feature Card Text - 改善版・左揃え・読みやすさ向上
     ======================================================== */
     .feature-card p {
         color: var(--gray);
-        line-height: 1.7;
+        line-height: 1.8; /* 改善: 行間を広げて読みやすく */
         position: relative;
         z-index: 1;
         font-size: 1rem;
-        text-align: center; /* 改善: 中央揃えに変更 */
-        padding: 0 0.5rem; /* 改善: 左右に軽いpadding */
+        text-align: left; /* 改善: 左揃えに変更 */
+        padding: 0.5rem 1rem; /* 改善: 内側余白を調整 */
+        background: rgba(248, 250, 252, 0.6); /* 改善: 背景色で読みやすさ向上 */
+        border-radius: var(--radius-md);
+        letter-spacing: 0.01em; /* 改善: 文字間隔を調整 */
     }
 
     /* ========================================================
@@ -1723,14 +2001,15 @@
     }
     
     /* ========================================================
-    ▼ Process Step Text - 左揃え・改行バランス調整・完全実装
+    ▼ Process Step Text - 改善版・左揃え・読みやすさ向上
     ======================================================== */
     .process-step-content p {
         color: var(--gray);
         margin-bottom: 0;
-        line-height: 1.7;
+        line-height: 1.8; /* 改善: 行間を広げて読みやすく */
         font-size: 1rem;
         text-align: left; /* 改善: 左揃えに変更 */
+        letter-spacing: 0.01em; /* 改善: 文字間隔を調整 */
     }
 
     /* ========================================================
@@ -1798,15 +2077,16 @@
     }
 
     /* ========================================================
-    ▼ Escort Text - 左揃え・改行バランス調整・完全実装
+    ▼ Escort Text - 改善版・左揃え・読みやすさ向上
     ======================================================== */
     .escort-text p {
         color: rgba(255, 255, 255, 0.9);
         font-size: 1.15rem;
-        line-height: 1.7;
+        line-height: 1.8; /* 改善: 行間を広げて読みやすく */
         margin-bottom: 2rem;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         text-align: left; /* 改善: 左揃えに変更 */
+        letter-spacing: 0.01em; /* 改善: 文字間隔を調整 */
     }
 
     .escort-image {
@@ -2771,6 +3051,11 @@
         .escort-text {
             padding: 0 1rem;
         }
+
+        .comparison-section {
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
     }
     
     @media (max-width: 768px) {
@@ -3177,7 +3462,90 @@
         </section>
         
         <!-- ========================================================
-        ▼ Service List Component - テキストバランス改善・左揃え完全実装
+        ▼ Competitor Comparison Section Component - 新規追加・プロフェッショナルデザイン
+        ======================================================== -->
+        <section class="section">
+            <div class="container">
+                <div class="comparison-section">
+                    <div class="comparison-container">
+                        <div class="section-header">
+                            <span class="section-subtitle">他社との違い</span>
+                            <h2 class="heading-lg">ShinAIが<span class="text-gradient">選ばれる理由</span></h2>
+                            <p class="section-description">従来のAI企業とは異なる、ShinAI独自の価値提案</p>
+                        </div>
+                        
+                        <div class="comparison-table">
+                            <div class="comparison-header">
+                                <h3>他社 vs ShinAI 比較表</h3>
+                            </div>
+                            
+                            <div class="comparison-row comparison-labels">
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">比較項目</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">他社</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">ShinAI</div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-row">
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">初期費用</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-competitor status-negative">500万円〜</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-shinai status-positive">50万円〜</div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-row">
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">プロトタイプ期間</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-competitor status-negative">2-3ヶ月</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-shinai status-positive">2週間</div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-row">
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">失敗時のリスク</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-competitor status-negative">全額損失</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-shinai status-positive">最小限</div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-row">
+                                <div class="comparison-cell">
+                                    <div class="comparison-item">技術変更対応</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-competitor status-negative">追加費用</div>
+                                </div>
+                                <div class="comparison-cell">
+                                    <div class="comparison-shinai status-positive">柔軟対応</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================
+        ▼ Service List Component - 改善版・左揃えテキスト・読みやすさ向上
         ======================================================== -->
         <section class="section" id="services">
             <div class="container">
@@ -3204,7 +3572,10 @@
                                 <i class="fas fa-file-invoice" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">新規事業企画書AIツール<br>「アイプロ」</h3>
-                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成。<br>入力情報をもとにデータドリブンで魅力的な企画を提案し、<br>短時間で高品質な資料作成を実現。<br>営業・企画部門の生産性を劇的に向上させます。</p>
+                            <p class="service-description">AIが自動でビジネス企画書・プレゼン資料を作成します。
+                            入力した基本情報をもとに、データドリブンで魅力的な企画提案を生成。
+                            従来の企画書作成に要していた時間を大幅に短縮し、営業・企画部門の生産性を劇的に向上させます。
+                            中小企業を中心に多くのお客様にご利用いただいており、継続的な改善により精度も向上しています。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>時間短縮</span></span>
                                 <span class="service-tag"><span>データ活用</span></span>
@@ -3234,7 +3605,9 @@
                                 <i class="fas fa-robot" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">オーダーメイド<br>AIアプリケーション開発</h3>
-                            <p class="service-description">AIエージェント開発やRAG構築など、<br>お客様の業種・業態特有の課題に対応した<br>カスタムAIソリューション。<br>独自データを活用した特化型AIシステムで<br>競争優位性を実現します。</p>
+                            <p class="service-description">AIエージェント開発やRAG構築など、お客様の業種・業態特有の課題に対応したカスタムAIソリューションを提供します。
+                            独自データを活用した特化型AIシステムの構築により、競争優位性を実現。
+                            ChatGPT/GPT-4などの最新LLMを活用し、既存システムとの連携も含めた包括的なソリューションを構築します。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>AIエージェント</span></span>
                                 <span class="service-tag"><span>RAG構築</span></span>
@@ -3264,7 +3637,9 @@
                                 <i class="fas fa-lightbulb" aria-hidden="true"></i>
                             </div>
                             <h3 class="service-title">AI導入(DX/AX)<br>コンサルティング</h3>
-                            <p class="service-description">戦略立案から社内チーム育成まで伴走支援。<br>「やりっぱなし」にしないAI導入を徹底し、<br>成果定着と自走化を実現。<br>DX/AXの推進パートナーとして<br>長期的な成長をサポートします。</p>
+                            <p class="service-description">戦略立案から社内チーム育成まで、包括的な伴走支援を提供します。
+                            「やりっぱなし」にしないAI導入を徹底し、成果の定着と自走化を実現。
+                            技術だけでなく、企画から運用までのノウハウを共有し、DX/AXの推進パートナーとして長期的な成長をサポートします。</p>
                             <div class="service-tags">
                                 <span class="service-tag"><span>伴走支援</span></span>
                                 <span class="service-tag"><span>内製化支援</span></span>
@@ -3299,7 +3674,8 @@
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>短期間での導入と効果実証</h3>
-                        <p>独自開発のAIテンプレートと<br>クラウドインフラの活用により、<br>最短2週間からのPoC（実証実験）と<br>MVP（最小限の価値のある製品）の開発が可能。<br>小さく始めて段階的に拡張する<br>確実なアプローチを採用しています。</p>
+                        <p>独自開発のAIテンプレートとクラウドインフラの活用により、最短2週間からのPoC（実証実験）とMVP（最小限の価値のある製品）の開発が可能です。
+                        小さく始めて段階的に拡張する確実なアプローチを採用し、リスクを最小化しながら成果を確実に実現します。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3307,7 +3683,8 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3>社内チーム育成と自走化支援</h3>
-                        <p>AI導入の効果を持続・拡大させるために、<br>お客様の社内チーム育成と知識移転に注力。<br>技術だけでなく、企画から運用までの<br>ノウハウを共有し、<br>自社でAI活用を推進できる<br>体制構築を支援します。</p>
+                        <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転に注力しています。
+                        技術だけでなく、企画から運用までのノウハウを共有し、自社でAI活用を推進できる体制構築を支援します。</p>
                     </div>
                     
                     <div class="feature-card">
@@ -3315,7 +3692,8 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>安全なAI活用の実現</h3>
-                        <p>個人情報保護とセキュリティを最優先に、<br>企業ポリシーに準拠した<br>AIソリューションを構築。<br>データガバナンス対策とAI倫理を遵守した<br>安全なAI活用で、<br>ユーザーからの信頼を獲得します。</p>
+                        <p>個人情報保護とセキュリティを最優先に、企業ポリシーに準拠したAIソリューションを構築します。
+                        データガバナンス対策とAI倫理を遵守した安全なAI活用で、ユーザーからの信頼を獲得し、安心してご利用いただけます。</p>
                     </div>
                 </div>
             </div>
@@ -3332,8 +3710,9 @@
                         <div class="escort-content">
                             <div class="escort-text">
                                 <h2>AI伴走型開発で<br>確実な成果を実現</h2>
-                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。<br>企画から実装、運用、そして自走化まで一貫して伴走することで、<br>「やりっぱなしにならない」AI導入を実現。</p>
-                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、<br>真の価値を共に創造します。</p>
+                                <p>ShinAIは単なる技術提供だけではなく、企業の状況・課題に応じた最適なAI導入をご支援します。
+                                企画から実装、運用、そして自走化まで一貫して伴走することで、「やりっぱなしにならない」AI導入を実現します。</p>
+                                <p>技術と事業、両面からの専門家チームが、御社のDX/AX推進を加速させ、真の価値を共に創造します。</p>
                                 <div class="escort-icons">
                                     <div class="escort-icon">
                                         <i class="fas fa-chart-line"></i>
@@ -3374,7 +3753,7 @@
                         <div class="process-step-number">1</div>
                         <div class="process-step-content">
                             <h3>課題分析・企画</h3>
-                            <p>お客様の現状課題をヒアリングし、AI導入の目的とKPIを明確化。<br>ROI（投資対効果）を最大化するための企画立案を行います。</p>
+                            <p>お客様の現状課題をヒアリングし、AI導入の目的とKPIを明確化します。ROI（投資対効果）を最大化するための企画立案を行い、最適なソリューション設計を実施します。</p>
                         </div>
                     </div>
                     
@@ -3382,7 +3761,7 @@
                         <div class="process-step-number">2</div>
                         <div class="process-step-content">
                             <h3>PoC（実証実験）</h3>
-                            <p>小規模な範囲で短期間のテスト運用を実施。<br>AIソリューションの技術的な実現性と期待される効果を検証します。</p>
+                            <p>小規模な範囲で短期間のテスト運用を実施します。AIソリューションの技術的な実現性と期待される効果を検証し、本格導入への道筋を確立します。</p>
                         </div>
                     </div>
                     
@@ -3390,7 +3769,7 @@
                         <div class="process-step-number">3</div>
                         <div class="process-step-content">
                             <h3>システム開発・導入</h3>
-                            <p>PoCの結果をもとに、本格的なシステム開発と実装を行います。<br>お客様の既存システムとの連携や、セキュリティ対策も含めて設計します。</p>
+                            <p>PoCの結果をもとに、本格的なシステム開発と実装を行います。お客様の既存システムとの連携や、セキュリティ対策も含めて設計・構築します。</p>
                         </div>
                     </div>
                     
@@ -3398,7 +3777,7 @@
                         <div class="process-step-number">4</div>
                         <div class="process-step-content">
                             <h3>社内チーム育成</h3>
-                            <p>AI導入の効果を持続・拡大させるために、<br>お客様の社内チーム育成と知識移転を実施。<br>運用ノウハウを共有します。</p>
+                            <p>AI導入の効果を持続・拡大させるために、お客様の社内チーム育成と知識移転を実施します。運用ノウハウと技術知識を共有し、自走化を支援します。</p>
                         </div>
                     </div>
                     
@@ -3406,7 +3785,7 @@
                         <div class="process-step-number">5</div>
                         <div class="process-step-content">
                             <h3>運用サポート・拡張</h3>
-                            <p>導入後の運用をサポートし、定期的な改善提案と機能拡張を行います。<br>AIの性能向上とビジネス成果の最大化を継続的に支援します。</p>
+                            <p>導入後の運用をサポートし、定期的な改善提案と機能拡張を行います。AIの性能向上とビジネス成果の最大化を継続的に支援し、長期的な成功をお約束します。</p>
                         </div>
                     </div>
                 </div>
@@ -3751,7 +4130,7 @@
                             } else if (messageLower.includes('rag') || messageLower.includes('検索') || messageLower.includes('retrieval')) {
                                 response = "RAG(Retrieval Augmented Generation)は社内データを活用したAIシステム構築の鍵となる技術です。ShinAIではベクトルデータベースを活用した高度なRAGシステムを構築し、御社の知識ベースを効率的に活用できるようにします。社内文書や過去のナレッジを活用したAIシステムをご検討の場合は、ぜひご相談ください。";
                             } else if (messageLower.includes('料金') || messageLower.includes('費用') || messageLower.includes('価格')) {
-                                response = "ShinAIのサービスは、プロジェクトの規模や内容によって料金が異なります。プロトタイプ開発からスタートすることで、初期費用を30万円〜からご用意しております。AIエージェント開発やRAG構築など、具体的なシステムの内容や規模に応じて最適なプランをご提案します。詳細な費用については、無料相談でお気軽にお問い合わせください。";
+                                response = "ShinAIのサービスは、プロジェクトの規模や内容によって料金が異なります。プロトタイプ開発からスタートすることで、初期費用を50万円〜からご用意しております。AIエージェント開発やRAG構築など、具体的なシステムの内容や規模に応じて最適なプランをご提案します。詳細な費用については、無料相談でお気軽にお問い合わせください。";
                             } else if (messageLower.includes('期間') || messageLower.includes('納期') || messageLower.includes('時間')) {
                                 response = "AIシステム開発の期間は、プロジェクトの複雑さによって異なりますが、最短2週間でプロトタイプの開発が可能です。小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。プロトタイプから段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
                             } else if (messageLower.includes('アイプロ')) {
@@ -3884,7 +4263,7 @@
             });
         }, observerOptions);
         
-        document.querySelectorAll('.section-header, .service-card, .feature-card, .process-step, .cta-container, .escort-development').forEach(el => {
+        document.querySelectorAll('.section-header, .service-card, .feature-card, .process-step, .cta-container, .escort-development, .comparison-section').forEach(el => {
             observer.observe(el);
         });
     });
