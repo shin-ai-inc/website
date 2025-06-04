@@ -3970,12 +3970,9 @@
             </div>
         </section>
 
-        <!-- 
-        ==============================================
-        // === component-split: ImplementationSteps ===
-        COMPONENT: AI導入ステップ
-        ==============================================
-        -->
+        <!-- ========================================================
+        ▼ Implementation Steps Component
+        ======================================================== -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-in">
@@ -4076,7 +4073,7 @@
     <!-- 
     ==============================================
     // === component-split: Footer ===
-    COMPONENT: フッター（services.html準拠・順序修正）
+    COMPONENT: フッター（改善版・順序修正・services.html完全準拠）
     ==============================================
     -->
     <footer class="footer">
@@ -4149,13 +4146,24 @@
                 </div>
             </div>
             
+            <!-- 
+            ==============================================
+            // === component-split: ImprovedFooterBottom ===
+            COMPONENT: 改善されたフッター最下部配置・services.html完全準拠
+            機能: PC版コピーライト左下→リンク右下、モバイル版リンク上部→コピーライト最下部
+            特徴: 順序修正、視覚的バランス向上
+            ==============================================
+            -->
             <div class="footer-bottom">
+                <!-- PC版: コピーライト左下配置 -->
+                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                
+                <!-- PC版: リンク右下配置 -->
                 <div class="footer-links-inline">
                     <a href="privacy-policy.html">プライバシーポリシー</a>
                     <a href="terms.html">利用規約</a>
                     <a href="legal.html">特定商取引法に基づく表記</a>
                 </div>
-                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -4207,7 +4215,7 @@
     <!-- 
     ==============================================
     // === component-split: JavaScript ===
-    COMPONENT: メインJavaScript - 高速化・マウスオーバー最適化・完全改善版
+    COMPONENT: メインJavaScript - 高速化・改善版・完全実装
     ==============================================
     -->
     <script>
@@ -4229,7 +4237,7 @@
             }
             
             // ========================================================
-            // ▼ Perfect Responsive Header & Navigation Component - 完全改善版
+            // ▼ Perfect Responsive Header & Navigation Component - services.html完全準拠
             // ========================================================
             
             const header = document.getElementById('header');
@@ -4272,7 +4280,7 @@
                 }
             });
             
-            // ハンバーガーメニュー - about.html準拠（モバイル専用）
+            // ハンバーガーメニュー - services.html完全準拠（モバイル専用）
             if (hamburger && nav) {
                 hamburger.addEventListener('click', function() {
                     const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -4349,7 +4357,7 @@
             }
             
             // ========================================================
-            // ▼ Advanced Chatbot Component - 業界特化対応・完全改善版
+            // ▼ Advanced Chatbot Component - 業界特化対応・完全改善版・下側滑らか表示
             // ========================================================
             const chatbotButton = document.getElementById('chatbot-button');
             const chatbotWindow = document.getElementById('chatbot-window');
@@ -4375,21 +4383,31 @@
                     chatbotButton.setAttribute('aria-expanded', 'false');
                 });
                 
-                // チャット送信処理 - 業界特化応答・完全改善版
+                // チャット送信処理 - 業界特化応答・完全改善版・下側滑らか表示・高速テキスト
                 if (chatSend && chatInput && chatMessages) {
                     const handleSend = function() {
                         const message = chatInput.value.trim();
                         if (message) {
-                            // ユーザーメッセージを追加
+                            // ユーザーメッセージを追加 - 下側滑らか表示
                             addChatMessage(message, 'user');
                             chatInput.value = '';
                             
-                            // ローディングインジケーター表示
+                            // ローディングインジケーター表示 - 下側滑らか表示
                             const loadingMsg = document.createElement('div');
                             loadingMsg.classList.add('chat-message', 'bot', 'loading');
                             loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
+                            loadingMsg.style.opacity = '0';
+                            loadingMsg.style.transform = 'translateY(20px)';
+                            loadingMsg.style.transition = 'all 0.3s ease-out';
+                            
                             chatMessages.appendChild(loadingMsg);
                             chatMessages.scrollTop = chatMessages.scrollHeight;
+                            
+                            // 下側滑らか表示アニメーション
+                            setTimeout(() => {
+                                loadingMsg.style.opacity = '1';
+                                loadingMsg.style.transform = 'translateY(0)';
+                            }, 10);
                             
                             // AIの応答内容 - 業界特化型・完全改善版
                             setTimeout(function() {
@@ -4427,14 +4445,24 @@
                                     response = responses[Math.floor(Math.random() * responses.length)];
                                 }
                                 
-                                // レスポンス追加（高速タイピング効果）
+                                // レスポンス追加（高速タイピング効果・下側滑らか表示）
                                 const botMessage = document.createElement('div');
                                 botMessage.classList.add('chat-message', 'bot');
                                 botMessage.textContent = '';
+                                botMessage.style.opacity = '0';
+                                botMessage.style.transform = 'translateY(20px)';
+                                botMessage.style.transition = 'all 0.3s ease-out';
+                                
                                 chatMessages.appendChild(botMessage);
                                 
+                                // 下側滑らか表示アニメーション
+                                setTimeout(() => {
+                                    botMessage.style.opacity = '1';
+                                    botMessage.style.transform = 'translateY(0)';
+                                }, 10);
+                                
                                 let i = 0;
-                                const typingSpeed = 8; // 高速化
+                                const typingSpeed = 5; // 高速化: 8→5に変更
                                 
                                 const typingEffect = setInterval(function() {
                                     if (i < response.length) {
@@ -4444,12 +4472,23 @@
                                     } else {
                                         clearInterval(typingEffect);
                                         
-                                        // CTAボタンを追加
+                                        // CTAボタンを追加 - 下側滑らか表示
                                         setTimeout(function() {
                                             const ctaButton = document.createElement('div');
                                             ctaButton.classList.add('chat-message', 'bot');
                                             ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
+                                            ctaButton.style.opacity = '0';
+                                            ctaButton.style.transform = 'translateY(20px)';
+                                            ctaButton.style.transition = 'all 0.3s ease-out';
+                                            
                                             chatMessages.appendChild(ctaButton);
+                                            
+                                            // 下側滑らか表示アニメーション
+                                            setTimeout(() => {
+                                                ctaButton.style.opacity = '1';
+                                                ctaButton.style.transform = 'translateY(0)';
+                                            }, 10);
+                                            
                                             chatMessages.scrollTop = chatMessages.scrollHeight;
                                         }, 200);
                                     }
@@ -4466,12 +4505,23 @@
                         }
                     });
                     
+                    // 下側滑らか表示対応版
                     function addChatMessage(message, type) {
                         const msgElement = document.createElement('div');
                         msgElement.classList.add('chat-message', type);
                         msgElement.textContent = message;
+                        msgElement.style.opacity = '0';
+                        msgElement.style.transform = 'translateY(20px)';
+                        msgElement.style.transition = 'all 0.3s ease-out';
                         
                         chatMessages.appendChild(msgElement);
+                        
+                        // 下側滑らか表示アニメーション
+                        setTimeout(() => {
+                            msgElement.style.opacity = '1';
+                            msgElement.style.transform = 'translateY(0)';
+                        }, 10);
+                        
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     }
                 }
