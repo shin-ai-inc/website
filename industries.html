@@ -26,7 +26,7 @@
     <meta name="revisit-after" content="7 days">
     
     <!-- Component: EnhancedOGP -->
-    <meta property="og:title" content="業界別AI活用 | ShinAI - 各業界に最適なAIソリューション">
+    <meta property="og:title" content="業界別AI活用事例 | ShinAI - 導入イメージを掴む最適なAIソリューション">
     <meta property="og:description" content="ShinAI - 福祉・介護、教育・研修、建設業など、業界ごとの課題に最適化したAIソリューション事例をご紹介します。AIエージェント開発・RAG構築で企業変革を実現。">
     <meta property="og:image" content="https://shin-ai-inc.github.io/website/assets/images/ogp-ai-optimized.jpg">
     <meta property="og:image:alt" content="ShinAI - 業界別AI活用ソリューション 無料AI相談">
@@ -42,7 +42,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="twitter:creator" content="@ShinAI_JP">
-    <meta name="twitter:title" content="業界別AI活用 | ShinAI - 各業界に最適なAIソリューション">
+    <meta name="twitter:title" content="業界別AI活用事例 | ShinAI - 導入イメージを掴む最適なAIソリューション">
     <meta name="twitter:description" content="福祉・介護、教育・研修、建設業など、業界ごとの課題に最適化したAIソリューション事例をご紹介。AIエージェント開発・RAG構築で企業変革を実現。">
     <meta name="twitter:image" content="https://shin-ai-inc.github.io/website/assets/images/ogp-ai-optimized.jpg">
     <meta name="twitter:image:alt" content="ShinAI - 業界別AI活用ソリューション">
@@ -173,7 +173,7 @@
     }
     </script>
     
-    <title>業界別AI活用 | ShinAI - 各業界に最適なAIソリューション</title>
+    <title>業界別AI活用事例 | ShinAI - 導入イメージを掴む最適なAIソリューション</title>
     
     <!-- Component: CriticalPathCSS -->
     <style>
@@ -689,7 +689,7 @@
         display: inline-block;
     }
 
-    /* Component: Enhanced Hero - 線香花火エフェクト */
+    /* Component: FireworksEffect - Enhanced Hero Background */
     .page-hero {
         position: relative;
         min-height: 90vh;
@@ -707,7 +707,7 @@
         color: var(--white);
     }
 
-    /* Component: 線香花火エフェクト Background - 可憐で美しい改良版 */
+    /* Component: Enhanced Fireworks Container - Mobile/PC Optimized */
     .sparkler-container {
         position: absolute;
         top: 0;
@@ -717,9 +717,15 @@
         overflow: hidden;
         z-index: 1;
         pointer-events: none;
+        background: linear-gradient(45deg, 
+            rgba(15, 23, 42, 0.1) 0%, 
+            rgba(30, 41, 59, 0.05) 25%, 
+            rgba(51, 65, 85, 0.03) 50%, 
+            rgba(71, 85, 105, 0.05) 75%, 
+            rgba(15, 23, 42, 0.1) 100%);
     }
 
-    /* 線香花火の中心核 */
+    /* Enhanced Sparkler Cores - Increased Density for PC */
     .sparkler-core {
         position: absolute;
         width: 8px;
@@ -730,10 +736,11 @@
             rgba(255, 215, 0, 0.9) 30%, 
             rgba(255, 140, 0, 0.7) 60%, 
             transparent 100%);
-        animation: sparklerCore 6s ease-in-out infinite;
+        animation: sparklerCoreEnhanced 6s ease-in-out infinite;
         pointer-events: none;
     }
 
+    /* Multiple Sparkler Cores for Enhanced Density */
     .sparkler-core:nth-child(1) {
         top: 20%;
         left: 15%;
@@ -764,22 +771,61 @@
         animation-delay: 3s;
     }
 
-    @keyframes sparklerCore {
-        0%, 100% {
-            opacity: 0;
-            transform: scale(0.5);
+    /* Additional Cores for PC (Hidden on Mobile) */
+    .sparkler-core:nth-child(6) {
+        top: 30%;
+        left: 30%;
+        animation-delay: 5s;
+        display: none;
+    }
+
+    .sparkler-core:nth-child(7) {
+        bottom: 60%;
+        right: 40%;
+        animation-delay: 1.5s;
+        display: none;
+    }
+
+    .sparkler-core:nth-child(8) {
+        top: 70%;
+        left: 70%;
+        animation-delay: 3.5s;
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .sparkler-core:nth-child(6),
+        .sparkler-core:nth-child(7),
+        .sparkler-core:nth-child(8) {
+            display: block;
         }
-        10% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        90% {
-            opacity: 1;
-            transform: scale(1);
+        
+        .sparkler-core {
+            width: 12px;
+            height: 12px;
         }
     }
 
-    /* 線香花火の火花 */
+    @keyframes sparklerCoreEnhanced {
+        0%, 100% {
+            opacity: 0;
+            transform: scale(0.5) rotate(0deg);
+        }
+        10% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2) rotate(180deg);
+        }
+        90% {
+            opacity: 1;
+            transform: scale(1) rotate(360deg);
+        }
+    }
+
+    /* Enhanced Sparks with Mobile Motion */
     .spark {
         position: absolute;
         width: 2px;
@@ -789,9 +835,9 @@
         pointer-events: none;
     }
 
-    /* 火花パターン1 - 上向き */
+    /* Enhanced Spark Patterns with Gravity and Opacity */
     .spark-pattern-1 {
-        animation: sparkFall1 3s ease-out infinite;
+        animation: sparkFallEnhanced1 4s ease-out infinite;
     }
 
     .spark-pattern-1:nth-child(6) { 
@@ -810,9 +856,8 @@
         background: rgba(255, 140, 0, 0.7);
     }
 
-    /* 火花パターン2 - 右上向き */
     .spark-pattern-2 {
-        animation: sparkFall2 3.5s ease-out infinite;
+        animation: sparkFallEnhanced2 4.5s ease-out infinite;
     }
 
     .spark-pattern-2:nth-child(9) { 
@@ -831,9 +876,8 @@
         background: rgba(255, 140, 0, 0.7);
     }
 
-    /* 火花パターン3 - 左下向き */
     .spark-pattern-3 {
-        animation: sparkFall3 4s ease-out infinite;
+        animation: sparkFallEnhanced3 5s ease-out infinite;
     }
 
     .spark-pattern-3:nth-child(12) { 
@@ -852,9 +896,8 @@
         background: rgba(255, 140, 0, 0.7);
     }
 
-    /* 火花パターン4 - 右下向き */
     .spark-pattern-4 {
-        animation: sparkFall4 3.8s ease-out infinite;
+        animation: sparkFallEnhanced4 4.8s ease-out infinite;
     }
 
     .spark-pattern-4:nth-child(15) { 
@@ -873,9 +916,8 @@
         background: rgba(255, 140, 0, 0.7);
     }
 
-    /* 火花パターン5 - 中央向き */
     .spark-pattern-5 {
-        animation: sparkFall5 4.2s ease-out infinite;
+        animation: sparkFallEnhanced5 5.2s ease-out infinite;
     }
 
     .spark-pattern-5:nth-child(18) { 
@@ -894,109 +936,130 @@
         background: rgba(255, 140, 0, 0.7);
     }
 
-    @keyframes sparkFall1 {
+    /* Enhanced Spark Animations with Realistic Gravity */
+    @keyframes sparkFallEnhanced1 {
         0% {
             opacity: 0;
             transform: translateY(0) translateX(0) scale(0);
         }
-        10% {
+        15% {
             opacity: 1;
-            transform: translateY(-10px) translateX(-5px) scale(1);
+            transform: translateY(-15px) translateX(-8px) scale(1);
         }
         50% {
-            opacity: 1;
-            transform: translateY(-30px) translateX(-15px) scale(0.8);
+            opacity: 0.8;
+            transform: translateY(-35px) translateX(-20px) scale(0.9);
+        }
+        80% {
+            opacity: 0.4;
+            transform: translateY(-25px) translateX(-30px) scale(0.6);
         }
         100% {
             opacity: 0;
-            transform: translateY(-50px) translateX(-25px) scale(0.3);
+            transform: translateY(10px) translateX(-40px) scale(0.3);
         }
     }
 
-    @keyframes sparkFall2 {
+    @keyframes sparkFallEnhanced2 {
         0% {
             opacity: 0;
             transform: translateY(0) translateX(0) scale(0);
         }
-        10% {
+        15% {
             opacity: 1;
-            transform: translateY(-8px) translateX(8px) scale(1);
+            transform: translateY(-12px) translateX(12px) scale(1);
         }
         50% {
-            opacity: 1;
-            transform: translateY(-25px) translateX(20px) scale(0.8);
+            opacity: 0.8;
+            transform: translateY(-30px) translateX(25px) scale(0.9);
+        }
+        80% {
+            opacity: 0.4;
+            transform: translateY(-20px) translateX(35px) scale(0.6);
         }
         100% {
             opacity: 0;
-            transform: translateY(-45px) translateX(35px) scale(0.3);
+            transform: translateY(15px) translateX(45px) scale(0.3);
         }
     }
 
-    @keyframes sparkFall3 {
+    @keyframes sparkFallEnhanced3 {
         0% {
             opacity: 0;
             transform: translateY(0) translateX(0) scale(0);
         }
-        10% {
+        15% {
             opacity: 1;
-            transform: translateY(10px) translateX(-10px) scale(1);
+            transform: translateY(15px) translateX(-15px) scale(1);
         }
         50% {
-            opacity: 1;
-            transform: translateY(25px) translateX(-20px) scale(0.8);
+            opacity: 0.8;
+            transform: translateY(30px) translateX(-25px) scale(0.9);
+        }
+        80% {
+            opacity: 0.4;
+            transform: translateY(25px) translateX(-35px) scale(0.6);
         }
         100% {
             opacity: 0;
-            transform: translateY(45px) translateX(-35px) scale(0.3);
+            transform: translateY(60px) translateX(-45px) scale(0.3);
         }
     }
 
-    @keyframes sparkFall4 {
+    @keyframes sparkFallEnhanced4 {
         0% {
             opacity: 0;
             transform: translateY(0) translateX(0) scale(0);
         }
-        10% {
+        15% {
             opacity: 1;
-            transform: translateY(8px) translateX(8px) scale(1);
+            transform: translateY(12px) translateX(12px) scale(1);
         }
         50% {
-            opacity: 1;
-            transform: translateY(20px) translateX(18px) scale(0.8);
+            opacity: 0.8;
+            transform: translateY(25px) translateX(22px) scale(0.9);
+        }
+        80% {
+            opacity: 0.4;
+            transform: translateY(20px) translateX(32px) scale(0.6);
         }
         100% {
             opacity: 0;
-            transform: translateY(40px) translateX(30px) scale(0.3);
+            transform: translateY(50px) translateX(40px) scale(0.3);
         }
     }
 
-    @keyframes sparkFall5 {
+    @keyframes sparkFallEnhanced5 {
         0% {
             opacity: 0;
             transform: translateY(0) translateX(0) scale(0);
         }
-        10% {
+        15% {
             opacity: 1;
-            transform: translateY(-5px) translateX(0) scale(1);
+            transform: translateY(-8px) translateX(0) scale(1);
         }
         50% {
-            opacity: 1;
-            transform: translateY(-15px) translateX(0) scale(0.8);
+            opacity: 0.8;
+            transform: translateY(-20px) translateX(0) scale(0.9);
+        }
+        80% {
+            opacity: 0.4;
+            transform: translateY(-15px) translateX(0) scale(0.6);
         }
         100% {
             opacity: 0;
-            transform: translateY(-30px) translateX(0) scale(0.3);
+            transform: translateY(5px) translateX(0) scale(0.3);
         }
     }
 
-    /* 微細なきらめきエフェクト */
+    /* Enhanced Micro Sparkles with Increased Density */
     .micro-sparkle {
         position: absolute;
         width: 1px;
         height: 1px;
         background: rgba(255, 255, 255, 0.7);
         border-radius: 50%;
-        animation: microSparkle 2s ease-in-out infinite;
+        animation: microSparkleEnhanced 3s ease-in-out infinite;
         pointer-events: none;
     }
 
@@ -1005,19 +1068,38 @@
     .micro-sparkle:nth-child(23) { bottom: 35%; left: 45%; animation-delay: 2.5s; }
     .micro-sparkle:nth-child(24) { bottom: 20%; right: 20%; animation-delay: 3.5s; }
     .micro-sparkle:nth-child(25) { top: 55%; left: 65%; animation-delay: 4.5s; }
+    .micro-sparkle:nth-child(26) { top: 15%; right: 45%; animation-delay: 0.8s; display: none; }
+    .micro-sparkle:nth-child(27) { bottom: 50%; left: 25%; animation-delay: 2.8s; display: none; }
+    .micro-sparkle:nth-child(28) { top: 75%; right: 35%; animation-delay: 4.2s; display: none; }
 
-    @keyframes microSparkle {
-        0%, 100% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1.5);
+    @media (min-width: 768px) {
+        .micro-sparkle:nth-child(26),
+        .micro-sparkle:nth-child(27),
+        .micro-sparkle:nth-child(28) {
+            display: block;
         }
     }
 
-    /* モバイル版線香花火エフェクト最適化 */
+    @keyframes microSparkleEnhanced {
+        0%, 100% {
+            opacity: 0;
+            transform: scale(0.5) rotate(0deg);
+        }
+        25% {
+            opacity: 0.7;
+            transform: scale(1.2) rotate(90deg);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.8) rotate(180deg);
+        }
+        75% {
+            opacity: 0.7;
+            transform: scale(1.2) rotate(270deg);
+        }
+    }
+
+    /* Mobile Optimizations for Fireworks */
     @media (max-width: 768px) {
         .sparkler-core {
             width: 6px;
@@ -1033,8 +1115,14 @@
             width: 0.8px;
             height: 0.8px;
         }
+        
+        .page-hero {
+            min-height: 80vh;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem;
+        }
     }
     
+    /* Component: HeroHeader - Updated Title */
     .page-hero-content {
         position: relative;
         z-index: var(--z-elevate);
@@ -1109,11 +1197,6 @@
     }
     
     @media (max-width: 768px) {
-        .page-hero {
-            min-height: 80vh;
-            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem;
-        }
-        
         .breadcrumb {
             margin-bottom: 0.8rem;
             font-size: 0.75rem;
@@ -1157,112 +1240,7 @@
         line-height: 1.6;
     }
     
-    /* Component: RefinedBrandCatchphrase - 新しいキャッチコピー */
-    .brand-catchphrase {
-        position: relative;
-        display: inline-block;
-        font-style: italic;
-        color: var(--dark);
-        margin-bottom: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 500;
-        padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
-        background: linear-gradient(135deg, 
-            rgba(248, 250, 252, 0.9) 0%, 
-            rgba(241, 245, 249, 0.8) 50%, 
-            rgba(248, 250, 252, 0.9) 100%);
-        border-radius: 30px;
-        font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-        text-align: center;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0 4px 15px rgba(58, 95, 235, 0.08);
-        border: 1px solid rgba(58, 95, 235, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    
-    .brand-catchphrase:hover {
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.12);
-        transform: translateY(-2px);
-    }
-    
-    .brand-catchphrase::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, 
-            transparent 0%, 
-            rgba(255, 255, 255, 0.05) 25%, 
-            rgba(255, 255, 255, 0.1) 50%, 
-            rgba(255, 255, 255, 0.05) 75%, 
-            transparent 100%);
-        transform: rotate(45deg);
-        animation: subtleShimmer 6s linear infinite;
-        z-index: 1;
-    }
-    
-    .brand-catchphrase-text {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(0.4rem, 1vw, 0.8rem);
-        flex-wrap: wrap;
-    }
-    
-    .brand-catchphrase i {
-        color: var(--primary);
-        font-size: clamp(1rem, 1.5vw, 1.2rem);
-        opacity: 0.7;
-        animation: gentleFloat 3s ease-in-out infinite alternate;
-    }
-    
-    @keyframes subtleShimmer {
-        0% {
-            transform: rotate(45deg) translateX(-100%);
-        }
-        100% {
-            transform: rotate(45deg) translateX(100%);
-        }
-    }
-    
-    @keyframes gentleFloat {
-        0% {
-            transform: translateY(0px);
-            opacity: 0.7;
-        }
-        100% {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-    }
-    
-    .highlight {
-        position: relative;
-        display: inline;
-        color: var(--primary);
-    }
-    
-    .highlight::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 30%;
-        background: rgba(58, 95, 235, 0.1);
-        z-index: -1;
-        border-radius: 1px;
-    }
-
-    /* Component: ShinAI強みセクション - 完全改良版 */
+    /* Component: StrengthsSection - Redesigned Layout */
     .intro-section {
         background: linear-gradient(135deg, 
             rgba(248, 250, 252, 0.9) 0%, 
@@ -1301,11 +1279,32 @@
         margin-bottom: clamp(1.5rem, 3vw, 2rem);
     }
     
+    /* Redesigned Grid Layout for PC */
+    .intro-main-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: clamp(2rem, 4vw, 3rem);
+        align-items: start;
+        margin-top: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    @media (max-width: 992px) {
+        .intro-main-grid {
+            grid-template-columns: 1fr;
+            gap: clamp(1.5rem, 3vw, 2rem);
+        }
+    }
+    
+    .intro-text-section {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    
     .intro-text {
-        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        font-size: clamp(1rem, 1.8vw, 1.1rem);
         line-height: 1.7;
         color: var(--dark);
-        margin-bottom: clamp(1.2rem, 2.5vw, 1.5rem);
         letter-spacing: 0.01em;
     }
     
@@ -1318,21 +1317,49 @@
         border-left: 2px solid var(--primary);
     }
 
-    .strengths-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-        gap: clamp(1.2rem, 2.5vw, 1.8rem);
-        margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
-        max-width: 1200px;
+    /* Simplified Brand Catchphrase */
+    .brand-catchphrase {
+        position: relative;
+        display: block;
+        color: var(--dark);
+        margin-bottom: clamp(1.2rem, 2.5vw, 1.5rem);
+        font-weight: 600;
+        padding: clamp(1rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2rem);
+        background: linear-gradient(135deg, 
+            rgba(248, 250, 252, 0.9) 0%, 
+            rgba(241, 245, 249, 0.8) 50%, 
+            rgba(248, 250, 252, 0.9) 100%);
+        border-radius: 20px;
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
+        text-align: center;
+        max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+        box-shadow: 0 4px 15px rgba(58, 95, 235, 0.08);
+        border: 1px solid rgba(58, 95, 235, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        border-bottom: 3px solid var(--primary);
+    }
+    
+    .brand-catchphrase:hover {
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.12);
+        transform: translateY(-2px);
+    }
+
+    /* Strengths Cards Grid - Right Side */
+    .strengths-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(1rem, 2vw, 1.2rem);
     }
 
     .strength-item {
         background: linear-gradient(135deg, 
             rgba(255, 255, 255, 0.95) 0%, 
             rgba(248, 250, 252, 0.9) 100%);
-        padding: clamp(1.5rem, 3vw, 2rem);
+        padding: clamp(1.2rem, 2.5vw, 1.5rem);
         border-radius: 16px;
         box-shadow: 0 6px 20px rgba(58, 95, 235, 0.06);
         border: 1px solid rgba(58, 95, 235, 0.08);
@@ -1340,7 +1367,6 @@
         position: relative;
         overflow: hidden;
         text-align: center;
-        height: 100%;
         display: flex;
         flex-direction: column;
         backdrop-filter: blur(10px);
@@ -1360,8 +1386,8 @@
     }
 
     .strength-item:hover {
-        transform: translateY(-6px) scale(1.01);
-        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.12);
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.12);
         border-color: rgba(58, 95, 235, 0.15);
     }
 
@@ -1370,17 +1396,17 @@
     }
 
     .strength-icon {
-        width: clamp(50px, 8vw, 60px);
-        height: clamp(50px, 8vw, 60px);
+        width: clamp(40px, 6vw, 45px);
+        height: clamp(40px, 6vw, 45px);
         background: var(--gradient-primary);
-        border-radius: 16px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
         color: var(--white);
-        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        margin: 0 auto clamp(1rem, 2vw, 1.2rem);
+        box-shadow: 0 6px 18px rgba(58, 95, 235, 0.25);
+        margin: 0 auto clamp(0.8rem, 1.5vw, 1rem);
         transition: all 0.3s ease;
         position: relative;
         z-index: 2;
@@ -1388,13 +1414,13 @@
 
     .strength-item:hover .strength-icon {
         transform: scale(1.08) rotate(5deg);
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+        box-shadow: 0 10px 25px rgba(58, 95, 235, 0.35);
     }
 
     .strength-title {
-        font-size: clamp(1.1rem, 2vw, 1.2rem);
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
         font-weight: 700;
-        margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
+        margin-bottom: clamp(0.5rem, 1vw, 0.6rem);
         color: var(--dark);
         line-height: 1.3;
     }
@@ -1402,20 +1428,20 @@
     .strength-description {
         color: var(--gray);
         line-height: 1.6;
-        font-size: clamp(0.85rem, 1.2vw, 0.9rem);
-        margin-bottom: clamp(1rem, 2vw, 1.2rem);
+        font-size: clamp(0.75rem, 1.1vw, 0.8rem);
+        margin-bottom: clamp(0.8rem, 1.5vw, 1rem);
         flex-grow: 1;
     }
 
     .strength-stat {
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
-        padding: clamp(0.6rem, 1.5vw, 0.8rem);
+        padding: clamp(0.5rem, 1vw, 0.6rem);
         border-radius: var(--radius-lg);
         margin-top: auto;
     }
 
     .stat-value {
-        font-size: clamp(1.6rem, 3vw, 2rem);
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
         font-weight: 800;
         line-height: 1;
         background: var(--gradient-primary);
@@ -1426,14 +1452,14 @@
     }
 
     .stat-label {
-        font-size: clamp(0.75rem, 1.2vw, 0.8rem);
+        font-size: clamp(0.7rem, 1vw, 0.75rem);
         color: var(--gray);
-        margin-top: 0.4rem;
+        margin-top: 0.3rem;
         font-weight: 600;
         line-height: 1.2;
     }
 
-    /* 個別アイコンカラーリング */
+    /* Individual Icon Colors */
     .strength-item:nth-child(1) .strength-icon {
         background: linear-gradient(135deg, #3A5FEB, #5B7BFF);
     }
@@ -1446,7 +1472,7 @@
         background: linear-gradient(135deg, #FF8A00, #FFA94D);
     }
 
-    /* アイプロセクション */
+    /* AI Pro Section */
     .aipro-showcase {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
@@ -1457,6 +1483,7 @@
         padding: clamp(1.2rem, 2.5vw, 1.8rem);
         margin-top: clamp(1.5rem, 3vw, 2rem);
         text-align: center;
+        grid-column: 1 / -1;
     }
 
     .aipro-title {
@@ -1473,12 +1500,40 @@
         margin-bottom: clamp(0.8rem, 1.5vw, 1rem);
     }
 
-    /* Component: Enhanced Industries Grid */
+    /* Component: IndustriesSection - Enhanced 2x3 Grid Layout */
     .industries-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
         gap: clamp(1.2rem, 2.5vw, 1.8rem);
         margin-top: clamp(1.5rem, 3vw, 2rem);
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    @media (max-width: 1200px) {
+        .industries-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .industries-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: clamp(1rem, 2vw, 1.2rem);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1rem;
+        }
+        
+        .industry-card {
+            scroll-snap-align: start;
+            min-width: 280px;
+        }
     }
     
     .industry-card {
@@ -1493,7 +1548,7 @@
         display: flex;
         flex-direction: column;
         border: 1px solid rgba(58, 95, 235, 0.06);
-        scroll-snap-align: start;
+        min-height: 320px;
     }
 
     .industry-card:hover {
@@ -1512,7 +1567,7 @@
         z-index: 1;
     }
 
-    /* 業界別カラーシステム */
+    /* Industry Color System */
     .industry-card[data-industry="welfare"]::before {
         background: linear-gradient(180deg, var(--welfare-primary), var(--welfare-secondary));
     }
@@ -1559,7 +1614,7 @@
         transition: all 0.15s ease;
     }
 
-    /* 業界別アイコンカラー */
+    /* Industry Icon Colors */
     .industry-card[data-industry="welfare"] .industry-icon {
         background: linear-gradient(135deg, var(--welfare-primary), var(--welfare-secondary));
         box-shadow: 0 4px 15px rgba(70, 113, 255, 0.2);
@@ -1634,7 +1689,7 @@
         font-size: clamp(0.6rem, 1vw, 0.7rem);
     }
 
-    /* 業界カードごとのアイコン色分け */
+    /* Industry Feature Icon Colors */
     .industry-card[data-industry="welfare"] .industry-feature i {
         color: var(--welfare-primary);
     }
@@ -1752,7 +1807,7 @@
         transform: translateX(3px);
     }
 
-    /* 業界別のボタンカラー */
+    /* Industry Button Colors */
     .industry-card[data-industry="welfare"] .btn-outline {
         color: var(--welfare-primary);
         border-color: rgba(70, 113, 255, 0.2);
@@ -1860,7 +1915,7 @@
         z-index: 1;
     }
 
-    /* 活用事例の色分け */
+    /* Use Case Colors */
     .use-case[data-industry="welfare"]::before {
         background: linear-gradient(180deg, var(--welfare-primary), var(--welfare-secondary));
     }
@@ -2107,6 +2162,72 @@
     .step:hover .step-duration {
         background: rgba(255, 138, 0, 0.08);
         color: var(--accent);
+    }
+
+    /* Component: ClosingCopy - Enhanced Typography and Spacing */
+    .closing-copy-section {
+        padding: clamp(2rem, 4vw, 3.5rem) 0;
+        background: linear-gradient(135deg, 
+            rgba(248, 250, 252, 0.9) 0%, 
+            rgba(241, 245, 249, 0.8) 50%, 
+            rgba(248, 250, 252, 0.9) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .closing-copy-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 30%, rgba(58, 95, 235, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 201, 167, 0.03) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .closing-brand-catchphrase {
+        position: relative;
+        display: block;
+        color: var(--dark);
+        margin-bottom: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 600;
+        padding: clamp(1.2rem, 2.5vw, 1.5rem) clamp(2rem, 4vw, 2.5rem);
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.95) 0%, 
+            rgba(248, 250, 252, 0.9) 100%);
+        border-radius: 20px;
+        font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+        text-align: center;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.1);
+        border: 1px solid rgba(58, 95, 235, 0.12);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+        border-bottom: 3px solid var(--primary);
+        z-index: 1;
+        line-height: 1.6;
+    }
+    
+    .closing-brand-catchphrase:hover {
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.15);
+        transform: translateY(-3px);
+    }
+    
+    .highlight {
+        position: relative;
+        display: inline;
+        color: var(--primary);
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-color: var(--primary);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
     }
 
     /* Component: Enhanced CTA Section */
@@ -2600,7 +2721,7 @@
         align-items: center;
         justify-content: center;
         font-size: 1.3rem;
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.3);
         cursor: pointer;
         position: relative;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2642,7 +2763,7 @@
     
     .chatbot-button:hover {
         transform: scale(1.08);
-        box-shadow: var(--shadow-xl);
+        box-shadow: 0 12px 35px rgba(58, 95, 235, 0.4);
     }
     
     .chatbot-button:hover::after {
@@ -2661,7 +2782,7 @@
         height: 480px;
         background: var(--white);
         border-radius: 18px;
-        box-shadow: var(--shadow-xl);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         overflow: hidden;
         display: none;
         flex-direction: column;
@@ -2930,7 +3051,7 @@
         cursor: pointer;
         z-index: var(--z-fixed);
         transition: all var(--transition-normal) ease;
-        box-shadow: var(--shadow-md);
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.25);
         border: none;
         overflow: hidden;
         font-size: 0.9rem;
@@ -2963,7 +3084,7 @@
     
     .back-to-top:hover {
         transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.35);
     }
     
     .back-to-top:hover::before {
@@ -3239,18 +3360,21 @@
     
     <!-- Component: MainContent -->
     <main id="main-content">
-        <!-- Component: EnhancedPageHero -->
+        <!-- Component: HeroHeader - Updated Title -->
         <section class="page-hero" id="hero">
-            <!-- 線香花火エフェクト -->
+            <!-- Component: FireworksEffect - Enhanced Mobile/PC Optimized -->
             <div class="sparkler-container">
-                <!-- 大輪の線香花火エフェクト -->
+                <!-- Enhanced Sparkler Cores -->
+                <div class="sparkler-core"></div>
+                <div class="sparkler-core"></div>
+                <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 
-                <!-- 火花エフェクト -->
+                <!-- Enhanced Spark Effects -->
                 <div class="spark spark-pattern-1"></div>
                 <div class="spark spark-pattern-1"></div>
                 <div class="spark spark-pattern-1"></div>
@@ -3267,7 +3391,10 @@
                 <div class="spark spark-pattern-5"></div>
                 <div class="spark spark-pattern-5"></div>
                 
-                <!-- きらめき効果 -->
+                <!-- Enhanced Micro Sparkles -->
+                <div class="micro-sparkle"></div>
+                <div class="micro-sparkle"></div>
+                <div class="micro-sparkle"></div>
                 <div class="micro-sparkle"></div>
                 <div class="micro-sparkle"></div>
                 <div class="micro-sparkle"></div>
@@ -3284,7 +3411,7 @@
                     </div>
 
                     <h1 class="page-hero-title heading-xl">
-                        業界に特化した<span class="text-gradient">AI変革ソリューション</span>
+                        業界別AI活用事例<span class="text-gradient">導入イメージを掴む</span>最適なAIソリューション
                     </h1>
 
                     <p class="page-hero-description text-lg">
@@ -3295,18 +3422,10 @@
             </div>
         </section>
 
-        <!-- Component: ImprovedIntroSection -->
+        <!-- Component: StrengthsSection - Redesigned Layout -->
         <section class="section intro-section" aria-labelledby="intro-title">
             <div class="container">
                 <div class="section-header animate-in">
-                    <!-- 新しいキャッチコピー -->
-                    <div class="brand-catchphrase">
-                        <div class="brand-catchphrase-text">
-                            <i class="fas fa-quote-left"></i>
-                            <span>真の価値を信じ、次世代のために新たな未来を創る</span>
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                    </div>
                     <span class="section-subtitle">ShinAIの強み</span>
                     <h2 class="heading-lg" id="intro-title">なぜ<span class="highlight">プロトタイプからの伴走型開発</span>が選ばれるのか</h2>
                     <p class="section-description">
@@ -3315,63 +3434,74 @@
                 </div>
                 
                 <div class="intro-content animate-in">
-                    <p class="intro-text">
-                        従来のAI導入は「大規模投資→失敗リスク→導入断念」という負のサイクルに陥りがちです。
-                        ShinAIは<span class="intro-highlight">「小さく始めて、確実に成果を積み重ねる」</span>という独自のアプローチで、
-                        この課題を根本的に解決します。
-                    </p>
-                    
-                    <!-- Component: ShinAI強みコンテナ -->
-                    <div class="strengths-container">
-                        <!-- プロトタイプ先行開発 -->
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-seedling" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">プロトタイプ先行開発</h4>
-                            <p class="strength-description">最短2週間で動作する試作品を構築。実際に使って効果を確認してから本格導入を決定できるため、投資リスクを最小化します。プロジェクトの方向性を早期に確認し、成功への確実な道筋を描きます。</p>
-                            <div class="strength-stat">
-                                <span class="stat-value">2</span>
-                                <span class="stat-label">週間で試作完成</span>
-                            </div>
-                        </div>
-                        
-                        <!-- 完全伴走型サポート -->
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-handshake" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">完全伴走型サポート</h4>
-                            <p class="strength-description">技術導入だけでなく、組織への定着まで継続支援。専門知識がなくても安心してAI活用を進められる体制を構築し、長期的な成功をサポートします。</p>
-                            <div class="strength-stat">
-                                <span class="stat-value">100</span>
-                                <span class="stat-label">%継続支援率</span>
-                            </div>
-                        </div>
-                        
-                        <!-- 業界特化カスタマイズ -->
-                        <div class="strength-item">
-                            <div class="strength-icon">
-                                <i class="fas fa-industry" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">業界特化カスタマイズ</h4>
-                            <p class="strength-description">福祉・教育・建設・製造・小売・金融など、各業界の特性と規制に完全対応したAIソリューションを開発。業界固有の課題を深く理解した専門的アプローチを提供します。</p>
-                            <div class="strength-stat">
-                                <span class="stat-value">6</span>
-                                <span class="stat-label">業界専門対応</span>
-                            </div>
-                        </div>
+                    <!-- Brand Catchphrase - Simplified -->
+                    <div class="brand-catchphrase">
+                        真の価値を信じ、次世代のために新たな未来を創る
                     </div>
                     
-                    <div class="aipro-showcase">
-                        <h3 class="aipro-title">自社プロダクト「<span class="text-gradient">アイプロ</span>」で実証済みの技術力</h3>
-                        <p class="aipro-description">新規事業企画書作成AIツール「アイプロ」は、中小企業を中心に高い評価をいただいており、ShinAIの技術力とユーザビリティ設計の実力を証明しています。この実績をもとに、お客様の業界に最適化したAIソリューションを開発いたします。</p>
+                    <!-- Redesigned Grid Layout -->
+                    <div class="intro-main-grid">
+                        <!-- Left Side: Text Content -->
+                        <div class="intro-text-section">
+                            <p class="intro-text">
+                                従来のAI導入は「大規模投資→失敗リスク→導入断念」という負のサイクルに陥りがちです。
+                                ShinAIは<span class="intro-highlight">「小さく始めて、確実に成果を積み重ねる」</span>という独自のアプローチで、
+                                この課題を根本的に解決します。
+                            </p>
+                            
+                            <div class="aipro-showcase">
+                                <h3 class="aipro-title">自社プロダクト「<span class="text-gradient">アイプロ</span>」で実証済みの技術力</h3>
+                                <p class="aipro-description">新規事業企画書作成AIツール「アイプロ」は、中小企業を中心に高い評価をいただいており、ShinAIの技術力とユーザビリティ設計の実力を証明しています。この実績をもとに、お客様の業界に最適化したAIソリューションを開発いたします。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side: Strengths Cards -->
+                        <div class="strengths-container">
+                            <!-- プロトタイプ先行開発 -->
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-seedling" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="strength-title">プロトタイプ先行開発</h4>
+                                <p class="strength-description">最短2週間で動作する試作品を構築。実際に使って効果を確認してから本格導入を決定できるため、投資リスクを最小化します。</p>
+                                <div class="strength-stat">
+                                    <span class="stat-value">2</span>
+                                    <span class="stat-label">週間で試作完成</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 完全伴走型サポート -->
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-handshake" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="strength-title">完全伴走型サポート</h4>
+                                <p class="strength-description">技術導入だけでなく、組織への定着まで継続支援。専門知識がなくても安心してAI活用を進められる体制を構築します。</p>
+                                <div class="strength-stat">
+                                    <span class="stat-value">100</span>
+                                    <span class="stat-label">%継続支援率</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 業界特化カスタマイズ -->
+                            <div class="strength-item">
+                                <div class="strength-icon">
+                                    <i class="fas fa-industry" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="strength-title">業界特化カスタマイズ</h4>
+                                <p class="strength-description">福祉・教育・建設・製造・小売・金融など、各業界の特性と規制に完全対応したAIソリューションを開発します。</p>
+                                <div class="strength-stat">
+                                    <span class="stat-value">6</span>
+                                    <span class="stat-label">業界専門対応</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Component: IndustriesNavigation -->
+        <!-- Component: IndustriesSection - Enhanced 2x3 Grid Layout -->
         <section class="section section-bg-light" aria-labelledby="industries-title">
             <div class="container">
                 <div class="section-header animate-in">
@@ -3390,7 +3520,7 @@
                     <a href="#finance" class="industry-tab" role="tab" aria-selected="false" aria-controls="finance-content" id="finance-tab">金融・保険</a>
                 </div>
                 
-                <!-- Component: IndustriesGrid -->
+                <!-- Enhanced 2x3 Grid Layout -->
                 <div class="industries-grid animate-in" aria-label="業界別AIソリューション">
                     <!-- 福祉・介護 -->
                     <div class="industry-card" id="welfare" data-industry="welfare" role="tabpanel" aria-labelledby="welfare-tab" tabindex="0">
@@ -3591,14 +3721,6 @@
         <section class="section">
             <div class="container">
                 <div class="section-header animate-in">
-                    <!-- 締めキャッチフレーズ - 新しいコピー -->
-                    <div class="brand-catchphrase">
-                        <div class="brand-catchphrase-text">
-                            <i class="fas fa-quote-left"></i>
-                            <span>大切な人と関わる時間を作るために真の価値を追求し続けます</span>
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                    </div>
                     <span class="section-subtitle">AI活用例</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
@@ -3870,7 +3992,7 @@
             </div>
         </section>
 
-        <!-- Component: ImplementationSteps -->
+        <!-- Component: Implementation Steps -->
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-in">
@@ -3928,7 +4050,18 @@
             </div>
         </section>
 
-        <!-- Component: EnhancedCTASection -->
+        <!-- Component: ClosingCopy - Enhanced Typography and Spacing -->
+        <section class="closing-copy-section">
+            <div class="container">
+                <div class="section-header animate-in">
+                    <div class="closing-brand-catchphrase">
+                        <span class="highlight">大切な人と関わる時間を作るために</span>真の価値を追求し続けます
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Component: Enhanced CTA Section -->
         <section class="cta-section">
             <div class="cta-patterns">
                 <div class="cta-pattern"></div>
