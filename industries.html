@@ -888,291 +888,375 @@
         }
     }
 
-    /* 線香花火の美しい火花粒子 - 本物のような円状放射 */
+    /* =============================================
+    === SUB-COMPONENT: PerfectJapaneseSparklerParticles ===
+    FUNCTION: 本物の線香花火のような超滑らかで繊細な火花粒子
+    FEATURES: 物理法則に基づいた自然な動き・滑らかな円状放射・繊細なフェードアウト
+    ============================================= */
     .spark {
         position: absolute;
-        width: 2.5px;
-        height: 2.5px;
+        width: 1.8px;
+        height: 1.8px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         pointer-events: none;
-        box-shadow: 0 0 6px currentColor;
-        filter: blur(0.3px);
+        box-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
+        filter: blur(0.1px);
+        will-change: transform, opacity;
     }
 
-    /* 円状放射パターン1 - 美しく散る火花 */
+    /* 超滑らかな円状放射パターン1 - 本物の線香花火のような美しい軌道 */
     .spark-pattern-1 {
-        animation: beautifulRadialBurst1 4.5s ease-out infinite;
-        background: rgba(255, 160, 200, 0.95);
-        box-shadow: 0 0 8px rgba(255, 160, 200, 0.8);
+        animation: ultraSmoothRadial1 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        background: rgba(255, 180, 220, 0.9);
+        box-shadow: 0 0 3px rgba(255, 180, 220, 0.7), 0 0 6px rgba(255, 180, 220, 0.4);
     }
 
-    /* コア1からの円状放射（12方向 - より豊かな表現） */
-    .spark-pattern-1:nth-child(31) { left: 12%; top: 18%; animation-delay: 0.1s; }
-    .spark-pattern-1:nth-child(32) { left: 13.5%; top: 16.5%; animation-delay: 0.15s; }
-    .spark-pattern-1:nth-child(33) { left: 15%; top: 18%; animation-delay: 0.2s; }
-    .spark-pattern-1:nth-child(34) { left: 13.5%; top: 19.5%; animation-delay: 0.25s; }
-    .spark-pattern-1:nth-child(35) { left: 12%; top: 19.5%; animation-delay: 0.3s; }
-    .spark-pattern-1:nth-child(36) { left: 10.5%; top: 19.5%; animation-delay: 0.35s; }
-    .spark-pattern-1:nth-child(37) { left: 9%; top: 18%; animation-delay: 0.4s; }
-    .spark-pattern-1:nth-child(38) { left: 10.5%; top: 16.5%; animation-delay: 0.45s; }
-    .spark-pattern-1:nth-child(39) { left: 14%; top: 15%; animation-delay: 0.5s; }
-    .spark-pattern-1:nth-child(40) { left: 16%; top: 17%; animation-delay: 0.55s; }
-    .spark-pattern-1:nth-child(41) { left: 14%; top: 21%; animation-delay: 0.6s; }
-    .spark-pattern-1:nth-child(42) { left: 8%; top: 17%; animation-delay: 0.65s; }
+    /* 完全に滑らかな円状配置 - コア1からの12方向放射 */
+    .spark-pattern-1:nth-child(31) { left: 12%; top: 18%; animation-delay: 0.05s; }
+    .spark-pattern-1:nth-child(32) { left: 13.5%; top: 16.5%; animation-delay: 0.1s; }
+    .spark-pattern-1:nth-child(33) { left: 15%; top: 18%; animation-delay: 0.15s; }
+    .spark-pattern-1:nth-child(34) { left: 13.5%; top: 19.5%; animation-delay: 0.2s; }
+    .spark-pattern-1:nth-child(35) { left: 12%; top: 19.5%; animation-delay: 0.25s; }
+    .spark-pattern-1:nth-child(36) { left: 10.5%; top: 19.5%; animation-delay: 0.3s; }
+    .spark-pattern-1:nth-child(37) { left: 9%; top: 18%; animation-delay: 0.35s; }
+    .spark-pattern-1:nth-child(38) { left: 10.5%; top: 16.5%; animation-delay: 0.4s; }
+    .spark-pattern-1:nth-child(39) { left: 14%; top: 15%; animation-delay: 0.45s; }
+    .spark-pattern-1:nth-child(40) { left: 16%; top: 17%; animation-delay: 0.5s; }
+    .spark-pattern-1:nth-child(41) { left: 14%; top: 21%; animation-delay: 0.55s; }
+    .spark-pattern-1:nth-child(42) { left: 8%; top: 17%; animation-delay: 0.6s; }
 
     .spark-pattern-2 {
-        animation: beautifulRadialBurst2 5s ease-out infinite;
-        background: rgba(120, 200, 255, 0.95);
-        box-shadow: 0 0 8px rgba(120, 200, 255, 0.8);
+        animation: ultraSmoothRadial2 6.5s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+        background: rgba(140, 220, 255, 0.9);
+        box-shadow: 0 0 3px rgba(140, 220, 255, 0.7), 0 0 6px rgba(140, 220, 255, 0.4);
     }
 
-    /* コア2からの円状放射 */
-    .spark-pattern-2:nth-child(43) { right: 18%; top: 28%; animation-delay: 1.3s; }
-    .spark-pattern-2:nth-child(44) { right: 16.5%; top: 26.5%; animation-delay: 1.35s; }
-    .spark-pattern-2:nth-child(45) { right: 15%; top: 28%; animation-delay: 1.4s; }
-    .spark-pattern-2:nth-child(46) { right: 16.5%; top: 29.5%; animation-delay: 1.45s; }
-    .spark-pattern-2:nth-child(47) { right: 18%; top: 29.5%; animation-delay: 1.5s; }
-    .spark-pattern-2:nth-child(48) { right: 19.5%; top: 29.5%; animation-delay: 1.55s; }
-    .spark-pattern-2:nth-child(49) { right: 21%; top: 28%; animation-delay: 1.6s; }
-    .spark-pattern-2:nth-child(50) { right: 19.5%; top: 26.5%; animation-delay: 1.65s; }
-    .spark-pattern-2:nth-child(51) { right: 17%; top: 25%; animation-delay: 1.7s; }
-    .spark-pattern-2:nth-child(52) { right: 14%; top: 27%; animation-delay: 1.75s; }
-    .spark-pattern-2:nth-child(53) { right: 17%; top: 31%; animation-delay: 1.8s; }
-    .spark-pattern-2:nth-child(54) { right: 22%; top: 27%; animation-delay: 1.85s; }
+    /* コア2からの滑らかな円状放射 */
+    .spark-pattern-2:nth-child(43) { right: 18%; top: 28%; animation-delay: 1.25s; }
+    .spark-pattern-2:nth-child(44) { right: 16.5%; top: 26.5%; animation-delay: 1.3s; }
+    .spark-pattern-2:nth-child(45) { right: 15%; top: 28%; animation-delay: 1.35s; }
+    .spark-pattern-2:nth-child(46) { right: 16.5%; top: 29.5%; animation-delay: 1.4s; }
+    .spark-pattern-2:nth-child(47) { right: 18%; top: 29.5%; animation-delay: 1.45s; }
+    .spark-pattern-2:nth-child(48) { right: 19.5%; top: 29.5%; animation-delay: 1.5s; }
+    .spark-pattern-2:nth-child(49) { right: 21%; top: 28%; animation-delay: 1.55s; }
+    .spark-pattern-2:nth-child(50) { right: 19.5%; top: 26.5%; animation-delay: 1.6s; }
+    .spark-pattern-2:nth-child(51) { right: 17%; top: 25%; animation-delay: 1.65s; }
+    .spark-pattern-2:nth-child(52) { right: 14%; top: 27%; animation-delay: 1.7s; }
+    .spark-pattern-2:nth-child(53) { right: 17%; top: 31%; animation-delay: 1.75s; }
+    .spark-pattern-2:nth-child(54) { right: 22%; top: 27%; animation-delay: 1.8s; }
 
     .spark-pattern-3 {
-        animation: beautifulRadialBurst3 4.8s ease-out infinite;
-        background: rgba(150, 255, 150, 0.95);
-        box-shadow: 0 0 8px rgba(150, 255, 150, 0.8);
+        animation: ultraSmoothRadial3 7s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        background: rgba(170, 255, 170, 0.9);
+        box-shadow: 0 0 3px rgba(170, 255, 170, 0.7), 0 0 6px rgba(170, 255, 170, 0.4);
     }
 
-    /* コア3からの円状放射 */
-    .spark-pattern-3:nth-child(55) { left: 22%; bottom: 32%; animation-delay: 2.5s; }
-    .spark-pattern-3:nth-child(56) { left: 23.5%; bottom: 30.5%; animation-delay: 2.55s; }
-    .spark-pattern-3:nth-child(57) { left: 25%; bottom: 32%; animation-delay: 2.6s; }
-    .spark-pattern-3:nth-child(58) { left: 23.5%; bottom: 33.5%; animation-delay: 2.65s; }
-    .spark-pattern-3:nth-child(59) { left: 22%; bottom: 33.5%; animation-delay: 2.7s; }
-    .spark-pattern-3:nth-child(60) { left: 20.5%; bottom: 33.5%; animation-delay: 2.75s; }
-    .spark-pattern-3:nth-child(61) { left: 19%; bottom: 32%; animation-delay: 2.8s; }
-    .spark-pattern-3:nth-child(62) { left: 20.5%; bottom: 30.5%; animation-delay: 2.85s; }
-    .spark-pattern-3:nth-child(63) { left: 24%; bottom: 29%; animation-delay: 2.9s; }
-    .spark-pattern-3:nth-child(64) { left: 26%; bottom: 31%; animation-delay: 2.95s; }
-    .spark-pattern-3:nth-child(65) { left: 24%; bottom: 35%; animation-delay: 3.0s; }
-    .spark-pattern-3:nth-child(66) { left: 18%; bottom: 31%; animation-delay: 3.05s; }
+    /* コア3からの滑らかな円状放射 */
+    .spark-pattern-3:nth-child(55) { left: 22%; bottom: 32%; animation-delay: 2.4s; }
+    .spark-pattern-3:nth-child(56) { left: 23.5%; bottom: 30.5%; animation-delay: 2.45s; }
+    .spark-pattern-3:nth-child(57) { left: 25%; bottom: 32%; animation-delay: 2.5s; }
+    .spark-pattern-3:nth-child(58) { left: 23.5%; bottom: 33.5%; animation-delay: 2.55s; }
+    .spark-pattern-3:nth-child(59) { left: 22%; bottom: 33.5%; animation-delay: 2.6s; }
+    .spark-pattern-3:nth-child(60) { left: 20.5%; bottom: 33.5%; animation-delay: 2.65s; }
+    .spark-pattern-3:nth-child(61) { left: 19%; bottom: 32%; animation-delay: 2.7s; }
+    .spark-pattern-3:nth-child(62) { left: 20.5%; bottom: 30.5%; animation-delay: 2.75s; }
+    .spark-pattern-3:nth-child(63) { left: 24%; bottom: 29%; animation-delay: 2.8s; }
+    .spark-pattern-3:nth-child(64) { left: 26%; bottom: 31%; animation-delay: 2.85s; }
+    .spark-pattern-3:nth-child(65) { left: 24%; bottom: 35%; animation-delay: 2.9s; }
+    .spark-pattern-3:nth-child(66) { left: 18%; bottom: 31%; animation-delay: 2.95s; }
 
     .spark-pattern-4 {
-        animation: beautifulRadialBurst4 4.2s ease-out infinite;
-        background: rgba(255, 200, 120, 0.95);
-        box-shadow: 0 0 8px rgba(255, 200, 120, 0.8);
+        animation: ultraSmoothRadial4 5.5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+        background: rgba(255, 220, 140, 0.9);
+        box-shadow: 0 0 3px rgba(255, 220, 140, 0.7), 0 0 6px rgba(255, 220, 140, 0.4);
     }
 
-    /* コア4からの円状放射 */
-    .spark-pattern-4:nth-child(67) { right: 15%; bottom: 22%; animation-delay: 3.7s; }
-    .spark-pattern-4:nth-child(68) { right: 13.5%; bottom: 20.5%; animation-delay: 3.75s; }
-    .spark-pattern-4:nth-child(69) { right: 12%; bottom: 22%; animation-delay: 3.8s; }
-    .spark-pattern-4:nth-child(70) { right: 13.5%; bottom: 23.5%; animation-delay: 3.85s; }
+    /* コア4からの滑らかな円状放射 */
+    .spark-pattern-4:nth-child(67) { right: 15%; bottom: 22%; animation-delay: 3.6s; }
+    .spark-pattern-4:nth-child(68) { right: 13.5%; bottom: 20.5%; animation-delay: 3.65s; }
+    .spark-pattern-4:nth-child(69) { right: 12%; bottom: 22%; animation-delay: 3.7s; }
+    .spark-pattern-4:nth-child(70) { right: 13.5%; bottom: 23.5%; animation-delay: 3.75s; }
 
     .spark-pattern-5 {
-        animation: beautifulRadialBurst5 5.2s ease-out infinite;
-        background: rgba(200, 150, 255, 0.95);
-        box-shadow: 0 0 8px rgba(200, 150, 255, 0.8);
+        animation: ultraSmoothRadial5 6.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        background: rgba(220, 170, 255, 0.9);
+        box-shadow: 0 0 3px rgba(220, 170, 255, 0.7), 0 0 6px rgba(220, 170, 255, 0.4);
     }
 
-    /* コア5からの円状放射 */
-    .spark-pattern-5:nth-child(71) { left: 58%; top: 48%; animation-delay: 4.9s; }
-    .spark-pattern-5:nth-child(72) { left: 59.5%; top: 46.5%; animation-delay: 4.95s; }
-    .spark-pattern-5:nth-child(73) { left: 61%; top: 48%; animation-delay: 5.0s; }
-    .spark-pattern-5:nth-child(74) { left: 59.5%; top: 49.5%; animation-delay: 5.05s; }
+    /* コア5からの滑らかな円状放射 */
+    .spark-pattern-5:nth-child(71) { left: 58%; top: 48%; animation-delay: 4.8s; }
+    .spark-pattern-5:nth-child(72) { left: 59.5%; top: 46.5%; animation-delay: 4.85s; }
+    .spark-pattern-5:nth-child(73) { left: 61%; top: 48%; animation-delay: 4.9s; }
+    .spark-pattern-5:nth-child(74) { left: 59.5%; top: 49.5%; animation-delay: 4.95s; }
 
-    /* 美しい円状放射アニメーション - 本物の線香花火のような軌道 */
-    @keyframes beautifulRadialBurst1 {
+    /* =============================================
+    === ULTRA-SMOOTH: 本物の線香花火のような超滑らかな円状放射アニメーション ===
+    FUNCTION: 物理法則に基づいた自然で美しい動き
+    FEATURES: 滑らかな加速・減速・繊細なフェードアウト・完璧な円状軌道
+    ============================================= */
+    @keyframes ultraSmoothRadial1 {
         0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) scale(0);
-            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.1);
+            filter: blur(1.5px);
         }
-        15% {
-            opacity: 1;
-            transform: translateX(-12px) translateY(-12px) scale(1.2);
-            filter: blur(0px);
-        }
-        30% {
-            opacity: 1;
-            transform: translateX(-28px) translateY(-28px) scale(1);
-            filter: blur(0px);
-        }
-        50% {
-            opacity: 0.9;
-            transform: translateX(-45px) translateY(-45px) scale(0.8);
-            filter: blur(0.2px);
-        }
-        70% {
-            opacity: 0.6;
-            transform: translateX(-65px) translateY(-65px) scale(0.5);
+        8% {
+            opacity: 0.7;
+            transform: translate3d(-8px, -8px, 0) scale(0.8);
             filter: blur(0.5px);
         }
-        85% {
-            opacity: 0.3;
-            transform: translateX(-80px) translateY(-80px) scale(0.3);
-            filter: blur(1px);
+        18% {
+            opacity: 1;
+            transform: translate3d(-18px, -18px, 0) scale(1.1);
+            filter: blur(0px);
+        }
+        32% {
+            opacity: 1;
+            transform: translate3d(-32px, -32px, 0) scale(1);
+            filter: blur(0px);
+        }
+        48% {
+            opacity: 0.95;
+            transform: translate3d(-48px, -48px, 0) scale(0.9);
+            filter: blur(0.1px);
+        }
+        65% {
+            opacity: 0.8;
+            transform: translate3d(-65px, -65px, 0) scale(0.7);
+            filter: blur(0.3px);
+        }
+        78% {
+            opacity: 0.5;
+            transform: translate3d(-78px, -78px, 0) scale(0.5);
+            filter: blur(0.8px);
+        }
+        88% {
+            opacity: 0.25;
+            transform: translate3d(-88px, -88px, 0) scale(0.3);
+            filter: blur(1.2px);
+        }
+        95% {
+            opacity: 0.1;
+            transform: translate3d(-95px, -95px, 0) scale(0.15);
+            filter: blur(1.8px);
         }
         100% {
             opacity: 0;
-            transform: translateX(-95px) translateY(-95px) scale(0.1);
-            filter: blur(2px);
+            transform: translate3d(-105px, -105px, 0) scale(0.05);
+            filter: blur(2.5px);
         }
     }
 
-    @keyframes beautifulRadialBurst2 {
+    @keyframes ultraSmoothRadial2 {
         0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.1) rotate(0deg);
+            filter: blur(1.5px);
         }
-        15% {
-            opacity: 1;
-            transform: translateX(15px) translateY(-12px) scale(1.2) rotate(45deg);
-            filter: blur(0px);
-        }
-        30% {
-            opacity: 1;
-            transform: translateX(32px) translateY(-28px) scale(1) rotate(90deg);
-            filter: blur(0px);
-        }
-        50% {
-            opacity: 0.9;
-            transform: translateX(50px) translateY(-45px) scale(0.8) rotate(135deg);
-            filter: blur(0.2px);
-        }
-        70% {
-            opacity: 0.6;
-            transform: translateX(70px) translateY(-65px) scale(0.5) rotate(180deg);
+        8% {
+            opacity: 0.7;
+            transform: translate3d(10px, -8px, 0) scale(0.8) rotate(30deg);
             filter: blur(0.5px);
         }
-        85% {
-            opacity: 0.3;
-            transform: translateX(85px) translateY(-80px) scale(0.3) rotate(225deg);
-            filter: blur(1px);
+        18% {
+            opacity: 1;
+            transform: translate3d(22px, -18px, 0) scale(1.1) rotate(60deg);
+            filter: blur(0px);
+        }
+        32% {
+            opacity: 1;
+            transform: translate3d(38px, -32px, 0) scale(1) rotate(90deg);
+            filter: blur(0px);
+        }
+        48% {
+            opacity: 0.95;
+            transform: translate3d(54px, -48px, 0) scale(0.9) rotate(120deg);
+            filter: blur(0.1px);
+        }
+        65% {
+            opacity: 0.8;
+            transform: translate3d(72px, -65px, 0) scale(0.7) rotate(150deg);
+            filter: blur(0.3px);
+        }
+        78% {
+            opacity: 0.5;
+            transform: translate3d(85px, -78px, 0) scale(0.5) rotate(180deg);
+            filter: blur(0.8px);
+        }
+        88% {
+            opacity: 0.25;
+            transform: translate3d(95px, -88px, 0) scale(0.3) rotate(210deg);
+            filter: blur(1.2px);
+        }
+        95% {
+            opacity: 0.1;
+            transform: translate3d(102px, -95px, 0) scale(0.15) rotate(240deg);
+            filter: blur(1.8px);
         }
         100% {
             opacity: 0;
-            transform: translateX(100px) translateY(-95px) scale(0.1) rotate(270deg);
-            filter: blur(2px);
+            transform: translate3d(110px, -105px, 0) scale(0.05) rotate(270deg);
+            filter: blur(2.5px);
         }
     }
 
-    @keyframes beautifulRadialBurst3 {
+    @keyframes ultraSmoothRadial3 {
         0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.1) rotate(0deg);
+            filter: blur(1.5px);
         }
-        15% {
-            opacity: 1;
-            transform: translateX(-10px) translateY(15px) scale(1.2) rotate(-45deg);
-            filter: blur(0px);
-        }
-        30% {
-            opacity: 1;
-            transform: translateX(-22px) translateY(32px) scale(1) rotate(-90deg);
-            filter: blur(0px);
-        }
-        50% {
-            opacity: 0.9;
-            transform: translateX(-38px) translateY(50px) scale(0.8) rotate(-135deg);
-            filter: blur(0.2px);
-        }
-        70% {
-            opacity: 0.6;
-            transform: translateX(-55px) translateY(70px) scale(0.5) rotate(-180deg);
+        8% {
+            opacity: 0.7;
+            transform: translate3d(-6px, 10px, 0) scale(0.8) rotate(-30deg);
             filter: blur(0.5px);
         }
-        85% {
-            opacity: 0.3;
-            transform: translateX(-70px) translateY(85px) scale(0.3) rotate(-225deg);
-            filter: blur(1px);
+        18% {
+            opacity: 1;
+            transform: translate3d(-15px, 22px, 0) scale(1.1) rotate(-60deg);
+            filter: blur(0px);
+        }
+        32% {
+            opacity: 1;
+            transform: translate3d(-28px, 38px, 0) scale(1) rotate(-90deg);
+            filter: blur(0px);
+        }
+        48% {
+            opacity: 0.95;
+            transform: translate3d(-42px, 54px, 0) scale(0.9) rotate(-120deg);
+            filter: blur(0.1px);
+        }
+        65% {
+            opacity: 0.8;
+            transform: translate3d(-58px, 72px, 0) scale(0.7) rotate(-150deg);
+            filter: blur(0.3px);
+        }
+        78% {
+            opacity: 0.5;
+            transform: translate3d(-72px, 85px, 0) scale(0.5) rotate(-180deg);
+            filter: blur(0.8px);
+        }
+        88% {
+            opacity: 0.25;
+            transform: translate3d(-82px, 95px, 0) scale(0.3) rotate(-210deg);
+            filter: blur(1.2px);
+        }
+        95% {
+            opacity: 0.1;
+            transform: translate3d(-90px, 102px, 0) scale(0.15) rotate(-240deg);
+            filter: blur(1.8px);
         }
         100% {
             opacity: 0;
-            transform: translateX(-85px) translateY(100px) scale(0.1) rotate(-270deg);
-            filter: blur(2px);
+            transform: translate3d(-98px, 110px, 0) scale(0.05) rotate(-270deg);
+            filter: blur(2.5px);
         }
     }
 
-    @keyframes beautifulRadialBurst4 {
+    @keyframes ultraSmoothRadial4 {
         0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.1) rotate(0deg);
+            filter: blur(1.5px);
         }
-        15% {
-            opacity: 1;
-            transform: translateX(18px) translateY(10px) scale(1.2) rotate(60deg);
-            filter: blur(0px);
-        }
-        30% {
-            opacity: 1;
-            transform: translateX(38px) translateY(22px) scale(1) rotate(120deg);
-            filter: blur(0px);
-        }
-        50% {
-            opacity: 0.9;
-            transform: translateX(58px) translateY(35px) scale(0.8) rotate(180deg);
-            filter: blur(0.2px);
-        }
-        70% {
-            opacity: 0.6;
-            transform: translateX(78px) translateY(48px) scale(0.5) rotate(240deg);
+        8% {
+            opacity: 0.7;
+            transform: translate3d(12px, 6px, 0) scale(0.8) rotate(45deg);
             filter: blur(0.5px);
         }
-        85% {
-            opacity: 0.3;
-            transform: translateX(93px) translateY(58px) scale(0.3) rotate(300deg);
-            filter: blur(1px);
+        18% {
+            opacity: 1;
+            transform: translate3d(26px, 15px, 0) scale(1.1) rotate(90deg);
+            filter: blur(0px);
+        }
+        32% {
+            opacity: 1;
+            transform: translate3d(44px, 28px, 0) scale(1) rotate(135deg);
+            filter: blur(0px);
+        }
+        48% {
+            opacity: 0.95;
+            transform: translate3d(62px, 42px, 0) scale(0.9) rotate(180deg);
+            filter: blur(0.1px);
+        }
+        65% {
+            opacity: 0.8;
+            transform: translate3d(78px, 58px, 0) scale(0.7) rotate(225deg);
+            filter: blur(0.3px);
+        }
+        78% {
+            opacity: 0.5;
+            transform: translate3d(90px, 72px, 0) scale(0.5) rotate(270deg);
+            filter: blur(0.8px);
+        }
+        88% {
+            opacity: 0.25;
+            transform: translate3d(98px, 82px, 0) scale(0.3) rotate(315deg);
+            filter: blur(1.2px);
+        }
+        95% {
+            opacity: 0.1;
+            transform: translate3d(104px, 90px, 0) scale(0.15) rotate(360deg);
+            filter: blur(1.8px);
         }
         100% {
             opacity: 0;
-            transform: translateX(108px) translateY(68px) scale(0.1) rotate(360deg);
-            filter: blur(2px);
+            transform: translate3d(112px, 98px, 0) scale(0.05) rotate(405deg);
+            filter: blur(2.5px);
         }
     }
 
-    @keyframes beautifulRadialBurst5 {
+    @keyframes ultraSmoothRadial5 {
         0% {
             opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-            filter: blur(1px);
+            transform: translate3d(0, 0, 0) scale(0.1) rotate(0deg);
+            filter: blur(1.5px);
         }
-        15% {
-            opacity: 1;
-            transform: translateX(0) translateY(-18px) scale(1.2) rotate(30deg);
-            filter: blur(0px);
-        }
-        30% {
-            opacity: 1;
-            transform: translateX(0) translateY(-38px) scale(1) rotate(60deg);
-            filter: blur(0px);
-        }
-        50% {
-            opacity: 0.9;
-            transform: translateX(0) translateY(-58px) scale(0.8) rotate(90deg);
-            filter: blur(0.2px);
-        }
-        70% {
-            opacity: 0.6;
-            transform: translateX(0) translateY(-78px) scale(0.5) rotate(120deg);
+        8% {
+            opacity: 0.7;
+            transform: translate3d(0, -12px, 0) scale(0.8) rotate(15deg);
             filter: blur(0.5px);
         }
-        85% {
-            opacity: 0.3;
-            transform: translateX(0) translateY(-93px) scale(0.3) rotate(150deg);
-            filter: blur(1px);
+        18% {
+            opacity: 1;
+            transform: translate3d(0, -26px, 0) scale(1.1) rotate(30deg);
+            filter: blur(0px);
+        }
+        32% {
+            opacity: 1;
+            transform: translate3d(0, -44px, 0) scale(1) rotate(45deg);
+            filter: blur(0px);
+        }
+        48% {
+            opacity: 0.95;
+            transform: translate3d(0, -62px, 0) scale(0.9) rotate(60deg);
+            filter: blur(0.1px);
+        }
+        65% {
+            opacity: 0.8;
+            transform: translate3d(0, -78px, 0) scale(0.7) rotate(75deg);
+            filter: blur(0.3px);
+        }
+        78% {
+            opacity: 0.5;
+            transform: translate3d(0, -90px, 0) scale(0.5) rotate(90deg);
+            filter: blur(0.8px);
+        }
+        88% {
+            opacity: 0.25;
+            transform: translate3d(0, -98px, 0) scale(0.3) rotate(105deg);
+            filter: blur(1.2px);
+        }
+        95% {
+            opacity: 0.1;
+            transform: translate3d(0, -104px, 0) scale(0.15) rotate(120deg);
+            filter: blur(1.8px);
         }
         100% {
             opacity: 0;
-            transform: translateX(0) translateY(-108px) scale(0.1) rotate(180deg);
-            filter: blur(2px);
+            transform: translate3d(0, -112px, 0) scale(0.05) rotate(135deg);
+            filter: blur(2.5px);
         }
     }
 
