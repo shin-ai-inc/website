@@ -108,7 +108,7 @@
     }
     
     /* ========================================================
-    ▼ Preloader Styles Component - WHITE BACKGROUND
+    ▼ Preloader Styles Component - Super Fast
     ======================================================== */
     .page-loader {
         position: fixed;
@@ -116,14 +116,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--white);
+        background: white;
         z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: opacity 0.1s ease, visibility 0.1s ease;
-        /* 🎯 ENSURED: Loader has white background */
-        background-color: var(--white) !important;
     }
     
     .page-loader.loaded {
@@ -147,7 +145,7 @@
     }
     
     /* ========================================================
-    ▼ Three.js Particle Container Component - WHITE BACKGROUND
+    ▼ Three.js Particle Container Component - Always Visible
     ======================================================== */
     #three-container {
         position: fixed;
@@ -158,9 +156,6 @@
         z-index: -3;
         pointer-events: none;
         overflow: hidden;
-        /* 🎯 ADDED: Ensure white background for particle container */
-        background: var(--white);
-        background-color: var(--white);
     }
     </style>
 
@@ -270,39 +265,14 @@
     }
 
     /* ========================================================
-    ▼ Page Layout and Background Component - WHITE BACKGROUND ENSURED
+    ▼ Reset and Base Styles Component
     ======================================================== */
-    
-    /* 🎯 CRITICAL: Global white background enforcement */
-    html {
-        background: var(--white) !important;
-        background-color: var(--white) !important;
-    }
-    
-    body {
-        background: var(--white) !important;
-        background-color: var(--white) !important;
-    }
-    
-    /* 🎯 ADDED: Ensure main content areas have white background */
-    main, .section {
-        background: var(--white);
-        background-color: var(--white);
-    }
-    
-    /* 🎯 MOBILE: Extra enforcement for mobile devices */
-    @media screen and (max-width: 768px) {
-        html, body {
-            background: var(--white) !important;
-            background-color: var(--white) !important;
-        }
-    }
-    
-    @media screen and (max-width: 480px) {
-        html, body {
-            background: var(--white) !important;
-            background-color: var(--white) !important;
-        }
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     html {
@@ -699,7 +669,7 @@
     }
 
     /* ========================================================
-    ▼ Perfect Responsive Header Component - WHITE BACKGROUND OPTIMIZED
+    ▼ Perfect Responsive Header Component - Updated Specification
     ======================================================== */
     .header {
         position: fixed;
@@ -714,28 +684,12 @@
         height: 50px;
         transition: all 0.2s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        /* 🎯 ENSURED: Header has white background */
-        background-color: rgba(255, 255, 255, 0.98) !important;
-    }
-
-    /* 🎯 ADDED: Ensure space above header is white */
-    .header::before {
-        content: '';
-        position: fixed;
-        top: -20px;
-        left: 0;
-        right: 0;
-        height: 20px;
-        background: var(--white);
-        z-index: -1;
     }
 
     .header.scrolled {
         height: 45px;
         background: rgba(255, 255, 255, 0.99);
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-        /* 🎯 ENSURED: Scrolled header has white background */
-        background-color: rgba(255, 255, 255, 0.99) !important;
     }
 
     .header-inner {
@@ -887,16 +841,10 @@
         
         .header {
             height: 40px;
-            /* 🎯 MOBILE: Ensure white background on mobile */
-            background: rgba(255, 255, 255, 0.98) !important;
-            background-color: rgba(255, 255, 255, 0.98) !important;
         }
         
         .header.scrolled {
             height: 38px;
-            /* 🎯 MOBILE: Ensure white background when scrolled */
-            background: rgba(255, 255, 255, 0.99) !important;
-            background-color: rgba(255, 255, 255, 0.99) !important;
         }
         
         .header-inner {
@@ -974,7 +922,7 @@
     }
 
     /* ========================================================
-    ▼ FAQ Hero Section Component - WHITE BACKGROUND OPTIMIZED
+    ▼ FAQ Specific Styles Component - Ultra Fast & Smooth Display
     ======================================================== */
     .faq-hero {
         position: relative;
@@ -982,9 +930,6 @@
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.05));
         overflow: hidden;
         text-align: center;
-        /* 🎯 ADDED: Ensure white base background */
-        background-color: var(--white);
-        background-image: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.05));
     }
 
     @media (max-width: 768px) {
@@ -1021,7 +966,7 @@
     }
 
     /* ========================================================
-    ▼ FAQ Search Function Component - MOBILE OPTIMIZED: Professional Design
+    ▼ FAQ Search Function Component - Professional Mobile-First Design
     ======================================================== */
     .faq-search {
         position: relative;
@@ -1031,164 +976,104 @@
 
     .faq-search-icon {
         position: absolute;
-        left: 1.5rem;
+        left: 1.2rem;
         top: 50%;
         transform: translateY(-50%);
         color: var(--primary);
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         pointer-events: none;
-        z-index: 2;
+        z-index: 5;
+        transition: all var(--transition-normal) ease;
     }
 
     .faq-search-wrapper {
         position: relative;
         display: flex;
+        box-shadow: var(--shadow-lg);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        background: var(--white);
+        border: 2px solid rgba(58, 95, 235, 0.1);
+        transition: all var(--transition-normal) ease;
+    }
+
+    .faq-search-wrapper:focus-within {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.1), var(--shadow-xl);
+        transform: translateY(-2px);
+    }
+
+    .faq-search-wrapper:focus-within .faq-search-icon {
+        color: var(--primary);
+        transform: translateY(-50%) scale(1.1);
     }
 
     #faq-search-input {
-        width: 100%;
-        padding: 1.25rem 1.5rem 1.25rem 4rem;
-        border: 2px solid rgba(58, 95, 235, 0.1);
-        border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-        font-size: 1.1rem;
+        flex: 1;
+        padding: 1.2rem 1.2rem 1.2rem 3.8rem;
+        border: none;
+        font-size: 1rem;
+        line-height: 1.5;
+        background: transparent;
+        color: var(--dark);
         transition: all var(--transition-normal) ease;
-        box-shadow: var(--shadow-md);
-        background: var(--white);
-        /* 🎯 MOBILE FIX: Ensure text stays within bounds */
-        box-sizing: border-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        /* 🎯 PRECISION: Perfect text alignment */
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        vertical-align: middle;
     }
 
-    /* 🎯 MOBILE OPTIMIZATION: Professional mobile search design */
-    @media (max-width: 768px) {
-        .faq-search {
-            max-width: 100%;
-            margin: 0 auto 2rem;
-            padding: 0 0.5rem;
-        }
-
-        .faq-search-wrapper {
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .faq-search-icon {
-            left: 1.2rem;
-            font-size: 1.1rem;
-            color: var(--primary);
-        }
-
-        #faq-search-input {
-            width: 100%;
-            border-radius: var(--radius-lg);
-            padding: 1rem 1rem 1rem 3.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            /* 🚀 MOBILE FIX: Perfect text positioning */
-            box-sizing: border-box;
-            border: 2px solid rgba(58, 95, 235, 0.15);
-            background: var(--white);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        #faq-search-input::placeholder {
-            color: rgba(100, 116, 139, 0.8);
-            font-size: 0.95rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .faq-search-button {
-            margin-top: 0;
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.5rem;
-            width: 100%;
-            font-size: 1rem;
-            font-weight: var(--font-weight-semibold);
-            background: var(--gradient-primary);
-            color: var(--white);
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition-normal) ease;
-            box-shadow: var(--shadow-button);
-        }
-
-        .faq-search-button:hover {
-            background: var(--gradient-primary-hover);
-            box-shadow: var(--shadow-button-hover);
-            transform: translateY(-1px);
-        }
-    }
-
-    /* 🎯 SMALL MOBILE OPTIMIZATION: Extra small screens */
-    @media (max-width: 576px) {
-        .faq-search {
-            padding: 0 0.25rem;
-        }
-
-        .faq-search-icon {
-            left: 1rem;
-            font-size: 1rem;
-        }
-
-        #faq-search-input {
-            padding: 0.9rem 0.9rem 0.9rem 3rem;
-            font-size: 0.95rem;
-        }
-
-        #faq-search-input::placeholder {
-            font-size: 0.9rem;
-        }
-
-        .faq-search-button {
-            padding: 0.9rem 1.2rem;
-            font-size: 0.95rem;
-        }
+    #faq-search-input::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+        opacity: 0.8;
+        /* 🎯 PRECISION: Placeholder alignment */
+        line-height: 1.5;
+        vertical-align: middle;
     }
 
     #faq-search-input:focus {
         outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1), var(--shadow-md);
-    }
-    
-    /* 🎯 PRECISION: Disable all browser autocomplete features */
-    #faq-search-input::-webkit-search-cancel-button,
-    #faq-search-input::-webkit-search-decoration,
-    #faq-search-input::-webkit-search-results-button,
-    #faq-search-input::-webkit-search-results-decoration {
-        -webkit-appearance: none;
-        appearance: none;
-    }
-    
-    #faq-search-input {
-        -webkit-appearance: none;
-        -moz-appearance: textfield;
-        appearance: none;
+        background: rgba(58, 95, 235, 0.02);
     }
 
     .faq-search-button {
         background: var(--gradient-primary);
         color: var(--white);
         border: none;
-        padding: 0 1.5rem;
-        border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        padding: 1.2rem 2rem;
         font-weight: var(--font-weight-semibold);
+        font-size: 0.95rem;
         cursor: pointer;
         transition: all var(--transition-normal) ease;
-        box-shadow: var(--shadow-button);
-        font-size: 1rem;
+        white-space: nowrap;
         min-width: 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faq-search-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
     }
 
     .faq-search-button:hover {
         background: var(--gradient-primary-hover);
-        box-shadow: var(--shadow-button-hover);
-        transform: translateY(-1px);
+        transform: translateX(2px);
+    }
+
+    .faq-search-button:hover::before {
+        left: 100%;
+    }
+
+    .faq-search-button:active {
+        transform: translateX(0) scale(0.98);
     }
 
     .search-results-info {
@@ -1197,17 +1082,175 @@
         color: var(--primary);
         height: 1.5rem;
         display: none;
+        text-align: center;
+        font-weight: var(--font-weight-medium);
     }
 
     .search-results-info.active {
         display: block;
-        animation: fadeInUp 0.1s ease forwards;
+        animation: fadeInUp 0.3s ease forwards;
     }
 
     .search-highlight {
-        background-color: rgba(255, 138, 0, 0.2);
-        padding: 0 2px;
-        border-radius: 3px;
+        background-color: rgba(255, 138, 0, 0.25);
+        padding: 0 3px;
+        border-radius: 4px;
+        font-weight: var(--font-weight-semibold);
+    }
+
+    /* ========================================================
+    ▼ Mobile-First Responsive Search Design - Professional Enhancement
+    ======================================================== */
+    @media (max-width: 768px) {
+        .faq-search {
+            max-width: 100%;
+            margin: 0 auto 2.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .faq-search-wrapper {
+            flex-direction: column;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-search-icon {
+            left: 1rem;
+            font-size: 1rem;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        #faq-search-input {
+            padding: 1rem 1rem 1rem 3.2rem;
+            font-size: 0.95rem;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            /* 🎯 MOBILE PRECISION: Perfect text and icon alignment */
+            line-height: 1.4;
+            height: auto;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        #faq-search-input::placeholder {
+            font-size: 0.9rem;
+            color: #6b7280;
+            /* 🎯 MOBILE PRECISION: Optimized placeholder */
+            line-height: 1.4;
+        }
+
+        .faq-search-button {
+            margin-top: 0;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            padding: 0.9rem 1.5rem;
+            width: 100%;
+            font-size: 0.9rem;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid rgba(58, 95, 235, 0.1);
+        }
+
+        .faq-search-wrapper:focus-within {
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1), var(--shadow-lg);
+        }
+
+        .search-results-info {
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+        }
+    }
+
+    /* ========================================================
+    ▼ Extra Small Mobile Optimization - Ultra Precise Design
+    ======================================================== */
+    @media (max-width: 480px) {
+        .faq-search {
+            padding: 0 0.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-search-wrapper {
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-search-icon {
+            left: 0.9rem;
+            font-size: 0.95rem;
+            /* 🎯 ULTRA PRECISION: Perfect mobile icon positioning */
+            top: 24px;
+            transform: translateY(-50%);
+        }
+
+        #faq-search-input {
+            padding: 0.9rem 0.9rem 0.9rem 3rem;
+            font-size: 0.9rem;
+            min-height: 44px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            /* 🎯 ULTRA PRECISION: Pixel-perfect alignment */
+            line-height: 1.35;
+            vertical-align: middle;
+        }
+
+        #faq-search-input::placeholder {
+            font-size: 0.85rem;
+            /* 🎯 ULTRA PRECISION: Compact placeholder for small screens */
+            content: "キーワード検索";
+        }
+
+        .faq-search-button {
+            padding: 0.8rem 1.2rem;
+            font-size: 0.85rem;
+            min-height: 44px;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+        }
+
+        .search-results-info {
+            font-size: 0.8rem;
+            margin-top: 0.6rem;
+        }
+    }
+
+    /* ========================================================
+    ▼ Accessibility & Touch Enhancement Component
+    ======================================================== */
+    @media (hover: none) and (pointer: coarse) {
+        .faq-search-button {
+            min-height: 44px;
+            padding: 1rem 1.5rem;
+        }
+
+        .faq-search-button:active {
+            background: var(--gradient-primary-hover);
+            transform: scale(0.98);
+        }
+
+        #faq-search-input {
+            min-height: 44px;
+            font-size: 16px; /* Prevent zoom on iOS */
+        }
+    }
+
+    /* ========================================================
+    ▼ High-DPI Display Optimization Component
+    ======================================================== */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .faq-search-icon {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .faq-search-wrapper {
+            border-width: 1px;
+        }
+
+        .faq-search-wrapper:focus-within {
+            border-width: 2px;
+        }
     }
 
     /* ========================================================
@@ -1263,7 +1306,7 @@
     }
 
     /* ========================================================
-    ▼ FAQ Categories Component - MOBILE OPTIMIZED: Professional Design
+    ▼ FAQ Categories Component - Minimal Hover Effects
     ======================================================== */
     .faq-categories {
         display: flex;
@@ -1271,7 +1314,6 @@
         justify-content: center;
         gap: 0.8rem;
         margin-bottom: 3rem;
-        padding: 0 1rem;
     }
 
     .faq-category {
@@ -1285,17 +1327,11 @@
         cursor: pointer;
         transition: all var(--transition-normal) ease;
         box-shadow: var(--shadow-sm);
-        white-space: nowrap;
-        /* 🎯 MOBILE FIX: Ensure categories don't overflow */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: calc(50% - 0.4rem);
     }
 
     .faq-category:hover {
         border-color: var(--primary);
         color: var(--primary);
-        transform: translateY(-1px);
     }
 
     .faq-category.active {
@@ -1303,36 +1339,6 @@
         color: var(--white);
         border-color: transparent;
         box-shadow: var(--shadow-button);
-    }
-
-    /* 🎯 MOBILE OPTIMIZATION: Professional mobile categories */
-    @media (max-width: 768px) {
-        .faq-categories {
-            gap: 0.6rem;
-            margin-bottom: 2rem;
-            padding: 0 0.5rem;
-        }
-
-        .faq-category {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            max-width: calc(50% - 0.3rem);
-            min-width: fit-content;
-        }
-    }
-
-    /* 🎯 SMALL MOBILE OPTIMIZATION: Extra small screens */
-    @media (max-width: 576px) {
-        .faq-categories {
-            gap: 0.5rem;
-            padding: 0 0.25rem;
-        }
-
-        .faq-category {
-            padding: 0.55rem 1rem;
-            font-size: 0.85rem;
-            max-width: calc(50% - 0.25rem);
-        }
     }
 
     /* ========================================================
@@ -1826,30 +1832,24 @@
     }
 
     /* ========================================================
-    ▼ Mobile FAQ Optimization Component - Enhanced Smooth Expansion
+    ▼ Mobile FAQ Optimization Component - Enhanced Professional Search Integration
     ======================================================== */
-
-
-        .faq-search-wrapper {
-            flex-direction: column;
+    @media (max-width: 768px) {
+        .faq-hero {
+            padding: calc(var(--header-height-mobile) + 1.5rem) 0 2.5rem;
         }
 
-        #faq-search-input {
-            border-radius: var(--radius-lg);
-            padding: 1rem 1rem 1rem 3.5rem;
+        .faq-hero-title {
+            font-size: 2.5rem;
         }
 
-        .faq-search-button {
-            margin-top: 0.8rem;
-            border-radius: var(--radius-full);
-            padding: 0.8rem 1.5rem;
-            width: 100%;
+        .faq-hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
 
-        .faq-search-icon {
-            left: 1.2rem;
-            font-size: 1.1rem;
-        }
+        /* 🎯 INTEGRATED: Professional search design already handled above */
+        /* Mobile search styles are integrated in the main search component */
 
         .faq-categories {
             gap: 0.6rem;
@@ -1871,7 +1871,32 @@
             padding-right: 1.5rem;
         }
 
+        .faq-answer {
+            /* 🎯 PRECISION ENHANCED: Mobile-optimized with guaranteed content display */
+            transition: max-height 0.3s ease, opacity 0.2s ease 0.05s !important;
+        }
 
+        .faq-answer-inner {
+            /* 🚀 PRECISION ENHANCED: Mobile-optimized content appearance */
+            transition: opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s !important;
+            padding: 0 1.25rem 1.25rem;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+            visibility: visible !important;
+            transform: translateZ(0) !important;
+        }
+        
+        .faq-item.active .faq-answer-inner {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            display: block !important;
+            visibility: visible !important;
+            min-height: 20px !important;
+        }
 
         .faq-benefits {
             padding: 2rem 1.5rem;
@@ -1910,6 +1935,7 @@
         .faq-cta-buttons .btn {
             width: 100%;
         }
+    }
 
     @media (max-width: 576px) {
         .faq-hero-title {
@@ -1926,32 +1952,41 @@
             font-size: 1.5rem;
         }
 
+        .faq-answer {
+            /* 🚀 PRECISION ENHANCED: Small mobile with guaranteed content display */
+            transition: max-height 0.25s ease, opacity 0.15s ease 0.03s !important;
+        }
 
+        .faq-answer-inner {
+            /* ⚡ PRECISION ENHANCED: Small mobile optimized content display */
+            transition: opacity 0.15s ease 0.08s, transform 0.15s ease 0.08s !important;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 450px !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+            visibility: visible !important;
+            transform: translateZ(0) !important;
+        }
+        
+        .faq-item.active .faq-answer-inner {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            display: block !important;
+            visibility: visible !important;
+            min-height: 20px !important;
+        }
     }
     
     /* ========================================================
-    ▼ Footer Component - Updated Specification Complete with White Background Below
+    ▼ Footer Component - Updated Specification Complete
     ======================================================== */
     .footer {
         background: var(--dark);
         color: var(--white);
         padding: 4rem 0 1.5rem;
         position: relative;
-        /* 🎯 ADDED: Ensure white background extends below footer */
-        margin-bottom: 0;
-        border-bottom: 20px solid var(--white);
-    }
-    
-    /* 🎯 ADDED: Ensure white space below footer */
-    .footer::after {
-        content: '';
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 20px;
-        background: var(--white);
-        z-index: -1;
     }
     
     .footer-grid {
@@ -3426,7 +3461,7 @@
     </button>
 
     <!-- ========================================================
-    ▼ Main Script Component - Mobile Optimized & Ultra Precise FAQ Content Display
+    ▼ Main Script Component - Precision Enhanced & Ultra Precise FAQ Content Display
     ======================================================== -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -3457,11 +3492,7 @@
             currentYearElement.textContent = currentYear;
         }
         
-        // 🎯 CRITICAL: Ensure page background is white
-        document.documentElement.style.backgroundColor = '#ffffff';
-        document.body.style.backgroundColor = '#ffffff';
-        
-        // 🎯 PRECISION: Disable search input autocomplete immediately
+        // 🎯 PRECISION: Enhanced search input initialization with mobile optimization
         const searchInputElement = document.getElementById('faq-search-input');
         if (searchInputElement) {
             searchInputElement.setAttribute('autocomplete', 'off');
@@ -3471,12 +3502,33 @@
             searchInputElement.setAttribute('data-lpignore', 'true');
             searchInputElement.setAttribute('data-form-type', 'other');
             
+            // 🎯 MOBILE PRECISION: Device-specific optimizations
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            
+            if (isMobile) {
+                // Prevent iOS zoom
+                searchInputElement.style.fontSize = '16px';
+                
+                // Optimized placeholder for mobile
+                if (isSmallMobile) {
+                    searchInputElement.placeholder = "キーワード検索";
+                }
+            }
+            
             // Additional prevention methods
             searchInputElement.addEventListener('keydown', function(e) {
                 if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
                     e.preventDefault();
                 }
             });
+            
+            // 🎯 MOBILE ENHANCEMENT: Touch-friendly interactions
+            if (isMobile) {
+                searchInputElement.addEventListener('touchstart', function() {
+                    this.focus();
+                }, { passive: true });
+            }
         }
         
         // ========================================================
@@ -3538,7 +3590,61 @@
             // Precision enhanced mobile optimization with guaranteed content display
             const style = document.createElement('style');
             style.textContent = `
-                /* 🎯 PRECISION: Disable all browser autocomplete features */
+                /* 🎯 PRECISION: Mobile FAQ display optimization */
+                @media (max-width: 768px) {
+                    .mobile-device .faq-answer {
+                        transition: max-height 0.3s ease, opacity 0.2s ease 0.05s !important;
+                    }
+                    
+                    .mobile-device .faq-answer-inner {
+                        transition: opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s !important;
+                    }
+                    
+                    .mobile-device .faq-item.active .faq-answer {
+                        max-height: 500px !important;
+                        opacity: 1 !important;
+                        overflow: visible !important;
+                        visibility: visible !important;
+                        transform: translateZ(0) !important;
+                    }
+                    
+                    .mobile-device .faq-item.active .faq-answer-inner {
+                        opacity: 1 !important;
+                        transform: translateY(0) !important;
+                        display: block !important;
+                        visibility: visible !important;
+                        min-height: 20px !important;
+                    }
+                }
+                
+                /* 🎯 PRECISION: Small mobile FAQ display optimization */
+                @media (max-width: 576px) {
+                    .small-mobile-device .faq-answer {
+                        transition: max-height 0.25s ease, opacity 0.15s ease 0.03s !important;
+                    }
+                    
+                    .small-mobile-device .faq-answer-inner {
+                        transition: opacity 0.15s ease 0.08s, transform 0.15s ease 0.08s !important;
+                    }
+                    
+                    .small-mobile-device .faq-item.active .faq-answer {
+                        max-height: 450px !important;
+                        opacity: 1 !important;
+                        overflow: visible !important;
+                        visibility: visible !important;
+                        transform: translateZ(0) !important;
+                    }
+                    
+                    .small-mobile-device .faq-item.active .faq-answer-inner {
+                        opacity: 1 !important;
+                        transform: translateY(0) !important;
+                        display: block !important;
+                        visibility: visible !important;
+                        min-height: 20px !important;
+                    }
+                }
+                
+                /* 🎯 PRECISION: Disable browser autocomplete suggestions */
                 #faq-search-input::-webkit-search-cancel-button,
                 #faq-search-input::-webkit-search-decoration {
                     -webkit-appearance: none;
@@ -3728,13 +3834,13 @@
             }
         });
         
-        // FAQ Search Function - Ultra Fast with Autocomplete Prevention
+        // FAQ Search Function - Ultra Fast with Professional Mobile Enhancement
         const searchForm = document.getElementById('faq-search-form');
         const searchInput = document.getElementById('faq-search-input');
         const searchResultsInfo = document.getElementById('search-results-info');
         
         if (searchForm && searchInput) {
-            // 🎯 PRECISION: Disable all autocomplete suggestions
+            // 🎯 PRECISION: Disable all autocomplete suggestions with enhanced mobile support
             searchInput.setAttribute('autocomplete', 'off');
             searchInput.setAttribute('autocorrect', 'off');
             searchInput.setAttribute('autocapitalize', 'off');
@@ -3742,9 +3848,28 @@
             searchInput.setAttribute('data-lpignore', 'true');
             searchInput.setAttribute('data-form-type', 'other');
             
+            // 🎯 MOBILE ENHANCEMENT: Improved mobile search experience
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                // Prevent zoom on iOS
+                searchInput.style.fontSize = '16px';
+                
+                // Enhanced mobile placeholder
+                if (window.innerWidth <= 480) {
+                    searchInput.placeholder = "キーワード検索";
+                }
+            }
+            
             // Prevent browser history suggestions
             searchInput.addEventListener('focus', function() {
                 this.setAttribute('autocomplete', 'new-password');
+                // 🎯 MOBILE: Smooth focus animation
+                this.parentElement.style.transform = 'translateY(-1px)';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                // 🎯 MOBILE: Reset focus animation
+                this.parentElement.style.transform = 'translateY(0)';
             });
             
             // Form Submit Event
@@ -3753,13 +3878,19 @@
                 performSearch();
             });
             
-            // Input Event (Real-time Search)
+            // Input Event (Real-time Search with debouncing for performance)
+            let searchTimeout;
             searchInput.addEventListener('input', function() {
-                if (this.value.length > 1) {
-                    performSearch();
-                } else if (this.value.length === 0) {
-                    resetSearch();
-                }
+                clearTimeout(searchTimeout);
+                const searchValue = this.value;
+                
+                searchTimeout = setTimeout(() => {
+                    if (searchValue.length > 1) {
+                        performSearch();
+                    } else if (searchValue.length === 0) {
+                        resetSearch();
+                    }
+                }, 300); // Debounce for better performance
             });
             
             // Search Execution Function
