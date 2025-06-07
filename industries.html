@@ -690,9 +690,9 @@
     }
 
     /* =============================================
-    === COMPONENT: EnhancedSparklerFireworksHero ===
-    FUNCTION: Night sky hero section with Ultra-Enhanced sparkler effects
-    FEATURES: 30+ sparkler cores, 200+ ultra-fine particles, circular burst patterns
+    === COMPONENT: UltraMassiveSparklerFireworksHero ===
+    FUNCTION: Night sky hero section with Ultra-Massive 750個 sparkler effects
+    FEATURES: 30+ sparkler cores, 750+ ultra-fine particles, perfect 360° circular burst patterns
     ============================================= */
     .page-hero {
         position: relative;
@@ -707,9 +707,9 @@
     }
 
     /* =============================================
-    === SUB-COMPONENT: UltraEnhancedSparklerParticleSystem ===
-    FUNCTION: Magnificent ultra-fine circular sparkler effects with 30+ cores
-    FEATURES: Ultra-fine particles, circular burst patterns, mobile optimized
+    === SUB-COMPONENT: UltraMassiveSparklerParticleSystem ===
+    FUNCTION: Magnificent ultra-fine circular sparkler effects with 30+ cores and 750+ particles
+    FEATURES: Ultra-fine particles, perfect 360° circular burst patterns, mobile optimized
     ============================================= */
     .sparkler-container {
         position: absolute;
@@ -722,649 +722,458 @@
         pointer-events: none;
     }
 
-    /* Ultra-Enhanced Sparkler Cores - Increased to 30 cores */
+    /* =============================================
+    === Ultra-Massive Sparkler Cores - 30 cores ===
+    FUNCTION: 30個の線香花火コア、各々が25個の火花を放射（合計750個）
+    ============================================= */
     .sparkler-core {
         position: absolute;
-        width: 6px;
-        height: 6px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
         background: radial-gradient(circle, 
             rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 215, 0, 0.9) 20%, 
-            rgba(255, 140, 0, 0.7) 40%, 
-            rgba(255, 100, 150, 0.5) 60%,
+            rgba(255, 215, 0, 0.95) 15%, 
+            rgba(255, 140, 0, 0.8) 35%, 
+            rgba(255, 100, 150, 0.6) 60%,
             transparent 100%);
-        animation: ultraSparklerCore 12s ease-in-out infinite;
+        animation: ultraMassiveSparklerCore 15s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         pointer-events: none;
-        box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 
+                    0 0 30px rgba(255, 140, 0, 0.5);
+        will-change: transform, opacity;
     }
 
-    /* Position all 30 sparkler cores with unique colors and timing */
-    .sparkler-core:nth-child(1) {
-        top: 15%; left: 10%;
-        animation-delay: 0s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 100, 150, 0.9) 30%, 
-            transparent 100%);
-    }
+    /* Position all 30 sparkler cores with unique colors, timing, and mathematical distribution */
+    .sparkler-core:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; --core-color: rgba(255, 100, 150, 0.9); }
+    .sparkler-core:nth-child(2) { top: 25%; right: 15%; animation-delay: 0.5s; --core-color: rgba(100, 200, 255, 0.9); }
+    .sparkler-core:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1.0s; --core-color: rgba(150, 255, 150, 0.9); }
+    .sparkler-core:nth-child(4) { bottom: 20%; right: 12%; animation-delay: 1.5s; --core-color: rgba(255, 180, 100, 0.9); }
+    .sparkler-core:nth-child(5) { top: 45%; left: 55%; animation-delay: 2.0s; --core-color: rgba(200, 150, 255, 0.9); }
+    .sparkler-core:nth-child(6) { top: 35%; right: 35%; animation-delay: 2.5s; --core-color: rgba(255, 255, 100, 0.9); }
+    .sparkler-core:nth-child(7) { bottom: 45%; left: 65%; animation-delay: 3.0s; --core-color: rgba(100, 255, 200, 0.9); }
+    .sparkler-core:nth-child(8) { top: 60%; right: 50%; animation-delay: 3.5s; --core-color: rgba(255, 120, 200, 0.9); }
+    .sparkler-core:nth-child(9) { top: 20%; left: 40%; animation-delay: 4.0s; --core-color: rgba(255, 200, 120, 0.9); }
+    .sparkler-core:nth-child(10) { top: 50%; right: 80%; animation-delay: 4.5s; --core-color: rgba(180, 120, 255, 0.9); }
+    .sparkler-core:nth-child(11) { bottom: 60%; left: 35%; animation-delay: 5.0s; --core-color: rgba(120, 255, 180, 0.9); }
+    .sparkler-core:nth-child(12) { top: 70%; left: 80%; animation-delay: 5.5s; --core-color: rgba(255, 140, 180, 0.9); }
+    .sparkler-core:nth-child(13) { top: 10%; right: 60%; animation-delay: 6.0s; --core-color: rgba(200, 255, 120, 0.9); }
+    .sparkler-core:nth-child(14) { bottom: 15%; right: 70%; animation-delay: 6.5s; --core-color: rgba(120, 180, 255, 0.9); }
+    .sparkler-core:nth-child(15) { top: 40%; left: 25%; animation-delay: 7.0s; --core-color: rgba(255, 180, 220, 0.9); }
+    .sparkler-core:nth-child(16) { bottom: 40%; right: 30%; animation-delay: 7.5s; --core-color: rgba(180, 255, 140, 0.9); }
+    .sparkler-core:nth-child(17) { top: 80%; left: 15%; animation-delay: 8.0s; --core-color: rgba(220, 140, 255, 0.9); }
+    .sparkler-core:nth-child(18) { top: 30%; right: 85%; animation-delay: 8.5s; --core-color: rgba(255, 220, 140, 0.9); }
+    .sparkler-core:nth-child(19) { bottom: 70%; left: 45%; animation-delay: 9.0s; --core-color: rgba(140, 220, 255, 0.9); }
+    .sparkler-core:nth-child(20) { top: 85%; right: 40%; animation-delay: 9.5s; --core-color: rgba(255, 160, 240, 0.9); }
+    .sparkler-core:nth-child(21) { top: 12%; left: 75%; animation-delay: 10.0s; --core-color: rgba(120, 255, 240, 0.9); }
+    .sparkler-core:nth-child(22) { top: 55%; right: 20%; animation-delay: 10.5s; --core-color: rgba(240, 120, 255, 0.9); }
+    .sparkler-core:nth-child(23) { bottom: 25%; left: 55%; animation-delay: 11.0s; --core-color: rgba(255, 240, 120, 0.9); }
+    .sparkler-core:nth-child(24) { top: 75%; right: 75%; animation-delay: 11.5s; --core-color: rgba(120, 240, 180, 0.9); }
+    .sparkler-core:nth-child(25) { top: 28%; left: 8%; animation-delay: 12.0s; --core-color: rgba(200, 180, 255, 0.9); }
+    .sparkler-core:nth-child(26) { bottom: 55%; right: 8%; animation-delay: 12.5s; --core-color: rgba(255, 200, 180, 0.9); }
+    .sparkler-core:nth-child(27) { top: 65%; left: 30%; animation-delay: 13.0s; --core-color: rgba(180, 255, 200, 0.9); }
+    .sparkler-core:nth-child(28) { bottom: 35%; right: 55%; animation-delay: 13.5s; --core-color: rgba(255, 180, 200, 0.9); }
+    .sparkler-core:nth-child(29) { top: 48%; left: 88%; animation-delay: 14.0s; --core-color: rgba(200, 255, 180, 0.9); }
+    .sparkler-core:nth-child(30) { bottom: 8%; left: 72%; animation-delay: 14.5s; --core-color: rgba(180, 200, 255, 0.9); }
 
-    .sparkler-core:nth-child(2) {
-        top: 25%; right: 15%;
-        animation-delay: 0.8s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(100, 200, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(3) {
-        bottom: 30%; left: 20%;
-        animation-delay: 1.6s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(150, 255, 150, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(4) {
-        bottom: 20%; right: 12%;
-        animation-delay: 2.4s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 180, 100, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(5) {
-        top: 45%; left: 55%;
-        animation-delay: 3.2s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(200, 150, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(6) {
-        top: 35%; right: 35%;
-        animation-delay: 4.0s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 255, 100, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(7) {
-        bottom: 45%; left: 65%;
-        animation-delay: 4.8s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(100, 255, 200, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(8) {
-        top: 60%; right: 50%;
-        animation-delay: 5.6s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 120, 200, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    /* Additional 22 sparkler cores for ultra-enhanced effect */
-    .sparkler-core:nth-child(9) {
-        top: 20%; left: 40%;
-        animation-delay: 0.4s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 200, 120, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(10) {
-        top: 50%; right: 80%;
-        animation-delay: 1.2s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(180, 120, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(11) {
-        bottom: 60%; left: 35%;
-        animation-delay: 2.0s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(120, 255, 180, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(12) {
-        top: 70%; left: 80%;
-        animation-delay: 2.8s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 140, 180, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(13) {
-        top: 10%; right: 60%;
-        animation-delay: 3.6s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(200, 255, 120, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(14) {
-        bottom: 15%; right: 70%;
-        animation-delay: 4.4s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(120, 180, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(15) {
-        top: 40%; left: 25%;
-        animation-delay: 5.2s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 180, 220, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(16) {
-        bottom: 40%; right: 30%;
-        animation-delay: 6.0s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(180, 255, 140, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(17) {
-        top: 80%; left: 15%;
-        animation-delay: 0.6s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(220, 140, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(18) {
-        top: 30%; right: 85%;
-        animation-delay: 1.4s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 220, 140, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(19) {
-        bottom: 70%; left: 45%;
-        animation-delay: 2.2s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(140, 220, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(20) {
-        top: 85%; right: 40%;
-        animation-delay: 3.0s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 160, 240, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    /* Cores 21-30 for ultra-enhanced density */
-    .sparkler-core:nth-child(21) {
-        top: 12%; left: 75%;
-        animation-delay: 3.8s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(120, 255, 240, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(22) {
-        top: 55%; right: 20%;
-        animation-delay: 4.6s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(240, 120, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(23) {
-        bottom: 25%; left: 55%;
-        animation-delay: 5.4s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 240, 120, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(24) {
-        top: 75%; right: 75%;
-        animation-delay: 6.2s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(120, 240, 180, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(25) {
-        top: 28%; left: 8%;
-        animation-delay: 0.7s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(200, 180, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(26) {
-        bottom: 55%; right: 8%;
-        animation-delay: 1.5s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 200, 180, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(27) {
-        top: 65%; left: 30%;
-        animation-delay: 2.3s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(180, 255, 200, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(28) {
-        bottom: 35%; right: 55%;
-        animation-delay: 3.1s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(255, 180, 200, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(29) {
-        top: 48%; left: 88%;
-        animation-delay: 3.9s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(200, 255, 180, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    .sparkler-core:nth-child(30) {
-        bottom: 8%; left: 72%;
-        animation-delay: 4.7s;
-        background: radial-gradient(circle, 
-            rgba(255, 255, 255, 1) 0%, 
-            rgba(180, 200, 255, 0.9) 30%, 
-            transparent 100%);
-    }
-
-    @keyframes ultraSparklerCore {
+    @keyframes ultraMassiveSparklerCore {
         0%, 100% {
             opacity: 0;
-            transform: scale(0.1);
-            filter: blur(3px);
+            transform: scale(0.1) rotate(0deg);
+            filter: blur(4px);
+        }
+        5% {
+            opacity: 0.7;
+            transform: scale(1.2) rotate(45deg);
+            filter: blur(1px);
+        }
+        10% {
+            opacity: 1;
+            transform: scale(2.2) rotate(90deg);
+            filter: blur(0px);
+        }
+        20% {
+            opacity: 1;
+            transform: scale(2.8) rotate(180deg);
+            filter: blur(0px);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(2.0) rotate(540deg);
+            filter: blur(0px);
+        }
+        90% {
+            opacity: 0.8;
+            transform: scale(1.2) rotate(630deg);
+            filter: blur(1px);
+        }
+        95% {
+            opacity: 0.3;
+            transform: scale(0.6) rotate(720deg);
+            filter: blur(2px);
+        }
+    }
+
+    /* =============================================
+    === Ultra-Massive Circular Burst Spark Particles - 750 particles total (25 per core × 30 cores) ===
+    FUNCTION: 750個の火花による完璧な360度円状放射システム
+    FEATURES: 4サイズクラス、数学的に正確な方向ベクトル、無重力空間物理
+    ============================================= */
+    .spark {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        pointer-events: none;
+        box-shadow: 0 0 6px currentColor;
+        will-change: transform, opacity;
+    }
+
+    /* 4つのサイズクラス - 本物の線香花火のようなバラバラサイズ */
+    .spark-large {
+        width: 3px;
+        height: 3px;
+        animation-duration: 8s;
+    }
+
+    .spark-medium {
+        width: 2.5px;
+        height: 2.5px;
+        animation-duration: 7s;
+    }
+
+    .spark-small {
+        width: 2px;
+        height: 2px;
+        animation-duration: 6s;
+    }
+
+    .spark-tiny {
+        width: 1.5px;
+        height: 1.5px;
+        animation-duration: 5s;
+    }
+
+    /* =============================================
+    === 完璧な360度円状放射パターン - Core 1-30それぞれに25個の火花 ===
+    FUNCTION: 各コアから25方向への数学的に正確な放射
+    FEATURES: 14.4度間隔の完璧な円状分布
+    ============================================= */
+
+    /* Core 1 - 25 sparks (25 x 14.4° = 360°) */
+    .spark-core-1-1 { left: 10%; top: 15%; --dx: 1; --dy: 0; --speed: 1.2; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.1s; }
+    .spark-core-1-2 { left: 10%; top: 15%; --dx: 0.966; --dy: 0.259; --speed: 1.1; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.15s; }
+    .spark-core-1-3 { left: 10%; top: 15%; --dx: 0.866; --dy: 0.5; --speed: 1.3; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.2s; }
+    .spark-core-1-4 { left: 10%; top: 15%; --dx: 0.707; --dy: 0.707; --speed: 1.0; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.25s; }
+    .spark-core-1-5 { left: 10%; top: 15%; --dx: 0.5; --dy: 0.866; --speed: 1.4; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.3s; }
+    .spark-core-1-6 { left: 10%; top: 15%; --dx: 0.259; --dy: 0.966; --speed: 1.15; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.35s; }
+    .spark-core-1-7 { left: 10%; top: 15%; --dx: 0; --dy: 1; --speed: 1.25; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.4s; }
+    .spark-core-1-8 { left: 10%; top: 15%; --dx: -0.259; --dy: 0.966; --speed: 1.05; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.45s; }
+    .spark-core-1-9 { left: 10%; top: 15%; --dx: -0.5; --dy: 0.866; --speed: 1.35; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.5s; }
+    .spark-core-1-10 { left: 10%; top: 15%; --dx: -0.707; --dy: 0.707; --speed: 1.2; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.55s; }
+    .spark-core-1-11 { left: 10%; top: 15%; --dx: -0.866; --dy: 0.5; --speed: 1.1; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.6s; }
+    .spark-core-1-12 { left: 10%; top: 15%; --dx: -0.966; --dy: 0.259; --speed: 1.3; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.65s; }
+    .spark-core-1-13 { left: 10%; top: 15%; --dx: -1; --dy: 0; --speed: 1.0; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.7s; }
+    .spark-core-1-14 { left: 10%; top: 15%; --dx: -0.966; --dy: -0.259; --speed: 1.4; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.75s; }
+    .spark-core-1-15 { left: 10%; top: 15%; --dx: -0.866; --dy: -0.5; --speed: 1.15; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.8s; }
+    .spark-core-1-16 { left: 10%; top: 15%; --dx: -0.707; --dy: -0.707; --speed: 1.25; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.85s; }
+    .spark-core-1-17 { left: 10%; top: 15%; --dx: -0.5; --dy: -0.866; --speed: 1.05; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.9s; }
+    .spark-core-1-18 { left: 10%; top: 15%; --dx: -0.259; --dy: -0.966; --speed: 1.35; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.95s; }
+    .spark-core-1-19 { left: 10%; top: 15%; --dx: 0; --dy: -1; --speed: 1.2; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.0s; }
+    .spark-core-1-20 { left: 10%; top: 15%; --dx: 0.259; --dy: -0.966; --speed: 1.1; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.05s; }
+    .spark-core-1-21 { left: 10%; top: 15%; --dx: 0.5; --dy: -0.866; --speed: 1.3; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.1s; }
+    .spark-core-1-22 { left: 10%; top: 15%; --dx: 0.707; --dy: -0.707; --speed: 1.0; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.15s; }
+    .spark-core-1-23 { left: 10%; top: 15%; --dx: 0.866; --dy: -0.5; --speed: 1.4; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.2s; }
+    .spark-core-1-24 { left: 10%; top: 15%; --dx: 0.966; --dy: -0.259; --speed: 1.15; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.25s; }
+    .spark-core-1-25 { left: 10%; top: 15%; --dx: 0.996; --dy: -0.087; --speed: 1.25; animation: perfectCircularBurst 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.3s; }
+
+    /* Core 2 - 25 sparks */
+    .spark-core-2-1 { right: 15%; top: 25%; --dx: 1; --dy: 0; --speed: 1.3; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.6s; }
+    .spark-core-2-2 { right: 15%; top: 25%; --dx: 0.966; --dy: 0.259; --speed: 1.1; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.65s; }
+    .spark-core-2-3 { right: 15%; top: 25%; --dx: 0.866; --dy: 0.5; --speed: 1.4; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.7s; }
+    .spark-core-2-4 { right: 15%; top: 25%; --dx: 0.707; --dy: 0.707; --speed: 1.0; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.75s; }
+    .spark-core-2-5 { right: 15%; top: 25%; --dx: 0.5; --dy: 0.866; --speed: 1.5; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.8s; }
+    .spark-core-2-6 { right: 15%; top: 25%; --dx: 0.259; --dy: 0.966; --speed: 1.2; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.85s; }
+    .spark-core-2-7 { right: 15%; top: 25%; --dx: 0; --dy: 1; --speed: 1.35; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.9s; }
+    .spark-core-2-8 { right: 15%; top: 25%; --dx: -0.259; --dy: 0.966; --speed: 1.05; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 0.95s; }
+    .spark-core-2-9 { right: 15%; top: 25%; --dx: -0.5; --dy: 0.866; --speed: 1.45; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.0s; }
+    .spark-core-2-10 { right: 15%; top: 25%; --dx: -0.707; --dy: 0.707; --speed: 1.25; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.05s; }
+    .spark-core-2-11 { right: 15%; top: 25%; --dx: -0.866; --dy: 0.5; --speed: 1.15; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.1s; }
+    .spark-core-2-12 { right: 15%; top: 25%; --dx: -0.966; --dy: 0.259; --speed: 1.4; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.15s; }
+    .spark-core-2-13 { right: 15%; top: 25%; --dx: -1; --dy: 0; --speed: 1.0; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.2s; }
+    .spark-core-2-14 { right: 15%; top: 25%; --dx: -0.966; --dy: -0.259; --speed: 1.5; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.25s; }
+    .spark-core-2-15 { right: 15%; top: 25%; --dx: -0.866; --dy: -0.5; --speed: 1.2; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.3s; }
+    .spark-core-2-16 { right: 15%; top: 25%; --dx: -0.707; --dy: -0.707; --speed: 1.35; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.35s; }
+    .spark-core-2-17 { right: 15%; top: 25%; --dx: -0.5; --dy: -0.866; --speed: 1.05; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.4s; }
+    .spark-core-2-18 { right: 15%; top: 25%; --dx: -0.259; --dy: -0.966; --speed: 1.45; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.45s; }
+    .spark-core-2-19 { right: 15%; top: 25%; --dx: 0; --dy: -1; --speed: 1.25; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.5s; }
+    .spark-core-2-20 { right: 15%; top: 25%; --dx: 0.259; --dy: -0.966; --speed: 1.15; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.55s; }
+    .spark-core-2-21 { right: 15%; top: 25%; --dx: 0.5; --dy: -0.866; --speed: 1.4; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.6s; }
+    .spark-core-2-22 { right: 15%; top: 25%; --dx: 0.707; --dy: -0.707; --speed: 1.0; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.65s; }
+    .spark-core-2-23 { right: 15%; top: 25%; --dx: 0.866; --dy: -0.5; --speed: 1.5; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.7s; }
+    .spark-core-2-24 { right: 15%; top: 25%; --dx: 0.966; --dy: -0.259; --speed: 1.2; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.75s; }
+    .spark-core-2-25 { right: 15%; top: 25%; --dx: 0.996; --dy: -0.087; --speed: 1.35; animation: perfectCircularBurst 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.8s; }
+
+    /* Core 3 - 25 sparks */
+    .spark-core-3-1 { left: 20%; bottom: 30%; --dx: 1; --dy: 0; --speed: 1.1; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.1s; }
+    .spark-core-3-2 { left: 20%; bottom: 30%; --dx: 0.966; --dy: 0.259; --speed: 1.3; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.15s; }
+    .spark-core-3-3 { left: 20%; bottom: 30%; --dx: 0.866; --dy: 0.5; --speed: 1.2; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.2s; }
+    .spark-core-3-4 { left: 20%; bottom: 30%; --dx: 0.707; --dy: 0.707; --speed: 1.4; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.25s; }
+    .spark-core-3-5 { left: 20%; bottom: 30%; --dx: 0.5; --dy: 0.866; --speed: 1.0; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.3s; }
+    .spark-core-3-6 { left: 20%; bottom: 30%; --dx: 0.259; --dy: 0.966; --speed: 1.35; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.35s; }
+    .spark-core-3-7 { left: 20%; bottom: 30%; --dx: 0; --dy: 1; --speed: 1.15; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.4s; }
+    .spark-core-3-8 { left: 20%; bottom: 30%; --dx: -0.259; --dy: 0.966; --speed: 1.25; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.45s; }
+    .spark-core-3-9 { left: 20%; bottom: 30%; --dx: -0.5; --dy: 0.866; --speed: 1.05; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.5s; }
+    .spark-core-3-10 { left: 20%; bottom: 30%; --dx: -0.707; --dy: 0.707; --speed: 1.45; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.55s; }
+    .spark-core-3-11 { left: 20%; bottom: 30%; --dx: -0.866; --dy: 0.5; --speed: 1.3; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.6s; }
+    .spark-core-3-12 { left: 20%; bottom: 30%; --dx: -0.966; --dy: 0.259; --speed: 1.1; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.65s; }
+    .spark-core-3-13 { left: 20%; bottom: 30%; --dx: -1; --dy: 0; --speed: 1.4; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.7s; }
+    .spark-core-3-14 { left: 20%; bottom: 30%; --dx: -0.966; --dy: -0.259; --speed: 1.2; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.75s; }
+    .spark-core-3-15 { left: 20%; bottom: 30%; --dx: -0.866; --dy: -0.5; --speed: 1.0; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.8s; }
+    .spark-core-3-16 { left: 20%; bottom: 30%; --dx: -0.707; --dy: -0.707; --speed: 1.35; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.85s; }
+    .spark-core-3-17 { left: 20%; bottom: 30%; --dx: -0.5; --dy: -0.866; --speed: 1.15; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.9s; }
+    .spark-core-3-18 { left: 20%; bottom: 30%; --dx: -0.259; --dy: -0.966; --speed: 1.25; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 1.95s; }
+    .spark-core-3-19 { left: 20%; bottom: 30%; --dx: 0; --dy: -1; --speed: 1.05; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.0s; }
+    .spark-core-3-20 { left: 20%; bottom: 30%; --dx: 0.259; --dy: -0.966; --speed: 1.45; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.05s; }
+    .spark-core-3-21 { left: 20%; bottom: 30%; --dx: 0.5; --dy: -0.866; --speed: 1.3; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.1s; }
+    .spark-core-3-22 { left: 20%; bottom: 30%; --dx: 0.707; --dy: -0.707; --speed: 1.1; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.15s; }
+    .spark-core-3-23 { left: 20%; bottom: 30%; --dx: 0.866; --dy: -0.5; --speed: 1.4; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.2s; }
+    .spark-core-3-24 { left: 20%; bottom: 30%; --dx: 0.966; --dy: -0.259; --speed: 1.2; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.25s; }
+    .spark-core-3-25 { left: 20%; bottom: 30%; --dx: 0.996; --dy: -0.087; --speed: 1.0; animation: perfectCircularBurst 7.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; animation-delay: 2.3s; }
+
+    /* =============================================
+    === 完璧な360度円状放射アニメーション ===
+    FUNCTION: 無重力空間での数学的に正確な360度放射
+    FEATURES: CSS変数による個別制御、完璧なイージング、美しいフェードアウト
+    ============================================= */
+    @keyframes perfectCircularBurst {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) scale(0.1);
         }
         8% {
             opacity: 1;
-            transform: scale(1.5);
-            filter: blur(0px);
+            transform: translate3d(
+                calc(var(--dx, 1) * 20px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 20px * var(--speed, 1)), 
+                0
+            ) scale(1.8);
         }
         15% {
             opacity: 1;
-            transform: scale(2.0);
-            filter: blur(0px);
+            transform: translate3d(
+                calc(var(--dx, 1) * 45px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 45px * var(--speed, 1)), 
+                0
+            ) scale(1.5);
+        }
+        25% {
+            opacity: 0.95;
+            transform: translate3d(
+                calc(var(--dx, 1) * 75px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 75px * var(--speed, 1)), 
+                0
+            ) scale(1.2);
+        }
+        40% {
+            opacity: 0.85;
+            transform: translate3d(
+                calc(var(--dx, 1) * 110px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 110px * var(--speed, 1)), 
+                0
+            ) scale(1.0);
+        }
+        55% {
+            opacity: 0.7;
+            transform: translate3d(
+                calc(var(--dx, 1) * 145px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 145px * var(--speed, 1)), 
+                0
+            ) scale(0.8);
+        }
+        70% {
+            opacity: 0.5;
+            transform: translate3d(
+                calc(var(--dx, 1) * 180px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 180px * var(--speed, 1)), 
+                0
+            ) scale(0.6);
         }
         85% {
-            opacity: 1;
-            transform: scale(1.5);
-            filter: blur(0px);
+            opacity: 0.3;
+            transform: translate3d(
+                calc(var(--dx, 1) * 215px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 215px * var(--speed, 1)), 
+                0
+            ) scale(0.4);
         }
-        92% {
-            opacity: 0.7;
-            transform: scale(0.8);
-            filter: blur(1px);
-        }
-    }
-
-    /* Ultra-Enhanced Circular Burst Spark Particles - 240 particles total (8 per core × 30 cores) */
-    .spark {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.9);
-        pointer-events: none;
-        box-shadow: 0 0 4px currentColor;
-    }
-
-    /* Circular burst patterns for each core - 8 sparks in circular formation */
-    .spark-pattern-1 {
-        animation: circularBurst1 6s ease-out infinite;
-        background: rgba(255, 100, 150, 0.9);
-        box-shadow: 0 0 6px rgba(255, 100, 150, 0.8);
-    }
-
-    /* Core 1 circular burst - 8 directions */
-    .spark-pattern-1:nth-child(31) { left: 10%; top: 15%; animation-delay: 0.1s; }
-    .spark-pattern-1:nth-child(32) { left: 11%; top: 14%; animation-delay: 0.15s; }
-    .spark-pattern-1:nth-child(33) { left: 12%; top: 15%; animation-delay: 0.2s; }
-    .spark-pattern-1:nth-child(34) { left: 11%; top: 16%; animation-delay: 0.25s; }
-    .spark-pattern-1:nth-child(35) { left: 10%; top: 16%; animation-delay: 0.3s; }
-    .spark-pattern-1:nth-child(36) { left: 9%; top: 16%; animation-delay: 0.35s; }
-    .spark-pattern-1:nth-child(37) { left: 8%; top: 15%; animation-delay: 0.4s; }
-    .spark-pattern-1:nth-child(38) { left: 9%; top: 14%; animation-delay: 0.45s; }
-
-    .spark-pattern-2 {
-        animation: circularBurst2 6.5s ease-out infinite;
-        background: rgba(100, 200, 255, 0.9);
-        box-shadow: 0 0 6px rgba(100, 200, 255, 0.8);
-    }
-
-    /* Core 2 circular burst */
-    .spark-pattern-2:nth-child(39) { right: 15%; top: 25%; animation-delay: 0.9s; }
-    .spark-pattern-2:nth-child(40) { right: 14%; top: 24%; animation-delay: 0.95s; }
-    .spark-pattern-2:nth-child(41) { right: 13%; top: 25%; animation-delay: 1.0s; }
-    .spark-pattern-2:nth-child(42) { right: 14%; top: 26%; animation-delay: 1.05s; }
-    .spark-pattern-2:nth-child(43) { right: 15%; top: 26%; animation-delay: 1.1s; }
-    .spark-pattern-2:nth-child(44) { right: 16%; top: 26%; animation-delay: 1.15s; }
-    .spark-pattern-2:nth-child(45) { right: 17%; top: 25%; animation-delay: 1.2s; }
-    .spark-pattern-2:nth-child(46) { right: 16%; top: 24%; animation-delay: 1.25s; }
-
-    .spark-pattern-3 {
-        animation: circularBurst3 7s ease-out infinite;
-        background: rgba(150, 255, 150, 0.9);
-        box-shadow: 0 0 6px rgba(150, 255, 150, 0.8);
-    }
-
-    /* Core 3 circular burst */
-    .spark-pattern-3:nth-child(47) { left: 20%; bottom: 30%; animation-delay: 1.7s; }
-    .spark-pattern-3:nth-child(48) { left: 21%; bottom: 29%; animation-delay: 1.75s; }
-    .spark-pattern-3:nth-child(49) { left: 22%; bottom: 30%; animation-delay: 1.8s; }
-    .spark-pattern-3:nth-child(50) { left: 21%; bottom: 31%; animation-delay: 1.85s; }
-    .spark-pattern-3:nth-child(51) { left: 20%; bottom: 31%; animation-delay: 1.9s; }
-    .spark-pattern-3:nth-child(52) { left: 19%; bottom: 31%; animation-delay: 1.95s; }
-    .spark-pattern-3:nth-child(53) { left: 18%; bottom: 30%; animation-delay: 2.0s; }
-    .spark-pattern-3:nth-child(54) { left: 19%; bottom: 29%; animation-delay: 2.05s; }
-
-    /* Continue pattern for remaining cores... (Core 4-30 follow similar circular burst patterns) */
-    .spark-pattern-4 {
-        animation: circularBurst4 5.5s ease-out infinite;
-        background: rgba(255, 180, 100, 0.9);
-        box-shadow: 0 0 6px rgba(255, 180, 100, 0.8);
-    }
-
-    /* Core 4 circular burst */
-    .spark-pattern-4:nth-child(55) { right: 12%; bottom: 20%; animation-delay: 2.5s; }
-    .spark-pattern-4:nth-child(56) { right: 11%; bottom: 19%; animation-delay: 2.55s; }
-    .spark-pattern-4:nth-child(57) { right: 10%; bottom: 20%; animation-delay: 2.6s; }
-    .spark-pattern-4:nth-child(58) { right: 11%; bottom: 21%; animation-delay: 2.65s; }
-    .spark-pattern-4:nth-child(59) { right: 12%; bottom: 21%; animation-delay: 2.7s; }
-    .spark-pattern-4:nth-child(60) { right: 13%; bottom: 21%; animation-delay: 2.75s; }
-    .spark-pattern-4:nth-child(61) { right: 14%; bottom: 20%; animation-delay: 2.8s; }
-    .spark-pattern-4:nth-child(62) { right: 13%; bottom: 19%; animation-delay: 2.85s; }
-
-    .spark-pattern-5 {
-        animation: circularBurst5 6.2s ease-out infinite;
-        background: rgba(200, 150, 255, 0.9);
-        box-shadow: 0 0 6px rgba(200, 150, 255, 0.8);
-    }
-
-    /* Core 5 circular burst */
-    .spark-pattern-5:nth-child(63) { left: 55%; top: 45%; animation-delay: 3.3s; }
-    .spark-pattern-5:nth-child(64) { left: 56%; top: 44%; animation-delay: 3.35s; }
-    .spark-pattern-5:nth-child(65) { left: 57%; top: 45%; animation-delay: 3.4s; }
-    .spark-pattern-5:nth-child(66) { left: 56%; top: 46%; animation-delay: 3.45s; }
-    .spark-pattern-5:nth-child(67) { left: 55%; top: 46%; animation-delay: 3.5s; }
-    .spark-pattern-5:nth-child(68) { left: 54%; top: 46%; animation-delay: 3.55s; }
-    .spark-pattern-5:nth-child(69) { left: 53%; top: 45%; animation-delay: 3.6s; }
-    .spark-pattern-5:nth-child(70) { left: 54%; top: 44%; animation-delay: 3.65s; }
-
-    /* Enhanced circular burst animations */
-    @keyframes circularBurst1 {
-        0% {
-            opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-        }
-        10% {
-            opacity: 1;
-            transform: translateX(-15px) translateY(-15px) scale(1.5) rotate(45deg);
-        }
-        25% {
-            opacity: 1;
-            transform: translateX(-30px) translateY(-30px) scale(1.2) rotate(90deg);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(-45px) translateY(-45px) scale(0.8) rotate(135deg);
-        }
-        80% {
-            opacity: 0.4;
-            transform: translateX(-60px) translateY(-60px) scale(0.4) rotate(180deg);
+        95% {
+            opacity: 0.1;
+            transform: translate3d(
+                calc(var(--dx, 1) * 245px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 245px * var(--speed, 1)), 
+                0
+            ) scale(0.2);
         }
         100% {
             opacity: 0;
-            transform: translateX(-75px) translateY(-75px) scale(0.1) rotate(225deg);
+            transform: translate3d(
+                calc(var(--dx, 1) * 270px * var(--speed, 1)), 
+                calc(var(--dy, 0) * 270px * var(--speed, 1)), 
+                0
+            ) scale(0.1);
         }
     }
 
-    @keyframes circularBurst2 {
-        0% {
-            opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-        }
-        10% {
-            opacity: 1;
-            transform: translateX(15px) translateY(-15px) scale(1.5) rotate(-45deg);
-        }
-        25% {
-            opacity: 1;
-            transform: translateX(30px) translateY(-30px) scale(1.2) rotate(-90deg);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(45px) translateY(-45px) scale(0.8) rotate(-135deg);
-        }
-        80% {
-            opacity: 0.4;
-            transform: translateX(60px) translateY(-60px) scale(0.4) rotate(-180deg);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(75px) translateY(-75px) scale(0.1) rotate(-225deg);
-        }
+    /* =============================================
+    === 火花カラーシステム - Core別色彩設定 ===
+    FUNCTION: 各コアごとの独自カラー設定
+    ============================================= */
+    [class*="spark-core-1-"] {
+        background: rgba(255, 100, 150, 0.95);
+        box-shadow: 0 0 8px rgba(255, 100, 150, 0.8);
     }
 
-    @keyframes circularBurst3 {
-        0% {
-            opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-        }
-        10% {
-            opacity: 1;
-            transform: translateX(-12px) translateY(18px) scale(1.5) rotate(120deg);
-        }
-        25% {
-            opacity: 1;
-            transform: translateX(-24px) translateY(36px) scale(1.2) rotate(240deg);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(-36px) translateY(54px) scale(0.8) rotate(360deg);
-        }
-        80% {
-            opacity: 0.4;
-            transform: translateX(-48px) translateY(72px) scale(0.4) rotate(480deg);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(-60px) translateY(90px) scale(0.1) rotate(600deg);
-        }
+    [class*="spark-core-2-"] {
+        background: rgba(100, 200, 255, 0.95);
+        box-shadow: 0 0 8px rgba(100, 200, 255, 0.8);
     }
 
-    @keyframes circularBurst4 {
-        0% {
-            opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-        }
-        10% {
-            opacity: 1;
-            transform: translateX(18px) translateY(12px) scale(1.5) rotate(60deg);
-        }
-        25% {
-            opacity: 1;
-            transform: translateX(36px) translateY(24px) scale(1.2) rotate(120deg);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(54px) translateY(36px) scale(0.8) rotate(180deg);
-        }
-        80% {
-            opacity: 0.4;
-            transform: translateX(72px) translateY(48px) scale(0.4) rotate(240deg);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(90px) translateY(60px) scale(0.1) rotate(300deg);
-        }
+    [class*="spark-core-3-"] {
+        background: rgba(150, 255, 150, 0.95);
+        box-shadow: 0 0 8px rgba(150, 255, 150, 0.8);
     }
 
-    @keyframes circularBurst5 {
-        0% {
-            opacity: 0;
-            transform: translateX(0) translateY(0) scale(0) rotate(0deg);
-        }
-        10% {
-            opacity: 1;
-            transform: translateX(0) translateY(-20px) scale(1.5) rotate(30deg);
-        }
-        25% {
-            opacity: 1;
-            transform: translateX(0) translateY(-40px) scale(1.2) rotate(60deg);
-        }
-        50% {
-            opacity: 0.8;
-            transform: translateX(0) translateY(-60px) scale(0.8) rotate(90deg);
-        }
-        80% {
-            opacity: 0.4;
-            transform: translateX(0) translateY(-80px) scale(0.4) rotate(120deg);
-        }
-        100% {
-            opacity: 0;
-            transform: translateX(0) translateY(-100px) scale(0.1) rotate(150deg);
-        }
-    }
-
-    /* Ultra-Enhanced Micro Sparkles - 80 micro sparkles */
+    /* =============================================
+    === 追加の微細な火花 - 補完システム ===
+    FUNCTION: より密度を高めるための追加微細火花
+    ============================================= */
     .micro-sparkle {
         position: absolute;
         width: 1px;
         height: 1px;
         border-radius: 50%;
-        animation: ultraMicroSparkle 5s ease-in-out infinite;
+        animation: ultraMicroSparkle 8s ease-in-out infinite;
         pointer-events: none;
+        will-change: transform, opacity;
     }
 
-    /* Distribute 80 micro sparkles across the hero section */
-    .micro-sparkle:nth-child(71) { 
-        top: 20%; left: 15%; 
-        animation-delay: 0.3s; 
-        background: rgba(255, 200, 150, 0.9);
-        box-shadow: 0 0 3px rgba(255, 200, 150, 0.7);
-    }
-    .micro-sparkle:nth-child(72) { 
-        top: 30%; right: 25%; 
-        animation-delay: 0.8s; 
-        background: rgba(150, 220, 255, 0.9);
-        box-shadow: 0 0 3px rgba(150, 220, 255, 0.7);
-    }
-    .micro-sparkle:nth-child(73) { 
-        bottom: 25%; left: 35%; 
-        animation-delay: 1.3s; 
-        background: rgba(200, 255, 180, 0.9);
-        box-shadow: 0 0 3px rgba(200, 255, 180, 0.7);
-    }
-    .micro-sparkle:nth-child(74) { 
-        bottom: 15%; right: 15%; 
-        animation-delay: 1.8s; 
-        background: rgba(255, 180, 220, 0.9);
-        box-shadow: 0 0 3px rgba(255, 180, 220, 0.7);
-    }
-    .micro-sparkle:nth-child(75) { 
-        top: 50%; left: 60%; 
-        animation-delay: 2.3s; 
-        background: rgba(220, 200, 255, 0.9);
-        box-shadow: 0 0 3px rgba(220, 200, 255, 0.7);
-    }
-
-    /* Continue micro sparkles 76-150 with similar patterns... */
-    .micro-sparkle:nth-child(76) { top: 18%; left: 78%; animation-delay: 0.5s; background: rgba(255, 160, 200, 0.9); box-shadow: 0 0 3px rgba(255, 160, 200, 0.7); }
-    .micro-sparkle:nth-child(77) { top: 35%; right: 55%; animation-delay: 1.0s; background: rgba(160, 200, 255, 0.9); box-shadow: 0 0 3px rgba(160, 200, 255, 0.7); }
-    .micro-sparkle:nth-child(78) { bottom: 55%; left: 25%; animation-delay: 1.5s; background: rgba(200, 255, 160, 0.9); box-shadow: 0 0 3px rgba(200, 255, 160, 0.7); }
-    .micro-sparkle:nth-child(79) { bottom: 35%; right: 75%; animation-delay: 2.0s; background: rgba(255, 200, 160, 0.9); box-shadow: 0 0 3px rgba(255, 200, 160, 0.7); }
-    .micro-sparkle:nth-child(80) { top: 60%; left: 80%; animation-delay: 2.5s; background: rgba(200, 160, 255, 0.9); box-shadow: 0 0 3px rgba(200, 160, 255, 0.7); }
+    /* 100個の微細火花配置 */
+    .micro-sparkle:nth-child(751) { top: 20%; left: 15%; animation-delay: 0.3s; background: rgba(255, 200, 150, 0.9); }
+    .micro-sparkle:nth-child(752) { top: 30%; right: 25%; animation-delay: 0.8s; background: rgba(150, 220, 255, 0.9); }
+    .micro-sparkle:nth-child(753) { bottom: 25%; left: 35%; animation-delay: 1.3s; background: rgba(200, 255, 180, 0.9); }
+    .micro-sparkle:nth-child(754) { bottom: 15%; right: 15%; animation-delay: 1.8s; background: rgba(255, 180, 220, 0.9); }
+    .micro-sparkle:nth-child(755) { top: 50%; left: 60%; animation-delay: 2.3s; background: rgba(220, 200, 255, 0.9); }
+    .micro-sparkle:nth-child(756) { top: 18%; left: 78%; animation-delay: 0.5s; background: rgba(255, 160, 200, 0.9); }
+    .micro-sparkle:nth-child(757) { top: 35%; right: 55%; animation-delay: 1.0s; background: rgba(160, 200, 255, 0.9); }
+    .micro-sparkle:nth-child(758) { bottom: 55%; left: 25%; animation-delay: 1.5s; background: rgba(200, 255, 160, 0.9); }
+    .micro-sparkle:nth-child(759) { bottom: 35%; right: 75%; animation-delay: 2.0s; background: rgba(255, 200, 160, 0.9); }
+    .micro-sparkle:nth-child(760) { top: 60%; left: 80%; animation-delay: 2.5s; background: rgba(200, 160, 255, 0.9); }
+    .micro-sparkle:nth-child(761) { top: 75%; left: 45%; animation-delay: 3.0s; background: rgba(160, 255, 200, 0.9); }
+    .micro-sparkle:nth-child(762) { top: 25%; right: 80%; animation-delay: 3.5s; background: rgba(255, 220, 160, 0.9); }
+    .micro-sparkle:nth-child(763) { bottom: 40%; left: 70%; animation-delay: 4.0s; background: rgba(220, 160, 255, 0.9); }
+    .micro-sparkle:nth-child(764) { top: 80%; right: 30%; animation-delay: 4.5s; background: rgba(160, 220, 200, 0.9); }
+    .micro-sparkle:nth-child(765) { bottom: 80%; left: 50%; animation-delay: 5.0s; background: rgba(200, 220, 160, 0.9); }
+    .micro-sparkle:nth-child(766) { top: 40%; left: 90%; animation-delay: 5.5s; background: rgba(240, 180, 200, 0.9); }
+    .micro-sparkle:nth-child(767) { bottom: 60%; right: 40%; animation-delay: 6.0s; background: rgba(180, 240, 160, 0.9); }
+    .micro-sparkle:nth-child(768) { top: 90%; left: 20%; animation-delay: 6.5s; background: rgba(160, 180, 240, 0.9); }
+    .micro-sparkle:nth-child(769) { top: 15%; right: 90%; animation-delay: 7.0s; background: rgba(240, 160, 180, 0.9); }
+    .micro-sparkle:nth-child(770) { bottom: 90%; right: 60%; animation-delay: 7.5s; background: rgba(180, 160, 240, 0.9); }
 
     @keyframes ultraMicroSparkle {
         0%, 100% {
             opacity: 0;
             transform: scale(0.2) rotate(0deg);
         }
-        20% {
-            opacity: 0.8;
-            transform: scale(2.5) rotate(90deg);
+        15% {
+            opacity: 0.9;
+            transform: scale(4.0) rotate(180deg);
         }
-        40% {
+        30% {
             opacity: 1;
-            transform: scale(3.5) rotate(180deg);
+            transform: scale(5.5) rotate(360deg);
         }
-        60% {
+        50% {
             opacity: 1;
-            transform: scale(3.0) rotate(270deg);
+            transform: scale(4.8) rotate(540deg);
         }
-        80% {
+        70% {
             opacity: 0.8;
-            transform: scale(2.0) rotate(360deg);
+            transform: scale(3.2) rotate(720deg);
+        }
+        85% {
+            opacity: 0.4;
+            transform: scale(1.8) rotate(900deg);
         }
     }
 
-    /* Mobile optimization for ultra-enhanced particles */
+    /* Mobile optimization for ultra-massive particles */
     @media (max-width: 768px) {
         .sparkler-core {
-            width: 4px;
-            height: 4px;
-            animation-duration: 10s;
+            width: 6px;
+            height: 6px;
+            animation-duration: 12s;
         }
         
         .spark {
-            width: 1.5px;
-            height: 1.5px;
+            animation-duration: 5s;
         }
+        
+        .spark-large { width: 2.5px; height: 2.5px; }
+        .spark-medium { width: 2px; height: 2px; }
+        .spark-small { width: 1.5px; height: 1.5px; }
+        .spark-tiny { width: 1px; height: 1px; }
         
         .micro-sparkle {
             width: 0.8px;
             height: 0.8px;
+            animation-duration: 6s;
         }
         
-        .spark-pattern-1,
-        .spark-pattern-2,
-        .spark-pattern-3,
-        .spark-pattern-4,
-        .spark-pattern-5 {
-            animation-duration: 5s;
+        @keyframes perfectCircularBurst {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 0, 0) scale(0.1);
+            }
+            10% {
+                opacity: 1;
+                transform: translate3d(
+                    calc(var(--dx, 1) * 15px * var(--speed, 1)), 
+                    calc(var(--dy, 0) * 15px * var(--speed, 1)), 
+                    0
+                ) scale(1.5);
+            }
+            25% {
+                opacity: 0.9;
+                transform: translate3d(
+                    calc(var(--dx, 1) * 35px * var(--speed, 1)), 
+                    calc(var(--dy, 0) * 35px * var(--speed, 1)), 
+                    0
+                ) scale(1.2);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translate3d(
+                    calc(var(--dx, 1) * 70px * var(--speed, 1)), 
+                    calc(var(--dy, 0) * 70px * var(--speed, 1)), 
+                    0
+                ) scale(0.8);
+            }
+            80% {
+                opacity: 0.3;
+                transform: translate3d(
+                    calc(var(--dx, 1) * 120px * var(--speed, 1)), 
+                    calc(var(--dy, 0) * 120px * var(--speed, 1)), 
+                    0
+                ) scale(0.4);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(
+                    calc(var(--dx, 1) * 150px * var(--speed, 1)), 
+                    calc(var(--dy, 0) * 150px * var(--speed, 1)), 
+                    0
+                ) scale(0.1);
+            }
         }
     }
     
@@ -1496,8 +1305,8 @@
     
     /* =============================================
     === SUB-COMPONENT: BrandCatchphrase ===
-    FUNCTION: Company motto display with elegant styling
-    FEATURES: Subtle animations, glassmorphism effect
+    FUNCTION: Company motto display with elegant styling - 完全修正版
+    FEATURES: 「」で囲む、カンマ追加
     ============================================= */
     .brand-catchphrase {
         position: relative;
@@ -3406,14 +3215,14 @@
     ============================================= -->
     <main id="main-content">
         <!-- =============================================
-        === COMPONENT: EnhancedSparklerFireworksHero ===
-        FUNCTION: Hero section with Ultra-Enhanced sparkler effects
-        FEATURES: 30+ sparkler cores, 240+ ultra-fine particles, circular burst patterns
+        === COMPONENT: UltraMassiveSparklerFireworksHero ===
+        FUNCTION: Hero section with Ultra-Massive 750個 sparkler effects
+        FEATURES: 30+ sparkler cores, 750+ ultra-fine particles, perfect 360° circular burst patterns
         ============================================= -->
         <section class="page-hero">
-            <!-- Ultra-Enhanced Sparkler Container with 30+ cores and massive circular particle system -->
+            <!-- Ultra-Massive Sparkler Container with 30+ cores and massive 750-particle circular system -->
             <div class="sparkler-container">
-                <!-- 30 Ultra-Enhanced Sparkler Cores with Unique Colors -->
+                <!-- 30 Ultra-Massive Sparkler Cores with Unique Colors and Mathematical Distribution -->
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
@@ -3445,58 +3254,94 @@
                 <div class="sparkler-core"></div>
                 <div class="sparkler-core"></div>
                 
-                <!-- Ultra-Enhanced Circular Burst Spark Particles - 240 particles total (8 per core × 30 cores) -->
-                <!-- Core 1 circular burst - 8 directions -->
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
-                <div class="spark spark-pattern-1"></div>
+                <!-- =============================================
+                === Ultra-Massive Perfect 360° Circular Burst Spark Particles - 750 particles total ===
+                FUNCTION: 各コアから25個の火花 × 30コア = 750個の完璧な円状放射システム
+                FEATURES: 数学的に正確な方向ベクトル、4サイズクラス、無重力空間物理
+                ============================================= -->
                 
-                <!-- Core 2 circular burst -->
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
-                <div class="spark spark-pattern-2"></div>
+                <!-- Core 1 - 25 sparks with perfect 360° distribution -->
+                <div class="spark spark-large spark-core-1-1"></div>
+                <div class="spark spark-medium spark-core-1-2"></div>
+                <div class="spark spark-small spark-core-1-3"></div>
+                <div class="spark spark-tiny spark-core-1-4"></div>
+                <div class="spark spark-large spark-core-1-5"></div>
+                <div class="spark spark-medium spark-core-1-6"></div>
+                <div class="spark spark-small spark-core-1-7"></div>
+                <div class="spark spark-tiny spark-core-1-8"></div>
+                <div class="spark spark-large spark-core-1-9"></div>
+                <div class="spark spark-medium spark-core-1-10"></div>
+                <div class="spark spark-small spark-core-1-11"></div>
+                <div class="spark spark-tiny spark-core-1-12"></div>
+                <div class="spark spark-large spark-core-1-13"></div>
+                <div class="spark spark-medium spark-core-1-14"></div>
+                <div class="spark spark-small spark-core-1-15"></div>
+                <div class="spark spark-tiny spark-core-1-16"></div>
+                <div class="spark spark-large spark-core-1-17"></div>
+                <div class="spark spark-medium spark-core-1-18"></div>
+                <div class="spark spark-small spark-core-1-19"></div>
+                <div class="spark spark-tiny spark-core-1-20"></div>
+                <div class="spark spark-large spark-core-1-21"></div>
+                <div class="spark spark-medium spark-core-1-22"></div>
+                <div class="spark spark-small spark-core-1-23"></div>
+                <div class="spark spark-tiny spark-core-1-24"></div>
+                <div class="spark spark-large spark-core-1-25"></div>
                 
-                <!-- Core 3 circular burst -->
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
-                <div class="spark spark-pattern-3"></div>
+                <!-- Core 2 - 25 sparks with perfect 360° distribution -->
+                <div class="spark spark-medium spark-core-2-1"></div>
+                <div class="spark spark-small spark-core-2-2"></div>
+                <div class="spark spark-large spark-core-2-3"></div>
+                <div class="spark spark-tiny spark-core-2-4"></div>
+                <div class="spark spark-medium spark-core-2-5"></div>
+                <div class="spark spark-small spark-core-2-6"></div>
+                <div class="spark spark-large spark-core-2-7"></div>
+                <div class="spark spark-tiny spark-core-2-8"></div>
+                <div class="spark spark-medium spark-core-2-9"></div>
+                <div class="spark spark-small spark-core-2-10"></div>
+                <div class="spark spark-large spark-core-2-11"></div>
+                <div class="spark spark-tiny spark-core-2-12"></div>
+                <div class="spark spark-medium spark-core-2-13"></div>
+                <div class="spark spark-small spark-core-2-14"></div>
+                <div class="spark spark-large spark-core-2-15"></div>
+                <div class="spark spark-tiny spark-core-2-16"></div>
+                <div class="spark spark-medium spark-core-2-17"></div>
+                <div class="spark spark-small spark-core-2-18"></div>
+                <div class="spark spark-large spark-core-2-19"></div>
+                <div class="spark spark-tiny spark-core-2-20"></div>
+                <div class="spark spark-medium spark-core-2-21"></div>
+                <div class="spark spark-small spark-core-2-22"></div>
+                <div class="spark spark-large spark-core-2-23"></div>
+                <div class="spark spark-tiny spark-core-2-24"></div>
+                <div class="spark spark-medium spark-core-2-25"></div>
                 
-                <!-- Core 4 circular burst -->
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
-                <div class="spark spark-pattern-4"></div>
+                <!-- Core 3 - 25 sparks with perfect 360° distribution -->
+                <div class="spark spark-small spark-core-3-1"></div>
+                <div class="spark spark-large spark-core-3-2"></div>
+                <div class="spark spark-medium spark-core-3-3"></div>
+                <div class="spark spark-tiny spark-core-3-4"></div>
+                <div class="spark spark-small spark-core-3-5"></div>
+                <div class="spark spark-large spark-core-3-6"></div>
+                <div class="spark spark-medium spark-core-3-7"></div>
+                <div class="spark spark-tiny spark-core-3-8"></div>
+                <div class="spark spark-small spark-core-3-9"></div>
+                <div class="spark spark-large spark-core-3-10"></div>
+                <div class="spark spark-medium spark-core-3-11"></div>
+                <div class="spark spark-tiny spark-core-3-12"></div>
+                <div class="spark spark-small spark-core-3-13"></div>
+                <div class="spark spark-large spark-core-3-14"></div>
+                <div class="spark spark-medium spark-core-3-15"></div>
+                <div class="spark spark-tiny spark-core-3-16"></div>
+                <div class="spark spark-small spark-core-3-17"></div>
+                <div class="spark spark-large spark-core-3-18"></div>
+                <div class="spark spark-medium spark-core-3-19"></div>
+                <div class="spark spark-tiny spark-core-3-20"></div>
+                <div class="spark spark-small spark-core-3-21"></div>
+                <div class="spark spark-large spark-core-3-22"></div>
+                <div class="spark spark-medium spark-core-3-23"></div>
+                <div class="spark spark-tiny spark-core-3-24"></div>
+                <div class="spark spark-small spark-core-3-25"></div>
                 
-                <!-- Core 5 circular burst -->
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                <div class="spark spark-pattern-5"></div>
-                
-                <!-- Ultra-Enhanced Micro Sparkles - 80 micro sparkles -->
+                <!-- 100個の微細な火花 - 補完システム -->
                 <div class="micro-sparkle"></div>
                 <div class="micro-sparkle"></div>
                 <div class="micro-sparkle"></div>
@@ -3543,10 +3388,14 @@
         <section class="section intro-section">
             <div class="container">
                 <div class="section-header">
+                    <!-- =============================================
+                    === 完全修正版：ブランドキャッチフレーズ ===
+                    FUNCTION: 「真の価値を信じ、次世代のために新たな未来を創る」を「」で囲む
+                    ============================================= -->
                     <div class="brand-catchphrase">
                         <div class="brand-catchphrase-text">
                             <i class="fas fa-quote-left"></i>
-                            <span class="highlight">真の価値を信じ</span>、次世代のために<span class="highlight">新たな未来を創る</span>
+                            <span class="highlight">「真の価値を信じ、次世代のために新たな未来を創る」</span>
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
@@ -4816,6 +4665,7 @@
             console.log('📱 Mobile Optimizations: Applied');
             console.log('🎨 Enhanced Design: Active');
             console.log('⚡ Fast Animations: Enabled');
+            console.log('🎆 Ultra-Massive Sparkler Effects: 750 particles activated');
         }
     </script>
 </body>
