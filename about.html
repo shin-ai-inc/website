@@ -3407,7 +3407,7 @@
                 </div>
                 
                 <div class="team-grid animate-on-scroll">
-                    <!-- 柴田 昌国（代表取締役CEO）- ★実際のCEO画像に更新完了★ -->
+                    <!-- 柴田 昌国（代表取締役CEO）- ★確実にローカル画像を使用★ -->
                     <div class="team-member">
                         <div class="team-member-photo">
                             <img src="assets/images/ceo-masakuni-shibata.png" 
@@ -3415,7 +3415,7 @@
                                 width="150" 
                                 height="150"
                                 loading="lazy"
-                                style="object-fit: cover; object-position: center;">
+                                style="object-fit: cover; object-position: center; border-radius: 50%;">
                         </div>
                         <h3 class="team-member-name">柴田 昌国</h3>
                         <p class="team-member-position">代表取締役 / CEO</p>
@@ -3426,14 +3426,12 @@
                         </div>
                     </div>
                     
-                    <!-- Y氏（CTO） -->
+                    <!-- Y氏（CTO）- ★外部画像を削除してプレースホルダーに変更★ -->
                     <div class="team-member">
                         <div class="team-member-photo">
-                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=150&h=150" 
-                                alt="Y氏" 
-                                width="150" 
-                                height="150"
-                                loading="lazy">
+                            <div style="width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">
+                                Y
+                            </div>
                         </div>
                         <h3 class="team-member-name">Y氏</h3>
                         <p class="team-member-position">最高技術責任者 / CTO</p>
@@ -3752,23 +3750,33 @@
         // ========================================================
         
         // CEO画像の確実な表示を保証（外部画像参照を完全に削除）
-        const ceoImage = document.querySelector('img[alt*="柴田"]');
-        if (ceoImage) {
-            // 強制的にローカル画像に設定
-            ceoImage.src = 'assets/images/ceo-masakuni-shibata.png';
-            ceoImage.setAttribute('src', 'assets/images/ceo-masakuni-shibata.png');
-            
-            // 外部画像への参照を完全に削除
-            ceoImage.removeAttribute('data-src');
-            ceoImage.style.backgroundImage = 'none';
-            
-            ceoImage.onerror = function() {
-                console.error('CEO画像の読み込みに失敗しました:', this.src);
-            };
-            ceoImage.onload = function() {
-                console.log('CEO画像が正常に読み込まれました:', this.src);
-            };
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const ceoImages = document.querySelectorAll('img[alt*="柴田"], img[src*="ceo-masakuni-shibata"]');
+            ceoImages.forEach(function(img) {
+                // 強制的にローカル画像に設定
+                img.src = 'assets/images/ceo-masakuni-shibata.png';
+                img.setAttribute('data-original', 'assets/images/ceo-masakuni-shibata.png');
+                
+                // 外部画像への参照を完全に削除
+                img.removeAttribute('data-src');
+                img.style.backgroundImage = 'none';
+                
+                // 画像が確実に表示されるよう監視
+                img.onerror = function() {
+                    console.error('CEO画像の読み込みに失敗:', this.src);
+                    // フォールバック処理
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.style.cssText = 'width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;';
+                    placeholder.textContent = '柴田';
+                    this.parentNode.insertBefore(placeholder, this);
+                };
+                
+                img.onload = function() {
+                    console.log('CEO画像が正常に読み込まれました:', this.src);
+                };
+            });
+        });
         
         // ========================================================
         // ▼ Perfect Responsive Header & Navigation Component - 改善版・PC/モバイル完全対応
