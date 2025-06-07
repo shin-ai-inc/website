@@ -118,7 +118,13 @@
         "@type": "Person",
         "name": "柴田 昌国",
         "jobTitle": "代表取締役CEO",
-        "description": "AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。"
+        "description": "AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png",
+          "width": 150,
+          "height": 150
+        }
       },
       "address": {
         "@type": "PostalAddress",
@@ -206,6 +212,12 @@
           "worksFor": {
             "@type": "Organization",
             "name": "ShinAI"
+          },
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png",
+            "width": 150,
+            "height": 150
           }
         },
         {
@@ -1665,7 +1677,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         transition: transform 0.5s ease;
+        border-radius: 50%;
     }
     
     .team-member:hover .team-member-photo img {
@@ -3731,6 +3745,29 @@
         if (currentYearElement) {
             const currentYear = new Date().getFullYear();
             currentYearElement.textContent = currentYear;
+        }
+        
+        // ========================================================
+        // ▼ Image Loading Optimization Component - CEO画像確実表示
+        // ========================================================
+        
+        // CEO画像の確実な表示を保証（外部画像参照を完全に削除）
+        const ceoImage = document.querySelector('img[alt*="柴田"]');
+        if (ceoImage) {
+            // 強制的にローカル画像に設定
+            ceoImage.src = 'assets/images/ceo-masakuni-shibata.png';
+            ceoImage.setAttribute('src', 'assets/images/ceo-masakuni-shibata.png');
+            
+            // 外部画像への参照を完全に削除
+            ceoImage.removeAttribute('data-src');
+            ceoImage.style.backgroundImage = 'none';
+            
+            ceoImage.onerror = function() {
+                console.error('CEO画像の読み込みに失敗しました:', this.src);
+            };
+            ceoImage.onload = function() {
+                console.log('CEO画像が正常に読み込まれました:', this.src);
+            };
         }
         
         // ========================================================
