@@ -84,8 +84,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     
     <!-- ファビコン最適化 -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-    <link rel="apple-touch-icon" href="assets/images/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
     <link rel="manifest" href="assets/manifest.json">
     
     <!-- ========================================================
@@ -101,7 +101,7 @@
       "url": "https://shin-ai-inc.github.io/website/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://shin-ai-inc.github.io/website/assets/images/logo.svg",
+        "url": "https://shin-ai-inc.github.io/website/assets/images/logo.png",
         "width": 500,
         "height": 500
       },
@@ -357,7 +357,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 6px;
-        background: #3A5FEB;
+        background: transparent;
         overflow: hidden;
     }
     
@@ -2251,7 +2251,7 @@
     }
 
     /* ========================================================
-    ▼ Footer Component - 改善版・フッター順序修正（リンク→コピーライト）
+    ▼ Footer Component - index.html完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
     ======================================================== */
     .footer {
         background: var(--dark);
@@ -2267,6 +2267,9 @@
         margin-bottom: 2rem;
     }
     
+    /* ========================================================
+    ▼ Footer Brand Component - ロゴ・説明・ソーシャル
+    ======================================================== */
     .footer-logo {
         display: flex;
         align-items: center;
@@ -2281,7 +2284,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 8px;
-        background: var(--white);
+        background: transparent;
         overflow: hidden;
     }
     
@@ -2351,6 +2354,9 @@
         transform: scale(1.1);
     }
     
+    /* ========================================================
+    ▼ Footer Navigation Components - サービス・会社情報・お問い合わせ
+    ======================================================== */
     .footer-heading {
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
@@ -2433,6 +2439,9 @@
         color: var(--white);
     }
     
+    /* ========================================================
+    ▼ Footer Bottom Component - index.html完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
+    ======================================================== */
     .footer-bottom {
         padding-top: 1.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -2443,17 +2452,22 @@
         gap: 1rem;
     }
     
+    /* PC版: コピーライト左下配置 */
     .footer-copyright {
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.8rem;
-        order: 2;
+        order: 1; /* 確実に左下に配置 */
+        flex-shrink: 0;
     }
     
+    /* PC版: リンク右下配置 */
     .footer-links-inline {
         display: flex;
         gap: 1.2rem;
         flex-wrap: wrap;
-        order: 1;
+        order: 2; /* 確実に右下に配置 */
+        flex-grow: 1;
+        justify-content: flex-end;
     }
     
     .footer-links-inline a {
@@ -2483,6 +2497,9 @@
         width: 100%;
     }
     
+    /* ========================================================
+    ▼ Footer Responsive Component - index.html完全準拠・モバイル最適化・順序制御完全対応
+    ======================================================== */
     @media (max-width: 992px) {
         .footer-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -2500,6 +2517,7 @@
             gap: 1.2rem;
         }
         
+        /* モバイル版ブランド要素サイズ調整 */
         .footer-logo-icon {
             width: 28px;
             height: 28px;
@@ -2527,6 +2545,7 @@
             font-size: 0.8rem;
         }
         
+        /* モバイル版ナビゲーション要素サイズ調整 */
         .footer-heading {
             font-size: 1rem;
             margin-bottom: 1rem;
@@ -2538,37 +2557,41 @@
         
         .footer-contact-item {
             font-size: 0.8rem;
-            gap: 0.5rem;
-            margin-bottom: 0.6rem;
         }
         
         .footer-contact-item i {
             font-size: 0.85rem;
         }
         
+        /* モバイル版フッター最下部: index.html完全準拠・確実な順序制御（リンク上部→コピーライト最下部） */
         .footer-bottom {
             flex-direction: column;
             text-align: center;
+            gap: 0.8rem;
         }
         
+        /* モバイル版: リンクが上部に表示 */
         .footer-links-inline {
             justify-content: center;
             gap: 0.8rem;
-            order: 1;
+            order: 1; /* 確実に上部に配置 */
+            margin-bottom: 0.2rem;
         }
         
         .footer-links-inline a {
             font-size: 0.75rem;
         }
         
+        /* モバイル版: コピーライトが最下部に表示 */
         .footer-copyright {
             font-size: 0.75rem;
-            order: 2;
+            order: 2; /* 確実に最下部に配置 */
+            margin-top: 0.2rem;
         }
     }
 
     /* ========================================================
-    ▼ Chatbot Component - モバイル最適化・改善版
+    ▼ Chatbot Component - 改善版・モバイル最適化
     ======================================================== */
     .chatbot {
         position: fixed;
@@ -3084,7 +3107,7 @@
             <!-- Logo Component - 左端中央配置・改善版 -->
             <a href="index.html" class="logo" aria-label="ShinAIホームページ">
                 <div class="logo-icon">
-                    <img src="assets/images/logo.svg" alt="ShinAI" width="28" height="28">
+                    <img src="assets/images/logo.png" alt="ShinAI" width="28" height="28">
                 </div>
                 <span>ShinAI</span>
             </a>
@@ -3373,7 +3396,7 @@
                     <!-- 柴田 昌国（代表取締役） -->
                     <div class="team-member">
                         <div class="team-member-photo">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150" 
+                            <img src="assets/images/ceo-masakuni-shibata.png" 
                                 alt="柴田 昌国" 
                                 width="150" 
                                 height="150"
@@ -3549,7 +3572,7 @@
     </main>
 
     <!-- ========================================================
-    ▼ Footer Component - 改善版・フッター順序修正（リンク→コピーライト）
+    ▼ Footer Component - index.html完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
     ======================================================== -->
     <footer class="footer">
         <div class="container">
@@ -3558,7 +3581,7 @@
                 <div>
                     <div class="footer-logo">
                         <div class="footer-logo-icon">
-                            <img src="assets/images/logo.svg" alt="ShinAI" width="35" height="35">
+                            <img src="assets/images/logo.png" alt="ShinAI" width="35" height="35">
                         </div>
                         <span class="footer-logo-text">ShinAI</span>
                     </div>
@@ -3625,20 +3648,22 @@
                 </div>
             </div>
             
-            <!-- Footer Bottom Component - 順序修正版（リンク→コピーライト） -->
+            <!-- ========================================================
+            ▼ Footer Bottom Component - index.html完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
+            ======================================================== -->
             <div class="footer-bottom">
+                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
                 <div class="footer-links-inline">
                     <a href="privacy-policy.html">プライバシーポリシー</a>
                     <a href="terms.html">利用規約</a>
                     <a href="legal.html">特定商取引法に基づく表記</a>
                 </div>
-                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- ========================================================
-    ▼ Chatbot Component - モバイル最適化・改善版
+    ▼ Chatbot Component - 改善版・モバイル最適化
     ======================================================== -->
     <div class="chatbot" aria-label="AIアシスタント">
         <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
