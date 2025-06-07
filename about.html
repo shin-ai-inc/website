@@ -121,7 +121,7 @@
         "description": "AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。",
         "image": {
           "@type": "ImageObject",
-          "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png?v=20250607",
+          "url": "/assets/images/ceo-masakuni-shibata.png",
           "width": 150,
           "height": 150
         }
@@ -215,7 +215,7 @@
           },
           "image": {
             "@type": "ImageObject",
-            "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png?v=20250607",
+            "url": "/assets/images/ceo-masakuni-shibata.png",
             "width": 150,
             "height": 150
           }
@@ -2605,8 +2605,23 @@
     }
 
     /* ========================================================
-    ▼ Chatbot Component - 改善版・モバイル最適化
+    ▼ CEO Image Force Display Component - CEO画像強制表示
     ======================================================== */
+    #ceo-image-main {
+        content: url('assets/images/ceo-masakuni-shibata.png') !important;
+        width: 150px !important;
+        height: 150px !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 50% !important;
+        display: block !important;
+    }
+    
+    /* 外部画像URLを強制的に無効化 */
+    img[src*="unsplash.com"],
+    img[src*="images.unsplash.com"] {
+        display: none !important;
+    }
     .chatbot {
         position: fixed;
         bottom: 30px;
@@ -3204,11 +3219,12 @@
                 
                 <div class="company-about-grid animate-on-scroll">
                     <div class="company-image">
-                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200&h=900" 
-                            alt="チームワークを象徴する画像" 
-                            width="1200"
-                            height="900"
-                            loading="lazy">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; text-align: center; padding: 2rem;">
+                            <div>
+                                <i class="fas fa-lightbulb" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
+                                <p>AI技術で未来を創造<br><strong>ShinAI</strong></p>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <div class="company-message">
@@ -3407,16 +3423,19 @@
                 </div>
                 
                 <div class="team-grid animate-on-scroll">
-                    <!-- 柴田 昌国（代表取締役CEO）- ★キャッシュ回避・画像強制表示★ -->
+                    <!-- 柴田 昌国（代表取締役CEO）- ★完全確実なローカル画像パス★ -->
                     <div class="team-member">
                         <div class="team-member-photo">
-                            <img src="assets/images/ceo-masakuni-shibata.png?v=20250607" 
+                            <!-- 絶対確実にローカル画像を使用 -->
+                            <img id="ceo-image-main" 
+                                src="assets/images/ceo-masakuni-shibata.png" 
                                 alt="柴田昌国 ShinAI代表取締役CEO" 
                                 width="150" 
                                 height="150"
                                 loading="eager"
                                 style="object-fit: cover; object-position: center; border-radius: 50%; display: block; max-width: 100%; height: auto;"
-                                crossorigin="anonymous">
+                                onload="console.log('✅ CEO画像読み込み成功:', this.src)"
+                                onerror="console.error('❌ CEO画像読み込み失敗:', this.src); this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto;&quot;>柴田</div>';">
                         </div>
                         <h3 class="team-member-name">柴田 昌国</h3>
                         <p class="team-member-position">代表取締役 / CEO</p>
@@ -3427,7 +3446,7 @@
                         </div>
                     </div>
                     
-                    <!-- Y氏（CTO）- ★外部画像を削除してプレースホルダーに変更★ -->
+                    <!-- Y氏（CTO）- ★プレースホルダー表示★ -->
                     <div class="team-member">
                         <div class="team-member-photo">
                             <div style="width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">
@@ -3444,13 +3463,14 @@
                     </div>
                 </div>
                 
-                <!-- チーム全体の写真 -->
+                <!-- チーム全体の写真 - ★外部画像を削除してプレースホルダーに変更★ -->
                 <div class="team-photo animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200&h=550" 
-                        alt="ShinAIチームの集合写真" 
-                        width="1200"
-                        height="550"
-                        loading="lazy">
+                    <div style="width: 100%; height: 350px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 1.2rem; text-align: center; padding: 2rem;">
+                        <div>
+                            <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                            <p>ShinAIチーム集合写真<br><small>※準備中</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
