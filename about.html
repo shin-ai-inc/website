@@ -121,7 +121,7 @@
         "description": "AIスタートアップ企業「ShinAI」創業者。真の価値を信じ、次世代のために人とAIの共創社会の実現に情熱を注ぐ。",
         "image": {
           "@type": "ImageObject",
-          "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png",
+          "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png?v=20250607",
           "width": 150,
           "height": 150
         }
@@ -215,7 +215,7 @@
           },
           "image": {
             "@type": "ImageObject",
-            "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png",
+            "url": "https://shin-ai-inc.github.io/website/assets/images/ceo-masakuni-shibata.png?v=20250607",
             "width": 150,
             "height": 150
           }
@@ -3407,15 +3407,16 @@
                 </div>
                 
                 <div class="team-grid animate-on-scroll">
-                    <!-- 柴田 昌国（代表取締役CEO）- ★確実にローカル画像を使用★ -->
+                    <!-- 柴田 昌国（代表取締役CEO）- ★キャッシュ回避・画像強制表示★ -->
                     <div class="team-member">
                         <div class="team-member-photo">
-                            <img src="assets/images/ceo-masakuni-shibata.png" 
-                                alt="柴田昌国 - ShinAI代表取締役CEO" 
+                            <img src="assets/images/ceo-masakuni-shibata.png?v=20250607" 
+                                alt="柴田昌国 ShinAI代表取締役CEO" 
                                 width="150" 
                                 height="150"
-                                loading="lazy"
-                                style="object-fit: cover; object-position: center; border-radius: 50%;">
+                                loading="eager"
+                                style="object-fit: cover; object-position: center; border-radius: 50%; display: block; max-width: 100%; height: auto;"
+                                crossorigin="anonymous">
                         </div>
                         <h3 class="team-member-name">柴田 昌国</h3>
                         <p class="team-member-position">代表取締役 / CEO</p>
@@ -3746,36 +3747,92 @@
         }
         
         // ========================================================
-        // ▼ Image Loading Optimization Component - CEO画像確実表示
+        // ▼ CEO Image Path Debug & Force Load Component - パス確認・強制表示
         // ========================================================
         
-        // CEO画像の確実な表示を保証（外部画像参照を完全に削除）
-        document.addEventListener('DOMContentLoaded', function() {
-            const ceoImages = document.querySelectorAll('img[alt*="柴田"], img[src*="ceo-masakuni-shibata"]');
-            ceoImages.forEach(function(img) {
-                // 強制的にローカル画像に設定
-                img.src = 'assets/images/ceo-masakuni-shibata.png';
-                img.setAttribute('data-original', 'assets/images/ceo-masakuni-shibata.png');
-                
-                // 外部画像への参照を完全に削除
-                img.removeAttribute('data-src');
-                img.style.backgroundImage = 'none';
-                
-                // 画像が確実に表示されるよう監視
-                img.onerror = function() {
-                    console.error('CEO画像の読み込みに失敗:', this.src);
-                    // フォールバック処理
-                    this.style.display = 'none';
-                    const placeholder = document.createElement('div');
-                    placeholder.style.cssText = 'width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;';
-                    placeholder.textContent = '柴田';
-                    this.parentNode.insertBefore(placeholder, this);
-                };
-                
-                img.onload = function() {
-                    console.log('CEO画像が正常に読み込まれました:', this.src);
-                };
+        // ページ読み込み完了時にCEO画像を強制設定
+        window.addEventListener('load', function() {
+            console.log('=== CEO画像デバッグ開始 ===');
+            
+            // 可能な全てのCEO画像要素を取得
+            const ceoSelectors = [
+                'img[alt*="柴田"]',
+                'img[src*="ceo"]',
+                'img[src*="masakuni"]',
+                'img[src*="shibata"]'
+            ];
+            
+            let ceoImages = [];
+            ceoSelectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    if (!ceoImages.includes(el)) {
+                        ceoImages.push(el);
+                    }
+                });
             });
+            
+            console.log('発見されたCEO画像要素数:', ceoImages.length);
+            
+            // 各画像要素に対してパス設定
+            ceoImages.forEach((img, index) => {
+                console.log(`CEO画像 ${index + 1}:`, img);
+                console.log('現在のsrc:', img.src);
+                console.log('現在のalt:', img.alt);
+                
+                // 複数のパスパターンを試行
+                const possiblePaths = [
+                    'assets/images/ceo-masakuni-shibata.png',
+                    './assets/images/ceo-masakuni-shibata.png',
+                    '../assets/images/ceo-masakuni-shibata.png',
+                    'images/ceo-masakuni-shibata.png',
+                    'ceo-masakuni-shibata.png'
+                ];
+                
+                let pathIndex = 0;
+                
+                function tryNextPath() {
+                    if (pathIndex < possiblePaths.length) {
+                        const testPath = possiblePaths[pathIndex];
+                        console.log(`パス試行 ${pathIndex + 1}: ${testPath}`);
+                        
+                        // 新しい画像オブジェクトでテスト
+                        const testImg = new Image();
+                        testImg.onload = function() {
+                            console.log(`✅ 成功: ${testPath} が読み込めました`);
+                            img.src = testPath;
+                            img.style.display = 'block';
+                        };
+                        testImg.onerror = function() {
+                            console.log(`❌ 失敗: ${testPath} が読み込めませんでした`);
+                            pathIndex++;
+                            tryNextPath();
+                        };
+                        testImg.src = testPath;
+                    } else {
+                        console.log('❌ 全てのパスが失敗しました。フォールバック処理を実行します。');
+                        // フォールバック: イニシャル表示
+                        img.style.display = 'none';
+                        const placeholder = document.createElement('div');
+                        placeholder.style.cssText = 'width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #3A5FEB, #00C9A7); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto;';
+                        placeholder.textContent = '柴田';
+                        img.parentNode.insertBefore(placeholder, img);
+                    }
+                }
+                
+                // パス試行開始
+                tryNextPath();
+            });
+            
+            // さらに、チーム全体の画像も確認
+            const teamImages = document.querySelectorAll('.team-member img');
+            console.log('チーム画像総数:', teamImages.length);
+            teamImages.forEach((img, index) => {
+                console.log(`チーム画像 ${index + 1} src:`, img.src);
+                console.log(`チーム画像 ${index + 1} alt:`, img.alt);
+            });
+            
+            console.log('=== CEO画像デバッグ終了 ===');
         });
         
         // ========================================================
