@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI導入による収益拡大効果の詳細分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    body {
+        font-family: 'Yu Gothic', 'Hiragino Sans', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #e17055 0%, #f39c12 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .header .subtitle {
+        font-size: 1.3em;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    
+    .content {
+        padding: 40px;
+    }
+    
+    .section {
+        margin-bottom: 50px;
+    }
+    
+    .section h2 {
+        color: #2d3436;
+        font-size: 2em;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 4px solid #e17055;
+        display: flex;
+        align-items: center;
+    }
+    
+    .current-status {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .status-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-top: 4px solid #e17055;
+    }
+    
+    .status-number {
+        font-size: 2.2em;
+        font-weight: bold;
+        color: #e17055;
+        margin-bottom: 5px;
+    }
+    
+    .status-label {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    
+    .status-note {
+        font-size: 0.8em;
+        color: #999;
+    }
+    
+    .comparison-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 30px 0;
+    }
+    
+    .before-after {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .before-after.before {
+        border-left: 6px solid #ff7675;
+        background: linear-gradient(135deg, #ffb3ba 0%, #ffdfba 100%);
+    }
+    
+    .before-after.after {
+        border-left: 6px solid #00b894;
+        background: linear-gradient(135deg, #baffc9 0%, #bae1ff 100%);
+    }
+    
+    .before-after h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .before-after.before h3 {
+        color: #d63031;
+    }
+    
+    .before-after.after h3 {
+        color: #00b894;
+    }
+    
+    .workflow-step {
+        background: rgba(255,255,255,0.8);
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .step-time {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+    
+    .before .step-time { color: #d63031; }
+    .after .step-time { color: #00b894; }
+    
+    .efficiency-chart {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin: 30px 0;
+    }
+    
+    .chart-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2d3436;
+    }
+    
+    .progress-bar {
+        margin: 20px 0;
+    }
+    
+    .progress-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    
+    .progress-track {
+        height: 25px;
+        background: #f1f2f6;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00b894, #00cec9);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        transition: width 2s ease;
+    }
+    
+    .revenue-projection {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        padding: 30px;
+        border-radius: 15px;
+        margin: 30px 0;
+    }
+    
+    .scenario-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .scenario-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .scenario-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+    }
+    
+    .scenario-card.conservative::before { background: #fdcb6e; }
+    .scenario-card.standard::before { background: #00b894; }
+    .scenario-card.optimistic::before { background: #a29bfe; }
+    
+    .scenario-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    .scenario-card.conservative .scenario-title { color: #e17055; }
+    .scenario-card.standard .scenario-title { color: #00b894; }
+    .scenario-card.optimistic .scenario-title { color: #6c5ce7; }
+    
+    .scenario-value {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .scenario-card.conservative .scenario-value { color: #e17055; }
+    .scenario-card.standard .scenario-value { color: #00b894; }
+    .scenario-card.optimistic .scenario-value { color: #6c5ce7; }
+    
+    .roi-dashboard {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        margin: 40px 0;
+    }
+    
+    .roi-title {
+        font-size: 2.2em;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+    
+    .roi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+    }
+    
+    .roi-metric {
+        background: rgba(255,255,255,0.1);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+    }
+    
+    .roi-number {
+        font-size: 3em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffeaa7;
+    }
+    
+    .roi-label {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+    
+    .timeline-revenue {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin: 30px 0;
+    }
+    
+    .timeline-chart {
+        display: flex;
+        align-items: end;
+        justify-content: space-around;
+        height: 300px;
+        margin: 30px 0;
+        padding: 20px;
+        background: linear-gradient(to top, #f8f9fa 0%, transparent 100%);
+        border-radius: 10px;
+    }
+    
+    .timeline-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 10px;
+    }
+    
+    .bar {
+        width: 40px;
+        background: linear-gradient(to top, #00b894, #00cec9);
+        border-radius: 5px 5px 0 0;
+        margin-bottom: 10px;
+        position: relative;
+        animation: growUp 2s ease-out;
+    }
+    
+    @keyframes growUp {
+        from { height: 0; }
+        to { height: var(--height); }
+    }
+    
+    .bar-value {
+        position: absolute;
+        top: -25px;
+        font-weight: bold;
+        font-size: 0.9em;
+        color: #2d3436;
+        white-space: nowrap;
+    }
+    
+    .bar-label {
+        font-size: 0.9em;
+        color: #636e72;
+        text-align: center;
+    }
+    
+    .investment-recovery {
+        background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+        padding: 30px;
+        border-radius: 15px;
+        margin: 30px 0;
+        text-align: center;
+    }
+    
+    .recovery-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #2d3436;
+    }
+    
+    .recovery-calculation {
+        background: rgba(255,255,255,0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        font-size: 1.1em;
+    }
+    
+    .calculation-step {
+        margin: 10px 0;
+        padding: 8px;
+        background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+    }
+    
+    .highlight-result {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #e17055;
+        margin: 15px 0;
+    }
+    
+    .risk-analysis {
+        background: #fff5f5;
+        border-left: 6px solid #ff7675;
+        padding: 30px;
+        border-radius: 15px;
+        margin: 30px 0;
+    }
+    
+    .risk-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    
+    .risk-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .risk-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+    }
+    
+    .mitigation {
+        color: #00b894;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
+    .conclusion-box {
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        margin: 40px 0;
+    }
+    
+    .conclusion-title {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    .conclusion-text {
+        font-size: 1.3em;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+    
+    .key-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .key-point {
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .key-number {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #ffeaa7;
+    }
+    
+    @media (max-width: 768px) {
+        .comparison-section {
+            grid-template-columns: 1fr;
+        }
+        
+        .scenario-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .roi-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .timeline-chart {
+            height: 250px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 収益シミュレーション資料</h1>
+            <p class="subtitle">AI導入による収益拡大効果の詳細分析</p>
+            <p style="margin-top: 20px; font-size: 1.1em;">株式会社イーファイトスポーツ様　作成日：2025年5月26日</p>
+        </div>
+    <div class="content">
+        <div class="section">
+            <h2>📊 現状分析（ベースライン）</h2>
+            <div class="current-status">
+                <h3 style="text-align: center; margin-bottom: 20px; font-size: 1.5em; color: #2d3436;">
+                    現在の運営状況（2022年7月実績ベース）
+                </h3>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div class="status-number">3,000万</div>
+                        <div class="status-label">月間PV</div>
+                        <div class="status-note">素晴らしい実績基盤</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="status-number">10本</div>
+                        <div class="status-label">記事数/週</div>
+                        <div class="status-note">現在の制作体制</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="status-number">3-5時間</div>
+                        <div class="status-label">1記事制作時間</div>
+                        <div class="status-note">取材～執筆～校正含む</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="status-number">50時間</div>
+                        <div class="status-label">編集者稼働/週</div>
+                        <div class="status-note">10本×5時間</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚡ AI導入後の劇的変化</h2>
+            <div class="comparison-section">
+                <div class="before-after before">
+                    <h3>【現状】手作業中心</h3>
+                    <div class="workflow-step">
+                        <span>取材準備</span>
+                        <span class="step-time">30分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>データ収集</span>
+                        <span class="step-time">60分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>分析・構成</span>
+                        <span class="step-time">90分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>執筆作業</span>
+                        <span class="step-time">120分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>校正</span>
+                        <span class="step-time">30分</span>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; font-size: 1.3em; font-weight: bold; color: #d63031;">
+                        合計：330分（5.5時間）
+                    </div>
+                </div>
+                
+                <div class="before-after after">
+                    <h3>【AI導入後】効率的</h3>
+                    <div class="workflow-step">
+                        <span>AI生成確認</span>
+                        <span class="step-time">10分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>内容調整</span>
+                        <span class="step-time">30分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>独自性追加</span>
+                        <span class="step-time">15分</span>
+                    </div>
+                    <div class="workflow-step">
+                        <span>最終校正</span>
+                        <span class="step-time">5分</span>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; font-size: 1.3em; font-weight: bold; color: #00b894;">
+                        合計：60分（1時間）
+                    </div>
+                </div>
+            </div>
+
+            <div class="efficiency-chart">
+                <div class="chart-title">作業時間短縮効果の詳細分析</div>
+                
+                <div class="progress-bar">
+                    <div class="progress-label">
+                        <span>データ収集作業</span>
+                        <span>92%短縮</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 92%;">60分 → 5分</div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-label">
+                        <span>統計分析作業</span>
+                        <span>89%短縮</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 89%;">90分 → 10分</div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-label">
+                        <span>執筆作業</span>
+                        <span>79%短縮</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 79%;">120分 → 25分</div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-label">
+                        <span><strong>全体作業時間</strong></span>
+                        <span><strong>83%短縮</strong></span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 83%; background: linear-gradient(90deg, #e17055, #f39c12);">
+                            <strong>360分 → 60分</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 収益拡大の3つのシナリオ</h2>
+            <div class="revenue-projection">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.8em; color: #2d3436;">
+                    年間収益増加の詳細予測
+                </h3>
+                
+                <div class="scenario-grid">
+                    <div class="scenario-card conservative">
+                        <div class="scenario-title">保守的ケース</div>
+                        <div class="scenario-value">108万円</div>
+                        <div style="margin: 15px 0;">
+                            <div>PV増加：+30%</div>
+                            <div>広告収益：+54万円</div>
+                            <div>スポンサー：+54万円</div>
+                        </div>
+                        <div style="font-size: 0.9em; color: #666;">
+                            最も慎重な見積もり
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-card standard">
+                        <div class="scenario-title">標準ケース</div>
+                        <div class="scenario-value">168万円</div>
+                        <div style="margin: 15px 0;">
+                            <div>PV増加：+50%</div>
+                            <div>広告収益：+90万円</div>
+                            <div>スポンサー：+78万円</div>
+                        </div>
+                        <div style="font-size: 0.9em; color: #666;">
+                            現実的な予測値
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-card optimistic">
+                        <div class="scenario-title">楽観ケース</div>
+                        <div class="scenario-value">228万円</div>
+                        <div style="margin: 15px 0;">
+                            <div>PV増加：+80%</div>
+                            <div>広告収益：+144万円</div>
+                            <div>スポンサー：+84万円</div>
+                        </div>
+                        <div style="font-size: 0.9em; color: #666;">
+                            最大ポテンシャル
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 投資対効果（ROI）ダッシュボード</h2>
+            <div class="roi-dashboard">
+                <div class="roi-title">投資効率の圧倒的な魅力</div>
+                
+                <div class="roi-grid">
+                    <div class="roi-metric">
+                        <div class="roi-number">120万円</div>
+                        <div class="roi-label">初期投資額</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-number">90-190%</div>
+                        <div class="roi-label">投資効率(ROI)</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-number">6-13ヶ月</div>
+                        <div class="roi-label">投資回収期間</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-number">3-6倍</div>
+                        <div class="roi-label">業界平均比</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; font-size: 1.3em;">
+                    <strong>2年目以降は純利益として継続的に積み上がります</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 月次収益推移の予測</h2>
+            <div class="timeline-revenue">
+                <div class="chart-title">AI導入後の段階的収益増加</div>
+                
+                <div class="timeline-chart">
+                    <div class="timeline-bar">
+                        <div class="bar" style="--height: 60px; height: 60px;">
+                            <div class="bar-value">+9万円</div>
+                        </div>
+                        <div class="bar-label">1ヶ月目</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="bar" style="--height: 100px; height: 100px;">
+                            <div class="bar-value">+15万円</div>
+                        </div>
+                        <div class="bar-label">2ヶ月目</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="bar" style="--height: 140px; height: 140px;">
+                            <div class="bar-value">+21万円</div>
+                        </div>
+                        <div class="bar-label">3ヶ月目</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="bar" style="--height: 200px; height: 200px;">
+                            <div class="bar-value">+30万円</div>
+                        </div>
+                        <div class="bar-label">6ヶ月目</div>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="bar" style="--height: 240px; height: 240px;">
+                            <div class="bar-value">+36万円</div>
+                        </div>
+                        <div class="bar-label">12ヶ月目</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <div style="display: inline-block; background: #e8f5e8; padding: 15px; border-radius: 10px;">
+                        <strong>6ヶ月後：累積効果135万円（投資完全回収達成！）</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔢 投資回収の詳細計算</h2>
+            <div class="investment-recovery">
+                <div class="recovery-title">投資回収シミュレーション</div>
+                
+                <div class="recovery-calculation">
+                    <div class="calculation-step">
+                        <strong>初期投資額：</strong> 120万円（特別価格）
+                    </div>
+                    <div class="calculation-step">
+                        <strong>月間収益増加：</strong> 9万円〜19万円
+                    </div>
+                    <div class="calculation-step">
+                        <strong>年間収益増加：</strong> 108万円〜228万円
+                    </div>
+                    <div class="highlight-result">
+                        投資回収期間：6〜13ヶ月
+                    </div>
+                    <div class="highlight-result">
+                        ROI：90%〜190%
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #2d3436;">3年間の累積効果</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #00b894;">1年目</div>
+                            <div>投資120万円</div>
+                            <div>回収108-228万円</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #00b894;">2年目</div>
+                            <div>追加投資0円</div>
+                            <div>利益108-228万円</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: #00b894;">3年目</div>
+                            <div>追加投資0円</div>
+                            <div>利益108-228万円</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; font-size: 1.3em; font-weight: bold; color: #e17055;">
+                        3年間累積利益：204万円〜564万円
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ リスク分析と対策</h2>
+            <div class="risk-analysis">
+                <h3 style="margin-bottom: 20px; font-size: 1.5em; color: #d63031;">
+                    最悪ケースシナリオでも安全性を確保
+                </h3>
+                
+                <div class="risk-grid">
+                    <div class="risk-card">
+                        <div class="risk-title">想定リスク：PV増加なし</div>
+                        <div>影響：収益増加が限定的</div>
+                        <div class="mitigation">対策：品質改善・マーケティング強化で解決</div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">想定リスク：AI品質問題</div>
+                        <div>影響：追加の手作業が発生</div>
+                        <div class="mitigation">対策：3ヶ月成果保証で無償カスタマイズ</div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-title">想定リスク：競合の追随</div>
+                        <div>影響：相対的優位性の減少</div>
+                        <div class="mitigation">対策：継続的機能改善で先行優位を維持</div>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #d63031; margin-bottom: 15px;">最悪ケースの財務影響</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div>
+                            <strong>想定最小効果：</strong><br>
+                            収益増加：年間50万円<br>
+                            コスト削減：年間50万円<br>
+                            総効果：年間100万円
+                        </div>
+                        <div>
+                            <strong>最悪ケース結果：</strong><br>
+                            1年目ROI：-17%<br>
+                            2年目以降ROI：+83%<br>
+                            <span style="color: #00b894; font-weight: bold;">2年目から黒字転換</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion-box">
+            <div class="conclusion-title">投資判断の結論</div>
+            <div class="conclusion-text">
+                投資額120万円に対し、年間108-228万円の収益増加が見込まれる本案件は、<br>
+                <strong>財務的に極めて魅力的な投資機会</strong>です。
+            </div>
+            
+            <div class="key-points">
+                <div class="key-point">
+                    <div class="key-number">90-190%</div>
+                    <div>業界平均3-6倍のROI</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-number">6-13ヶ月</div>
+                    <div>短期での投資回収</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-number">3年564万円</div>
+                    <div>長期累積効果</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-number">低リスク</div>
+                    <div>最悪ケースでも2年目黒字</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; font-size: 1.4em; font-weight: bold;">
+                格闘技メディア業界における競争激化を考慮すると、<br>
+                <span style="color: #ffeaa7;">今こそ先行投資により競合優位性を確立すべきタイミング</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
