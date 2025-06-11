@@ -743,6 +743,12 @@
         letter-spacing: 0.01em; /* 統一ヘッダー準拠 */
     }
     
+    .btn-header-consultation i {
+        display: inline-block !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
+        opacity: 1 !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
+        visibility: visible !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
+    }
+    
     .btn-header-consultation:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(58, 95, 235, 0.35);
@@ -948,6 +954,9 @@
     .btn span, .btn i {
         position: relative;
         z-index: 2;
+        display: inline-block; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
+        opacity: 1; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
+        visibility: visible; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
     }
     
     .btn-primary {
@@ -1598,11 +1607,12 @@
         background-color: rgba(0, 196, 140, 0.05);
     }
     
-    /* ★★★ IMPROVEMENT: お問い合わせ内容入力欄のサイズ拡大 ★★★ */
+    /* ★★★ IMPROVEMENT: お問い合わせ内容入力欄のサイズ大幅拡大 ★★★ */
     #message {
-        min-height: 160px; /* PC版: 大幅に高さを拡大 */
+        min-height: 220px; /* PC版: さらに大幅に高さを拡大 */
         resize: vertical; /* 縦方向のリサイズ許可 */
         line-height: 1.6; /* 読みやすさ向上 */
+        padding: 1.2rem 1.3rem; /* 内側の余白も拡大 */
     }
     
     .field-hint {
@@ -1883,7 +1893,7 @@
         }
     }
     
-    /* ★★★ COMPONENT: Reduced Motion Support - 紙飛行機アニメーション対応 ★★★ */
+    /* ★★★ COMPONENT: Reduced Motion Support - 極上紙飛行機アニメーション対応 ★★★ */
     @media (prefers-reduced-motion: reduce) {
         .professional-checkbox,
         .professional-checkbox__visual,
@@ -2566,11 +2576,11 @@
         z-index: 1;
         transition: transform var(--transition-normal) ease;
         font-size: 1rem;
-        animation: paperPlaneFloatSmooth 3.8s ease-in-out infinite; /* ★★★ IMPROVEMENT: チャットボット用滑らかアニメーション ★★★ */
+        animation: paperPlaneFloatUltraSmooth 6.2s ease-in-out infinite; /* ★★★ IMPROVEMENT: チャットボット用超滑らかアニメーション ★★★ */
         transform-origin: center;
         display: inline-block;
         will-change: transform;
-        animation-delay: 0.6s;
+        animation-delay: 0.7s;
     }
     
     .chatbot-send:hover {
@@ -2582,7 +2592,7 @@
     }
     
     .chatbot-send:hover i {
-        animation: paperPlaneHover 0.4s ease-out forwards; /* ★★★ IMPROVEMENT: チャットボット用ホバーエフェクト ★★★ */
+        animation: paperPlaneHoverUltraSmooth 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; /* ★★★ IMPROVEMENT: チャットボット用超滑らかホバーエフェクト ★★★ */
     }
     
     .loading-dots {
@@ -2692,8 +2702,8 @@
         
         .chatbot-send i {
             font-size: 0.7rem;
-            animation: paperPlaneFloatMobileSmooth 4.2s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル版チャットボット用アニメーション ★★★ */
-            animation-delay: 0.5s;
+            animation: paperPlaneFloatMobileUltraSmooth 6.8s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル版チャットボット用超滑らかアニメーション ★★★ */
+            animation-delay: 0.6s;
         }
         
         .chat-message {
@@ -2862,7 +2872,7 @@
             transition-duration: 0.01ms !important;
         }
         
-        /* 紙飛行機アニメーション完全停止 */
+        /* 極上紙飛行機アニメーション完全停止 */
         .btn-icon-right i,
         .chatbot-send i,
         .btn-primary.btn-icon-right i {
@@ -2870,9 +2880,9 @@
         }
         
         /* キーフレームアニメーション無効化 */
-        @keyframes paperPlaneFloatSmooth { to { transform: none; } }
-        @keyframes paperPlaneFloatMobileSmooth { to { transform: none; } }
-        @keyframes paperPlaneHover { to { transform: none; } }
+        @keyframes paperPlaneFloatUltraSmooth { to { transform: none; } }
+        @keyframes paperPlaneFloatMobileUltraSmooth { to { transform: none; } }
+        @keyframes paperPlaneHoverUltraSmooth { to { transform: none; } }
     }
     
     a:focus-visible, 
@@ -3462,18 +3472,53 @@
             currentYearElement.textContent = currentYear;
         }
         
-        // ★★★ IMPROVEMENT: 改善された紙飛行機アニメーション初期化 ★★★
+        // ★★★ IMPROVEMENT: モバイル版紙飛行機エフェクト確実表示・極上の滑らかな紙飛行機アニメーション初期化 ★★★
         setTimeout(() => {
             const paperPlaneIcons = document.querySelectorAll('.btn-icon-right i, .chatbot-send i');
             paperPlaneIcons.forEach(icon => {
                 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                    icon.style.animation = window.innerWidth <= 768 ? 
-                        'paperPlaneFloatMobileSmooth 4.5s ease-in-out infinite' : 
-                        'paperPlaneFloatSmooth 4s ease-in-out infinite';
-                    icon.style.animationDelay = Math.random() * 0.8 + 's'; // ★★★ IMPROVEMENT: ランダムな開始タイミング強化 ★★★
+                    // モバイル版での確実な表示設定
+                    icon.style.display = 'inline-block';
+                    icon.style.opacity = '1';
+                    icon.style.visibility = 'visible';
                     icon.style.transformOrigin = 'center';
                     icon.style.willChange = 'transform';
+                    
+                    // アニメーション適用
+                    if (window.innerWidth <= 768) {
+                        icon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6.5s ease-in-out infinite';
+                        icon.style.fontSize = '0.75rem'; /* ★★★ IMPROVEMENT: モバイル版アイコンサイズ確保 ★★★ */
+                    } else {
+                        icon.style.animation = 'paperPlaneFloatUltraSmooth 6s ease-in-out infinite';
+                    }
+                    
+                    icon.style.animationDelay = Math.random() * 1 + 's';
+                    
+                    // ★★★ IMPROVEMENT: モバイル版デバッグ用ログ（本番環境では削除可能） ★★★
+                    console.log('紙飛行機アニメーション適用:', {
+                        element: icon,
+                        isMobile: window.innerWidth <= 768,
+                        animation: icon.style.animation,
+                        display: icon.style.display,
+                        opacity: icon.style.opacity
+                    });
                 }
+            });
+            
+            // ★★★ IMPROVEMENT: モバイル版専用 - リサイズ時の再適用 ★★★
+            window.addEventListener('resize', function() {
+                const isMobile = window.innerWidth <= 768;
+                paperPlaneIcons.forEach(icon => {
+                    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        if (isMobile) {
+                            icon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6.5s ease-in-out infinite';
+                            icon.style.fontSize = '0.75rem';
+                        } else {
+                            icon.style.animation = 'paperPlaneFloatUltraSmooth 6s ease-in-out infinite';
+                            icon.style.fontSize = '';
+                        }
+                    }
+                });
             });
         }, 500);
         
@@ -3660,13 +3705,30 @@
                                 } else {
                                     clearInterval(typingEffect);
                                     
-                                    // CTAボタンを追加（★★★ IMPROVEMENT: 改善された紙飛行機アニメーション付き ★★★）
+                                    // CTAボタンを追加（★★★ IMPROVEMENT: モバイル版確実対応・極上滑らか紙飛行機アニメーション付き ★★★）
                                     setTimeout(function() {
                                         const ctaButton = document.createElement('div');
                                         ctaButton.classList.add('chat-message', 'bot');
-                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: paperPlaneFloatSmooth 3.5s ease-in-out infinite; animation-delay: 0.3s; transform-origin: center; will-change: transform;"></i></a>';
+                                        
+                                        // モバイル版対応の紙飛行機アニメーション設定
+                                        const animationName = window.innerWidth <= 768 ? 
+                                            'paperPlaneFloatMobileUltraSmooth' : 
+                                            'paperPlaneFloatUltraSmooth';
+                                        const animationDuration = window.innerWidth <= 768 ? '6.2s' : '5.8s';
+                                        const iconSize = window.innerWidth <= 768 ? '0.75rem' : '1rem';
+                                        
+                                        ctaButton.innerHTML = `<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: ${animationName} ${animationDuration} ease-in-out infinite; animation-delay: 0.4s; transform-origin: center; will-change: transform; display: inline-block !important; opacity: 1 !important; visibility: visible !important; font-size: ${iconSize} !important;"></i></a>`;
+                                        
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
+                                        
+                                        // ★★★ IMPROVEMENT: モバイル版デバッグ用確認 ★★★
+                                        console.log('チャットボットCTA紙飛行機アニメーション適用:', {
+                                            isMobile: window.innerWidth <= 768,
+                                            animationName: animationName,
+                                            animationDuration: animationDuration,
+                                            iconSize: iconSize
+                                        });
                                     }, 300);
                                 }
                             }, typingSpeed);
@@ -3858,18 +3920,38 @@
             submitButton.classList.remove('btn-loading');
             submitButton.disabled = false;
             
-            // ★★★ IMPROVEMENT: 紙飛行機アニメーションが確実に動作するよう強制再開 ★★★
+            // ★★★ IMPROVEMENT: モバイル版確実対応・極上滑らか紙飛行機アニメーションが確実に動作するよう強制再開 ★★★
             setTimeout(() => {
                 const paperPlaneIcon = submitButton.querySelector('i');
                 if (paperPlaneIcon) {
+                    // アニメーション一旦停止
                     paperPlaneIcon.style.animation = 'none';
                     paperPlaneIcon.offsetHeight; // リフロー強制実行
-                    paperPlaneIcon.style.animation = window.innerWidth <= 768 ? 
-                        'paperPlaneFloatMobileSmooth 4s ease-in-out infinite' : 
-                        'paperPlaneFloatSmooth 3.5s ease-in-out infinite';
-                    paperPlaneIcon.style.animationDelay = '0.3s';
+                    
+                    // モバイル版での確実な表示設定
+                    paperPlaneIcon.style.display = 'inline-block';
+                    paperPlaneIcon.style.opacity = '1';
+                    paperPlaneIcon.style.visibility = 'visible';
                     paperPlaneIcon.style.transformOrigin = 'center';
                     paperPlaneIcon.style.willChange = 'transform';
+                    
+                    // アニメーション再開
+                    if (window.innerWidth <= 768) {
+                        paperPlaneIcon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6s ease-in-out infinite';
+                        paperPlaneIcon.style.fontSize = '0.75rem'; /* ★★★ IMPROVEMENT: モバイル版アイコンサイズ確保 ★★★ */
+                    } else {
+                        paperPlaneIcon.style.animation = 'paperPlaneFloatUltraSmooth 5.5s ease-in-out infinite';
+                    }
+                    
+                    paperPlaneIcon.style.animationDelay = '0.4s';
+                    
+                    // ★★★ IMPROVEMENT: モバイル版デバッグ用確認 ★★★
+                    console.log('送信ボタン紙飛行機アニメーション再開:', {
+                        element: paperPlaneIcon,
+                        isMobile: window.innerWidth <= 768,
+                        animation: paperPlaneIcon.style.animation,
+                        display: paperPlaneIcon.style.display
+                    });
                 }
             }, 100);
             
