@@ -968,72 +968,94 @@
     }
     
     /* ========================================================
-    ▼ Paper Plane Animation Component - ゆらゆらモーション強化版
-    機能: 紙飛行機アイコンの自然なゆらゆらモーション
-    特徴: より目に見える動き、PC/モバイル完全対応
+    ▼ Enhanced Paper Plane Animation Component - ★★★ IMPROVEMENT: より滑らかで繊細なアニメーション ★★★
+    機能: 紙飛行機アイコンの自然で滑らかなゆらゆらモーション
+    特徴: より繊細な動き、easing強化、モバイル対応完備
     ======================================================== */
-    @keyframes paperPlaneFloat {
+    
+    /* ★★★ IMPROVEMENT: PC版 - より滑らかで繊細なアニメーション ★★★ */
+    @keyframes paperPlaneFloatSmooth {
         0% {
             transform: translate(0, 0) rotate(0deg);
         }
-        20% {
-            transform: translate(-3px, -4px) rotate(-3deg);
+        15% {
+            transform: translate(-2px, -3px) rotate(-1.5deg);
         }
-        40% {
-            transform: translate(2px, -6px) rotate(2deg);
+        30% {
+            transform: translate(1px, -4px) rotate(1deg);
+        }
+        45% {
+            transform: translate(-1px, -2px) rotate(-0.8deg);
         }
         60% {
-            transform: translate(-2px, -3px) rotate(-2deg);
+            transform: translate(2px, -5px) rotate(1.2deg);
         }
-        80% {
-            transform: translate(1px, -5px) rotate(1deg);
+        75% {
+            transform: translate(-1.5px, -3px) rotate(-1deg);
+        }
+        90% {
+            transform: translate(1px, -2px) rotate(0.5deg);
         }
         100% {
             transform: translate(0, 0) rotate(0deg);
         }
     }
     
-    /* より滑らかなモバイル用アニメーション */
-    @keyframes paperPlaneFloatMobile {
+    /* ★★★ IMPROVEMENT: モバイル版 - より滑らかなアニメーション ★★★ */
+    @keyframes paperPlaneFloatMobileSmooth {
         0% {
             transform: translate(0, 0) rotate(0deg);
         }
-        25% {
-            transform: translate(-2px, -3px) rotate(-2deg);
+        20% {
+            transform: translate(-1.5px, -2px) rotate(-1deg);
         }
-        50% {
-            transform: translate(1px, -4px) rotate(1deg);
+        40% {
+            transform: translate(1px, -3px) rotate(0.8deg);
         }
-        75% {
-            transform: translate(-1px, -2px) rotate(-1deg);
+        60% {
+            transform: translate(-1px, -1.5px) rotate(-0.6deg);
+        }
+        80% {
+            transform: translate(1.2px, -2.5px) rotate(0.7deg);
         }
         100% {
             transform: translate(0, 0) rotate(0deg);
         }
     }
+    
+    /* ★★★ IMPROVEMENT: ホバー時のより滑らかなアニメーション ★★★ */
+    @keyframes paperPlaneHover {
+        0% {
+            transform: translateX(0) scale(1);
+        }
+        50% {
+            transform: translateX(2px) scale(1.05);
+        }
+        100% {
+            transform: translateX(4px) scale(1.08);
+        }
+    }
 
     .btn-icon-right i {
-        transition: transform var(--transition-normal) ease;
-        animation: paperPlaneFloat 3s ease-in-out infinite;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ IMPROVEMENT: より滑らかなeasing ★★★ */
+        animation: paperPlaneFloatSmooth 4s ease-in-out infinite; /* ★★★ IMPROVEMENT: 時間延長で滑らか ★★★ */
         transform-origin: center;
         display: inline-block;
         will-change: transform;
     }
     
     .btn-icon-right:hover i {
-        transform: translateX(3px);
-        animation-play-state: paused;
+        animation: paperPlaneHover 0.6s ease-out forwards; /* ★★★ IMPROVEMENT: ホバー専用アニメーション ★★★ */
     }
     
     /* フォーム送信ボタン専用スタイル */
     .btn-primary.btn-icon-right i {
-        animation: paperPlaneFloat 2.8s ease-in-out infinite;
-        animation-delay: 0.2s;
+        animation: paperPlaneFloatSmooth 3.5s ease-in-out infinite; /* ★★★ IMPROVEMENT: 少し速めで滑らか ★★★ */
+        animation-delay: 0.3s;
     }
     
     .btn-primary.btn-icon-right:hover i {
-        transform: translateX(4px);
-        animation-play-state: paused;
+        animation: paperPlaneHover 0.5s ease-out forwards; /* ★★★ IMPROVEMENT: 送信ボタン専用ホバー ★★★ */
     }
     
     @media (max-width: 768px) {
@@ -1048,15 +1070,22 @@
             max-width: 240px;
         }
         
-        /* モバイル版紙飛行機アニメーション強化 */
+        /* ★★★ IMPROVEMENT: モバイル版紙飛行機アニメーション強化 ★★★ */
         .btn-icon-right i {
-            animation: paperPlaneFloatMobile 3.5s ease-in-out infinite;
-            animation-delay: 0.3s;
+            animation: paperPlaneFloatMobileSmooth 4.5s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル専用滑らかアニメーション ★★★ */
+            animation-delay: 0.4s;
         }
         
         .btn-primary.btn-icon-right i {
-            animation: paperPlaneFloatMobile 3s ease-in-out infinite;
-            animation-delay: 0.1s;
+            animation: paperPlaneFloatMobileSmooth 4s ease-in-out infinite; /* ★★★ IMPROVEMENT: 送信ボタン用モバイルアニメーション ★★★ */
+            animation-delay: 0.2s;
+        }
+        
+        /* ★★★ IMPROVEMENT: モバイル版ホバー/タップエフェクト ★★★ */
+        .btn-icon-right:active i,
+        .btn-primary.btn-icon-right:active i {
+            animation-play-state: paused;
+            transform: translateX(2px) scale(1.1); /* ★★★ IMPROVEMENT: タップ時のフィードバック ★★★ */
         }
     }
     
@@ -1414,7 +1443,7 @@
     }
 
     /* ========================================================
-    ▼ Contact Form Component - モバイル情報密度最適化・全体像把握向上
+    ▼ Contact Form Component - モバイル情報密度最適化・全体像把握向上・★★★ IMPROVEMENT: お問い合わせ内容入力欄サイズ拡大 ★★★
     ======================================================== */
     .contact-form-section {
         padding: 2.5rem 0; /* 全体像把握最適化：縮小 */
@@ -1567,6 +1596,13 @@
     .form-control.valid {
         border-color: var(--success);
         background-color: rgba(0, 196, 140, 0.05);
+    }
+    
+    /* ★★★ IMPROVEMENT: お問い合わせ内容入力欄のサイズ拡大 ★★★ */
+    #message {
+        min-height: 160px; /* PC版: 大幅に高さを拡大 */
+        resize: vertical; /* 縦方向のリサイズ許可 */
+        line-height: 1.6; /* 読みやすさ向上 */
     }
     
     .field-hint {
@@ -1827,6 +1863,11 @@
         
         .professional-checkbox__label {
             font-size: 0.9rem;
+        }
+        
+        /* ★★★ IMPROVEMENT: モバイル版お問い合わせ内容入力欄のサイズ拡大 ★★★ */
+        #message {
+            min-height: 140px; /* モバイル版: 縦幅を大幅に拡大 */
         }
     }
     
@@ -2525,11 +2566,11 @@
         z-index: 1;
         transition: transform var(--transition-normal) ease;
         font-size: 1rem;
-        animation: paperPlaneFloat 3.2s ease-in-out infinite;
+        animation: paperPlaneFloatSmooth 3.8s ease-in-out infinite; /* ★★★ IMPROVEMENT: チャットボット用滑らかアニメーション ★★★ */
         transform-origin: center;
         display: inline-block;
         will-change: transform;
-        animation-delay: 0.5s;
+        animation-delay: 0.6s;
     }
     
     .chatbot-send:hover {
@@ -2541,8 +2582,7 @@
     }
     
     .chatbot-send:hover i {
-        transform: translateX(2px);
-        animation-play-state: paused;
+        animation: paperPlaneHover 0.4s ease-out forwards; /* ★★★ IMPROVEMENT: チャットボット用ホバーエフェクト ★★★ */
     }
     
     .loading-dots {
@@ -2652,8 +2692,8 @@
         
         .chatbot-send i {
             font-size: 0.7rem;
-            animation: paperPlaneFloatMobile 3.8s ease-in-out infinite;
-            animation-delay: 0.4s;
+            animation: paperPlaneFloatMobileSmooth 4.2s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル版チャットボット用アニメーション ★★★ */
+            animation-delay: 0.5s;
         }
         
         .chat-message {
@@ -2830,8 +2870,9 @@
         }
         
         /* キーフレームアニメーション無効化 */
-        @keyframes paperPlaneFloat { to { transform: none; } }
-        @keyframes paperPlaneFloatMobile { to { transform: none; } }
+        @keyframes paperPlaneFloatSmooth { to { transform: none; } }
+        @keyframes paperPlaneFloatMobileSmooth { to { transform: none; } }
+        @keyframes paperPlaneHover { to { transform: none; } }
     }
     
     a:focus-visible, 
@@ -3104,7 +3145,7 @@
                             <div class="form-group">
                                 <label for="phone" class="form-label">電話番号</label>
                                 <div class="input-wrapper">
-                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="例: 03-1234-5678">
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="例: 080-1234-5678">
                                     <span class="focus-border"></span>
                                 </div>
                                 <div class="field-hint">任意項目です</div>
@@ -3421,15 +3462,15 @@
             currentYearElement.textContent = currentYear;
         }
         
-        // 紙飛行機アニメーション初期化
+        // ★★★ IMPROVEMENT: 改善された紙飛行機アニメーション初期化 ★★★
         setTimeout(() => {
             const paperPlaneIcons = document.querySelectorAll('.btn-icon-right i, .chatbot-send i');
             paperPlaneIcons.forEach(icon => {
                 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                     icon.style.animation = window.innerWidth <= 768 ? 
-                        'paperPlaneFloatMobile 3.5s ease-in-out infinite' : 
-                        'paperPlaneFloat 2.8s ease-in-out infinite';
-                    icon.style.animationDelay = Math.random() * 0.5 + 's'; // ランダムな開始タイミング
+                        'paperPlaneFloatMobileSmooth 4.5s ease-in-out infinite' : 
+                        'paperPlaneFloatSmooth 4s ease-in-out infinite';
+                    icon.style.animationDelay = Math.random() * 0.8 + 's'; // ★★★ IMPROVEMENT: ランダムな開始タイミング強化 ★★★
                     icon.style.transformOrigin = 'center';
                     icon.style.willChange = 'transform';
                 }
@@ -3619,11 +3660,11 @@
                                 } else {
                                     clearInterval(typingEffect);
                                     
-                                    // CTAボタンを追加（紙飛行機アニメーション付き）
+                                    // CTAボタンを追加（★★★ IMPROVEMENT: 改善された紙飛行機アニメーション付き ★★★）
                                     setTimeout(function() {
                                         const ctaButton = document.createElement('div');
                                         ctaButton.classList.add('chat-message', 'bot');
-                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: paperPlaneFloat 2.8s ease-in-out infinite; animation-delay: 0.2s; transform-origin: center; will-change: transform;"></i></a>';
+                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: paperPlaneFloatSmooth 3.5s ease-in-out infinite; animation-delay: 0.3s; transform-origin: center; will-change: transform;"></i></a>';
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
                                     }, 300);
@@ -3812,21 +3853,23 @@
         
         // 送信成功メッセージの表示
         function showSuccessMessage() {
-            // 送信ボタンを元に戻す + アニメーション再開
+            // 送信ボタンを元に戻す + ★★★ IMPROVEMENT: アニメーション再開強化 ★★★
             submitButton.innerHTML = '<span>送信する</span><i class="fas fa-paper-plane" aria-hidden="true"></i>';
             submitButton.classList.remove('btn-loading');
             submitButton.disabled = false;
             
-            // 紙飛行機アニメーションが確実に動作するよう強制再開
+            // ★★★ IMPROVEMENT: 紙飛行機アニメーションが確実に動作するよう強制再開 ★★★
             setTimeout(() => {
                 const paperPlaneIcon = submitButton.querySelector('i');
                 if (paperPlaneIcon) {
                     paperPlaneIcon.style.animation = 'none';
                     paperPlaneIcon.offsetHeight; // リフロー強制実行
                     paperPlaneIcon.style.animation = window.innerWidth <= 768 ? 
-                        'paperPlaneFloatMobile 3s ease-in-out infinite' : 
-                        'paperPlaneFloat 2.8s ease-in-out infinite';
-                    paperPlaneIcon.style.animationDelay = '0.2s';
+                        'paperPlaneFloatMobileSmooth 4s ease-in-out infinite' : 
+                        'paperPlaneFloatSmooth 3.5s ease-in-out infinite';
+                    paperPlaneIcon.style.animationDelay = '0.3s';
+                    paperPlaneIcon.style.transformOrigin = 'center';
+                    paperPlaneIcon.style.willChange = 'transform';
                 }
             }, 100);
             
