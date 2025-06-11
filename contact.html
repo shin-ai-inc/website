@@ -16,7 +16,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="ShinAI - AI System Development Company">
     
-    <!-- ★★★ IMPROVEMENT: PC/モバイル完全対応 - 全ブラウザでヘッダー上余白を白色統一 ★★★ -->
+    <!-- Mobile & Browser Optimization -->
     <meta name="theme-color" content="#ffffff">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#ffffff">
@@ -25,15 +25,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ShinAI">
-    
-    <!-- Windowsタイル色指定 -->
     <meta name="msapplication-TileImage" content="assets/images/logo.png">
-    
-    <!-- Safari PC版対応 -->
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="format-detection" content="telephone=no">
     
-    <!-- AI検索エンジン最適化強化 -->
+    <!-- Search Engine Optimization -->
     <meta name="google-site-verification" content="AI-optimized-verification-token">
     <meta name="bing-site-verification" content="AI-optimized-bing-token">
     <meta name="subject" content="AIシステム開発・AI導入支援・プロトタイプ開発・無料AI相談">
@@ -63,7 +59,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:updated_time" content="2025-01-27T00:00:00+09:00">
     
-    <!-- Twitter Card AI最適化 -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="twitter:creator" content="@ShinAI_JP">
@@ -109,16 +105,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     </noscript>
     
-    <!-- アイコン - AI Crawler対応 -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     
-    <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     
-    <!-- ファビコン最適化・白色テーマ確実適用 -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
     <link rel="manifest" href="assets/manifest.json">
@@ -327,16 +320,16 @@
     <!-- 
     ==============================================
     // === component-split: CriticalPathCSS ===
-    COMPONENT: 高速表示最適化CSS
+    COMPONENT: 高速表示最適化CSS - プロダクション品質
     機能: レスポンシブ完全対応、情報密度最適化
-    特徴: 統一ヘッダー・フッター準拠、モバイル精密化、全体像把握重視
+    特徴: 統一ヘッダー・フッター準拠、モバイル精密化
     ==============================================
     -->
     <style>
-    /* ページ読み込み最適化 - AI Crawler対応 */
+    /* ページ読み込み最適化 */
     html {
         visibility: hidden;
-        background-color: #ffffff !important; /* PC版ヘッダー上余白確実に白色指定 */
+        background-color: #ffffff !important;
     }
     html.loaded {
         visibility: visible;
@@ -344,7 +337,7 @@
     }
     
     /* ========================================================
-    ▼ Preloader Component - 高速化・改善版
+    ▼ Preloader Component
     ======================================================== */
     .page-loader {
         position: fixed;
@@ -375,16 +368,13 @@
     }
     
     @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
+        to { transform: rotate(360deg); }
     }
     
     /* ========================================================
-    ▼ CSS Variables Component - 統一ヘッダー・フッター準拠・モバイル最適化強化版
+    ▼ CSS Variables Component
     ======================================================== */
     :root {
-        /* Primary Colors */
         --primary: #3A5FEB;
         --primary-dark: #2C49C7;
         --primary-light: #5B7BFF;
@@ -401,7 +391,6 @@
         --error: #FF3B3B;
         --success: #00C48C;
         
-        /* Gradients */
         --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
         --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
         --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
@@ -410,9 +399,7 @@
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06));
         --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
-        --gradient-cta-new: linear-gradient(90deg, #00DBB4 0%, #4A85FF 100%);
         
-        /* Shadows - 軽量化 */
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
         --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.05);
         --shadow-md: 0 4px 8px rgba(15, 23, 42, 0.06);
@@ -421,7 +408,6 @@
         --shadow-button: 0 3px 8px rgba(58, 95, 235, 0.2);
         --shadow-button-hover: 0 5px 12px rgba(58, 95, 235, 0.3);
         
-        /* Typography - モバイル最適化 */
         --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         --font-weight-normal: 400;
@@ -431,7 +417,6 @@
         --font-weight-extrabold: 800;
         --font-weight-black: 900;
         
-        /* Spacing - モバイル最適化・全体像把握最適化 */
         --space-1: 0.25rem;
         --space-2: 0.5rem;
         --space-3: 0.75rem;
@@ -443,12 +428,10 @@
         --space-12: 3rem;
         --space-16: 4rem;
         
-        /* Layout - 統一ヘッダー準拠 */
-        --header-height: 50px; /* 統一ヘッダー準拠 */
-        --header-height-mobile: 40px; /* 統一ヘッダー準拠 */
+        --header-height: 50px;
+        --header-height-mobile: 40px;
         --container-width: 1400px;
         
-        /* Border Radius */
         --radius-sm: 4px;
         --radius-md: 6px;
         --radius-lg: 8px;
@@ -456,12 +439,10 @@
         --radius-2xl: 16px;
         --radius-full: 9999px;
         
-        /* Animation */
         --transition-fast: 0.1s;
         --transition-normal: 0.2s;
         --transition-slow: 0.3s;
         
-        /* Z-index */
         --z-negative: -1;
         --z-elevate: 1;
         --z-fixed: 40;
@@ -470,7 +451,7 @@
     }
 
     /* ========================================================
-    ▼ Base Styles Component - AI Crawler最適化・改善版・PC版白色背景完全保証
+    ▼ Base Styles Component
     ======================================================== */
     *, *::before, *::after {
         margin: 0;
@@ -480,32 +461,29 @@
         -moz-osx-font-smoothing: grayscale;
     }
     
-    /* PC版ヘッダー上余白を確実に白色にする追加設定 */
     html, body {
         background: #ffffff !important;
         background-color: #ffffff !important;
     }
     
-    /* ブラウザのデフォルトスタイル完全リセット */
     html {
         scroll-behavior: smooth;
         font-size: 16px;
         height: 100%;
-        background-color: #ffffff !important; /* PC版確実に白色背景 */
+        background-color: #ffffff !important;
     }
     
     body {
         font-family: var(--font-sans);
         line-height: 1.6;
         color: var(--dark);
-        background-color: #ffffff !important; /* PC版確実に白色背景 */
+        background-color: #ffffff !important;
         overflow-x: hidden;
         min-height: 100%;
-        margin: 0 !important; /* ブラウザデフォルトマージン除去 */
-        padding: 0 !important; /* ブラウザデフォルトパディング除去 */
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
-    /* 追加：ページ全体の背景色強制指定 */
     #main-content {
         background-color: #ffffff;
     }
@@ -551,30 +529,30 @@
     }
     
     /* ========================================================
-    ▼ Layout System Component - モバイル情報密度最適化・全体像把握向上・改善版
+    ▼ Layout System Component
     ======================================================== */
     .container {
         width: 100%;
         max-width: var(--container-width);
         margin: 0 auto;
-        padding: 0 1.5rem; /* PC版最適化 */
+        padding: 0 1.5rem;
     }
     
     @media (max-width: 768px) {
         .container {
-            padding: 0 0.75rem; /* モバイル情報密度最適化 */
+            padding: 0 0.75rem;
         }
     }
     
     .section {
-        padding: 2.5rem 0; /* 全体像把握最適化：縮小 */
+        padding: 2.5rem 0;
         position: relative;
         overflow: hidden;
     }
     
     @media (max-width: 768px) {
         .section {
-            padding: 1.2rem 0; /* モバイル情報密度最適化：大幅縮小 */
+            padding: 1.2rem 0;
         }
     }
     
@@ -603,7 +581,7 @@
     }
     
     /* ========================================================
-    ▼ Perfect Responsive Header Component - 統一ヘッダー仕様完全準拠・改善版・スタイリッシュ化・高さ調整
+    ▼ Perfect Responsive Header Component
     ======================================================== */
     .header {
         position: fixed;
@@ -615,13 +593,13 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        height: 50px; /* 統一ヘッダー準拠 */
+        height: 50px;
         transition: all 0.2s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .header.scrolled {
-        height: 45px; /* 統一ヘッダー準拠 */
+        height: 45px;
         background: rgba(255, 255, 255, 0.99);
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
     }
@@ -631,20 +609,20 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        padding: 0 2.5rem; /* 統一ヘッダー準拠 */
+        padding: 0 2.5rem;
         max-width: 1400px;
         margin: 0 auto;
     }
     
     /* ========================================================
-    ▼ Logo Component - 統一ヘッダー仕様完全準拠・スタイリッシュ化・バランス調整
+    ▼ Logo Component
     ======================================================== */
     .logo {
         display: flex;
         align-items: center;
         gap: 0.6rem;
         font-weight: 700;
-        font-size: 1rem; /* 統一ヘッダー準拠 */
+        font-size: 1rem;
         color: #0f172a;
         transition: all 0.2s ease;
         cursor: pointer;
@@ -656,8 +634,8 @@
     }
 
     .logo-icon {
-        width: 28px; /* 統一ヘッダー準拠 */
-        height: 28px; /* 統一ヘッダー準拠 */
+        width: 28px;
+        height: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -673,21 +651,20 @@
     }
     
     /* ========================================================
-    ▼ Desktop Navigation Component - 統一ヘッダー仕様完全準拠・スタイリッシュ化・フォントサイズ縮小
+    ▼ Desktop Navigation Component
     ======================================================== */
     .nav {
-        display: none; /* 初期状態は非表示 */
+        display: none;
         align-items: center;
-        gap: 1.6rem; /* 統一ヘッダー準拠 */
+        gap: 1.6rem;
         margin: 0;
         padding: 0;
         height: 100%;
     }
     
-    /* PC画面でのみナビゲーション表示 */
     @media (min-width: 769px) {
         .nav {
-            display: flex; /* PC画面でのみ表示 */
+            display: flex;
         }
     }
     
@@ -695,11 +672,11 @@
         color: #0f172a;
         font-weight: 500;
         transition: all 0.2s ease;
-        padding: 0.3rem 0; /* 統一ヘッダー準拠 */
-        font-size: 0.85rem; /* 統一ヘッダー準拠 */
+        padding: 0.3rem 0;
+        font-size: 0.85rem;
         position: relative;
         text-decoration: none;
-        letter-spacing: 0.01em; /* 統一ヘッダー準拠 */
+        letter-spacing: 0.01em;
     }
     
     .nav-link::after {
@@ -727,26 +704,20 @@
     .btn-header-consultation {
         background: linear-gradient(135deg, #3A5FEB, #00C9A7);
         color: white;
-        padding: 0.45rem 0.9rem; /* 統一ヘッダー準拠 */
-        border-radius: 18px; /* 統一ヘッダー準拠 */
+        padding: 0.45rem 0.9rem;
+        border-radius: 18px;
         font-weight: 600;
-        font-size: 0.8rem; /* 統一ヘッダー準拠 */
+        font-size: 0.8rem;
         transition: all 0.3s ease;
         box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
         display: inline-flex;
         align-items: center;
-        gap: 0.3rem; /* 統一ヘッダー準拠 */
+        gap: 0.3rem;
         white-space: nowrap;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        letter-spacing: 0.01em; /* 統一ヘッダー準拠 */
-    }
-    
-    .btn-header-consultation i {
-        display: inline-block !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
-        opacity: 1 !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
-        visibility: visible !important; /* ★★★ IMPROVEMENT: ヘッダーボタンアイコン確実表示 ★★★ */
+        letter-spacing: 0.01em;
     }
     
     .btn-header-consultation:hover {
@@ -756,51 +727,49 @@
     }
     
     /* ========================================================
-    ▼ Mobile Hamburger Component - 統一ヘッダー仕様完全準拠・モバイル専用・コンパクト化
+    ▼ Mobile Hamburger Component
     ======================================================== */
     .hamburger {
-        display: none; /* PC画面では完全非表示 */
+        display: none;
         background: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(0, 0, 0, 0.08);
         color: #0f172a;
-        font-size: 0.9rem; /* 統一ヘッダー準拠 */
+        font-size: 0.9rem;
         cursor: pointer;
-        padding: 0.35rem; /* 統一ヘッダー準拠 */
-        border-radius: 5px; /* 統一ヘッダー準拠 */
+        padding: 0.35rem;
+        border-radius: 5px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         transition: all 0.2s ease;
-        width: 32px; /* 統一ヘッダー準拠 */
-        height: 32px; /* 統一ヘッダー準拠 */
+        width: 32px;
+        height: 32px;
         align-items: center;
         justify-content: center;
     }
     
-    /* モバイル画面でのみハンバーガーメニュー表示 */
     @media (max-width: 768px) {
         .hamburger {
-            display: flex; /* モバイル画面でのみ表示 */
+            display: flex;
         }
         
-        /* モバイル版統一ヘッダー */
         .header {
-            height: 40px; /* 統一ヘッダー準拠 */
+            height: 40px;
         }
         
         .header.scrolled {
-            height: 38px; /* 統一ヘッダー準拠 */
+            height: 38px;
         }
         
         .header-inner {
-            padding: 0 1rem; /* 統一ヘッダー準拠 */
+            padding: 0 1rem;
         }
         
         .logo {
-            font-size: 0.95rem; /* 統一ヘッダー準拠 */
+            font-size: 0.95rem;
         }
         
         .logo-icon {
-            width: 22px; /* 統一ヘッダー準拠 */
-            height: 22px; /* 統一ヘッダー準拠 */
+            width: 22px;
+            height: 22px;
         }
     }
     
@@ -811,7 +780,7 @@
     }
     
     /* ========================================================
-    ▼ Mobile Navigation Component - 統一ヘッダー仕様完全準拠・クリア表示・モバイル専用メニュー
+    ▼ Mobile Navigation Component
     ======================================================== */
     @media (max-width: 768px) {
         .nav {
@@ -835,7 +804,7 @@
         
         .nav.active {
             right: 0;
-            display: flex; /* アクティブ時に表示 */
+            display: flex;
         }
         
         .nav-item {
@@ -845,9 +814,9 @@
         
         .nav-link {
             width: 100%;
-            padding: 0.7rem 0; /* 統一ヘッダー準拠 */
+            padding: 0.7rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-            font-size: 0.9rem; /* 統一ヘッダー準拠 */
+            font-size: 0.9rem;
             display: block;
         }
         
@@ -859,16 +828,16 @@
         .btn-header-consultation {
             width: 100%;
             justify-content: center;
-            padding: 0.6rem 0.9rem; /* 統一ヘッダー準拠 */
-            font-size: 0.85rem; /* 統一ヘッダー準拠 */
+            padding: 0.6rem 0.9rem;
+            font-size: 0.85rem;
         }
     }
     
     /* ========================================================
-    ▼ Typography System Component - モバイル情報密度最適化・視認性向上
+    ▼ Typography System Component
     ======================================================== */
     .heading-xl {
-        font-size: clamp(1.6rem, 4vw, 2.8rem); /* モバイル最適化：縮小 */
+        font-size: clamp(1.6rem, 4vw, 2.8rem);
         font-weight: var(--font-weight-black);
         line-height: 1.1;
         margin-bottom: var(--space-3);
@@ -876,7 +845,7 @@
     }
     
     .heading-lg {
-        font-size: clamp(1.3rem, 3vw, 2.1rem); /* モバイル最適化：縮小 */
+        font-size: clamp(1.3rem, 3vw, 2.1rem);
         font-weight: var(--font-weight-extrabold);
         line-height: 1.2;
         margin-bottom: var(--space-3);
@@ -884,19 +853,19 @@
     }
     
     .heading-md {
-        font-size: clamp(1.1rem, 2.5vw, 1.6rem); /* モバイル最適化：縮小 */
+        font-size: clamp(1.1rem, 2.5vw, 1.6rem);
         font-weight: var(--font-weight-bold);
         line-height: 1.3;
         margin-bottom: var(--space-2);
     }
     
     .text-lg {
-        font-size: clamp(0.9rem, 1.6vw, 1.1rem); /* モバイル最適化：縮小 */
+        font-size: clamp(0.9rem, 1.6vw, 1.1rem);
         line-height: 1.6;
     }
     
     .text-md {
-        font-size: clamp(0.8rem, 1.2vw, 0.95rem); /* モバイル最適化：縮小 */
+        font-size: clamp(0.8rem, 1.2vw, 0.95rem);
         line-height: 1.5;
     }
     
@@ -910,7 +879,7 @@
     }
 
     /* ========================================================
-    ▼ Button Component - モバイル最適化・統一ヘッダー準拠・紙飛行機アニメーション対応
+    ▼ Button Component - プロダクション品質
     ======================================================== */
     .btn {
         display: inline-flex;
@@ -954,9 +923,9 @@
     .btn span, .btn i {
         position: relative;
         z-index: 2;
-        display: inline-block; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
-        opacity: 1; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
-        visibility: visible; /* ★★★ IMPROVEMENT: アイコン確実表示 ★★★ */
+        display: inline-block;
+        opacity: 1;
+        visibility: visible;
     }
     
     .btn-primary {
@@ -977,99 +946,67 @@
     }
     
     /* ========================================================
-    ▼ Enhanced Paper Plane Animation Component - ★★★ IMPROVEMENT: より滑らかで繊細なアニメーション ★★★
-    機能: 紙飛行機アイコンの自然で滑らかなゆらゆらモーション
-    特徴: より繊細な動き、easing強化、モバイル対応完備
+    ▼ Paper Plane Animation Component - プロダクション最適化版
     ======================================================== */
-    
-    /* ★★★ IMPROVEMENT: PC版 - より滑らかで繊細なアニメーション ★★★ */
-    @keyframes paperPlaneFloatSmooth {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
+    @keyframes paperPlaneBounce {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
         }
-        15% {
-            transform: translate(-2px, -3px) rotate(-1.5deg);
-        }
-        30% {
-            transform: translate(1px, -4px) rotate(1deg);
-        }
-        45% {
-            transform: translate(-1px, -2px) rotate(-0.8deg);
-        }
-        60% {
-            transform: translate(2px, -5px) rotate(1.2deg);
-        }
-        75% {
-            transform: translate(-1.5px, -3px) rotate(-1deg);
-        }
-        90% {
-            transform: translate(1px, -2px) rotate(0.5deg);
-        }
-        100% {
-            transform: translate(0, 0) rotate(0deg);
-        }
-    }
-    
-    /* ★★★ IMPROVEMENT: モバイル版 - より滑らかなアニメーション ★★★ */
-    @keyframes paperPlaneFloatMobileSmooth {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
-        }
-        20% {
-            transform: translate(-1.5px, -2px) rotate(-1deg);
-        }
-        40% {
-            transform: translate(1px, -3px) rotate(0.8deg);
-        }
-        60% {
-            transform: translate(-1px, -1.5px) rotate(-0.6deg);
-        }
-        80% {
-            transform: translate(1.2px, -2.5px) rotate(0.7deg);
-        }
-        100% {
-            transform: translate(0, 0) rotate(0deg);
-        }
-    }
-    
-    /* ★★★ IMPROVEMENT: ホバー時のより滑らかなアニメーション ★★★ */
-    @keyframes paperPlaneHover {
-        0% {
-            transform: translateX(0) scale(1);
+        25% {
+            transform: translateY(-3px) rotate(-1deg);
         }
         50% {
-            transform: translateX(2px) scale(1.05);
+            transform: translateY(-1px) rotate(1deg);
+        }
+        75% {
+            transform: translateY(-4px) rotate(-0.5deg);
+        }
+    }
+    
+    @keyframes paperPlaneBounceMobile {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+            transform: translateY(-2px) rotate(-0.8deg);
+        }
+        66% {
+            transform: translateY(-3px) rotate(0.8deg);
+        }
+    }
+    
+    @keyframes paperPlaneHover {
+        0% {
+            transform: translateX(0px);
         }
         100% {
-            transform: translateX(4px) scale(1.08);
+            transform: translateX(3px);
         }
     }
 
-    .btn-icon-right i {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ IMPROVEMENT: より滑らかなeasing ★★★ */
-        animation: paperPlaneFloatSmooth 4s ease-in-out infinite; /* ★★★ IMPROVEMENT: 時間延長で滑らか ★★★ */
-        transform-origin: center;
-        display: inline-block;
-        will-change: transform;
+    .btn-icon-right i,
+    .btn-primary i,
+    .btn-header-consultation i,
+    .chatbot-send i,
+    .fa-paper-plane {
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: paperPlaneBounce 3s ease-in-out infinite !important;
+        transform-origin: center !important;
+        will-change: transform !important;
     }
     
-    .btn-icon-right:hover i {
-        animation: paperPlaneHover 0.6s ease-out forwards; /* ★★★ IMPROVEMENT: ホバー専用アニメーション ★★★ */
-    }
-    
-    /* フォーム送信ボタン専用スタイル */
-    .btn-primary.btn-icon-right i {
-        animation: paperPlaneFloatSmooth 3.5s ease-in-out infinite; /* ★★★ IMPROVEMENT: 少し速めで滑らか ★★★ */
-        animation-delay: 0.3s;
-    }
-    
-    .btn-primary.btn-icon-right:hover i {
-        animation: paperPlaneHover 0.5s ease-out forwards; /* ★★★ IMPROVEMENT: 送信ボタン専用ホバー ★★★ */
+    .btn-icon-right:hover i,
+    .btn-primary:hover i,
+    .btn-header-consultation:hover i,
+    .chatbot-send:hover i {
+        animation: paperPlaneHover 0.3s ease-out forwards !important;
     }
     
     @media (max-width: 768px) {
         .btn {
-            padding: 0.55rem 1.1rem; /* モバイル情報密度最適化 */
+            padding: 0.55rem 1.1rem;
             font-size: 0.7rem;
         }
         
@@ -1079,34 +1016,33 @@
             max-width: 240px;
         }
         
-        /* ★★★ IMPROVEMENT: モバイル版紙飛行機アニメーション強化 ★★★ */
-        .btn-icon-right i {
-            animation: paperPlaneFloatMobileSmooth 4.5s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル専用滑らかアニメーション ★★★ */
-            animation-delay: 0.4s;
+        .btn-icon-right i,
+        .btn-primary i,
+        .btn-header-consultation i,
+        .chatbot-send i,
+        .fa-paper-plane {
+            animation: paperPlaneBounceMobile 4s ease-in-out infinite !important;
+            font-size: 0.8rem !important;
         }
         
-        .btn-primary.btn-icon-right i {
-            animation: paperPlaneFloatMobileSmooth 4s ease-in-out infinite; /* ★★★ IMPROVEMENT: 送信ボタン用モバイルアニメーション ★★★ */
-            animation-delay: 0.2s;
-        }
-        
-        /* ★★★ IMPROVEMENT: モバイル版ホバー/タップエフェクト ★★★ */
         .btn-icon-right:active i,
-        .btn-primary.btn-icon-right:active i {
-            animation-play-state: paused;
-            transform: translateX(2px) scale(1.1); /* ★★★ IMPROVEMENT: タップ時のフィードバック ★★★ */
+        .btn-primary:active i,
+        .btn-header-consultation:active i,
+        .chatbot-send:active i {
+            animation: paperPlaneHover 0.2s ease-out forwards !important;
+            transform: scale(1.1) !important;
         }
     }
     
     /* ========================================================
-    ▼ Page Hero Component - モバイル情報密度最適化・全体像把握向上
+    ▼ Page Hero Component
     ======================================================== */
     .page-hero {
         position: relative;
-        min-height: 70vh; /* 全体像把握最適化：縮小 */
+        min-height: 70vh;
         display: flex;
         align-items: center;
-        padding: calc(var(--header-height) + 1.5rem) 0 2rem; /* 統一ヘッダー高さ準拠 */
+        padding: calc(var(--header-height) + 1.5rem) 0 2rem;
         overflow: hidden;
         background: var(--gradient-hero);
         text-align: center;
@@ -1123,8 +1059,8 @@
     .breadcrumb {
         display: flex;
         justify-content: center;
-        margin-bottom: 1rem; /* 全体像把握最適化：縮小 */
-        font-size: 0.85rem; /* モバイル最適化：縮小 */
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
         color: var(--gray);
     }
     
@@ -1149,7 +1085,7 @@
     }
     
     .page-hero-title {
-        margin-bottom: 1.5rem; /* 全体像把握最適化：縮小 */
+        margin-bottom: 1.5rem;
         color: var(--dark);
         position: relative;
         display: inline-block;
@@ -1170,7 +1106,7 @@
     .page-hero-description {
         color: var(--gray);
         max-width: 700px;
-        margin: 0 auto 2rem; /* 全体像把握最適化：縮小 */
+        margin: 0 auto 2rem;
         line-height: 1.6;
         animation: fadeIn 1s ease 0.2s forwards;
         opacity: 0;
@@ -1179,8 +1115,8 @@
     
     @media (max-width: 768px) {
         .page-hero {
-            min-height: 55vh; /* モバイル情報密度最適化：大幅縮小 */
-            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem; /* 統一ヘッダー高さ準拠 */
+            min-height: 55vh;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem;
         }
         
         .breadcrumb {
@@ -1195,11 +1131,11 @@
     }
 
     /* ========================================================
-    ▼ Section Header Component - モバイル情報密度最適化・全体像把握向上
+    ▼ Section Header Component
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 1.5rem; /* 全体像把握最適化：縮小 */
+        margin-bottom: 1.5rem;
         position: relative;
         z-index: 1;
     }
@@ -1207,18 +1143,18 @@
     .section-subtitle {
         display: inline-block;
         background: rgba(58, 95, 235, 0.1);
-        padding: 0.4rem 1.2rem; /* モバイル最適化：調整 */
+        padding: 0.4rem 1.2rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 0.8rem; /* 全体像把握最適化：縮小 */
-        font-size: 0.85rem; /* モバイル最適化：調整 */
+        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
         box-shadow: 0 2px 6px rgba(58, 95, 235, 0.08);
         border: 1px solid rgba(58, 95, 235, 0.1);
     }
     
     .section-header .heading-lg {
-        margin-bottom: 0.8rem; /* 全体像把握最適化：縮小 */
+        margin-bottom: 0.8rem;
     }
     
     .section-description {
@@ -1230,7 +1166,7 @@
     
     @media (max-width: 768px) {
         .section-header {
-            margin-bottom: 1rem; /* モバイル情報密度最適化：縮小 */
+            margin-bottom: 1rem;
         }
         
         .section-subtitle {
@@ -1250,10 +1186,10 @@
     }
 
     /* ========================================================
-    ▼ Process Steps Component - モバイル情報密度最適化
+    ▼ Process Steps Component
     ======================================================== */
     .process-steps {
-        margin: 2.5rem 0; /* 全体像把握最適化：縮小 */
+        margin: 2.5rem 0;
     }
     
     .process-timeline {
@@ -1267,10 +1203,10 @@
     .process-timeline::before {
         content: '';
         position: absolute;
-        top: 35px; /* 調整 */
+        top: 35px;
         left: 0;
         width: 100%;
-        height: 3px; /* 縮小 */
+        height: 3px;
         background: linear-gradient(to right, #3A5FEB, #00C9A7);
         border-radius: var(--radius-full);
         z-index: var(--z-negative);
@@ -1284,21 +1220,21 @@
     }
     
     .process-step-icon {
-        width: 70px; /* 縮小 */
-        height: 70px; /* 縮小 */
+        width: 70px;
+        height: 70px;
         background: white;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1rem; /* 縮小 */
+        margin: 0 auto 1rem;
         position: relative;
         z-index: var(--z-elevate);
         box-shadow: var(--shadow-md);
         border: 3px solid white;
         transition: all var(--transition-normal);
         color: white;
-        font-size: 1.5rem; /* 縮小 */
+        font-size: 1.5rem;
     }
     
     .process-step:nth-child(1) .process-step-icon {
@@ -1330,8 +1266,8 @@
         position: absolute;
         top: -5px;
         right: -5px;
-        width: 28px; /* 縮小 */
-        height: 28px; /* 縮小 */
+        width: 28px;
+        height: 28px;
         background: white;
         border-radius: 50%;
         display: flex;
@@ -1342,7 +1278,7 @@
         box-shadow: var(--shadow-sm);
         border: 2px solid var(--primary);
         transition: all var(--transition-normal);
-        font-size: 0.9rem; /* 縮小 */
+        font-size: 0.9rem;
     }
 
     .process-step:hover .process-step-number {
@@ -1352,30 +1288,29 @@
     }
     
     .process-step-title {
-        font-size: 1.1rem; /* 縮小 */
+        font-size: 1.1rem;
         font-weight: 600;
-        margin-bottom: 0.5rem; /* 縮小 */
+        margin-bottom: 0.5rem;
         color: var(--dark);
     }
     
     .process-step-description {
-        font-size: 0.85rem; /* 縮小 */
+        font-size: 0.85rem;
         color: var(--gray);
         line-height: 1.5;
     }
     
-    /* モバイル対応 */
     @media (max-width: 992px) {
         .process-timeline {
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem; /* 縮小 */
+            gap: 1.5rem;
         }
         
         .process-timeline::before {
             top: 0;
-            left: 35px; /* 調整 */
-            width: 3px; /* 縮小 */
+            left: 35px;
+            width: 3px;
             height: 100%;
         }
         
@@ -1384,7 +1319,7 @@
             display: flex;
             align-items: flex-start;
             text-align: left;
-            padding-left: 50px; /* 調整 */
+            padding-left: 50px;
         }
         
         .process-step-icon {
@@ -1392,21 +1327,21 @@
             top: 0;
             left: 0;
             margin: 0;
-            width: 60px; /* モバイル縮小 */
-            height: 60px; /* モバイル縮小 */
-            font-size: 1.3rem; /* モバイル縮小 */
+            width: 60px;
+            height: 60px;
+            font-size: 1.3rem;
         }
         
         .process-step-number {
-            width: 24px; /* モバイル縮小 */
-            height: 24px; /* モバイル縮小 */
-            font-size: 0.8rem; /* モバイル縮小 */
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
             top: -3px;
             right: -3px;
         }
         
         .process-step-content {
-            margin-left: 15px; /* 調整 */
+            margin-left: 15px;
             max-width: 100%;
             width: 100%;
         }
@@ -1416,46 +1351,46 @@
         }
         
         .process-step-title {
-            font-size: 1rem; /* モバイル縮小 */
+            font-size: 1rem;
         }
         
         .process-step-description {
-            font-size: 0.8rem; /* モバイル縮小 */
+            font-size: 0.8rem;
         }
     }
     
     @media (max-width: 768px) {
         .process-steps {
-            margin: 1.5rem 0; /* モバイル情報密度最適化：大幅縮小 */
+            margin: 1.5rem 0;
         }
         
         .process-step-icon {
-            width: 50px; /* モバイル極小 */
-            height: 50px; /* モバイル極小 */
-            font-size: 1.1rem; /* モバイル極小 */
+            width: 50px;
+            height: 50px;
+            font-size: 1.1rem;
         }
         
         .process-step-number {
-            width: 20px; /* モバイル極小 */
-            height: 20px; /* モバイル極小 */
-            font-size: 0.7rem; /* モバイル極小 */
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
         }
         
         .process-step-title {
-            font-size: 0.9rem; /* モバイル極小 */
+            font-size: 0.9rem;
             margin-bottom: 0.3rem;
         }
         
         .process-step-description {
-            font-size: 0.75rem; /* モバイル極小 */
+            font-size: 0.75rem;
         }
     }
 
     /* ========================================================
-    ▼ Contact Form Component - モバイル情報密度最適化・全体像把握向上・★★★ IMPROVEMENT: お問い合わせ内容入力欄サイズ拡大 ★★★
+    ▼ Contact Form Component - プロダクション最適化版
     ======================================================== */
     .contact-form-section {
-        padding: 2.5rem 0; /* 全体像把握最適化：縮小 */
+        padding: 2.5rem 0;
         position: relative;
         background: var(--light-gray);
     }
@@ -1464,7 +1399,7 @@
         background: white;
         border-radius: var(--radius-xl);
         box-shadow: var(--shadow-xl);
-        padding: 2.5rem; /* 全体像把握最適化：縮小 */
+        padding: 2.5rem;
         position: relative;
         z-index: var(--z-elevate);
         transition: all var(--transition-normal);
@@ -1481,7 +1416,7 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 5px; /* 縮小 */
+        height: 5px;
         background: linear-gradient(to right, #3A5FEB, #00C9A7, #4671FF);
         background-size: 200% auto;
         animation: gradientShift 6s linear infinite;
@@ -1490,33 +1425,33 @@
     
     .contact-form-header {
         text-align: center;
-        margin-bottom: 2rem; /* 全体像把握最適化：縮小 */
+        margin-bottom: 2rem;
     }
     
     .contact-form-title {
-        font-size: 1.8rem; /* 縮小 */
+        font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 0.8rem; /* 縮小 */
+        margin-bottom: 0.8rem;
         color: var(--dark);
     }
     
     .contact-form-description {
         color: var(--gray);
-        font-size: 1rem; /* 縮小 */
+        font-size: 1rem;
         line-height: 1.6;
     }
     
     .free-consultation-badge {
         display: inline-block;
-        padding: 0.6rem 1.5rem; /* 縮小 */
+        padding: 0.6rem 1.5rem;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(0, 201, 167, 0.1));
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: 700;
-        margin-bottom: 1.2rem; /* 縮小 */
+        margin-bottom: 1.2rem;
         position: relative;
         overflow: hidden;
-        font-size: 0.95rem; /* 縮小 */
+        font-size: 0.95rem;
     }
     
     .free-consultation-badge::after {
@@ -1549,17 +1484,17 @@
     }
     
     .form-group {
-        margin-bottom: 1.5rem; /* 縮小 */
+        margin-bottom: 1.5rem;
         position: relative;
     }
     
     .form-label {
         display: block;
         font-weight: 600;
-        margin-bottom: 0.6rem; /* 縮小 */
+        margin-bottom: 0.6rem;
         color: var(--dark);
         transition: all var(--transition-normal);
-        font-size: 0.95rem; /* 縮小 */
+        font-size: 0.95rem;
     }
 
     .required {
@@ -1569,10 +1504,10 @@
     
     .form-control {
         width: 100%;
-        padding: 0.9rem 1.1rem; /* 縮小 */
+        padding: 0.9rem 1.1rem;
         border: 1.5px solid rgba(58, 95, 235, 0.2);
         border-radius: var(--radius-md);
-        font-size: 0.95rem; /* 縮小 */
+        font-size: 0.95rem;
         transition: all var(--transition-normal);
         background-color: white;
         color: var(--dark);
@@ -1607,24 +1542,24 @@
         background-color: rgba(0, 196, 140, 0.05);
     }
     
-    /* ★★★ IMPROVEMENT: お問い合わせ内容入力欄のサイズ大幅拡大 ★★★ */
+    /* Enhanced Message Input */
     #message {
-        min-height: 220px; /* PC版: さらに大幅に高さを拡大 */
-        resize: vertical; /* 縦方向のリサイズ許可 */
-        line-height: 1.6; /* 読みやすさ向上 */
-        padding: 1.2rem 1.3rem; /* 内側の余白も拡大 */
+        min-height: 220px;
+        resize: vertical;
+        line-height: 1.6;
+        padding: 1.2rem 1.3rem;
     }
     
     .field-hint {
-        font-size: 0.8rem; /* 縮小 */
+        font-size: 0.8rem;
         color: var(--gray);
-        margin-top: 0.3rem; /* 縮小 */
+        margin-top: 0.3rem;
     }
     
     .field-error {
-        font-size: 0.8rem; /* 縮小 */
+        font-size: 0.8rem;
         color: var(--error);
-        margin-top: 0.3rem; /* 縮小 */
+        margin-top: 0.3rem;
         display: none;
     }
     
@@ -1636,7 +1571,7 @@
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1.2rem; /* 縮小 */
+        gap: 1.2rem;
     }
 
     .input-wrapper {
@@ -1661,9 +1596,7 @@
     }
     
     /* ========================================================
-    ▼ Modern Professional Checkbox System Component - 新設計チェックボックス
-    機能: モダンデザイン、高アクセシビリティ、アニメーション強化
-    特徴: プロフェッショナル仕様、完全レスポンシブ、コンポーネント分割最適化
+    ▼ Professional Checkbox System Component
     ======================================================== */
     .checkbox-group {
         display: grid;
@@ -1672,7 +1605,6 @@
         margin-top: 0.5rem;
     }
     
-    /* ★★★ COMPONENT: Professional Checkbox Container ★★★ */
     .professional-checkbox {
         position: relative;
         display: flex;
@@ -1711,7 +1643,6 @@
         opacity: 1;
     }
     
-    /* ★★★ COMPONENT: Hidden Native Input ★★★ */
     .professional-checkbox__input {
         position: absolute;
         opacity: 0;
@@ -1720,7 +1651,6 @@
         pointer-events: none;
     }
     
-    /* ★★★ COMPONENT: Custom Checkbox Visual - 高速アニメーション対応 ★★★ */
     .professional-checkbox__visual {
         position: relative;
         width: 22px;
@@ -1731,7 +1661,7 @@
         margin-right: 0.75rem;
         margin-top: 0.125rem;
         flex-shrink: 0;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ UX IMPROVEMENT: 高速化 0.3s → 0.15s ★★★ */
+        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         z-index: 2;
     }
@@ -1746,10 +1676,9 @@
         background: linear-gradient(135deg, var(--primary), var(--secondary));
         border-radius: 4px;
         transform: translate(-50%, -50%) scale(0);
-        transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ UX IMPROVEMENT: 超高速化 0.3s → 0.12s ★★★ */
+        transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* ★★★ COMPONENT: Checkmark Icon - 超高速レスポンス ★★★ */
     .professional-checkbox__checkmark {
         position: absolute;
         top: 50%;
@@ -1757,7 +1686,7 @@
         width: 12px;
         height: 12px;
         transform: translate(-50%, -50%) scale(0);
-        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ UX IMPROVEMENT: 最高速化 0.3s → 0.1s ★★★ */
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 3;
     }
     
@@ -1771,10 +1700,9 @@
         stroke-linejoin: round;
         stroke-dasharray: 16;
         stroke-dashoffset: 16;
-        transition: stroke-dashoffset 0.15s cubic-bezier(0.4, 0, 0.2, 1); /* ★★★ UX IMPROVEMENT: 高速SVGアニメーション ★★★ */
+        transition: stroke-dashoffset 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* ★★★ COMPONENT: Label Text ★★★ */
     .professional-checkbox__label {
         flex: 1;
         font-weight: 500;
@@ -1786,7 +1714,6 @@
         position: relative;
     }
     
-    /* ★★★ COMPONENT: Checked State Styles ★★★ */
     .professional-checkbox__input:checked + .professional-checkbox__visual {
         border-color: var(--primary);
         background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -1812,18 +1739,15 @@
         font-weight: 600;
     }
     
-    /* ★★★ COMPONENT: Focus State for Accessibility ★★★ */
     .professional-checkbox__input:focus + .professional-checkbox__visual {
         box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
         border-color: var(--primary);
     }
     
-    /* ★★★ COMPONENT: Active State Animation ★★★ */
     .professional-checkbox:active .professional-checkbox__visual {
         transform: scale(0.95);
     }
     
-    /* ★★★ COMPONENT: Hover State Enhancement ★★★ */
     .professional-checkbox:hover .professional-checkbox__visual {
         border-color: var(--primary-light);
         box-shadow: 0 0 0 2px rgba(58, 95, 235, 0.08);
@@ -1833,7 +1757,6 @@
         color: var(--primary);
     }
     
-    /* ★★★ COMPONENT: Selected Container State ★★★ */
     .professional-checkbox.selected {
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
         border-color: rgba(58, 95, 235, 0.2);
@@ -1843,84 +1766,16 @@
     .professional-checkbox.selected::before {
         opacity: 1;
     }
-    
-    /* ★★★ COMPONENT: Mobile Responsive Optimization ★★★ */
-    @media (max-width: 768px) {
-        .checkbox-group {
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-        }
-        
-        .professional-checkbox {
-            padding: 0.875rem;
-        }
-        
-        .professional-checkbox__visual {
-            width: 20px;
-            height: 20px;
-            margin-right: 0.625rem;
-            border-width: 1.5px;
-        }
-        
-        .professional-checkbox__checkmark {
-            width: 11px;
-            height: 11px;
-        }
-        
-        .professional-checkbox__checkmark svg {
-            stroke-width: 2.2;
-        }
-        
-        .professional-checkbox__label {
-            font-size: 0.9rem;
-        }
-        
-        /* ★★★ IMPROVEMENT: モバイル版お問い合わせ内容入力欄のサイズ拡大 ★★★ */
-        #message {
-            min-height: 140px; /* モバイル版: 縦幅を大幅に拡大 */
-        }
-    }
-    
-    /* ★★★ COMPONENT: High Contrast Mode Support ★★★ */
-    @media (prefers-contrast: high) {
-        .professional-checkbox__visual {
-            border-width: 3px;
-        }
-        
-        .professional-checkbox__input:checked + .professional-checkbox__visual {
-            background: var(--dark);
-            border-color: var(--dark);
-        }
-    }
-    
-    /* ★★★ COMPONENT: Reduced Motion Support - 極上紙飛行機アニメーション対応 ★★★ */
-    @media (prefers-reduced-motion: reduce) {
-        .professional-checkbox,
-        .professional-checkbox__visual,
-        .professional-checkbox__checkmark,
-        .professional-checkbox__checkmark svg,
-        .btn-icon-right i,
-        .chatbot-send i,
-        .btn-primary.btn-icon-right i {
-            transition: none;
-            animation: none !important;
-        }
-        
-        .professional-checkbox__checkmark svg {
-            stroke-dasharray: none;
-            stroke-dashoffset: 0;
-        }
-    }
 
     .form-submit {
         text-align: center;
-        margin-top: 2rem; /* 縮小 */
+        margin-top: 2rem;
     }
     
     .submit-status {
         text-align: center;
         font-weight: 600;
-        margin-top: 1.2rem; /* 縮小 */
+        margin-top: 1.2rem;
         transition: all 0.3s ease;
         opacity: 0;
         height: 0;
@@ -1930,7 +1785,7 @@
     .submit-status.visible {
         opacity: 1;
         height: auto;
-        margin-bottom: 1.2rem; /* 縮小 */
+        margin-bottom: 1.2rem;
     }
     
     .submit-status.success {
@@ -1948,37 +1803,37 @@
     
     .btn-loading .loading-spinner {
         display: inline-block;
-        width: 18px; /* 縮小 */
-        height: 18px; /* 縮小 */
+        width: 18px;
+        height: 18px;
         border: 2px solid rgba(255, 255, 255, 0.3);
         border-radius: 50%;
         border-top-color: white;
         animation: spin 0.8s linear infinite;
-        margin-right: 8px; /* 縮小 */
+        margin-right: 8px;
     }
     
     .message-success {
         background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
         border-left: 4px solid var(--success);
-        padding: 1rem; /* 縮小 */
+        padding: 1rem;
         border-radius: 0 var(--radius-md) var(--radius-md) 0;
         display: flex;
         align-items: center;
-        gap: 0.8rem; /* 縮小 */
-        margin-bottom: 1.5rem; /* 縮小 */
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
         display: none;
     }
     
     .message-success i {
         color: var(--success);
-        font-size: 1.3rem; /* 縮小 */
+        font-size: 1.3rem;
     }
     
     .message-success p {
         color: var(--dark);
         margin: 0;
         font-weight: 500;
-        font-size: 0.95rem; /* 縮小 */
+        font-size: 0.95rem;
     }
     
     .message-success.show {
@@ -1988,11 +1843,11 @@
     
     @media (max-width: 768px) {
         .contact-form-section {
-            padding: 1.5rem 0; /* モバイル情報密度最適化：大幅縮小 */
+            padding: 1.5rem 0;
         }
         
         .contact-form-container {
-            padding: 1.5rem; /* モバイル情報密度最適化：大幅縮小 */
+            padding: 1.5rem;
             margin: 0 0.75rem;
         }
         
@@ -2036,7 +1891,36 @@
         
         .checkbox-group {
             grid-template-columns: 1fr;
-            gap: 0.6rem;
+            gap: 0.75rem;
+        }
+        
+        .professional-checkbox {
+            padding: 0.875rem;
+        }
+        
+        .professional-checkbox__visual {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.625rem;
+            border-width: 1.5px;
+        }
+        
+        .professional-checkbox__checkmark {
+            width: 11px;
+            height: 11px;
+        }
+        
+        .professional-checkbox__checkmark svg {
+            stroke-width: 2.2;
+        }
+        
+        .professional-checkbox__label {
+            font-size: 0.9rem;
+        }
+        
+        #message {
+            min-height: 200px;
+            padding: 1rem 1.2rem;
         }
         
         .form-submit {
@@ -2045,32 +1929,32 @@
     }
 
     /* ========================================================
-    ▼ Footer Component - 統一フッター仕様完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
+    ▼ Footer Component
     ======================================================== */
     .footer {
         background: var(--dark);
         color: var(--white);
-        padding: 4rem 0 1.5rem; /* 統一フッター準拠 */
+        padding: 4rem 0 1.5rem;
         position: relative;
     }
 
     .footer-grid {
         display: grid;
         grid-template-columns: 1.5fr repeat(3, 1fr);
-        gap: 2.5rem; /* 統一フッター準拠 */
-        margin-bottom: 2.5rem; /* 統一フッター準拠 */
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
     }
 
     .footer-logo {
         display: flex;
         align-items: center;
-        gap: 0.65rem; /* 統一フッター準拠 */
-        margin-bottom: 1.2rem; /* 統一フッター準拠 */
+        gap: 0.65rem;
+        margin-bottom: 1.2rem;
     }
 
     .footer-logo-icon {
-        width: 35px; /* 統一フッター準拠 */
-        height: 35px; /* 統一フッター準拠 */
+        width: 35px;
+        height: 35px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2080,16 +1964,16 @@
     }
 
     .footer-logo-text {
-        font-size: 1.35rem; /* 統一フッター準拠 */
+        font-size: 1.35rem;
         font-weight: var(--font-weight-bold);
         font-family: var(--font-en);
     }
 
     .footer-description {
         color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 1.2rem; /* 統一フッター準拠 */
-        line-height: 1.7; /* 統一フッター準拠 */
-        font-size: 0.9rem; /* 統一フッター準拠 */
+        margin-bottom: 1.2rem;
+        line-height: 1.7;
+        font-size: 0.9rem;
     }
 
     .footer-social {
@@ -2098,8 +1982,8 @@
     }
 
     .footer-social-link {
-        width: 34px; /* 統一フッター準拠 */
-        height: 34px; /* 統一フッター準拠 */
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.1);
         color: var(--white);
@@ -2133,7 +2017,7 @@
     }
 
     .footer-social-link:hover {
-        transform: translateY(-3px); /* 統一フッター準拠 */
+        transform: translateY(-3px);
         color: var(--white);
     }
 
@@ -2142,17 +2026,17 @@
     }
 
     .footer-social-link:hover i {
-        transform: scale(1.2); /* 統一フッター準拠 */
+        transform: scale(1.2);
     }
 
     .footer-heading {
-        font-size: 1.1rem; /* 統一フッター準拠 */
-        margin-bottom: 1.2rem; /* 統一フッター準拠 */
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
         color: var(--white);
         font-weight: var(--font-weight-semibold);
         position: relative;
-        padding-bottom: 0.6rem; /* 統一フッター準拠 */
-        white-space: nowrap; /* 統一フッター準拠 */
+        padding-bottom: 0.6rem;
+        white-space: nowrap;
     }
 
     .footer-heading::after {
@@ -2160,8 +2044,8 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 35px; /* 統一フッター準拠 */
-        height: 2px; /* 統一フッター準拠 */
+        width: 35px;
+        height: 2px;
         background: var(--gradient-primary);
         border-radius: var(--radius-full);
     }
@@ -2181,9 +2065,9 @@
         position: relative;
         padding-left: 0;
         display: inline-block;
-        word-break: keep-all; /* 統一フッター準拠 */
-        white-space: normal; /* 統一フッター準拠 */
-        font-size: 0.85rem; /* 統一フッター準拠 */
+        word-break: keep-all;
+        white-space: normal;
+        font-size: 0.85rem;
         text-decoration: none;
     }
 
@@ -2191,16 +2075,16 @@
         content: '';
         position: absolute;
         left: 0;
-        bottom: -2px; /* 統一フッター準拠 */
+        bottom: -2px;
         width: 0;
-        height: 2px; /* 統一フッター準拠 */
+        height: 2px;
         background: var(--gradient-accent);
         transition: width var(--transition-normal) ease;
     }
 
     .footer-links a:hover {
         color: var(--white);
-        padding-left: 5px; /* 統一フッター準拠 */
+        padding-left: 5px;
     }
 
     .footer-links a:hover::before {
@@ -2212,20 +2096,20 @@
         gap: 0.6rem;
         margin-bottom: 0.8rem;
         color: rgba(255, 255, 255, 0.7);
-        font-size: 0.85rem; /* 統一フッター準拠 */
+        font-size: 0.85rem;
     }
 
     .footer-contact-item span,
     .footer-contact-item a {
         display: inline-block;
-        word-break: keep-all; /* 統一フッター準拠 */
-        white-space: normal; /* 統一フッター準拠 */
+        word-break: keep-all;
+        white-space: normal;
     }
 
     .footer-contact-item i {
         color: var(--secondary);
         font-size: 1rem;
-        margin-top: 0.2rem; /* 統一フッター準拠 */
+        margin-top: 0.2rem;
     }
 
     .footer-contact-item a {
@@ -2238,9 +2122,6 @@
         color: var(--white);
     }
 
-    /* ========================================================
-    ▼ Footer Bottom Component - 統一フッター仕様完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
-    ======================================================== */
     .footer-bottom {
         padding-top: 1.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -2251,20 +2132,18 @@
         gap: 1rem;
     }
 
-    /* PC版: コピーライト左下配置 */
     .footer-copyright {
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.8rem;
-        order: 1; /* 確実に左下に配置 */
+        order: 1;
         flex-shrink: 0;
     }
 
-    /* PC版: リンク右下配置 */
     .footer-links-inline {
         display: flex;
-        gap: 1.5rem; /* 統一フッター準拠 */
+        gap: 1.5rem;
         flex-wrap: wrap;
-        order: 2; /* 確実に右下に配置 */
+        order: 2;
         flex-grow: 1;
         justify-content: flex-end;
     }
@@ -2281,7 +2160,7 @@
         content: '';
         position: absolute;
         left: 0;
-        bottom: -2px; /* 統一フッター準拠 */
+        bottom: -2px;
         width: 0;
         height: 1px;
         background: var(--white);
@@ -2299,46 +2178,43 @@
     @media (max-width: 992px) {
         .footer-grid {
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem; /* 統一フッター準拠 */
+            gap: 2rem;
         }
     }
 
     @media (max-width: 768px) {
         .footer {
-            padding: 3rem 0 1.5rem; /* 統一フッター準拠 */
+            padding: 3rem 0 1.5rem;
         }
         
         .footer-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem; /* 統一フッター準拠 */
+            gap: 1.5rem;
         }
         
-        /* モバイル版フッター最下部: 統一フッター仕様完全準拠・確実な順序制御（リンク上部→コピーライト最下部） */
         .footer-bottom {
             flex-direction: column;
             text-align: center;
         }
         
-        /* モバイル版: リンクが上部に表示 */
         .footer-links-inline {
             justify-content: center;
-            gap: 1rem; /* 統一フッター準拠 */
-            order: 1; /* 確実に上部に配置 */
+            gap: 1rem;
+            order: 1;
         }
         
         .footer-links-inline a {
-            font-size: 0.75rem; /* 統一フッター準拠 */
+            font-size: 0.75rem;
         }
         
-        /* モバイル版: コピーライトが最下部に表示 */
         .footer-copyright {
-            font-size: 0.75rem; /* 統一フッター準拠 */
-            order: 2; /* 確実に最下部に配置 */
+            font-size: 0.75rem;
+            order: 2;
         }
     }
 
     /* ========================================================
-    ▼ Chatbot Component - 統一ヘッダー・フッター準拠・モバイル最適化
+    ▼ Chatbot Component
     ======================================================== */
     .chatbot {
         position: fixed;
@@ -2576,23 +2452,19 @@
         z-index: 1;
         transition: transform var(--transition-normal) ease;
         font-size: 1rem;
-        animation: paperPlaneFloatUltraSmooth 6.2s ease-in-out infinite; /* ★★★ IMPROVEMENT: チャットボット用超滑らかアニメーション ★★★ */
+        animation: paperPlaneBounce 3.2s ease-in-out infinite !important;
         transform-origin: center;
         display: inline-block;
         will-change: transform;
-        animation-delay: 0.7s;
+        animation-delay: 0.8s;
     }
     
     .chatbot-send:hover {
         transform: scale(1.1);
     }
     
-    .chatbot-send:hover::before {
-        opacity: 1;
-    }
-    
     .chatbot-send:hover i {
-        animation: paperPlaneHoverUltraSmooth 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; /* ★★★ IMPROVEMENT: チャットボット用超滑らかホバーエフェクト ★★★ */
+        animation: paperPlaneHover 0.3s ease-out forwards !important;
     }
     
     .loading-dots {
@@ -2701,8 +2573,8 @@
         }
         
         .chatbot-send i {
-            font-size: 0.7rem;
-            animation: paperPlaneFloatMobileUltraSmooth 6.8s ease-in-out infinite; /* ★★★ IMPROVEMENT: モバイル版チャットボット用超滑らかアニメーション ★★★ */
+            font-size: 0.7rem !important;
+            animation: paperPlaneBounceMobile 4.2s ease-in-out infinite !important;
             animation-delay: 0.6s;
         }
         
@@ -2714,7 +2586,7 @@
     }
     
     /* ========================================================
-    ▼ Back to Top Button Component - 統一ヘッダー・フッター準拠
+    ▼ Back to Top Button Component
     ======================================================== */
     .back-to-top {
         position: fixed;
@@ -2792,7 +2664,7 @@
     }
 
     /* ========================================================
-    ▼ Animation Component - 統一ヘッダー・フッター準拠
+    ▼ Animation Component
     ======================================================== */
     @keyframes fadeIn {
         from {
@@ -2863,7 +2735,7 @@
     }
     
     /* ========================================================
-    ▼ Accessibility Component - 統一ヘッダー・フッター準拠
+    ▼ Accessibility Component
     ======================================================== */
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -2872,17 +2744,16 @@
             transition-duration: 0.01ms !important;
         }
         
-        /* 極上紙飛行機アニメーション完全停止 */
         .btn-icon-right i,
         .chatbot-send i,
-        .btn-primary.btn-icon-right i {
+        .btn-primary.btn-icon-right i,
+        .fa-paper-plane {
             animation: none !important;
         }
         
-        /* キーフレームアニメーション無効化 */
-        @keyframes paperPlaneFloatUltraSmooth { to { transform: none; } }
-        @keyframes paperPlaneFloatMobileUltraSmooth { to { transform: none; } }
-        @keyframes paperPlaneHoverUltraSmooth { to { transform: none; } }
+        @keyframes paperPlaneBounce { to { transform: none; } }
+        @keyframes paperPlaneBounceMobile { to { transform: none; } }
+        @keyframes paperPlaneHover { to { transform: none; } }
     }
     
     a:focus-visible, 
@@ -2900,7 +2771,7 @@
     }
 
     /* ========================================================
-    ▼ Utility Classes Component - 統一ヘッダー・フッター準拠
+    ▼ Utility Classes Component
     ======================================================== */
     .hide-mobile {
         display: block;
@@ -2918,6 +2789,23 @@
         .show-mobile {
             display: block !important;
         }
+    }
+    
+    .section-bg-gradient {
+        background: var(--gradient-section);
+        position: relative;
+    }
+    
+    .section-bg-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(58,95,235,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(0,201,167,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.4;
+        pointer-events: none;
     }
     </style>
 </head>
@@ -2937,7 +2825,7 @@
     <!-- 
     ==============================================
     // === component-split: PerfectResponsiveHeader ===
-    COMPONENT: 完全レスポンシブヘッダー - 統一ヘッダー仕様完全準拠・改善版・スタイリッシュ化・高さ調整
+    COMPONENT: 完全レスポンシブヘッダー - 統一ヘッダー仕様完全準拠
     機能: 統一ヘッダー準拠・極小ヘッダー・PC/モバイル完全対応
     特徴: 左端ロゴ配置、コンパクトハンバーガー、クリアナビゲーション
     ==============================================
@@ -2982,7 +2870,7 @@
                 </ul>
             </nav>
             
-            <!-- Mobile Hamburger Component - 統一ヘッダー準拠・極小コンパクト・スマート化 -->
+            <!-- Mobile Hamburger Component - 統一ヘッダー準拠・極小コンパクト -->
             <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
@@ -3176,7 +3064,7 @@
                         <div class="form-group">
                             <label class="form-label">ご興味のある分野（複数選択可）</label>
                             <div class="checkbox-group">
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 1 ★★★ -->
+                                <!-- Professional Checkbox Item 1 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service1" name="service[]" value="業務効率化" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3189,7 +3077,7 @@
                                     <span class="professional-checkbox__label">業務の効率化・自動化</span>
                                 </label>
                                 
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 2 ★★★ -->
+                                <!-- Professional Checkbox Item 2 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service2" name="service[]" value="コスト削減" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3202,7 +3090,7 @@
                                     <span class="professional-checkbox__label">コスト削減</span>
                                 </label>
                                 
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 3 ★★★ -->
+                                <!-- Professional Checkbox Item 3 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service3" name="service[]" value="売上アップ" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3215,7 +3103,7 @@
                                     <span class="professional-checkbox__label">売上・利益アップ</span>
                                 </label>
                                 
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 4 ★★★ -->
+                                <!-- Professional Checkbox Item 4 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service4" name="service[]" value="顧客対応" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3228,7 +3116,7 @@
                                     <span class="professional-checkbox__label">顧客対応の改善</span>
                                 </label>
                                 
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 5 ★★★ -->
+                                <!-- Professional Checkbox Item 5 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service5" name="service[]" value="データ分析" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3241,7 +3129,7 @@
                                     <span class="professional-checkbox__label">データ分析・活用</span>
                                 </label>
                                 
-                                <!-- ★★★ COMPONENT: Professional Checkbox Item 6 ★★★ -->
+                                <!-- Professional Checkbox Item 6 -->
                                 <label class="professional-checkbox">
                                     <input type="checkbox" id="service6" name="service[]" value="その他" class="professional-checkbox__input">
                                     <div class="professional-checkbox__visual">
@@ -3290,7 +3178,7 @@
     <!-- 
     ==============================================
     // === component-split: Footer ===
-    COMPONENT: フッター - 統一フッター仕様完全準拠・確実な順序制御
+    COMPONENT: フッター - 統一フッター仕様完全準拠
     機能: 統一フッター準拠・AI最適化
     特徴: モバイル情報密度最適化、完全レスポンシブ
     ==============================================
@@ -3369,9 +3257,7 @@
                 </div>
             </div>
             
-            <!-- ========================================================
-            ▼ Footer Bottom Component - 統一フッター仕様完全準拠・確実な順序制御（PC版：コピーライト左下・モバイル版：リンク上部→コピーライト最下部）
-            ======================================================== -->
+            <!-- Footer Bottom Component -->
             <div class="footer-bottom">
                 <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
                 <div class="footer-links-inline">
@@ -3434,7 +3320,7 @@
     <!-- 
     ==============================================
     // === component-split: JavaScript ===
-    COMPONENT: メインJavaScript - 統一ヘッダー・フッター準拠
+    COMPONENT: メインJavaScript - プロダクション最適化版
     機能: 統一ヘッダー・フッター準拠・インタラクション制御
     特徴: パフォーマンス最適化、AI企業専用チャットボット
     ==============================================
@@ -3442,7 +3328,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ========================================================
-        // ▼ 初期化処理 Component - 統一ヘッダー・フッター準拠・PC版白色背景確実適用
+        // ▼ 初期化処理 Component
         // ========================================================
         
         // PC版白色背景確実適用
@@ -3465,91 +3351,62 @@
             document.documentElement.classList.add('loaded');
         }, 100);
         
-        // Current year update - 統一フッター準拠
+        // Current year update
         const currentYearElement = document.getElementById('current-year');
         if (currentYearElement) {
             const currentYear = new Date().getFullYear();
             currentYearElement.textContent = currentYear;
         }
         
-        // ★★★ IMPROVEMENT: モバイル版紙飛行機エフェクト確実表示・極上の滑らかな紙飛行機アニメーション初期化 ★★★
+        // 紙飛行機アニメーション初期化
         setTimeout(() => {
-            const paperPlaneIcons = document.querySelectorAll('.btn-icon-right i, .chatbot-send i');
+            const paperPlaneIcons = document.querySelectorAll('.btn-icon-right i, .chatbot-send i, .fa-paper-plane');
             paperPlaneIcons.forEach(icon => {
                 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                    // モバイル版での確実な表示設定
                     icon.style.display = 'inline-block';
                     icon.style.opacity = '1';
                     icon.style.visibility = 'visible';
                     icon.style.transformOrigin = 'center';
                     icon.style.willChange = 'transform';
                     
-                    // アニメーション適用
-                    if (window.innerWidth <= 768) {
-                        icon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6.5s ease-in-out infinite';
-                        icon.style.fontSize = '0.75rem'; /* ★★★ IMPROVEMENT: モバイル版アイコンサイズ確保 ★★★ */
-                    } else {
-                        icon.style.animation = 'paperPlaneFloatUltraSmooth 6s ease-in-out infinite';
-                    }
+                    const isMobile = window.innerWidth <= 768;
+                    const animationName = isMobile ? 'paperPlaneBounceMobile' : 'paperPlaneBounce';
+                    const duration = isMobile ? '4s' : '3s';
                     
-                    icon.style.animationDelay = Math.random() * 1 + 's';
+                    icon.style.animation = `${animationName} ${duration} ease-in-out infinite`;
+                    icon.style.animationDelay = (Math.random() * 2) + 's';
                     
-                    // ★★★ IMPROVEMENT: モバイル版デバッグ用ログ（本番環境では削除可能） ★★★
-                    console.log('紙飛行機アニメーション適用:', {
-                        element: icon,
-                        isMobile: window.innerWidth <= 768,
-                        animation: icon.style.animation,
-                        display: icon.style.display,
-                        opacity: icon.style.opacity
-                    });
+                    icon.offsetHeight;
                 }
-            });
-            
-            // ★★★ IMPROVEMENT: モバイル版専用 - リサイズ時の再適用 ★★★
-            window.addEventListener('resize', function() {
-                const isMobile = window.innerWidth <= 768;
-                paperPlaneIcons.forEach(icon => {
-                    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                        if (isMobile) {
-                            icon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6.5s ease-in-out infinite';
-                            icon.style.fontSize = '0.75rem';
-                        } else {
-                            icon.style.animation = 'paperPlaneFloatUltraSmooth 6s ease-in-out infinite';
-                            icon.style.fontSize = '';
-                        }
-                    }
-                });
             });
         }, 500);
         
         // ========================================================
-        // ▼ Perfect Responsive Header & Navigation Component - 統一ヘッダー仕様完全準拠・PC/モバイル完全対応
+        // ▼ Header & Navigation Component
         // ========================================================
         
         const header = document.getElementById('header');
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('nav');
         
-        // Optimized scroll event - throttled for performance
         let lastScrollTop = 0;
         let ticking = false;
         
-        // Header scroll effect - 統一ヘッダー準拠
+        // Header scroll effect
         window.addEventListener('scroll', function() {
             if (!ticking) {
                 window.requestAnimationFrame(function() {
                     const currentScrollTop = window.scrollY;
                     
-                    // Header scroll effect
                     if (header) {
-                        if (currentScrollTop > 8) { /* 統一ヘッダー準拠 */
+                        if (currentScrollTop > 8) {
                             header.classList.add('scrolled');
                         } else {
                             header.classList.remove('scrolled');
                         }
                     }
                     
-                    // Back to Top button display control
+                    // Back to Top button
                     const backToTop = document.getElementById('back-to-top');
                     if (backToTop) {
                         if (currentScrollTop > 200) {
@@ -3567,7 +3424,7 @@
             }
         });
         
-        // Mobile menu - 統一ヘッダー仕様完全準拠・improved version with perfect responsive design
+        // Mobile menu
         if (hamburger && nav) {
             hamburger.addEventListener('click', function() {
                 const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -3575,7 +3432,6 @@
                 
                 nav.classList.toggle('active');
                 
-                // Icon change - smooth transition - 統一ヘッダー準拠
                 if (expanded) {
                     this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 } else {
@@ -3583,7 +3439,7 @@
                 }
             });
             
-            // Close menu by clicking nav links - mobile optimization - 統一ヘッダー準拠
+            // Close menu by clicking nav links
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -3599,7 +3455,7 @@
         }
         
         // ========================================================
-        // ▼ Back to Top Button Component - 統一ヘッダー・フッター準拠
+        // ▼ Back to Top Button Component
         // ========================================================
         const backToTopButton = document.getElementById('back-to-top');
         if (backToTopButton) {
@@ -3612,7 +3468,7 @@
         }
 
         // ========================================================
-        // ▼ Advanced Chatbot Component - 統一ヘッダー・フッター準拠・AI最適化完全版
+        // ▼ Chatbot Component
         // ========================================================
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotWindow = document.getElementById('chatbot-window');
@@ -3638,28 +3494,25 @@
                 chatbotButton.setAttribute('aria-expanded', 'false');
             });
             
-            // Chat send processing - 専門AI受託開発会社版
+            // Chat send processing
             if (chatSend && chatInput && chatMessages) {
                 const handleSend = function() {
                     const message = chatInput.value.trim();
                     if (message) {
-                        // ユーザーメッセージを追加
                         addChatMessage(message, 'user');
                         chatInput.value = '';
                         
-                        // ローディングインジケーター表示
+                        // Loading indicator
                         const loadingMsg = document.createElement('div');
                         loadingMsg.classList.add('chat-message', 'bot', 'loading');
                         loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
                         chatMessages.appendChild(loadingMsg);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                         
-                        // AIの応答内容 - プロフェッショナル版
+                        // AI response
                         setTimeout(function() {
-                            // ローディング削除
                             chatMessages.removeChild(loadingMsg);
                             
-                            // 専門的なAIシステム受託開発会社としての応答
                             let response = '';
                             const messageLower = message.toLowerCase();
                             
@@ -3678,7 +3531,6 @@
                             } else if (messageLower.includes('アイプロ')) {
                                 response = "新規事業企画書AIツール「アイプロ」は、AIが自動でビジネス企画書・プレゼン資料を作成するツールです。入力情報をもとにデータドリブンで魅力的な企画を提案し、最短5分で高品質な資料作成を実現。中小企業を中心に営業・企画部門の生産性を大幅に向上させます。具体的な活用方法については、デモンストレーションも可能ですので、お気軽にお問い合わせください。";
                             } else {
-                                // AI受託開発会社としての汎用的な応答
                                 const responses = [
                                     "ShinAIでは、AIエージェント開発やRAG構築などの社内向けAIシステム開発から、業務効率化AIツールの提供まで幅広くサポートしています。プロトタイプから始める伴走型開発で、初期投資を抑えながら確実な成果を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
                                     "最先端のAI技術を活用して企業の課題を解決するShinAIです。ChatGPT/GPT-4などのLLMを活用したAIエージェント開発や、社内データを活用したRAGシステム構築が得意分野です。小さく始めて効果を確認する段階的アプローチで、リスクを最小化しながら最大の成果を目指します。",
@@ -3688,14 +3540,14 @@
                                 response = responses[Math.floor(Math.random() * responses.length)];
                             }
                             
-                            // レスポンス追加（タイピング効果付き）
+                            // Response with typing effect
                             const botMessage = document.createElement('div');
                             botMessage.classList.add('chat-message', 'bot');
                             botMessage.textContent = '';
                             chatMessages.appendChild(botMessage);
                             
                             let i = 0;
-                            const typingSpeed = 8; // 高速化
+                            const typingSpeed = 8;
                             
                             const typingEffect = setInterval(function() {
                                 if (i < response.length) {
@@ -3705,30 +3557,19 @@
                                 } else {
                                     clearInterval(typingEffect);
                                     
-                                    // CTAボタンを追加（★★★ IMPROVEMENT: モバイル版確実対応・極上滑らか紙飛行機アニメーション付き ★★★）
+                                    // CTA button
                                     setTimeout(function() {
                                         const ctaButton = document.createElement('div');
                                         ctaButton.classList.add('chat-message', 'bot');
                                         
-                                        // モバイル版対応の紙飛行機アニメーション設定
-                                        const animationName = window.innerWidth <= 768 ? 
-                                            'paperPlaneFloatMobileUltraSmooth' : 
-                                            'paperPlaneFloatUltraSmooth';
-                                        const animationDuration = window.innerWidth <= 768 ? '6.2s' : '5.8s';
-                                        const iconSize = window.innerWidth <= 768 ? '0.75rem' : '1rem';
+                                        const isMobile = window.innerWidth <= 768;
+                                        const animationName = isMobile ? 'paperPlaneBounceMobile' : 'paperPlaneBounce';
+                                        const duration = isMobile ? '4s' : '3s';
                                         
-                                        ctaButton.innerHTML = `<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: ${animationName} ${animationDuration} ease-in-out infinite; animation-delay: 0.4s; transform-origin: center; will-change: transform; display: inline-block !important; opacity: 1 !important; visibility: visible !important; font-size: ${iconSize} !important;"></i></a>`;
+                                        ctaButton.innerHTML = `<a href="contact.html" class="btn btn-primary btn-icon-right" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem; padding: 0.6rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;"><span>お問い合わせ・無料相談予約</span><i class="fas fa-paper-plane" aria-hidden="true" style="animation: ${animationName} ${duration} ease-in-out infinite !important; animation-delay: 0.5s; transform-origin: center; will-change: transform; display: inline-block !important; opacity: 1 !important; visibility: visible !important;"></i></a>`;
                                         
                                         chatMessages.appendChild(ctaButton);
                                         chatMessages.scrollTop = chatMessages.scrollHeight;
-                                        
-                                        // ★★★ IMPROVEMENT: モバイル版デバッグ用確認 ★★★
-                                        console.log('チャットボットCTA紙飛行機アニメーション適用:', {
-                                            isMobile: window.innerWidth <= 768,
-                                            animationName: animationName,
-                                            animationDuration: animationDuration,
-                                            iconSize: iconSize
-                                        });
                                     }, 300);
                                 }
                             }, typingSpeed);
@@ -3756,29 +3597,26 @@
         }
         
         // ========================================================
-        // ▼ Contact Form Component - プロフェッショナルチェックボックス対応・高度なフォーム機能
+        // ▼ Contact Form Component
         // ========================================================
         const contactForm = document.getElementById('contact-form-element');
         const submitButton = document.getElementById('submit-button');
         const submitStatus = document.getElementById('submit-status');
         
         if (contactForm) {
-            /* ★★★ COMPONENT: Professional Checkbox System JavaScript ★★★ */
+            // Professional Checkbox System
             const professionalCheckboxes = document.querySelectorAll('.professional-checkbox__input');
             
             professionalCheckboxes.forEach(checkbox => {
                 const checkboxContainer = checkbox.closest('.professional-checkbox');
                 
-                // 初期状態の確認
                 if (checkbox.checked) {
                     checkboxContainer.classList.add('selected');
                 }
                 
-                // ★★★ IMPROVEMENT: Change イベント - プロフェッショナル仕様対応 ★★★
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
                         checkboxContainer.classList.add('selected');
-                        // ★★★ ENHANCEMENT: チェック時のハプティックフィードバック風エフェクト ★★★
                         checkboxContainer.style.transform = 'scale(1.02)';
                         setTimeout(() => {
                             checkboxContainer.style.transform = '';
@@ -3788,7 +3626,6 @@
                     }
                 });
                 
-                // ★★★ IMPROVEMENT: キーボードアクセシビリティ強化 ★★★
                 checkbox.addEventListener('focus', function() {
                     checkboxContainer.classList.add('focused');
                 });
@@ -3798,11 +3635,10 @@
                 });
             });
             
-            // フォーム送信処理
+            // Form submission
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // 必須項目の検証
                 let isValid = true;
                 const requiredFields = contactForm.querySelectorAll('[required]');
                 
@@ -3827,7 +3663,7 @@
                     }
                 });
                 
-                // メールアドレスの特別検証
+                // Email validation
                 const emailField = document.getElementById('email');
                 if (emailField && emailField.value.trim()) {
                     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -3846,43 +3682,19 @@
                 }
                 
                 if (isValid) {
-                    // 送信中の表示 + アニメーション停止
+                    // Submit processing
                     submitButton.innerHTML = '<span class="loading-spinner"></span>送信中...';
                     submitButton.classList.add('btn-loading');
                     submitButton.disabled = true;
                     
-                    // フォームデータの取得
-                    const formData = new FormData(contactForm);
-                    const formEntries = {};
-                    
-                    // サービス選択のデータ整形
-                    const selectedServices = [];
-                    document.querySelectorAll('input[name="service[]"]:checked').forEach(checkbox => {
-                        selectedServices.push(checkbox.value);
-                    });
-                    
-                    // FormDataから通常のオブジェクトへ変換
-                    for (let [key, value] of formData.entries()) {
-                        // チェックボックスの特殊処理を除外
-                        if (key !== 'service[]') {
-                            formEntries[key] = value;
-                        }
-                    }
-                    
-                    // サービス選択を追加
-                    formEntries['services'] = selectedServices.join(', ');
-                    
-                    // タイムスタンプを更新
-                    formEntries['timestamp'] = new Date().toISOString();
-                    
-                    // テスト環境のため、実際のAPIコールをシミュレート
+                    // Simulate form submission
                     setTimeout(() => {
                         showSuccessMessage();
                     }, 1500);
                 }
             });
             
-            // フォーム入力リアルタイム検証
+            // Real-time validation
             const formInputs = contactForm.querySelectorAll('input, textarea');
             formInputs.forEach(input => {
                 input.addEventListener('input', function() {
@@ -3896,7 +3708,7 @@
                         }
                     }
                     
-                    // メールアドレス特別検証
+                    // Email special validation
                     if (this.id === 'email' && this.value.trim()) {
                         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                         if (emailPattern.test(this.value)) {
@@ -3913,73 +3725,53 @@
             });
         }
         
-        // 送信成功メッセージの表示
+        // Success message display
         function showSuccessMessage() {
-            // 送信ボタンを元に戻す + ★★★ IMPROVEMENT: アニメーション再開強化 ★★★
+            // Reset submit button
             submitButton.innerHTML = '<span>送信する</span><i class="fas fa-paper-plane" aria-hidden="true"></i>';
             submitButton.classList.remove('btn-loading');
             submitButton.disabled = false;
             
-            // ★★★ IMPROVEMENT: モバイル版確実対応・極上滑らか紙飛行機アニメーションが確実に動作するよう強制再開 ★★★
+            // Restart animation
             setTimeout(() => {
                 const paperPlaneIcon = submitButton.querySelector('i');
                 if (paperPlaneIcon) {
-                    // アニメーション一旦停止
                     paperPlaneIcon.style.animation = 'none';
-                    paperPlaneIcon.offsetHeight; // リフロー強制実行
+                    paperPlaneIcon.offsetHeight;
                     
-                    // モバイル版での確実な表示設定
-                    paperPlaneIcon.style.display = 'inline-block';
-                    paperPlaneIcon.style.opacity = '1';
-                    paperPlaneIcon.style.visibility = 'visible';
+                    const isMobile = window.innerWidth <= 768;
+                    const animationName = isMobile ? 'paperPlaneBounceMobile' : 'paperPlaneBounce';
+                    const duration = isMobile ? '4s' : '3s';
+                    
+                    paperPlaneIcon.style.animation = `${animationName} ${duration} ease-in-out infinite`;
+                    paperPlaneIcon.style.animationDelay = '0.5s';
                     paperPlaneIcon.style.transformOrigin = 'center';
                     paperPlaneIcon.style.willChange = 'transform';
-                    
-                    // アニメーション再開
-                    if (window.innerWidth <= 768) {
-                        paperPlaneIcon.style.animation = 'paperPlaneFloatMobileUltraSmooth 6s ease-in-out infinite';
-                        paperPlaneIcon.style.fontSize = '0.75rem'; /* ★★★ IMPROVEMENT: モバイル版アイコンサイズ確保 ★★★ */
-                    } else {
-                        paperPlaneIcon.style.animation = 'paperPlaneFloatUltraSmooth 5.5s ease-in-out infinite';
-                    }
-                    
-                    paperPlaneIcon.style.animationDelay = '0.4s';
-                    
-                    // ★★★ IMPROVEMENT: モバイル版デバッグ用確認 ★★★
-                    console.log('送信ボタン紙飛行機アニメーション再開:', {
-                        element: paperPlaneIcon,
-                        isMobile: window.innerWidth <= 768,
-                        animation: paperPlaneIcon.style.animation,
-                        display: paperPlaneIcon.style.display
-                    });
                 }
             }, 100);
             
-            // 成功メッセージを表示
+            // Success message
             submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
             submitStatus.className = 'submit-status success visible';
             
-            // 成功メッセージもモーダル表示
             const successMessage = document.getElementById('message-success');
             if (successMessage) {
                 successMessage.classList.add('show');
             }
             
-            // フォームをリセット
+            // Reset form
             contactForm.reset();
             
-            // 入力フィールドの状態をクリア
             contactForm.querySelectorAll('.form-control').forEach(control => {
                 control.classList.remove('valid');
                 control.classList.remove('error');
             });
             
-            // チェックボックスをリセット
             contactForm.querySelectorAll('.professional-checkbox').forEach(checkbox => {
                 checkbox.classList.remove('selected');
             });
             
-            // 一定時間後にメッセージを非表示
+            // Hide messages after timeout
             setTimeout(() => {
                 submitStatus.className = 'submit-status';
                 if (successMessage) {
@@ -3989,7 +3781,7 @@
         }
         
         // ========================================================
-        // ▼ Accessibility Enhancement Component - 統一ヘッダー・フッター準拠
+        // ▼ Accessibility Enhancement Component
         // ========================================================
         
         // Keyboard navigation support
@@ -4026,7 +3818,7 @@
             }
         });
         
-        // アニメーションスクロール検出
+        // Scroll animation observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -30px 0px'
