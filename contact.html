@@ -888,7 +888,7 @@
         padding: 0.75rem 1.5rem;
         border-radius: var(--radius-full);
         font-weight: var(--font-weight-semibold);
-        transition: all var(--transition-normal) ease;
+        transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
         text-align: center;
         cursor: pointer;
         position: relative;
@@ -911,7 +911,7 @@
         background: rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.4s ease-out, height 0.4s ease-out;
+        transition: width 0.25s ease-out, height 0.25s ease-out;
         z-index: 1;
     }
     
@@ -938,6 +938,7 @@
         transform: translateY(-2px) scale(1.02);
         box-shadow: var(--shadow-button-hover);
         color: var(--white);
+        transition: all 0.12s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     
     .btn-lg {
@@ -1508,7 +1509,7 @@
         border: 1.5px solid rgba(58, 95, 235, 0.2);
         border-radius: var(--radius-md);
         font-size: 0.95rem;
-        transition: all var(--transition-normal);
+        transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
         background-color: white;
         color: var(--dark);
         position: relative;
@@ -1524,11 +1525,12 @@
         outline: none;
         box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.1);
         transform: translateY(-2px);
+        transition: all 0.12s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     .form-control:focus + .focus-border {
         width: 100%;
-        transition: 0.4s;
+        transition: 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
         left: 0;
     }
     
@@ -1585,18 +1587,18 @@
         width: 0;
         height: 2px;
         background: var(--gradient-primary);
-        transition: 0.4s;
+        transition: 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
         z-index: 2;
     }
 
     .form-control:focus + .focus-border {
         width: 100%;
-        transition: 0.4s;
+        transition: 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
         left: 0;
     }
     
     /* ========================================================
-    ▼ Professional Checkbox System Component
+    ▼ Professional Checkbox System Component - 滑らかスッキリ最適化版
     ======================================================== */
     .checkbox-group {
         display: grid;
@@ -1614,7 +1616,7 @@
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
         border: 1px solid rgba(58, 95, 235, 0.1);
         cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.15s ease-out;
         overflow: hidden;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         user-select: none;
@@ -1629,7 +1631,7 @@
         height: 100%;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.15s ease-out;
         z-index: 1;
     }
     
@@ -1661,7 +1663,7 @@
         margin-right: 0.75rem;
         margin-top: 0.125rem;
         flex-shrink: 0;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.12s ease-out;
         overflow: hidden;
         z-index: 2;
     }
@@ -1676,7 +1678,7 @@
         background: linear-gradient(135deg, var(--primary), var(--secondary));
         border-radius: 4px;
         transform: translate(-50%, -50%) scale(0);
-        transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.15s ease-out;
     }
     
     .professional-checkbox__checkmark {
@@ -1686,7 +1688,7 @@
         width: 12px;
         height: 12px;
         transform: translate(-50%, -50%) scale(0);
-        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.18s ease-out;
         z-index: 3;
     }
     
@@ -1700,7 +1702,7 @@
         stroke-linejoin: round;
         stroke-dasharray: 16;
         stroke-dashoffset: 16;
-        transition: stroke-dashoffset 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: stroke-dashoffset 0.18s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .professional-checkbox__label {
@@ -1709,7 +1711,7 @@
         font-size: 0.95rem;
         color: var(--dark);
         line-height: 1.5;
-        transition: color 0.3s ease;
+        transition: color 0.15s ease-out;
         z-index: 2;
         position: relative;
     }
@@ -1718,6 +1720,7 @@
         border-color: var(--primary);
         background: linear-gradient(135deg, var(--primary), var(--secondary));
         box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
+        transition: all 0.15s ease-out;
     }
     
     .professional-checkbox__input:checked + .professional-checkbox__visual::before {
@@ -1737,15 +1740,18 @@
     .professional-checkbox__input:checked ~ .professional-checkbox__label {
         color: var(--primary);
         font-weight: 600;
+        transition: all 0.15s ease-out;
     }
     
     .professional-checkbox__input:focus + .professional-checkbox__visual {
         box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.2);
         border-color: var(--primary);
+        transition: all 0.12s ease-out;
     }
     
     .professional-checkbox:active .professional-checkbox__visual {
-        transform: scale(0.95);
+        transform: scale(0.99);
+        transition: transform 0.08s ease-out;
     }
     
     .professional-checkbox:hover .professional-checkbox__visual {
@@ -1761,6 +1767,7 @@
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.05), rgba(0, 201, 167, 0.05));
         border-color: rgba(58, 95, 235, 0.2);
         box-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);
+        transition: all 0.15s ease-out;
     }
     
     .professional-checkbox.selected::before {
@@ -3604,7 +3611,7 @@
         const submitStatus = document.getElementById('submit-status');
         
         if (contactForm) {
-            // Professional Checkbox System
+            // Professional Checkbox System - 滑らかスッキリ最適化版
             const professionalCheckboxes = document.querySelectorAll('.professional-checkbox__input');
             
             professionalCheckboxes.forEach(checkbox => {
@@ -3614,15 +3621,48 @@
                     checkboxContainer.classList.add('selected');
                 }
                 
+                // 滑らかな反応のイベントリスナー
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
+                        // スッキリとした滑らかなフィードバック
                         checkboxContainer.classList.add('selected');
-                        checkboxContainer.style.transform = 'scale(1.02)';
+                        
+                        // 振動を抑えた軽微な確認フィードバック
+                        checkboxContainer.style.transition = 'all 0.12s ease-out';
+                        checkboxContainer.style.transform = 'scale(1.005)';
+                        
+                        // 自然に元に戻す
                         setTimeout(() => {
                             checkboxContainer.style.transform = '';
-                        }, 150);
+                        }, 120);
                     } else {
                         checkboxContainer.classList.remove('selected');
+                    }
+                });
+                
+                // 軽微なクリックフィードバック
+                checkbox.addEventListener('mousedown', function() {
+                    checkboxContainer.style.transform = 'scale(0.995)';
+                    checkboxContainer.style.transition = 'transform 0.08s ease-out';
+                });
+                
+                checkbox.addEventListener('mouseup', function() {
+                    checkboxContainer.style.transform = '';
+                    checkboxContainer.style.transition = 'all 0.15s ease-out';
+                });
+                
+                // キーボード操作時の滑らかフィードバック
+                checkbox.addEventListener('keydown', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        checkboxContainer.style.transform = 'scale(0.995)';
+                        checkboxContainer.style.transition = 'transform 0.08s ease-out';
+                    }
+                });
+                
+                checkbox.addEventListener('keyup', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        checkboxContainer.style.transform = '';
+                        checkboxContainer.style.transition = 'all 0.15s ease-out';
                     }
                 });
                 
