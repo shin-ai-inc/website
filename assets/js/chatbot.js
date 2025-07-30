@@ -228,8 +228,10 @@ const ChatbotModule = {
     },
     
     addMessage: function(text, type) {
+        if (!this.messages) return;
+        
         const message = document.createElement('div');
-        message.classList.add('message', `${type}-message`);
+        message.classList.add('chat-message', type === 'user' ? 'user' : 'bot');
         message.textContent = text;
         
         if (type === 'bot') {
