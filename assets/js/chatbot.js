@@ -12,8 +12,9 @@ const ChatbotModule = {
     input: null,
     submitBtn: null,
     isTyping: false,
-    // セキュリティ強化：APIキーをサーバーサイドに移行
+    // GitHub Pages対応：APIサーバーまたはフォールバック
     apiUrl: 'http://localhost:3002/api/chat',
+    fallbackMode: false, // サーバーAPI利用不可時にtrueに変更
     defaultResponses: [
         "AIチャットボットについての詳細は、お問い合わせフォームよりお気軽にご連絡ください。",
         "AI導入についてのご相談は、専門のコンサルタントが対応いたします。無料相談フォームからお問い合わせください。",
@@ -48,12 +49,12 @@ const ChatbotModule = {
 応答の際は、上記情報に基づいた正確な内容を提供し、詳細な相談は無料相談フォームへの誘導を行ってください。300文字以内の簡潔な返答を心がけてください。`,
     
     init: function() {
-        this.toggle = document.getElementById('chatbot-toggle');
-        this.container = document.getElementById('chatbot-container');
+        this.toggle = document.getElementById('chatbot-button');
+        this.container = document.getElementById('chatbot-window');
         this.closeBtn = document.getElementById('chatbot-close');
         this.messages = document.getElementById('chatbot-messages');
-        this.input = document.getElementById('chatbot-input-text');
-        this.submitBtn = document.getElementById('chatbot-submit');
+        this.input = document.getElementById('chat-input');
+        this.submitBtn = document.getElementById('chat-send');
         
         if (!this.toggle || !this.container) return;
         
@@ -87,7 +88,7 @@ const ChatbotModule = {
         this.toggle.setAttribute('aria-expanded', isOpen);
         
         if (isOpen) {
-            this.input.focus();
+            if (this.input) this.input.focus();
             this.announceToScreenReaders('チャットボットが開きました');
             
             // 既存のプロアクティブプロンプトを削除
@@ -116,14 +117,19 @@ const ChatbotModule = {
         this.showTypingIndicator();
         
         try {
-            // サーバーAPI経由でOpenAI APIを安全に利用
+            // GitHub Pages環境ではフォールバックモードで動作
             let response;
-            try {
-                response = await this.callServerAPI(text);
-            } catch (apiError) {
-                console.warn('Server API failed, using fallback:', apiError.message);
-                // サーバーAPI失敗時のフォールバック応答
+            if (this.fallbackMode || window.location.protocol === 'file:' || window.location.hostname.includes('github.io')) {
+                console.info('Using fallback mode (GitHub Pages or file:// protocol)');
                 response = this.getLocalResponse(text);
+            } else {
+                try {
+                    response = await this.callServerAPI(text);
+                } catch (apiError) {
+                    console.warn('Server API failed, using fallback:', apiError.message);
+                    // サーバーAPI失敗時のフォールバック応答
+                    response = this.getLocalResponse(text);
+                }
             }
             
             // 入力中表示を非表示
@@ -209,6 +215,12 @@ const ChatbotModule = {
             return "お問い合わせは、ページ上部のメニューにある「お問い合わせ」からフォームにアクセスいただくか、お電話（03-1234-5678、平日9:00〜18:00）、またはメール（shinai.life@gmail.com）にてお気軽にご連絡ください。";
         } else if (lowerText.includes('ありがとう')) {
             return "こちらこそありがとうございます。他にご質問やご不明点がございましたら、いつでもお気軽にお聞きください。ShinAIは御社のAI導入と業務効率化を全力でサポートいたします。";
+        } else if (lowerText.includes('時間') || lowerText.includes('営業') || lowerText.includes('いつ')) {
+            return "営業時間は平日9:00〜18:00です（土日祝休み）。お急ぎの場合は、お問い合わせフォームからご連絡いただければ、翌営業日に迅速に対応いたします。";
+        } else if (lowerText.includes('場所') || lowerText.includes('住所') || lowerText.includes('アクセス')) {
+            return "ShinAIのオフィスは東京都千代田区丸の内3-8-3 Tokyo Innovation Baseにございます。最寄り駅は東京駅・大手町駅です。お打ち合わせはオンラインでも対応可能です。";
+        } else if (lowerText.includes('無料') || lowerText.includes('相談') || lowerText.includes('初回')) {
+            return "初回相談は完全無料です。お客様の課題をお聞きし、最適なAI導入プランをご提案いたします。無料相談のご予約は、お問い合わせフォームまたはお電話にて承っております。";
         } else {
             // デフォルトレスポンス（ランダム）
             return this.defaultResponses[Math.floor(Math.random() * this.defaultResponses.length)];
