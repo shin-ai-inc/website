@@ -12,8 +12,8 @@ const ChatbotModule = {
     input: null,
     submitBtn: null,
     isTyping: false,
-    apiKey: '', // OpenAI APIキーを設定
-    apiUrl: 'https://api.openai.com/v1/chat/completions',
+    // セキュリティ強化：APIキーをサーバーサイドに移行
+    apiUrl: 'http://localhost:3002/api/chat',
     defaultResponses: [
         "AIチャットボットについての詳細は、お問い合わせフォームよりお気軽にご連絡ください。",
         "AI導入についてのご相談は、専門のコンサルタントが対応いたします。無料相談フォームからお問い合わせください。",
@@ -76,15 +76,11 @@ const ChatbotModule = {
             }
         }, 30000);
         
-        // APIキーの設定
-        this.fetchApiKey();
+        // サーバーAPI連携のためAPIキー設定は不要
+        console.log('ShinAI ChatBot initialized - Server API mode');
     },
     
-    fetchApiKey: function() {
-        // 本番環境ではサーバーサイドで管理するか、安全な方法で取得する
-        // テスト環境ではローカルストレージから取得
-        this.apiKey = localStorage.getItem('shinai_chatbot_api_key') || '';
-    },
+    // セキュリティ強化により削除：APIキー管理はサーバーサイドで実行
     
     toggleChat: function() {
         const isOpen = this.container.classList.toggle('active');
@@ -120,12 +116,13 @@ const ChatbotModule = {
         this.showTypingIndicator();
         
         try {
-            // APIキーがある場合はAPIを利用、なければフォールバック
+            // サーバーAPI経由でOpenAI APIを安全に利用
             let response;
-            if (this.apiKey) {
-                response = await this.callOpenAI(text);
-            } else {
-                // フォールバック応答
+            try {
+                response = await this.callServerAPI(text);
+            } catch (apiError) {
+                console.warn('Server API failed, using fallback:', apiError.message);
+                // サーバーAPI失敗時のフォールバック応答
                 response = this.getLocalResponse(text);
             }
             
@@ -145,35 +142,44 @@ const ChatbotModule = {
         }
     },
     
-    callOpenAI: async function(userMessage) {
+    callServerAPI: async function(userMessage) {
         try {
             const response = await fetch(this.apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.apiKey}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [
-                        { role: 'system', content: this.systemPrompt },
-                        { role: 'user', content: userMessage }
-                    ],
-                    max_tokens: 300,
-                    temperature: 0.7
+                    message: userMessage
                 })
             });
             
             if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+                const errorData = await response.json().catch(() => ({}));
+                
+                // レート制限エラーの場合
+                if (response.status === 429) {
+                    throw new Error(errorData.message || 'リクエスト制限に達しました。しばらく経ってからお試しください。');
+                }
+                
+                // サービス停止エラーの場合
+                if (response.status === 503) {
+                    throw new Error(errorData.message || 'サービスが一時的に停止中です。');
+                }
+                
+                throw new Error(`Server API error: ${response.status}`);
             }
             
             const data = await response.json();
-            return data.choices[0].message.content.trim();
+            
+            if (!data.success) {
+                throw new Error('Server returned error response');
+            }
+            
+            return data.response;
         } catch (error) {
-            console.error('OpenAI API error:', error);
-            // APIエラー時にフォールバック応答を返す
-            return this.getLocalResponse(userMessage);
+            console.error('Server API error:', error);
+            throw error; // エラーを上位に伝播してフォールバック処理を実行
         }
     },
     
