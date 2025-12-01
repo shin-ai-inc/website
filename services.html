@@ -974,9 +974,25 @@
     DESIGN: プロフェッショナル・洗練・AI生成っぽさ完全排除
     ======================================================== */
     .implementation-process {
-        background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
-        padding: 4rem 0;  /* masa様改善: 5rem→4remでコンパクト化 */
+        background: linear-gradient(180deg,
+            #ffffff 0%,
+            #f8fafc 40%,
+            #ffffff 100%);
+        padding: 5.5rem 0 4.5rem 0;
         position: relative;
+    }
+
+    .implementation-process::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(58, 95, 235, 0.2) 50%,
+            transparent 100%);
     }
 
     .process-header {
@@ -1148,6 +1164,106 @@
         line-height: 1.6;
     }
 
+    /* ========================================================
+    ▼ Step Outcome Component - Professional Design Enhancement
+    PURPOSE: 各ステップで得られる成果を明確化
+    DESIGN: 視覚的誘導・アクション促進・安心感醸成
+    ======================================================== */
+    .step-outcome {
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.04), rgba(0, 201, 167, 0.04));
+        border-left: 3px solid var(--primary);
+        border-radius: 4px;
+    }
+
+    .step-outcome strong {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.35rem;
+    }
+
+    .step-outcome span {
+        display: block;
+        font-size: 0.85rem;
+        color: #2d3748;
+        line-height: 1.5;
+    }
+
+    /* ========================================================
+    ▼ Process CTA Component - Natural Action Induction
+    PURPOSE: プロセス説明後の自然なCTA誘導
+    DESIGN: 押し付けない・寄り添う姿勢
+    ======================================================== */
+    .process-cta {
+        margin-top: 3rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.03), rgba(0, 201, 167, 0.03));
+        border-radius: 12px;
+    }
+
+    .process-cta-text {
+        font-size: 1.05rem;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+    }
+
+    .btn-process-consultation {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.9rem 2rem;
+        background: var(--gradient-primary);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(58, 95, 235, 0.25);
+        transition: all 0.2s ease;
+    }
+
+    .btn-process-consultation:hover {
+        background: var(--gradient-primary-hover);
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.35);
+        transform: translateY(-2px);
+    }
+
+    .btn-process-consultation i {
+        font-size: 0.9rem;
+        transition: transform 0.2s ease;
+    }
+
+    .btn-process-consultation:hover i {
+        transform: translateX(3px);
+    }
+
+    /* ========================================================
+    ▼ Partnership Message Component - Trust Building
+    PURPOSE: パートナーシップ姿勢の明示
+    DESIGN: 信頼醸成・長期関係構築
+    ======================================================== */
+    .value-pillars-footer {
+        margin-top: 3rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        background: rgba(247, 250, 252, 0.5);
+        border-radius: 8px;
+    }
+
+    .partnership-message {
+        font-size: 1.05rem;
+        color: #2d3748;
+        line-height: 1.8;
+        font-weight: 500;
+    }
+
     @media (max-width: 992px) {
         .process-timeline {
             grid-template-columns: repeat(2, 1fr);  /* masa様改善: タブレットで2カラム */
@@ -1189,6 +1305,473 @@
 
         .step-description {
             font-size: 0.8125rem;
+        }
+    }
+
+    /* ========================================================
+    ▼ New Process Flow Component - Vertical Flow Design
+    PURPOSE: 縦型フロー可視化・導入から社内浸透まで明確化
+    DESIGN: プロフェッショナルマーケター・デザイナー視点
+    ======================================================== */
+    .process-header-redesign {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3.5rem;
+    }
+
+    .section-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #64748b;
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1.2rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .section-label::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.5rem;
+        height: 2px;
+        background: linear-gradient(90deg, #3A5FEB, #00C9A7);
+        box-shadow: 0 0 8px rgba(58, 95, 235, 0.4);
+    }
+
+    .section-heading {
+        font-size: clamp(1.65rem, 3vw, 2.1rem);
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 1.2rem;
+        line-height: 1.35;
+        letter-spacing: -0.025em;
+    }
+
+    .section-description {
+        font-size: 1.05rem;
+        color: #64748b;
+        line-height: 1.75;
+        letter-spacing: -0.005em;
+    }
+
+    .process-flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.75rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        padding: 2.5rem 0 1rem 0;
+    }
+
+    .process-flow::before {
+        content: '';
+        position: absolute;
+        top: 6rem;
+        left: 5%;
+        right: 5%;
+        height: 3px;
+        background: linear-gradient(90deg,
+            rgba(58, 95, 235, 0.08) 0%,
+            rgba(58, 95, 235, 0.15) 25%,
+            rgba(0, 201, 167, 0.15) 75%,
+            rgba(0, 201, 167, 0.08) 100%);
+        border-radius: 3px;
+        z-index: 0;
+    }
+
+    .process-flow::after {
+        content: '一緒に歩む道のり';
+        position: absolute;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        opacity: 0.6;
+    }
+
+    .flow-step {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        background: white;
+        padding: 2.25rem 1.85rem 2rem 1.85rem;
+        border-radius: 16px;
+        box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+        border: 1px solid rgba(226, 232, 240, 0.65);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        z-index: 1;
+    }
+
+    .flow-step::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg,
+            rgba(58, 95, 235, 0.6) 0%,
+            rgba(0, 201, 167, 0.6) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 16px 0 0 16px;
+    }
+
+    .flow-step:hover {
+        background: rgba(248, 250, 252, 0.55);
+        border-color: rgba(58, 95, 235, 0.18);
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1),
+                    0 2px 6px rgba(58, 95, 235, 0.08);
+        transform: translateY(-3px);
+    }
+
+    .flow-step:hover::before {
+        opacity: 1;
+    }
+
+    .flow-step::after {
+        content: '→';
+        position: absolute;
+        top: 50%;
+        right: -1rem;
+        transform: translate(100%, -50%);
+        font-size: 1.5rem;
+        color: rgba(148, 163, 184, 0.25);
+        font-weight: 300;
+        z-index: 2;
+        transition: color 0.3s ease;
+    }
+
+    .flow-step:hover::after {
+        color: rgba(58, 95, 235, 0.5);
+    }
+
+    .flow-step:last-child::after {
+        display: none;
+    }
+
+    .step-visual {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        width: 100%;
+    }
+
+    .step-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        background: linear-gradient(135deg,
+            rgba(58, 95, 235, 0.08) 0%,
+            rgba(0, 201, 167, 0.08) 100%);
+        border: 1px solid rgba(58, 95, 235, 0.15);
+        color: #475569;
+        transition: all 0.3s ease;
+        font-weight: 700;
+        font-family: 'Inter', -apple-system, sans-serif;
+        letter-spacing: -0.02em;
+    }
+
+    .icon-analysis::before {
+        content: '01';
+    }
+
+    .icon-experiment::before {
+        content: '02';
+    }
+
+    .icon-development::before {
+        content: '03';
+    }
+
+    .icon-training::before {
+        content: '04';
+    }
+
+    .icon-support::before {
+        content: '05';
+    }
+
+    .step-icon i {
+        display: none;
+    }
+
+    .flow-step:hover .step-icon {
+        background: linear-gradient(135deg,
+            rgba(58, 95, 235, 0.12) 0%,
+            rgba(0, 201, 167, 0.12) 100%);
+        border-color: rgba(58, 95, 235, 0.25);
+        color: #3A5FEB;
+    }
+
+    .step-number-badge {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    .flow-step:hover .step-number-badge {
+        color: #3A5FEB;
+    }
+
+    .step-info {
+        width: 100%;
+    }
+
+    .step-heading {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.6rem;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+    }
+
+    .step-text {
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.65;
+        margin-bottom: 0;
+        letter-spacing: 0;
+    }
+
+    .step-result {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding: 0.5rem 0.85rem;
+        background: rgba(248, 250, 252, 0.5);
+        border-radius: 8px;
+        border: 1px solid rgba(226, 232, 240, 0.7);
+        transition: all 0.3s ease;
+    }
+
+    .step-result::before {
+        content: '→';
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 400;
+        transition: color 0.3s ease;
+    }
+
+    .flow-step:hover .step-result {
+        background: rgba(58, 95, 235, 0.04);
+        border-color: rgba(58, 95, 235, 0.2);
+    }
+
+    .flow-step:hover .step-result::before {
+        color: #3A5FEB;
+    }
+
+    .step-result i {
+        display: none;
+    }
+
+    .step-result span {
+        font-size: 0.8rem;
+        color: #64748b;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.4;
+        transition: color 0.3s ease;
+    }
+
+    .flow-step:hover .step-result span {
+        color: #3A5FEB;
+    }
+
+    .flow-arrow {
+        display: none;
+    }
+
+    /* ========================================================
+    ▼ Responsive Design for Process Flow - Mobile Optimization
+    ======================================================== */
+    @media (max-width: 1200px) {
+        .process-flow {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .flow-step:nth-child(3)::after {
+            display: none;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .process-flow {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .flow-step:nth-child(2)::after,
+        .flow-step:nth-child(4)::after {
+            display: none;
+        }
+
+        .process-flow::before {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .implementation-process {
+            padding: 3rem 0;
+        }
+
+        .process-header-redesign {
+            margin-bottom: 2rem;
+        }
+
+        .section-heading {
+            font-size: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 0.95rem;
+        }
+
+        .process-flow {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .flow-step {
+            padding: 1.75rem 1.25rem;
+        }
+
+        .flow-step::after {
+            display: none;
+        }
+
+        .step-visual {
+            flex-direction: row;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            font-size: 1rem;
+        }
+
+        .step-heading {
+            font-size: 1rem;
+        }
+
+        .step-text {
+            font-size: 0.875rem;
+        }
+
+        .step-result {
+            width: auto;
+            justify-content: flex-start;
+        }
+
+        .step-result span {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* ========================================================
+    ▼ Partnership Message Section - 心に響く美しいメッセージ配置
+    PURPOSE: 5ステップ導入プロセス完了後の自然な連結・信頼醸成
+    DESIGN: シームレスな移行・押し付けない寄り添う姿勢
+    ======================================================== */
+    .partnership-section {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        padding: 5rem 0 5rem 0;
+        position: relative;
+        margin-top: -1px;
+    }
+
+    .partnership-card {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        text-align: center;
+        position: relative;
+    }
+
+    .partnership-lead {
+        font-size: 1.05rem;
+        color: #64748b;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    .partnership-statement {
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .partnership-statement p {
+        font-size: 1.1rem;
+        color: #334155;
+        line-height: 1.8;
+        margin: 0;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+
+    .partnership-statement strong {
+        font-weight: 700;
+        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 1.15rem;
+    }
+
+    @media (max-width: 768px) {
+        .partnership-section {
+            padding: 3rem 0;
+        }
+
+        .partnership-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .partnership-lead {
+            font-size: 1rem;
+        }
+
+        .partnership-statement p {
+            font-size: 1.05rem;
+        }
+
+        .partnership-statement strong {
+            font-size: 1.1rem;
         }
     }
 
@@ -1820,87 +2403,138 @@
         </section>
 
         <!-- ========================================================
-        ▼ Implementation Process Section - 5 STEPS VISUALIZATION
-        PURPOSE: サービス導入フロー5ステップ可視化
+        ▼ Implementation Process Section - COMPLETELY REDESIGNED
+        PURPOSE: 導入から社内浸透まで明確可視化 - シンプル・分かりやすさ重視
+        DESIGN: プロフェッショナルマーケター×デザイナー視点 - 大々的改善
         ======================================================== -->
         <section class="implementation-process" id="process">
             <div class="container">
-                <div class="process-header">
-                    <span class="process-badge">AI導入プロセス</span>
-                    <h2 class="process-title">ShinAIの導入支援プロセス</h2>
-                    <p class="process-subtitle">
-                        お客様に寄り添い、確実な成果を生み出すAI導入の5つのステップ
+                <div class="process-header-redesign">
+                    <span class="section-label">HOW WE WORK</span>
+                    <h2 class="section-heading">ご依頼から自走まで、<br>伴走型の5つのステップ</h2>
+                    <p class="section-description">
+                        課題の整理から内製化まで、段階的に価値を積み重ねます。
                     </p>
                 </div>
 
-                <div class="process-timeline">
-                    <!-- Step 1 -->
-                    <div class="process-step">
-                        <div class="step-number-wrapper">
-                            <div class="step-number">1</div>
+                <div class="process-flow">
+                    <!-- Step 1: 課題分析 -->
+                    <div class="flow-step">
+                        <div class="step-visual">
+                            <div class="step-icon icon-analysis">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <span class="step-number-badge">STEP 1</span>
                         </div>
-                        <div class="step-content">
-                            <span class="step-label">STEP 01</span>
-                            <h3 class="step-title">課題分析・企画</h3>
-                            <p class="step-description">
-                                お客様の現状の課題をヒアリングし、AI導入の目的と期待を明確化。ROI（投資対効果）を重視した企画を策定します。
+                        <div class="step-info">
+                            <h3 class="step-heading">ご相談・課題整理</h3>
+                            <p class="step-text">
+                                現状の課題をヒアリングし、AI活用の可能性を探ります。
                             </p>
+                            <div class="step-result">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>導入計画の策定</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 2 -->
-                    <div class="process-step">
-                        <div class="step-number-wrapper">
-                            <div class="step-number">2</div>
+                    <!-- Arrow -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+
+                    <!-- Step 2: 実証実験 -->
+                    <div class="flow-step">
+                        <div class="step-visual">
+                            <div class="step-icon icon-experiment">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <span class="step-number-badge">STEP 2</span>
                         </div>
-                        <div class="step-content">
-                            <span class="step-label">STEP 02</span>
-                            <h3 class="step-title">PoC（実証実験）</h3>
-                            <p class="step-description">
-                                小規模な検証で実現性を予測。AIソリューションの性能や適用可能性を実際に確認することで不安を軽減します。
+                        <div class="step-info">
+                            <h3 class="step-heading">小規模検証・実験</h3>
+                            <p class="step-text">
+                                実際のデータで効果を確認し、本格導入前に検証します。
                             </p>
+                            <div class="step-result">
+                                <i class="fas fa-chart-line"></i>
+                                <span>効果の実証データ</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 3 -->
-                    <div class="process-step">
-                        <div class="step-number-wrapper">
-                            <div class="step-number">3</div>
+                    <!-- Arrow -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+
+                    <!-- Step 3: 開発・導入 -->
+                    <div class="flow-step">
+                        <div class="step-visual">
+                            <div class="step-icon icon-development">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <span class="step-number-badge">STEP 3</span>
                         </div>
-                        <div class="step-content">
-                            <span class="step-label">STEP 03</span>
-                            <h3 class="step-title">システム開発・導入</h3>
-                            <p class="step-description">
-                                PoCの検証をもとに、本格的なシステム構築とお客様の業務への導入。セキュリティと信頼性を最優先に開発します。
+                        <div class="step-info">
+                            <h3 class="step-heading">本格開発・導入</h3>
+                            <p class="step-text">
+                                検証結果を基に本格構築し、業務フローへ統合します。
                             </p>
+                            <div class="step-result">
+                                <i class="fas fa-rocket"></i>
+                                <span>本番環境で稼働</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 4 -->
-                    <div class="process-step">
-                        <div class="step-number-wrapper">
-                            <div class="step-number">4</div>
+                    <!-- Arrow -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+
+                    <!-- Step 4: 社内育成 -->
+                    <div class="flow-step">
+                        <div class="step-visual">
+                            <div class="step-icon icon-training">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="step-number-badge">STEP 4</span>
                         </div>
-                        <div class="step-content">
-                            <span class="step-label">STEP 04</span>
-                            <h3 class="step-title">社内チーム育成</h3>
-                            <p class="step-description">
-                                AI導入の効果を持続させるため、お客様の社内チームの育成と技術移転を実施します。
+                        <div class="step-info">
+                            <h3 class="step-heading">社内チーム育成</h3>
+                            <p class="step-text">
+                                自社で運用・改善できるよう技術移転を行います。
                             </p>
+                            <div class="step-result">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>内製化体制確立</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 5 -->
-                    <div class="process-step">
-                        <div class="step-number-wrapper">
-                            <div class="step-number">5</div>
+                    <!-- Arrow -->
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+
+                    <!-- Step 5: 継続サポート -->
+                    <div class="flow-step">
+                        <div class="step-visual">
+                            <div class="step-icon icon-support">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <span class="step-number-badge">STEP 5</span>
                         </div>
-                        <div class="step-content">
-                            <span class="step-label">STEP 05</span>
-                            <h3 class="step-title">運用サポート・拡張</h3>
-                            <p class="step-description">
-                                導入後も継続的にサポートし、定期的な運用チェックとビジネス状況変化に応じた拡張を支援します。
+                        <div class="step-info">
+                            <h3 class="step-heading">自走と継続改善</h3>
+                            <p class="step-text">
+                                内製化後も必要に応じてサポートし、進化を支援します。
                             </p>
+                            <div class="step-result">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>持続的価値創出</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1908,38 +2542,21 @@
         </section>
 
         <!-- ========================================================
-        ▼ Value Pillars Section - COMPLETE PROFESSIONAL REDESIGN
+        ▼ Partnership Message Section - 心に響くメッセージ
+        PURPOSE: 5ステップ導入プロセス完了後の自然な連結
+        DESIGN: パートナーシップ姿勢の明示・信頼醸成
         ======================================================== -->
-        <section class="value-pillars">
+        <section class="partnership-section">
             <div class="container">
-                <h2 class="heading-lg text-center" style="color: #2d3748;">AI伴走型開発で確実な成果を実現</h2>
-                <p class="text-center" style="max-width: 720px; margin: 0 auto; color: #4a5568; font-size: 1.05rem; line-height: 1.7;">
-                    プロトタイプから始め、段階的に進化させることで、<br>
-                    失敗しないAI導入と確実なROIを実現します。
-                </p>
-
-                <div class="value-pillars-grid">
-                    <div class="value-pillar">
-                        <div class="pillar-number">01</div>
-                        <h3 class="pillar-title">効果測定による改善サイクル</h3>
-                        <p class="pillar-description">
-                            定量的な指標でAIシステムの効果を測定し、継続的に改善。データに基づいた意思決定で、投資対効果を最大化します。
-                        </p>
-                    </div>
-
-                    <div class="value-pillar">
-                        <div class="pillar-number">02</div>
-                        <h3 class="pillar-title">継続的な技術進化への対応</h3>
-                        <p class="pillar-description">
-                            急速に進化するAI技術を追い続け、最新のモデルやアルゴリズムを適用。常に最適なソリューションを提供します。
-                        </p>
-                    </div>
-
-                    <div class="value-pillar">
-                        <div class="pillar-number">03</div>
-                        <h3 class="pillar-title">社内チーム育成による自走化</h3>
-                        <p class="pillar-description">
-                            技術移転と人材育成を通じて、社内でのAI活用を推進。長期的な競争力強化と自走可能な組織づくりを支援します。
+                <div class="partnership-card">
+                    <p class="partnership-lead">
+                        時代の変化は速く、AI技術も日々進化しています。<br>
+                        ShinAIは継続的なパートナーとして、御社のビジネス成長を技術面から支え続けます。
+                    </p>
+                    <div class="partnership-statement">
+                        <p>
+                            ShinAIは、単なる開発会社ではありません。<br>
+                            <strong>御社の長期的な成功を共に目指すパートナーです。</strong>
                         </p>
                     </div>
                 </div>
@@ -2337,10 +2954,10 @@
             ease: 'power2.out'
         });
 
-        // Process steps animation
-        gsap.from('.process-step', {
+        // Process flow animation (redesigned vertical flow)
+        gsap.from('.flow-step', {
             scrollTrigger: {
-                trigger: '.process-timeline',
+                trigger: '.process-flow',
                 start: 'top 75%'
             },
             opacity: 0,
@@ -2350,17 +2967,29 @@
             ease: 'power2.out'
         });
 
-        // Value pillars animation
-        gsap.from('.value-pillar', {
+        // Process flow arrows animation
+        gsap.from('.flow-arrow', {
             scrollTrigger: {
-                trigger: '.value-pillars-grid',
+                trigger: '.process-flow',
+                start: 'top 75%'
+            },
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: 'back.out(1.7)'
+        });
+
+        // Partnership card animation
+        gsap.from('.partnership-card', {
+            scrollTrigger: {
+                trigger: '.partnership-section',
                 start: 'top 80%'
             },
             opacity: 0,
             y: 40,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: 'power2.out'
+            duration: 0.8,
+            ease: 'power3.out'
         });
     }
 
