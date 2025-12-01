@@ -2,16 +2,7 @@
 <html lang="ja">
 <head>
     <!-- ========================================================
-    Claude Code最適化対応:
-    - 全コンポーネント分割コメント完備
-    - エラーハンドリング強化
-    - 型ヒント統一
-    - ログ出力統一
-    - 可読性最大化
-    ======================================================== -->
-
-    <!-- ========================================================
-    ▼ AI Discovery Meta Information Component - Enterprise Grade
+    ▼ AI Discovery Meta Information Component - 最高度AI発見性最適化強化版
     ======================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -24,7 +15,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <!-- AI検索エンジン最適化 -->
+
+    <!-- AI検索エンジン最適化強化 -->
     <meta name="google-site-verification" content="AI-optimized-verification-token">
     <meta name="bing-site-verification" content="AI-optimized-bing-token">
     <meta name="subject" content="AIシステム開発・AI導入支援・カスタムAIソリューション">
@@ -35,7 +27,7 @@
     <meta name="revisit-after" content="7 days">
 
     <!-- ========================================================
-    ▼ Advanced OGP Settings Component - AI Agent Discovery Enhancement
+    ▼ Advanced OGP Settings Component - AI Agent Discovery Enhancement強化版
     ======================================================== -->
     <meta property="og:title" content="ShinAI - サービス｜AIシステム受託開発・AIプロダクト提供">
     <meta property="og:description" content="AIエージェント開発やRAG構築など最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で初期投資を抑えて確実な成果を実現します。">
@@ -49,7 +41,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:updated_time" content="2025-12-01T00:00:00+09:00">
 
-    <!-- Twitter Card -->
+    <!-- Twitter Card最適化強化 -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ShinAI_JP">
     <meta name="twitter:creator" content="@ShinAI_JP">
@@ -73,8 +65,9 @@
     <meta property="article:tag" content="RAG構築">
     <meta property="article:tag" content="導入プロセス">
 
+
     <!-- ========================================================
-    ▼ Resource Loading Component - Performance Optimization
+    ▼ Resource Loading Component - AI Crawler最適化 & パフォーマンス向上
     ======================================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,12 +86,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
-    <!-- Favicon -->
+
+    <!-- ファビコン最適化 - 画像パス修正 -->
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
 
     <!-- ========================================================
-    ▼ Advanced Structured Data Component - Schema.org完全準拠
+    ▼ Advanced Structured Data Component - AI Discovery最高度最適化強化版
     ======================================================== -->
     <script type="application/ld+json">
     {
@@ -1665,25 +1659,31 @@
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>活動拠点：東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span>活動拠点：〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-building" aria-hidden="true"></i>
-                        <span>所在地：群馬県高崎市井野町360-7 オークスアベニューD201</span>
+                        <span>所在地：群馬県高崎市井野町360-7<br>オークスアベニューD201</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span>shinai.life@gmail.com</span>
+                        <a href="mailto:shinai.life@gmail.com">shinai.life@gmail.com</a>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-clock" aria-hidden="true"></i>
-                        <span>平日 9:00-18:00</span>
+                        <span>平日 9:00〜18:00（土日祝休）</span>
                     </div>
                 </div>
             </div>
 
+
             <div class="footer-bottom">
-                <p>&copy; 2024 ShinAI. All rights reserved.</p>
+                <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
+                <div class="footer-links-inline">
+                    <a href="privacy-policy.html">プライバシーポリシー</a>
+                    <a href="terms.html">利用規約</a>
+                    <a href="legal.html">特定商取引法に基づく表記</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1691,7 +1691,37 @@
     <!-- ========================================================
     ▼ Chatbot Component
     ======================================================== -->
-    <div id="chatbot-container"></div>
+    <div class="chatbot" aria-label="AIアシスタント">
+        <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
+            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+        </button>
+
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot" aria-hidden="true"></i> AIアシスタント</h3>
+                <button class="chatbot-close" id="chatbot-close" aria-label="閉じる">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="チャットメッセージ">
+                <div class="chat-message bot">
+                    こんにちは！ShinAIアシスタントです。AIシステム開発や伴走型支援について、どのようなご質問でもお気軽にどうぞ。
+                </div>
+            </div>
+
+            <div class="chatbot-input">
+                <input type="text" id="chat-input" placeholder="メッセージを入力..." aria-label="メッセージ" autocomplete="off">
+                <button class="chatbot-send" id="chat-send" aria-label="送信">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================
+    ▼ Back to Top Button Component - 削除済み（masa様要求により不要）
+    ======================================================== -->
 
     <!-- ========================================================
     ▼ JavaScript Component - Performance Optimized
