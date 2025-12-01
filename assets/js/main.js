@@ -175,15 +175,13 @@ const AnimationModule = {
             gsap.registerPlugin(ScrollTrigger);
         }
         
-        // ヘッダーフェードイン（common-elements.jsで動的生成されるため、存在確認後に実行）
-        const headerElement = document.querySelector('.header');
-        if (headerElement && headerElement.innerHTML.trim() !== '') {
-            // ヘッダーが既に表示されている場合のみアニメーション
-            gsap.fromTo('.header', 
-                { opacity: 1, y: 0 },  // 初期状態を明示的に設定
-                { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }
-            );
-        }
+        // ヘッダーフェードイン
+        gsap.from('.header', {
+            opacity: 0,
+            y: -50,
+            duration: 1,
+            ease: 'power3.out'
+        });
         
         // ヒーローセクションのアニメーション
         this.animateHero();
