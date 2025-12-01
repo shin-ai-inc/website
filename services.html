@@ -469,14 +469,14 @@
     }
 
     .section {
-        padding: 5rem 0;
+        padding: 4rem 0;  /* masa様改善: 5rem→4remに統一・適切な余白 */
         position: relative;
         overflow: hidden;
     }
 
     @media (max-width: 768px) {
         .section {
-            padding: 3rem 0;
+            padding: 2.5rem 0;  /* masa様改善: 3rem→2.5remに調整 */
         }
     }
 
@@ -498,13 +498,13 @@
     }
 
     .heading-lg {
-        font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+        font-size: clamp(1.625rem, 2.75vw, 2rem);  /* masa様改善: サイズ拡大で階層明確化 */
         font-weight: 600;
-        line-height: 1.4;
-        margin-bottom: 1rem;
-        letter-spacing: 0.025em;
+        line-height: 1.35;  /* masa様改善: 1.4→1.35でタイト化 */
+        margin-bottom: 1.25rem;  /* masa様改善: 1rem→1.25rem */
+        letter-spacing: 0.02em;  /* masa様改善: 0.025em→0.02em */
         font-stretch: 103%;
-        color: var(--dark);
+        color: #1a202c;  /* masa様改善: より濃いグレーで可読性向上 */
     }
 
     .heading-md {
@@ -531,22 +531,30 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: var(--header-height);
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-sm);
+        right: 0;
         z-index: 1000;
-        transition: all var(--transition-normal) ease;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        height: 50px;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .header.scrolled {
-        background: rgba(255, 255, 255, 0.98);
-        box-shadow: var(--shadow-md);
+        height: 45px;
+        background: rgba(255, 255, 255, 0.99);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
     }
 
     .header-inner {
-        max-width: var(--container-width);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 2rem;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 0 2rem;
         height: 100%;
@@ -714,7 +722,17 @@
         align-items: center;
         padding: calc(var(--header-height) + 3rem) 0 3rem;
         overflow: hidden;
-        background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+        /* masa様改善: プロフェッショナルな透過処理 */
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.75) 0%,
+            rgba(248, 250, 252, 0.80) 50%,
+            rgba(255, 255, 255, 0.70) 100%
+        );
+        backdrop-filter: blur(8px) saturate(120%);
+        -webkit-backdrop-filter: blur(8px) saturate(120%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
     }
 
 
@@ -870,11 +888,14 @@
     .service-link {
         display: inline-flex;
         align-items: center;
+        justify-content: center;  /* masa様改善: 中央揃え */
         gap: 0.5rem;
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
         font-size: 0.95rem;
         transition: all var(--transition-fast) ease;
+        width: 100%;  /* masa様改善: 幅100%で中央揃え実現 */
+        margin-top: 1rem;
     }
 
     .service-link:hover {
@@ -902,7 +923,7 @@
     ======================================================== */
     .implementation-process {
         background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
-        padding: 5rem 0;
+        padding: 4rem 0;  /* masa様改善: 5rem→4remでコンパクト化 */
         position: relative;
     }
 
@@ -941,54 +962,60 @@
 
     .process-timeline {
         position: relative;
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
+        /* masa様改善: 横並びグリッドで圧迫感解消・スマート化 */
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.25rem;
     }
 
-    .process-timeline::before {
-        content: '';
-        position: absolute;
-        left: 80px;
-        top: 40px;
-        bottom: 40px;
-        width: 2px;
-        background: linear-gradient(to bottom,
-            var(--primary) 0%,
-            var(--secondary) 50%,
-            var(--accent) 100%);
-    }
+    /* masa様改善: 縦線削除（横並びレイアウトのため不要） */
 
     .process-step {
         position: relative;
         display: flex;
-        gap: 3rem;
-        margin-bottom: 3.5rem;
-        align-items: flex-start;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.75rem 1.25rem;
+        background: white;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .process-step:last-child {
-        margin-bottom: 0;
+    .process-step:hover {
+        box-shadow: 0 8px 24px rgba(58, 95, 235, 0.15);
+        transform: translateY(-6px);
+        border-color: rgba(58, 95, 235, 0.2);
     }
 
     .step-number-wrapper {
         position: relative;
-        flex-shrink: 0;
-        z-index: 2;
+        margin-bottom: 1rem;  /* masa様改善: 番号と内容の間に余白 */
     }
 
     .step-number {
-        width: 120px;
-        height: 120px;
+        width: 64px;  /* masa様改善: 80px→64pxにさらにコンパクト化 */
+        height: 64px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
-        font-weight: 600;
+        font-size: 1.5rem;  /* masa様改善: 1.75rem→1.5remに縮小 */
+        font-weight: 700;
         color: white;
         position: relative;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 0 auto;  /* masa様改善: 中央揃え */
+    }
+
+    .process-step:hover .step-number {
+        transform: scale(1.1);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
     }
 
     .process-step:nth-child(1) .step-number {
@@ -1014,71 +1041,62 @@
 
     .step-content {
         flex: 1;
-        background: white;
-        padding: 2.5rem;
-        border-radius: var(--radius-xl);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(58, 95, 235, 0.08);
-        transition: all 0.3s ease;
-    }
-
-    .step-content:hover {
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
-        border-color: rgba(58, 95, 235, 0.15);
-        transform: translateY(-4px);
+        width: 100%;  /* masa様改善: 横並びレイアウトで幅100% */
     }
 
     .step-label {
-        font-size: 0.8rem;
+        font-size: 0.7rem;  /* masa様改善: コンパクト化 */
         font-weight: var(--font-weight-semibold);
         color: var(--primary);
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
 
     .step-title {
-        font-size: 1.35rem;
+        font-size: 1.05rem;  /* masa様改善: 1.35rem→1.05remにコンパクト化 */
         font-weight: 600;
-        color: var(--dark);
-        margin-bottom: 0.75rem;
+        color: #1a202c;
+        margin-bottom: 0.5rem;
         line-height: 1.4;
-        letter-spacing: 0.02em;
+        letter-spacing: 0.015em;
     }
 
     .step-description {
-        font-size: 1rem;
-        color: var(--gray);
-        line-height: 1.8;
+        font-size: 0.875rem;  /* masa様改善: 1rem→0.875remにコンパクト化 */
+        color: #4a5568;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 992px) {
+        .process-timeline {
+            grid-template-columns: repeat(2, 1fr);  /* masa様改善: タブレットで2カラム */
+            gap: 1rem;
+        }
     }
 
     @media (max-width: 768px) {
-        .process-timeline::before {
-            left: 30px;
+        .process-timeline {
+            grid-template-columns: 1fr;  /* masa様改善: モバイルで1カラム */
+            gap: 1rem;
         }
 
         .process-step {
-            flex-direction: column;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .step-number-wrapper {
-            align-self: flex-start;
+            padding: 1.5rem 1.25rem;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
-        }
-
-        .step-content {
-            padding: 1.5rem;
+            width: 56px;  /* masa様改善: モバイル最適化 */
+            height: 56px;
+            font-size: 1.25rem;
         }
 
         .step-title {
-            font-size: 1.15rem;
+            font-size: 1rem;
+        }
+
+        .step-description {
+            font-size: 0.8125rem;
         }
     }
 
@@ -1126,11 +1144,16 @@
     }
 
     .pillar-number {
-        font-size: 3rem;
-        font-weight: var(--font-weight-black);
-        color: rgba(58, 95, 235, 0.12);
+        font-size: 3.5rem;  /* masa様改善: 3rem→3.5remに拡大 */
+        font-weight: 800;  /* masa様改善: 900→800に調整 */
+        /* masa様改善: 背景色との差別化のため、強いコントラスト */
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.25) 0%, rgba(0, 201, 167, 0.20) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         line-height: 1;
         margin-bottom: 1rem;
+        text-shadow: 0 2px 8px rgba(58, 95, 235, 0.1);  /* 視認性向上 */
     }
 
     .pillar-title {
@@ -1328,16 +1351,15 @@
                     </li>
                     <li class="nav-cta">
                         <a href="contact.html" class="btn-header-consultation">
-                            無料相談
+                            <i class="fas fa-comment-dots"></i>
+                            <span>無料相談</span>
                         </a>
                     </li>
                 </ul>
             </nav>
 
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
@@ -1357,7 +1379,9 @@
                         <i class="fas fa-chevron-right"></i>
                         <span>サービス</span>
                     </div>
-                    <h1 class="page-hero-title">AIで、本質的な価値を創る</h1>
+                    <h1 class="page-hero-title">
+                        企業のビジネス課題を解決する<br>AIシステム開発
+                    </h1>
                     <p class="page-hero-subtitle">
                         AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。<br>
                         プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現します。
@@ -1403,7 +1427,7 @@
                                 </li>
                             </ul>
                             <a href="contact.html" class="service-link">
-                                詳しく見る
+                                相談する
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -1433,7 +1457,7 @@
                                 </li>
                             </ul>
                             <a href="contact.html" class="service-link">
-                                詳しく見る
+                                相談する
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -1463,7 +1487,7 @@
                                 </li>
                             </ul>
                             <a href="contact.html" class="service-link">
-                                詳しく見る
+                                相談する
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -1565,9 +1589,10 @@
         ======================================================== -->
         <section class="value-pillars">
             <div class="container">
-                <h2 class="heading-lg text-center">AI伴走型開発で確実な成果を実現</h2>
-                <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--gray); font-size: 1.05rem;">
-                    プロトタイプから始め、段階的に進化させることで、確実な成果とROIを実現します。
+                <h2 class="heading-lg text-center" style="color: #2d3748;">AI伴走型開発で確実な成果を実現</h2>
+                <p class="text-center" style="max-width: 720px; margin: 0 auto; color: #4a5568; font-size: 1.05rem; line-height: 1.7;">
+                    プロトタイプから始め、段階的に進化させることで、<br>
+                    失敗しないAI導入と確実なROIを実現します。
                 </p>
 
                 <div class="value-pillars-grid">
@@ -1791,7 +1816,7 @@
     });
 
     // ========================================================
-    // ▼ Three.js Particle Component - VIBRANT VERSION
+    // ▼ Three.js Particle Component - RISING MIST VERSION (masa様改善版)
     // ========================================================
     function initThreeJSParticles() {
         const container = document.getElementById('three-container');
@@ -1814,39 +1839,42 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
         container.appendChild(renderer.domElement);
 
-        // Core sphere - VIBRANT VERSION
+        // Core sphere - SUBTLE VERSION (masa様改善: 主張を抑える)
         const coreGeometry = new THREE.IcosahedronGeometry(5, isMobile ? 1 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x3A5FEB,
             transparent: true,
-            opacity: 0.25,
-            wireframe: true
+            opacity: 0.12,  // 0.25 → 0.12に削減
+            wireframe: true,
+            wireframeLinewidth: 0.3  // さらに細く
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
 
-        // Inner core - VIBRANT VERSION
+        // Inner core - SUBTLE VERSION (masa様改善: 主張を抑える)
         const innerCoreGeometry = new THREE.IcosahedronGeometry(2.5, 1);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00DBB4,
             transparent: true,
-            opacity: 0.32,
-            wireframe: true
+            opacity: 0.15,  // 0.32 → 0.15に削減
+            wireframe: true,
+            wireframeLinewidth: 0.3  // さらに細く
         });
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
 
-        // Particle setup
-        const particlesCount = isMobile ? 250 : 500;
+        // Particle setup - RISING MIST VERSION
+        const particlesCount = isMobile ? 200 : 400;  // 数を削減
         const particles = [];
 
+        // より細いパーティクル (masa様改善)
         const geometries = [
-            new THREE.BoxGeometry(0.1, 0.1, 0.1),
-            new THREE.SphereGeometry(0.05, 6, 6),
-            new THREE.TetrahedronGeometry(0.08, 0)
+            new THREE.BoxGeometry(0.04, 0.04, 0.04),  // 0.1 → 0.04に縮小
+            new THREE.SphereGeometry(0.025, 6, 6),    // 0.05 → 0.025に縮小
+            new THREE.TetrahedronGeometry(0.04, 0)    // 0.08 → 0.04に縮小
         ];
 
-        // Color palette - VIBRANT PROFESSIONAL VERSION
+        // Color palette - SUBTLE PROFESSIONAL VERSION
         const colors = [
             0x3A5FEB,
             0x5B7BFF,
@@ -1858,7 +1886,7 @@
             0x1DE9B6
         ];
 
-        // Create particles
+        // Create particles - RISING MIST PATTERN (masa様改善: 画面全体に表示)
         for (let i = 0; i < particlesCount; i++) {
             const geometryIndex = Math.floor(Math.random() * geometries.length);
             const geometry = geometries[geometryIndex].clone();
@@ -1867,30 +1895,28 @@
             const material = new THREE.MeshBasicMaterial({
                 color: colors[colorIndex],
                 transparent: true,
-                opacity: Math.random() * 0.4 + 0.3
+                opacity: Math.random() * 0.3 + 0.2  // 視認性向上
             });
 
             const particle = new THREE.Mesh(geometry, material);
 
-            const radius = Math.random() * 35 + 12;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.random() * Math.PI;
+            // 画面全体に広がるように配置 (masa様改善)
+            particle.position.x = (Math.random() - 0.5) * 80;  // 画面幅全体
+            particle.position.y = (Math.random() - 0.5) * 100;  // 画面高さ全体
+            particle.position.z = (Math.random() - 0.5) * 60;   // 奥行き
 
-            particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
-            particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
-            particle.position.z = radius * Math.cos(phi);
-
+            // RISING MIST VELOCITY (masa様改善: 下から上へ上昇、霧風動き)
             const particleData = {
                 mesh: particle,
                 velocity: {
-                    x: (Math.random() - 0.5) * 0.0075,
-                    y: (Math.random() - 0.5) * 0.0075,
-                    z: (Math.random() - 0.5) * 0.0075
+                    x: (Math.random() - 0.5) * 0.002,  // 横方向の動きを大幅削減
+                    y: Math.random() * 0.015 + 0.005,  // 上昇方向のみ (常に正)
+                    z: (Math.random() - 0.5) * 0.002   // 奥行き方向の動きを大幅削減
                 },
                 rotation: {
-                    x: (Math.random() - 0.5) * 0.004,
-                    y: (Math.random() - 0.5) * 0.004,
-                    z: (Math.random() - 0.5) * 0.004
+                    x: (Math.random() - 0.5) * 0.001,  // 回転を控えめに
+                    y: (Math.random() - 0.5) * 0.001,
+                    z: (Math.random() - 0.5) * 0.001
                 },
                 orbit: {
                     radius: radius,
@@ -1903,31 +1929,40 @@
             scene.add(particle);
         }
 
-        // Animation loop
+        // Animation loop - RISING MIST VERSION (masa様改善)
         function animate() {
             requestAnimationFrame(animate);
 
-            core.rotation.y += 0.0008;
-            core.rotation.x += 0.0004;
+            // コアの回転を適切な速度に (masa様改善: 穏やか過ぎる→視覚的に心地よい速度)
+            core.rotation.y += 0.0015;  // 適切な視覚効果
+            core.rotation.x += 0.0008;  // 適切な視覚効果
 
-            innerCore.rotation.y -= 0.0012;
-            innerCore.rotation.x -= 0.0006;
+            innerCore.rotation.y -= 0.0020;  // 外側コアとの差別化
+            innerCore.rotation.x -= 0.0010;  // 適切な回転速度
 
             particles.forEach(function(p) {
+                // 上昇動き (masa様改善: 霧風動き)
                 p.mesh.position.x += p.velocity.x;
-                p.mesh.position.y += p.velocity.y;
+                p.mesh.position.y += p.velocity.y;  // 常に上昇
                 p.mesh.position.z += p.velocity.z;
 
+                // 控えめな回転
                 p.mesh.rotation.x += p.rotation.x;
                 p.mesh.rotation.y += p.rotation.y;
                 p.mesh.rotation.z += p.rotation.z;
 
-                p.orbit.angle += p.orbit.speed;
-                const orbitX = Math.cos(p.orbit.angle) * p.orbit.radius;
-                const orbitY = Math.sin(p.orbit.angle) * p.orbit.radius;
+                // パーティクルが上部に達したら下部に戻す (霧の循環)
+                if (p.mesh.position.y > 50) {
+                    p.mesh.position.y = -50;
+                    // 横位置をランダムにリセット
+                    const radius = Math.random() * 35 + 12;
+                    const theta = Math.random() * Math.PI * 2;
+                    p.mesh.position.x = radius * Math.cos(theta);
+                    p.mesh.position.z = radius * Math.sin(theta);
+                }
 
-                p.mesh.position.x += (orbitX - p.mesh.position.x) * 0.005;
-                p.mesh.position.y += (orbitY - p.mesh.position.y) * 0.005;
+                // 軌道動きを削除 (masa様改善: 縦横無尽な動きを排除)
+                // 下から上への上昇のみに集中
             });
 
             renderer.render(scene, camera);
