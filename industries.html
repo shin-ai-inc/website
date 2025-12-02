@@ -337,8 +337,8 @@
         特徴: PC版のみ高さ調整、モバイル視認性向上
         ==============================================
         */
-        --header-height: 58px; /* 【改善】PC版縦幅縮小：65px → 58px */
-        --header-height-mobile: 40px; /* モバイル版は維持 */
+        --header-height: 50px; /* index.html完全統一: 50px */
+        --header-height-mobile: 40px; /* index.html完全統一: 40px */
         --container-width: 1400px;
         
         /* Border Radius */
@@ -494,9 +494,13 @@
         align-items: center;
         padding: calc(var(--header-height) + 2rem) 0 2rem;
         overflow: hidden;
-        background: var(--gradient-night);
+        background: linear-gradient(135deg,
+            #1a2332 0%,
+            #243447 30%,
+            #2c3e50 60%,
+            #34495e 100%);
         text-align: center;
-        color: #F2F6FF;
+        color: #ffffff;
     }
 
     /* =============================================
@@ -684,39 +688,41 @@
     
     .page-hero-title {
         margin-bottom: 2rem;
-        color: #F2F6FF;
+        color: #ffffff;
         position: relative;
         display: inline-block;
         animation: fadeInFast 0.8s ease forwards;
         text-align: center;
         font-size: clamp(1.8rem, 4vw, 3.2rem);
-        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(45deg,
-            #F2F6FF 0%,
-            #ffffff 25%,
-            #e0f2fe 50%,
-            #ffffff 75%,
-            #F2F6FF 100%);
-        background-size: 200% auto;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5),
+                     0 2px 8px rgba(0, 0, 0, 0.3);
+        font-weight: 800;
+        letter-spacing: 0.01em;
+    }
+
+    /* グラデーションは削除し、くっきり白色で表示 */
+    .page-hero-title .text-gradient {
+        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: gradientShift 4s linear infinite;
+        font-weight: 900;
     }
 
     .page-hero-description {
-        color: rgba(242, 246, 255, 0.9);
+        color: rgba(255, 255, 255, 0.95);
         max-width: 700px;
         margin: 0 auto 2rem;
-        line-height: 1.7;
+        line-height: 1.8;
         animation: fadeInFast 0.8s ease 0.2s forwards;
         opacity: 0;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
         padding: 0 1rem;
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        font-weight: 500;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     }
 
     @keyframes fadeInFast {
@@ -2550,7 +2556,6 @@
         <section class="section" aria-labelledby="intro-title">
             <div class="container">
                 <div class="section-header animate-in">
-                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
                     <span class="section-subtitle">ShinAIのアプローチ</span>
                     <h2 class="heading-lg" id="intro-title">プロトタイプから始める<span class="highlight">段階的AI導入</span></h2>
                     <p class="section-description">
@@ -2859,7 +2864,6 @@
         <section class="section">
             <div class="container">
                 <div class="section-header animate-in">
-                    <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
                     <span class="section-subtitle">AI活用例</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
