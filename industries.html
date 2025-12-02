@@ -835,35 +835,205 @@
         }
     }
 
-    /* 
+    /*
     ==============================================
-    // === component-split: ImprovedBenefitsContainer ===
-    COMPONENT: 改善された3つのカードコンテナ
-    機能: バランス改善、30万円表示削除、視覚的統一
-    特徴: レスポンシブ最適化、情報密度向上
+    === COMPONENT: StrengthsShowcase ===
+    FUNCTION: Company strengths display - 2×2 PC layout (4 cards)
+    FEATURES: Interactive cards, performance metrics, responsive grid
     ==============================================
     */
-    .benefits-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-        align-items: stretch; /* 【改善】カード高さ統一 */
+    .intro-section {
+        background: linear-gradient(135deg,
+            rgba(248, 250, 252, 0.9) 0%,
+            rgba(241, 245, 249, 0.8) 50%,
+            rgba(248, 250, 252, 0.9) 100%);
+        position: relative;
+        overflow: hidden;
     }
 
-    .benefit-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.08);
-        padding: 2.5rem 2rem; /* 【改善】パディング調整でバランス向上 */
-        position: relative;
-        transition: all 0.15s ease;
-        overflow: hidden;
+    .intro-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 30%, rgba(58, 95, 235, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 201, 167, 0.03) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* 新クラス名：strengths-grid（2×2グリッド） */
+    .strengths-grid {
+        display: grid;
+        gap: clamp(1.2rem, 2.5vw, 1.8rem);
+        margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* PC版: 2×2グリッド */
+    @media (min-width: 769px) {
+        .strengths-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+    }
+
+    /* モバイル版: 1列表示 */
+    @media (max-width: 768px) {
+        .strengths-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 旧クラス名も互換性のため維持 */
+    .benefits-container {
+        display: grid;
+        gap: clamp(1.2rem, 2.5vw, 1.8rem);
+        margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media (min-width: 769px) {
+        .benefits-container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .benefits-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 新クラス名：strength-card */
+    .strength-card {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.9) 100%);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.06);
         border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between; /* 【改善】コンテンツ分散配置 */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .strength-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: 1;
+        transition: height 0.3s ease;
+    }
+
+    .strength-card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.12);
+        border-color: rgba(58, 95, 235, 0.15);
+    }
+
+    .strength-card:hover::before {
+        height: 6px;
+    }
+
+    .strength-icon {
+        width: clamp(50px, 8vw, 60px);
+        height: clamp(50px, 8vw, 60px);
+        background: var(--gradient-primary);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+        color: var(--white);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        margin: 0 auto clamp(1rem, 2vw, 1.2rem);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .strength-card:hover .strength-icon {
+        transform: scale(1.08) rotate(5deg);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+
+    .strength-title {
+        font-size: clamp(1.1rem, 2vw, 1.2rem);
+        font-weight: 700;
+        margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
+        color: var(--dark);
+        line-height: 1.3;
+    }
+
+    .strength-description {
+        color: var(--gray);
+        line-height: 1.6;
+        font-size: clamp(0.85rem, 1.2vw, 0.9rem);
+        margin-bottom: clamp(1rem, 2vw, 1.2rem);
+        flex-grow: 1;
+    }
+
+    .strength-stat {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        padding: clamp(0.6rem, 1.5vw, 0.8rem);
+        border-radius: var(--radius-lg);
+        margin-top: auto;
+    }
+
+    .stat-value {
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        font-weight: 800;
+        line-height: 1;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: clamp(0.75rem, 1.2vw, 0.8rem);
+        color: var(--gray);
+        margin-top: 0.4rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    /* 旧クラス名も互換性のため維持 */
+    .benefit-card {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.9) 100%);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.06);
+        border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .benefit-card::before {
@@ -871,99 +1041,77 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--gradient-primary);
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: 1;
     }
 
     .benefit-card:hover {
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.12);
-        border-color: rgba(58, 95, 235, 0.15);
-        transform: translateY(-3px); /* 【改善】ホバー効果強化 */
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.12);
     }
 
     .benefit-icon {
-        width: 60px;
-        height: 60px;
+        width: clamp(50px, 8vw, 60px);
+        height: clamp(50px, 8vw, 60px);
         background: var(--gradient-primary);
         border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 1.5rem;
+        font-size: clamp(1.5rem, 2.5vw, 1.8rem);
         color: var(--white);
-        position: relative;
-        z-index: 1;
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        transition: all 0.15s ease;
+        margin: 0 auto clamp(1rem, 2vw, 1.2rem);
+        transition: all 0.3s ease;
     }
 
     .benefit-card:hover .benefit-icon {
-        transform: scale(1.05); /* 【改善】控えめなスケール */
-    }
-
-    .benefit-content {
-        flex-grow: 1; /* 【改善】コンテンツ領域拡張 */
-        display: flex;
-        flex-direction: column;
+        transform: scale(1.08) rotate(5deg);
     }
 
     .benefit-content h4 {
-        font-size: 1.3rem; /* 【改善】タイトルサイズ統一 */
+        font-size: clamp(1.1rem, 2vw, 1.2rem);
         font-weight: 700;
-        margin-bottom: 1rem; /* 【改善】間隔調整 */
+        margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
         color: var(--dark);
-        line-height: 1.3;
     }
 
     .benefit-content p {
         color: var(--gray);
-        line-height: 1.7; /* 【改善】読みやすさ向上 */
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 0.95rem; /* 【改善】文字サイズ統一 */
-        text-align: left;
-        flex-grow: 1; /* 【改善】テキスト領域拡張 */
+        line-height: 1.6;
+        font-size: clamp(0.85rem, 1.2vw, 0.9rem);
+        margin-bottom: clamp(1rem, 2vw, 1.2rem);
+        text-align: center;
     }
 
     .benefit-stat {
-        background: var(--gradient-card);
-        padding: 1.2rem; /* 【改善】パディング調整 */
-        border-radius: var(--radius-md);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        padding: clamp(0.6rem, 1.5vw, 0.8rem);
+        border-radius: var(--radius-lg);
         margin-top: auto;
-        min-height: 80px; /* 【改善】統計表示エリア高さ統一 */
-        justify-content: center;
     }
 
-    /* 【改善】第1カード：プロトタイプ先行開発 */
+    /* Individual strength card icon colors */
+    .strength-card:nth-child(1) .strength-icon,
     .benefit-card:nth-child(1) .benefit-icon {
         background: linear-gradient(135deg, #3A5FEB, #5B7BFF);
     }
 
-    .benefit-card:nth-child(1) .benefit-stat {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(91, 123, 255, 0.1));
-    }
-
-    /* 【改善】第2カード：完全伴走型サポート */
+    .strength-card:nth-child(2) .strength-icon,
     .benefit-card:nth-child(2) .benefit-icon {
         background: linear-gradient(135deg, #00C9A7, #20E7C4);
     }
 
-    .benefit-card:nth-child(2) .benefit-stat {
-        background: linear-gradient(135deg, rgba(0, 201, 167, 0.1), rgba(32, 231, 196, 0.1));
-    }
-
-    /* 【改善】第3カード：業界特化カスタマイズ */
+    .strength-card:nth-child(3) .strength-icon,
     .benefit-card:nth-child(3) .benefit-icon {
         background: linear-gradient(135deg, #FF8A00, #FFA94D);
     }
 
-    .benefit-card:nth-child(3) .benefit-stat {
-        background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 77, 0.1));
+    .strength-card:nth-child(4) .strength-icon,
+    .benefit-card:nth-child(4) .benefit-icon {
+        background: linear-gradient(135deg, #4671FF, #65A0FF);
     }
 
     .stat-value {
@@ -2391,52 +2539,58 @@
                 <div class="section-content max-width-800 text-left animate-in">
                     <p>AI導入の多くは、初期投資の大きさや効果の不透明さから躊躇されることがあります。ShinAIは「プロトタイプからの段階的導入」により、お客様に寄り添った支援を行います：</p>
                     
-                    <!-- 
+                    <!--
                     ==============================================
-                    // === component-split: ImprovedBenefitsContainer ===
-                    COMPONENT: 改善された3つのカードコンテナ
-                    機能: バランス改善、30万円表示削除、視覚的統一
-                    特徴: レスポンシブ最適化、情報密度向上
+                    // === component-split: StrengthsGrid2x2 ===
+                    COMPONENT: 強み2×2グリッドカードコンテナ
+                    機能: 4カード2×2グリッド、レスポンシブ対応
+                    特徴: PC版2×2、モバイル版1列、統一美的デザイン
                     ==============================================
                     -->
-                    <div class="benefits-container">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
+                    <div class="strengths-grid benefits-container">
+                        <div class="strength-card benefit-card">
+                            <div class="strength-icon benefit-icon">
                                 <i class="fas fa-seedling" aria-hidden="true"></i>
                             </div>
-                            <div class="benefit-content">
-                                <h4>小規模試作から開始</h4>
-                                <p>まずは小さな試作品で効果を実感。実際の業務で使いながら、必要な機能を見極めることができます。大規模な投資の前に、AIの可能性を体験していただけます。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">2</span><span class="stat-label">週間で試作完成</span>
-                                </div>
+                            <h4 class="strength-title">小規模試作から開始</h4>
+                            <p class="strength-description">まずは小さな試作品で効果を実感。実際の業務で使いながら、必要な機能を見極めることができます。大規模な投資の前に、AIの可能性を体験していただけます。</p>
+                            <div class="strength-stat benefit-stat">
+                                <span class="stat-value">2</span><span class="stat-label">週間で試作完成</span>
                             </div>
                         </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
+
+                        <div class="strength-card benefit-card">
+                            <div class="strength-icon benefit-icon">
                                 <i class="fas fa-handshake" aria-hidden="true"></i>
                             </div>
-                            <div class="benefit-content">
-                                <h4>寄り添う伴走支援</h4>
-                                <p>技術導入から組織への定着まで、お客様のペースに合わせて支援。専門知識がなくても、一緒に進めていけるよう丁寧にサポートいたします。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">継続的</span>
-                                    <span class="stat-label">サポート体制</span>
-                                </div>
+                            <h4 class="strength-title">寄り添う伴走支援</h4>
+                            <p class="strength-description">技術導入から組織への定着まで、お客様のペースに合わせて支援。専門知識がなくても、一緒に進めていけるよう丁寧にサポートいたします。</p>
+                            <div class="strength-stat benefit-stat">
+                                <span class="stat-value">継続的</span>
+                                <span class="stat-label">サポート体制</span>
                             </div>
                         </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
+
+                        <div class="strength-card benefit-card">
+                            <div class="strength-icon benefit-icon">
                                 <i class="fas fa-industry" aria-hidden="true"></i>
                             </div>
-                            <div class="benefit-content">
-                                <h4>業界に合わせた設計</h4>
-                                <p>福祉・教育・建設・製造・小売・金融。各業界の実務経験を活かし、現場で本当に役立つAIシステムを設計します。業界特有の課題に対応したソリューションをご提案いたします。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">6</span><span class="stat-label">業界対応</span>
-                                </div>
+                            <h4 class="strength-title">業界に合わせた設計</h4>
+                            <p class="strength-description">福祉・教育・建設・製造・小売・金融。各業界の実務経験を活かし、現場で本当に役立つAIシステムを設計します。業界特有の課題に対応したソリューションをご提案いたします。</p>
+                            <div class="strength-stat benefit-stat">
+                                <span class="stat-value">6</span><span class="stat-label">業界対応</span>
+                            </div>
+                        </div>
+
+                        <div class="strength-card benefit-card">
+                            <div class="strength-icon benefit-icon">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                            </div>
+                            <h4 class="strength-title">高度なAI技術力</h4>
+                            <p class="strength-description">最新のLLM技術、機械学習、深層学習を駆使。自社開発AIツールの実績をもとに、業界最先端の技術を御社の課題解決に活かします。継続的な研究開発により、常に最新技術を提供いたします。</p>
+                            <div class="strength-stat benefit-stat">
+                                <span class="stat-value">最新</span>
+                                <span class="stat-label">AI技術導入</span>
                             </div>
                         </div>
                     </div>
