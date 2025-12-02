@@ -700,15 +700,15 @@
     .btn-header-consultation {
         background: linear-gradient(135deg, #3A5FEB, #00C9A7);
         color: white;
-        padding: 0.6rem 1.2rem;
-        border-radius: 24px;
+        padding: 0.4rem 0.9rem;
+        border-radius: 20px;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.8rem;
         transition: all 0.3s ease;
         box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
         display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
+        gap: 0.35rem;
         white-space: nowrap;
         text-decoration: none;
         border: none;
@@ -2597,84 +2597,6 @@
             padding: 0.4rem 0.6rem;
         }
     }
-    
-    /* ========================================================
-    ▼ Back to Top Button Component - index.html準拠
-    ======================================================== */
-    .back-to-top {
-        position: fixed;
-        bottom: 120px;
-        right: 30px;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        background: var(--gradient-primary);
-        color: var(--white);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px);
-        cursor: pointer;
-        z-index: var(--z-fixed);
-        transition: all var(--transition-normal) ease;
-        box-shadow: var(--shadow-md);
-        border: none;
-        overflow: hidden;
-    }
-    
-    .back-to-top.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-    
-    .back-to-top i {
-        position: relative;
-        z-index: 2;
-        transition: transform var(--transition-normal) ease;
-        font-size: 1rem;
-    }
-    
-    .back-to-top::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-accent);
-        opacity: 0;
-        transition: opacity var(--transition-normal) ease;
-        z-index: 1;
-    }
-    
-    .back-to-top:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .back-to-top:hover::before {
-        opacity: 1;
-    }
-    
-    .back-to-top:hover i {
-        transform: translateY(-1px);
-    }
-    
-    @media (max-width: 768px) {
-        .back-to-top {
-            bottom: 70px;
-            right: 15px;
-            width: 32px;
-            height: 32px;
-        }
-        
-        .back-to-top i {
-            font-size: 0.8rem;
-        }
-    }
 
     /* ========================================================
     ▼ Animation Component - index.html準拠
@@ -3268,19 +3190,7 @@
         </div>
     </div>
 
-    <!-- 
-    ==============================================
-    // === component-split: BackToTop ===
-    COMPONENT: トップに戻るボタン
-    機能: index.html準拠・ナビゲーション補助
-    特徴: モバイル最適化、スムーズスクロール
-    ==============================================
-    -->
-    <button id="back-to-top" class="back-to-top" aria-label="ページトップへ戻る">
-        <i class="fas fa-chevron-up" aria-hidden="true"></i>
-    </button>
-
-    <!-- 
+    <!--
     ==============================================
     // === component-split: JavaScript ===
     COMPONENT: メインJavaScript
@@ -3342,17 +3252,7 @@
                             header.classList.remove('scrolled');
                         }
                     }
-                    
-                    // Back to Top button display control
-                    const backToTop = document.getElementById('back-to-top');
-                    if (backToTop) {
-                        if (currentScrollTop > 200) {
-                            backToTop.classList.add('active');
-                        } else {
-                            backToTop.classList.remove('active');
-                        }
-                    }
-                    
+
                     lastScrollTop = currentScrollTop;
                     ticking = false;
                 });
@@ -3388,19 +3288,6 @@
                             hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                         }
                     }
-                });
-            });
-        }
-        
-        // ========================================================
-        // ▼ Back to Top Button Component - index.html準拠
-        // ========================================================
-        const backToTopButton = document.getElementById('back-to-top');
-        if (backToTopButton) {
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
                 });
             });
         }
