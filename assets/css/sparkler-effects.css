@@ -209,83 +209,93 @@ assets/js/sparkler-effects.js による自動生成システム
 - 保守性最大化: 1箇所変更で全火花更新可能
 ======================================================== */
 
-/* 360度円状放射アニメーション - 回転しながら拡大縮小 */
+/* masa様改善Part2: 美しい流れ星エフェクト - ランダムに散りゆく様をProデザイナーとして表現 */
 @keyframes perfectSparklerBurst {
     0% {
         opacity: 0;
-        transform: translate3d(0, 0, 0) scale(0.1);
+        transform: translate3d(0, 0, 0) scale(0.3) rotate(0deg);
+        filter: blur(0px);
     }
-    5% {
+    3% {
         opacity: 1;
         transform: translate3d(
-            calc(var(--dx, 1) * 8px * var(--speed, 1)),
-            calc(var(--dy, 0) * 8px * var(--speed, 1)),
+            calc(var(--dx, 1) * 5px * var(--speed, 1)),
+            calc(var(--dy, 0) * 5px * var(--speed, 1) + 3px),
             0
-        ) scale(2.0);
+        ) scale(2.5) rotate(calc(var(--dx, 1) * 15deg));
+        filter: blur(0px);
     }
-    12% {
+    8% {
         opacity: 1;
         transform: translate3d(
-            calc(var(--dx, 1) * 24px * var(--speed, 1)),
-            calc(var(--dy, 0) * 24px * var(--speed, 1)),
+            calc(var(--dx, 1) * 15px * var(--speed, 1)),
+            calc(var(--dy, 0) * 15px * var(--speed, 1) + 12px),
             0
-        ) scale(1.8);
+        ) scale(2.2) rotate(calc(var(--dx, 1) * 30deg));
+        filter: blur(0px);
     }
-    20% {
-        opacity: 1;
-        transform: translate3d(
-            calc(var(--dx, 1) * 42px * var(--speed, 1)),
-            calc(var(--dy, 0) * 42px * var(--speed, 1)),
-            0
-        ) scale(1.5);
-    }
-    35% {
+    15% {
         opacity: 0.95;
         transform: translate3d(
-            calc(var(--dx, 1) * 68px * var(--speed, 1)),
-            calc(var(--dy, 0) * 68px * var(--speed, 1)),
+            calc(var(--dx, 1) * 32px * var(--speed, 1)),
+            calc(var(--dy, 0) * 32px * var(--speed, 1) + 28px),
             0
-        ) scale(1.2);
+        ) scale(1.9) rotate(calc(var(--dx, 1) * 50deg));
+        filter: blur(0.5px);
     }
-    50% {
+    25% {
         opacity: 0.85;
         transform: translate3d(
-            calc(var(--dx, 1) * 95px * var(--speed, 1)),
-            calc(var(--dy, 0) * 95px * var(--speed, 1)),
+            calc(var(--dx, 1) * 55px * var(--speed, 1)),
+            calc(var(--dy, 0) * 55px * var(--speed, 1) + 52px),
             0
-        ) scale(1.0);
+        ) scale(1.5) rotate(calc(var(--dx, 1) * 75deg));
+        filter: blur(1px);
     }
-    65% {
-        opacity: 0.7;
+    40% {
+        opacity: 0.65;
         transform: translate3d(
-            calc(var(--dx, 1) * 122px * var(--speed, 1)),
-            calc(var(--dy, 0) * 122px * var(--speed, 1)),
+            calc(var(--dx, 1) * 85px * var(--speed, 1)),
+            calc(var(--dy, 0) * 85px * var(--speed, 1) + 85px),
             0
-        ) scale(0.8);
+        ) scale(1.0) rotate(calc(var(--dx, 1) * 105deg));
+        filter: blur(1.5px);
     }
-    80% {
+    55% {
         opacity: 0.5;
         transform: translate3d(
-            calc(var(--dx, 1) * 145px * var(--speed, 1)),
-            calc(var(--dy, 0) * 145px * var(--speed, 1)),
+            calc(var(--dx, 1) * 115px * var(--speed, 1)),
+            calc(var(--dy, 0) * 115px * var(--speed, 1) + 125px),
             0
-        ) scale(0.6);
+        ) scale(0.8) rotate(calc(var(--dx, 1) * 140deg));
+        filter: blur(2px);
     }
-    92% {
-        opacity: 0.25;
+    70% {
+        opacity: 0.35;
         transform: translate3d(
-            calc(var(--dx, 1) * 162px * var(--speed, 1)),
-            calc(var(--dy, 0) * 162px * var(--speed, 1)),
+            calc(var(--dx, 1) * 140px * var(--speed, 1)),
+            calc(var(--dy, 0) * 140px * var(--speed, 1) + 165px),
             0
-        ) scale(0.4);
+        ) scale(0.6) rotate(calc(var(--dx, 1) * 180deg));
+        filter: blur(2.5px);
+    }
+    85% {
+        opacity: 0.18;
+        transform: translate3d(
+            calc(var(--dx, 1) * 160px * var(--speed, 1)),
+            calc(var(--dy, 0) * 160px * var(--speed, 1) + 195px),
+            0
+        ) scale(0.35) rotate(calc(var(--dx, 1) * 220deg));
+        filter: blur(3px);
     }
     100% {
         opacity: 0;
         transform: translate3d(
             calc(var(--dx, 1) * 175px * var(--speed, 1)),
-            calc(var(--dy, 0) * 175px * var(--speed, 1)),
+            calc(var(--dy, 0) * 175px * var(--speed, 1) + 220px),
             0
-        ) scale(0.1);
+        ) scale(0.1) rotate(calc(var(--dx, 1) * 270deg));
+        filter: blur(4px);
     }
 }
 
@@ -325,14 +335,48 @@ assets/js/sparkler-effects.js による自動生成システム
 - CSSファイル軽量化: AIエージェント読み込み負担軽減
 ======================================================== */
 
+/* masa様改善Part2: きらめく星のような微細粒子 - 優雅な瞬き */
 @keyframes ultraMicroSparkle {
-    0%, 100% { opacity: 0; transform: scale(0.1) rotate(0deg); }
-    15% { opacity: 0.6; transform: scale(4.0) rotate(180deg); }
-    25% { opacity: 1; transform: scale(8.0) rotate(360deg); }
-    45% { opacity: 0.9; transform: scale(6.5) rotate(540deg); }
-    60% { opacity: 0.8; transform: scale(5.5) rotate(720deg); }
-    75% { opacity: 0.5; transform: scale(3.5) rotate(900deg); }
-    90% { opacity: 0.2; transform: scale(1.5) rotate(1080deg); }
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.2) translateY(0px) rotate(0deg);
+        filter: blur(0px);
+    }
+    12% {
+        opacity: 0.7;
+        transform: scale(5.5) translateY(8px) rotate(90deg);
+        filter: blur(0px);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(9.0) translateY(15px) rotate(180deg);
+        filter: blur(0.5px);
+    }
+    35% {
+        opacity: 0.9;
+        transform: scale(7.5) translateY(28px) rotate(270deg);
+        filter: blur(1px);
+    }
+    50% {
+        opacity: 0.75;
+        transform: scale(6.0) translateY(45px) rotate(360deg);
+        filter: blur(1.5px);
+    }
+    65% {
+        opacity: 0.5;
+        transform: scale(4.0) translateY(65px) rotate(450deg);
+        filter: blur(2px);
+    }
+    80% {
+        opacity: 0.25;
+        transform: scale(2.0) translateY(85px) rotate(540deg);
+        filter: blur(2.5px);
+    }
+    95% {
+        opacity: 0.08;
+        transform: scale(0.8) translateY(100px) rotate(630deg);
+        filter: blur(3px);
+    }
 }
 
 /* ========================================================

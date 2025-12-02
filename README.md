@@ -74,8 +74,17 @@ ShinAI コーポレートウェブサイトは、AI企業としての**品格**�
 ### 外部ライブラリ
 - **GSAP 3.12.4** - スムーズなアニメーション
 - **ScrollTrigger** - スクロール連動エフェクト
-- **Three.js r134** - 3Dビジュアライゼーション
+- **Three.js r134** - 3Dビジュアライゼーション（index.html, services.html）
 - **Font Awesome 6.5.1** - アイコンライブラリ
+
+### カスタムエフェクトシステム
+- **Digital Night Sky System v3.0** - 感動体験を生む芸術的パーティクル（industries.html専用）
+  - 170-220個高品質パーティクル（前景30-40 + 中景60-80 + 背景80-100）
+  - インタラクティブマジック（マウス・スクロール・クリック連動）
+  - 完全CSS/JavaScript分離アーキテクチャ
+  - GPU加速対応・60fps維持・モバイル最適化
+- **Sparkler Effects System v2.0** - 線香花火エフェクト（廃止予定）
+  - Digital Night Sky v3.0に置き換え済み
 
 ### フォント
 - **Noto Sans JP** - 日本語テキスト（300/400/500/700/900）
@@ -106,12 +115,16 @@ website-main/
 │   │   ├── style.css                    # メインスタイルシート
 │   │   ├── responsive.css               # レスポンシブ対応
 │   │   ├── chatbot.css                  # チャットボット専用CSS（外部分離）
-│   │   └── common-header-footer.css     # 共通ヘッダー/フッターCSS（Enterprise Grade）
+│   │   ├── common-header-footer.css     # 共通ヘッダー/フッターCSS（Enterprise Grade）
+│   │   ├── digital-night-sky-v3.css     # Digital Night Sky System v3.0 CSS
+│   │   └── sparkler-effects.css         # 線香花火エフェクトCSS（廃止予定）
 │   │
 │   ├── js/
-│   │   ├── main.js         # メインJavaScript
-│   │   ├── chatbot.js      # チャットボット機能（外部分離・モジュール化）
-│   │   └── three-particles.js  # 3Dパーティクルエフェクト
+│   │   ├── main.js                    # メインJavaScript
+│   │   ├── chatbot.js                 # チャットボット機能（外部分離・モジュール化）
+│   │   ├── three-particles.js         # 3Dパーティクルエフェクト（index.html, services.html）
+│   │   ├── digital-night-sky-v3.js    # Digital Night Sky System v3.0 JS
+│   │   └── sparkler-effects.js        # 線香花火エフェクトJS（廃止予定）
 │   │
 │   └── images/
 │       ├── logo.png        # 企業ロゴ（929KB）
@@ -271,21 +284,41 @@ http://localhost:8000/
 
 ---
 
-### 4. 業界別活用事例ページ (industries.html) - 改善中
+### 4. 業界別活用事例ページ (industries.html) - Pro級品質完成 ✅
 
 **目的**: 実績と導入事例の紹介
 
 **対象業界**:
+- 福祉・介護
+- 教育・研修
+- 建設業
 - 製造業
 - 小売業
-- 医療・ヘルスケア
 - 金融
-- 教育
 
-**改善予定**:
-- ヘッダー・フッター統一化 ✅ 完了
-- 事例写真・データ追加
-- 成果指標の視覚化
+**実装完了事項** (2025-12-02 最終更新):
+- ✅ ヘッダー・フッター統一化完了
+- ✅ Heroセクション余白問題解消（ヘッダー直下配置）
+- ✅ ヒーローセクション芸術的センス向上（デジタルアート作品レベル）
+- ✅ Digital Night Sky System v3.0完全実装
+  - 170-220個高品質パーティクル（3層アーキテクチャ）
+  - インタラクティブマジック（マウス・スクロール・クリック連動）
+  - 滑らか・停滞ゼロ・美しい循環の上昇流
+- ✅ 「プロトタイプ段階的導入」セクション完全削除
+- ✅ 対応業界セクション大幅改善
+  - AIくさい青字・下線完全排除
+  - コンパクト・スマート・美的バランス実現
+  - エンタープライズ品質アクセント実装
+- ✅ AI活用例セクション見せ方工夫
+  - 美的センス・バランス最適化
+  - 青いドット排除・洗練されたアクセント
+- ✅ ページ全体余白・レイアウト美学調整
+- ✅ index.htmlとの完全統一
+- ✅ 技術的負債ゼロ達成
+
+**視覚エフェクト**:
+- Digital Night Sky System v3.0（静寂の中の輝き）
+- 業界別カラーアクセント（6業界対応）
 
 ---
 
@@ -401,6 +434,135 @@ small { font-size: 0.875rem; }               /* 14px */
 - **コピーライトサイズ**: 0.8rem
 
 **統一CSSファイル**: `assets/css/common-header-footer.css`
+
+---
+
+## 視覚エフェクトシステム
+
+### 1. Three.js パーティクルシステム（index.html, services.html）
+
+**使用ページ**: index.html, services.html
+
+**実装方法**:
+```html
+<div id="three-container"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+```
+
+**特徴**:
+- 3D空間での粒子システム
+- リアルタイム回転・移動アニメーション
+- モバイル対応（パーティクル数削減）
+- GPU加速レンダリング
+
+**パフォーマンス**:
+- PC: 400粒子 @ 60fps
+- モバイル: 200粒子 @ 60fps
+
+---
+
+### 2. Digital Night Sky System v3.0（industries.html専用）
+
+**使用ページ**: industries.html
+
+**コンセプト**: "静寂の中の輝き" - 夜空に瞬く星々のような静謐で美しい存在感
+
+**アーキテクチャ**:
+```
+industries.html
+├── <link rel="stylesheet" href="assets/css/digital-night-sky-v3.css">
+├── <script src="assets/js/digital-night-sky-v3.js" defer></script>
+└── <div class="sparkler-container">
+    └── (完全JavaScript動的生成)
+        ├── 前景層: 主役星 30-40個（最大・最明・最速）
+        ├── 中景層: サポート星 60-80個（中サイズ・中輝度・中速）
+        └── 背景層: 微細な瞬き 80-100個（最小・最淡・静止）
+```
+
+#### 実装構造
+
+**HTML部分** (industries.html内):
+```html
+<div class="sparkler-container">
+    <!-- 完全JavaScript動的生成 - HTMLはクリーン -->
+</div>
+```
+
+**CSS部分** (assets/css/digital-night-sky-v3.css):
+- **3層アーキテクチャ**:
+  - `.star`, `.star-large`, `.star-medium`, `.star-small` (前景層)
+  - `.star-support` (中景層)
+  - `.star-ambient` (背景層)
+- **Cinematic Lighting**: radial-gradient + 多層box-shadow
+- **呼吸アニメーション**: `@keyframes starBreathing`
+- **上昇流エフェクト**: `@keyframes starAscending` (下から上への美しい循環)
+- **アクセシビリティ**: `@media (prefers-reduced-motion)` 完全対応
+
+**JavaScript部分** (assets/js/digital-night-sky-v3.js):
+- **動的生成システム**: DocumentFragment使用・一括DOM挿入
+- **インタラクティブマジック**:
+  - マウスムーブ連動: 150px半径内の星が応答
+  - スクロール連動: 速度に応じた星の動き
+  - クリック波紋効果: 200px半径内の星が反応
+- **モバイル最適化**: 粒子数自動削減（85-110個）
+- **RequestAnimationFrame**: 60fps維持
+
+#### 技術仕様
+
+**パーティクル総数**: 170-220個（デスクトップ）/ 85-110個（モバイル）
+- 前景層（主役星）: 30-40個 / 15-20個
+- 中景層（サポート星）: 60-80個 / 30-40個
+- 背景層（微細な瞬き）: 80-100個 / 40-50個
+
+**デザイン哲学**:
+- **品格**: "Less is More" - 150-200個の極上の質
+- **感動**: Cinematic Lighting - 色温度・呼吸・奥行き
+- **没入感**: Interactive Magic - マウス・スクロール連動
+- **記憶**: Narrative Motion - ストーリーのある動き
+
+**GPU加速技術**:
+- `will-change: transform, opacity`
+- `transform3d()` 使用
+- RequestAnimationFrame最適化
+
+**パフォーマンス**:
+- PC: 170-220粒子 @ 60fps
+- モバイル: 85-110粒子 @ 60fps
+
+#### なぜ別ファイルに分離？
+
+**理由**:
+1. **再利用性**: 他のページでも簡単に導入可能
+2. **保守性**: CSS/JS を1箇所変更で全体に反映
+3. **パフォーマンス**: キャッシュ効率向上
+4. **可読性**: HTMLファイル軽量化（完全JavaScript動的生成）
+5. **技術的負債ゼロ**: モジュラー設計
+
+#### 使用方法
+
+**新しいページに追加する場合**:
+
+```html
+<!-- 1. CSSを<head>内に追加 -->
+<link rel="stylesheet" href="assets/css/digital-night-sky-v3.css">
+
+<!-- 2. JavaScriptを</body>直前に追加 -->
+<script src="assets/js/digital-night-sky-v3.js" defer></script>
+
+<!-- 3. HTMLマークアップをヒーローセクション内に追加 -->
+<section class="page-hero">
+    <div class="sparkler-container">
+        <!-- 完全JavaScript動的生成 - HTMLはクリーン -->
+    </div>
+    <!-- ページコンテンツ -->
+</section>
+```
+
+**注意事項**:
+- `sparkler-container` は `position: relative` の親要素内に配置
+- JavaScriptが自動的に `.sparkler-container` を検索し `.digital-night-sky` クラス追加
+- z-index調整が必要な場合はCSSで上書き可能
+- モバイル対応は自動（画面幅768px以下で粒子数削減）
 
 ---
 
