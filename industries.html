@@ -106,6 +106,13 @@
     <!-- Chatbot External CSS Component -->
     <link rel="stylesheet" href="assets/css/chatbot.css">
 
+    <!-- Sparkler Effects External CSS Component - 600 Light Particles System -->
+    <!-- Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル -->
+    <link rel="stylesheet" href="assets/css/digital-night-sky-v3.css">
+
+    <!-- Digital Night Sky Interactive Magic - JavaScript System v3.0 -->
+    <script src="assets/js/digital-night-sky-v3.js" defer></script>
+
     <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
@@ -133,7 +140,7 @@
       "alternateName": ["シンアイ", "ShinAI Inc"],
       "url": "https://shin-ai-inc.github.io/website/industries.html",
       "mainEntityOfPage": "https://shin-ai-inc.github.io/website/industries.html",
-      "description": "各業界の課題に合わせた最適なAIソリューションをご紹介。AIエージェント開発・RAG構築で企業の課題を解決し、プロトタイプから始める伴走型開発で確実な成果を実現。",
+      "description": "各業界の課題に合わせた最適なAIソリューションをご紹介。AIエージェント開発・RAG構築で企業の課題を解決し、プロトタイプから始める伴走型開発で成果を追求。",
       "slogan": "AIの力で人間らしい時間を取り戻す",
       "foundingDate": "2024",
       "logo": {
@@ -337,8 +344,8 @@
         特徴: PC版のみ高さ調整、モバイル視認性向上
         ==============================================
         */
-        --header-height: 58px; /* 【改善】PC版縦幅縮小：65px → 58px */
-        --header-height-mobile: 40px; /* モバイル版は維持 */
+        --header-height: 50px; /* index.html完全統一: 50px */
+        --header-height-mobile: 40px; /* index.html完全統一: 40px */
         --container-width: 1400px;
         
         /* Border Radius */
@@ -386,6 +393,9 @@
         background-color: var(--white);
         overflow-x: hidden;
         min-height: 100%;
+        margin: 0;
+        padding: 0;
+        /* masa様改善Part3: body余白完全排除・ヘッダー直下隙間ゼロ */
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -445,14 +455,14 @@
     }
     
     .section {
-        padding: 2.5rem 0;
+        padding: 3.5rem 0;
         position: relative;
         overflow: hidden;
     }
-    
+
     @media (max-width: 768px) {
         .section {
-            padding: 1.5rem 0;
+            padding: 2rem 0;
         }
     }
     
@@ -485,18 +495,46 @@
     }
 
     /* ========================================================
-    ▼ Page Hero Component
+    ▼ Page Hero Component - ダーク背景グラデーション
+    masa様改善Part3完全版: index.html統一構造 + 背景ヘッダー直下開始
     ======================================================== */
     .page-hero {
         position: relative;
-        min-height: 70vh;
+        min-height: 90vh;
         display: flex;
         align-items: center;
-        padding: calc(var(--header-height) + 1.5rem) 0 2rem;
+        /* index.html完全統一: calc(var(--header-height) + 2rem) */
+        padding: calc(var(--header-height) + 2rem) 0 2.5rem;
+        margin-top: calc(var(--header-height) * -1);
+        /* 負のmarginでヘッダー下から背景開始 = 白い隙間完全排除 */
         overflow: hidden;
-        background: var(--gradient-hero);
+        background: linear-gradient(135deg,
+            #0a0e1a 0%,
+            #0f1419 30%,
+            #131820 60%,
+            #1a1f2e 100%);
         text-align: center;
+        color: #ffffff;
     }
+
+    main {
+        margin: 0;
+        padding: 0;
+    }
+
+    @media (max-width: 768px) {
+        .page-hero {
+            min-height: 80vh;
+            /* index.html統一: calc(var(--header-height-mobile) + 2rem) */
+            padding: calc(var(--header-height-mobile) + 2rem) 0 2rem;
+            margin-top: calc(var(--header-height-mobile) * -1);
+        }
+    }
+
+    /* NOTE: Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル
+       3レイヤー構造: 前景(主役星30-40個) / 中景(サポート星60-80個) / 背景(微細な瞬き80-100個)
+       インタラクティブ: マウス・スクロール連動による応答的魔法
+       詳細: assets/css/digital-night-sky-v3.css + assets/js/digital-night-sky-v3.js */
     
     .page-hero-content {
         position: relative;
@@ -534,33 +572,162 @@
         color: var(--gray);
     }
     
+    /* ========================================================
+    ▼ Hero Title Component - 芸術的タイポグラフィ
+    masa様要件: デジタルアート作品レベルの美的センス
+    ======================================================== */
     .page-hero-title {
-        margin-bottom: 1.5rem;
-        color: var(--dark);
+        margin-bottom: 2.5rem;
+        color: #ffffff;
         position: relative;
-        display: inline-block;
-        animation: fadeIn 1s ease forwards;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        animation: fadeInFast 0.8s ease forwards;
         text-align: center;
+        font-family: var(--font-sans);
     }
-    
-    .page-hero-title {
-        background: linear-gradient(to right, #3A5FEB, #00C9A7, #3A5FEB);
-        background-size: 200% auto;
+
+    .hero-title-line {
+        display: block;
+        font-size: clamp(1.8rem, 4vw, 3.8rem);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+        animation: titleLineAppear 1s ease forwards;
+        opacity: 0;
+    }
+
+    .hero-title-line-1 {
+        animation-delay: 0.1s;
+        font-weight: 400;
+        opacity: 0.92;
+    }
+
+    .hero-title-line-2 {
+        animation-delay: 0.3s;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        display: flex;
+        align-items: baseline;
+        gap: 0.3em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    @keyframes titleLineAppear {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+    }
+
+    /* グラデーション強調 - 芸術的発光効果 */
+    .hero-gradient-emphasis {
+        background: linear-gradient(135deg,
+            #5B7BFF 0%,
+            #7B8FFF 30%,
+            #20E7C4 70%,
+            #00D9B8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: gradientShift 6s linear infinite;
-        text-shadow: 0 5px 15px rgba(58, 95, 235, 0.2);
+        font-weight: 900;
+        position: relative;
+        text-shadow: none;
+        filter: drop-shadow(0 0 20px rgba(91, 123, 255, 0.5))
+                drop-shadow(0 4px 12px rgba(32, 231, 196, 0.3));
+        letter-spacing: 0.02em;
     }
-    
+
+    .hero-title-punctuation {
+        font-weight: 300;
+        opacity: 0.85;
+        font-size: 0.95em;
+    }
+
+    /* Hero Description - コンパクト・洗練 */
     .page-hero-description {
-        color: var(--gray);
-        max-width: 700px;
+        color: rgba(255, 255, 255, 0.88);
+        max-width: 800px;
         margin: 0 auto 2rem;
-        line-height: 1.6;
-        animation: fadeIn 1s ease 0.2s forwards;
+        font-size: 1.25rem;
+        line-height: 1.75;
+        animation: fadeInFast 1s ease 0.5s forwards;
         opacity: 0;
         text-align: center;
+        padding: 0 1.5rem;
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        font-weight: 400;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        letter-spacing: 0.03em;
+    }
+
+    .hero-desc-emphasis {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.98);
+    }
+
+    /* Industry Tags - エレガントなチップデザイン */
+    .hero-industry-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        max-width: 550px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        animation: fadeInFast 1.2s ease 0.7s forwards;
+        opacity: 0;
+    }
+
+    .industry-tag {
+        display: inline-block;
+        padding: 0.45rem 1.1rem;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        letter-spacing: 0.05em;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: default;
+    }
+
+    .industry-tag:hover {
+        background: rgba(91, 123, 255, 0.15);
+        border-color: rgba(91, 123, 255, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(91, 123, 255, 0.2);
+    }
+
+    .industry-tag-more {
+        display: inline-block;
+        padding: 0.45rem 1.1rem;
+        font-size: 0.82rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+        letter-spacing: 0.03em;
+    }
+
+    @keyframes fadeInFast {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
     @media (max-width: 768px) {
@@ -585,33 +752,34 @@
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
         position: relative;
         z-index: 1;
     }
-    
+
     .section-subtitle {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.1);
-        padding: 0.4rem 1.2rem;
+        background: rgba(58, 95, 235, 0.08);
+        padding: 0.5rem 1.3rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 0.8rem;
-        font-size: 0.85rem;
-        box-shadow: 0 2px 6px rgba(58, 95, 235, 0.08);
-        border: 1px solid rgba(58, 95, 235, 0.1);
+        margin-bottom: 1rem;
+        font-size: 0.88rem;
+        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.06);
+        border: 1px solid rgba(58, 95, 235, 0.08);
     }
-    
+
     .section-header .heading-lg {
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
     }
-    
+
     .section-description {
         color: var(--gray);
-        max-width: 600px;
+        max-width: 650px;
         margin: 0 auto;
-        line-height: 1.6;
+        line-height: 1.7;
+        font-size: 0.95rem;
     }
     
     .brand-catchphrase {
@@ -668,35 +836,205 @@
         }
     }
 
-    /* 
+    /*
     ==============================================
-    // === component-split: ImprovedBenefitsContainer ===
-    COMPONENT: 改善された3つのカードコンテナ
-    機能: バランス改善、30万円表示削除、視覚的統一
-    特徴: レスポンシブ最適化、情報密度向上
+    === COMPONENT: StrengthsShowcase ===
+    FUNCTION: Company strengths display - 2×2 PC layout (4 cards)
+    FEATURES: Interactive cards, performance metrics, responsive grid
     ==============================================
     */
-    .benefits-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-        align-items: stretch; /* 【改善】カード高さ統一 */
+    .intro-section {
+        background: linear-gradient(135deg,
+            rgba(248, 250, 252, 0.9) 0%,
+            rgba(241, 245, 249, 0.8) 50%,
+            rgba(248, 250, 252, 0.9) 100%);
+        position: relative;
+        overflow: hidden;
     }
 
-    .benefit-card {
-        background: var(--white);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(58, 95, 235, 0.08);
-        padding: 2.5rem 2rem; /* 【改善】パディング調整でバランス向上 */
-        position: relative;
-        transition: all 0.15s ease;
-        overflow: hidden;
+    .intro-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 30%, rgba(58, 95, 235, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 201, 167, 0.03) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* 新クラス名：strengths-grid（2×2グリッド） */
+    .strengths-grid {
+        display: grid;
+        gap: clamp(1.2rem, 2.5vw, 1.8rem);
+        margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* PC版: 2×2グリッド */
+    @media (min-width: 769px) {
+        .strengths-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+    }
+
+    /* モバイル版: 1列表示 */
+    @media (max-width: 768px) {
+        .strengths-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 旧クラス名も互換性のため維持 */
+    .benefits-container {
+        display: grid;
+        gap: clamp(1.2rem, 2.5vw, 1.8rem);
+        margin-top: clamp(1.2rem, 2.5vw, 1.8rem);
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media (min-width: 769px) {
+        .benefits-container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .benefits-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 新クラス名：strength-card */
+    .strength-card {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.9) 100%);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.06);
         border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between; /* 【改善】コンテンツ分散配置 */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .strength-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        z-index: 1;
+        transition: height 0.3s ease;
+    }
+
+    .strength-card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.12);
+        border-color: rgba(58, 95, 235, 0.15);
+    }
+
+    .strength-card:hover::before {
+        height: 6px;
+    }
+
+    .strength-icon {
+        width: clamp(50px, 8vw, 60px);
+        height: clamp(50px, 8vw, 60px);
+        background: var(--gradient-primary);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+        color: var(--white);
+        box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
+        margin: 0 auto clamp(1rem, 2vw, 1.2rem);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .strength-card:hover .strength-icon {
+        transform: scale(1.08) rotate(5deg);
+        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.35);
+    }
+
+    .strength-title {
+        font-size: clamp(1.1rem, 2vw, 1.2rem);
+        font-weight: 700;
+        margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
+        color: var(--dark);
+        line-height: 1.3;
+    }
+
+    .strength-description {
+        color: var(--gray);
+        line-height: 1.6;
+        font-size: clamp(0.85rem, 1.2vw, 0.9rem);
+        margin-bottom: clamp(1rem, 2vw, 1.2rem);
+        flex-grow: 1;
+    }
+
+    .strength-stat {
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        padding: clamp(0.6rem, 1.5vw, 0.8rem);
+        border-radius: var(--radius-lg);
+        margin-top: auto;
+    }
+
+    .stat-value {
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        font-weight: 800;
+        line-height: 1;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: clamp(0.75rem, 1.2vw, 0.8rem);
+        color: var(--gray);
+        margin-top: 0.4rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    /* 旧クラス名も互換性のため維持 */
+    .benefit-card {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 250, 252, 0.9) 100%);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.06);
+        border: 1px solid rgba(58, 95, 235, 0.08);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .benefit-card::before {
@@ -704,99 +1042,77 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--gradient-primary);
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
         z-index: 1;
     }
 
     .benefit-card:hover {
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.12);
-        border-color: rgba(58, 95, 235, 0.15);
-        transform: translateY(-3px); /* 【改善】ホバー効果強化 */
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 15px 35px rgba(58, 95, 235, 0.12);
     }
 
     .benefit-icon {
-        width: 60px;
-        height: 60px;
+        width: clamp(50px, 8vw, 60px);
+        height: clamp(50px, 8vw, 60px);
         background: var(--gradient-primary);
         border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 1.5rem;
+        font-size: clamp(1.5rem, 2.5vw, 1.8rem);
         color: var(--white);
-        position: relative;
-        z-index: 1;
         box-shadow: 0 8px 20px rgba(58, 95, 235, 0.25);
-        transition: all 0.15s ease;
+        margin: 0 auto clamp(1rem, 2vw, 1.2rem);
+        transition: all 0.3s ease;
     }
 
     .benefit-card:hover .benefit-icon {
-        transform: scale(1.05); /* 【改善】控えめなスケール */
-    }
-
-    .benefit-content {
-        flex-grow: 1; /* 【改善】コンテンツ領域拡張 */
-        display: flex;
-        flex-direction: column;
+        transform: scale(1.08) rotate(5deg);
     }
 
     .benefit-content h4 {
-        font-size: 1.3rem; /* 【改善】タイトルサイズ統一 */
+        font-size: clamp(1.1rem, 2vw, 1.2rem);
         font-weight: 700;
-        margin-bottom: 1rem; /* 【改善】間隔調整 */
+        margin-bottom: clamp(0.6rem, 1.5vw, 0.8rem);
         color: var(--dark);
-        line-height: 1.3;
     }
 
     .benefit-content p {
         color: var(--gray);
-        line-height: 1.7; /* 【改善】読みやすさ向上 */
-        margin-bottom: 1.5rem; /* 【改善】間隔調整 */
-        font-size: 0.95rem; /* 【改善】文字サイズ統一 */
-        text-align: left;
-        flex-grow: 1; /* 【改善】テキスト領域拡張 */
+        line-height: 1.6;
+        font-size: clamp(0.85rem, 1.2vw, 0.9rem);
+        margin-bottom: clamp(1rem, 2vw, 1.2rem);
+        text-align: center;
     }
 
     .benefit-stat {
-        background: var(--gradient-card);
-        padding: 1.2rem; /* 【改善】パディング調整 */
-        border-radius: var(--radius-md);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.08));
+        padding: clamp(0.6rem, 1.5vw, 0.8rem);
+        border-radius: var(--radius-lg);
         margin-top: auto;
-        min-height: 80px; /* 【改善】統計表示エリア高さ統一 */
-        justify-content: center;
     }
 
-    /* 【改善】第1カード：プロトタイプ先行開発 */
+    /* Individual strength card icon colors */
+    .strength-card:nth-child(1) .strength-icon,
     .benefit-card:nth-child(1) .benefit-icon {
         background: linear-gradient(135deg, #3A5FEB, #5B7BFF);
     }
 
-    .benefit-card:nth-child(1) .benefit-stat {
-        background: linear-gradient(135deg, rgba(58, 95, 235, 0.1), rgba(91, 123, 255, 0.1));
-    }
-
-    /* 【改善】第2カード：完全伴走型サポート */
+    .strength-card:nth-child(2) .strength-icon,
     .benefit-card:nth-child(2) .benefit-icon {
         background: linear-gradient(135deg, #00C9A7, #20E7C4);
     }
 
-    .benefit-card:nth-child(2) .benefit-stat {
-        background: linear-gradient(135deg, rgba(0, 201, 167, 0.1), rgba(32, 231, 196, 0.1));
-    }
-
-    /* 【改善】第3カード：業界特化カスタマイズ */
+    .strength-card:nth-child(3) .strength-icon,
     .benefit-card:nth-child(3) .benefit-icon {
         background: linear-gradient(135deg, #FF8A00, #FFA94D);
     }
 
-    .benefit-card:nth-child(3) .benefit-stat {
-        background: linear-gradient(135deg, rgba(255, 138, 0, 0.1), rgba(255, 169, 77, 0.1));
+    .strength-card:nth-child(4) .strength-icon,
+    .benefit-card:nth-child(4) .benefit-icon {
+        background: linear-gradient(135deg, #4671FF, #65A0FF);
     }
 
     .stat-value {
@@ -867,11 +1183,42 @@
     /* ========================================================
     ▼ Industries Grid Component
     ======================================================== */
+    /*
+    ==============================================
+    // === component-split: IndustriesGrid3x2 ===
+    COMPONENT: 業界3×2グリッドレイアウト
+    機能: 6業界を3×2グリッドで常時表示
+    特徴: PC版3列、タブレット2列、モバイル1列
+    ==============================================
+    */
     .industries-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: clamp(1.2rem, 2.5vw, 2rem);
+        margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* PC版: 3列グリッド（3×2配置） */
+    @media (min-width: 1025px) {
+        .industries-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* タブレット版: 2列グリッド */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .industries-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* モバイル版: 1列表示 */
+    @media (max-width: 768px) {
+        .industries-grid {
+            grid-template-columns: 1fr;
+        }
     }
     
     /* 
@@ -882,18 +1229,19 @@
     特徴: CTAボタン整理、情報密度向上
     ==============================================
     */
+    /* masa様要件: コンパクト・スマート・美的バランス */
     .industry-card {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-        padding: 1.8rem;
-        transition: all 0.15s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        padding: 1.4rem;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         position: relative;
         overflow: hidden;
         height: 100%;
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(58, 95, 235, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .industry-card:hover {
@@ -940,22 +1288,22 @@
     .industry-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1.2rem;
-        gap: 1rem;
+        margin-bottom: 1rem;
+        gap: 0.85rem;
     }
 
     .industry-icon {
-        width: 50px;
-        height: 50px;
-        min-width: 50px;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
         background: var(--primary);
         color: var(--white);
-        border-radius: 12px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem;
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.25);
+        font-size: 1.15rem;
+        box-shadow: 0 4px 16px rgba(58, 95, 235, 0.22);
         transition: all 0.15s ease;
     }
 
@@ -995,68 +1343,85 @@
     }
 
     .industry-title {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
         font-weight: 700;
         margin: 0;
         color: var(--dark);
-        letter-spacing: -0.01em;
+        letter-spacing: 0.01em;
     }
 
     .industry-description {
         color: var(--gray);
-        line-height: 1.6;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        line-height: 1.65;
+        margin: 0 0 1.2rem 0;
         flex-grow: 1;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         text-align: left;
     }
 
     .industry-features {
         list-style: none;
         padding: 0;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        margin: 0 0 1.2rem 0;
     }
 
     .industry-feature {
         position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.6rem;
+        padding-left: 1.35rem;
+        margin-bottom: 0.5rem;
         color: var(--gray);
-        line-height: 1.5;
-        font-size: 0.85rem;
+        line-height: 1.6;
+        font-size: 0.82rem;
         text-align: left;
     }
 
+    /* masa様改善: AIくさいfa-checkアイコン完全排除 */
     .industry-feature i {
+        display: none;
+    }
+
+    /* masa様改善: エンタープライズ品質・洗練された小さなアクセント */
+    .industry-feature::before {
+        content: '';
         position: absolute;
         left: 0;
-        top: 0.2rem;
-        font-size: 0.8rem;
+        top: 0.65rem;
+        width: 4px;
+        height: 4px;
+        border-radius: 1px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        box-shadow: 0 0 8px rgba(58, 95, 235, 0.35);
     }
 
-    /* 業界カードごとのアイコン色分け */
-    .industry-card[data-industry="welfare"] .industry-feature i {
-        color: var(--welfare-primary);
+    /* 業界カードごとのアクセント色分け */
+    .industry-card[data-industry="welfare"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--welfare-primary), var(--welfare-secondary));
+        box-shadow: 0 0 10px rgba(var(--welfare-primary), 0.4);
     }
 
-    .industry-card[data-industry="education"] .industry-feature i {
-        color: var(--education-primary);
+    .industry-card[data-industry="education"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--education-primary), var(--education-secondary));
+        box-shadow: 0 0 10px rgba(var(--education-primary), 0.4);
     }
 
-    .industry-card[data-industry="construction"] .industry-feature i {
-        color: var(--construction-primary);
+    .industry-card[data-industry="construction"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--construction-primary), var(--construction-secondary));
+        box-shadow: 0 0 10px rgba(var(--construction-primary), 0.4);
     }
 
-    .industry-card[data-industry="manufacturing"] .industry-feature i {
-        color: var(--manufacturing-primary);
+    .industry-card[data-industry="manufacturing"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--manufacturing-primary), var(--manufacturing-secondary));
+        box-shadow: 0 0 10px rgba(var(--manufacturing-primary), 0.4);
     }
 
-    .industry-card[data-industry="retail"] .industry-feature i {
-        color: var(--retail-primary);
+    .industry-card[data-industry="retail"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--retail-primary), var(--retail-secondary));
+        box-shadow: 0 0 10px rgba(var(--retail-primary), 0.4);
     }
 
-    .industry-card[data-industry="finance"] .industry-feature i {
-        color: var(--finance-primary);
+    .industry-card[data-industry="finance"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--finance-primary), var(--finance-secondary));
+        box-shadow: 0 0 10px rgba(var(--finance-primary), 0.4);
     }
 
     /* 
@@ -1255,18 +1620,18 @@
     .use-case {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-        padding: 2rem;
-        margin: 2rem 0;
-        border: 1px solid rgba(58, 95, 235, 0.08);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        padding: 1.5rem;
+        margin: 1.2rem 0;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.15s ease;
         position: relative;
         overflow: hidden;
     }
 
     .use-case:hover {
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.1);
-        border-color: rgba(58, 95, 235, 0.12);
+        box-shadow: 0 8px 24px rgba(58, 95, 235, 0.08);
+        border-color: rgba(58, 95, 235, 0.1);
     }
 
     .use-case::before {
@@ -1307,22 +1672,22 @@
     .use-case-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1.5rem;
-        gap: 1rem;
+        margin-bottom: 1.2rem;
+        gap: 0.9rem;
     }
 
     .use-case-icon {
-        width: 60px;
-        height: 60px;
-        min-width: 60px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
         background: var(--primary);
         color: var(--white);
-        border-radius: 15px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.25);
+        font-size: 1.3rem;
+        box-shadow: 0 4px 16px rgba(58, 95, 235, 0.2);
         transition: all 0.15s ease;
     }
 
@@ -1331,33 +1696,35 @@
     }
 
     .use-case-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 700;
         margin: 0;
         color: var(--dark);
+        letter-spacing: 0.01em;
     }
 
     .use-case-content {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.2rem;
     }
 
     .use-case-section {
-        background: rgba(248, 250, 252, 0.6);
+        background: rgba(248, 250, 252, 0.5);
         border-radius: var(--radius-md);
-        padding: 1.2rem;
-        border: 1px solid rgba(58, 95, 235, 0.06);
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.04);
     }
 
     .use-case-section h4 {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        color: var(--primary);
+        gap: 0.45rem;
+        color: var(--dark);
         margin-top: 0;
-        margin-bottom: 0.8rem;
-        font-size: 1rem;
+        margin-bottom: 0.7rem;
+        font-size: 0.95rem;
+        font-weight: 600;
     }
 
     .use-case-list {
@@ -1368,11 +1735,11 @@
 
     .use-case-list li {
         position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.6rem;
+        padding-left: 1.3rem;
+        margin-bottom: 0.5rem;
         color: var(--gray);
-        line-height: 1.5;
-        font-size: 0.85rem;
+        line-height: 1.6;
+        font-size: 0.82rem;
         text-align: left;
     }
 
@@ -1381,13 +1748,15 @@
     }
 
     .use-case-list li::before {
-        content: '•';
+        content: '';
         position: absolute;
         left: 0;
-        top: 0;
-        color: var(--primary);
-        font-size: 1rem;
-        font-weight: bold;
+        top: 0.65rem;
+        width: 4px;
+        height: 4px;
+        border-radius: 1px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        box-shadow: 0 0 6px rgba(58, 95, 235, 0.3);
     }
 
     .use-case-list li strong {
@@ -1804,12 +2173,9 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        
-        .industries-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        
+
+        /* .industries-grid設定は上部の専用セクションに統合済み */
+
         .implementation-steps::before {
             left: 25px;
         }
@@ -1844,11 +2210,8 @@
             padding: 1.5rem 0;
         }
         
-        .industries-grid {
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-        }
-        
+        /* .industries-grid設定は上部の専用セクションに統合済み */
+
         .industry-tabs {
             overflow-x: auto;
             justify-content: flex-start;
@@ -2017,11 +2380,8 @@
         .container {
             max-width: 1400px;
         }
-        
-        .industries-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-        }
+
+        /* .industries-grid設定は上部の専用セクションに統合済み */
     }
     
     /* ダークモード対応 */
@@ -2068,6 +2428,34 @@
             border: 1px solid #ccc;
         }
     }
+
+    /* ========================================================
+    ▼ Footer Fix - 活動拠点・所在地のレスポンシブ改行
+    masa様改善: 柔軟な改行対応
+    ======================================================== */
+    .footer-contact-item {
+        white-space: nowrap;
+    }
+
+    .footer-contact-item span {
+        display: inline-block;
+    }
+
+    .footer-contact-item br {
+        display: inline;
+    }
+
+    @media (max-width: 768px) {
+        .footer-contact-item {
+            white-space: normal;
+        }
+
+        .footer-contact-item span {
+            word-break: normal;
+            overflow-wrap: break-word;
+            line-height: 1.6;
+        }
+    }
     </style>
 </head>
 <body>
@@ -2089,15 +2477,13 @@
     -->
     <header class="header" id="header">
         <div class="header-inner">
-            <!-- Logo Component - 左端中央配置 -->
             <a href="index.html" class="logo" aria-label="ShinAIホームページ">
                 <div class="logo-icon">
-                    <img src="assets/images/logo.png" alt="ShinAI" width="36" height="36">
+                    <img src="assets/images/logo.png" alt="ShinAI" width="28" height="28">
                 </div>
                 <span>ShinAI</span>
             </a>
-            
-            <!-- Desktop Navigation Component - PC専用表示 -->
+
             <nav aria-label="メインナビゲーション">
                 <ul class="nav" id="nav">
                     <li class="nav-item">
@@ -2126,8 +2512,7 @@
                     </li>
                 </ul>
             </nav>
-            
-            <!-- Mobile Hamburger Component - モバイル専用 -->
+
             <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav" aria-label="メニューを開く">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
@@ -2150,6 +2535,48 @@
         ==============================================
         -->
         <section class="page-hero" id="hero">
+            <!--
+            ==============================================
+            // === component-split: DigitalNightSkySystem ===
+            COMPONENT: Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル
+
+            CONCEPT: "静寂の中の輝き" - 夜空に瞬く星々のような静謐で美しい存在感
+
+            構成:
+            - 前景層: 主役星 30-40個 (最大・最明・最速) - 視線を惹きつける
+            - 中景層: サポート星 60-80個 (中サイズ・中輝度・中速) - 空間の豊かさ
+            - 背景層: 微細な瞬き 80-100個 (最小・最淡・静止) - 奥行きと深み
+            合計: 170-220個の極上品質パーティクル
+
+            インタラクション:
+            - マウスムーブ連動: カーソル周辺150px半径の星が応答
+            - スクロール連動: 速度に応じた星の動き
+            - クリック波紋効果: 触れると応える魔法
+
+            技術: GPU加速・will-change・RequestAnimationFrame・DocumentFragment最適化
+            スタイル: assets/css/digital-night-sky-v3.css
+            スクリプト: assets/js/digital-night-sky-v3.js
+
+            モバイル最適化: 粒子数削減(85-110個)・サイズ調整・アニメーション簡素化
+            アクセシビリティ: prefers-reduced-motion完全対応
+            ==============================================
+            -->
+            <div class="sparkler-container">
+                <!--
+                Digital Night Sky v3.0: 完全JavaScript動的生成システム
+
+                すべての星々がassets/js/digital-night-sky-v3.jsによって
+                自動生成されます。HTMLは完全にクリーンな状態を保ちます。
+
+                生成される星々:
+                - 前景層(主役星): 30-40個 (モバイル: 15-20個)
+                - 中景層(サポート星): 60-80個 (モバイル: 30-40個)
+                - 背景層(微細な瞬き): 80-100個 (モバイル: 40-50個)
+
+                合計: デスクトップ170-220個 / モバイル85-110個
+                -->
+            </div>
+
             <div class="container">
                 <div class="page-hero-content">
                     <div class="breadcrumb" aria-label="パンくずリスト">
@@ -2159,94 +2586,30 @@
                     </div>
 
                     <h1 class="page-hero-title heading-xl">
-                        業界に特化した<span class="text-gradient">AI変革ソリューション</span>
+                        <span class="hero-title-line hero-title-line-1">あなたの業界に、</span>
+                        <span class="hero-title-line hero-title-line-2">
+                            <span class="text-gradient hero-gradient-emphasis">本当に必要なAI</span>
+                            <span class="hero-title-punctuation">を。</span>
+                        </span>
                     </h1>
 
                     <p class="page-hero-description text-lg">
-                        プロトタイプから始める伴走型開発で、確実な成果を実現。<br class="hide-mobile">
-                        あらゆる業界の課題に最適化したAIエージェント開発・RAG構築をご提供します。
+                        <span class="hero-desc-emphasis">現場を深く理解し、</span>実務に根ざした価値あるAIを共に創る。
                     </p>
+
+                    <div class="hero-industry-tags">
+                        <span class="industry-tag">福祉</span>
+                        <span class="industry-tag">教育</span>
+                        <span class="industry-tag">建設</span>
+                        <span class="industry-tag">製造</span>
+                        <span class="industry-tag">小売</span>
+                        <span class="industry-tag">金融</span>
+                        <span class="industry-tag-more">and more...</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 
-        ==============================================
-        // === component-split: IntroSection ===
-        COMPONENT: 導入セクション - 差別化強化
-        ==============================================
-        -->
-        <section class="section" aria-labelledby="intro-title">
-            <div class="container">
-                <div class="section-header animate-in">
-                    <p class="brand-catchphrase">「真の価値を信じ、次世代のために新たな未来を創る」</p>
-                    <span class="section-subtitle">ShinAIの強み</span>
-                    <h2 class="heading-lg" id="intro-title">なぜ<span class="highlight">プロトタイプからの伴走型開発</span>が選ばれるのか</h2>
-                    <p class="section-description">
-                        段階的AI導入で、<br>リスクを最小化し確実な成果を実現します
-                    </p>
-                </div>
-                
-                <div class="section-content max-width-800 text-left animate-in">
-                    <p>多くのAI導入プロジェクトが失敗する理由は、いきなり大規模な開発を始めることにあります。ShinAIは「プロトタイプからの伴走型開発」により、以下の差別化された価値を提供します：</p>
-                    
-                    <!-- 
-                    ==============================================
-                    // === component-split: ImprovedBenefitsContainer ===
-                    COMPONENT: 改善された3つのカードコンテナ
-                    機能: バランス改善、30万円表示削除、視覚的統一
-                    特徴: レスポンシブ最適化、情報密度向上
-                    ==============================================
-                    -->
-                    <div class="benefits-container">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-seedling" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>プロトタイプ先行開発</h4>
-                                <p>最短2週間で動作する試作品を構築。実際に使って効果を確認してから本格導入を決定できるため、投資リスクを最小化します。プロジェクトの方向性を早期に確認し、成功への確実な道筋を描きます。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">2</span><span class="stat-label">週間で試作完成</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-handshake" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>完全伴走型サポート</h4>
-                                <p>技術導入だけでなく、組織への定着まで継続支援。専門知識がなくても安心してAI活用を進められる体制を構築し、長期的な成功をサポートします。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">100</span><span class="stat-percent">%</span>
-                                    <span class="stat-label">継続支援率</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-industry" aria-hidden="true"></i>
-                            </div>
-                            <div class="benefit-content">
-                                <h4>業界特化カスタマイズ</h4>
-                                <p>福祉・教育・建設・製造・小売・金融など、各業界の特性と規制に完全対応したAIソリューションを開発。業界固有の課題を深く理解した専門的アプローチを提供します。</p>
-                                <div class="benefit-stat">
-                                    <span class="stat-value">6</span><span class="stat-label">業界専門対応</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-card">
-                        <h3 class="heading-md text-center mb-4">自社プロダクト「<span class="text-gradient">アイプロ</span>」で実証済みの技術力</h3>
-                        <p class="text-center text-left">新規事業企画書作成AIツール「アイプロ」は、中小企業を中心に高い評価をいただいており、ShinAIの技術力とユーザビリティ設計の実力を証明しています。この実績をもとに、お客様の業界に最適化したAIソリューションを開発いたします。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <!-- 
         ==============================================
@@ -2258,25 +2621,16 @@
             <div class="container">
                 <div class="section-header animate-in">
                     <span class="section-subtitle">対応業界</span>
-                    <h2 class="heading-lg" id="industries-title">業界特化型<span class="highlight">AIソリューション</span></h2>
-                    <p class="section-description">各業界の特性を深く理解し、最適なAI活用方法をご提案します</p>
+                    <h2 class="heading-lg" id="industries-title">6つの業界に対応した<span class="highlight">AI活用支援</span></h2>
+                    <p class="section-description">各業界の実情に寄り添い、実践的なAI活用方法をご提案いたします</p>
                 </div>
                 
-                <!-- 
+                <!--
                 ==============================================
-                // === component-split: IndustryTabs ===
-                COMPONENT: 業界タブナビゲーション
+                // === タブナビゲーション削除（3×2グリッド化のため常時表示に変更）
                 ==============================================
                 -->
-                <div class="industry-tabs animate-in" role="tablist" aria-label="業界カテゴリ">
-                    <a href="#welfare" class="industry-tab active" role="tab" aria-selected="true" aria-controls="welfare-content" id="welfare-tab">福祉・介護</a>
-                    <a href="#education" class="industry-tab" role="tab" aria-selected="false" aria-controls="education-content" id="education-tab">教育・研修</a>
-                    <a href="#construction" class="industry-tab" role="tab" aria-selected="false" aria-controls="construction-content" id="construction-tab">建設業</a>
-                    <a href="#manufacturing" class="industry-tab" role="tab" aria-selected="false" aria-controls="manufacturing-content" id="manufacturing-tab">製造業</a>
-                    <a href="#retail" class="industry-tab" role="tab" aria-selected="false" aria-controls="retail-content" id="retail-tab">小売・EC</a>
-                    <a href="#finance" class="industry-tab" role="tab" aria-selected="false" aria-controls="finance-content" id="finance-tab">金融・保険</a>
-                </div>
-                
+
                 <!-- 
                 ==============================================
                 // === component-split: IndustriesGrid ===
@@ -2496,7 +2850,6 @@
         <section class="section">
             <div class="container">
                 <div class="section-header animate-in">
-                    <p class="brand-catchphrase">「大切な人と関わる時間を創るために、真の価値を追求し続けます」</p>
                     <span class="section-subtitle">AI活用例</span>
                     <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
                     <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
@@ -2542,9 +2895,9 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>記録業務の時間を60〜70%削減、入居者との対話時間が増加</li>
-                                <li>24時間体制の見守りが可能になり、事故発生率が30〜40%低減</li>
-                                <li>スタッフの業務負担軽減により離職率が20〜30%低下</li>
+                                <li>記録業務の効率化により、入居者との対話時間が増加</li>
+                                <li>24時間体制の見守りが可能になり、事故の早期発見につながる</li>
+                                <li>スタッフの業務負担が軽減され、職場環境が改善</li>
                                 <li>高齢者の孤独感軽減と認知機能維持による生活の質向上</li>
                             </ul>
                         </div>
@@ -2591,10 +2944,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>個別最適化学習により、学習成果が15〜25%向上</li>
-                                <li>教員の業務時間が週あたり約8〜12時間削減</li>
-                                <li>学習者の学習継続率が30%向上、中退率が15〜20%低下</li>
-                                <li>学習データ分析による教育手法の継続的改善と効果最大化</li>
+                                <li>一人ひとりに最適化された学習により、理解度の向上が期待できる</li>
+                                <li>教員の業務負担が軽減され、生徒と向き合う時間が増加</li>
+                                <li>学習者のモチベーション維持により、継続的な学びを支援</li>
+                                <li>学習データの分析により、教育手法の継続的な改善が可能</li>
                             </ul>
                         </div>
                     </div>
@@ -2640,10 +2993,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>現場の安全管理強化により事故率が40%低減</li>
-                                <li>現場での判断時間が50%短縮、作業効率が20%向上</li>
-                                <li>工程最適化により工期短縮と予算内完成率が15%向上</li>
-                                <li>技術伝承の効率化により、若手技術者の習熟期間が30%短縮</li>
+                                <li>現場の安全管理が強化され、事故リスクの低減につながる</li>
+                                <li>必要な情報への迅速なアクセスにより、現場での判断を支援</li>
+                                <li>工程最適化により、プロジェクト管理の効率化が期待できる</li>
+                                <li>熟練技術者のノウハウ継承により、若手育成を促進</li>
                             </ul>
                         </div>
                     </div>
@@ -2689,10 +3042,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>検査精度が95%以上に向上し、不良品流出が80%以上減少</li>
-                                <li>設備故障による計画外停止時間が60〜70%減少</li>
-                                <li>生産計画の最適化により生産効率が15〜20%向上</li>
-                                <li>新人作業者の習熟期間が50%短縮、技術標準化が促進</li>
+                                <li>検査精度の向上により、品質管理の強化が期待できる</li>
+                                <li>設備の予知保全により、計画外停止の削減につながる</li>
+                                <li>生産計画の最適化により、工場の生産効率が向上</li>
+                                <li>製造ノウハウのデジタル化により、新人育成を支援</li>
                             </ul>
                         </div>
                     </div>
@@ -2738,10 +3091,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>パーソナライズ推薦による売上が25〜35%向上</li>
-                                <li>需要予測精度の向上で在庫コストが20%削減、欠品率が80%低減</li>
-                                <li>カスタマーサポートコストの削減と対応時間の短縮（約70%）</li>
-                                <li>視覚的検索やAR体験による購買意欲向上と返品率の低減（約30%）</li>
+                                <li>顧客一人ひとりに最適な商品提案により、購買体験が向上</li>
+                                <li>需要予測の精度向上により、在庫の最適化と欠品の削減が期待できる</li>
+                                <li>24時間対応のAIサポートにより、顧客満足度の向上につながる</li>
+                                <li>市場動向に基づく価格戦略により、競争力を強化</li>
                             </ul>
                         </div>
                     </div>
@@ -2787,10 +3140,10 @@
                         <div class="use-case-section">
                             <h4><i class="fas fa-chart-line"></i> 期待される効果</h4>
                             <ul class="use-case-list">
-                                <li>与信判断の精度が25%向上、審査時間が80%短縮</li>
-                                <li>不正検知率が95%以上に向上、被害額が60%以上削減</li>
-                                <li>顧客満足度の向上とアセットマネジメント収益の20%増加</li>
-                                <li>コンプライアンス関連業務の工数が40%削減、対応品質が向上</li>
+                                <li>データ分析に基づく与信判断により、審査の精度向上と迅速化が期待できる</li>
+                                <li>異常パターンの早期発見により、不正取引の防止につながる</li>
+                                <li>顧客一人ひとりに最適な資産運用提案により、満足度向上を支援</li>
+                                <li>規制対応業務の効率化により、コンプライアンス体制を強化</li>
                             </ul>
                         </div>
                     </div>
@@ -2808,17 +3161,17 @@
             <div class="container">
                 <div class="section-header animate-in">
                     <span class="section-subtitle">AI導入プロセス</span>
-                    <h2 class="heading-lg">プロトタイプからの<span class="highlight">伴走型開発プロセス</span></h2>
-                    <p class="section-description">リスクを最小化し確実な成果を実現する、ShinAI独自の導入手法をご紹介します</p>
+                    <h2 class="heading-lg">ご依頼から自走まで、<br>伴走型の<span class="highlight">5つのステップ</span></h2>
+                    <p class="section-description">課題の整理から内製化まで、段階的に価値を積み重ねます。</p>
                 </div>
                 
                 <div class="implementation-steps animate-in">
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
-                            <h4 class="step-title">無料相談・課題特定</h4>
-                            <p class="step-duration">期間: 1週間</p>
-                            <p class="step-description">AIで解決すべき具体的なビジネス課題を明確にします。専門知識は必要ありません。ShinAIの専門家が、お客様と共に最適な要件を定義し、明確な目標とKPIを設定します。</p>
+                            <h4 class="step-title">課題ヒアリング・要件定義</h4>
+                            <p class="step-duration">期間: 1週間程度</p>
+                            <p class="step-description">まずは現場のお困りごとをじっくり伺います。専門用語は不要です。お話を通じて、AIで解決できる課題を一緒に整理していきます。</p>
                         </div>
                     </div>
                     
@@ -2826,8 +3179,8 @@
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h4 class="step-title">プロトタイプ開発</h4>
-                            <p class="step-duration">期間: 2週間</p>
-                            <p class="step-description">小規模な試作品を最短2週間で構築します。限定されたデータと範囲で迅速に実験を行い、技術的実現性と期待される効果を確認。投資対効果を明確にしてから次のステップに進みます。</p>
+                            <p class="step-duration">期間: 2週間程度</p>
+                            <p class="step-description">まずは小規模な試作品を作成します。実際に触って動かしながら、AIの可能性を体感していただけます。この段階で方向性を確認できるので、安心して次に進めます。</p>
                         </div>
                     </div>
                     
@@ -2835,8 +3188,8 @@
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h4 class="step-title">効果検証・改善</h4>
-                            <p class="step-duration">期間: 2〜3週間</p>
-                            <p class="step-description">プロトタイプを実際の業務で使用し、効果を数値で検証します。ユーザーフィードバックを収集し、必要な改善を実施。本格導入への確実な道筋を構築します。</p>
+                            <p class="step-duration">期間: 2〜3週間程度</p>
+                            <p class="step-description">試作品を実際の業務で使っていただき、使い心地や効果を確認します。現場の声を反映しながら改良を重ね、より使いやすいシステムに育てていきます。</p>
                         </div>
                     </div>
                     
@@ -2844,8 +3197,8 @@
                         <div class="step-number">4</div>
                         <div class="step-content">
                             <h4 class="step-title">段階的本格導入</h4>
-                            <p class="step-duration">期間: 1〜3ヶ月</p>
-                            <p class="step-description">効果が確認できたら段階的に機能を拡張し、組織全体への展開を行います。ユーザートレーニングと変革管理も含め、組織全体でのAI活用を実現します。</p>
+                            <p class="step-duration">期間: 1〜3ヶ月程度</p>
+                            <p class="step-description">効果を実感できたら、少しずつ範囲を広げていきます。現場の方々が無理なく慣れていけるよう、段階的に導入を進めます。</p>
                         </div>
                     </div>
                     
@@ -2854,7 +3207,7 @@
                         <div class="step-content">
                             <h4 class="step-title">継続的改善・内製化支援</h4>
                             <p class="step-duration">期間: 継続的</p>
-                            <p class="step-description">AIシステムの継続的な改善と社内チームの育成を支援します。ビジネス環境の変化に応じたアップデートと拡張を継続して提供し、長期的に自走できる体制を構築します。</p>
+                            <p class="step-description">運用しながら改善を続け、社内チームの育成も支援します。将来的には自社で運用できるよう、必要な知識やノウハウをお伝えしていきます。</p>
                         </div>
                     </div>
                 </div>
@@ -2879,13 +3232,11 @@
             <div class="container">
                 <div class="cta-content animate-in">
                     <h2 class="heading-lg cta-title">
-                        あなたの業界に最適な<br>
-                        <span class="text-accent">AIソリューション</span><br class="show-mobile">
-                        をご提案します
+                        まずはお話を聞かせてください
                     </h2>
                     <p class="cta-description">
-                        業界特有の課題とAI活用の可能性について、まずはお気軽にご相談ください。<br>
-                        ShinAIの専門家が、貴社の課題解決に最適なAIソリューションをご提案します。
+                        業界ごとの課題やAI活用の可能性について、お気軽にご相談ください。<br>
+                        お客様の状況に合わせて、最適なアプローチをご提案いたします。
                     </p>
                     <div class="cta-buttons">
                         <a href="contact.html" class="btn-consultation-main">
@@ -2918,49 +3269,39 @@
                         <span class="footer-logo-text">ShinAI</span>
                     </div>
                     <p class="footer-description">
-                        AIエージェント開発やRAG構築など、最先端のAI技術で企業の課題を解決。プロトタイプから始める伴走型開発で、確実な成果を実現します。
+                        最新の大規模言語モデルを独自最適化し、企業向けAIシステム開発を提供。企業のベテラン社員の暗黙知をデータ化し、パートナーシップで共創社会の実現を目指します。
                     </p>
-                    <div class="footer-social">
-                        <a href="https://twitter.com/ShinAI_JP" class="footer-social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.facebook.com/ShinAI.tech" class="footer-social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/shinai-tech" class="footer-social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.instagram.com/shinai.tech" class="footer-social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                    </div>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">サービス</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html#aipro">新規事業企画書AIツール「アイプロ」</a></li>
-                        <li><a href="services.html#custom">オーダーメイドAIアプリケーション開発</a></li>
-                        <li><a href="services.html#consulting">AI導入(DX/AX)コンサルティング</a></li>
+                        <li><a href="services.html#custom">オーダーメイドAIシステム開発</a></li>
+                        <li><a href="services.html#consulting">顧問サービス（内製化サポート）</a></li>
+                        <li><a href="services.html#cocreation">業界横断共創ビジネス（協業）</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">会社情報</h4>
                     <ul class="footer-links">
-                        <li><a href="about.html">会社概要</a></li>
-                        <li><a href="about.html#philosophy">企業理念</a></li>
-                        <li><a href="industries.html">AI活用事例</a></li>
+                        <li><a href="about.html">会社紹介</a></li>
+                        <li><a href="services.html">サービス一覧</a></li>
+                        <li><a href="industries.html">業界別活用事例</a></li>
                         <li><a href="faq.html">よくあるご質問</a></li>
-                        <li><a href="about.html#careers">採用情報</a></li>
+                        <li><a href="contact.html">お問い合わせ</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span>活動拠点：〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-building" aria-hidden="true"></i>
+                        <span>所在地：群馬県高崎市井野町360-7<br>オークスアベニューD201</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -2970,13 +3311,9 @@
                         <i class="fas fa-clock" aria-hidden="true"></i>
                         <span>平日 9:00〜18:00（土日祝休）</span>
                     </div>
-                    <div class="footer-contact-item">
-                        <i class="fas fa-file-alt" aria-hidden="true"></i>
-                        <a href="contact.html">お問い合わせフォーム</a>
-                    </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p class="footer-copyright">&copy; <span id="current-year">2025</span> ShinAI All Rights Reserved.</p>
                 <div class="footer-links-inline">
@@ -3119,29 +3456,31 @@
             }
             
             // ========================================================
-            // ▼ Industry Tabs Navigation Component
+            // ▼ Industry Tabs Navigation Component（削除：3×2グリッド化により不要）
             // ========================================================
+            // タブナビゲーション削除により以下のコードは無効化
+            /*
             const industryTabs = document.querySelectorAll('.industry-tab');
-            
+
             industryTabs.forEach(tab => {
                 tab.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+
                     // すべてのタブから active クラスを削除
                     industryTabs.forEach(t => t.classList.remove('active'));
-                    
+
                     // クリックされたタブに active クラスを追加
                     this.classList.add('active');
-                    
+
                     // スムーズスクロール
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    
+
                     if (targetElement) {
                         const headerOffset = 80;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                        
+
                         window.scrollTo({
                             top: offsetPosition,
                             behavior: 'smooth'
@@ -3149,6 +3488,7 @@
                     }
                 });
             });
+            */
 
             // ========================================================
             // ▼ Advanced Chatbot Component - 業界特化対応
@@ -3215,13 +3555,13 @@
                                 } else if (messageLower.includes('金融') || messageLower.includes('保険') || messageLower.includes('finance')) {
                                     response = "金融・保険分野でのAI活用についてですね。ShinAIでは与信審査AIや不正検知システム、資産運用アドバイザリーAIを提供しています。与信判断の精度が25%向上し、審査時間を80%短縮できます。リスク評価の精度向上と業務効率化を両立します。どのような金融サービスでのご活用をお考えでしょうか？";
                                 } else if (messageLower.includes('プロトタイプ') || messageLower.includes('伴走')) {
-                                    response = "ShinAIの「プロトタイプからの伴走型開発」についてですね。最短2週間でプロトタイプを構築し、実際に使って効果を確認してから本格導入を決定できます。これにより投資リスクを最小化し、確実な成果を実現します。技術導入だけでなく、組織への定着まで継続支援いたします。";
+                                    response = "ShinAIの「プロトタイプからの伴走型開発」についてですね。最短2週間でプロトタイプを構築し、実際に使って効果を確認してから本格導入を決定できます。これにより投資リスクを最小化し、成果を追求します。技術導入だけでなく、組織への定着まで継続支援いたします。";
                                 } else if (messageLower.includes('アイプロ') || messageLower.includes('企画書')) {
                                     response = "新規事業企画書AIツール「アイプロ」についてですね。AIが自動でビジネス企画書・プレゼン資料を作成するツールで、中小企業を中心に高い評価をいただいています。最短5分で高品質な提案資料が完成し、営業・企画部門の生産性を大幅に向上させます。ShinAIの技術力とユーザビリティ設計の実力を証明するプロダクトです。";
                                 } else {
                                     // 汎用的な応答
                                     const responses = [
-                                        "ShinAIでは、業界ごとの特性を理解し、最適なAIソリューションを提供しています。プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
+                                        "ShinAIでは、業界ごとの特性を理解し、最適なAIソリューションを提供しています。プロトタイプから始める伴走型開発で、初期投資を抑えて成果を追求します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
                                         "AIは様々な業界で革新的な価値を生み出せます。ShinAIは福祉・介護、教育・研修、建設業、製造業、小売・EC、金融・保険など、幅広い業界での導入実績があります。御社の業界に関する具体的なご質問がありましたら、お聞かせください。",
                                         "業界別のAI活用について、もっと詳しく知りたい点はありますか？ShinAIの専門家が、貴社の課題解決に最適なAIソリューションをご提案します。まずは無料相談で、お気軽にご相談ください。"
                                     ];
