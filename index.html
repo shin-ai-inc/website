@@ -1048,8 +1048,8 @@
     
     @media (max-width: 768px) {
         .hero {
-            min-height: 75vh;
-            padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
+            min-height: 60vh;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 2rem;
         }
 
         .hero-differentiators {
@@ -3007,7 +3007,7 @@
         container.appendChild(renderer.domElement);
 
         // 二重地球儀構造: 従来版の適切な濃度
-        const coreGeometry = new THREE.IcosahedronGeometry(isMobile ? 6 : 7.2, 2);
+        const coreGeometry = new THREE.IcosahedronGeometry(isMobile ? 8 : 7.2, 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x3A5FEB,
             transparent: true,
@@ -3017,7 +3017,7 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
 
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(isMobile ? 3 : 3.6, 2);
+        const innerCoreGeometry = new THREE.IcosahedronGeometry(isMobile ? 4 : 3.6, 2);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
             transparent: true,
@@ -3198,14 +3198,14 @@
             camera.lookAt(scene.position);
 
             // Core animation
-            core.rotation.y += 0.001;
-            core.rotation.x += 0.0005;
+            core.rotation.y += isMobile ? 0.0015 : 0.001;
+            core.rotation.x += isMobile ? 0.0008 : 0.0005;
             const scalePulse = Math.sin(time * 0.4) * 0.04 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
 
             // Inner core reverse rotation
-            innerCore.rotation.y -= 0.0015;
-            innerCore.rotation.z += 0.0008;
+            innerCore.rotation.y -= isMobile ? 0.002 : 0.0015;
+            innerCore.rotation.z += isMobile ? 0.0012 : 0.0008;
             const innerScalePulse = Math.sin(time * 0.6) * 0.08 + 1;
             innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
 

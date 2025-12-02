@@ -47,6 +47,7 @@
 
     <!-- Common Header/Footer CSS Component - Enterprise Grade -->
     <link rel="stylesheet" href="assets/css/common-header-footer.css">
+    <link rel="stylesheet" href="assets/css/chatbot.css">
 
     <!-- アニメーションライブラリ - 最適化版：非同期読み込み -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
@@ -2538,7 +2539,7 @@
             question.addEventListener('click', () => {
                 // 現在の状態を取得
                 const isActive = item.classList.contains('active');
-                
+
                 // 他のすべてのFAQを閉じる
                 faqItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
@@ -2546,10 +2547,24 @@
                         otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                     }
                 });
-                
+
                 // クリックされたアイテムの状態を切り替え
                 item.classList.toggle('active');
                 question.setAttribute('aria-expanded', !isActive);
+
+                // モバイル版: 質問が画面に収まるように滑らかにスクロール
+                if (!isActive && window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        const headerHeight = document.getElementById('header')?.offsetHeight || 40;
+                        const questionTop = item.getBoundingClientRect().top + window.scrollY;
+                        const targetScrollPosition = questionTop - headerHeight - 20;
+
+                        window.scrollTo({
+                            top: targetScrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
             });
             
             // キーボード操作のサポート
