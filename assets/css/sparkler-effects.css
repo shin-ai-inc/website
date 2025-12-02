@@ -112,6 +112,57 @@ TECHNICAL OPTIMIZATION:
     }
 }
 
+/* モバイル版パーティクル輝度強化 */
+@media (max-width: 768px) {
+    .sparkler-core {
+        box-shadow: 0 0 16px currentColor, 0 0 32px currentColor, 0 0 48px currentColor;
+        filter: brightness(1.8);
+    }
+
+    @keyframes ultraBeautifulSparklerCore {
+        0%, 100% {
+            opacity: 0;
+            transform: scale(0.3);
+            filter: blur(2px) brightness(1.5);
+        }
+        8% {
+            opacity: 1;
+            transform: scale(3.5);
+            filter: blur(0px) brightness(2.2);
+        }
+        15% {
+            opacity: 1;
+            transform: scale(4.8);
+            filter: blur(0px) brightness(2.5);
+        }
+        25% {
+            opacity: 1;
+            transform: scale(5.5);
+            filter: blur(0px) brightness(2.8);
+        }
+        75% {
+            opacity: 1;
+            transform: scale(4.5);
+            filter: blur(0px) brightness(2.5);
+        }
+        85% {
+            opacity: 0.95;
+            transform: scale(3.2);
+            filter: blur(1px) brightness(2.2);
+        }
+        92% {
+            opacity: 0.7;
+            transform: scale(1.8);
+            filter: blur(2px) brightness(1.8);
+        }
+    }
+
+    .spark {
+        box-shadow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor;
+        filter: brightness(2.0);
+    }
+}
+
 /* ========================================================
 ▼ Spark Component - 400個の火花定義（20コア × 20火花）
 360度円状放射 - 18度間隔の完璧な数学的配置
