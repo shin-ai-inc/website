@@ -500,7 +500,7 @@
     ======================================================== */
     .page-hero {
         position: relative;
-        min-height: 700px;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         /* index.html完全統一: calc(var(--header-height) + 2rem) */
@@ -524,7 +524,7 @@
 
     @media (max-width: 768px) {
         .page-hero {
-            min-height: 80vh;
+            min-height: 100vh;
             /* index.html統一: calc(var(--header-height-mobile) + 2rem) */
             padding: calc(var(--header-height-mobile) + 2rem) 0 2rem;
             margin-top: calc(var(--header-height-mobile) * -1);
@@ -560,7 +560,7 @@
     
     .breadcrumb a:hover {
         color: var(--primary-dark);
-        text-decoration: underline;
+        text-decoration: none;
     }
     
     .breadcrumb-separator {
@@ -592,7 +592,7 @@
     .hero-title-line {
         display: block;
         font-size: clamp(1.8rem, 4vw, 3.8rem);
-        font-weight: 600;
+        font-weight: 500;
         letter-spacing: 0.05em;
         text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
         animation: titleLineAppear 1s ease forwards;
@@ -748,11 +748,17 @@
 
         .hero-title-line {
             font-size: clamp(1.6rem, 4vw, 2.5rem);
+            text-align: left;
+        }
+
+        .hero-title-line-2 {
+            justify-content: flex-start;
         }
 
         .page-hero-description {
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
+            text-align: left;
         }
     }
 
@@ -2438,33 +2444,6 @@
         }
     }
 
-    /* ========================================================
-    ▼ Footer Fix - 活動拠点・所在地のレスポンシブ改行
-    masa様改善: 柔軟な改行対応
-    ======================================================== */
-    .footer-contact-item {
-        white-space: nowrap;
-    }
-
-    .footer-contact-item span {
-        display: inline-block;
-    }
-
-    .footer-contact-item br {
-        display: inline;
-    }
-
-    @media (max-width: 768px) {
-        .footer-contact-item {
-            white-space: normal;
-        }
-
-        .footer-contact-item span {
-            word-break: normal;
-            overflow-wrap: break-word;
-            line-height: 1.6;
-        }
-    }
     </style>
 </head>
 <body>
@@ -2499,10 +2478,10 @@
                         <a href="index.html" class="nav-link">ホーム</a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.html" class="nav-link">会社紹介</a>
+                        <a href="services.html" class="nav-link">サービス</a>
                     </li>
                     <li class="nav-item">
-                        <a href="services.html" class="nav-link">サービス</a>
+                        <a href="about.html" class="nav-link">会社紹介</a>
                     </li>
                     <li class="nav-item">
                         <a href="industries.html" class="nav-link active" aria-current="page">業界別活用</a>
@@ -2603,7 +2582,7 @@
                     </h1>
 
                     <p class="page-hero-description text-lg">
-                        <span class="hero-desc-emphasis">現場を深く理解し、</span>実務に根ざした<br class="mobile-only">価値あるAIを共に創る。
+                        <span class="hero-desc-emphasis">現場を深く理解し、</span>実務に根ざした価値あるAIを<br class="mobile-only">共に創る。
                     </p>
 
                     <div class="hero-industry-tags">
