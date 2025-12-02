@@ -1182,11 +1182,42 @@
     /* ========================================================
     ▼ Industries Grid Component
     ======================================================== */
+    /*
+    ==============================================
+    // === component-split: IndustriesGrid3x2 ===
+    COMPONENT: 業界3×2グリッドレイアウト
+    機能: 6業界を3×2グリッドで常時表示
+    特徴: PC版3列、タブレット2列、モバイル1列
+    ==============================================
+    */
     .industries-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: clamp(1.2rem, 2.5vw, 2rem);
+        margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* PC版: 3列グリッド（3×2配置） */
+    @media (min-width: 1025px) {
+        .industries-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* タブレット版: 2列グリッド */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .industries-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* モバイル版: 1列表示 */
+    @media (max-width: 768px) {
+        .industries-grid {
+            grid-template-columns: 1fr;
+        }
     }
     
     /* 
@@ -2119,12 +2150,9 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        
-        .industries-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        
+
+        /* .industries-grid設定は上部の専用セクションに統合済み */
+
         .implementation-steps::before {
             left: 25px;
         }
@@ -2159,11 +2187,8 @@
             padding: 1.5rem 0;
         }
         
-        .industries-grid {
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-        }
-        
+        /* .industries-grid設定は上部の専用セクションに統合済み */
+
         .industry-tabs {
             overflow-x: auto;
             justify-content: flex-start;
@@ -2332,11 +2357,8 @@
         .container {
             max-width: 1400px;
         }
-        
-        .industries-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-        }
+
+        /* .industries-grid設定は上部の専用セクションに統合済み */
     }
     
     /* ダークモード対応 */
@@ -2612,21 +2634,12 @@
                     <p class="section-description">各業界の実情に寄り添い、実践的なAI活用方法をご提案いたします</p>
                 </div>
                 
-                <!-- 
+                <!--
                 ==============================================
-                // === component-split: IndustryTabs ===
-                COMPONENT: 業界タブナビゲーション
+                // === タブナビゲーション削除（3×2グリッド化のため常時表示に変更）
                 ==============================================
                 -->
-                <div class="industry-tabs animate-in" role="tablist" aria-label="業界カテゴリ">
-                    <a href="#welfare" class="industry-tab active" role="tab" aria-selected="true" aria-controls="welfare-content" id="welfare-tab">福祉・介護</a>
-                    <a href="#education" class="industry-tab" role="tab" aria-selected="false" aria-controls="education-content" id="education-tab">教育・研修</a>
-                    <a href="#construction" class="industry-tab" role="tab" aria-selected="false" aria-controls="construction-content" id="construction-tab">建設業</a>
-                    <a href="#manufacturing" class="industry-tab" role="tab" aria-selected="false" aria-controls="manufacturing-content" id="manufacturing-tab">製造業</a>
-                    <a href="#retail" class="industry-tab" role="tab" aria-selected="false" aria-controls="retail-content" id="retail-tab">小売・EC</a>
-                    <a href="#finance" class="industry-tab" role="tab" aria-selected="false" aria-controls="finance-content" id="finance-tab">金融・保険</a>
-                </div>
-                
+
                 <!-- 
                 ==============================================
                 // === component-split: IndustriesGrid ===
