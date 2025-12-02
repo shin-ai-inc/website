@@ -107,10 +107,11 @@
     <link rel="stylesheet" href="assets/css/chatbot.css">
 
     <!-- Sparkler Effects External CSS Component - 600 Light Particles System -->
-    <link rel="stylesheet" href="assets/css/sparkler-effects.css">
+    <!-- Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル -->
+    <link rel="stylesheet" href="assets/css/digital-night-sky-v3.css">
 
-    <!-- Sparkler Effects Dynamic Generator - JavaScript Optimization -->
-    <script src="assets/js/sparkler-effects.js" defer></script>
+    <!-- Digital Night Sky Interactive Magic - JavaScript System v3.0 -->
+    <script src="assets/js/digital-night-sky-v3.js" defer></script>
 
     <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
@@ -139,7 +140,7 @@
       "alternateName": ["シンアイ", "ShinAI Inc"],
       "url": "https://shin-ai-inc.github.io/website/industries.html",
       "mainEntityOfPage": "https://shin-ai-inc.github.io/website/industries.html",
-      "description": "各業界の課題に合わせた最適なAIソリューションをご紹介。AIエージェント開発・RAG構築で企業の課題を解決し、プロトタイプから始める伴走型開発で確実な成果を実現。",
+      "description": "各業界の課題に合わせた最適なAIソリューションをご紹介。AIエージェント開発・RAG構築で企業の課題を解決し、プロトタイプから始める伴走型開発で成果を追求。",
       "slogan": "AIの力で人間らしい時間を取り戻す",
       "foundingDate": "2024",
       "logo": {
@@ -392,6 +393,9 @@
         background-color: var(--white);
         overflow-x: hidden;
         min-height: 100%;
+        margin: 0;
+        padding: 0;
+        /* masa様改善Part3: body余白完全排除・ヘッダー直下隙間ゼロ */
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -451,14 +455,14 @@
     }
     
     .section {
-        padding: 2.5rem 0;
+        padding: 3.5rem 0;
         position: relative;
         overflow: hidden;
     }
-    
+
     @media (max-width: 768px) {
         .section {
-            padding: 1.5rem 0;
+            padding: 2rem 0;
         }
     }
     
@@ -492,31 +496,45 @@
 
     /* ========================================================
     ▼ Page Hero Component - ダーク背景グラデーション
+    masa様改善Part3完全版: index.html統一構造 + 背景ヘッダー直下開始
     ======================================================== */
     .page-hero {
         position: relative;
         min-height: 90vh;
         display: flex;
         align-items: center;
-        padding: calc(var(--header-height) + 2rem) 0 2rem;
+        /* index.html完全統一: calc(var(--header-height) + 2rem) */
+        padding: calc(var(--header-height) + 2rem) 0 2.5rem;
+        margin-top: calc(var(--header-height) * -1);
+        /* 負のmarginでヘッダー下から背景開始 = 白い隙間完全排除 */
         overflow: hidden;
         background: linear-gradient(135deg,
-            #1a2332 0%,
-            #243447 30%,
-            #2c3e50 60%,
-            #34495e 100%);
+            #0a0e1a 0%,
+            #0f1419 30%,
+            #131820 60%,
+            #1a1f2e 100%);
         text-align: center;
         color: #ffffff;
+    }
+
+    main {
+        margin: 0;
+        padding: 0;
     }
 
     @media (max-width: 768px) {
         .page-hero {
             min-height: 80vh;
-            padding: calc(var(--header-height-mobile) + 1rem) 0 1.5rem;
+            /* index.html統一: calc(var(--header-height-mobile) + 2rem) */
+            padding: calc(var(--header-height-mobile) + 2rem) 0 2rem;
+            margin-top: calc(var(--header-height-mobile) * -1);
         }
     }
 
-    /* NOTE: 線香花火エフェクト600個光粒子システムは assets/css/sparkler-effects.css に分離 */
+    /* NOTE: Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル
+       3レイヤー構造: 前景(主役星30-40個) / 中景(サポート星60-80個) / 背景(微細な瞬き80-100個)
+       インタラクティブ: マウス・スクロール連動による応答的魔法
+       詳細: assets/css/digital-night-sky-v3.css + assets/js/digital-night-sky-v3.js */
     
     .page-hero-content {
         position: relative;
@@ -554,43 +572,151 @@
         color: var(--gray);
     }
     
+    /* ========================================================
+    ▼ Hero Title Component - 芸術的タイポグラフィ
+    masa様要件: デジタルアート作品レベルの美的センス
+    ======================================================== */
     .page-hero-title {
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         color: #ffffff;
         position: relative;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
         animation: fadeInFast 0.8s ease forwards;
         text-align: center;
-        font-size: clamp(1.8rem, 4vw, 3.2rem);
-        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5),
-                     0 2px 8px rgba(0, 0, 0, 0.3);
-        font-weight: 800;
-        letter-spacing: 0.01em;
+        font-family: var(--font-sans);
     }
 
-    /* グラデーションは削除し、くっきり白色で表示 */
-    .page-hero-title .text-gradient {
-        background: linear-gradient(135deg, #3A5FEB 0%, #00C9A7 100%);
+    .hero-title-line {
+        display: block;
+        font-size: clamp(1.8rem, 4vw, 3.8rem);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+        animation: titleLineAppear 1s ease forwards;
+        opacity: 0;
+    }
+
+    .hero-title-line-1 {
+        animation-delay: 0.1s;
+        font-weight: 400;
+        opacity: 0.92;
+    }
+
+    .hero-title-line-2 {
+        animation-delay: 0.3s;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        display: flex;
+        align-items: baseline;
+        gap: 0.3em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    @keyframes titleLineAppear {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+    }
+
+    /* グラデーション強調 - 芸術的発光効果 */
+    .hero-gradient-emphasis {
+        background: linear-gradient(135deg,
+            #5B7BFF 0%,
+            #7B8FFF 30%,
+            #20E7C4 70%,
+            #00D9B8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-weight: 900;
+        position: relative;
+        text-shadow: none;
+        filter: drop-shadow(0 0 20px rgba(91, 123, 255, 0.5))
+                drop-shadow(0 4px 12px rgba(32, 231, 196, 0.3));
+        letter-spacing: 0.02em;
     }
 
+    .hero-title-punctuation {
+        font-weight: 300;
+        opacity: 0.85;
+        font-size: 0.95em;
+    }
+
+    /* Hero Description - コンパクト・洗練 */
     .page-hero-description {
-        color: rgba(255, 255, 255, 0.95);
-        max-width: 700px;
+        color: rgba(255, 255, 255, 0.88);
+        max-width: 800px;
         margin: 0 auto 2rem;
-        line-height: 1.8;
-        animation: fadeInFast 0.8s ease 0.2s forwards;
+        font-size: 1.25rem;
+        line-height: 1.75;
+        animation: fadeInFast 1s ease 0.5s forwards;
         opacity: 0;
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
+        padding: 0 1.5rem;
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        font-weight: 400;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        letter-spacing: 0.03em;
+    }
+
+    .hero-desc-emphasis {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.98);
+    }
+
+    /* Industry Tags - エレガントなチップデザイン */
+    .hero-industry-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+        max-width: 550px;
+        margin: 0 auto;
         padding: 0 1rem;
-        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        animation: fadeInFast 1.2s ease 0.7s forwards;
+        opacity: 0;
+    }
+
+    .industry-tag {
+        display: inline-block;
+        padding: 0.45rem 1.1rem;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        font-size: 0.85rem;
         font-weight: 500;
-        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+        color: rgba(255, 255, 255, 0.9);
+        letter-spacing: 0.05em;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: default;
+    }
+
+    .industry-tag:hover {
+        background: rgba(91, 123, 255, 0.15);
+        border-color: rgba(91, 123, 255, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(91, 123, 255, 0.2);
+    }
+
+    .industry-tag-more {
+        display: inline-block;
+        padding: 0.45rem 1.1rem;
+        font-size: 0.82rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+        letter-spacing: 0.03em;
     }
 
     @keyframes fadeInFast {
@@ -626,33 +752,34 @@
     ======================================================== */
     .section-header {
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
         position: relative;
         z-index: 1;
     }
-    
+
     .section-subtitle {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.1);
-        padding: 0.4rem 1.2rem;
+        background: rgba(58, 95, 235, 0.08);
+        padding: 0.5rem 1.3rem;
         border-radius: var(--radius-full);
         color: var(--primary);
         font-weight: var(--font-weight-semibold);
-        margin-bottom: 0.8rem;
-        font-size: 0.85rem;
-        box-shadow: 0 2px 6px rgba(58, 95, 235, 0.08);
-        border: 1px solid rgba(58, 95, 235, 0.1);
+        margin-bottom: 1rem;
+        font-size: 0.88rem;
+        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.06);
+        border: 1px solid rgba(58, 95, 235, 0.08);
     }
-    
+
     .section-header .heading-lg {
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
     }
-    
+
     .section-description {
         color: var(--gray);
-        max-width: 600px;
+        max-width: 650px;
         margin: 0 auto;
-        line-height: 1.6;
+        line-height: 1.7;
+        font-size: 0.95rem;
     }
     
     .brand-catchphrase {
@@ -1102,18 +1229,19 @@
     特徴: CTAボタン整理、情報密度向上
     ==============================================
     */
+    /* masa様要件: コンパクト・スマート・美的バランス */
     .industry-card {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-        padding: 1.8rem;
-        transition: all 0.15s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        padding: 1.4rem;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         position: relative;
         overflow: hidden;
         height: 100%;
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(58, 95, 235, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .industry-card:hover {
@@ -1160,22 +1288,22 @@
     .industry-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1.2rem;
-        gap: 1rem;
+        margin-bottom: 1rem;
+        gap: 0.85rem;
     }
 
     .industry-icon {
-        width: 50px;
-        height: 50px;
-        min-width: 50px;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
         background: var(--primary);
         color: var(--white);
-        border-radius: 12px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem;
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.25);
+        font-size: 1.15rem;
+        box-shadow: 0 4px 16px rgba(58, 95, 235, 0.22);
         transition: all 0.15s ease;
     }
 
@@ -1215,68 +1343,85 @@
     }
 
     .industry-title {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
         font-weight: 700;
         margin: 0;
         color: var(--dark);
-        letter-spacing: -0.01em;
+        letter-spacing: 0.01em;
     }
 
     .industry-description {
         color: var(--gray);
-        line-height: 1.6;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        line-height: 1.65;
+        margin: 0 0 1.2rem 0;
         flex-grow: 1;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         text-align: left;
     }
 
     .industry-features {
         list-style: none;
         padding: 0;
-        margin: 0 0 1.5rem 0; /* 【改善】マージン調整 */
+        margin: 0 0 1.2rem 0;
     }
 
     .industry-feature {
         position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.6rem;
+        padding-left: 1.35rem;
+        margin-bottom: 0.5rem;
         color: var(--gray);
-        line-height: 1.5;
-        font-size: 0.85rem;
+        line-height: 1.6;
+        font-size: 0.82rem;
         text-align: left;
     }
 
+    /* masa様改善: AIくさいfa-checkアイコン完全排除 */
     .industry-feature i {
+        display: none;
+    }
+
+    /* masa様改善: エンタープライズ品質・洗練された小さなアクセント */
+    .industry-feature::before {
+        content: '';
         position: absolute;
         left: 0;
-        top: 0.2rem;
-        font-size: 0.8rem;
+        top: 0.65rem;
+        width: 4px;
+        height: 4px;
+        border-radius: 1px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        box-shadow: 0 0 8px rgba(58, 95, 235, 0.35);
     }
 
-    /* 業界カードごとのアイコン色分け */
-    .industry-card[data-industry="welfare"] .industry-feature i {
-        color: var(--welfare-primary);
+    /* 業界カードごとのアクセント色分け */
+    .industry-card[data-industry="welfare"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--welfare-primary), var(--welfare-secondary));
+        box-shadow: 0 0 10px rgba(var(--welfare-primary), 0.4);
     }
 
-    .industry-card[data-industry="education"] .industry-feature i {
-        color: var(--education-primary);
+    .industry-card[data-industry="education"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--education-primary), var(--education-secondary));
+        box-shadow: 0 0 10px rgba(var(--education-primary), 0.4);
     }
 
-    .industry-card[data-industry="construction"] .industry-feature i {
-        color: var(--construction-primary);
+    .industry-card[data-industry="construction"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--construction-primary), var(--construction-secondary));
+        box-shadow: 0 0 10px rgba(var(--construction-primary), 0.4);
     }
 
-    .industry-card[data-industry="manufacturing"] .industry-feature i {
-        color: var(--manufacturing-primary);
+    .industry-card[data-industry="manufacturing"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--manufacturing-primary), var(--manufacturing-secondary));
+        box-shadow: 0 0 10px rgba(var(--manufacturing-primary), 0.4);
     }
 
-    .industry-card[data-industry="retail"] .industry-feature i {
-        color: var(--retail-primary);
+    .industry-card[data-industry="retail"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--retail-primary), var(--retail-secondary));
+        box-shadow: 0 0 10px rgba(var(--retail-primary), 0.4);
     }
 
-    .industry-card[data-industry="finance"] .industry-feature i {
-        color: var(--finance-primary);
+    .industry-card[data-industry="finance"] .industry-feature::before {
+        background: linear-gradient(135deg, var(--finance-primary), var(--finance-secondary));
+        box-shadow: 0 0 10px rgba(var(--finance-primary), 0.4);
     }
 
     /* 
@@ -1475,18 +1620,18 @@
     .use-case {
         background: var(--white);
         border-radius: var(--radius-lg);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-        padding: 1.8rem;
-        margin: 1.5rem 0;
-        border: 1px solid rgba(58, 95, 235, 0.08);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        padding: 1.5rem;
+        margin: 1.2rem 0;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.15s ease;
         position: relative;
         overflow: hidden;
     }
 
     .use-case:hover {
-        box-shadow: 0 12px 30px rgba(58, 95, 235, 0.1);
-        border-color: rgba(58, 95, 235, 0.12);
+        box-shadow: 0 8px 24px rgba(58, 95, 235, 0.08);
+        border-color: rgba(58, 95, 235, 0.1);
     }
 
     .use-case::before {
@@ -1527,22 +1672,22 @@
     .use-case-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1.5rem;
-        gap: 1rem;
+        margin-bottom: 1.2rem;
+        gap: 0.9rem;
     }
 
     .use-case-icon {
-        width: 60px;
-        height: 60px;
-        min-width: 60px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
         background: var(--primary);
         color: var(--white);
-        border-radius: 15px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        box-shadow: 0 6px 20px rgba(58, 95, 235, 0.25);
+        font-size: 1.3rem;
+        box-shadow: 0 4px 16px rgba(58, 95, 235, 0.2);
         transition: all 0.15s ease;
     }
 
@@ -1551,33 +1696,35 @@
     }
 
     .use-case-title {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 700;
         margin: 0;
         color: var(--dark);
+        letter-spacing: 0.01em;
     }
 
     .use-case-content {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.2rem;
     }
 
     .use-case-section {
-        background: rgba(248, 250, 252, 0.6);
+        background: rgba(248, 250, 252, 0.5);
         border-radius: var(--radius-md);
-        padding: 1.2rem;
-        border: 1px solid rgba(58, 95, 235, 0.06);
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.04);
     }
 
     .use-case-section h4 {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        color: var(--primary);
+        gap: 0.45rem;
+        color: var(--dark);
         margin-top: 0;
-        margin-bottom: 0.8rem;
-        font-size: 1rem;
+        margin-bottom: 0.7rem;
+        font-size: 0.95rem;
+        font-weight: 600;
     }
 
     .use-case-list {
@@ -1588,11 +1735,11 @@
 
     .use-case-list li {
         position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.6rem;
+        padding-left: 1.3rem;
+        margin-bottom: 0.5rem;
         color: var(--gray);
-        line-height: 1.5;
-        font-size: 0.85rem;
+        line-height: 1.6;
+        font-size: 0.82rem;
         text-align: left;
     }
 
@@ -1601,13 +1748,15 @@
     }
 
     .use-case-list li::before {
-        content: '•';
+        content: '';
         position: absolute;
         left: 0;
-        top: 0;
-        color: var(--primary);
-        font-size: 1rem;
-        font-weight: bold;
+        top: 0.65rem;
+        width: 4px;
+        height: 4px;
+        border-radius: 1px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        box-shadow: 0 0 6px rgba(58, 95, 235, 0.3);
     }
 
     .use-case-list li strong {
@@ -2281,10 +2430,15 @@
     }
 
     /* ========================================================
-    ▼ Footer Fix - 活動拠点・所在地の改行防止
+    ▼ Footer Fix - 活動拠点・所在地のレスポンシブ改行
+    masa様改善: 柔軟な改行対応
     ======================================================== */
     .footer-contact-item {
         white-space: nowrap;
+    }
+
+    .footer-contact-item span {
+        display: inline-block;
     }
 
     .footer-contact-item br {
@@ -2294,6 +2448,12 @@
     @media (max-width: 768px) {
         .footer-contact-item {
             white-space: normal;
+        }
+
+        .footer-contact-item span {
+            word-break: normal;
+            overflow-wrap: break-word;
+            line-height: 1.6;
         }
     }
     </style>
@@ -2377,260 +2537,44 @@
         <section class="page-hero" id="hero">
             <!--
             ==============================================
-            // === component-split: SparklerEffectsSystem ===
-            COMPONENT: 線香花火600個光粒子システム
-            構成: 20コア × 各20火花 = 400火花 + 200微細粒子 = 合計600個
-            技術: GPU加速・will-change・transform3d最適化
-            スタイル: assets/css/sparkler-effects.css
+            // === component-split: DigitalNightSkySystem ===
+            COMPONENT: Digital Night Sky System v3.0 - 感動体験を生む芸術的パーティクル
+
+            CONCEPT: "静寂の中の輝き" - 夜空に瞬く星々のような静謐で美しい存在感
+
+            構成:
+            - 前景層: 主役星 30-40個 (最大・最明・最速) - 視線を惹きつける
+            - 中景層: サポート星 60-80個 (中サイズ・中輝度・中速) - 空間の豊かさ
+            - 背景層: 微細な瞬き 80-100個 (最小・最淡・静止) - 奥行きと深み
+            合計: 170-220個の極上品質パーティクル
+
+            インタラクション:
+            - マウスムーブ連動: カーソル周辺150px半径の星が応答
+            - スクロール連動: 速度に応じた星の動き
+            - クリック波紋効果: 触れると応える魔法
+
+            技術: GPU加速・will-change・RequestAnimationFrame・DocumentFragment最適化
+            スタイル: assets/css/digital-night-sky-v3.css
+            スクリプト: assets/js/digital-night-sky-v3.js
+
+            モバイル最適化: 粒子数削減(85-110個)・サイズ調整・アニメーション簡素化
+            アクセシビリティ: prefers-reduced-motion完全対応
             ==============================================
             -->
             <div class="sparkler-container">
-                <!-- 20個の超美麗線香花火コア - 各コアから20個の火花が360度円状放射 -->
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
-                <div class="sparkler-core"></div>
+                <!--
+                Digital Night Sky v3.0: 完全JavaScript動的生成システム
 
-                <!-- コア1からの20個の火花 - 18度間隔の完璧な360度円状放射 -->
-                <div class="spark spark-large spark-core-1-1"></div>
-                <div class="spark spark-medium spark-core-1-2"></div>
-                <div class="spark spark-small spark-core-1-3"></div>
-                <div class="spark spark-tiny spark-core-1-4"></div>
-                <div class="spark spark-large spark-core-1-5"></div>
-                <div class="spark spark-medium spark-core-1-6"></div>
-                <div class="spark spark-small spark-core-1-7"></div>
-                <div class="spark spark-tiny spark-core-1-8"></div>
-                <div class="spark spark-large spark-core-1-9"></div>
-                <div class="spark spark-medium spark-core-1-10"></div>
-                <div class="spark spark-small spark-core-1-11"></div>
-                <div class="spark spark-tiny spark-core-1-12"></div>
-                <div class="spark spark-large spark-core-1-13"></div>
-                <div class="spark spark-medium spark-core-1-14"></div>
-                <div class="spark spark-small spark-core-1-15"></div>
-                <div class="spark spark-tiny spark-core-1-16"></div>
-                <div class="spark spark-large spark-core-1-17"></div>
-                <div class="spark spark-medium spark-core-1-18"></div>
-                <div class="spark spark-small spark-core-1-19"></div>
-                <div class="spark spark-tiny spark-core-1-20"></div>
+                すべての星々がassets/js/digital-night-sky-v3.jsによって
+                自動生成されます。HTMLは完全にクリーンな状態を保ちます。
 
-                <!-- NOTE: コア2-20からの380個の火花（19コア × 20火花 = 380個）
-                masa様承認後、完全実装予定。各コアから同じ18度間隔360度円状放射パターンを適用。
-                技術的負債を残さず、パフォーマンス最適化を維持しながら段階的実装を行います。 -->
+                生成される星々:
+                - 前景層(主役星): 30-40個 (モバイル: 15-20個)
+                - 中景層(サポート星): 60-80個 (モバイル: 30-40個)
+                - 背景層(微細な瞬き): 80-100個 (モバイル: 40-50個)
 
-                <!-- 200個の微細補完粒子 - ランダム配置による豊かな視覚効果 -->
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <!-- 微細粒子61-200: さらに140個追加（合計200個） -->
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
-                <div class="micro-sparkle"></div>
+                合計: デスクトップ170-220個 / モバイル85-110個
+                -->
             </div>
 
             <div class="container">
@@ -2642,94 +2586,30 @@
                     </div>
 
                     <h1 class="page-hero-title heading-xl">
-                        あなたの業界に、<br class="hide-mobile"><span class="text-gradient">本当に必要なAI</span>を。
+                        <span class="hero-title-line hero-title-line-1">あなたの業界に、</span>
+                        <span class="hero-title-line hero-title-line-2">
+                            <span class="text-gradient hero-gradient-emphasis">本当に必要なAI</span>
+                            <span class="hero-title-punctuation">を。</span>
+                        </span>
                     </h1>
 
                     <p class="page-hero-description text-lg">
-                        福祉・教育・建設・製造・小売・金融。<br class="hide-mobile">
-                        各業界の現場を深く理解し、実務に根ざした価値あるAIを共に創ります。
+                        <span class="hero-desc-emphasis">現場を深く理解し、</span>実務に根ざした価値あるAIを共に創る。
                     </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- 
-        ==============================================
-        // === component-split: IntroSection ===
-        COMPONENT: 導入セクション - 差別化強化
-        ==============================================
-        -->
-        <section class="section" aria-labelledby="intro-title">
-            <div class="container">
-                <div class="section-header animate-in">
-                    <span class="section-subtitle">ShinAIのアプローチ</span>
-                    <h2 class="heading-lg" id="intro-title">プロトタイプから始める<span class="highlight">段階的AI導入</span></h2>
-                    <p class="section-description">
-                        小さく始めて、着実に成果を積み重ねる。<br>リスクを抑えた実践的なAI活用をご提案します
-                    </p>
-                </div>
-
-                <div class="section-content max-width-800 text-left animate-in">
-                    <p>AI導入の多くは、初期投資の大きさや効果の不透明さから躊躇されることがあります。ShinAIは「プロトタイプからの段階的導入」により、お客様に寄り添った支援を行います：</p>
-                    
-                    <!--
-                    ==============================================
-                    // === component-split: StrengthsGrid2x2 ===
-                    COMPONENT: 強み2×2グリッドカードコンテナ
-                    機能: 4カード2×2グリッド、レスポンシブ対応
-                    特徴: PC版2×2、モバイル版1列、統一美的デザイン
-                    ==============================================
-                    -->
-                    <div class="strengths-grid benefits-container">
-                        <div class="strength-card benefit-card">
-                            <div class="strength-icon benefit-icon">
-                                <i class="fas fa-seedling" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">小規模試作から開始</h4>
-                            <p class="strength-description">まずは小さな試作品で効果を実感。実際の業務で使いながら、必要な機能を見極めることができます。大規模な投資の前に、AIの可能性を体験していただけます。</p>
-                            <div class="strength-stat benefit-stat">
-                                <span class="stat-value">2</span><span class="stat-label">週間で試作完成</span>
-                            </div>
-                        </div>
-
-                        <div class="strength-card benefit-card">
-                            <div class="strength-icon benefit-icon">
-                                <i class="fas fa-handshake" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">寄り添う伴走支援</h4>
-                            <p class="strength-description">技術導入から組織への定着まで、お客様のペースに合わせて支援。専門知識がなくても、一緒に進めていけるよう丁寧にサポートいたします。</p>
-                            <div class="strength-stat benefit-stat">
-                                <span class="stat-value">継続的</span>
-                                <span class="stat-label">サポート体制</span>
-                            </div>
-                        </div>
-
-                        <div class="strength-card benefit-card">
-                            <div class="strength-icon benefit-icon">
-                                <i class="fas fa-industry" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">業界に合わせた設計</h4>
-                            <p class="strength-description">福祉・教育・建設・製造・小売・金融。各業界の実務経験を活かし、現場で本当に役立つAIシステムを設計します。業界特有の課題に対応したソリューションをご提案いたします。</p>
-                            <div class="strength-stat benefit-stat">
-                                <span class="stat-value">6</span><span class="stat-label">業界対応</span>
-                            </div>
-                        </div>
-
-                        <div class="strength-card benefit-card">
-                            <div class="strength-icon benefit-icon">
-                                <i class="fas fa-rocket" aria-hidden="true"></i>
-                            </div>
-                            <h4 class="strength-title">先進技術の実践投入</h4>
-                            <p class="strength-description">最新のLLM技術、機械学習、深層学習を駆使。自社開発AIツールの実績をもとに、業界最先端の技術を御社の課題解決に活かします。継続的な研究開発により、常に最新技術を提供いたします。</p>
-                            <div class="strength-stat benefit-stat">
-                                <span class="stat-value">最先端</span>
-                                <span class="stat-label">技術活用</span>
-                            </div>
-                        </div>
+                    <div class="hero-industry-tags">
+                        <span class="industry-tag">福祉</span>
+                        <span class="industry-tag">教育</span>
+                        <span class="industry-tag">建設</span>
+                        <span class="industry-tag">製造</span>
+                        <span class="industry-tag">小売</span>
+                        <span class="industry-tag">金融</span>
+                        <span class="industry-tag-more">and more...</span>
                     </div>
                 </div>
             </div>
         </section>
+
         
         <!-- 
         ==============================================
@@ -3675,13 +3555,13 @@
                                 } else if (messageLower.includes('金融') || messageLower.includes('保険') || messageLower.includes('finance')) {
                                     response = "金融・保険分野でのAI活用についてですね。ShinAIでは与信審査AIや不正検知システム、資産運用アドバイザリーAIを提供しています。与信判断の精度が25%向上し、審査時間を80%短縮できます。リスク評価の精度向上と業務効率化を両立します。どのような金融サービスでのご活用をお考えでしょうか？";
                                 } else if (messageLower.includes('プロトタイプ') || messageLower.includes('伴走')) {
-                                    response = "ShinAIの「プロトタイプからの伴走型開発」についてですね。最短2週間でプロトタイプを構築し、実際に使って効果を確認してから本格導入を決定できます。これにより投資リスクを最小化し、確実な成果を実現します。技術導入だけでなく、組織への定着まで継続支援いたします。";
+                                    response = "ShinAIの「プロトタイプからの伴走型開発」についてですね。最短2週間でプロトタイプを構築し、実際に使って効果を確認してから本格導入を決定できます。これにより投資リスクを最小化し、成果を追求します。技術導入だけでなく、組織への定着まで継続支援いたします。";
                                 } else if (messageLower.includes('アイプロ') || messageLower.includes('企画書')) {
                                     response = "新規事業企画書AIツール「アイプロ」についてですね。AIが自動でビジネス企画書・プレゼン資料を作成するツールで、中小企業を中心に高い評価をいただいています。最短5分で高品質な提案資料が完成し、営業・企画部門の生産性を大幅に向上させます。ShinAIの技術力とユーザビリティ設計の実力を証明するプロダクトです。";
                                 } else {
                                     // 汎用的な応答
                                     const responses = [
-                                        "ShinAIでは、業界ごとの特性を理解し、最適なAIソリューションを提供しています。プロトタイプから始める伴走型開発で、初期投資を抑えて確実な成果を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
+                                        "ShinAIでは、業界ごとの特性を理解し、最適なAIソリューションを提供しています。プロトタイプから始める伴走型開発で、初期投資を抑えて成果を追求します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
                                         "AIは様々な業界で革新的な価値を生み出せます。ShinAIは福祉・介護、教育・研修、建設業、製造業、小売・EC、金融・保険など、幅広い業界での導入実績があります。御社の業界に関する具体的なご質問がありましたら、お聞かせください。",
                                         "業界別のAI活用について、もっと詳しく知りたい点はありますか？ShinAIの専門家が、貴社の課題解決に最適なAIソリューションをご提案します。まずは無料相談で、お気軽にご相談ください。"
                                     ];
