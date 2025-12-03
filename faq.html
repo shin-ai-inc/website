@@ -614,20 +614,20 @@
         color: var(--white);
     }
     
-    /* サービス詳細ボタン - 控えめ（優先度低） */
+    /* サービス詳細ボタン - 差し色枠線で視認性向上 */
     .btn-secondary {
         background: rgba(58, 95, 235, 0.08);
         color: var(--primary);
-        border: 1px solid rgba(58, 95, 235, 0.15);
+        border: 2px solid #20E7C4;
         box-shadow: var(--shadow-xs);
-        opacity: 0.9; /* 少し透明に */
+        opacity: 0.95;
     }
-    
+
     .btn-secondary:hover {
-        background: rgba(58, 95, 235, 0.12);
-        border-color: var(--primary);
+        background: rgba(32, 231, 196, 0.12);
+        border-color: #00C9A7;
         color: var(--primary);
-        /* 動きを最小限に */
+        box-shadow: 0 4px 12px rgba(32, 231, 196, 0.2);
     }
     
     .btn-outline {
@@ -1316,16 +1316,17 @@
 
     @media (max-width: 768px) {
         .faq-hero {
-            padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 2.5rem;
         }
 
         .faq-hero-title {
             font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
         .faq-hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
         }
 
         .faq-search-wrapper {
@@ -1334,7 +1335,7 @@
 
         #faq-search-input {
             border-radius: var(--radius-lg);
-            padding: 1rem 1rem 1rem 3.5rem;
+            padding: 0.9rem 1rem 0.9rem 3rem;
         }
 
         .faq-search-button {
@@ -1345,8 +1346,10 @@
         }
 
         .faq-search-icon {
-            left: 1.2rem;
-            font-size: 1.1rem;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
         }
 
         .faq-categories {

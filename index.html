@@ -1048,8 +1048,8 @@
     
     @media (max-width: 768px) {
         .hero {
-            min-height: 60vh;
-            padding: calc(var(--header-height-mobile) + 1rem) 0 2rem;
+            min-height: 50vh;
+            padding: calc(var(--header-height-mobile) + 0.5rem) 0 1.5rem;
         }
 
         .hero-differentiators {
@@ -1057,7 +1057,7 @@
             flex-direction: row;
             justify-content: space-between;
             gap: 0.6rem;
-            margin: 2.5rem auto 3rem;
+            margin: 1.5rem auto 2rem;
             padding: 0 1rem;
             max-width: 100%;
         }
@@ -3006,8 +3006,8 @@
 
         container.appendChild(renderer.domElement);
 
-        // 二重地球儀構造: 従来版の適切な濃度
-        const coreGeometry = new THREE.IcosahedronGeometry(isMobile ? 8 : 7.2, 2);
+        // 二重地球儀構造: モバイル高解像度化（subdivision level増加）
+        const coreGeometry = new THREE.IcosahedronGeometry(isMobile ? 8 : 7.2, isMobile ? 3 : 2);
         const coreMaterial = new THREE.MeshBasicMaterial({
             color: 0x3A5FEB,
             transparent: true,
@@ -3017,7 +3017,7 @@
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
 
-        const innerCoreGeometry = new THREE.IcosahedronGeometry(isMobile ? 4 : 3.6, 2);
+        const innerCoreGeometry = new THREE.IcosahedronGeometry(isMobile ? 4 : 3.6, isMobile ? 3 : 2);
         const innerCoreMaterial = new THREE.MeshBasicMaterial({
             color: 0x00C9A7,
             transparent: true,
@@ -3027,8 +3027,8 @@
         const innerCore = new THREE.Mesh(innerCoreGeometry, innerCoreMaterial);
         scene.add(innerCore);
 
-        // パーティクル数: プラネタリウム効果のため大幅増量
-        const particlesCount = isMobile ? 800 : 1400;
+        // パーティクル数: モバイル版さらに増量
+        const particlesCount = isMobile ? 1200 : 1400;
         const particles = [];
 
         // パーティクル形状: サイズを大きく
@@ -3197,15 +3197,15 @@
 
             camera.lookAt(scene.position);
 
-            // Core animation
-            core.rotation.y += isMobile ? 0.0015 : 0.001;
-            core.rotation.x += isMobile ? 0.0008 : 0.0005;
+            // Core animation - モバイル版回転速度さらにアップ
+            core.rotation.y += isMobile ? 0.0022 : 0.001;
+            core.rotation.x += isMobile ? 0.0012 : 0.0005;
             const scalePulse = Math.sin(time * 0.4) * 0.04 + 1;
             core.scale.set(scalePulse, scalePulse, scalePulse);
 
-            // Inner core reverse rotation
-            innerCore.rotation.y -= isMobile ? 0.002 : 0.0015;
-            innerCore.rotation.z += isMobile ? 0.0012 : 0.0008;
+            // Inner core reverse rotation - モバイル版回転速度さらにアップ
+            innerCore.rotation.y -= isMobile ? 0.003 : 0.0015;
+            innerCore.rotation.z += isMobile ? 0.0018 : 0.0008;
             const innerScalePulse = Math.sin(time * 0.6) * 0.08 + 1;
             innerCore.scale.set(innerScalePulse, innerScalePulse, innerScalePulse);
 
