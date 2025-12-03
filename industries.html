@@ -240,27 +240,42 @@
     }
     
     /* ========================================================
-    ▼ CSS Variables Component - 最適化版
+    ▼ CSS Variables Component - index.html完全統一版
     ======================================================== */
     :root {
-        /* Primary Colors */
+        /* Primary Colors - index.html統一 */
         --primary: #3A5FEB;
         --primary-dark: #2C49C7;
         --primary-light: #5B7BFF;
         --secondary: #00C9A7;
         --secondary-dark: #00A689;
         --secondary-light: #20E7C4;
-        --accent: #FF8A00;
-        --accent-light: #FFA94D;
-        --accent-dark: #E67900;
+        --accent: #E67E22;
+        --accent-light: #F39C12;
+        --accent-dark: #D35400;
+
+        /* Elegant Complementary Colors - 品格ある補完色 */
+        --elegant-navy: #1E3A5F;
+        --elegant-slate: #475569;
+        --elegant-charcoal: #2C3E50;
+        --elegant-silver: #94A3B8;
+        --elegant-pearl: #F1F5F9;
+
+        /* Neutral Colors */
         --dark: #0f172a;
         --gray: #64748b;
         --light-gray: #f8fafc;
         --white: #ffffff;
-        --error: #FF3B3B;
-        --success: #00C48C;
-        
-        /* Gradients */
+
+        --differentiator-bg-normal: linear-gradient(135deg, rgba(58, 95, 235, 0.08) 0%, rgba(0, 201, 167, 0.08) 100%);
+        --differentiator-bg-hover: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        --differentiator-icon-normal: #3A5FEB;
+        --differentiator-icon-hover: #FFFFFF;
+        --differentiator-border-normal: rgba(58, 95, 235, 0.12);
+        --differentiator-border-hover: rgba(255, 107, 53, 0.3);
+        --differentiator-shadow-normal: 0 4px 12px rgba(58, 95, 235, 0.1);
+        --differentiator-shadow-hover: 0 8px 25px rgba(255, 107, 53, 0.25);
+
         --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
         --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
         --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
@@ -269,43 +284,28 @@
         --gradient-section: linear-gradient(to bottom, rgba(58, 95, 235, 0.02), rgba(0, 201, 167, 0.02));
         --gradient-card: linear-gradient(135deg, rgba(58, 95, 235, 0.06), rgba(0, 201, 167, 0.06));
         --gradient-brand: linear-gradient(135deg, #3A5FEB 0%, #4E6EF2 45%, #00C9A7 100%);
-        
-        /* 
-        ==============================================
-        // === component-split: ImprovedCTAGradient ===
-        COMPONENT: 楽しめるグラデーション強化
-        機能: CTAセクションの魅力的なカラーアニメーション
-        特徴: 色変化を活かした鮮やかで楽しいデザイン
-        ==============================================
-        */
-        --gradient-cta-enhanced: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD, #98D8C8);
-        
-        /* 業界別カラーシステム */
+        --gradient-cta-new: linear-gradient(135deg, #2D4CC8 0%, #00B89F 50%, #2D4CC8 100%);
+
+        /* 業界別カラーシステム - industries.html専用 */
         --welfare-primary: #4671FF;
         --welfare-secondary: #65A0FF;
         --welfare-bg: rgba(70, 113, 255, 0.08);
-        
         --education-primary: #FF8A00;
         --education-secondary: #FFA53B;
         --education-bg: rgba(255, 138, 0, 0.08);
-        
         --construction-primary: #32A852;
         --construction-secondary: #41C866;
         --construction-bg: rgba(50, 168, 82, 0.08);
-        
         --manufacturing-primary: #00C9A7;
         --manufacturing-secondary: #00E6C3;
         --manufacturing-bg: rgba(0, 201, 167, 0.08);
-        
         --retail-primary: #FF5757;
         --retail-secondary: #FF7E7E;
         --retail-bg: rgba(255, 87, 87, 0.08);
-        
         --finance-primary: #FFBA00;
         --finance-secondary: #FFD056;
         --finance-bg: rgba(255, 186, 0, 0.08);
-        
-        /* Shadows - 軽量化 */
+
         --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
         --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.05);
         --shadow-md: 0 4px 8px rgba(15, 23, 42, 0.06);
@@ -313,18 +313,34 @@
         --shadow-xl: 0 8px 16px rgba(15, 23, 42, 0.08);
         --shadow-button: 0 3px 8px rgba(58, 95, 235, 0.2);
         --shadow-button-hover: 0 5px 12px rgba(58, 95, 235, 0.3);
-        
-        /* Typography */
+
         --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        /* Typography Scale - Perfect Fourth (1.333) */
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-md: 1.125rem;
+        --font-size-lg: 1.333rem;
+        --font-size-xl: 1.777rem;
+        --font-size-2xl: 2.369rem;
+        --font-size-3xl: 3.157rem;
+
+        --line-height-tight: 1.25;
+        --line-height-snug: 1.375;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.625;
+        --line-height-loose: 1.75;
+
         --font-weight-normal: 400;
         --font-weight-medium: 500;
         --font-weight-semibold: 600;
         --font-weight-bold: 700;
         --font-weight-extrabold: 800;
         --font-weight-black: 900;
-        
-        /* Spacing */
+
+        /* Spacing Scale - 8px base system */
+        --space-0: 0;
         --space-1: 0.25rem;
         --space-2: 0.5rem;
         --space-3: 0.75rem;
@@ -335,33 +351,24 @@
         --space-10: 2.5rem;
         --space-12: 3rem;
         --space-16: 4rem;
-        
-        /* 
-        ==============================================
-        // === component-split: ImprovedHeaderHeight ===
-        COMPONENT: ヘッダー高さ最適化
-        機能: PC版縦幅縮小、モバイル背景完全ホワイト化
-        特徴: PC版のみ高さ調整、モバイル視認性向上
-        ==============================================
-        */
-        --header-height: 50px; /* index.html完全統一: 50px */
-        --header-height-mobile: 40px; /* index.html完全統一: 40px */
+        --space-20: 5rem;
+        --space-24: 6rem;
+
+        --header-height: 50px;
+        --header-height-mobile: 40px;
         --container-width: 1400px;
-        
-        /* Border Radius */
+
         --radius-sm: 4px;
         --radius-md: 6px;
         --radius-lg: 8px;
         --radius-xl: 12px;
         --radius-2xl: 16px;
         --radius-full: 9999px;
-        
-        /* Animation - 高速化 */
+
         --transition-fast: 0.1s;
-        --transition-normal: 0.15s;
-        --transition-slow: 0.2s;
-        
-        /* Z-index */
+        --transition-normal: 0.2s;
+        --transition-slow: 0.3s;
+
         --z-negative: -1;
         --z-elevate: 1;
         --z-fixed: 40;
@@ -496,15 +503,14 @@
 
     /* ========================================================
     ▼ Page Hero Component - ダーク背景グラデーション
-    masa様改善Part3完全版: index.html統一構造 + 背景ヘッダー直下開始
+    masa様要求完全対応: ヘッダー直下から夜空開始・画面完全カバー・次セクション非表示
     ======================================================== */
     .page-hero {
         position: relative;
         min-height: 105vh;
         display: flex;
         align-items: center;
-        /* index.html完全統一: calc(var(--header-height) + 2rem) */
-        padding: calc(var(--header-height) + 2rem) 0 1rem;
+        padding: calc(var(--header-height) + 2rem) 0 2rem;
         margin-top: calc(var(--header-height) * -1);
         /* 負のmarginでヘッダー下から背景開始 = 白い隙間完全排除 */
         overflow: hidden;
@@ -518,15 +524,14 @@
     }
 
     main {
-        margin: 0;
-        padding: 0;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     @media (max-width: 768px) {
         .page-hero {
             min-height: 105vh;
-            /* index.html統一: calc(var(--header-height-mobile) + 2rem) */
-            padding: calc(var(--header-height-mobile) + 2rem) 0 1rem;
+            padding: calc(var(--header-height-mobile) + 2rem) 0 2rem;
             margin-top: calc(var(--header-height-mobile) * -1);
         }
     }
@@ -764,7 +769,7 @@
         .page-hero-description {
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
-            text-align: left;
+            text-align: center;
         }
     }
 
@@ -780,15 +785,25 @@
 
     .section-subtitle {
         display: inline-block;
-        background: rgba(58, 95, 235, 0.08);
-        padding: 0.5rem 1.3rem;
-        border-radius: var(--radius-full);
         color: var(--primary);
-        font-weight: var(--font-weight-semibold);
+        font-weight: var(--font-weight-medium);
         margin-bottom: 1rem;
         font-size: 0.88rem;
-        box-shadow: 0 2px 8px rgba(58, 95, 235, 0.06);
-        border: 1px solid rgba(58, 95, 235, 0.08);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        position: relative;
+        padding-left: 0;
+    }
+
+    .section-subtitle::after {
+        content: '';
+        position: absolute;
+        bottom: -0.35rem;
+        left: 0;
+        width: 2.5rem;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        border-radius: 1px;
     }
 
     .section-header .heading-lg {
@@ -819,21 +834,11 @@
     }
     
     .highlight {
-        position: relative;
-        display: inline;
-        color: var(--primary);
-    }
-    
-    .highlight::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 30%;
-        background: rgba(58, 95, 235, 0.1);
-        z-index: -1;
-        border-radius: 1px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: var(--font-weight-semibold);
     }
     
     @media (max-width: 768px) {
@@ -842,9 +847,8 @@
         }
         
         .section-subtitle {
-            font-size: 0.7rem;
-            padding: 0.3rem 1rem;
-            margin-bottom: 0.6rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
         }
         
         .section-description {
@@ -1920,20 +1924,33 @@
         color: var(--accent);
     }
 
-    /* 
+    /*
     ==============================================
     // === component-split: EnhancedCTASection ===
-    COMPONENT: 楽しめるグラデーションCTAセクション
+    COMPONENT: 芸術的グラデーションCTAセクション
     機能: 色変化を活かした魅力的なデザイン
-    特徴: アニメーション強化、視覚的インパクト向上
+    特徴: 美しいアニメーション、視覚的インパクト向上
     ==============================================
     */
     .cta-section {
-        background: var(--gradient-cta-enhanced);
-        background-size: 400% 400%;
-        animation: gradientAnimation 15s ease infinite;
-        color: var(--white);
-        padding: 4rem 0;
+        background:
+            linear-gradient(45deg,
+                #FFF8F0 0%, #FFE4E1 25%, #F5E6F0 50%, #E0D0E8 75%, #FFF8F0 100%
+            ),
+            linear-gradient(135deg,
+                #FFE8E8 0%, #EFDFF5 33%, #FFF0E6 66%, #FFE8E8 100%
+            ),
+            linear-gradient(-45deg,
+                #E8D5ED 0%, #FFF8F0 50%, #E8D5ED 100%
+            );
+        background-size: 400% 400%, 600% 600%, 800% 800%;
+        background-blend-mode: overlay, screen, multiply;
+        animation:
+            waveGradient1 8s ease-in-out infinite,
+            waveGradient2 12s ease-in-out infinite reverse,
+            waveGradient3 15s ease-in-out infinite;
+        color: #4A4A4A;
+        padding: 5rem 0;
         position: relative;
         overflow: hidden;
         text-align: center;
@@ -1941,22 +1958,108 @@
         border-top: none;
     }
 
-    /* 【改善】楽しめるグラデーションアニメーション */
-    @keyframes gradientAnimation {
-        0% {
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+            radial-gradient(ellipse at 15% 20%, rgba(245, 230, 211, 0.4) 0%, transparent 45%),
+            radial-gradient(ellipse at 85% 80%, rgba(224, 213, 232, 0.4) 0%, transparent 45%),
+            radial-gradient(ellipse at 50% 50%, rgba(255, 240, 245, 0.3) 0%, transparent 55%),
+            radial-gradient(circle at 70% 30%, rgba(240, 229, 216, 0.35) 0%, transparent 40%),
+            radial-gradient(circle at 30% 70%, rgba(230, 230, 250, 0.35) 0%, transparent 40%);
+        animation: waveOverlay 15s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+        pointer-events: none;
+    }
+
+    .cta-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+            radial-gradient(ellipse at 40% 40%, rgba(245, 222, 179, 0.25) 0%, transparent 50%),
+            radial-gradient(ellipse at 60% 60%, rgba(230, 230, 250, 0.25) 0%, transparent 50%);
+        animation: waveOverlay 18s cubic-bezier(0.42, 0, 0.58, 1) infinite reverse;
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    /* 複数の波が同時に動く複雑なアニメーション */
+    @keyframes waveGradient1 {
+        0%, 100% {
             background-position: 0% 50%;
         }
         25% {
-            background-position: 100% 50%;
+            background-position: 40% 70%;
         }
         50% {
-            background-position: 100% 100%;
+            background-position: 100% 50%;
         }
         75% {
-            background-position: 0% 100%;
+            background-position: 60% 30%;
+        }
+    }
+
+    @keyframes waveGradient2 {
+        0%, 100% {
+            background-position: 100% 30%;
+        }
+        20% {
+            background-position: 70% 60%;
+        }
+        40% {
+            background-position: 30% 80%;
+        }
+        60% {
+            background-position: 0% 50%;
+        }
+        80% {
+            background-position: 50% 20%;
+        }
+    }
+
+    @keyframes waveGradient3 {
+        0%, 100% {
+            background-position: 50% 0%;
+        }
+        33% {
+            background-position: 20% 50%;
+        }
+        66% {
+            background-position: 80% 100%;
+        }
+    }
+
+    @keyframes waveOverlay {
+        0% {
+            transform: translate(0, 0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        20% {
+            transform: translate(3%, 2%) scale(1.08) rotate(1deg);
+            opacity: 0.88;
+        }
+        40% {
+            transform: translate(-2%, 4%) scale(1.05) rotate(-0.5deg);
+            opacity: 0.95;
+        }
+        60% {
+            transform: translate(2%, -3%) scale(1.06) rotate(0.8deg);
+            opacity: 0.9;
+        }
+        80% {
+            transform: translate(-3%, -1%) scale(1.04) rotate(-0.3deg);
+            opacity: 0.92;
         }
         100% {
-            background-position: 0% 50%;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+            opacity: 1;
         }
     }
 
@@ -1969,27 +2072,28 @@
 
     .cta-title {
         margin-bottom: 1.5rem;
-        color: var(--white);
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 【改善】影強化 */
+        color: #2D2D2D;
+        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
         font-size: clamp(1.6rem, 4vw, 2.2rem);
         line-height: 1.3;
-        font-weight: 800; /* 【改善】フォントウェイト強化 */
+        font-weight: 800;
     }
 
     .cta-title .text-accent {
-        color: #FFE4B5; /* 【改善】コントラスト向上 */
+        color: #9B7EBD;
         background: none;
-        -webkit-text-fill-color: #FFE4B5;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        -webkit-text-fill-color: #9B7EBD;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         font-weight: var(--font-weight-black);
     }
 
     .cta-description {
         font-size: 1rem;
         margin-bottom: 2.5rem;
+        color: #5A5A5A;
         opacity: 0.95;
         line-height: 1.8;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); /* 【改善】影強化 */
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
     }
 
     .cta-buttons {
@@ -2001,72 +2105,49 @@
     }
     
     .btn-consultation-main {
-        position: relative;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.95);
-        color: #1E90FF;
-        padding: 1.2rem 2.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        color: #B8956D;
+        padding: 1rem 2.2rem;
         border-radius: 50px;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 1rem;
-        transition: all 0.25s ease;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 12px rgba(184, 149, 109, 0.12);
+        border: 1px solid rgba(184, 149, 109, 0.25);
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 0.6rem;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
         text-decoration: none;
     }
-    
-    .btn-consultation-main::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #00BFFF 0%, #1E90FF 25%, #6A5ACD 75%, #8A2BE2 100%);
-        opacity: 0;
-        transition: all 0.25s ease;
-        z-index: -1;
-    }
-    
+
     .btn-consultation-main:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-        color: var(--white);
-        border-color: rgba(255, 255, 255, 0.6);
-    }
-    
-    .btn-consultation-main:hover::before {
-        opacity: 1;
+        background: rgba(255, 255, 255, 1);
+        color: #A68556;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(184, 149, 109, 0.18);
+        border-color: rgba(184, 149, 109, 0.35);
     }
 
     .btn-secondary-cta {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 0.6rem;
-        background: rgba(255, 255, 255, 0.15);
-        color: var(--white);
-        font-weight: var(--font-weight-semibold);
+        background: transparent;
+        color: #8A8A8A;
+        font-weight: 500;
         padding: 1rem 2rem;
         border-radius: 50px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        transition: all 0.25s ease;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(138, 138, 138, 0.2);
+        transition: all 0.3s ease;
         text-decoration: none;
     }
 
     .btn-secondary-cta:hover {
-        background: rgba(255, 255, 255, 0.25);
-        border-color: rgba(255, 255, 255, 0.6);
-        transform: translateY(-2px);
-        color: var(--white);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.4);
+        border-color: rgba(138, 138, 138, 0.3);
+        color: #6A6A6A;
     }
 
     /* 【改善】パーティクルエフェクト強化 */
@@ -2383,8 +2464,7 @@
         }
         
         .section-subtitle {
-            font-size: 0.7rem;
-            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
         }
         
         .benefit-icon {
@@ -2413,6 +2493,20 @@
     }
     
     /* 印刷用スタイル */
+    /* ========================================================
+    ▼ Footer Enhancement - index.html完全統一
+    ======================================================== */
+    .footer-heading::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-full);
+    }
+
     @media print {
         .header,
         .footer,
@@ -2582,7 +2676,7 @@
                     <h1 class="page-hero-title heading-xl">
                         <span class="hero-title-line hero-title-line-1">あなたの業界に、</span>
                         <span class="hero-title-line hero-title-line-2">
-                            <span class="text-gradient hero-gradient-emphasis">本当に必要なAI</span>
+                            <span class="text-gradient hero-gradient-emphasis"> 本当に必要なAI</span>
                             <span class="hero-title-punctuation">を。</span>
                         </span>
                     </h1>
@@ -2615,8 +2709,8 @@
             <div class="container">
                 <div class="section-header animate-in">
                     <span class="section-subtitle">対応業界</span>
-                    <h2 class="heading-lg" id="industries-title">6つの業界に対応した<span class="highlight">AI活用支援</span></h2>
-                    <p class="section-description">各業界の実情に寄り添い、実践的なAI活用方法をご提案いたします</p>
+                    <h2 class="heading-lg" id="industries-title">あなたの業界に、<br class="hide-mobile"><span class="highlight">最適なAI活用を</span></h2>
+                    <p class="section-description">現場の実情を理解し、業界特有の課題に寄り添います</p>
                 </div>
                 
                 <!--
@@ -2844,9 +2938,9 @@
         <section class="section">
             <div class="container">
                 <div class="section-header animate-in">
-                    <span class="section-subtitle">AI活用例</span>
-                    <h2 class="heading-lg">業界別<span class="highlight">AI活用具体例</span></h2>
-                    <p class="section-description">各業界でのAI活用方法と得られる効果を詳しくご紹介します</p>
+                    <span class="section-subtitle">活用シーン</span>
+                    <h2 class="heading-lg">現場で、<br class="hide-mobile"><span class="highlight">こう活かせます</span></h2>
+                    <p class="section-description">実際の業務シーンでAIがどう役立つか、具体例とともにご紹介します</p>
                 </div>
                 
                 <!-- 
@@ -3154,9 +3248,9 @@
         <section class="section section-bg-light">
             <div class="container">
                 <div class="section-header animate-in">
-                    <span class="section-subtitle">AI導入プロセス</span>
-                    <h2 class="heading-lg">ご依頼から自走まで、<br>伴走型の<span class="highlight">5つのステップ</span></h2>
-                    <p class="section-description">課題の整理から内製化まで、段階的に価値を積み重ねます。</p>
+                    <span class="section-subtitle">導入プロセス</span>
+                    <h2 class="heading-lg">ご依頼から自走まで、<br><span class="highlight">一緒に歩みます</span></h2>
+                    <p class="section-description">課題の整理から内製化まで、段階的に価値を積み重ねていきます</p>
                 </div>
                 
                 <div class="implementation-steps animate-in">
@@ -3225,20 +3319,17 @@
             
             <div class="container">
                 <div class="cta-content animate-in">
-                    <h2 class="heading-lg cta-title">
-                        まずはお話を聞かせてください
-                    </h2>
                     <p class="cta-description">
-                        業界ごとの課題やAI活用の可能性について、お気軽にご相談ください。<br>
-                        お客様の状況に合わせて、最適なアプローチをご提案いたします。
+                        御社の業界を理解し、丁寧にお話をお伺いします。<br>
+                        安心してお任せください。まずは、お気軽にご相談を。
                     </p>
                     <div class="cta-buttons">
                         <a href="contact.html" class="btn-consultation-main">
                             <i class="fas fa-comment-dots"></i>
-                            <span>無料相談を申し込む</span>
+                            <span>相談する</span>
                         </a>
                         <a href="faq.html" class="btn-secondary-cta">
-                            よくある質問を見る <i class="fas fa-arrow-right"></i>
+                            よくあるご質問 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
