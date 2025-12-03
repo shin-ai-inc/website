@@ -695,10 +695,11 @@
     ======================================================== */
     .faq-hero {
         position: relative;
-        padding: calc(var(--header-height)) 0 5rem;
+        padding: calc(var(--header-height) + 1.5rem) 0 5rem;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.05));
         overflow: hidden;
         text-align: center;
+        margin-top: 0;
     }
 
     .faq-hero-title {
@@ -898,7 +899,6 @@
 
     .faq-group {
         margin-bottom: 3.5rem;
-        scroll-margin-top: 100px; /* スムーススクロール位置調整 */
     }
 
     .faq-group-title {
@@ -1311,7 +1311,7 @@
 
     @media (max-width: 768px) {
         .faq-hero {
-            padding: calc(var(--header-height-mobile)) 0 3rem;
+            padding: calc(var(--header-height-mobile) + 1rem) 0 3rem;
         }
 
         .faq-hero-title {
@@ -2594,9 +2594,15 @@
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             
-            question.addEventListener('click', () => {
+            question.addEventListener('click', (e) => {
+                // スクロール動作を完全に防止
+                e.preventDefault();
+
                 // 現在の状態を取得
                 const isActive = item.classList.contains('active');
+
+                // 現在のスクロール位置を保存
+                const currentScrollY = window.scrollY;
 
                 // 他のすべてのFAQを閉じる
                 faqItems.forEach(otherItem => {
@@ -2609,6 +2615,11 @@
                 // クリックされたアイテムの状態を切り替え
                 item.classList.toggle('active');
                 question.setAttribute('aria-expanded', !isActive);
+
+                // スクロール位置を強制的に元に戻す
+                requestAnimationFrame(() => {
+                    window.scrollTo(0, currentScrollY);
+                });
             });
             
             // キーボード操作のサポート
