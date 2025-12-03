@@ -695,7 +695,7 @@
     ======================================================== */
     .faq-hero {
         position: relative;
-        padding: calc(var(--header-height) + 3rem) 0 5rem;
+        padding: calc(var(--header-height)) 0 5rem;
         background: linear-gradient(135deg, rgba(58, 95, 235, 0.08), rgba(0, 201, 167, 0.05));
         overflow: hidden;
         text-align: center;
@@ -926,10 +926,9 @@
         background: var(--white);
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-md);
-        overflow: hidden;
-        transition: all var(--transition-normal) ease;
+        overflow: visible;
+        transition: box-shadow var(--transition-normal) ease;
         border: 1px solid rgba(58, 95, 235, 0.05);
-        scroll-margin-top: 100px; /* スムーススクロール位置調整 */
     }
 
     .faq-item:hover {
@@ -999,16 +998,13 @@
         max-height: 0;
         overflow: hidden;
         opacity: 0;
-        transform: translateY(-10px);
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
-                    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+        transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
     }
 
     .faq-item.active .faq-answer {
         max-height: 1000px;
         opacity: 1;
-        transform: translateY(0);
     }
 
     .faq-answer-inner {
@@ -1016,7 +1012,6 @@
         color: var(--gray);
         line-height: 1.8;
         text-align: left;
-        will-change: transform;
     }
 
     /* キーベネフィットセクション - ホバーエフェクト控えめ */
@@ -1316,7 +1311,7 @@
 
     @media (max-width: 768px) {
         .faq-hero {
-            padding: calc(var(--header-height-mobile) + 2rem) 0 3rem;
+            padding: calc(var(--header-height-mobile)) 0 3rem;
         }
 
         .faq-hero-title {
@@ -1895,6 +1890,69 @@
             display: none !important;
         }
     }
+
+    /* ========================================================
+    ▼ Footer Contact Item - 全ページ統一仕様
+    ======================================================== */
+    .footer-contact-item {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        align-items: flex-start;
+        line-height: 1.7;
+    }
+
+    .footer-contact-item span {
+        flex: 1;
+        word-break: keep-all;
+        overflow-wrap: normal;
+        white-space: pre-line;
+    }
+
+    .footer-contact-item i {
+        color: var(--secondary);
+        font-size: 1.1rem;
+        margin-top: 0.15rem;
+        min-width: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .footer-contact-item a {
+        color: rgba(255, 255, 255, 0.8);
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        flex: 1;
+    }
+
+    .footer-contact-item a:hover {
+        color: var(--white);
+        text-decoration: underline;
+        text-decoration-color: var(--secondary);
+    }
+
+    /* フッター全要素フォントサイズ統一 - index.html完全準拠 */
+    .footer-description {
+        font-size: 1rem !important;
+        line-height: 1.6;
+    }
+
+    .footer-heading {
+        font-size: 1.2rem !important;
+    }
+
+    .footer-links a {
+        font-size: 0.9rem !important;
+    }
+
+    .footer-copyright {
+        font-size: 0.8rem !important;
+    }
+
+    .footer-links-inline a {
+        font-size: 0.75rem !important;
+    }
     </style>
 </head>
 <body>
@@ -2371,7 +2429,7 @@
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>活動拠点：〒100-0001 東京都千代田区丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span>活動拠点：〒100-0001 東京都千代田区<br>丸の内3-8-3 Tokyo Innovation Base</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-building" aria-hidden="true"></i>
@@ -2551,20 +2609,6 @@
                 // クリックされたアイテムの状態を切り替え
                 item.classList.toggle('active');
                 question.setAttribute('aria-expanded', !isActive);
-
-                // モバイル版: 質問が画面に収まるように滑らかにスクロール
-                if (!isActive && window.innerWidth <= 768) {
-                    setTimeout(() => {
-                        const headerHeight = document.getElementById('header')?.offsetHeight || 40;
-                        const questionTop = item.getBoundingClientRect().top + window.scrollY;
-                        const targetScrollPosition = questionTop - headerHeight - 20;
-
-                        window.scrollTo({
-                            top: targetScrollPosition,
-                            behavior: 'smooth'
-                        });
-                    }, 100);
-                }
             });
             
             // キーボード操作のサポート
