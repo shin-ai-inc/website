@@ -902,6 +902,10 @@
         position: relative;
     }
 
+    .hero-differentiators-pc {
+        display: grid;
+    }
+
     .differentiator-item {
         display: flex;
         flex-direction: column;
@@ -1019,7 +1023,7 @@
             transform: translateY(0);
         }
     }
-    
+
     @media (max-width: 768px) {
         .hero {
             min-height: 60vh;
@@ -1050,60 +1054,8 @@
             padding: 0;
         }
 
-        .hero-differentiators {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin: 2rem auto 2.5rem;
-            padding: 0 1rem;
-            max-width: 400px;
-        }
-
-        .differentiator-item {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 1.5rem 1.2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(58, 95, 235, 0.12),
-                        0 0 0 1px rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        
-        .differentiator-icon {
-            width: 56px;
-            height: 56px;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .differentiator-item:active .differentiator-icon {
-            background: var(--differentiator-bg-hover);
-            color: var(--differentiator-icon-hover);
-            border-color: var(--differentiator-border-hover);
-            box-shadow: var(--differentiator-shadow-hover);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .differentiator-title {
-            font-size: 1.05rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.3;
-            font-weight: var(--font-weight-extrabold);
-        }
-
-        .differentiator-text-pc {
-            display: none;
-        }
-
-        .differentiator-text-mobile {
-            display: block;
-            font-size: 0.9rem;
-            line-height: 1.3;
+        .hero-differentiators-pc {
+            display: none !important;
         }
         
         .hero-buttons {
@@ -1125,28 +1077,26 @@
 
     .mission-text-pc {
         font-weight: var(--font-weight-bold);
-        font-size: clamp(1.8rem, 4vw, 3.2rem);
+        font-size: clamp(1.4rem, 3vw, 1.75rem);
         color: white;
         margin: 0;
         padding: 1.5rem 1.5rem;
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
         display: block;
-        line-height: 1.6;
-        letter-spacing: 0.02em;
+        line-height: 1.5;
     }
 
     .mission-text-mobile {
         font-weight: var(--font-weight-bold);
-        font-size: clamp(1.25rem, 5vw, 1.6rem);
+        font-size: 1rem;
         color: white;
         margin: 0;
         padding: 0.9rem;
         max-width: 800px;
         margin: 0 auto;
         display: none;
-        line-height: 1.6;
-        letter-spacing: 0.02em;
+        line-height: 1.5;
     }
     
     @media (max-width: 768px) {
@@ -2210,7 +2160,7 @@
                         ShinAIは、人の想いとAIをつなぎ、<br>企業の「これまで」を大切に、<br class="mobile-only">「これから」の変革に伴走します。
                     </p>
                     
-                    <div class="hero-differentiators">
+                    <div class="hero-differentiators hero-differentiators-pc">
                         <div class="differentiator-item">
                             <div class="differentiator-icon">
                                 <i class="fas fa-brain"></i>
