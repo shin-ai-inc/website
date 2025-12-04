@@ -1322,9 +1322,9 @@
         .services-grid {
             grid-template-columns: 1fr;
             gap: 1.2rem;
-            max-width: 320px;
+            max-width: 280px;
         }
-        
+
         .service-card {
             max-width: 100%;
             margin: 0 auto;
@@ -1334,11 +1334,11 @@
         }
 
         .service-image {
-            height: 90px;
+            height: 130px;
         }
 
         .service-content {
-            padding: 0.8rem 1rem 1rem;
+            padding: 1rem 1.1rem 1.2rem;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -1355,23 +1355,25 @@
         }
         
         .service-icon-wrapper {
-            width: 40px;
-            height: 40px;
-            margin: -20px auto 0.5rem;
+            width: 48px;
+            height: 48px;
+            margin: -24px auto 0.7rem;
         }
 
         .service-icon i {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
         }
 
         .service-title {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
         }
-        
+
         .service-description {
             font-size: 0.85rem;
-            margin-bottom: 0.7rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
         }
     }
 
@@ -2754,13 +2756,15 @@
                 this.setAttribute('aria-expanded', !expanded);
 
                 // モバイルでは入力欄を最初はreadonly、タップ時のみキーボード表示
-                if (!expanded && window.innerWidth <= 768) {
-                    chatInput.setAttribute('readonly', 'true');
-                    setTimeout(() => {
-                        chatInput.removeAttribute('readonly');
-                    }, 100);
-                } else if (!expanded) {
-                    chatInput.focus();
+                if (!expanded && chatInput) {
+                    if (window.innerWidth <= 768) {
+                        chatInput.setAttribute('readonly', 'true');
+                        setTimeout(() => {
+                            chatInput.removeAttribute('readonly');
+                        }, 100);
+                    } else {
+                        chatInput.focus();
+                    }
                 }
             });
             
