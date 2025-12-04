@@ -1322,9 +1322,9 @@
         .services-grid {
             grid-template-columns: 1fr;
             gap: 1.2rem;
-            max-width: 320px;
+            max-width: 280px;
         }
-        
+
         .service-card {
             max-width: 100%;
             margin: 0 auto;
@@ -1334,11 +1334,11 @@
         }
 
         .service-image {
-            height: 90px;
+            height: 130px;
         }
 
         .service-content {
-            padding: 0.8rem 1rem 1rem;
+            padding: 1rem 1.1rem 1.2rem;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -1355,23 +1355,25 @@
         }
         
         .service-icon-wrapper {
-            width: 40px;
-            height: 40px;
-            margin: -20px auto 0.5rem;
+            width: 48px;
+            height: 48px;
+            margin: -24px auto 0.7rem;
         }
 
         .service-icon i {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
         }
 
         .service-title {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
         }
-        
+
         .service-description {
             font-size: 0.85rem;
-            margin-bottom: 0.7rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
         }
     }
 
@@ -2149,7 +2151,7 @@
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">強化学習対応可能<br class="mobile-only">企業AI開発特化のエンジニアチーム</div>
+                    <div class="hero-badge"><span class="pc-space">強化学習対応可能　</span><span class="mobile-no-space">強化学習対応可能</span><br class="mobile-only">企業AI開発特化のエンジニアチーム</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
                         <span class="hero-title-pc">
@@ -2605,11 +2607,11 @@
                             }, '-=0.4')
                             .from('.hero-differentiators .differentiator-item', {
                                 opacity: 0,
-                                y: 40,
-                                duration: 0.5,
-                                stagger: 0.15,
-                                ease: 'back.out(1.2)'
-                            }, '-=0.3')
+                                y: 30,
+                                duration: 0.4,
+                                stagger: 0.09,
+                                ease: 'power2.out'
+                            }, 0.3)
                             .from('.hero-buttons .btn', {
                                 opacity: 0,
                                 scale: 0.9,
@@ -2754,13 +2756,15 @@
                 this.setAttribute('aria-expanded', !expanded);
 
                 // モバイルでは入力欄を最初はreadonly、タップ時のみキーボード表示
-                if (!expanded && window.innerWidth <= 768) {
-                    chatInput.setAttribute('readonly', 'true');
-                    setTimeout(() => {
-                        chatInput.removeAttribute('readonly');
-                    }, 100);
-                } else if (!expanded) {
-                    chatInput.focus();
+                if (!expanded && chatInput) {
+                    if (window.innerWidth <= 768) {
+                        chatInput.setAttribute('readonly', 'true');
+                        setTimeout(() => {
+                            chatInput.removeAttribute('readonly');
+                        }, 100);
+                    } else {
+                        chatInput.focus();
+                    }
                 }
             });
             
@@ -3074,7 +3078,7 @@
 
         // 初期モーション制御（開いた数秒間、上部へ素早く流れる）
         let initialMotionTime = 0;
-        const initialMotionDuration = 3.5; // 3.5秒間
+        const initialMotionDuration = 2.5; // 2.5秒間（より速く）
         let isInitialMotion = true;
 
         // Mouse tracking
@@ -3187,8 +3191,15 @@
                 const waveY = Math.cos(time * 0.6 + index * 0.15) * 1;
                 const waveZ = Math.sin(time * 0.4 + index * 0.12) * 1.5;
 
-                // 初期モーション後は通常の動きにブレンド
-                const blendFactor = isInitialMotion ? (1 - initialMotionTime / initialMotionDuration) : 1;
+                // 初期モーション後は通常の動きにブレンド - 滑らかなイージング
+                let blendFactor;
+                if (isInitialMotion) {
+                    const t = initialMotionTime / initialMotionDuration;
+                    // ease-out-sine: 最も滑らかな減速
+                    blendFactor = Math.sin((t * Math.PI) / 2);
+                } else {
+                    blendFactor = 1;
+                }
                 p.mesh.position.x = p.mesh.position.x * (1 - blendFactor) + (orbitX + p.velocity.x * waveX) * blendFactor;
                 p.mesh.position.y = p.mesh.position.y * (1 - blendFactor) + (orbitY + p.velocity.y * waveY) * blendFactor;
                 p.mesh.position.z = p.mesh.position.z * (1 - blendFactor) + (orbitZ + p.velocity.z * waveZ) * blendFactor;
@@ -3206,10 +3217,13 @@
                     p.mesh.rotation.z += p.rotation.z;
                 }
 
-                // Boundary check
-                if (Math.abs(p.mesh.position.x) > 60) p.mesh.position.x *= -0.9;
-                if (Math.abs(p.mesh.position.y) > 45) p.mesh.position.y *= -0.9;
-                if (Math.abs(p.mesh.position.z) > 60) p.mesh.position.z *= -0.9;
+                // 宇宙的境界処理 - 反対側に出現（ワープ効果）
+                if (p.mesh.position.x > 60) p.mesh.position.x = -60;
+                if (p.mesh.position.x < -60) p.mesh.position.x = 60;
+                if (p.mesh.position.y > 45) p.mesh.position.y = -45;
+                if (p.mesh.position.y < -45) p.mesh.position.y = 45;
+                if (p.mesh.position.z > 60) p.mesh.position.z = -60;
+                if (p.mesh.position.z < -60) p.mesh.position.z = 60;
             });
 
             const updateLineInterval = isMobile ? 5 : 3;
