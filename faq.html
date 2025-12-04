@@ -350,20 +350,9 @@
     
     /* ========================================================
     ▼ レイアウトシステム Component
+    NOTE: .container definition is in common-header-footer.css
     ======================================================== */
-    .container {
-        width: 100%;
-        max-width: var(--container-width);
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-    
-    @media (max-width: 768px) {
-        .container {
-            padding: 0 1.25rem;
-        }
-    }
-    
+
     .grid {
         display: grid;
         gap: var(--space-6);
@@ -2429,7 +2418,7 @@
                     <h4 class="footer-heading">お問い合わせ</h4>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>活動拠点：〒100-0001 東京都千代田区<br>丸の内3-8-3 Tokyo Innovation Base</span>
+                        <span><span style="white-space: nowrap;">活動拠点：〒100-0001 東京都千代田区</span><br>丸の内3-8-3 Tokyo Innovation Base</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-building" aria-hidden="true"></i>
@@ -2589,20 +2578,30 @@
         // ▼ FAQ機能 Component - 高速化・スムーズ表示
         // ========================================================
         
-        // FAQアコーディオン機能 - スムーズ表示（上側移動なし）
+        // FAQアコーディオン機能 - モバイルスクロールジャンプ完全防止版
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
-            
+
             question.addEventListener('click', (e) => {
                 // スクロール動作を完全に防止
                 e.preventDefault();
+                e.stopPropagation();
 
                 // 現在の状態を取得
                 const isActive = item.classList.contains('active');
 
                 // 現在のスクロール位置を保存
                 const currentScrollY = window.scrollY;
+                const currentScrollX = window.scrollX;
+
+                // スクロール位置を固定する関数
+                const lockScroll = () => {
+                    window.scrollTo(currentScrollX, currentScrollY);
+                };
+
+                // スクロールイベントを一時的にロック
+                window.addEventListener('scroll', lockScroll, { passive: false });
 
                 // 他のすべてのFAQを閉じる
                 faqItems.forEach(otherItem => {
@@ -2616,10 +2615,11 @@
                 item.classList.toggle('active');
                 question.setAttribute('aria-expanded', !isActive);
 
-                // スクロール位置を強制的に元に戻す
-                requestAnimationFrame(() => {
-                    window.scrollTo(0, currentScrollY);
-                });
+                // アニメーション完了後にスクロールロックを解除
+                setTimeout(() => {
+                    window.removeEventListener('scroll', lockScroll);
+                    window.scrollTo(currentScrollX, currentScrollY);
+                }, 450); // CSSアニメーション時間(0.4s)より少し長めに設定
             });
             
             // キーボード操作のサポート
