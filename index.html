@@ -1130,8 +1130,8 @@
     .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        max-width: 900px;
+        gap: 2.5rem;
+        max-width: 1200px;
         margin: 0 auto;
     }
     
@@ -1293,8 +1293,8 @@
     @media (max-width: 992px) {
         .services-grid {
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            max-width: 750px;
+            gap: 1.5rem;
+            max-width: 900px;
         }
         
         .service-card {
@@ -1313,8 +1313,8 @@
     @media (max-width: 768px) {
         .services-grid {
             grid-template-columns: 1fr;
-            gap: 0.9rem;
-            max-width: 300px;
+            gap: 1.5rem;
+            max-width: 320px;
         }
         
         .service-card {
@@ -2962,7 +2962,7 @@
         scene.add(innerCore);
 
         // パーティクル数: プラネタリウム効果のため大幅増量
-        const particlesCount = isMobile ? 800 : 1400;
+        const particlesCount = isMobile ? 1200 : 1400;
         const particles = [];
 
         // パーティクル形状: サイズを大きく
@@ -3003,26 +3003,29 @@
             particle.rotation.y = Math.random() * Math.PI * 2;
             particle.rotation.z = Math.random() * Math.PI * 2;
 
+            const velocityMultiplier = isMobile ? 2.5 : 1;
+            const orbitSpeedMultiplier = isMobile ? 3 : 1;
+
             particles.push({
                 mesh: particle,
                 velocity: {
-                    x: (Math.random() - 0.5) * 0.015,
-                    y: (Math.random() - 0.5) * 0.015,
-                    z: (Math.random() - 0.5) * 0.015
+                    x: (Math.random() - 0.5) * 0.015 * velocityMultiplier,
+                    y: (Math.random() - 0.5) * 0.015 * velocityMultiplier,
+                    z: (Math.random() - 0.5) * 0.015 * velocityMultiplier
                 },
                 rotation: {
-                    x: (Math.random() - 0.5) * 0.008,
-                    y: (Math.random() - 0.5) * 0.008,
-                    z: (Math.random() - 0.5) * 0.008
+                    x: (Math.random() - 0.5) * 0.008 * velocityMultiplier,
+                    y: (Math.random() - 0.5) * 0.008 * velocityMultiplier,
+                    z: (Math.random() - 0.5) * 0.008 * velocityMultiplier
                 },
                 orbit: {
-                    speed: 0.0001 + Math.random() * 0.0003,
+                    speed: (0.0001 + Math.random() * 0.0003) * orbitSpeedMultiplier,
                     radius: radius,
                     angle: Math.random() * Math.PI * 2,
                     yFactor: Math.random() * 2 - 1
                 },
                 pulse: {
-                    speed: 0.008 + Math.random() * 0.015,
+                    speed: (0.008 + Math.random() * 0.015) * velocityMultiplier,
                     size: 0.04 + Math.random() * 0.08
                 }
             });
@@ -3236,7 +3239,24 @@
         animate();
         
         let resizeTimeout;
+        let lastWidth = window.innerWidth;
+        let lastHeight = window.innerHeight;
+
         window.addEventListener('resize', function() {
+            // モバイルでスクロール時の不要なリサイズを防止
+            if (isMobile) {
+                const currentWidth = window.innerWidth;
+                const currentHeight = window.innerHeight;
+
+                // 幅が変わっていない場合（スクロールバー表示/非表示のみ）はリサイズしない
+                if (Math.abs(currentWidth - lastWidth) < 10 && Math.abs(currentHeight - lastHeight) < 100) {
+                    return;
+                }
+
+                lastWidth = currentWidth;
+                lastHeight = currentHeight;
+            }
+
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
                 camera.aspect = window.innerWidth / window.innerHeight;
