@@ -3076,10 +3076,11 @@
         let targetX = 0;
         let targetY = 0;
 
-        // 初期モーション制御（開いた数秒間、上部へ素早く流れる）
+        // 初期モーション制御 - 滑らかな遷移でズレ防止
         let initialMotionTime = 0;
-        const initialMotionDuration = 3.5; // 3.5秒間
+        const initialMotionDuration = 4.0; // 4.0秒間（より滑らか）
         let isInitialMotion = true;
+        let transitionSmoothing = 1.0; // 遷移スムージング係数
 
         // Mouse tracking
         document.addEventListener('mousemove', function(event) {
@@ -3130,12 +3131,15 @@
             requestAnimationFrame(animate);
             time += 0.008;
 
-            // 初期モーション制御
+            // 初期モーション制御 - 滑らかな遷移
             if (isInitialMotion) {
                 initialMotionTime += 0.016; // 約60fps
                 if (initialMotionTime >= initialMotionDuration) {
                     isInitialMotion = false;
                 }
+                // 遷移スムージング（終了に向けて徐々に通常モードへ）
+                const progress = initialMotionTime / initialMotionDuration;
+                transitionSmoothing = 1 - Math.pow(progress, 2); // ease-in quad
             }
 
             // Smooth camera movement
@@ -3173,12 +3177,27 @@
                 if (isInitialMotion) {
                     const progress = initialMotionTime / initialMotionDuration;
                     const easeOut = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-                    const initialUpwardSpeed = 0.8 * (1 - easeOut);
+                    const initialUpwardSpeed = 0.8 * (1 - easeOut) * transitionSmoothing;
                     p.mesh.position.y += initialUpwardSpeed;
 
                     // 流れるような横方向の動き
                     const flowX = Math.sin(time * 2 + index * 0.2) * 0.3;
-                    p.mesh.position.x += flowX * (1 - easeOut);
+                    p.mesh.position.x += flowX * (1 - easeOut) * transitionSmoothing;
+                }
+
+                // 中心への緩やかな引力（デジタルコアへの磁力）
+                const centerAttractionStrength = 0.0002;
+                const dx = 0 - p.mesh.position.x;
+                const dy = 0 - p.mesh.position.y;
+                const dz = 0 - p.mesh.position.z;
+                const distanceSquared = dx*dx + dy*dy + dz*dz;
+                const distance = Math.sqrt(distanceSquared);
+
+                if (distance > 1) {
+                    const force = centerAttractionStrength / distance;
+                    p.velocity.x += (dx / distance) * force;
+                    p.velocity.y += (dy / distance) * force;
+                    p.velocity.z += (dz / distance) * force;
                 }
 
                 p.orbit.angle += p.orbit.speed;
@@ -3191,8 +3210,12 @@
                 const waveY = Math.cos(time * 0.6 + index * 0.15) * 1;
                 const waveZ = Math.sin(time * 0.4 + index * 0.12) * 1.5;
 
-                // 初期モーション後は通常の動きにブレンド
-                const blendFactor = isInitialMotion ? (1 - initialMotionTime / initialMotionDuration) : 1;
+                // 超滑らかなブレンド（完全ズレ防止）
+                // ease-in-out cubic for perfect smoothness
+                const rawProgress = isInitialMotion ? (initialMotionTime / initialMotionDuration) : 1;
+                const blendFactor = rawProgress < 0.5
+                    ? 4 * rawProgress * rawProgress * rawProgress
+                    : 1 - Math.pow(-2 * rawProgress + 2, 3) / 2;
                 p.mesh.position.x = p.mesh.position.x * (1 - blendFactor) + (orbitX + p.velocity.x * waveX) * blendFactor;
                 p.mesh.position.y = p.mesh.position.y * (1 - blendFactor) + (orbitY + p.velocity.y * waveY) * blendFactor;
                 p.mesh.position.z = p.mesh.position.z * (1 - blendFactor) + (orbitZ + p.velocity.z * waveZ) * blendFactor;
@@ -3210,10 +3233,13 @@
                     p.mesh.rotation.z += p.rotation.z;
                 }
 
-                // Boundary check
-                if (Math.abs(p.mesh.position.x) > 60) p.mesh.position.x *= -0.9;
-                if (Math.abs(p.mesh.position.y) > 45) p.mesh.position.y *= -0.9;
-                if (Math.abs(p.mesh.position.z) > 60) p.mesh.position.z *= -0.9;
+                // 宇宙的境界処理 - 反対側に出現（ワープ効果）
+                if (p.mesh.position.x > 60) p.mesh.position.x = -60;
+                if (p.mesh.position.x < -60) p.mesh.position.x = 60;
+                if (p.mesh.position.y > 45) p.mesh.position.y = -45;
+                if (p.mesh.position.y < -45) p.mesh.position.y = 45;
+                if (p.mesh.position.z > 60) p.mesh.position.z = -60;
+                if (p.mesh.position.z < -60) p.mesh.position.z = 60;
             });
 
             const updateLineInterval = isMobile ? 5 : 3;
