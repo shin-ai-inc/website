@@ -1130,8 +1130,8 @@
     .services-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2.5rem;
-        max-width: 1200px;
+        gap: 1.2rem;
+        max-width: 950px;
         margin: 0 auto;
     }
     
@@ -1293,8 +1293,8 @@
     @media (max-width: 992px) {
         .services-grid {
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 900px;
+            gap: 1rem;
+            max-width: 800px;
         }
         
         .service-card {
@@ -1313,7 +1313,7 @@
     @media (max-width: 768px) {
         .services-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 1.2rem;
             max-width: 320px;
         }
         
@@ -2742,11 +2742,17 @@
         if (chatbotButton && chatbotWindow && chatbotClose) {
             chatbotButton.addEventListener('click', function() {
                 chatbotWindow.classList.toggle('active');
-                
+
                 const expanded = this.getAttribute('aria-expanded') === 'true';
                 this.setAttribute('aria-expanded', !expanded);
-                
-                if (!expanded) {
+
+                // モバイルでは入力欄を最初はreadonly、タップ時のみキーボード表示
+                if (!expanded && window.innerWidth <= 768) {
+                    chatInput.setAttribute('readonly', 'true');
+                    setTimeout(() => {
+                        chatInput.removeAttribute('readonly');
+                    }, 100);
+                } else if (!expanded) {
                     chatInput.focus();
                 }
             });
