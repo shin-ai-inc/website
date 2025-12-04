@@ -2151,7 +2151,7 @@
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">強化学習対応可能<br class="mobile-only">企業AI開発特化のエンジニアチーム</div>
+                    <div class="hero-badge"><span class="pc-space">強化学習対応可能　</span><span class="mobile-no-space">強化学習対応可能</span><br class="mobile-only">企業AI開発特化のエンジニアチーム</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
                         <span class="hero-title-pc">
@@ -2607,11 +2607,11 @@
                             }, '-=0.4')
                             .from('.hero-differentiators .differentiator-item', {
                                 opacity: 0,
-                                y: 40,
-                                duration: 0.5,
-                                stagger: 0.15,
-                                ease: 'back.out(1.2)'
-                            }, '-=0.3')
+                                y: 30,
+                                duration: 0.4,
+                                stagger: 0.09,
+                                ease: 'power2.out'
+                            }, 0.3)
                             .from('.hero-buttons .btn', {
                                 opacity: 0,
                                 scale: 0.9,
@@ -3078,7 +3078,7 @@
 
         // 初期モーション制御（開いた数秒間、上部へ素早く流れる）
         let initialMotionTime = 0;
-        const initialMotionDuration = 3.5; // 3.5秒間
+        const initialMotionDuration = 2.5; // 2.5秒間（より速く）
         let isInitialMotion = true;
 
         // Mouse tracking
@@ -3191,8 +3191,15 @@
                 const waveY = Math.cos(time * 0.6 + index * 0.15) * 1;
                 const waveZ = Math.sin(time * 0.4 + index * 0.12) * 1.5;
 
-                // 初期モーション後は通常の動きにブレンド
-                const blendFactor = isInitialMotion ? (1 - initialMotionTime / initialMotionDuration) : 1;
+                // 初期モーション後は通常の動きにブレンド - 滑らかなイージング
+                let blendFactor;
+                if (isInitialMotion) {
+                    const t = initialMotionTime / initialMotionDuration;
+                    // ease-out-sine: 最も滑らかな減速
+                    blendFactor = Math.sin((t * Math.PI) / 2);
+                } else {
+                    blendFactor = 1;
+                }
                 p.mesh.position.x = p.mesh.position.x * (1 - blendFactor) + (orbitX + p.velocity.x * waveX) * blendFactor;
                 p.mesh.position.y = p.mesh.position.y * (1 - blendFactor) + (orbitY + p.velocity.y * waveY) * blendFactor;
                 p.mesh.position.z = p.mesh.position.z * (1 - blendFactor) + (orbitZ + p.velocity.z * waveZ) * blendFactor;
