@@ -2151,7 +2151,7 @@
         <section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge"><span class="pc-space">強化学習対応可能　</span><span class="mobile-no-space">強化学習対応可能</span><br class="mobile-only">企業AI開発特化のエンジニアチーム</div>
+                    <div class="hero-badge">強化学習対応可能　企業AI開発特化のエンジニアチーム</div>
                     
                     <h1 class="hero-title heading-xl" id="hero-title">
                         <span class="hero-title-pc">
@@ -2739,151 +2739,18 @@
         // Back to Top button削除済み（masa様要求により不要）
 
         // ========================================================
-        // ▼ Advanced Chatbot Component
+        // ▼ Chatbot Component - External JS (assets/js/chatbot.js)
+        // 技術的負債完全排除: インラインコード削除・外部JS統一完了
         // ========================================================
-        const chatbotButton = document.getElementById('chatbot-button');
-        const chatbotWindow = document.getElementById('chatbot-window');
-        const chatbotClose = document.getElementById('chatbot-close');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        const chatMessages = document.getElementById('chatbot-messages');
-        
-        if (chatbotButton && chatbotWindow && chatbotClose) {
-            chatbotButton.addEventListener('click', function() {
-                chatbotWindow.classList.toggle('active');
 
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-
-                // モバイルでは入力欄を最初はreadonly、タップ時のみキーボード表示
-                if (!expanded && chatInput) {
-                    if (window.innerWidth <= 768) {
-                        chatInput.setAttribute('readonly', 'true');
-                        setTimeout(() => {
-                            chatInput.removeAttribute('readonly');
-                        }, 100);
-                    } else {
-                        chatInput.focus();
-                    }
-                }
-            });
-            
-            chatbotClose.addEventListener('click', function() {
-                chatbotWindow.classList.remove('active');
-                chatbotButton.setAttribute('aria-expanded', 'false');
-            });
-            
-            if (chatSend && chatInput && chatMessages) {
-                const handleSend = function() {
-                    const message = chatInput.value.trim();
-                    if (message) {
-                        addChatMessage(message, 'user');
-                        chatInput.value = '';
-                        
-                        const loadingMsg = document.createElement('div');
-                        loadingMsg.classList.add('chat-message', 'bot', 'loading');
-                        loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
-                        chatMessages.appendChild(loadingMsg);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                        
-                        setTimeout(function() {
-                            chatMessages.removeChild(loadingMsg);
-                            
-                            let response = '';
-                            const messageLower = message.toLowerCase();
-                            
-                            if (messageLower.includes('暗黙知') || messageLower.includes('データ化')) {
-                                response = "ShinAIでは製造業のベテラン社員が持つ「暗黙知」をAI技術でデータ化し、企業の知的財産として保護・活用するサービスを提供しています。技能継承の課題解決や組織全体での知識共有を実現し、企業の競争力強化に貢献します。詳しくはお気軽にお問い合わせください。";
-                            } else if (messageLower.includes('伴走') || messageLower.includes('サポート')) {
-                                response = "伴走型支援とは、お客様からフィードバックをいただきながら開発を進めるスタイルです。企画から実装、運用、自走化まで一貫してサポートし、「やりっぱなし」にならないAI導入を実現します。社内チーム育成も含めて長期的な成功をサポートいたします。";
-                            } else if (messageLower.includes('料金') || messageLower.includes('費用') || messageLower.includes('価格')) {
-                                response = "プロジェクトの規模や内容によって料金が異なります。オーダーメイドAIシステム開発、顧問サービス、業界横断共創ビジネスなど、お客様のニーズに合わせた最適なプランをご提案いたします。詳細な費用については、無料相談でお気軽にお問い合わせください。";
-                            } else if (messageLower.includes('期間') || messageLower.includes('納期')) {
-                                response = "プロジェクトの規模により異なりますが、小規模なAIエージェントであれば1ヶ月程度、大規模なRAGシステムであれば2-3ヶ月程度を目安としています。段階的に開発を進めることで、リスクを抑えながら確実な成果を実現します。";
-                            } else if (messageLower.includes('共創') || messageLower.includes('パートナー')) {
-                                response = "ShinAIでは業界横断の共創ビジネスを推進しています。パートナーシップによる協業で、AI×データによる唯一無二の価値を創造し、共創社会の実現を目指しています。お客様と共に新たな価値を生み出すことを大切にしています。";
-                            } else {
-                                const responses = [
-                                    "ShinAIでは最新の大規模言語モデルを独自最適化し、企業向けAIシステム開発を提供しています。オーダーメイドAIシステム開発、顧問サービス、業界横断共創ビジネスなど、お客様のニーズに合わせたサービスをご用意しております。",
-                                    "製造業のベテラン社員の暗黙知をデータ化し、企業の知的財産として保護。伴走型支援で「やりっぱなし」にならないAI導入を実現します。具体的な課題やご要望がございましたら、お気軽にお問い合わせください。",
-                                    "AI×データで唯一無二の価値を創造し、パートナーシップで共創社会の実現を目指すShinAIです。お客様と共に歩む開発スタイルで、自走化まで徹底サポートいたします。"
-                                ];
-                                
-                                response = responses[Math.floor(Math.random() * responses.length)];
-                            }
-                            
-                            const botMessage = document.createElement('div');
-                            botMessage.classList.add('chat-message', 'bot');
-                            botMessage.textContent = '';
-                            chatMessages.appendChild(botMessage);
-                            
-                            let i = 0;
-                            const typingSpeed = 8;
-                            
-                            const typingEffect = setInterval(function() {
-                                if (i < response.length) {
-                                    botMessage.textContent += response.charAt(i);
-                                    i++;
-                                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                                } else {
-                                    clearInterval(typingEffect);
-                                    
-                                    setTimeout(function() {
-                                        const ctaButton = document.createElement('div');
-                                        ctaButton.classList.add('chat-message', 'bot');
-                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
-                                        chatMessages.appendChild(ctaButton);
-                                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 300);
-                                }
-                            }, typingSpeed);
-                        }, 400);
-                    }
-                };
-                
-                chatSend.addEventListener('click', handleSend);
-                
-                chatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        handleSend();
-                    }
-                });
-                
-                function addChatMessage(message, type) {
-                    const msgElement = document.createElement('div');
-                    msgElement.classList.add('chat-message', type);
-                    msgElement.textContent = message;
-                    
-                    chatMessages.appendChild(msgElement);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
-        }
-        
         // ========================================================
         // ▼ アクセシビリティ改善 Component
+        // チャットボット関連は外部JS (chatbot.js) に統合済み
         // ========================================================
-        
-        let usingKeyboard = false;
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                usingKeyboard = true;
-                document.body.classList.add('keyboard-focus');
-            }
-        });
-        
-        document.addEventListener('mousedown', function() {
-            usingKeyboard = false;
-            document.body.classList.remove('keyboard-focus');
-        });
-        
+
+        // ESCキーでナビゲーション閉じる
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' || e.keyCode === 27) {
-                if (chatbotWindow && chatbotWindow.classList.contains('active')) {
-                    chatbotWindow.classList.remove('active');
-                    if (chatbotButton) chatbotButton.setAttribute('aria-expanded', 'false');
-                }
-                
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     if (hamburger) {
