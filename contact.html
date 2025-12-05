@@ -101,8 +101,8 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <!-- Common Header/Footer CSS Component - Enterprise Grade -->
-    <link rel="stylesheet" href="assets/css/common-header-footer.css">
     <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link rel="stylesheet" href="assets/css/common-header-footer.css">
 
     <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
@@ -2556,6 +2556,17 @@
             observer.observe(el);
         });
     });
+    </script>
+
+    <!-- Fallback for visibility - ensures page shows even if JS fails -->
+    <script>
+    // フォールバック：JavaScriptエラーがあっても必ずページを表示
+    setTimeout(function() {
+        if (!document.documentElement.classList.contains('loaded')) {
+            document.documentElement.classList.add('loaded');
+            console.warn('[ShinAI] Fallback activated: page visibility restored');
+        }
+    }, 500);
     </script>
 
     <!-- Chatbot JavaScript Component -->
