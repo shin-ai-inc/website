@@ -101,8 +101,8 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <!-- Common Header/Footer CSS Component - Enterprise Grade -->
-    <link rel="stylesheet" href="assets/css/common-header-footer.css">
     <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link rel="stylesheet" href="assets/css/common-header-footer.css">
 
     <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
@@ -319,11 +319,7 @@
     -->
     <style>
     /* ページ読み込み最適化 - AI Crawler対応 */
-    html {
-        visibility: hidden;
-    }
     html.loaded {
-        visibility: visible;
         transition: opacity 0.15s ease;
     }
     
@@ -342,11 +338,21 @@
         align-items: center;
         justify-content: center;
         transition: opacity 0.2s ease, visibility 0.2s ease;
+        animation: fadeOutLoader 0.3s ease 0.5s forwards;
     }
-    
+
+    @keyframes fadeOutLoader {
+        to {
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+    }
+
     .page-loader.loaded {
         opacity: 0;
         visibility: hidden;
+        display: none;
     }
     
     .loader-circle {
@@ -2320,26 +2326,26 @@
     ==============================================
     -->
     <script>
+    // 即座実行：ページ遷移時も確実にローディング解除
+    (function() {
+        console.log('[Contact Page] Script executing immediately');
+        const pageLoader = document.getElementById('page-loader');
+        console.log('[Contact Page] pageLoader element:', pageLoader);
+
+        if (pageLoader) {
+            pageLoader.classList.add('loaded');
+            pageLoader.style.display = 'none';
+            console.log('[Contact Page] Page loader hidden');
+        }
+
+        document.documentElement.classList.add('loaded');
+        console.log('[Contact Page] html.loaded class added');
+    })();
+
     document.addEventListener('DOMContentLoaded', function() {
         // ========================================================
         // ▼ 初期化処理 Component - index.html準拠
         // ========================================================
-        
-        // ページロード完了時にローディングを非表示
-        const pageLoader = document.getElementById('page-loader');
-        if (pageLoader) {
-            setTimeout(() => {
-                pageLoader.classList.add('loaded');
-                setTimeout(() => {
-                    pageLoader.style.display = 'none';
-                }, 200);
-            }, 200);
-        }
-        
-        // Visibility and accessibility improvement
-        setTimeout(() => {
-            document.documentElement.classList.add('loaded');
-        }, 100);
         
         // Current year update
         const currentYearElement = document.getElementById('current-year');
