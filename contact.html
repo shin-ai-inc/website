@@ -319,11 +319,7 @@
     -->
     <style>
     /* ページ読み込み最適化 - AI Crawler対応 */
-    html {
-        visibility: hidden;
-    }
     html.loaded {
-        visibility: visible;
         transition: opacity 0.15s ease;
     }
     
@@ -2320,12 +2316,8 @@
     ==============================================
     -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // ========================================================
-        // ▼ 初期化処理 Component - index.html準拠
-        // ========================================================
-        
-        // ページロード完了時にローディングを非表示
+    // 即座実行：ページ遷移時も確実にローディング解除
+    (function() {
         const pageLoader = document.getElementById('page-loader');
         if (pageLoader) {
             setTimeout(() => {
@@ -2335,11 +2327,16 @@
                 }, 200);
             }, 200);
         }
-        
-        // Visibility and accessibility improvement
+
         setTimeout(() => {
             document.documentElement.classList.add('loaded');
         }, 100);
+    })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================================================
+        // ▼ 初期化処理 Component - index.html準拠
+        // ========================================================
         
         // Current year update
         const currentYearElement = document.getElementById('current-year');
@@ -2556,17 +2553,6 @@
             observer.observe(el);
         });
     });
-    </script>
-
-    <!-- Fallback for visibility - ensures page shows even if JS fails -->
-    <script>
-    // フォールバック：JavaScriptエラーがあっても必ずページを表示
-    setTimeout(function() {
-        if (!document.documentElement.classList.contains('loaded')) {
-            document.documentElement.classList.add('loaded');
-            console.warn('[ShinAI] Fallback activated: page visibility restored');
-        }
-    }, 500);
     </script>
 
     <!-- Chatbot JavaScript Component -->
