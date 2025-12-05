@@ -24,6 +24,23 @@ const validator = require('validator');
 const crypto = require('crypto');
 const path = require('path');
 
+// ==============================================
+// 高度セキュリティ強化: AI攻撃対策
+// ==============================================
+
+// CSRF保護用シークレットキー（本番環境では環境変数から読み込み）
+const CSRF_SECRET = process.env.CSRF_SECRET || crypto.randomBytes(32).toString('hex');
+
+// リクエスト署名検証用の共有シークレット（本番環境では環境変数から読み込み）
+const REQUEST_SIGNATURE_SECRET = process.env.REQUEST_SIGNATURE_SECRET || crypto.randomBytes(32).toString('hex');
+
+// Replay攻撃防止: 処理済みnonceを5分間保持
+const processedNonces = new Set();
+const NONCE_EXPIRY_MS = 5 * 60 * 1000; // 5分
+
+// タイミング攻撃防止: 固定レスポンス時間
+const FIXED_RESPONSE_DELAY_MS = 50;
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -322,19 +339,139 @@ ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
 }
 
 // ==============================================
-// お問い合わせ送信エンドポイント
+// セキュリティヘルパー関数
+// ==============================================
+
+/**
+ * Replay攻撃防止: Nonce検証
+ */
+function validateNonce(nonce, timestamp) {
+    const now = Date.now();
+
+    // タイムスタンプ検証（5分以内）
+    if (Math.abs(now - timestamp) > NONCE_EXPIRY_MS) {
+        return { valid: false, reason: 'timestamp_expired' };
+    }
+
+    // Nonce重複チェック
+    if (processedNonces.has(nonce)) {
+        return { valid: false, reason: 'nonce_reused' };
+    }
+
+    return { valid: true };
+}
+
+/**
+ * Nonce追加と自動クリーンアップ
+ */
+function addNonce(nonce) {
+    processedNonces.add(nonce);
+
+    // 5分後に自動削除
+    setTimeout(() => {
+        processedNonces.delete(nonce);
+    }, NONCE_EXPIRY_MS);
+}
+
+/**
+ * 安全なランダムID生成（推測不可能）
+ */
+function generateSecureId() {
+    return crypto.randomBytes(16).toString('hex');
+}
+
+/**
+ * タイミング攻撃防止: 固定時間レスポンス
+ */
+async function fixedTimeResponse(startTime, callback) {
+    const elapsed = Date.now() - startTime;
+    const delay = Math.max(0, FIXED_RESPONSE_DELAY_MS - elapsed);
+
+    return new Promise(resolve => {
+        setTimeout(() => {
+            callback();
+            resolve();
+        }, delay);
+    });
+}
+
+/**
+ * AIプロンプトインジェクション検出
+ */
+function detectPromptInjection(text) {
+    const dangerousPatterns = [
+        /ignore\s+(previous|above|all)\s+instructions?/i,
+        /system\s*:\s*you\s+are/i,
+        /\{\{.*system.*\}\}/i,
+        /<\|im_start\|>/i,
+        /\[INST\]/i,
+        /__start__/i,
+        /assistant\s*:\s*I\s+will/i
+    ];
+
+    return dangerousPatterns.some(pattern => pattern.test(text));
+}
+
+// ==============================================
+// お問い合わせ送信エンドポイント - セキュリティ強化版
 // ==============================================
 
 app.post('/api/contact', contactLimiter, async (req, res) => {
+    const requestStartTime = Date.now();
     try {
         console.log('[CONTACT API] 新規お問い合わせ受信');
+
+        // ==============================================
+        // 【セキュリティ強化1】Replay攻撃防止: Nonce検証
+        // ==============================================
+        const { nonce, timestamp } = req.body;
+
+        if (!nonce || !timestamp) {
+            return await fixedTimeResponse(requestStartTime, () => {
+                res.status(400).json({
+                    success: false,
+                    error: 'リクエストが無効です'
+                });
+            });
+        }
+
+        const nonceValidation = validateNonce(nonce, timestamp);
+        if (!nonceValidation.valid) {
+            console.warn(`[SECURITY] Replay attack detected: ${nonceValidation.reason}`);
+            return await fixedTimeResponse(requestStartTime, () => {
+                res.status(400).json({
+                    success: false,
+                    error: 'リクエストが無効です'
+                });
+            });
+        }
+
+        // Nonce記録
+        addNonce(nonce);
+
+        // ==============================================
+        // 【セキュリティ強化2】AIプロンプトインジェクション検出
+        // ==============================================
+        const { message } = req.body;
+
+        if (message && detectPromptInjection(message)) {
+            console.warn('[SECURITY] AI Prompt Injection detected');
+            return await fixedTimeResponse(requestStartTime, () => {
+                res.status(400).json({
+                    success: false,
+                    error: 'お問い合わせ内容に不正な文字列が含まれています'
+                });
+            });
+        }
 
         // 入力バリデーション
         const validationErrors = validateContactForm(req.body);
         if (validationErrors.length > 0) {
-            return res.status(400).json({
-                success: false,
-                errors: validationErrors
+            return await fixedTimeResponse(requestStartTime, () => {
+                res.status(400).json({
+                    success: false,
+                    errors: validationErrors
+                });
             });
         }
 
@@ -343,7 +480,6 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
             name,
             email,
             phone,
-            message,
             services
         } = req.body;
 
@@ -398,6 +534,16 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
 
                 console.log(`[DATABASE] お問い合わせ保存成功 (ID: ${this.lastID})`);
 
+                // ==============================================
+                // 【セキュリティ強化3】サーバー側でmodalType判定
+                // ==============================================
+                const modalType = sanitizedData.services ? 'business' : 'general';
+
+                // ==============================================
+                // 【セキュリティ強化4】推測不可能なセキュアID生成
+                // ==============================================
+                const secureInquiryId = generateSecureId();
+
                 // メール送信（非同期）
                 sendEmailNotification({
                     company: sanitizedData.company,
@@ -415,11 +561,16 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
                     // メール失敗してもDBには保存済みなので成功レスポンス返す
                 });
 
-                // 成功レスポンス
-                res.status(200).json({
-                    success: true,
-                    message: 'お問い合わせを受け付けました。担当者より折り返しご連絡いたします。',
-                    inquiryId: this.lastID
+                // ==============================================
+                // 【セキュリティ強化5】タイミング攻撃防止: 固定時間レスポンス
+                // ==============================================
+                fixedTimeResponse(requestStartTime, () => {
+                    res.status(200).json({
+                        success: true,
+                        message: 'お問い合わせを受け付けました。担当者より折り返しご連絡いたします。',
+                        inquiryId: secureInquiryId, // 推測不可能なID
+                        modalType: modalType // サーバー側判定
+                    });
                 });
             }
         );
@@ -428,9 +579,13 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
 
     } catch (error) {
         console.error('[API ERROR]', error);
-        res.status(500).json({
-            success: false,
-            error: 'サーバーエラーが発生しました'
+
+        // タイミング攻撃防止: エラー時も固定時間レスポンス
+        await fixedTimeResponse(requestStartTime, () => {
+            res.status(500).json({
+                success: false,
+                error: 'サーバーエラーが発生しました'
+            });
         });
     }
 });

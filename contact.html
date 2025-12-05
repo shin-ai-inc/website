@@ -1597,33 +1597,188 @@
         margin-right: 8px; /* 縮小 */
     }
     
-    .message-success {
-        background: linear-gradient(135deg, rgba(0, 196, 140, 0.1), rgba(0, 230, 195, 0.1));
-        border-left: 4px solid var(--success);
-        padding: 1rem; /* 縮小 */
-        border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem; /* 縮小 */
-        margin-bottom: 1.5rem; /* 縮小 */
+    /* Enterprise Success Modal - Professional Design */
+    .success-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.75);
         display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(8px) saturate(180%);
+        -webkit-backdrop-filter: blur(8px) saturate(180%);
     }
-    
-    .message-success i {
-        color: var(--success);
-        font-size: 1.3rem; /* 縮小 */
-    }
-    
-    .message-success p {
-        color: var(--dark);
-        margin: 0;
-        font-weight: 500;
-        font-size: 0.95rem; /* 縮小 */
-    }
-    
-    .message-success.show {
+
+    .success-modal-overlay.show {
         display: flex;
-        animation: fadeIn 0.5s ease forwards;
+        animation: overlayFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .success-modal {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 16px;
+        padding: 48px 40px;
+        max-width: 540px;
+        width: 90%;
+        box-shadow:
+            0 0 0 1px rgba(15, 23, 42, 0.05),
+            0 25px 50px -12px rgba(15, 23, 42, 0.25),
+            0 0 120px rgba(102, 126, 234, 0.15);
+        position: relative;
+        animation: modalSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .success-modal::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+        border-radius: 16px 16px 0 0;
+    }
+
+    .success-modal-header {
+        text-align: center;
+        margin-bottom: 32px;
+        padding-top: 8px;
+    }
+
+    .success-modal-status {
+        display: inline-block;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+        border: 1px solid rgba(102, 126, 234, 0.2);
+        border-radius: 24px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #667eea;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .success-modal-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 16px;
+        letter-spacing: -0.5px;
+        line-height: 1.3;
+    }
+
+    .success-modal-message {
+        font-size: 16px;
+        color: #475569;
+        line-height: 1.75;
+        margin: 0 0 36px;
+        font-weight: 400;
+    }
+
+    .success-modal-message strong {
+        color: #1e293b;
+        font-weight: 600;
+    }
+
+    .success-modal-info {
+        background: linear-gradient(135deg, rgba(241, 245, 249, 0.8), rgba(248, 250, 252, 0.8));
+        border-left: 3px solid #667eea;
+        padding: 16px 20px;
+        margin: 0 0 32px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .success-modal-info-text {
+        font-size: 14px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .success-modal-actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    .success-modal-button {
+        flex: 1;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.3px;
+    }
+
+    .success-modal-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .success-modal-button:hover::before {
+        left: 100%;
+    }
+
+    .success-modal-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.35);
+    }
+
+    .success-modal-button:active {
+        transform: translateY(0);
+    }
+
+    @keyframes overlayFadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .success-modal {
+            padding: 36px 28px;
+            max-width: 92%;
+        }
+
+        .success-modal-title {
+            font-size: 24px;
+        }
+
+        .success-modal-message {
+            font-size: 15px;
+        }
     }
     
     @media (max-width: 768px) {
@@ -2037,15 +2192,54 @@
         <section class="contact-form-section" id="contact-form">
             <div class="container">
                 <div class="contact-form-container">
-                    <div class="message-success" id="message-success" role="alert" aria-live="polite">
-                        <i class="fas fa-check-circle" aria-hidden="true"></i>
-                        <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
+                    <!-- Success Modal - Business Type (チェックボックス選択時) -->
+                    <div class="success-modal-overlay" id="success-modal-business" role="dialog" aria-modal="true" aria-labelledby="success-modal-title-business">
+                        <div class="success-modal">
+                            <div class="success-modal-header">
+                                <span class="success-modal-status">受付完了</span>
+                                <h3 class="success-modal-title" id="success-modal-title-business">お問い合わせを承りました</h3>
+                            </div>
+                            <p class="success-modal-message">
+                                お問い合わせ内容を確認のうえ、<strong>2営業日以内</strong>にご連絡いたします。<br>
+                                ご相談内容に応じて、最適なご提案をさせていただきます。
+                            </p>
+                            <div class="success-modal-info">
+                                <p class="success-modal-info-text">
+                                    お話をじっくり伺いながら、一緒に進めてまいります。
+                                </p>
+                            </div>
+                            <div class="success-modal-actions">
+                                <button type="button" class="success-modal-button" data-modal-close="business">了解しました</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success Modal - General Type (チェックボックス未選択時) -->
+                    <div class="success-modal-overlay" id="success-modal-general" role="dialog" aria-modal="true" aria-labelledby="success-modal-title-general">
+                        <div class="success-modal">
+                            <div class="success-modal-header">
+                                <span class="success-modal-status">受付完了</span>
+                                <h3 class="success-modal-title" id="success-modal-title-general">お問い合わせを承りました</h3>
+                            </div>
+                            <p class="success-modal-message">
+                                お問い合わせいただき、ありがとうございます。<br>
+                                内容を確認のうえ、<strong>2営業日以内</strong>にご連絡いたします。
+                            </p>
+                            <div class="success-modal-info">
+                                <p class="success-modal-info-text">
+                                    お話をじっくり伺いながら、一緒に最適な道筋を見つけていければと思います。
+                                </p>
+                            </div>
+                            <div class="success-modal-actions">
+                                <button type="button" class="success-modal-button" data-modal-close="general">了解しました</button>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="contact-form-header">
-                        <div class="free-consultation-badge">無料相談受付中</div>
-                        <h3 class="contact-form-title">AIについて気軽に相談できます</h3>
-                        <p class="contact-form-description">専門知識がなくても大丈夫。あなたのビジネスに合ったAI活用方法を一緒に考えましょう。</p>
+                        <div class="free-consultation-badge">お問い合わせ</div>
+                        <h3 class="contact-form-title">お気軽にご連絡ください</h3>
+                        <p class="contact-form-description">ご相談、取材のご依頼、採用に関するお問い合わせなど、<br>どのようなことでもお気軽にお寄せください。</p>
                     </div>
                     
                     <form id="contact-form-element" aria-label="お問い合わせフォーム" novalidate>
@@ -2463,6 +2657,18 @@
                     return;
                 }
 
+                // ==============================================
+                // 【セキュリティ強化】Replay攻撃防止: Nonce生成
+                // ==============================================
+                function generateNonce() {
+                    const array = new Uint8Array(16);
+                    crypto.getRandomValues(array);
+                    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+                }
+
+                formData.nonce = generateNonce();
+                formData.timestamp = Date.now();
+
                 // 送信ボタンをローディング状態に
                 submitButton.innerHTML = '<span>送信中...</span><i class="fas fa-spinner fa-spin" aria-hidden="true"></i>';
                 submitButton.classList.add('btn-loading');
@@ -2481,8 +2687,10 @@
                     const result = await response.json();
 
                     if (response.ok && result.success) {
-                        // 送信成功
-                        showSuccessMessage();
+                        // ==============================================
+                        // 【セキュリティ強化】サーバー側判定のmodalTypeを使用
+                        // ==============================================
+                        showSuccessMessage(result.modalType);
                     } else {
                         // サーバーエラー
                         throw new Error(result.error || '送信に失敗しました');
@@ -2549,44 +2757,80 @@
         }
         
         // 送信成功メッセージの表示
-        function showSuccessMessage() {
+        function showSuccessMessage(modalType = 'general') {
             // 送信ボタンを元に戻す
             submitButton.innerHTML = '<span>送信する</span><i class="fas fa-paper-plane" aria-hidden="true"></i>';
             submitButton.classList.remove('btn-loading');
             submitButton.disabled = false;
-            
-            // 成功メッセージを表示
-            submitStatus.textContent = '送信完了！担当者より折り返しご連絡いたします。';
-            submitStatus.className = 'submit-status success visible';
-            
-            // 成功メッセージもモーダル表示
-            const successMessage = document.getElementById('message-success');
-            if (successMessage) {
-                successMessage.classList.add('show');
-            }
-            
+
             // フォームをリセット
             contactForm.reset();
-            
+
             // 入力フィールドの状態をクリア
             contactForm.querySelectorAll('.form-control').forEach(control => {
                 control.classList.remove('valid');
                 control.classList.remove('error');
             });
-            
+
             // チェックボックスをリセット
             contactForm.querySelectorAll('.form-check').forEach(formCheck => {
                 formCheck.classList.remove('checked');
             });
-            
-            // 一定時間後にメッセージを非表示
-            setTimeout(() => {
-                submitStatus.className = 'submit-status';
-                if (successMessage) {
-                    successMessage.classList.remove('show');
+
+            // ==============================================
+            // 【セキュリティ強化】サーバーから受け取ったmodalTypeを使用
+            // クライアント側判定を完全排除 → 改ざん不可能
+            // ==============================================
+            const modalId = `success-modal-${modalType}`;
+            const modal = document.getElementById(modalId);
+
+            if (modal) {
+                modal.classList.add('show');
+
+                // アクセシビリティ: フォーカスをモーダルのクローズボタンに移動
+                const closeButton = modal.querySelector('[data-modal-close]');
+                if (closeButton) {
+                    closeButton.focus();
                 }
-            }, 6000);
+            }
         }
+
+        // 成功モーダルクローズ機能（2種類のモーダル統一処理）
+        const modalTypes = ['business', 'general'];
+
+        modalTypes.forEach(type => {
+            const modalId = `success-modal-${type}`;
+            const modal = document.getElementById(modalId);
+
+            if (modal) {
+                // クローズボタンクリック
+                const closeButton = modal.querySelector('[data-modal-close]');
+                if (closeButton) {
+                    closeButton.addEventListener('click', function() {
+                        modal.classList.remove('show');
+                    });
+                }
+
+                // オーバーレイクリック（モーダル外クリック）
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            }
+        });
+
+        // ESCキーで全モーダルクローズ
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                modalTypes.forEach(type => {
+                    const modal = document.getElementById(`success-modal-${type}`);
+                    if (modal && modal.classList.contains('show')) {
+                        modal.classList.remove('show');
+                    }
+                });
+            }
+        });
         
         // ========================================================
         // ▼ Accessibility Enhancement Component - index.html準拠
