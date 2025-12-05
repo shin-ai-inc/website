@@ -338,11 +338,21 @@
         align-items: center;
         justify-content: center;
         transition: opacity 0.2s ease, visibility 0.2s ease;
+        animation: fadeOutLoader 0.3s ease 0.5s forwards;
     }
-    
+
+    @keyframes fadeOutLoader {
+        to {
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+    }
+
     .page-loader.loaded {
         opacity: 0;
         visibility: hidden;
+        display: none;
     }
     
     .loader-circle {
@@ -2318,19 +2328,18 @@
     <script>
     // 即座実行：ページ遷移時も確実にローディング解除
     (function() {
+        console.log('[Contact Page] Script executing immediately');
         const pageLoader = document.getElementById('page-loader');
+        console.log('[Contact Page] pageLoader element:', pageLoader);
+
         if (pageLoader) {
-            setTimeout(() => {
-                pageLoader.classList.add('loaded');
-                setTimeout(() => {
-                    pageLoader.style.display = 'none';
-                }, 200);
-            }, 200);
+            pageLoader.classList.add('loaded');
+            pageLoader.style.display = 'none';
+            console.log('[Contact Page] Page loader hidden');
         }
 
-        setTimeout(() => {
-            document.documentElement.classList.add('loaded');
-        }, 100);
+        document.documentElement.classList.add('loaded');
+        console.log('[Contact Page] html.loaded class added');
     })();
 
     document.addEventListener('DOMContentLoaded', function() {
