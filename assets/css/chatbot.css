@@ -464,8 +464,13 @@ AUTHOR: ShinAI Development Team
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         margin: 0;
         background: var(--white);
-        display: flex;
+        /* display: flex; は .active クラスで制御 */
         flex-direction: column;
+    }
+
+    /* モバイル版でもactiveクラスが必須 */
+    .chatbot-window.active {
+        display: flex !important;
     }
 
     .chatbot-header {
