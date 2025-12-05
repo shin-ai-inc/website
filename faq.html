@@ -2578,30 +2578,14 @@
         // ▼ FAQ機能 Component - 高速化・スムーズ表示
         // ========================================================
         
-        // FAQアコーディオン機能 - モバイルスクロールジャンプ完全防止版
+        // FAQアコーディオン機能 - 自然な展開動作
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
 
-            question.addEventListener('click', (e) => {
-                // スクロール動作を完全に防止
-                e.preventDefault();
-                e.stopPropagation();
-
+            question.addEventListener('click', () => {
                 // 現在の状態を取得
                 const isActive = item.classList.contains('active');
-
-                // 現在のスクロール位置を保存
-                const currentScrollY = window.scrollY;
-                const currentScrollX = window.scrollX;
-
-                // スクロール位置を固定する関数
-                const lockScroll = () => {
-                    window.scrollTo(currentScrollX, currentScrollY);
-                };
-
-                // スクロールイベントを一時的にロック
-                window.addEventListener('scroll', lockScroll, { passive: false });
 
                 // 他のすべてのFAQを閉じる
                 faqItems.forEach(otherItem => {
@@ -2614,12 +2598,6 @@
                 // クリックされたアイテムの状態を切り替え
                 item.classList.toggle('active');
                 question.setAttribute('aria-expanded', !isActive);
-
-                // アニメーション完了後にスクロールロックを解除
-                setTimeout(() => {
-                    window.removeEventListener('scroll', lockScroll);
-                    window.scrollTo(currentScrollX, currentScrollY);
-                }, 450); // CSSアニメーション時間(0.4s)より少し長めに設定
             });
             
             // キーボード操作のサポート
@@ -2847,131 +2825,6 @@
         }
 
         // ========================================================
-        // ▼ Advanced Chatbot Component - 高速化版・AI最適化完全版
-        // ========================================================
-        const chatbotButton = document.getElementById('chatbot-button');
-        const chatbotWindow = document.getElementById('chatbot-window');
-        const chatbotClose = document.getElementById('chatbot-close');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        const chatMessages = document.getElementById('chatbot-messages');
-        
-        if (chatbotButton && chatbotWindow && chatbotClose) {
-            chatbotButton.addEventListener('click', function() {
-                chatbotWindow.classList.toggle('active');
-                
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-                
-                if (!expanded) {
-                    chatInput.focus();
-                }
-            });
-            
-            chatbotClose.addEventListener('click', function() {
-                chatbotWindow.classList.remove('active');
-                chatbotButton.setAttribute('aria-expanded', 'false');
-            });
-            
-            // チャット送信処理 - 高速化版
-            if (chatSend && chatInput && chatMessages) {
-                const handleSend = function() {
-                    const message = chatInput.value.trim();
-                    if (message) {
-                        // ユーザーメッセージを追加
-                        addChatMessage(message, 'user');
-                        chatInput.value = '';
-                        
-                        // ローディングインジケーター表示
-                        const loadingMsg = document.createElement('div');
-                        loadingMsg.classList.add('chat-message', 'bot', 'loading');
-                        loadingMsg.innerHTML = '<span class="loading-dots"><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
-                        chatMessages.appendChild(loadingMsg);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                        
-                        // AIの応答内容 - タイプライター効果で表示速度を最適化
-                        setTimeout(function() {
-                            // ローディング削除
-                            chatMessages.removeChild(loadingMsg);
-                            
-                            // 専門的なAIシステム受託開発会社としての応答
-                            let response = '';
-                            const messageLower = message.toLowerCase();
-                            
-                            if (messageLower.includes('エージェント') || messageLower.includes('agent')) {
-                                response = "ShinAIではAIエージェント開発を得意としています。社内向けシステムへの導入から、特定業務の自動化まで、様々なAIエージェントを開発してきました。大規模言語モデルを活用し、御社の業務フローに最適化したAIエージェントを構築します。どのような課題に対して活用できるか、お問い合わせフォームよりご相談ください。";
-                            } else if (messageLower.includes('rag') || messageLower.includes('検索') || messageLower.includes('retrieval')) {
-                                response = "RAG(Retrieval Augmented Generation)は社内データを活用したAIシステム構築の鍵となる技術です。ShinAIではベクトルデータベースを活用した高度なRAGシステムを構築し、御社の知識ベースを効率的に活用できるようにします。社内文書や過去のナレッジを活用したAIシステムをご検討の場合は、お問い合わせフォームよりご相談ください。";
-                            } else if (messageLower.includes('料金') || messageLower.includes('費用') || messageLower.includes('価格')) {
-                                response = "プロジェクトの規模や内容に応じて、最適なプランをご提案いたします。AIエージェント開発やRAG構築など、具体的なシステムの内容や規模に応じた柔軟な対応が可能です。詳細な費用については、お問い合わせフォームよりご相談ください。";
-                            } else if (messageLower.includes('期間') || messageLower.includes('納期') || messageLower.includes('時間')) {
-                                response = "プロジェクトの複雑さにより開発期間は異なりますが、小規模なAIエージェントで1ヶ月程度、大規模なRAGシステムで2〜3ヶ月程度を目安としています。段階的な開発アプローチにより、リスクを最小化しながら着実に成果を積み上げてまいります。";
-                            } else if (messageLower.includes('事例') || messageLower.includes('実績')) {
-                                response = "製造業、医療・福祉、金融、小売・EC、建設業など、幅広い業界でのAIシステム導入実績がございます。御社の業界や課題に即した具体的な事例については、お問い合わせいただければ詳しくご説明いたします。";
-                            } else if (messageLower.includes('プロトタイプ') || messageLower.includes('小さく始める') || messageLower.includes('伴走')) {
-                                response = "ShinAIでは「プロトタイプからの伴走型開発」を採用しています。小規模な試作品を構築し、実際に使っていただきながら効果を確認。方向性が合っていることを確認しながら段階的に拡張していきます。このアプローチにより、リスクを最小化しながら着実に成果を積み上げることが可能です。お問い合わせフォームより、御社の課題に対するご相談をお聞かせください。";
-                            } else {
-                                // AI受託開発会社としての汎用的な応答（エンタープライズ品質）
-                                const responses = [
-                                    "ShinAIは、大規模言語モデルの独自最適化を強みとする企業向けAIシステム開発企業です。AIエージェント開発やRAG構築など、お客様の課題に合わせたサービスを展開しています。具体的な課題やご要望がございましたら、お問い合わせフォームよりご相談ください。",
-                                    "ベテラン社員の暗黙知をデータ化し、企業の知的財産として保護・活用。伴走型支援により、「導入して終わり」ではないAIシステム構築を実現します。どのようなことでもお気軽にお問い合わせください。",
-                                    "AI×データで独自の価値を創造し、お客様と共に持続可能な未来を築く。それがShinAIの目指す姿です。自走化まで寄り添う開発スタイルで、長期的な成功をサポートいたします。"
-                                ];
-                                
-                                response = responses[Math.floor(Math.random() * responses.length)];
-                            }
-                            
-                            // レスポンス追加（タイピング効果付き - 高速化）
-                            const botMessage = document.createElement('div');
-                            botMessage.classList.add('chat-message', 'bot');
-                            botMessage.textContent = '';
-                            chatMessages.appendChild(botMessage);
-                            
-                            let i = 0;
-                            const typingSpeed = 6; // 高速化
-                            
-                            const typingEffect = setInterval(function() {
-                                if (i < response.length) {
-                                    botMessage.textContent += response.charAt(i);
-                                    i++;
-                                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                                } else {
-                                    clearInterval(typingEffect);
-                                    
-                                    // CTAボタンを追加
-                                    setTimeout(function() {
-                                        const ctaButton = document.createElement('div');
-                                        ctaButton.classList.add('chat-message', 'bot');
-                                        ctaButton.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせフォームへ</a>';
-                                        chatMessages.appendChild(ctaButton);
-                                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                                    }, 200); // 高速化
-                                }
-                            }, typingSpeed);
-                        }, 300); // 高速化
-                    }
-                };
-                
-                chatSend.addEventListener('click', handleSend);
-                
-                chatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        handleSend();
-                    }
-                });
-                
-                function addChatMessage(message, type) {
-                    const msgElement = document.createElement('div');
-                    msgElement.classList.add('chat-message', type);
-                    msgElement.textContent = message;
-                    
-                    chatMessages.appendChild(msgElement);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
-        }
-        
-        // ========================================================
         // ▼ アクセシビリティ改善 Component
         // ========================================================
         
@@ -2989,15 +2842,9 @@
             document.body.classList.remove('keyboard-focus');
         });
         
-        // ESCでモーダルを閉じる
+        // ESCでモバイルメニューを閉じる
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' || e.keyCode === 27) {
-                // チャットボットを閉じる
-                if (chatbotWindow && chatbotWindow.classList.contains('active')) {
-                    chatbotWindow.classList.remove('active');
-                    if (chatbotButton) chatbotButton.setAttribute('aria-expanded', 'false');
-                }
-                
                 // モバイルメニューを閉じる
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
