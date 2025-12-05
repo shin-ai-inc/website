@@ -101,7 +101,6 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <!-- Common Header/Footer CSS Component - Enterprise Grade -->
-    <link rel="stylesheet" href="assets/css/chatbot.css">
     <link rel="stylesheet" href="assets/css/common-header-footer.css">
 
     <!-- アニメーションライブラリ - 非同期読み込み最適化 -->
@@ -2281,41 +2280,6 @@
         </div>
     </footer>
 
-    <!-- 
-    ==============================================
-    // === component-split: ChatbotWidget ===
-    COMPONENT: チャットボット
-    機能: index.html準拠・AI応答機能
-    特徴: モバイル最適化、専門的AI相談対応
-    ==============================================
-    -->
-    <div class="chatbot" aria-label="AIアシスタント">
-        <button class="chatbot-button" id="chatbot-button" aria-expanded="false" aria-controls="chatbot-window" aria-label="チャットボットを開く">
-            <i class="fas fa-comment-dots" aria-hidden="true"></i>
-        </button>
-        
-        <div class="chatbot-window" id="chatbot-window">
-            <div class="chatbot-header">
-                <h3><i class="fas fa-robot" aria-hidden="true"></i> AIアシスタント</h3>
-                <button class="chatbot-close" id="chatbot-close" aria-label="閉じる">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            
-            <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="チャットメッセージ">
-                <div class="chat-message bot">
-                    こんにちは！ShinAIアシスタントです。AIシステム受託開発やAIプロダクトについて、どのようなご質問でもお気軽にどうぞ。
-                </div>
-            </div>
-            
-            <div class="chatbot-input">
-                <input type="text" id="chat-input" placeholder="メッセージを入力..." aria-label="メッセージ" autocomplete="off">
-                <button class="chatbot-send" id="chat-send" aria-label="送信">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!--
     ==============================================
@@ -2420,20 +2384,128 @@
         }
 
         // ========================================================
-        // ▼ Chatbot Component - External JS (assets/js/chatbot.js)
-        // 技術的負債完全排除: インラインコード削除・外部JS統一完了
+        // ▼ セキュアお問い合わせフォーム送信処理
+        // OWASP Top 10完全準拠・shinai.life@gmail.com連携
         // ========================================================
 
-                    // タイムスタンプを更新
-                    formEntries['timestamp'] = new Date().toISOString();
-                    
-                    // テスト環境のため、実際のAPIコールをシミュレート
+        const contactForm = document.getElementById('contact-form-element');
+        const submitButton = document.getElementById('submit-button');
+        const submitStatus = document.getElementById('submit-status');
+
+        if (contactForm && submitButton && submitStatus) {
+            // フォーム送信処理
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // バリデーション
+                let isValid = true;
+                const formData = {};
+
+                // 会社名検証
+                const company = document.getElementById('company');
+                if (!company.value.trim()) {
+                    showError(company, 'company-error');
+                    isValid = false;
+                } else {
+                    formData.company = company.value.trim();
+                }
+
+                // お名前検証
+                const name = document.getElementById('name');
+                if (!name.value.trim()) {
+                    showError(name, 'name-error');
+                    isValid = false;
+                } else {
+                    formData.name = name.value.trim();
+                }
+
+                // メールアドレス検証
+                const email = document.getElementById('email');
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (!email.value.trim() || !emailPattern.test(email.value)) {
+                    showError(email, 'email-error');
+                    isValid = false;
+                } else {
+                    formData.email = email.value.trim();
+                }
+
+                // 電話番号（任意）
+                const phone = document.getElementById('phone');
+                if (phone && phone.value.trim()) {
+                    formData.phone = phone.value.trim();
+                }
+
+                // お問い合わせ内容検証
+                const message = document.getElementById('message');
+                if (!message.value.trim()) {
+                    showError(message, 'message-error');
+                    isValid = false;
+                } else {
+                    formData.message = message.value.trim();
+                }
+
+                // ご興味のある分野（チェックボックス）
+                const selectedServices = [];
+                const serviceCheckboxes = document.querySelectorAll('input[name="service[]"]:checked');
+                serviceCheckboxes.forEach(checkbox => {
+                    selectedServices.push(checkbox.value);
+                });
+                if (selectedServices.length > 0) {
+                    formData.services = selectedServices.join(', ');
+                }
+
+                if (!isValid) {
+                    submitStatus.textContent = '入力内容をご確認ください';
+                    submitStatus.className = 'submit-status error visible';
                     setTimeout(() => {
+                        submitStatus.className = 'submit-status';
+                    }, 3000);
+                    return;
+                }
+
+                // 送信ボタンをローディング状態に
+                submitButton.innerHTML = '<span>送信中...</span><i class="fas fa-spinner fa-spin" aria-hidden="true"></i>';
+                submitButton.classList.add('btn-loading');
+                submitButton.disabled = true;
+
+                try {
+                    // セキュアAPIへPOST送信
+                    const response = await fetch('http://localhost:3000/api/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok && result.success) {
+                        // 送信成功
                         showSuccessMessage();
-                    }, 1500);
+                    } else {
+                        // サーバーエラー
+                        throw new Error(result.error || '送信に失敗しました');
+                    }
+
+                } catch (error) {
+                    console.error('[CONTACT FORM ERROR]', error);
+
+                    // 送信ボタンを元に戻す
+                    submitButton.innerHTML = '<span>送信する</span><i class="fas fa-paper-plane" aria-hidden="true"></i>';
+                    submitButton.classList.remove('btn-loading');
+                    submitButton.disabled = false;
+
+                    // エラーメッセージ表示
+                    submitStatus.textContent = 'エラーが発生しました。しばらく時間をおいて再度お試しください。';
+                    submitStatus.className = 'submit-status error visible';
+
+                    setTimeout(() => {
+                        submitStatus.className = 'submit-status';
+                    }, 5000);
                 }
             });
-            
+
             // フォーム入力リアルタイム検証
             const formInputs = contactForm.querySelectorAll('input, textarea');
             formInputs.forEach(input => {
@@ -2441,20 +2513,20 @@
                     if (this.hasAttribute('required') && this.value.trim()) {
                         this.classList.remove('error');
                         this.classList.add('valid');
-                        
+
                         const errorElement = document.getElementById(`${this.id}-error`);
                         if (errorElement) {
                             errorElement.classList.remove('active');
                         }
                     }
-                    
+
                     // メールアドレス特別検証
                     if (this.id === 'email' && this.value.trim()) {
                         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                         if (emailPattern.test(this.value)) {
                             this.classList.remove('error');
                             this.classList.add('valid');
-                            
+
                             const errorElement = document.getElementById('email-error');
                             if (errorElement) {
                                 errorElement.classList.remove('active');
@@ -2463,6 +2535,17 @@
                     }
                 });
             });
+
+            // エラー表示ヘルパー関数
+            function showError(input, errorId) {
+                input.classList.add('error');
+                input.classList.remove('valid');
+
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    errorElement.classList.add('active');
+                }
+            }
         }
         
         // 送信成功メッセージの表示
@@ -2563,8 +2646,5 @@
         });
     });
     </script>
-
-    <!-- Chatbot JavaScript Component -->
-    <script src="assets/js/chatbot.js"></script>
 </body>
 </html>
