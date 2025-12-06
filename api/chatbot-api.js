@@ -211,7 +211,26 @@ app.post('/api/chatbot', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('[CHATBOT_ERROR] Server error:', error);
+        // Detailed error logging for debugging
+        console.error('[CHATBOT_ERROR] Server error:', {
+            message: error.message,
+            type: error.constructor.name,
+            stack: error.stack,
+            sessionId: sessionId?.substring(0, 8),
+            messageLength: message?.length,
+            timestamp: new Date().toISOString()
+        });
+
+        // Error classification for monitoring
+        if (error.message?.includes('rate limit')) {
+            console.error('[CHATBOT_ERROR] ERROR TYPE: Rate limit exceeded');
+        } else if (error.message?.includes('OpenAI') || error.message?.includes('API')) {
+            console.error('[CHATBOT_ERROR] ERROR TYPE: External API failure');
+        } else if (error instanceof TypeError) {
+            console.error('[CHATBOT_ERROR] ERROR TYPE: Code logic error');
+        } else {
+            console.error('[CHATBOT_ERROR] ERROR TYPE: Unknown server error');
+        }
 
         return fixedTimeResponse(requestStartTime, () => {
             res.status(500).json({
