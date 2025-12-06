@@ -31,6 +31,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const { validateChatbotInput } = require('./lib/security-utils');
 const SimpleRAGSystem = require('./lib/simple-rag-system');
+const HomepageRateLimiter = require('./lib/rate-limiter-homepage');
 
 const app = express();
 
@@ -38,6 +39,11 @@ const app = express();
 // RAG System Initialize
 // ============================================
 const ragSystem = new SimpleRAGSystem();
+
+// ============================================
+// Homepage Optimized Rate Limiter Initialize
+// ============================================
+const homepageRateLimiter = new HomepageRateLimiter();
 
 // ============================================
 // Middleware Configuration
@@ -77,31 +83,6 @@ const globalLimiter = rateLimit({
 });
 
 app.use('/api/', globalLimiter);
-
-// ============================================
-// Session Management (In-Memory)
-// ============================================
-
-/**
- * Session storage for rate limiting
- * Production: Use Redis for distributed systems
- * Development: In-memory for simplicity
- */
-const chatbotSessions = new Map();
-
-/**
- * Clean up expired sessions (every 5 minutes)
- */
-setInterval(() => {
-    const now = Date.now();
-    const expirationTime = 15 * 60 * 1000; // 15 minutes
-
-    for (const [sessionId, session] of chatbotSessions.entries()) {
-        if (now - session.lastRequest > expirationTime) {
-            chatbotSessions.delete(sessionId);
-        }
-    }
-}, 5 * 60 * 1000);
 
 // ============================================
 // API Endpoints
@@ -184,35 +165,32 @@ app.post('/api/chatbot', async (req, res) => {
         }
 
         // ========================================
-        // Step 3: Rate Limiting (Session-based)
+        // Step 3: Rate Limiting (Homepage Optimized)
         // ========================================
 
-        const now = Date.now();
-        const session = chatbotSessions.get(sessionId) || {
-            lastRequest: 0,
-            count: 0,
-            firstRequest: now
-        };
+        const rateLimitCheck = homepageRateLimiter.checkRateLimit(
+            req.ip || req.connection.remoteAddress,
+            sessionId,
+            message
+        );
 
-        // 2-second interval enforcement
-        if (now - session.lastRequest < 2000) {
-            console.warn('[CHATBOT_RATE_LIMIT] Exceeded:', {
+        if (!rateLimitCheck.allowed) {
+            console.warn('[HOMEPAGE_RATE_LIMIT] Limit exceeded:', {
                 sessionId: sessionId.substring(0, 8),
-                interval: now - session.lastRequest
+                ip: (req.ip || req.connection.remoteAddress || '').substring(0, 12) + '...',
+                reason: rateLimitCheck.error
             });
 
             return fixedTimeResponse(requestStartTime, () => {
                 res.status(429).json({
                     success: false,
-                    error: 'Rate limit exceeded'
+                    error: rateLimitCheck.error,
+                    reason: rateLimitCheck.reason,
+                    resetAt: rateLimitCheck.resetAt,
+                    blockDuration: rateLimitCheck.blockDuration
                 });
             });
         }
-
-        // Update session
-        session.lastRequest = now;
-        session.count += 1;
-        chatbotSessions.set(sessionId, session);
 
         // ========================================
         // Step 4: Response Generation (RAG統合)
