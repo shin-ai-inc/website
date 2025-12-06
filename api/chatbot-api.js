@@ -27,8 +27,14 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const { validateChatbotInput } = require('./lib/security-utils');
+const SimpleRAGSystem = require('./lib/simple-rag-system');
 
 const app = express();
+
+// ============================================
+// RAG System Initialize
+// ============================================
+const ragSystem = new SimpleRAGSystem();
 
 // ============================================
 // Middleware Configuration
@@ -206,10 +212,10 @@ app.post('/api/chatbot', async (req, res) => {
         chatbotSessions.set(sessionId, session);
 
         // ========================================
-        // Step 4: Response Generation
+        // Step 4: Response Generation (RAG統合)
         // ========================================
 
-        const response = generateSecureResponse(message);
+        const response = await ragSystem.generateRAGResponse(message, sessionId);
 
         // ========================================
         // Step 5: Send Response
