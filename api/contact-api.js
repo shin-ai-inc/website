@@ -63,14 +63,28 @@ const PORT = process.env.PORT || 3000;
 // セキュリティミドルウェア
 // ==============================================
 
-// Helmet: セキュアHTTPヘッダー設定
+// CSP Nonce生成ミドルウェア
+app.use((req, res, next) => {
+    // リクエストごとにユニークなNonceを生成
+    res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
+    next();
+});
+
+// Helmet: セキュアHTTPヘッダー設定 (Nonce対応CSP)
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            scriptSrc: ["'self'"],
+            styleSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
+            scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
             imgSrc: ["'self'", "data:", "https:"],
+            baseUri: ["'self'"],
+            fontSrc: ["'self'", "https:", "data:"],
+            formAction: ["'self'"],
+            frameAncestors: ["'self'"],
+            objectSrc: ["'none'"],
+            scriptSrcAttr: ["'none'"],
+            upgradeInsecureRequests: []
         },
     },
     hsts: {
