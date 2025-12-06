@@ -23,6 +23,16 @@ const helmet = require('helmet');
 const validator = require('validator');
 const crypto = require('crypto');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
+// ==============================================
+// Security Utilities Integration
+// ==============================================
+const {
+    generateSecureNonce,
+    validateReplayProtection,
+    validateChatbotInput
+} = require('./lib/security-utils');
 
 // ==============================================
 // 高度セキュリティ強化: AI攻撃対策
@@ -41,6 +51,11 @@ const NONCE_EXPIRY_MS = 5 * 60 * 1000; // 5分
 // タイミング攻撃防止: 固定レスポンス時間
 const FIXED_RESPONSE_DELAY_MS = 50;
 
+// CSRF Token Store (session-based, in-memory)
+// Production: Use Redis or database-backed session store
+const csrfTokens = new Map();
+const CSRF_TOKEN_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -48,14 +63,28 @@ const PORT = process.env.PORT || 3000;
 // セキュリティミドルウェア
 // ==============================================
 
-// Helmet: セキュアHTTPヘッダー設定
+// CSP Nonce生成ミドルウェア
+app.use((req, res, next) => {
+    // リクエストごとにユニークなNonceを生成
+    res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
+    next();
+});
+
+// Helmet: セキュアHTTPヘッダー設定 (Nonce対応CSP)
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            scriptSrc: ["'self'"],
+            styleSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
+            scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
             imgSrc: ["'self'", "data:", "https:"],
+            baseUri: ["'self'"],
+            fontSrc: ["'self'", "https:", "data:"],
+            formAction: ["'self'"],
+            frameAncestors: ["'self'"],
+            objectSrc: ["'none'"],
+            scriptSrcAttr: ["'none'"],
+            upgradeInsecureRequests: []
         },
     },
     hsts: {
@@ -78,13 +107,16 @@ app.use((req, res, next) => {
     next();
 });
 
+// Cookie Parser (CSRF Token用)
+app.use(cookieParser());
+
 // JSONパース（ペイロードサイズ制限）
 app.use(express.json({ limit: '10kb' }));
 
 // レート制限: DoS攻撃防止（15分間に5回まで）
 const contactLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15分
-    max: 5, // 5回まで
+    windowMs: process.env.NODE_ENV === 'test' ? 60 * 1000 : 15 * 60 * 1000, // テスト: 1分, 本番: 15分
+    max: process.env.NODE_ENV === 'test' ? 100 : 5, // テスト: 100回, 本番: 5回
     message: {
         success: false,
         error: '送信回数が多すぎます。しばらく時間をおいてから再度お試しください。'
@@ -416,13 +448,122 @@ function detectPromptInjection(text) {
 // お問い合わせ送信エンドポイント - セキュリティ強化版
 // ==============================================
 
-app.post('/api/contact', contactLimiter, async (req, res) => {
+// ==============================================
+// CSRF Protection Functions
+// ==============================================
+
+/**
+ * Generate CSRF Token
+ * - Cryptographically secure random token
+ * - Stored in-memory with expiration
+ * - Associated with cookie
+ */
+function generateCsrfToken() {
+    const token = crypto.randomBytes(32).toString('hex');
+    const cookieValue = crypto.randomBytes(32).toString('hex');
+    const expiresAt = Date.now() + CSRF_TOKEN_EXPIRY_MS;
+
+    csrfTokens.set(token, {
+        cookieValue: cookieValue,
+        expiresAt: expiresAt
+    });
+
+    // Auto cleanup after expiry
+    setTimeout(() => {
+        csrfTokens.delete(token);
+    }, CSRF_TOKEN_EXPIRY_MS);
+
+    return { token, cookieValue };
+}
+
+/**
+ * Validate CSRF Token
+ * - Check token exists
+ * - Check not expired
+ * - Check cookie matches
+ */
+function validateCsrfToken(token, cookieValue) {
+    if (!token || !cookieValue) {
+        return { valid: false, reason: 'missing_token_or_cookie' };
+    }
+
+    const tokenData = csrfTokens.get(token);
+
+    if (!tokenData) {
+        return { valid: false, reason: 'invalid_token' };
+    }
+
+    if (Date.now() > tokenData.expiresAt) {
+        csrfTokens.delete(token);
+        return { valid: false, reason: 'token_expired' };
+    }
+
+    if (tokenData.cookieValue !== cookieValue) {
+        return { valid: false, reason: 'cookie_mismatch' };
+    }
+
+    return { valid: true };
+}
+
+/**
+ * CSRF Protection Middleware
+ */
+function csrfProtection(req, res, next) {
+    const token = req.headers['x-csrf-token'];
+    const cookieValue = req.cookies._csrf;
+
+    const validation = validateCsrfToken(token, cookieValue);
+
+    if (!validation.valid) {
+        return res.status(403).json({
+            success: false,
+            error: 'invalid csrf token'
+        });
+    }
+
+    next();
+}
+
+// ==============================================
+// CSRF Token Generation Endpoint
+// ==============================================
+
+app.get('/api/csrf-token', (req, res) => {
+    try {
+        const { token, cookieValue } = generateCsrfToken();
+
+        // Set HTTP-only cookie
+        res.cookie('_csrf', cookieValue, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: CSRF_TOKEN_EXPIRY_MS
+        });
+
+        res.json({
+            csrfToken: token
+        });
+    } catch (error) {
+        console.error('[CSRF_TOKEN_ERROR]', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to generate CSRF token'
+        });
+    }
+});
+
+// ==============================================
+// お問い合わせ送信エンドポイント - セキュリティ強化版
+// ==============================================
+
+app.post('/api/contact', contactLimiter, csrfProtection, async (req, res) => {
     const requestStartTime = Date.now();
     try {
         console.log('[CONTACT API] 新規お問い合わせ受信');
 
         // ==============================================
-        // 【セキュリティ強化1】Replay攻撃防止: Nonce検証
+        // 【セキュリティ強化1】Replay攻撃防止: Nonce/Timestamp検証
+        // security-utils.js標準実装を使用
         // ==============================================
         const { nonce, timestamp } = req.body;
 
@@ -435,9 +576,10 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
             });
         }
 
-        const nonceValidation = validateNonce(nonce, timestamp);
-        if (!nonceValidation.valid) {
-            console.warn(`[SECURITY] Replay attack detected: ${nonceValidation.reason}`);
+        // validateReplayProtection: Nonce重複チェック + Timestamp鮮度チェック
+        const replayValidation = validateReplayProtection(nonce, timestamp, processedNonces);
+        if (!replayValidation.valid) {
+            console.warn(`[SECURITY] Replay attack detected: ${replayValidation.error}`);
             return await fixedTimeResponse(requestStartTime, () => {
                 res.status(400).json({
                     success: false,
@@ -446,8 +588,8 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
             });
         }
 
-        // Nonce記録
-        addNonce(nonce);
+        // Nonce自動登録（validateReplayProtectionが内部で実行）
+        // processedNoncesに自動追加済み
 
         // ==============================================
         // 【セキュリティ強化2】AIプロンプトインジェクション検出
@@ -606,8 +748,9 @@ app.get('/api/health', (req, res) => {
 // サーバー起動
 // ==============================================
 
-app.listen(PORT, () => {
-    console.log(`
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`
 ╔════════════════════════════════════════════════════════════╗
 ║  ShinAI お問い合わせAPI - セキュア実装                    ║
 ║                                                            ║
@@ -624,19 +767,21 @@ app.listen(PORT, () => {
 ║  [✓] セキュアHTTPヘッダー（Helmet）                       ║
 ╚════════════════════════════════════════════════════════════╝
     `);
-});
-
-// グレースフルシャットダウン
-process.on('SIGTERM', () => {
-    console.log('[SERVER] シャットダウン開始...');
-    db.close((err) => {
-        if (err) {
-            console.error('[DATABASE] クローズエラー:', err.message);
-        } else {
-            console.log('[DATABASE] 正常にクローズしました');
-        }
-        process.exit(0);
     });
-});
 
+    // グレースフルシャットダウン
+    process.on('SIGTERM', () => {
+        console.log('[SERVER] シャットダウン開始...');
+        db.close((err) => {
+            if (err) {
+                console.error('[DATABASE] クローズエラー:', err.message);
+            } else {
+                console.log('[DATABASE] 正常にクローズしました');
+            }
+            process.exit(0);
+        });
+    });
+}
+
+// Export for testing
 module.exports = app;
