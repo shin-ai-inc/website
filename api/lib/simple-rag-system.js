@@ -319,7 +319,16 @@ class SimpleRAGSystem {
             }
 
             // 1. 関連セクション検索
-            const relevantSections = this.searchRelevantSections(userMessage, 3);
+            const relevantSections = await this.searchRelevantSections(userMessage, 3);
+
+            // Defensive programming: Ensure relevantSections is an array
+            if (!Array.isArray(relevantSections)) {
+                console.error('[RAG] CRITICAL ERROR: searchRelevantSections() did not return an array:', {
+                    type: typeof relevantSections,
+                    value: relevantSections
+                });
+                throw new TypeError('searchRelevantSections() must return an array');
+            }
 
             // 2. コンテキスト構築
             const context = relevantSections.map(section =>
@@ -357,7 +366,29 @@ class SimpleRAGSystem {
             return response;
 
         } catch (error) {
-            console.error('[RAG] ChatGPT API error:', error);
+            // Detailed error logging for debugging
+            console.error('[RAG] ChatGPT API error:', {
+                message: error.message,
+                type: error.constructor.name,
+                stack: error.stack,
+                openaiConfigured: !!this.openai,
+                timestamp: new Date().toISOString()
+            });
+
+            // Error classification for monitoring
+            if (error.message?.includes('API key')) {
+                console.error('[RAG] ERROR TYPE: API Key configuration issue');
+            } else if (error.message?.includes('rate limit')) {
+                console.error('[RAG] ERROR TYPE: OpenAI rate limit exceeded');
+            } else if (error.message?.includes('network') || error.code === 'ECONNREFUSED') {
+                console.error('[RAG] ERROR TYPE: Network connectivity issue');
+            } else if (error instanceof TypeError) {
+                console.error('[RAG] ERROR TYPE: Code logic error (async/await, null reference, etc.)');
+            } else {
+                console.error('[RAG] ERROR TYPE: Unknown error');
+            }
+
+            // Fallback response (maintains service availability)
             return this.getFallbackResponse(userMessage);
         }
     }
