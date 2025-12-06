@@ -50,6 +50,11 @@ class HomepageRateLimiter {
                 perMonth: this.isTestEnvironment ? 100000 : 100 // テスト環境では100000メッセージ/月
             },
 
+            // メッセージサイズ制限 (Phase 4.0)
+            message: {
+                maxLength: 1000             // 最大1000文字 (一般的な問い合わせ50-200文字)
+            },
+
             // 不審行動検知閾値
             suspicion: {
                 rapidMessages: 5,           // 1分以内5メッセージで警告
@@ -68,6 +73,12 @@ class HomepageRateLimiter {
      */
     checkRateLimit(ipAddress, sessionId, message) {
         const now = Date.now();
+
+        // === 0. メッセージサイズ制限 (Phase 4.0 - セキュリティ強化) ===
+        const messageSizeCheck = this.checkMessageSize(message);
+        if (!messageSizeCheck.allowed) {
+            return messageSizeCheck;
+        }
 
         // IP使用量データ取得
         const ipData = this.getOrCreateIPData(ipAddress, now);
@@ -107,6 +118,45 @@ class HomepageRateLimiter {
             },
             warning: suspicionCheck.warning
         };
+    }
+
+    /**
+     * メッセージサイズ制限チェック (Phase 4.0)
+     *
+     * PURPOSE:
+     * - Prevent OpenAI API cost escalation from ultra-long messages
+     * - Constitutional AI compliance (resource protection)
+     * - Security: Prevent abuse through oversized input
+     *
+     * LIMITS:
+     * - Max message length: 1000 characters
+     * - Rationale: Typical inquiry = 50-200 chars
+     *             1000 chars = generous buffer for detailed questions
+     *             >1000 chars = likely spam/abuse or mistake
+     */
+    checkMessageSize(message) {
+        // Handle null/undefined gracefully (Constitutional AI: respectful handling)
+        const normalizedMessage = message || '';
+
+        // Convert to string if not already (edge case handling)
+        const messageStr = typeof normalizedMessage === 'string'
+            ? normalizedMessage
+            : String(normalizedMessage);
+
+        const maxLength = this.limits.message.maxLength;
+        const messageLength = messageStr.length;
+
+        if (messageLength > maxLength) {
+            return {
+                allowed: false,
+                error: 'Message too long',
+                reason: `Message length ${messageLength} exceeds limit of ${maxLength} characters. Please shorten your message.`,
+                maxLength: maxLength,
+                currentLength: messageLength
+            };
+        }
+
+        return { allowed: true };
     }
 
     /**
@@ -251,9 +301,10 @@ class HomepageRateLimiter {
             ipData.suspicionScore = 0;
         }
 
-        // 最近のメッセージ記録
+        // 最近のメッセージ記録 (null/undefined対応)
+        const normalizedMessage = message || '';
         ipData.recentMessages.push({
-            message: message,
+            message: normalizedMessage,
             timestamp: now
         });
 
@@ -280,10 +331,10 @@ class HomepageRateLimiter {
             suspicionScore += 40;
         }
 
-        // 3. 異常に長いメッセージの連続
+        // 3. 異常に長いメッセージの連続 (null/undefined対応)
         const longMessagesRecent = ipData.recentMessages
             .slice(-5)
-            .filter(m => m.message.length > 400);
+            .filter(m => m.message && m.message.length > 400);
         if (longMessagesRecent.length >= this.limits.suspicion.longMessages) {
             suspicionScore += 20;
         }
