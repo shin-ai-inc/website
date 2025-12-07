@@ -169,7 +169,7 @@ const ShinAIChatbot = {
         if (!this.lastMessageTime) this.lastMessageTime = 0;
 
         if (now - this.lastMessageTime < 2000) {  // 2秒に1回まで
-            this.addMessage('送信頻度が高すぎます。少しお待ちください。', 'bot');
+            this.addMessage('ただいま処理中です。少々お待ちいただけますでしょうか。', 'bot');
             return;
         }
 
