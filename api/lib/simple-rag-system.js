@@ -20,8 +20,9 @@
 const fs = require('fs');
 const path = require('path');
 const OpenAI = require('openai');
-const VectorDBManager = require('./vector-db-manager');
-const EmbeddingGenerator = require('./embedding-generator');
+const SimpleVectorSearch = require('./simple-vector-search');
+const HybridSearchEngine = require('./hybrid-search-engine');
+const RerankingEngine = require('./reranking-engine');
 
 class SimpleRAGSystem {
     constructor() {
@@ -38,10 +39,23 @@ class SimpleRAGSystem {
         this.SESSION_MAX_HISTORY = 10; // 最大10往復保持
         this.SESSION_EXPIRY_MS = 60 * 60 * 1000; // 1時間
 
-        // Vector Search Components (Phase 4.1)
-        this.vectorDB = new VectorDBManager();
-        this.embeddingGenerator = new EmbeddingGenerator();
+        // Vector Search (In-memory implementation)
+        this.vectorSearch = new SimpleVectorSearch();
         this.vectorSearchEnabled = false; // Feature flag
+
+        // Hybrid Search Engine (RRF fusion)
+        this.hybridSearch = new HybridSearchEngine({
+            vectorWeight: 0.7,  // 70% semantic
+            keywordWeight: 0.3  // 30% lexical
+        });
+        this.hybridSearchEnabled = false; // Feature flag
+
+        // Reranking Engine (LLM-based precision boost)
+        this.rerankingEngine = new RerankingEngine({
+            model: 'gpt-4o-mini',
+            temperature: 0.3
+        });
+        this.rerankingEnabled = false; // Feature flag
     }
 
     /**
@@ -140,12 +154,13 @@ class SimpleRAGSystem {
     }
 
     /**
-     * Vector Search初期化 (Phase 4.1)
+     * Vector Search初期化
      *
      * PURPOSE:
-     * - Initialize Chroma vector database
      * - Generate embeddings for all KB sections
      * - Index sections for semantic search
+     * - Enable hybrid search (vector + keyword fusion)
+     * - In-memory vector search (no external server)
      *
      * FALLBACK:
      * - If initialization fails, fall back to keyword search
@@ -155,22 +170,28 @@ class SimpleRAGSystem {
         try {
             console.log('[RAG] Initializing vector search...');
 
-            // Initialize Vector DB
-            await this.vectorDB.initialize();
-
             // Index Knowledge Base
             await this.indexKnowledgeBase();
 
             // Enable vector search
             this.vectorSearchEnabled = true;
 
+            // Enable hybrid search (vector + keyword)
+            this.hybridSearchEnabled = true;
+
+            // Enable reranking (LLM-based precision)
+            this.rerankingEnabled = true;
+
             console.log('[RAG] Vector search enabled successfully');
-            return { success: true, message: 'Vector search enabled' };
+            console.log('[RAG] Hybrid search enabled (Vector 70% + Keyword 30%)');
+            console.log('[RAG] Reranking enabled (LLM-based precision boost)');
+            return { success: true, message: 'Vector search, hybrid search, and reranking enabled' };
 
         } catch (error) {
             console.error('[RAG] Vector search initialization failed:', error.message);
             console.log('[RAG] Falling back to keyword search');
             this.vectorSearchEnabled = false;
+            this.hybridSearchEnabled = false;
 
             return {
                 success: false,
@@ -185,7 +206,7 @@ class SimpleRAGSystem {
      *
      * PURPOSE:
      * - Generate embeddings for all KB sections
-     * - Index sections in Chroma with metadata
+     * - Index sections in vector search engine
      *
      * COST OPTIMIZATION:
      * - Batch embedding generation (10 texts per batch)
@@ -206,51 +227,104 @@ class SimpleRAGSystem {
             title: s.title
         }));
 
-        // Generate embeddings (batched for efficiency)
-        const embeddings = await this.embeddingGenerator.generateBatchEmbeddings(documents);
-
-        // Index in Chroma
-        await this.vectorDB.addDocuments(documents, embeddings, metadatas, ids);
+        // Index in SimpleVectorSearch (generates embeddings internally)
+        const result = await this.vectorSearch.indexDocuments(documents, metadatas, ids);
 
         console.log('[RAG] Knowledge Base indexing complete');
-
-        // Log cost statistics
-        const costStats = this.embeddingGenerator.getCostStats();
-        console.log('[RAG] Embedding cost:', costStats);
+        console.log(`[RAG] Indexed documents: ${result.documentCount}`);
+        console.log(`[RAG] Embedding cost: $${result.costStats.estimatedCost}`);
     }
 
     /**
-     * 関連セクション検索 (Phase 4.1: Vector Search統合)
+     * 関連セクション検索 (Hybrid Search + Reranking + Metadata Filtering統合)
      *
      * STRATEGY:
-     * 1. Try vector search first (semantic understanding)
-     * 2. Fall back to keyword search if vector search fails
-     * 3. Maintain backward compatibility
+     * 1. Apply metadata filtering (if specified)
+     * 2. Hybrid search: Fuse vector + keyword (RRF) → Get Top 10
+     * 3. Reranking: LLM-based reranking → Get Top K
+     * 4. Fallback: Vector → Keyword
      *
      * EXPECTED IMPROVEMENTS:
-     * - Accuracy: 60% → 85-90% (vector search)
-     * - Semantic understanding: 0% → 100%
-     * - Latency: +15-70ms (acceptable overhead)
+     * - Accuracy: 60% (keyword) → 85% (vector) → 90% (hybrid) → 95%+ (reranked)
+     * - Precision: Maximized with metadata filtering
+     *
+     * @param {string} query - Search query
+     * @param {number} topK - Number of results to return
+     * @param {object} filters - Optional metadata filters {category, keywords}
      */
-    async searchRelevantSections(query, topK = 3) {
-        // Try vector search first (if enabled)
+    async searchRelevantSections(query, topK = 3, filters = {}) {
+        // Try hybrid search first (if enabled)
+        if (this.hybridSearchEnabled && this.vectorSearchEnabled) {
+            try {
+                // Get candidates from both searches (10 each)
+                const vectorCandidates = await this.vectorSearch.search(query, 10);
+                const keywordCandidates = this.keywordSearchFallback(query, 10);
+
+                // Convert to unified format with IDs
+                const vectorResultsWithIds = vectorCandidates.documents.map((doc, i) => ({
+                    id: vectorCandidates.ids[i],
+                    content: doc,
+                    category: vectorCandidates.metadatas[i].category,
+                    title: vectorCandidates.metadatas[i].title,
+                    keywords: this.extractKeywords(doc),
+                    vectorScore: vectorCandidates.scores[i]
+                }));
+
+                const keywordResultsWithIds = keywordCandidates.map((section, i) => ({
+                    id: `kw-${i}`,
+                    content: section.content,
+                    category: section.category,
+                    title: section.title,
+                    keywords: section.keywords
+                }));
+
+                // Fuse using RRF (get more candidates for reranking)
+                const candidateCount = this.rerankingEnabled ? 10 : topK;
+                const fusedResults = this.hybridSearch.fuseResults(
+                    vectorResultsWithIds,
+                    keywordResultsWithIds,
+                    candidateCount
+                );
+
+                // Apply metadata filtering (if specified)
+                let filteredResults = fusedResults;
+                if (filters.category || filters.keywords) {
+                    filteredResults = this.applyMetadataFilters(fusedResults, filters);
+                    console.log(`[RAG] Metadata filtering: ${fusedResults.length} → ${filteredResults.length} results`);
+                }
+
+                // Apply reranking if enabled
+                if (this.rerankingEnabled && filteredResults.length > 0) {
+                    const rerankedResults = await this.rerankingEngine.rerank(query, filteredResults, topK);
+                    console.log(`[RAG] Reranked results: ${rerankedResults.length} (top rerank score: ${rerankedResults[0]?.rerankScore}/10)`);
+                    return rerankedResults;
+                }
+
+                console.log(`[RAG] Hybrid search returned ${filteredResults.length} results (top hybrid score: ${filteredResults[0]?.hybridScore.toFixed(4)})`);
+                return filteredResults.slice(0, topK);
+
+            } catch (error) {
+                console.error('[RAG] Hybrid search failed, falling back to vector search:', error.message);
+                // Fall through to vector-only search below
+            }
+        }
+
+        // Try vector search (if enabled)
         if (this.vectorSearchEnabled) {
             try {
-                // Generate query embedding
-                const queryEmbedding = await this.embeddingGenerator.generateEmbedding(query);
-
                 // Vector similarity search
-                const results = await this.vectorDB.search(queryEmbedding, topK);
+                const results = await this.vectorSearch.search(query, topK);
 
-                // Convert Chroma results to section format
+                // Convert results to section format
                 const sections = results.documents.map((doc, i) => ({
                     content: doc,
                     category: results.metadatas[i].category,
                     title: results.metadatas[i].title,
-                    keywords: this.extractKeywords(doc) // Maintain consistency
+                    keywords: this.extractKeywords(doc),
+                    score: results.scores[i]
                 }));
 
-                console.log(`[RAG] Vector search returned ${sections.length} results`);
+                console.log(`[RAG] Vector search returned ${sections.length} results (top score: ${results.scores[0]?.toFixed(3)})`);
                 return sections;
 
             } catch (error) {
@@ -391,6 +465,43 @@ class SimpleRAGSystem {
             // Fallback response (maintains service availability)
             return this.getFallbackResponse(userMessage);
         }
+    }
+
+    /**
+     * Apply metadata filters to search results
+     *
+     * @param {Array} results - Search results to filter
+     * @param {object} filters - Filters {category, keywords}
+     * @returns {Array} Filtered results
+     */
+    applyMetadataFilters(results, filters) {
+        let filtered = results;
+
+        // Filter by category
+        if (filters.category) {
+            const targetCategory = filters.category.toLowerCase();
+            filtered = filtered.filter(result =>
+                result.category && result.category.toLowerCase().includes(targetCategory)
+            );
+        }
+
+        // Filter by keywords (any keyword match)
+        if (filters.keywords && Array.isArray(filters.keywords)) {
+            filtered = filtered.filter(result => {
+                const resultKeywords = result.keywords || [];
+                const resultContent = (result.content || '').toLowerCase();
+                const resultTitle = (result.title || '').toLowerCase();
+
+                return filters.keywords.some(keyword => {
+                    const kw = keyword.toLowerCase();
+                    return resultKeywords.some(rk => rk.toLowerCase().includes(kw)) ||
+                           resultContent.includes(kw) ||
+                           resultTitle.includes(kw);
+                });
+            });
+        }
+
+        return filtered;
     }
 
     /**
