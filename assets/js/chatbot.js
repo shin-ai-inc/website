@@ -196,8 +196,19 @@ const ShinAIChatbot = {
                 this.sessionId = this.generateSessionId();
             }
 
-            // API呼び出し
-            const apiResponse = await fetch('http://localhost:3001/api/chatbot', {
+            // ==============================================
+            // API呼び出し（環境別エンドポイント設定）
+            // ==============================================
+            // PRODUCTION NOTE:
+            // GitHub Pagesは静的サイトのため、別途APIサーバーが必要
+            // 推奨デプロイ先: Vercel / Railway / Render
+            // ==============================================
+
+            const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3001'  // ローカル開発環境
+                : (window.CHATBOT_API_URL || 'http://localhost:3001');  // 本番環境（環境変数から取得）
+
+            const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
