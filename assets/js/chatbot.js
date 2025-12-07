@@ -199,47 +199,115 @@ const ShinAIChatbot = {
             // ==============================================
             // API呼び出し（環境別エンドポイント設定）
             // ==============================================
-            // PRODUCTION NOTE:
-            // GitHub Pagesは静的サイトのため、別途APIサーバーが必要
-            // 推奨デプロイ先: Vercel / Railway / Render
-            // ==============================================
-
             const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                 ? 'http://localhost:3001'  // ローカル開発環境
-                : (window.CHATBOT_API_URL || 'http://localhost:3001');  // 本番環境（環境変数から取得）
+                : window.CHATBOT_API_URL;  // 本番環境（環境変数から取得）
 
-            const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: text,
-                    sessionId: this.sessionId
-                })
-            });
+            let response = null;
 
-            const data = await apiResponse.json();
+            // API利用可能時はAPI経由でレスポンス生成
+            if (apiBaseUrl) {
+                try {
+                    const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: text,
+                            sessionId: this.sessionId
+                        }),
+                        timeout: 5000  // 5秒タイムアウト
+                    });
+
+                    const data = await apiResponse.json();
+                    if (data.success) {
+                        response = data.response;
+                    }
+                } catch (apiError) {
+                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError.message);
+                }
+            }
+
+            // APIが利用できない場合、知的フォールバックレスポンス生成
+            if (!response) {
+                response = this.generateFallbackResponse(text);
+            }
 
             // ローディング非表示
             setTimeout(() => {
                 this.hideTypingIndicator();
-
-                if (data.success) {
-                    // AIレスポンス表示（タイピングエフェクト）
-                    this.displayTypingMessage(data.response);
-                } else {
-                    // エラーメッセージ表示
-                    this.addMessage('申し訳ありません。一時的にサービスが利用できません。', 'bot');
-                    console.warn('[ShinAI Chatbot] API Error:', data.error);
-                }
+                this.displayTypingMessage(response);
             }, this.loadingDelay);
 
         } catch (error) {
             console.error('[ShinAI Chatbot] エラー:', error);
             this.hideTypingIndicator();
-            this.addMessage('申し訳ありません。正常に応答できませんでした。お問い合わせフォームよりご連絡ください。', 'bot');
+            const fallbackResponse = this.generateFallbackResponse(text);
+            this.displayTypingMessage(fallbackResponse);
         }
+    },
+
+    /**
+     * 知的フォールバックレスポンス生成
+     * APIが利用できない場合でも、適切な応答を返す
+     */
+    generateFallbackResponse: function(userMessage) {
+        const msg = userMessage.toLowerCase();
+
+        // ==============================================
+        // 1. サービス・料金に関する質問
+        // ==============================================
+        if (msg.includes('サービス') || msg.includes('料金') || msg.includes('価格') || msg.includes('費用')) {
+            return 'ShinAIでは、AIシステム開発、カスタムAI開発、RAG構築、AIエージェント開発など、幅広いAIソリューションを提供しております。お客様のニーズに合わせたオーダーメイド開発が可能です。詳しいサービス内容や料金については、お問い合わせフォームよりお気軽にご相談ください。無料相談も承っております。';
+        }
+
+        // ==============================================
+        // 2. AI化・導入に関する質問
+        // ==============================================
+        if (msg.includes('ai化') || msg.includes('ai導入') || msg.includes('導入') || msg.includes('始め方')) {
+            return 'AI導入は、現状分析、要件定義、システム設計、開発、テスト、運用の流れで進めます。ShinAIでは、お客様の業務を深く理解し、最適なAIソリューションをご提案いたします。製造業のベテラン社員の暗黙知をデータ化するなど、企業の知的財産を保護しながらAI化を実現します。まずは無料相談からお気軽にお問い合わせください。';
+        }
+
+        // ==============================================
+        // 3. RAG・大規模言語モデルに関する質問
+        // ==============================================
+        if (msg.includes('rag') || msg.includes('大規模言語モデル') || msg.includes('llm') || msg.includes('chatgpt')) {
+            return 'ShinAIでは、最新の大規模言語モデル（LLM）を独自最適化し、RAG（Retrieval-Augmented Generation）技術を活用した高精度なAIシステムを構築しております。お客様の業務データと組み合わせることで、企業専用のAIアシスタントを実現します。オンプレミス環境での構築も可能です。詳細はお問い合わせフォームよりご相談ください。';
+        }
+
+        // ==============================================
+        // 4. 製造業・暗黙知に関する質問
+        // ==============================================
+        if (msg.includes('製造業') || msg.includes('暗黙知') || msg.includes('ベテラン') || msg.includes('技能')) {
+            return 'ShinAIは製造業のベテラン社員が持つ暗黙知のデータ化を得意としております。長年の経験で培われた技能や判断基準をAIシステムに組み込み、企業の貴重な知的財産として保護・活用します。技能継承の課題解決にも貢献いたします。具体的な事例や導入方法については、お問い合わせフォームよりご相談ください。';
+        }
+
+        // ==============================================
+        // 5. セキュリティ・オンプレミスに関する質問
+        // ==============================================
+        if (msg.includes('セキュリティ') || msg.includes('オンプレミス') || msg.includes('安全') || msg.includes('情報漏洩')) {
+            return 'ShinAIでは、企業の機密情報を守るため、オンプレミス環境でのAIシステム構築に対応しております。データは社内で完結し、外部クラウドに送信されることはありません。OWASP Top 10に準拠したセキュアな開発を実施し、企業の知的財産を確実に保護します。セキュリティ要件についても、お気軽にご相談ください。';
+        }
+
+        // ==============================================
+        // 6. 会社・問い合わせに関する質問
+        // ==============================================
+        if (msg.includes('会社') || msg.includes('問い合わせ') || msg.includes('相談') || msg.includes('連絡')) {
+            return 'ShinAIは、AI×データで唯一無二の価値を創造する企業向けAIシステム開発の専門企業です。お問い合わせ・無料相談は、当サイトのお問い合わせフォームより承っております。お客様のご要望をお聞かせいただければ、最適なソリューションをご提案させていただきます。お気軽にご連絡ください。';
+        }
+
+        // ==============================================
+        // 7. 挨拶・自己紹介
+        // ==============================================
+        if (msg.includes('こんにちは') || msg.includes('はじめまして') || msg.includes('hello') || msg.includes('あなたは誰') || msg.includes('何者')) {
+            return 'こんにちは！ShinAIのAIアシスタントです。企業向けAIシステム開発に関するご質問にお答えいたします。サービス内容、料金、AI導入の進め方など、どのようなことでもお気軽にお尋ねください。より詳しいご相談は、お問い合わせフォームより承っております。';
+        }
+
+        // ==============================================
+        // 8. デフォルトレスポンス
+        // ==============================================
+        return 'ご質問ありがとうございます。ShinAIでは、AIシステム開発、カスタムAI開発、RAG構築、AIエージェント開発など、幅広いAIソリューションを提供しております。お客様のご要望に応じたオーダーメイド開発が可能です。\n\n詳しいご相談は、お問い合わせフォームより承っております。無料相談も実施しておりますので、お気軽にご連絡ください。どのようなことでもお答えいたします！';
     },
 
     /**
