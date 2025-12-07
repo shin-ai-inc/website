@@ -199,9 +199,12 @@ const ShinAIChatbot = {
             // ==============================================
             // API呼び出し（環境別エンドポイント設定）
             // ==============================================
-            const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                ? 'http://localhost:3001'  // ローカル開発環境
-                : window.CHATBOT_API_URL;  // 本番環境（環境変数から取得）
+            // CHATBOT_API_URLが明示的に設定されている場合はそれを優先
+            const apiBaseUrl = window.CHATBOT_API_URL
+                ? window.CHATBOT_API_URL  // 本番環境またはVercel API指定時
+                : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+                    ? 'http://localhost:3001'  // ローカル開発環境
+                    : null;  // フォールバック
 
             let response = null;
 
