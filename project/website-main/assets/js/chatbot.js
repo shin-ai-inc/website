@@ -208,6 +208,10 @@ const ShinAIChatbot = {
             // API利用可能時はAPI経由でレスポンス生成
             if (apiBaseUrl) {
                 try {
+                    // AbortController でタイムアウト実装
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒タイムアウト
+
                     const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
                         method: 'POST',
                         headers: {
@@ -217,15 +221,22 @@ const ShinAIChatbot = {
                             message: text,
                             sessionId: this.sessionId
                         }),
-                        timeout: 5000  // 5秒タイムアウト
+                        signal: controller.signal
                     });
+
+                    clearTimeout(timeoutId);
 
                     const data = await apiResponse.json();
                     if (data.success) {
                         response = data.response;
                     }
                 } catch (apiError) {
-                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError.message);
+                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError);
+                    console.error('[ShinAI Chatbot] Error details:', {
+                        name: apiError.name,
+                        message: apiError.message,
+                        apiBaseUrl: apiBaseUrl
+                    });
                 }
             }
 
