@@ -42,6 +42,8 @@ class SimpleRAGSystem {
         // Vector Search (In-memory implementation)
         this.vectorSearch = new SimpleVectorSearch();
         this.vectorSearchEnabled = false; // Feature flag
+        this.vectorInitializing = false; // Initialization in progress
+        this.vectorInitialized = false; // Initialization complete
 
         // Hybrid Search Engine (RRF fusion)
         this.hybridSearch = new HybridSearchEngine({
@@ -253,6 +255,21 @@ class SimpleRAGSystem {
      * @param {object} filters - Optional metadata filters {category, keywords}
      */
     async searchRelevantSections(query, topK = 3, filters = {}) {
+        // Lazy initialization: Initialize vector search on first use
+        if (!this.vectorInitialized && !this.vectorInitializing && this.openai) {
+            this.vectorInitializing = true;
+            console.log('[RAG] Lazy initializing vector search on first query...');
+            try {
+                await this.initializeVectorSearch();
+                this.vectorInitialized = true;
+                console.log('[RAG] Vector search lazy initialization complete');
+            } catch (error) {
+                console.error('[RAG] Lazy initialization failed:', error.message);
+                console.log('[RAG] Falling back to keyword search');
+            }
+            this.vectorInitializing = false;
+        }
+
         // Try hybrid search first (if enabled)
         if (this.hybridSearchEnabled && this.vectorSearchEnabled) {
             try {
