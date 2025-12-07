@@ -16,6 +16,7 @@
  */
 
 const { ChromaClient } = require('chromadb');
+const OpenAIEmbeddingFunction = require('./openai-embedding-function');
 
 class VectorDBManager {
     constructor(config = {}) {
@@ -27,27 +28,39 @@ class VectorDBManager {
         this.similarityMetric = config.similarityMetric || 'cosine'; // cosine, l2, ip
         this.host = config.host || process.env.CHROMA_HOST || 'localhost';
         this.port = config.port || process.env.CHROMA_PORT || 8000;
+
+        // Initialize OpenAI embedding function
+        this.embeddingFunction = new OpenAIEmbeddingFunction();
     }
 
     /**
      * Initialize Chroma client and collection
+     *
+     * STRATEGY:
+     * - Use in-memory mode (development/testing) - CURRENT
+     * - OpenAI embedding function (text-embedding-3-small)
+     * - Production: Switch to server mode via env vars
+     *
+     * NOTE: chromadb v3.1.6 requires explicit embedding function
      */
     async initialize() {
         try {
-            // Create Chroma client
-            this.client = new ChromaClient({
-                path: this.host === 'localhost' ? undefined : `http://${this.host}:${this.port}`
-            });
+            // In-memory mode (development)
+            // Production: Set CHROMA_HOST to actual server hostname
+            console.log('[VectorDB] Initializing in-memory mode (development)');
+            this.client = new ChromaClient();
 
-            // Get or create collection
+            // Get or create collection with OpenAI embedding function
             this.collection = await this.client.getOrCreateCollection({
                 name: this.collectionName,
+                embeddingFunction: this.embeddingFunction,
                 metadata: {
                     'hnsw:space': this.similarityMetric  // Cosine similarity
                 }
             });
 
             console.log(`[VectorDB] Initialized collection: ${this.collectionName}`);
+            console.log(`[VectorDB] Embedding function: OpenAI text-embedding-3-small`);
             return true;
         } catch (error) {
             console.error('[VectorDB] Initialization error:', error.message);

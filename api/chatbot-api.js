@@ -40,6 +40,22 @@ const app = express();
 // ============================================
 const ragSystem = new SimpleRAGSystem();
 
+// Initialize Vector Search automatically on startup
+(async () => {
+    try {
+        console.log('[STARTUP] Initializing RAG Vector Search...');
+        const result = await ragSystem.initializeVectorSearch();
+        if (result.success) {
+            console.log('[STARTUP] RAG Vector Search ready - semantic search enabled');
+        } else {
+            console.warn('[STARTUP] RAG Vector Search initialization failed - using keyword fallback');
+        }
+    } catch (error) {
+        console.error('[STARTUP] RAG Vector Search error:', error.message);
+        console.warn('[STARTUP] Continuing with keyword search fallback');
+    }
+})();
+
 // ============================================
 // Homepage Optimized Rate Limiter Initialize
 // ============================================
