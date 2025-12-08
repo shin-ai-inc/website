@@ -1,8 +1,8 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 6.0.0 - Error Handling Enhanced
- * LAST UPDATED: 2025-12-08
+ * VERSION: 7.0.0 - Aggressive Cache Busting
+ * LAST UPDATED: 2025-12-08 17:35 JST
  * AUTHOR: ShinAI Development Team
  *
  * PURPOSE:
@@ -64,7 +64,7 @@ const ShinAIChatbot = {
         // アクセシビリティ初期化
         this.setupAccessibility();
 
-        console.log('[ShinAI Chatbot] 初期化完了');
+        console.log('[ShinAI Chatbot v7.0.0] 初期化完了 - Timestamp: 20251208173500');
     },
 
     /**
