@@ -42,6 +42,8 @@ class SimpleRAGSystem {
         // Vector Search (In-memory implementation)
         this.vectorSearch = new SimpleVectorSearch();
         this.vectorSearchEnabled = false; // Feature flag
+        this.vectorInitializing = false; // Initialization in progress
+        this.vectorInitialized = false; // Initialization complete
 
         // Hybrid Search Engine (RRF fusion)
         this.hybridSearch = new HybridSearchEngine({
@@ -253,6 +255,21 @@ class SimpleRAGSystem {
      * @param {object} filters - Optional metadata filters {category, keywords}
      */
     async searchRelevantSections(query, topK = 3, filters = {}) {
+        // Lazy initialization: Initialize vector search on first use
+        if (!this.vectorInitialized && !this.vectorInitializing && this.openai) {
+            this.vectorInitializing = true;
+            console.log('[RAG] Lazy initializing vector search on first query...');
+            try {
+                await this.initializeVectorSearch();
+                this.vectorInitialized = true;
+                console.log('[RAG] Vector search lazy initialization complete');
+            } catch (error) {
+                console.error('[RAG] Lazy initialization failed:', error.message);
+                console.log('[RAG] Falling back to keyword search');
+            }
+            this.vectorInitializing = false;
+        }
+
         // Try hybrid search first (if enabled)
         if (this.hybridSearchEnabled && this.vectorSearchEnabled) {
             try {
@@ -603,14 +620,43 @@ ${context}
      * NOTE: searchRelevantSections is now async, so this method must be async too
      */
     async getFallbackResponse(query) {
-        const relevantSections = await this.searchRelevantSections(query, 1);
+        const q = query.toLowerCase();
+        const relevantSections = await this.searchRelevantSections(query, 2);
 
-        if (relevantSections.length > 0) {
-            const section = relevantSections[0];
-            return `${section.title}に関する情報をご案内します。\n\n${section.content.substring(0, 300)}...\n\n詳細については、お問い合わせフォームよりご連絡ください。`;
+        // 挨拶への応答
+        if (q.match(/^(こんにちは|はじめまして|よろしく|お願いします)/)) {
+            return 'こんにちは！ShinAIのAIアシスタントです。AI導入や業務効率化について、何でもお気軽にご質問ください。';
         }
 
-        return 'お問い合わせありがとうございます。詳細については、お問い合わせフォームよりご連絡ください。無料相談も承っております。';
+        // ありがとう・感謝への応答
+        if (q.match(/(ありがとう|感謝|助かる|参考になる)/)) {
+            return 'お役に立てて嬉しいです！他にもご質問があれば、どんどん聞いてくださいね。';
+        }
+
+        // 関連情報がある場合
+        if (relevantSections.length > 0) {
+            const section = relevantSections[0];
+            const content = section.content.substring(0, 400);
+
+            // 質問内容に応じた自然な導入
+            let intro = '';
+            if (q.includes('暗黙知')) {
+                intro = 'ShinAIの暗黙知AI化サービスについてご案内しますね。\n\n';
+            } else if (q.includes('業務効率') || q.includes('自動化') || q.includes('RPA')) {
+                intro = '業務効率化AIサービスについてお答えします。\n\n';
+            } else if (q.includes('料金') || q.includes('価格') || q.includes('費用')) {
+                intro = '料金体系についてご説明しますね。\n\n';
+            } else if (q.includes('導入') || q.includes('プロセス')) {
+                intro = '導入プロセスについてご案内します。\n\n';
+            } else {
+                intro = `${section.title}に関する情報です。\n\n`;
+            }
+
+            return `${intro}${content}\n\nもっと詳しく知りたい点があれば、お気軽に聞いてください！`;
+        }
+
+        // デフォルト応答（より自然に）
+        return 'ご質問ありがとうございます。AIシステム開発、業務効率化、データ分析など、どのような点についてお知りになりたいですか？具体的にお聞かせいただければ、より詳しくご案内できますよ。';
     }
 }
 

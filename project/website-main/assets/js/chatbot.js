@@ -213,34 +213,53 @@ const ShinAIChatbot = {
                 try {
                     // AbortController でタイムアウト実装
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒タイムアウト
+                    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒タイムアウト（Vercel対応）
+
+                    console.log('[ShinAI Chatbot] API呼び出し開始:', `${apiBaseUrl}/api/chatbot`);
 
                     const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
                         },
                         body: JSON.stringify({
                             message: text,
                             sessionId: this.sessionId
                         }),
-                        signal: controller.signal
+                        signal: controller.signal,
+                        mode: 'cors', // CORS明示的有効化
+                        credentials: 'omit' // クレデンシャル不要
                     });
 
                     clearTimeout(timeoutId);
 
+                    console.log('[ShinAI Chatbot] API応答ステータス:', apiResponse.status);
+
+                    if (!apiResponse.ok) {
+                        throw new Error(`HTTP ${apiResponse.status}: ${apiResponse.statusText}`);
+                    }
+
                     const data = await apiResponse.json();
+                    console.log('[ShinAI Chatbot] API応答データ:', data);
+
                     if (data.success) {
                         response = data.response;
+                        console.log('[ShinAI Chatbot] LLM応答取得成功');
+                    } else {
+                        console.warn('[ShinAI Chatbot] API応答がsuccessではない:', data);
                     }
                 } catch (apiError) {
                     console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError);
                     console.error('[ShinAI Chatbot] Error details:', {
                         name: apiError.name,
                         message: apiError.message,
-                        apiBaseUrl: apiBaseUrl
+                        apiBaseUrl: apiBaseUrl,
+                        stack: apiError.stack
                     });
                 }
+            } else {
+                console.log('[ShinAI Chatbot] apiBaseUrlが未設定、フォールバックモード使用');
             }
 
             // APIが利用できない場合、知的フォールバックレスポンス生成
