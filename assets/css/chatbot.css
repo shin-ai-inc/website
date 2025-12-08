@@ -449,38 +449,24 @@ AUTHOR: ShinAI Development Team
         font-size: 1.2rem;
     }
 
-    /* モバイル版チャットボット最適化 - 既存ページ背景視認可能 */
+    /* モバイルでは下部フルスクリーン展開 */
     .chatbot-window {
         position: fixed;
-        top: 10vh;
         right: 0;
         left: 0;
         bottom: 0;
         width: 100%;
-        max-width: 100%;
-        height: auto;
-        border-radius: 20px 20px 0 0;
+        height: 60%;
+        border-radius: 15px 15px 0 0;
         transform-origin: bottom center;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-        margin: 0;
-        background: var(--white);
-        display: none; /* デフォルトは非表示 */
-        flex-direction: column;
-    }
-
-    /* モバイル版でもactiveクラスが必須 */
-    .chatbot-window.active {
-        display: flex !important;
     }
 
     .chatbot-header {
-        padding: 1rem 1.2rem;
-        border-radius: 20px 20px 0 0;
-        flex-shrink: 0;
+        padding: 0.9rem 1.1rem;
     }
 
     .chatbot-header h3 {
-        font-size: 0.95rem;
+        font-size: 1rem;
         gap: 0.6rem;
     }
 
@@ -493,19 +479,14 @@ AUTHOR: ShinAI Development Team
     .chatbot-messages {
         padding: 1.1rem;
         gap: 0.7rem;
-        flex: 1;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
     }
 
     .chatbot-input {
         padding: 0.85rem;
         background: var(--white);
-        position: sticky;
-        bottom: 0;
+        position: relative;
         z-index: 10;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        flex-shrink: 0;
+        padding-bottom: 1.1rem;
     }
 
     .chatbot-input input {
