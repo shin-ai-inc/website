@@ -449,6 +449,13 @@ AUTHOR: ShinAI Development Team
         font-size: 1.2rem;
     }
 
+    /* モバイル版: チャットウィンドウが開いている時は開閉ボタンを非表示（送信ボタンとの重複防止） */
+    .chatbot-window.active ~ .chatbot-button {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
     /* モバイル版チャットボット最適化 - キーボード表示時の対応強化 */
     .chatbot-window {
         position: fixed !important;
