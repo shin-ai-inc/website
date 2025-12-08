@@ -431,24 +431,21 @@ const ShinAIChatbot = {
             } else {
                 clearInterval(typingInterval);
 
-                // CTA追加
-                setTimeout(() => {
-                    this.addCTA();
-                }, 300);
+                // CTA追加は行わない
+                // 応答内容にお問い合わせリンクが含まれている場合は、LLMが適切に判断している
+                // 含まれていない場合は、挨拶や情報提供段階なので追加しない
             }
         }, this.typingSpeed);
     },
 
     /**
-     * CTA追加
+     * CTA追加（削除済み - LLMが応答内容に基づいて適切にリンクを含めるため）
+     *
+     * 以前は、すべてのボット応答の後に無条件で「お問い合わせ・無料相談予約」ボタンを追加していましたが、
+     * これはユーザー体験を損なうため削除しました。
+     *
+     * 現在は、LLMのシステムプロンプトで適切なタイミングでのみお問い合わせリンクを表示するよう制御しています。
      */
-    addCTA: function() {
-        const cta = document.createElement('div');
-        cta.classList.add('chat-message', 'bot');
-        cta.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
-        this.messages.appendChild(cta);
-        this.scrollToBottom();
-    },
 
     /**
      * ローディングインジケーター表示
