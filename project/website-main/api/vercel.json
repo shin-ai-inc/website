@@ -1,27 +1,27 @@
 {
   "version": 2,
-  "name": "shinai-chatbot-api",
   "builds": [
     {
       "src": "chatbot-api.js",
       "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/chatbot/health",
-      "dest": "/chatbot-api.js"
     },
     {
-      "src": "/api/chatbot",
-      "dest": "/chatbot-api.js",
-      "methods": ["POST", "OPTIONS"]
+      "src": "contact-api.js",
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [
     {
-      "source": "/api/:path*",
+      "source": "/api/chatbot",
       "destination": "/chatbot-api.js"
+    },
+    {
+      "source": "/api/chatbot/health",
+      "destination": "/chatbot-api.js"
+    },
+    {
+      "source": "/api/contact",
+      "destination": "/contact-api.js"
     }
   ],
   "headers": [
