@@ -623,3 +623,142 @@ main,
         margin-top: 40px;
     }
 }
+
+/* ========================================================
+▼ Mobile Touch Optimization Component - モバイル誤操作防止
+========================================================
+Purpose: viewport拡大・縮小許可時のモバイル誤操作防止
+Features:
+- ダブルタップズーム防止（意図的な拡大は許可）
+- 不要な選択・長押しメニュー抑制
+- スムーズなタッチ操作
+- レイアウト崩れ防止
+======================================================== */
+
+/* 全体の基本設定 */
+* {
+    /* タッチ操作の高速化 */
+    -webkit-tap-highlight-color: transparent;
+
+    /* テキスト選択の最適化（入力フィールドは除く） */
+    -webkit-touch-callout: default;
+}
+
+/* インタラクティブ要素以外のテキスト選択制御 */
+body,
+header,
+nav,
+footer {
+    /* 不要なテキスト選択を防止 */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 入力フィールドは選択可能に */
+input,
+textarea,
+select,
+[contenteditable="true"],
+.selectable {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+}
+
+/* リンク・ボタンの誤操作防止 */
+a,
+button,
+.btn,
+[role="button"] {
+    /* ダブルタップズーム防止 */
+    touch-action: manipulation;
+
+    /* タップハイライト除去 */
+    -webkit-tap-highlight-color: transparent;
+
+    /* 長押しメニュー制御 */
+    -webkit-touch-callout: none;
+}
+
+/* 画像の誤操作防止 */
+img {
+    /* 長押し保存メニュー防止 */
+    -webkit-touch-callout: none;
+
+    /* ドラッグ防止 */
+    -webkit-user-drag: none;
+    user-select: none;
+
+    /* ポインターイベント最適化 */
+    pointer-events: none;
+}
+
+/* クリッカブルな画像は有効化 */
+a img,
+button img,
+label img {
+    pointer-events: auto;
+}
+
+/* スクロール最適化 */
+body,
+html {
+    /* iOS慣性スクロール */
+    -webkit-overflow-scrolling: touch;
+
+    /* スクロールバー非表示（モバイル） */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* モバイル固有の最適化 */
+@media (max-width: 768px) {
+    /* タッチターゲットサイズ確保 */
+    a,
+    button,
+    .btn,
+    input[type="submit"],
+    input[type="button"] {
+        min-height: 44px; /* iOS推奨最小タップエリア */
+        min-width: 44px;
+        padding: 12px 20px;
+    }
+
+    /* フォーカス時のズーム防止 */
+    input,
+    textarea,
+    select {
+        font-size: 16px; /* 16px未満でiOSが自動ズーム */
+    }
+
+    /* ホバー効果の無効化（誤タップ防止） */
+    a:hover,
+    button:hover,
+    .btn:hover {
+        /* モバイルではホバー効果を最小化 */
+        transition: none;
+    }
+}
+
+/* タブレット固有の最適化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* タブレットではテキスト選択許可 */
+    body,
+    header,
+    nav,
+    footer {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+}
