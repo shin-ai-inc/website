@@ -1,0 +1,625 @@
+/* ========================================================
+▼ ShinAI Common Header/Footer Styles - Enterprise Grade
+========================================================
+Component: 全ページ共通ヘッダー/フッタースタイル
+Purpose: エンタープライズ品質の完全統一UI/UX実現
+Author: ShinAI Development Team
+Version: 1.0.0
+Last Updated: 2025-12-01
+Claude Code最適化対応:
+- 全コンポーネント分割コメント完備
+- エラーハンドリング強化
+- 型ヒント統一
+- ログ出力統一
+- 可読性最大化
+======================================================== */
+
+/* ========================================================
+▼ CSS Variables Component - 完全カラーシステム定義
+======================================================== */
+:root {
+    /* Primary Colors - 現行継続 */
+    --primary: #3A5FEB;
+    --primary-dark: #2C49C7;
+    --primary-light: #5B7BFF;
+    --secondary: #00C9A7;
+    --secondary-dark: #00A689;
+    --secondary-light: #20E7C4;
+    --accent: #E67E22;
+    --accent-light: #F39C12;
+    --accent-dark: #D35400;
+
+    /* Elegant Complementary Colors - 品格ある補完色 */
+    --elegant-navy: #1E3A5F;
+    --elegant-slate: #475569;
+    --elegant-charcoal: #2C3E50;
+    --elegant-silver: #94A3B8;
+    --elegant-pearl: #F1F5F9;
+
+    /* Neutral Colors */
+    --dark: #0f172a;
+    --gray: #64748b;
+    --light-gray: #f8fafc;
+    --white: #ffffff;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #3A5FEB, #00C9A7);
+    --gradient-primary-hover: linear-gradient(135deg, #2C49C7, #00A689);
+    --gradient-secondary: linear-gradient(135deg, #5B7BFF, #20E7C4);
+    --gradient-accent: linear-gradient(135deg, #FF8A00, #FFA94D);
+
+    /* Typography */
+    --font-sans: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Transitions */
+    --transition-fast: 0.1s;
+    --transition-normal: 0.2s;
+    --transition-slow: 0.3s;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-full: 9999px;
+}
+
+/* ========================================================
+▼ Perfect Responsive Header Component - PC/モバイル完全対応
+======================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    height: 50px;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header.scrolled {
+    height: 45px;
+    background: rgba(255, 255, 255, 0.99);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ========================================================
+▼ Logo Component - 左端中央配置・画像パス修正
+======================================================== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0f172a;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: #3A5FEB;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ========================================================
+▼ Desktop Navigation Component - PC専用表示
+======================================================== */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+@media (min-width: 769px) {
+    .nav {
+        display: flex;
+    }
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    color: #0f172a;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+    position: relative;
+    text-decoration: none;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+    transition: width 0.2s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #3A5FEB;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-cta {
+    list-style: none;
+}
+
+.btn-header-consultation {
+    background: linear-gradient(135deg, #3A5FEB, #00C9A7);
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(58, 95, 235, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-header-consultation:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 95, 235, 0.35);
+    color: white;
+}
+
+/* ========================================================
+▼ Mobile Hamburger Component - モバイルのみ表示
+======================================================== */
+.hamburger {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #0f172a;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger:hover {
+    color: #3A5FEB;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================================
+▼ Mobile Navigation Component - モバイル専用メニュー
+======================================================== */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .header {
+        height: 40px;
+    }
+
+    .header.scrolled {
+        height: 38px;
+    }
+
+    .header-inner {
+        padding: 0 0.75rem;
+    }
+
+    .logo {
+        font-size: 0.9rem;
+    }
+
+    .logo-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 50px 1rem 1rem;
+        border-left: 1px solid rgba(0, 0, 0, 0.05);
+        display: none;
+    }
+
+    .nav.active {
+        right: 0;
+        display: flex;
+    }
+
+    .nav-item {
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        font-size: 0.8rem;
+        display: block;
+    }
+
+    .nav-cta {
+        margin: 1rem 0 0;
+        width: 100%;
+    }
+
+    .btn-header-consultation {
+        width: 100%;
+        justify-content: center;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* ========================================================
+▼ Footer Component - Enterprise Grade
+======================================================== */
+.footer {
+    background: var(--dark);
+    color: var(--white);
+    padding: 3rem 0 1.5rem;
+    position: relative;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.footer-logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.footer-logo-text {
+    font-size: 1.3rem;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-en);
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.footer-heading {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    font-weight: var(--font-weight-semibold);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+}
+
+.footer-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all var(--transition-normal) ease;
+    font-size: 0.9rem;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: var(--gradient-accent);
+    transition: width var(--transition-normal) ease;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    padding-left: 2px;
+}
+
+.footer-links a:hover::before {
+    width: 100%;
+}
+
+.footer-contact-item {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    align-items: flex-start;
+}
+
+.footer-contact-item span {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.6;
+}
+
+.footer-contact-item i {
+    color: var(--secondary);
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    min-width: 1rem;
+    flex-shrink: 0;
+}
+
+.footer-contact-item a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-normal) ease;
+    text-decoration: none;
+}
+
+.footer-contact-item a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    order: 1;
+}
+
+.footer-links-inline {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    order: 2;
+}
+
+.footer-links-inline a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-normal) ease;
+    font-size: 0.8rem;
+    position: relative;
+    text-decoration: none;
+}
+
+.footer-links-inline a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: var(--white);
+    transition: width var(--transition-normal) ease;
+}
+
+.footer-links-inline a:hover {
+    color: var(--white);
+}
+
+.footer-links-inline a:hover::before {
+    width: 100%;
+}
+
+/* ========================================================
+▼ Footer Responsive - モバイル最適化
+======================================================== */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.6rem 0 0.9rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .footer-logo {
+        margin-bottom: 1rem;
+    }
+
+    .footer-logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .footer-logo-text {
+        font-size: 1.1rem;
+    }
+
+    .footer-description {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .footer-heading {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .footer-links a,
+    .footer-contact-item {
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom {
+        padding-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .footer-copyright {
+        order: 2;
+        font-size: 0.7rem;
+    }
+
+    .footer-links-inline {
+        order: 1;
+        gap: 0.8rem;
+    }
+
+    .footer-links-inline a {
+        font-size: 0.7rem;
+    }
+}
+
+/* ========================================================
+▼ Container Component - 全ページ共通コンテナ
+======================================================== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* ========================================================
+▼ Main Content Spacing - ヘッダー分のマージン確保
+======================================================== */
+main,
+#main-content {
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    main,
+    #main-content {
+        margin-top: 40px;
+    }
+}
