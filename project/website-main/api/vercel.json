@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "name": "shinai-chatbot-api",
+  "builds": [
+    {
+      "src": "chatbot-api.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/chatbot/health",
+      "dest": "/chatbot-api.js"
+    },
+    {
+      "src": "/api/chatbot",
+      "dest": "/chatbot-api.js",
+      "methods": ["POST", "OPTIONS"]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/chatbot-api.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "CHATBOT_API_PORT": "3001"
+  },
+  "regions": ["hnd1"]
+}

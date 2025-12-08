@@ -1,12 +1,14 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 3.0.0 - Professional Grade
- * LAST UPDATED: 2025-12-05
+ * VERSION: 5.0.0 - RAG Integration Complete
+ * LAST UPDATED: 2025-12-08
  * AUTHOR: ShinAI Development Team
  *
  * PURPOSE:
  * - エンタープライズ品質のAIチャットボット実装
+ * - OpenAI RAG統合完了（2層モデルアーキテクチャ）
+ * - Vercel API完全対応
  * - デスクトップ・モバイル完全対応
  * - ID統一・技術的負債完全排除
  * - WCAG 2.1 AA準拠
@@ -16,6 +18,8 @@
  * - モバイル最適化レスポンシブデザイン
  * - タイピングエフェクト実装
  * - エラーハンドリング完備
+ * - RAG知識ベース検索統合
+ * - セマンティック検索対応
  * ==============================================
  */
 
@@ -264,18 +268,34 @@ const ShinAIChatbot = {
 
             // APIが利用できない場合、知的フォールバックレスポンス生成
             if (!response) {
+                console.log('[ShinAI Chatbot] API応答なし、フォールバックモード使用');
                 response = this.generateFallbackResponse(text);
             }
 
-            // ローディング非表示
+            // ローディング非表示後、レスポンス表示
             setTimeout(() => {
                 this.hideTypingIndicator();
-                this.displayTypingMessage(response);
+
+                // レスポンスが有効な文字列かチェック
+                if (response && typeof response === 'string' && response.trim().length > 0) {
+                    this.displayTypingMessage(response);
+                } else {
+                    console.error('[ShinAI Chatbot] 無効なレスポンス:', response);
+                    this.displayTypingMessage(this.generateFallbackResponse(text));
+                }
             }, this.loadingDelay);
 
         } catch (error) {
-            console.error('[ShinAI Chatbot] エラー:', error);
+            console.error('[ShinAI Chatbot] エラー詳細:', {
+                message: error.message,
+                stack: error.stack,
+                userMessage: text,
+                apiBaseUrl: window.CHATBOT_API_URL
+            });
+
             this.hideTypingIndicator();
+
+            // フォールバックレスポンス生成（必ず有効な文字列を返す）
             const fallbackResponse = this.generateFallbackResponse(text);
             this.displayTypingMessage(fallbackResponse);
         }
