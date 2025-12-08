@@ -1449,7 +1449,20 @@
         box-shadow: 0 0 10px rgba(var(--finance-primary), 0.4);
     }
 
-    /* 
+    /* モバイル版: タップ時のアニメーションを無効化してリンク誤解を防止 */
+    @media (max-width: 768px) {
+        .industry-card:hover {
+            transform: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .industry-card:hover .industry-icon {
+            transform: none;
+        }
+    }
+
+    /*
     ==============================================
     // === component-split: SimplifiedIndustryFooter ===
     COMPONENT: 簡略化された業界カードフッター
