@@ -1,7 +1,7 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 5.0.0 - RAG Integration Complete
+ * VERSION: 6.0.0 - Error Handling Enhanced
  * LAST UPDATED: 2025-12-08
  * AUTHOR: ShinAI Development Team
  *
@@ -9,6 +9,7 @@
  * - エンタープライズ品質のAIチャットボット実装
  * - OpenAI RAG統合完了（2層モデルアーキテクチャ）
  * - Vercel API完全対応
+ * - 強化されたエラーハンドリング
  * - デスクトップ・モバイル完全対応
  * - ID統一・技術的負債完全排除
  * - WCAG 2.1 AA準拠
@@ -17,9 +18,10 @@
  * - HTML/JS ID完全一致
  * - モバイル最適化レスポンシブデザイン
  * - タイピングエフェクト実装
- * - エラーハンドリング完備
+ * - 堅牢なエラーハンドリング
  * - RAG知識ベース検索統合
  * - セマンティック検索対応
+ * - フォールバックレスポンス完備
  * ==============================================
  */
 
@@ -254,13 +256,21 @@ const ShinAIChatbot = {
                         console.warn('[ShinAI Chatbot] API応答がsuccessではない:', data);
                     }
                 } catch (apiError) {
-                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError);
-                    console.error('[ShinAI Chatbot] Error details:', {
+                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替');
+                    console.warn('[ShinAI Chatbot] エラー詳細:', {
                         name: apiError.name,
                         message: apiError.message,
-                        apiBaseUrl: apiBaseUrl,
-                        stack: apiError.stack
+                        apiBaseUrl: apiBaseUrl
                     });
+
+                    // エラー原因を判定してログ出力
+                    if (apiError.name === 'AbortError') {
+                        console.warn('[ShinAI Chatbot] タイムアウト: API応答が15秒以内に返りませんでした');
+                    } else if (apiError.name === 'TypeError' && apiError.message.includes('Failed to fetch')) {
+                        console.warn('[ShinAI Chatbot] ネットワークエラー: API接続に失敗しました（CORS/広告ブロッカー/ネットワーク問題の可能性）');
+                    } else {
+                        console.warn('[ShinAI Chatbot] 予期しないエラー:', apiError.message);
+                    }
                 }
             } else {
                 console.log('[ShinAI Chatbot] apiBaseUrlが未設定、フォールバックモード使用');
@@ -270,6 +280,12 @@ const ShinAIChatbot = {
             if (!response) {
                 console.log('[ShinAI Chatbot] API応答なし、フォールバックモード使用');
                 response = this.generateFallbackResponse(text);
+            }
+
+            // レスポンスの最終検証
+            if (!response || typeof response !== 'string' || response.trim().length === 0) {
+                console.error('[ShinAI Chatbot] 無効なレスポンス検出、デフォルトレスポンスを使用');
+                response = this.getDefaultFallbackResponse();
             }
 
             // ローディング非表示後、レスポンス表示
@@ -299,6 +315,14 @@ const ShinAIChatbot = {
             const fallbackResponse = this.generateFallbackResponse(text);
             this.displayTypingMessage(fallbackResponse);
         }
+    },
+
+    /**
+     * デフォルトフォールバックレスポンス
+     * すべてのフォールバックが失敗した場合の最終防御
+     */
+    getDefaultFallbackResponse: function() {
+        return 'こんにちは！ShinAIのAIアシスタントです。AI導入や技術的なご相談について、お気軽にお聞かせください。より詳しいご相談は、お問い合わせフォームより承っております。';
     },
 
     /**
