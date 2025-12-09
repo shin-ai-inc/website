@@ -274,17 +274,21 @@ const ShinAIChatbot = {
                 console.log('[ShinAI Chatbot] apiBaseUrlが未設定、フォールバックモード使用');
             }
 
-            // APIが応答を返さなかった場合はエラーメッセージ
+            // APIが応答を返さなかった場合の処理
             if (!response) {
                 console.error('[ShinAI Chatbot] APIが応答を返しませんでした');
 
-                // 開発環境でのヘルプメッセージ
+                // ローカル開発環境でのみ、最小限のフォールバック応答を提供
                 if (apiBaseUrl && apiBaseUrl.includes('localhost')) {
-                    console.info('[ShinAI Chatbot] 💡 ローカルAPIサーバーが起動していない可能性があります');
-                    console.info('[ShinAI Chatbot] 💡 APIサーバーを起動するか、本番環境でテストしてください');
-                }
+                    console.warn('[ShinAI Chatbot] ⚠️ ローカル開発モード: フォールバック応答を使用');
+                    console.info('[ShinAI Chatbot] 💡 本番環境ではAPIサーバーが必須です');
 
-                response = 'ただいま一時的にご利用いただけません。しばらく経ってから再度お試しください。';
+                    // 最小限の開発用フォールバック
+                    response = this.getLocalDevelopmentFallback(text);
+                } else {
+                    // 本番環境ではエラーメッセージのみ
+                    response = 'ただいま一時的にご利用いただけません。しばらく経ってから再度お試しください。';
+                }
             }
 
             // ローディング非表示
@@ -300,8 +304,26 @@ const ShinAIChatbot = {
         }
     },
 
-    // generateFallbackResponse() 関数を完全削除
-    // すべての応答はAPI経由で取得
+    /**
+     * ローカル開発環境専用の最小限フォールバック
+     * 注意: 本番環境では使用されません（APIサーバーが必須）
+     */
+    getLocalDevelopmentFallback: function(query) {
+        const q = query.toLowerCase();
+
+        // 挨拶への応答
+        if (q.match(/^(こんにちは|はじめまして|よろしく|お願いします)/)) {
+            return 'こんにちは！本日はご訪問いただきありがとうございます。何かお困りのことやお知りになりたいことはございますか？';
+        }
+
+        // 感謝への応答
+        if (q.match(/(ありがとう|感謝|助かる|参考になる)/)) {
+            return 'お役に立てて嬉しいです！他にもご質問があれば、どんどん聞いてくださいね。';
+        }
+
+        // デフォルト応答
+        return 'ご質問ありがとうございます。詳しいご相談は、お問い合わせフォームより承っております。お気軽にご連絡ください。';
+    },
 
     /**
      * Session ID生成
