@@ -199,21 +199,15 @@ const ShinAIChatbot = {
             // ==============================================
             // API呼び出し（環境別エンドポイント設定）
             // ==============================================
-            // CHATBOT_API_URLが明示的に設定されている場合はそれを優先
-            const apiBaseUrl = window.CHATBOT_API_URL
-                ? window.CHATBOT_API_URL  // 本番環境またはVercel API指定時
-                : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-                    ? 'http://localhost:3001'  // ローカル開発環境
-                    : null;  // フォールバック（本番環境でCHATBOT_API_URL未設定時）
-
-            // 本番環境でAPIが設定されていない場合の警告
-            if (!apiBaseUrl && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-                console.error('[ShinAI Chatbot] ⚠️ 本番環境でCHATBOT_API_URLが設定されていません');
+            // CHATBOT_API_URLが必須設定
+            if (!window.CHATBOT_API_URL) {
+                throw new Error('[ShinAI Chatbot] CHATBOT_API_URLが設定されていません');
             }
 
+            const apiBaseUrl = window.CHATBOT_API_URL;
             let response = null;
 
-            // API利用可能時はAPI経由でレスポンス生成
+            // API経由でレスポンス生成
             if (apiBaseUrl) {
                 try {
                     // AbortController でタイムアウト実装
