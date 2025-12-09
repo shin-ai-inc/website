@@ -232,7 +232,32 @@ const ShinAIChatbot = {
         } catch (error) {
             console.error('[ShinAI Chatbot] エラー:', error);
             this.hideTypingIndicator();
-            this.addMessage('申し訳ありません。正常に応答できませんでした。お問い合わせフォームよりご連絡ください。', 'bot');
+
+            // エラータイプに応じた適切なメッセージ表示
+            let errorMessage = '申し訳ありません。正常に応答できませんでした。';
+
+            // ERR_BLOCKED_BY_CLIENT（広告ブロッカーやブラウザ拡張機能によるブロック）
+            if (error.message && error.message.includes('ERR_BLOCKED_BY_CLIENT')) {
+                errorMessage = 'ネットワーク接続が制限されている可能性があります。広告ブロッカーを一時的に無効化するか、お問い合わせフォームをご利用ください。';
+            }
+            // TypeError: Failed to fetch（ネットワーク接続失敗）
+            else if (error instanceof TypeError && error.message.includes('fetch')) {
+                errorMessage = 'ネットワーク接続に失敗しました。インターネット接続をご確認いただくか、お問い合わせフォームをご利用ください。';
+            }
+            // CORS エラー
+            else if (error.message && error.message.includes('CORS')) {
+                errorMessage = 'サーバー接続に問題が発生しました。しばらくしてから再度お試しいただくか、お問い合わせフォームをご利用ください。';
+            }
+            // 一般的なネットワークエラー
+            else if (error.name === 'NetworkError' || error.message.includes('network')) {
+                errorMessage = 'ネットワークエラーが発生しました。接続状況をご確認いただくか、お問い合わせフォームをご利用ください。';
+            }
+            // その他のエラー
+            else {
+                errorMessage = '一時的にサービスが利用できません。お問い合わせフォームよりご連絡ください。';
+            }
+
+            this.addMessage(errorMessage, 'bot');
         }
     },
 
