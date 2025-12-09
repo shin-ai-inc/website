@@ -1,7 +1,7 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 3.2.0 - Professional Grade
+ * VERSION: 3.3.0 - Professional Grade
  * LAST UPDATED: 2025-12-09
  * AUTHOR: ShinAI Development Team
  *
@@ -30,6 +30,8 @@ const ShinAIChatbot = {
 
     // 状態管理
     isTyping: false,
+    messageCount: 0,        // セッション内のメッセージ数（user + bot）
+    lastUserMessage: '',    // 最後のユーザーメッセージ
 
     // 設定
     typingSpeed: 8,
@@ -182,6 +184,10 @@ const ShinAIChatbot = {
         // ユーザーメッセージ追加
         this.addMessage(text, 'user');
         this.input.value = '';
+
+        // メッセージカウント・最後のメッセージを記録
+        this.messageCount++;
+        this.lastUserMessage = text;
 
         // ローディング表示
         this.showTypingIndicator();
@@ -360,6 +366,36 @@ const ShinAIChatbot = {
     },
 
     /**
+     * CTA表示判定
+     * 相談意思を示すキーワードまたは3回目以降のやり取りで表示
+     */
+    shouldShowCTA: function() {
+        // 相談意思を示すキーワード
+        const consultationKeywords = [
+            '相談',
+            '導入',
+            '見積',
+            '話を聞',
+            '詳しく',
+            'お願い',
+            '検討',
+            '考えて',
+            '興味',
+            'ネイティブ'
+        ];
+
+        // ユーザーメッセージに相談キーワードが含まれる
+        const hasConsultationIntent = consultationKeywords.some(keyword =>
+            this.lastUserMessage.includes(keyword)
+        );
+
+        // 3回目以降のやり取り（ユーザー3回 = messageCount 5以上）
+        const isThirdInteraction = this.messageCount >= 5;
+
+        return hasConsultationIntent || isThirdInteraction;
+    },
+
+    /**
      * タイピングエフェクトメッセージ表示
      */
     displayTypingMessage: function(text) {
@@ -367,6 +403,9 @@ const ShinAIChatbot = {
         message.classList.add('chat-message', 'bot');
         message.textContent = '';
         this.messages.appendChild(message);
+
+        // ボットメッセージカウント
+        this.messageCount++;
 
         let i = 0;
         const typingInterval = setInterval(() => {
@@ -377,10 +416,12 @@ const ShinAIChatbot = {
             } else {
                 clearInterval(typingInterval);
 
-                // CTA追加
-                setTimeout(() => {
-                    this.addCTA();
-                }, 300);
+                // CTA表示判定
+                if (this.shouldShowCTA()) {
+                    setTimeout(() => {
+                        this.addCTA();
+                    }, 300);
+                }
             }
         }, this.typingSpeed);
     },
