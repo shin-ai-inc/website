@@ -60,6 +60,9 @@ const ShinAIChatbot = {
         // アクセシビリティ初期化
         this.setupAccessibility();
 
+        // モバイルキーボード対応初期化
+        this.setupMobileKeyboard();
+
         console.log('[ShinAI Chatbot] 初期化完了');
     },
 
@@ -102,6 +105,44 @@ const ShinAIChatbot = {
         document.addEventListener('mousedown', () => {
             document.body.classList.remove('keyboard-focus');
         });
+    },
+
+    /**
+     * モバイルキーボード対応 (iOS Safari Critical Fix)
+     * 問題: iOSキーボード表示時に画面下部に巨大な空白が発生
+     * 解決: Visual Viewport APIで動的に高さを調整
+     */
+    setupMobileKeyboard: function() {
+        // Visual Viewport API対応確認（iOS Safari等）
+        if (!window.visualViewport) {
+            console.log('[ShinAI Chatbot] Visual Viewport API非対応');
+            return;
+        }
+
+        const adjustChatHeight = () => {
+            if (!this.window.classList.contains('active')) return;
+
+            // Visual Viewportの実際の高さを取得
+            const viewportHeight = window.visualViewport.height;
+
+            // チャットウィンドウの高さを動的に調整
+            this.window.style.height = `${viewportHeight}px`;
+
+            console.log(`[ShinAI Chatbot] Viewport調整: ${viewportHeight}px`);
+        };
+
+        // Visual Viewportの変更を監視
+        window.visualViewport.addEventListener('resize', adjustChatHeight);
+        window.visualViewport.addEventListener('scroll', adjustChatHeight);
+
+        // 入力フィールドのフォーカス時に調整
+        if (this.input) {
+            this.input.addEventListener('focus', () => {
+                setTimeout(adjustChatHeight, 300); // キーボードアニメーション待機
+            });
+        }
+
+        console.log('[ShinAI Chatbot] モバイルキーボード対応初期化完了');
     },
 
     /**
