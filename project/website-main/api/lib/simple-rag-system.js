@@ -143,7 +143,8 @@ class SimpleRAGSystem {
             '機械学習', '予測', '自動化', 'チャットボット', '技能継承',
             '人材育成', '価格', '料金', '無料相談', '導入', 'セキュリティ',
             'プライバシー', 'OWASP', 'Constitutional AI', 'RAG', 'Vector Database',
-            'ChatGPT', 'GPT-4', 'Claude', '知識ベース', 'ナレッジ', '暗号化'
+            'ChatGPT', 'GPT-4', 'Claude', '知識ベース', 'ナレッジ', '暗号化',
+            '代表', '柴田', '昌国', '創業', '経歴', '代表者', 'ShinAI'
         ];
 
         importantTerms.forEach(term => {
@@ -153,6 +154,195 @@ class SimpleRAGSystem {
         });
 
         return [...new Set(keywords)]; // 重複除去
+    }
+
+    /**
+     * セマンティック同義語マッピング
+     *
+     * PURPOSE:
+     * - ユーザーの多様な表現を正規化
+     * - 同じ概念を指す異なる言葉を統一
+     * - 検索精度の向上
+     */
+    getSemanticSynonyms(query) {
+        const synonymMap = {
+            // 代表者・経営者関連
+            '代表': ['代表', 'CEO', '社長', '創業者', '代表者', '経営者', 'トップ', '代表取締役', '柴田', '昌国'],
+            'CEO': ['代表', 'CEO', '社長', '創業者', '代表者', '経営者'],
+            '社長': ['代表', 'CEO', '社長', '創業者', '代表者', '経営者'],
+            '創業者': ['代表', '創業者', '創業', '設立', '起業', '柴田'],
+
+            // 料金・価格関連
+            '料金': ['料金', '価格', '費用', 'コスト', '見積', '金額', '予算'],
+            '価格': ['料金', '価格', '費用', 'コスト', '見積', '金額'],
+            '費用': ['料金', '価格', '費用', 'コスト', '見積', '金額'],
+            'いくら': ['料金', '価格', '費用', 'コスト', '見積', '金額'],
+
+            // サービス・事業関連
+            'サービス': ['サービス', '事業', 'ソリューション', '提供', '支援'],
+            '事業': ['事業', 'サービス', '事業内容', 'ビジネス'],
+
+            // 技術関連
+            'AI': ['AI', '人工知能', '機械学習', 'ChatGPT', 'GPT', 'Claude', 'LLM', '生成AI'],
+            '人工知能': ['AI', '人工知能', '機械学習', '深層学習'],
+
+            // 導入・実装関連
+            '導入': ['導入', '実装', '構築', '開発', '立ち上げ', 'PoC'],
+            '実装': ['実装', '導入', '構築', '開発', 'システム構築'],
+
+            // 問い合わせ関連
+            '問い合わせ': ['問い合わせ', 'お問い合わせ', '連絡', 'コンタクト', '相談', 'メール'],
+            '連絡': ['連絡', '問い合わせ', 'お問い合わせ', 'コンタクト', 'メール'],
+            '相談': ['相談', '問い合わせ', 'お問い合わせ', '無料相談', 'ヒアリング']
+        };
+
+        const expandedTerms = new Set();
+        const lowerQuery = query.toLowerCase();
+
+        // クエリ内の各単語について同義語を展開
+        Object.keys(synonymMap).forEach(key => {
+            if (lowerQuery.includes(key.toLowerCase())) {
+                synonymMap[key].forEach(synonym => expandedTerms.add(synonym));
+            }
+        });
+
+        return Array.from(expandedTerms);
+    }
+
+    /**
+     * LLMベースのクエリ意図分類（高度版）
+     *
+     * PURPOSE:
+     * - gpt-4o-miniで質問意図を深く理解
+     * - より正確なセクション重み付け
+     * - コンテキストに応じた高精度スコアリング
+     */
+    async classifyQueryIntentLLM(query) {
+        if (!this.openai) {
+            console.log('[RAG] OpenAI not configured, using rule-based intent classification');
+            return this.classifyQueryIntent(query);
+        }
+
+        try {
+            const prompt = `以下のユーザーの質問を分析し、質問の意図を分類してください。
+
+質問: "${query}"
+
+以下のカテゴリから該当するものを選び、JSON形式で返してください：
+
+- person_info: 代表者・経営者・人物に関する質問
+- pricing: 料金・価格・費用に関する質問
+- service: サービス内容・事業内容に関する質問
+- contact: 連絡先・問い合わせ方法に関する質問
+- technical: 技術・AI・実装方法に関する質問
+- process: 導入プロセス・手順に関する質問
+- industry: 対応業界・実績に関する質問
+
+返答形式（JSON）:
+{
+  "intents": [
+    {
+      "type": "カテゴリ名",
+      "confidence": 0.0-1.0,
+      "targetSections": ["関連セクション名"],
+      "weight": 1.0-2.0
+    }
+  ],
+  "expandedKeywords": ["質問から抽出された重要キーワードと同義語"]
+}`;
+
+            const completion = await this.openai.chat.completions.create({
+                model: 'gpt-4o-mini',
+                messages: [{ role: 'user', content: prompt }],
+                temperature: 0.3,
+                max_tokens: 500,
+                response_format: { type: 'json_object' }
+            });
+
+            const result = JSON.parse(completion.choices[0].message.content);
+            console.log(`[RAG] LLM-based intent classification: ${result.intents.map(i => i.type).join(', ')}`);
+
+            return {
+                intents: result.intents || [],
+                expandedKeywords: result.expandedKeywords || []
+            };
+
+        } catch (error) {
+            console.error('[RAG] LLM intent classification failed:', error.message);
+            console.log('[RAG] Falling back to rule-based classification');
+            return {
+                intents: this.classifyQueryIntent(query),
+                expandedKeywords: this.getSemanticSynonyms(query)
+            };
+        }
+    }
+
+    /**
+     * ルールベースのクエリ意図分類（Fallback）
+     *
+     * PURPOSE:
+     * - LLM失敗時のフォールバック
+     * - 低レイテンシ対応
+     */
+    classifyQueryIntent(query) {
+        const intents = {
+            person_info: {
+                patterns: ['代表', '社長', 'CEO', '創業者', '柴田', '誰', '人', '経営者', '経歴'],
+                weight: 1.5,
+                targetSections: ['代表者情報', '会社概要']
+            },
+            pricing: {
+                patterns: ['料金', '価格', '費用', 'いくら', 'コスト', '見積', '予算', '金額'],
+                weight: 1.5,
+                targetSections: ['料金体系', 'お問い合わせ']
+            },
+            service: {
+                patterns: ['サービス', '事業', 'できる', '提供', '何', '支援', 'ソリューション'],
+                weight: 1.3,
+                targetSections: ['事業内容', '特徴・強み', 'サービス']
+            },
+            contact: {
+                patterns: ['連絡', '問い合わせ', 'メール', '電話', '相談', 'コンタクト'],
+                weight: 1.5,
+                targetSections: ['お問い合わせ', '無料相談']
+            },
+            technical: {
+                patterns: ['AI', '技術', 'RAG', 'GPT', 'LLM', 'ChatGPT', 'Claude', 'セキュリティ'],
+                weight: 1.2,
+                targetSections: ['特徴・強み', '事業内容', '技術']
+            },
+            process: {
+                patterns: ['導入', '手順', 'プロセス', '流れ', 'ステップ', '期間', 'どうやって'],
+                weight: 1.3,
+                targetSections: ['導入プロセス', '導入']
+            },
+            industry: {
+                patterns: ['業界', '製造', '小売', '金融', '医療', '建設', '対応', '実績'],
+                weight: 1.2,
+                targetSections: ['対象業界', '実績']
+            }
+        };
+
+        const lowerQuery = query.toLowerCase();
+        const detectedIntents = [];
+
+        Object.keys(intents).forEach(intentKey => {
+            const intent = intents[intentKey];
+            const matches = intent.patterns.filter(pattern =>
+                lowerQuery.includes(pattern.toLowerCase())
+            );
+
+            if (matches.length > 0) {
+                detectedIntents.push({
+                    type: intentKey,
+                    weight: intent.weight,
+                    targetSections: intent.targetSections,
+                    matchCount: matches.length
+                });
+            }
+        });
+
+        return detectedIntents;
     }
 
     /**
@@ -275,7 +465,7 @@ class SimpleRAGSystem {
             try {
                 // Get candidates from both searches (10 each)
                 const vectorCandidates = await this.vectorSearch.search(query, 10);
-                const keywordCandidates = this.keywordSearchFallback(query, 10);
+                const keywordCandidates = await this.keywordSearchFallback(query, 10);
 
                 // Convert to unified format with IDs
                 const vectorResultsWithIds = vectorCandidates.documents.map((doc, i) => ({
@@ -355,34 +545,110 @@ class SimpleRAGSystem {
     }
 
     /**
-     * キーワード検索フォールバック (Existing keyword search logic)
+     * キーワード検索フォールバック（高度化版 with LLM）
      *
      * PURPOSE:
-     * - Maintain existing keyword search functionality
-     * - Provide fallback when vector search fails/disabled
-     * - Zero breaking changes to API
+     * - LLMベースの意図分類による高精度検索
+     * - セマンティック同義語展開による検索精度向上
+     * - クエリ意図に基づく重み付けスコアリング
+     * - コンテキスト理解による適切なセクション選択
      */
-    keywordSearchFallback(query, topK = 3) {
+    async keywordSearchFallback(query, topK = 3) {
+        console.log(`[RAG] Advanced keyword search for query: "${query}"`);
+
+        // 1. 基本キーワード抽出
         const queryKeywords = this.extractKeywords(query);
 
-        // スコアリング
+        // 2. LLMベースの意図分類 & 同義語展開（優先）
+        let intents = [];
+        let expandedKeywords = [...queryKeywords];
+
+        if (this.openai) {
+            try {
+                const llmResult = await this.classifyQueryIntentLLM(query);
+                intents = llmResult.intents || [];
+                expandedKeywords = [...new Set([...queryKeywords, ...llmResult.expandedKeywords])];
+                console.log(`[RAG] LLM expanded keywords: ${expandedKeywords.length} terms`);
+                console.log(`[RAG] LLM detected intents: ${intents.map(i => i.type).join(', ')}`);
+            } catch (error) {
+                console.log('[RAG] LLM classification failed, using rule-based');
+                // Fallback to rule-based
+                const synonyms = this.getSemanticSynonyms(query);
+                expandedKeywords = [...new Set([...queryKeywords, ...synonyms])];
+                intents = this.classifyQueryIntent(query);
+                console.log(`[RAG] Rule-based intents: ${intents.map(i => i.type).join(', ')}`);
+            }
+        } else {
+            // Rule-based fallback
+            const synonyms = this.getSemanticSynonyms(query);
+            expandedKeywords = [...new Set([...queryKeywords, ...synonyms])];
+            intents = this.classifyQueryIntent(query);
+            console.log(`[RAG] Rule-based intents: ${intents.map(i => i.type).join(', ')}`);
+        }
+
+        // 4. 高度なスコアリング
         const scored = this.knowledgeBase.map(section => {
             let score = 0;
 
-            // キーワードマッチング
+            // 基本キーワードマッチング（高優先度）
             queryKeywords.forEach(keyword => {
                 if (section.keywords.includes(keyword)) {
-                    score += 3; // キーワード一致
+                    score += 5; // キーワードリスト一致（高スコア）
                 }
                 if (section.content.toLowerCase().includes(keyword.toLowerCase())) {
-                    score += 1; // コンテンツ内出現
+                    score += 2; // コンテンツ内出現
+                }
+                if (section.title.toLowerCase().includes(keyword.toLowerCase())) {
+                    score += 4; // タイトル一致（重要）
                 }
             });
 
-            // クエリ文字列直接マッチ
-            if (section.content.toLowerCase().includes(query.toLowerCase())) {
-                score += 5;
+            // 同義語マッチング（中優先度）
+            expandedKeywords.forEach(synonym => {
+                if (section.content.toLowerCase().includes(synonym.toLowerCase())) {
+                    score += 1.5; // 同義語出現
+                }
+                if (section.title.toLowerCase().includes(synonym.toLowerCase())) {
+                    score += 3; // タイトル内同義語
+                }
+            });
+
+            // クエリ文字列直接マッチ（最高優先度）
+            const lowerContent = section.content.toLowerCase();
+            const lowerQuery = query.toLowerCase();
+            if (lowerContent.includes(lowerQuery)) {
+                score += 8; // 完全文字列一致
             }
+
+            // 意図ベースの重み付け
+            intents.forEach(intent => {
+                // セクションタイトルが意図のターゲットセクションに含まれる場合
+                const titleMatchesIntent = intent.targetSections.some(targetSection =>
+                    section.title.includes(targetSection) || targetSection.includes(section.title)
+                );
+
+                if (titleMatchesIntent) {
+                    score *= intent.weight; // 意図に合致するセクションのスコアをブースト
+                    console.log(`[RAG] Intent boost for section "${section.title}": x${intent.weight}`);
+                }
+
+                // カテゴリマッチング
+                const categoryMatchesIntent = intent.targetSections.some(targetSection =>
+                    section.category.includes(targetSection) || targetSection.includes(section.category)
+                );
+
+                if (categoryMatchesIntent) {
+                    score *= 1.2; // カテゴリ一致でもブースト
+                }
+            });
+
+            // 部分一致スコアリング（より柔軟な検索）
+            const queryWords = query.split(/\s+/).filter(w => w.length > 1);
+            queryWords.forEach(word => {
+                if (lowerContent.includes(word.toLowerCase())) {
+                    score += 0.5; // 部分単語マッチ
+                }
+            });
 
             return { section, score };
         });
@@ -392,9 +658,12 @@ class SimpleRAGSystem {
             .filter(item => item.score > 0)
             .sort((a, b) => b.score - a.score)
             .slice(0, topK)
-            .map(item => item.section);
+            .map(item => {
+                console.log(`[RAG] Section: "${item.section.title}" (category: ${item.section.category}) - Score: ${item.score.toFixed(2)}`);
+                return item.section;
+            });
 
-        console.log(`[RAG] Keyword search returned ${topSections.length} results`);
+        console.log(`[RAG] Advanced keyword search returned ${topSections.length} results`);
         return topSections;
     }
 
@@ -581,8 +850,10 @@ class SimpleRAGSystem {
 1. **最初に料金についての説明をする**（質問に直接答える）：
    - 「料金につきましては、プロジェクトの規模やご要望の内容によって柔軟に対応させていただいております。」
 
-2. **次にお問い合わせに誘導する**（やんわりと）：
-   - 「お客様の具体的な課題やご予算感をお伺いした上で、最適なプランをご提案させていただきますので、よろしければ[お問い合わせフォーム](https://shin-ai-inc.github.io/website/contact.html)よりご相談いただけますでしょうか。無料相談も承っておりますので、お気軽にどうぞ。」
+2. **次に上品な埋め込みボタンで案内する**（やんわりと）：
+   - 説明文: 「お客様の具体的な課題やご予算感をお伺いした上で、最適なプランをご提案させていただきます。」
+   - HTMLボタン: `<a href="https://shin-ai-inc.github.io/website/contact.html" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">📧 無料相談のお問い合わせ</a>`
+   - 締めの言葉: 「無料相談も承っておりますので、お気軽にどうぞ。」
 
 ### 絶対にやってはいけないこと
 - ❌「何かお困りですか？」のような質問返しをする
@@ -633,9 +904,14 @@ class SimpleRAGSystem {
 - **料金に関する具体的な質問**（「料金はいくら？」「価格を教えて」→ 回答の最後に自然に案内）
 
 ### 案内する際のフォーマット（上記の場合のみ）
-お問い合わせリンクを含める場合は、以下の形式で**文末に1度だけ**追加：
+お問い合わせリンクを含める場合は、以下の**上品な埋め込みボタン形式**で追加：
 
-「詳細なご相談は、[お問い合わせフォーム](https://shin-ai-inc.github.io/website/contact.html)よりお気軽にどうぞ。無料相談も実施しております。」
+説明文 + 改行 + HTMLボタン + 改行 + 締めの言葉
+
+HTMLボタンの形式：
+`<a href="https://shin-ai-inc.github.io/website/contact.html" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">📧 お問い合わせフォームへ</a>`
+
+締めの言葉：「無料相談も実施しております。」または「お気軽にどうぞ。」
 
 ### 重要な原則
 - **デフォルトは「案内しない」** - 迷ったら案内しない
@@ -680,12 +956,20 @@ A: 「お役に立てて嬉しいです！他に気になることがあれば�
 
 ### 良い例（お問い合わせリンクを表示する場合）
 Q: 「料金について教えて」
-A: 「ShinAIの料金は、プロジェクトの規模やご要望に応じて柔軟に設定しております。詳細なお見積もりについては、[お問い合わせフォーム](https://shin-ai-inc.github.io/website/contact.html)よりご相談ください。無料相談も実施しておりますので、お気軽にどうぞ。」
-- 適切: 料金質問の場合のみリンク表示
+A: 「ShinAIの料金は、プロジェクトの規模やご要望に応じて柔軟に設定しております。お客様の具体的な課題やご予算感をお伺いした上で、最適なプランをご提案させていただきます。
+
+<a href="https://shin-ai-inc.github.io/website/contact.html" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">📧 無料相談のお問い合わせ</a>
+
+無料相談も承っておりますので、お気軽にどうぞ。」
+- 適切: 料金質問の場合、上品な埋め込みボタンで案内
 
 Q: 「導入を検討しているので、詳しく相談したい」
-A: 「ありがとうございます！詳細なご相談は、[お問い合わせフォーム](https://shin-ai-inc.github.io/website/contact.html)よりお気軽にどうぞ。専門スタッフが丁寧にご対応いたします。無料相談も実施しております。」
-- 適切: 明確な相談意思がある場合のみリンク表示`;
+A: 「ありがとうございます！詳しくお話をお伺いし、御社に最適なプランをご提案させていただきます。
+
+<a href="https://shin-ai-inc.github.io/website/contact.html" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); transition: all 0.3s ease;">📧 お問い合わせフォームへ</a>
+
+専門スタッフが丁寧にご対応いたします。無料相談も実施しております。」
+- 適切: 明確な相談意思がある場合、上品な埋め込みボタンで案内`;
     }
 
     /**

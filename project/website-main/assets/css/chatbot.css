@@ -258,6 +258,50 @@ AUTHOR: ShinAI Development Team
 }
 
 /* ========================================================
+   ▼ Message Embedded Button Component
+   メッセージ内埋め込みボタン - お問い合わせCTA
+
+   DESIGN NOTE:
+   - グラデーション背景でプロフェッショナルな印象
+   - ホバー時の微細なアニメーションで高級感
+   - シャドウで立体感と視認性を確保
+   ======================================================== */
+.chat-message a[href*="contact.html"] {
+    display: inline-block !important;
+    padding: 12px 24px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    margin-top: 12px !important;
+    margin-bottom: 8px !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+    transition: all 0.3s ease !important;
+}
+
+.chat-message a[href*="contact.html"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+
+.chat-message a[href*="contact.html"]:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* モバイル版: タップしやすいサイズに調整 */
+@media (max-width: 768px) {
+    .chat-message a[href*="contact.html"] {
+        padding: 14px 28px !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ========================================================
    ▼ Chatbot Input Component
    入力エリア - ユーザーからAIへのメッセージ入力
 
@@ -375,41 +419,104 @@ AUTHOR: ShinAI Development Team
 }
 
 /* ========================================================
-   ▼ Chatbot Loading Component
+   ▼ Chatbot Loading Component (Enhanced UX)
    ローディング表示 - AIの思考プロセスを可視化
 
    DESIGN NOTE:
-   - 3つのドットアニメーションでAIの処理中を表現
-   - 段階的な遅延で流れるような動きを演出
-   - 控えめながら明確な視覚的フィードバック
+   - 滑らかな濃度変化でプロフェッショナルな印象
+   - より繊細なアニメーションタイミング
+   - モバイルでも視認性の高いサイズとコントラスト
+   - 目に優しい濃度カーブ（ease-in-out）
    ======================================================== */
 .loading-dots {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    padding: 0.3rem 0;
 }
 
 .loading-dots i {
-    font-size: 5px;
-    animation: dotPulse 1.5s infinite;
+    font-size: 6px;
+    animation: dotPulseEnhanced 1.8s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+.loading-dots i:nth-child(1) {
+    animation-delay: 0s;
 }
 
 .loading-dots i:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: 0.3s;
 }
 
 .loading-dots i:nth-child(3) {
-    animation-delay: 0.4s;
+    animation-delay: 0.6s;
 }
 
-@keyframes dotPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.4;
+/* 高度な濃度変化アニメーション */
+@keyframes dotPulseEnhanced {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.2;
     }
-    50% {
-        transform: scale(1.5);
-        opacity: 1;
+    20% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.4);
+        opacity: 0.9;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+    80% {
+        transform: scale(0.9);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.2;
+    }
+}
+
+/* モバイル版: より視認性の高いローディング */
+@media (max-width: 768px) {
+    .loading-dots {
+        gap: 8px;
+        padding: 0.4rem 0;
+    }
+
+    .loading-dots i {
+        font-size: 7px;
+    }
+
+    @keyframes dotPulseEnhanced {
+        0% {
+            transform: scale(0.9);
+            opacity: 0.25;
+        }
+        20% {
+            transform: scale(1.2);
+            opacity: 0.6;
+        }
+        40% {
+            transform: scale(1.5);
+            opacity: 1;
+        }
+        60% {
+            transform: scale(1.2);
+            opacity: 0.7;
+        }
+        80% {
+            transform: scale(1);
+            opacity: 0.4;
+        }
+        100% {
+            transform: scale(0.9);
+            opacity: 0.25;
+        }
     }
 }
 
