@@ -280,12 +280,39 @@ const ShinAIChatbot = {
             } else {
                 clearInterval(typingInterval);
 
-                // CTA追加
-                setTimeout(() => {
-                    this.addCTA();
-                }, 300);
+                // CTA表示判定（応答テキストに特定キーワードが含まれる場合のみ）
+                if (this.shouldShowCTA(text)) {
+                    setTimeout(() => {
+                        this.addCTA();
+                    }, 300);
+                }
             }
         }, this.typingSpeed);
+    },
+
+    /**
+     * CTA表示判定
+     * 確度の高い相談と判断される場合にtrueを返す
+     */
+    shouldShowCTA: function(responseText) {
+        // 以下のキーワードが含まれる場合、確度が高いと判断
+        const highIntentKeywords = [
+            'お問い合わせ',
+            '無料相談',
+            'ご相談',
+            '詳細',
+            '具体的',
+            'カスタマイズ',
+            '導入',
+            '検討',
+            'お見積',
+            '料金',
+            'プラン',
+            '事例',
+            '実績'
+        ];
+
+        return highIntentKeywords.some(keyword => responseText.includes(keyword));
     },
 
     /**
