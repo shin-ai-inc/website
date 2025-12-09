@@ -292,27 +292,27 @@ const ShinAIChatbot = {
 
     /**
      * CTA表示判定
-     * 確度の高い相談と判断される場合にtrueを返す
+     * LLMが明示的にお問い合わせを推奨している場合のみtrueを返す
+     *
+     * 重要：単にキーワードが含まれるだけでは不十分
+     * 「お問い合わせページ」「無料相談」などの明示的な誘導フレーズが必要
      */
     shouldShowCTA: function(responseText) {
-        // 以下のキーワードが含まれる場合、確度が高いと判断
-        const highIntentKeywords = [
-            'お問い合わせ',
-            '無料相談',
-            'ご相談',
-            '詳細',
-            '具体的',
-            'カスタマイズ',
-            '導入',
-            '検討',
-            'お見積',
-            '料金',
-            'プラン',
-            '事例',
-            '実績'
+        // 明示的な誘導フレーズのみを検出
+        const explicitCTAPhrases = [
+            'お問い合わせページ',
+            '無料相談でお気軽に',
+            '無料相談にて',
+            'お問い合わせフォーム',
+            '詳細はお問い合わせ',
+            'ご相談ください',
+            'お気軽にお問い合わせ',
+            'お問い合わせいただければ',
+            '無料相談をご利用'
         ];
 
-        return highIntentKeywords.some(keyword => responseText.includes(keyword));
+        // これらのフレーズが含まれる場合のみCTA表示
+        return explicitCTAPhrases.some(phrase => responseText.includes(phrase));
     },
 
     /**
