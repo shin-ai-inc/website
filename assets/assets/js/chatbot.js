@@ -1,7 +1,7 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 3.3.0 - Professional Grade
+ * VERSION: 3.4.0 - Professional Grade (Mobile UX Optimized)
  * LAST UPDATED: 2025-12-09
  * AUTHOR: ShinAI Development Team
  *
@@ -112,8 +112,14 @@ const ShinAIChatbot = {
         this.button.setAttribute('aria-expanded', isOpen);
 
         if (isOpen) {
-            // モバイル対応: readonly属性一時付与でキーボード自動表示防止
+            // モバイル対応: ボディスクロール制御
             if (window.innerWidth <= 768) {
+                // 背景スクロール防止
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+
+                // readonly属性一時付与でキーボード自動表示防止
                 this.input.setAttribute('readonly', 'true');
                 setTimeout(() => {
                     this.input.removeAttribute('readonly');
@@ -130,6 +136,13 @@ const ShinAIChatbot = {
     closeChat: function() {
         this.window.classList.remove('active');
         this.button.setAttribute('aria-expanded', 'false');
+
+        // モバイル対応: ボディスクロール復元
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
     },
 
     /**
@@ -465,10 +478,18 @@ const ShinAIChatbot = {
     },
 
     /**
-     * スクロール最下部へ
+     * スクロール最下部へ（モバイル最適化）
      */
     scrollToBottom: function() {
-        this.messages.scrollTop = this.messages.scrollHeight;
+        // モバイル対応: スムーススクロール
+        if (window.innerWidth <= 768) {
+            // iOS Safari 対応
+            requestAnimationFrame(() => {
+                this.messages.scrollTop = this.messages.scrollHeight;
+            });
+        } else {
+            this.messages.scrollTop = this.messages.scrollHeight;
+        }
     }
 };
 
