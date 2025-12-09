@@ -1451,14 +1451,23 @@
 
     /* モバイル版: タップ時のアニメーションを無効化してリンク誤解を防止 */
     @media (max-width: 768px) {
-        .industry-card:hover {
-            transform: none;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            border-color: rgba(0, 0, 0, 0.05);
+        .industry-card:hover,
+        .industry-card:active,
+        .industry-card:focus {
+            transform: none !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+            border-color: rgba(0, 0, 0, 0.05) !important;
         }
 
-        .industry-card:hover .industry-icon {
-            transform: none;
+        .industry-card:hover .industry-icon,
+        .industry-card:active .industry-icon,
+        .industry-card:focus .industry-icon {
+            transform: none !important;
+        }
+
+        .industry-card {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
     }
 
