@@ -223,7 +223,11 @@ const ShinAIChatbot = {
 
                 if (data.success) {
                     // AIレスポンス表示（タイピングエフェクト）
-                    this.displayTypingMessage(data.response);
+                    // APIがオブジェクト or 文字列の両方に対応
+                    const responseText = typeof data.response === 'string'
+                        ? data.response
+                        : data.response.response;
+                    this.displayTypingMessage(responseText);
                 } else {
                     // エラーメッセージ表示
                     this.addMessage('申し訳ありません。一時的にサービスが利用できません。', 'bot');
