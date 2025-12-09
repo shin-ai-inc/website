@@ -198,9 +198,11 @@ const ShinAIChatbot = {
 
             // API呼び出し
             // 環境に応じたAPI URLを使用 (index.htmlで設定)
-            const apiUrl = window.CHATBOT_API_URL
-                ? `${window.CHATBOT_API_URL}/api/chatbot`
-                : 'http://localhost:3001/api/chatbot'; // Fallback for local dev
+            if (!window.CHATBOT_API_URL) {
+                throw new Error('CHATBOT_API_URL is not configured');
+            }
+
+            const apiUrl = `${window.CHATBOT_API_URL}/api/chatbot`;
 
             const apiResponse = await fetch(apiUrl, {
                 method: 'POST',
