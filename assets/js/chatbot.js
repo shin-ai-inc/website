@@ -197,7 +197,12 @@ const ShinAIChatbot = {
             }
 
             // API呼び出し
-            const apiResponse = await fetch('http://localhost:3001/api/chatbot', {
+            // 環境に応じたAPI URLを使用 (index.htmlで設定)
+            const apiUrl = window.CHATBOT_API_URL
+                ? `${window.CHATBOT_API_URL}/api/chatbot`
+                : 'http://localhost:3001/api/chatbot'; // Fallback for local dev
+
+            const apiResponse = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -275,12 +280,39 @@ const ShinAIChatbot = {
             } else {
                 clearInterval(typingInterval);
 
-                // CTA追加
-                setTimeout(() => {
-                    this.addCTA();
-                }, 300);
+                // CTA表示判定（応答テキストに特定キーワードが含まれる場合のみ）
+                if (this.shouldShowCTA(text)) {
+                    setTimeout(() => {
+                        this.addCTA();
+                    }, 300);
+                }
             }
         }, this.typingSpeed);
+    },
+
+    /**
+     * CTA表示判定
+     * LLMが明示的にお問い合わせを推奨している場合のみtrueを返す
+     *
+     * 重要：単にキーワードが含まれるだけでは不十分
+     * 「お問い合わせページ」「無料相談」などの明示的な誘導フレーズが必要
+     */
+    shouldShowCTA: function(responseText) {
+        // 明示的な誘導フレーズのみを検出
+        const explicitCTAPhrases = [
+            'お問い合わせページ',
+            '無料相談でお気軽に',
+            '無料相談にて',
+            'お問い合わせフォーム',
+            '詳細はお問い合わせ',
+            'ご相談ください',
+            'お気軽にお問い合わせ',
+            'お問い合わせいただければ',
+            '無料相談をご利用'
+        ];
+
+        // これらのフレーズが含まれる場合のみCTA表示
+        return explicitCTAPhrases.some(phrase => responseText.includes(phrase));
     },
 
     /**
