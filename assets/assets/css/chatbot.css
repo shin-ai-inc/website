@@ -728,6 +728,41 @@ AUTHOR: ShinAI Development Team
         transform: scale(0.97) !important;
         box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
     }
+
+    /* ========================================================
+       ▼ iOS Keyboard Optimization (Critical UX Fix)
+       モバイルキーボード表示時の致命的レイアウト問題を修正
+       ======================================================== */
+
+    /* iOS キーボード表示時のチャットウィンドウ高さ調整 */
+    .chatbot-window.active {
+        /* Visual Viewport対応: キーボード分を引いた高さに調整 */
+        min-height: 0;
+        max-height: 100vh;
+        max-height: 100dvh;
+    }
+
+    /* iOS キーボード表示時: メッセージエリアの最小高さ確保 */
+    .chatbot-window.active .chatbot-messages {
+        flex: 1 1 auto;
+        min-height: 200px; /* 最低限のメッセージ表示領域確保 */
+        max-height: calc(100vh - 180px); /* ヘッダー + 入力欄を引いた高さ */
+        max-height: calc(100dvh - 180px);
+    }
+
+    /* 入力フォーカス時: より積極的な領域確保 */
+    .chatbot-input input:focus {
+        /* iOS Safari: 入力フィールドが見えるようにスクロール */
+        scroll-margin-bottom: 20px;
+    }
+
+    /* iOS キーボードツールバー対策 */
+    @supports (-webkit-touch-callout: none) {
+        .chatbot-window.active {
+            /* iOS Safariのキーボードツールバー分を考慮 */
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+    }
 }
 
 /* ========================================================
