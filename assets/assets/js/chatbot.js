@@ -1,7 +1,7 @@
 /**
  * ==============================================
  * COMPONENT: Enterprise AI Chatbot Interface
- * VERSION: 3.1.0 - Professional Grade
+ * VERSION: 3.2.0 - Professional Grade
  * LAST UPDATED: 2025-12-09
  * AUTHOR: ShinAI Development Team
  *
