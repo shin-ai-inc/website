@@ -204,7 +204,12 @@ const ShinAIChatbot = {
                 ? window.CHATBOT_API_URL  // 本番環境またはVercel API指定時
                 : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
                     ? 'http://localhost:3001'  // ローカル開発環境
-                    : null;  // フォールバック
+                    : null;  // フォールバック（本番環境でCHATBOT_API_URL未設定時）
+
+            // 本番環境でAPIが設定されていない場合の警告
+            if (!apiBaseUrl && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                console.error('[ShinAI Chatbot] ⚠️ 本番環境でCHATBOT_API_URLが設定されていません');
+            }
 
             let response = null;
 
@@ -250,13 +255,20 @@ const ShinAIChatbot = {
                         console.warn('[ShinAI Chatbot] API応答がsuccessではない:', data);
                     }
                 } catch (apiError) {
-                    console.warn('[ShinAI Chatbot] API利用不可、フォールバックモードに切替:', apiError);
+                    console.warn('[ShinAI Chatbot] API利用不可:', apiError);
                     console.error('[ShinAI Chatbot] Error details:', {
                         name: apiError.name,
                         message: apiError.message,
                         apiBaseUrl: apiBaseUrl,
                         stack: apiError.stack
                     });
+
+                    // エラー種別に応じた詳細ログ
+                    if (apiError.name === 'AbortError') {
+                        console.warn('[ShinAI Chatbot] APIタイムアウト（15秒超過）');
+                    } else if (apiError.message && apiError.message.includes('Failed to fetch')) {
+                        console.warn('[ShinAI Chatbot] ネットワークエラー（CORS、ブロッカー、またはサーバー未起動の可能性）');
+                    }
                 }
             } else {
                 console.log('[ShinAI Chatbot] apiBaseUrlが未設定、フォールバックモード使用');
@@ -265,6 +277,13 @@ const ShinAIChatbot = {
             // APIが応答を返さなかった場合はエラーメッセージ
             if (!response) {
                 console.error('[ShinAI Chatbot] APIが応答を返しませんでした');
+
+                // 開発環境でのヘルプメッセージ
+                if (apiBaseUrl && apiBaseUrl.includes('localhost')) {
+                    console.info('[ShinAI Chatbot] 💡 ローカルAPIサーバーが起動していない可能性があります');
+                    console.info('[ShinAI Chatbot] 💡 APIサーバーを起動するか、本番環境でテストしてください');
+                }
+
                 response = 'ただいま一時的にご利用いただけません。しばらく経ってから再度お試しください。';
             }
 
