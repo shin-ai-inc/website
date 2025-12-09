@@ -278,8 +278,16 @@ const ShinAIChatbot = {
             if (!response) {
                 console.error('[ShinAI Chatbot] APIが応答を返しませんでした');
 
+                // ローカル開発環境の判定（file://プロトコル対応）
+                const isLocalDevelopment =
+                    window.location.protocol === 'file:' ||
+                    window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname === '' ||
+                    (apiBaseUrl && apiBaseUrl.includes('localhost'));
+
                 // ローカル開発環境でのみ、最小限のフォールバック応答を提供
-                if (apiBaseUrl && apiBaseUrl.includes('localhost')) {
+                if (isLocalDevelopment) {
                     console.warn('[ShinAI Chatbot] ⚠️ ローカル開発モード: フォールバック応答を使用');
                     console.info('[ShinAI Chatbot] 💡 本番環境ではAPIサーバーが必須です');
 
