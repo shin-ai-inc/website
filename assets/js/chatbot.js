@@ -221,7 +221,7 @@ const ShinAIChatbot = {
 
                 if (data.success) {
                     // AIレスポンス表示（タイピングエフェクト）
-                    this.displayTypingMessage(data.response);
+                    this.displayTypingMessage(data.response, data.cta);
                 } else {
                     // エラーメッセージ表示
                     this.addMessage('申し訳ありません。一時的にサービスが利用できません。', 'bot');
@@ -288,9 +288,12 @@ const ShinAIChatbot = {
     },
 
     /**
-     * タイピングエフェクトメッセージ表示
+     * タイピングエフェクトメッセージ表示（CTA対応）
+     *
+     * @param {string} text - 表示するメッセージ
+     * @param {object} ctaData - サーバーからのCTA判定データ（オプション）
      */
-    displayTypingMessage: function(text) {
+    displayTypingMessage: function(text, ctaData = null) {
         const message = document.createElement('div');
         message.classList.add('chat-message', 'bot');
         message.textContent = '';
@@ -305,10 +308,15 @@ const ShinAIChatbot = {
             } else {
                 clearInterval(typingInterval);
 
-                // CTA表示判定（応答テキストに特定キーワードが含まれる場合のみ）
-                if (this.shouldShowCTA(text)) {
+                // CTA表示判定（サーバーサイド判定を優先）
+                if (ctaData && ctaData.shouldShow) {
+                    console.log('[CTA] サーバー判定でCTA表示:', {
+                        score: ctaData.score,
+                        ctaType: ctaData.ctaType,
+                        pattern: ctaData.ctaPattern?.id
+                    });
                     setTimeout(() => {
-                        this.addCTA();
+                        this.addCTA(ctaData.ctaPattern, ctaData.ctaType);
                     }, 300);
                 }
             }
@@ -316,39 +324,85 @@ const ShinAIChatbot = {
     },
 
     /**
-     * CTA表示判定
-     * LLMが明示的にお問い合わせを推奨している場合のみtrueを返す
+     * CTA追加（A/Bテスト対応・複数パターン）
      *
-     * 重要：単にキーワードが含まれるだけでは不十分
-     * 「お問い合わせページ」「無料相談」などの明示的な誘導フレーズが必要
+     * @param {object} pattern - CTAパターン（サーバーから提供）
+     * @param {string} ctaType - CTAタイプ（contact_form, free_consultation, phone_consultation）
      */
-    shouldShowCTA: function(responseText) {
-        // 明示的な誘導フレーズのみを検出
-        const explicitCTAPhrases = [
-            'お問い合わせページ',
-            '無料相談でお気軽に',
-            '無料相談にて',
-            'お問い合わせフォーム',
-            '詳細はお問い合わせ',
-            'ご相談ください',
-            'お気軽にお問い合わせ',
-            'お問い合わせいただければ',
-            '無料相談をご利用'
-        ];
+    addCTA: function(pattern = null, ctaType = 'contact_form') {
+        // デフォルトパターン（サーバーからデータが来ない場合）
+        const defaultPattern = {
+            id: 'default',
+            title: 'お問い合わせ',
+            message: 'お気軽にご相談ください',
+            buttonText: 'お問い合わせフォーム',
+            style: 'primary'
+        };
 
-        // これらのフレーズが含まれる場合のみCTA表示
-        return explicitCTAPhrases.some(phrase => responseText.includes(phrase));
+        const ctaPattern = pattern || defaultPattern;
+
+        // CTA URL設定
+        const ctaUrls = {
+            contact_form: 'contact.html',
+            free_consultation: 'contact.html#consultation',
+            phone_consultation: 'contact.html#phone'
+        };
+
+        const ctaUrl = ctaUrls[ctaType] || 'contact.html';
+
+        // CTAスタイル設定
+        const styleClasses = {
+            primary: 'btn-primary',
+            secondary: 'btn-secondary',
+            accent: 'btn-accent'
+        };
+
+        const btnClass = styleClasses[ctaPattern.style] || 'btn-primary';
+
+        // CTA要素作成
+        const cta = document.createElement('div');
+        cta.classList.add('chat-message', 'bot', 'cta-message');
+        cta.setAttribute('data-pattern-id', ctaPattern.id);
+        cta.setAttribute('data-cta-type', ctaType);
+
+        cta.innerHTML = `
+            <div style="padding: 0.5rem 0; border-top: 1px solid rgba(0, 0, 0, 0.1); margin-top: 0.5rem;">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">
+                    ${ctaPattern.message}
+                </div>
+                <a href="${ctaUrl}"
+                   class="btn ${btnClass} btn-sm"
+                   style="width: 100%; text-align: center; display: block; padding: 0.75rem;">
+                    ${ctaPattern.buttonText}
+                </a>
+            </div>
+        `;
+
+        this.messages.appendChild(cta);
+        this.scrollToBottom();
+
+        // A/Bテストトラッキング（Google Analytics等へ送信可能）
+        this.trackCTADisplay(ctaPattern.id, ctaType);
     },
 
     /**
-     * CTA追加
+     * CTAトラッキング（A/Bテスト効果測定用）
      */
-    addCTA: function() {
-        const cta = document.createElement('div');
-        cta.classList.add('chat-message', 'bot');
-        cta.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 0.5rem;">お問い合わせ・無料相談予約</a>';
-        this.messages.appendChild(cta);
-        this.scrollToBottom();
+    trackCTADisplay: function(patternId, ctaType) {
+        // Google Analytics等のトラッキングコードをここに追加
+        console.log('[CTA Tracking] 表示:', {
+            pattern: patternId,
+            type: ctaType,
+            timestamp: new Date().toISOString()
+        });
+
+        // 将来的にGoogle Analytics等に送信
+        // if (window.gtag) {
+        //     gtag('event', 'cta_display', {
+        //         pattern_id: patternId,
+        //         cta_type: ctaType
+        //     });
+        // }
     },
 
     /**

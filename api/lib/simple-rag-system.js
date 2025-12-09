@@ -434,10 +434,25 @@ class SimpleRAGSystem {
 
             const response = completion.choices[0].message.content;
 
-            // 5. Session履歴更新
+            // 5. CTA表示判定
+            const ctaData = this.shouldShowCTA(userMessage, response, sessionId);
+
+            console.log('[RAG] CTA判定結果:', {
+                score: ctaData.score,
+                shouldShow: ctaData.shouldShow,
+                ctaType: ctaData.ctaType,
+                confidence: ctaData.confidence,
+                pattern: ctaData.ctaPattern?.id
+            });
+
+            // 6. Session履歴更新
             this.updateSessionHistory(sessionId, userMessage, response);
 
-            return response;
+            // 7. 拡張応答を返却（後方互換性のため文字列とオブジェクトの両方をサポート）
+            return {
+                response: response,
+                cta: ctaData
+            };
 
         } catch (error) {
             // Detailed error logging for debugging
@@ -722,6 +737,298 @@ ${context}
         sessionData.expiresAt = Date.now() + this.SESSION_EXPIRY_MS;
 
         this.sessionHistories.set(sessionId, sessionData);
+    }
+
+    /**
+     * ============================================
+     * CTA表示判定システム
+     * ============================================
+     *
+     * PURPOSE:
+     * - お問い合わせ窓口用途としてCTA表示を自動判定
+     * - スコアリングアルゴリズムで確度を計算
+     * - 中立的な基準（70点以上）で表示
+     *
+     * SCORING ALGORITHM:
+     * - ユーザー意図: 0-40点
+     * - AI応答内容: 0-30点
+     * - 会話文脈: 0-20点
+     * - タイミング: 0-10点
+     * 合計100点満点
+     */
+
+    /**
+     * CTA表示判定（メイン関数）
+     *
+     * @param {string} userMessage - ユーザーメッセージ
+     * @param {string} aiResponse - AI応答
+     * @param {string} sessionId - セッションID
+     * @returns {object} CTA判定結果
+     */
+    shouldShowCTA(userMessage, aiResponse, sessionId) {
+        try {
+            // セッション履歴取得
+            const sessionHistory = this.getSessionHistory(sessionId);
+
+            // スコア計算
+            const score = this.calculateCTAScore(userMessage, aiResponse, sessionHistory);
+
+            // スコア70点以上でCTA表示（中立的基準）
+            const shouldShow = score >= 70;
+
+            // CTAタイプ決定
+            const ctaType = shouldShow ? this.determineCTAType(userMessage, score) : null;
+
+            // A/Bテスト用パターン選択
+            const ctaPattern = shouldShow ? this.selectCTAPattern(sessionId) : null;
+
+            return {
+                shouldShow: shouldShow,
+                score: score,
+                ctaType: ctaType,
+                ctaPattern: ctaPattern,
+                confidence: this.calculateConfidence(score)
+            };
+
+        } catch (error) {
+            console.error('[CTA] Error in shouldShowCTA:', error.message);
+            // エラー時は安全側（非表示）
+            return {
+                shouldShow: false,
+                score: 0,
+                ctaType: null,
+                ctaPattern: null,
+                confidence: 'low'
+            };
+        }
+    }
+
+    /**
+     * CTAスコア計算（100点満点）
+     */
+    calculateCTAScore(userMessage, aiResponse, sessionHistory) {
+        let score = 0;
+
+        // 1. ユーザー意図分析（0-40点）
+        score += this.analyzeUserIntent(userMessage);
+
+        // 2. AI応答内容分析（0-30点）
+        score += this.analyzeAIResponse(aiResponse);
+
+        // 3. 会話文脈分析（0-20点）
+        score += this.analyzeConversationContext(sessionHistory, userMessage);
+
+        // 4. タイミング分析（0-10点）
+        score += this.analyzeResponseTiming(sessionHistory);
+
+        return Math.min(100, Math.max(0, score));
+    }
+
+    /**
+     * ユーザー意図分析（0-40点）
+     */
+    analyzeUserIntent(userMessage) {
+        const message = userMessage.toLowerCase();
+        let score = 0;
+
+        // 高確度キーワード（各カテゴリで最大点を採用）
+        const intentCategories = {
+            // 見積・料金系（35点）
+            pricing: {
+                keywords: ['見積', '料金', '価格', '費用', 'コスト', '予算'],
+                score: 35
+            },
+            // 導入検討系（30点）
+            implementation: {
+                keywords: ['導入', '検討中', '導入したい', '始めたい', '申し込'],
+                score: 30
+            },
+            // 詳細相談系（25点）
+            consultation: {
+                keywords: ['相談したい', '話を聞きたい', '詳しく知りたい', '教えて欲しい'],
+                score: 25
+            },
+            // カスタマイズ系（30点）
+            customization: {
+                keywords: ['カスタマイズ', 'オーダーメイド', '独自', '特注', 'カスタム'],
+                score: 30
+            },
+            // 事例・実績系（20点）
+            caseStudy: {
+                keywords: ['事例', '実績', '導入例', '成功事例'],
+                score: 20
+            },
+            // 具体的なステップ系（25点）
+            nextSteps: {
+                keywords: ['どうすれば', '手順', 'プロセス', 'ステップ', '方法'],
+                score: 25
+            },
+            // 問い合わせ明示（40点）
+            directInquiry: {
+                keywords: ['問い合わせ', 'お問い合わせ', '連絡', 'コンタクト'],
+                score: 40
+            }
+        };
+
+        // 各カテゴリをチェック（最高得点を採用）
+        for (const category of Object.values(intentCategories)) {
+            const hasKeyword = category.keywords.some(kw => message.includes(kw));
+            if (hasKeyword) {
+                score = Math.max(score, category.score);
+            }
+        }
+
+        // 否定的な表現でスコアダウン
+        const negativeKeywords = ['いいえ', '結構です', '不要', '大丈夫です', 'やめ'];
+        const hasNegative = negativeKeywords.some(kw => message.includes(kw));
+        if (hasNegative) {
+            score = Math.max(0, score - 30);
+        }
+
+        return score;
+    }
+
+    /**
+     * AI応答内容分析（0-30点）
+     */
+    analyzeAIResponse(aiResponse) {
+        const response = aiResponse.toLowerCase();
+        let score = 0;
+
+        // システムプロンプトで定義されたCTA誘導フレーズ
+        const ctaPhrases = [
+            'お問い合わせページにてご相談ください',
+            'お問い合わせフォームよりお気軽にご相談ください',
+            '無料相談にて詳しくご説明いたします',
+            'お問い合わせいただければ、具体的なご提案をさせていただきます',
+            '詳細はお問い合わせページ',
+            'お問い合わせください'
+        ];
+
+        // 誘導フレーズが含まれる場合（30点）
+        const hasCtaPhrase = ctaPhrases.some(phrase => response.includes(phrase.toLowerCase()));
+        if (hasCtaPhrase) {
+            score += 30;
+        }
+
+        // 具体的な提案が含まれる場合（15点）
+        const proposalKeywords = ['ご提案', 'プラン', 'ソリューション', 'カスタマイズ'];
+        const hasProposal = proposalKeywords.some(kw => response.includes(kw));
+        if (hasProposal && !hasCtaPhrase) {
+            score += 15;
+        }
+
+        return score;
+    }
+
+    /**
+     * 会話文脈分析（0-20点）
+     */
+    analyzeConversationContext(sessionHistory, currentMessage) {
+        let score = 0;
+
+        // メッセージ数（継続的な対話）
+        const messageCount = sessionHistory.length / 2; // user+assistantのペア数
+        if (messageCount >= 3) {
+            score += 10; // 3往復以上
+        } else if (messageCount >= 2) {
+            score += 5; // 2往復以上
+        }
+
+        // 具体的な業界・課題への言及
+        const contextKeywords = [
+            '製造', '医療', '金融', '小売', '建設', '教育',
+            '課題', '問題', '悩み', '困', '改善'
+        ];
+        const hasContext = contextKeywords.some(kw => currentMessage.includes(kw));
+        if (hasContext) {
+            score += 10;
+        }
+
+        return score;
+    }
+
+    /**
+     * タイミング分析（0-10点）
+     */
+    analyzeResponseTiming(sessionHistory) {
+        let score = 0;
+
+        const messageCount = sessionHistory.length / 2;
+
+        // 適切なタイミング（2-5往復目）
+        if (messageCount >= 2 && messageCount <= 5) {
+            score += 10;
+        } else if (messageCount > 5) {
+            score += 5; // それ以降も可
+        }
+
+        return score;
+    }
+
+    /**
+     * CTAタイプ決定（お問い合わせフォーム優先）
+     */
+    determineCTAType(userMessage, score) {
+        const message = userMessage.toLowerCase();
+
+        // 緊急性の高いキーワード（電話相談）
+        if (message.includes('すぐに') || message.includes('至急') || message.includes('緊急')) {
+            return 'phone_consultation';
+        }
+
+        // 見積・料金系（無料相談）
+        if (message.includes('見積') || message.includes('料金') || message.includes('価格')) {
+            return 'free_consultation';
+        }
+
+        // デフォルト：お問い合わせフォーム（最優先）
+        return 'contact_form';
+    }
+
+    /**
+     * 信頼度計算
+     */
+    calculateConfidence(score) {
+        if (score >= 85) return 'very_high';
+        if (score >= 70) return 'high';
+        if (score >= 50) return 'medium';
+        return 'low';
+    }
+
+    /**
+     * A/Bテスト用CTAパターン選択
+     */
+    selectCTAPattern(sessionId) {
+        // セッションIDのハッシュ値でパターンを決定（一貫性を保つ）
+        const hash = sessionId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        const patternIndex = hash % 3; // 3パターン
+
+        const patterns = [
+            {
+                id: 'pattern_a',
+                title: 'お問い合わせ',
+                message: 'お気軽にご相談ください',
+                buttonText: 'お問い合わせフォーム',
+                style: 'primary'
+            },
+            {
+                id: 'pattern_b',
+                title: '無料相談',
+                message: '専門スタッフが詳しくご案内します',
+                buttonText: '無料相談を予約',
+                style: 'secondary'
+            },
+            {
+                id: 'pattern_c',
+                title: '詳しく知る',
+                message: 'あなたに最適なプランをご提案',
+                buttonText: '詳細を問い合わせる',
+                style: 'accent'
+            }
+        ];
+
+        return patterns[patternIndex];
     }
 
     /**
