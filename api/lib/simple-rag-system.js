@@ -42,8 +42,6 @@ class SimpleRAGSystem {
         // Vector Search (In-memory implementation)
         this.vectorSearch = new SimpleVectorSearch();
         this.vectorSearchEnabled = false; // Feature flag
-        this.vectorInitializing = false; // Initialization in progress
-        this.vectorInitialized = false; // Initialization complete
 
         // Hybrid Search Engine (RRF fusion)
         this.hybridSearch = new HybridSearchEngine({
@@ -255,21 +253,6 @@ class SimpleRAGSystem {
      * @param {object} filters - Optional metadata filters {category, keywords}
      */
     async searchRelevantSections(query, topK = 3, filters = {}) {
-        // Lazy initialization: Initialize vector search on first use
-        if (!this.vectorInitialized && !this.vectorInitializing && this.openai) {
-            this.vectorInitializing = true;
-            console.log('[RAG] Lazy initializing vector search on first query...');
-            try {
-                await this.initializeVectorSearch();
-                this.vectorInitialized = true;
-                console.log('[RAG] Vector search lazy initialization complete');
-            } catch (error) {
-                console.error('[RAG] Lazy initialization failed:', error.message);
-                console.log('[RAG] Falling back to keyword search');
-            }
-            this.vectorInitializing = false;
-        }
-
         // Try hybrid search first (if enabled)
         if (this.hybridSearchEnabled && this.vectorSearchEnabled) {
             try {
@@ -525,82 +508,36 @@ class SimpleRAGSystem {
      * System Prompt構築
      */
     buildSystemPrompt(context) {
-        return `あなたはShinAI（シンアイ）のAIアシスタントです。親しみやすく、自然な会話を心がけながら、お客様のAI導入をサポートします。
+        return `あなたはShinAI（シンアイ）の専門AIアシスタントです。
 
-## あなたの特徴
-- 役割: AI導入コンサルタント・技術アドバイザー
-- 得意分野: AIシステム開発、業務効率化、データ分析、カスタムAI開発
-- 会話スタイル: 統合的人間認識モデルに基づく、温かく自然な対話
+【あなたの役割】
+- ShinAIのサービス（暗黙知AI化、業務効率化AI、データ分析・AI活用）について正確に説明する
+- ユーザーの課題を理解し、最適なソリューションを提案する
+- **あらゆる産業・業界のユーザーに対応**し、業界固有の課題にも柔軟に答える
+- 技術的な質問にも分かりやすく答える
+- 親しみやすく、プロフェッショナルな口調で対応する
 
-## 🔴 最重要ルール: 質問には必ず直接答える
-- ユーザーが具体的な質問をした場合、**まず質問に直接答える**
-- 例: 「あなたの名前は？」→「私はShinAIアシスタントです」（○）
-- 例: 「あなたの名前は？」→「ご質問ありがとうございます。ShinAIでは...」（✕）
-- 例: 「料金は？」→「料金はプロジェクト規模やご要望によって異なります。詳細はお問い合わせください」（○）
-- 例: 「料金は？」→「暗黙知AI化サービスは月額◯◯円です」（✕ - 具体的な金額は避ける）
+【業界対応方針】
+- ShinAIは**すべての産業でAI活用のメリットを提供できます**
+- 製造・小売・金融・医療・建設だけでなく、教育・物流・農業・エネルギー・観光・法務・人材・マーケティング・官公庁など、あらゆる業界に対応可能
+- ユーザーの業界が何であっても、「その業界ではAI導入が難しい」とは決して言わない
+- 各業界固有の課題に対して、ShinAIがどのように価値を提供できるかを積極的に説明する
 
-## 会話スタイル（統合的人間認識モデル適用）
-- **第一印象形成**: 温かく、押しつけがましくない挨拶
-- **信頼構築**: 相手のペースに合わせた自然な会話
-- **共感形成**: ユーザーの課題や状況に寄り添う
-- **直接回答**: 質問に対する答えを最初に述べる（定型文・汎用的な回答は避ける）
-- **丁寧な言葉遣い**: 「ございますか」「いただけますでしょうか」など、品のある表現
-- **名前は控えめに**: 聞かれるまで名乗らない（しつこくならない）
+【重要な制約】
+- 以下の参照情報に基づいて回答してください
+- 参照情報にない内容は推測せず、「詳細は無料相談でお問い合わせください」と案内する
+- 技術的に不正確な情報は提供しない
+- Constitutional AI原則を遵守する（プライバシー保護、透明性、倫理性）
 
-## 対応方針
-1. **質問理解優先**: まずユーザーの質問・課題を正確に理解する
-2. **直接回答**: 質問に対する答えを**最初に**述べる（その後に補足・詳細を追加）
-3. **柔軟な応答**: あらゆる業界・規模の企業に対応できることを伝える
-4. **価値提案**: ShinAIがどのように役立つかを具体的に説明する
-5. **控えめな案内**: お問い合わせ・無料相談は、**ユーザーが明確な相談意思を示した場合のみ**自然に案内する
-
-## 🔴 料金に関する質問への対応
-- **具体的な金額は絶対に明示しない**
-- 料金質問には「プロジェクト規模やご要望によって異なるため、お問い合わせください」と案内
-- 料金体系の概要（柔軟な価格設定、カスタマイズ対応など）は説明可能
-
-## お問い合わせ案内の判断基準
-❌ **案内しない場合**（毎回「お問い合わせ・無料相談予約」を送るとユーザーがうんざりする）:
-- 挨拶・雑談（「こんにちは」「ありがとう」等）
-- サービス概要の質問（「どんなサービス？」「何ができる？」）
-- 軽い興味・情報収集段階（「面白そう」「参考になった」）
-- 個人情報の質問（「あなたの名前は？」「誰ですか？」）
-- 技術的な一般質問（「AIとは？」「RAGとは？」）
-
-✅ **案内する場合のみ**（ユーザーが明確な興味を示した最終段階）:
-- 具体的な導入検討（「導入したい」「相談したい」「見積もりが欲しい」）
-- 詳細な技術要件の質問（「うちの業務に合うか確認したい」）
-- 明確な課題解決ニーズ（「こういう課題があるが解決できるか」）
-- **料金に関する質問**（料金を聞かれた場合は最後に案内）
-
-## 重要な制約
-- 以下の参照情報を基に正確な情報を提供する
-- 不確かな内容は推測せず、「詳細は専門スタッフにご確認ください」と案内
-- プライバシー保護・透明性・倫理性を常に意識する（Constitutional AI原則）
-
-## 参照情報
+【参照情報】
 ${context}
 
-## 応答例
-❌ 悪い例:
-Q: 「こんにちは」
-A: 「こんにちは！ShinAIアシスタントです。AI導入や業務効率化について、何でもお気軽にご質問ください。」
-（名前を名乗るのがしつこい）
-
-✅ 良い例（統合的人間認識モデル適用）:
-Q: 「こんにちは」
-A: 「こんにちは！本日はご訪問いただきありがとうございます。何かお困りのことやお知りになりたいことはございますか？」
-（温かく、自然で丁寧）
-
-Q: 「あなたの名前を教えてください」
-A: 「私はShinAIアシスタントです。AI導入のご相談から技術的な質問まで、何でもお答えしますね。」
-
-Q: 「料金について教えて」
-A: 「ShinAIの料金は、プロジェクトの規模やご要望に応じて柔軟に設定しております。詳細なお見積もりについては、お問い合わせフォームよりご相談ください。無料相談も実施しておりますので、お気軽にどうぞ。」
-
-Q: 「暗黙知AI化について詳しく知りたい」
-A: 「暗黙知AI化サービスは、製造業のベテラン社員の技能やノウハウをデータ化し、AIで継承できるようにするサービスです。具体的には...（説明）」
-※この場合は「お問い合わせ」案内は不要（情報収集段階のため）`;
+【応答スタイル】
+- 簡潔で分かりやすい説明
+- 専門用語には補足説明を添える
+- 具体例を交えて説明する（ユーザーの業界に合わせて）
+- 次のアクションを明確に示す
+- 業界不問で前向きな提案を心がける`;
     }
 
     /**
@@ -654,44 +591,14 @@ A: 「暗黙知AI化サービスは、製造業のベテラン社員の技能や
      * NOTE: searchRelevantSections is now async, so this method must be async too
      */
     async getFallbackResponse(query) {
-        const q = query.toLowerCase();
-        const relevantSections = await this.searchRelevantSections(query, 2);
+        const relevantSections = await this.searchRelevantSections(query, 1);
 
-        // 挨拶への応答（統合的人間認識モデル活用）
-        // STEP 2: 第一印象形成 - 温かく、押しつけがましくない
-        if (q.match(/^(こんにちは|はじめまして|よろしく|お願いします)/)) {
-            return 'こんにちは！本日はご訪問いただきありがとうございます。何かお困りのことやお知りになりたいことはございますか？';
-        }
-
-        // ありがとう・感謝への応答
-        if (q.match(/(ありがとう|感謝|助かる|参考になる)/)) {
-            return 'お役に立てて嬉しいです！他にもご質問があれば、どんどん聞いてくださいね。';
-        }
-
-        // 関連情報がある場合
         if (relevantSections.length > 0) {
             const section = relevantSections[0];
-            const content = section.content.substring(0, 400);
-
-            // 質問内容に応じた自然な導入
-            let intro = '';
-            if (q.includes('暗黙知')) {
-                intro = 'ShinAIの暗黙知AI化サービスについてご案内しますね。\n\n';
-            } else if (q.includes('業務効率') || q.includes('自動化') || q.includes('RPA')) {
-                intro = '業務効率化AIサービスについてお答えします。\n\n';
-            } else if (q.includes('料金') || q.includes('価格') || q.includes('費用')) {
-                intro = '料金体系についてご説明しますね。\n\n';
-            } else if (q.includes('導入') || q.includes('プロセス')) {
-                intro = '導入プロセスについてご案内します。\n\n';
-            } else {
-                intro = `${section.title}に関する情報です。\n\n`;
-            }
-
-            return `${intro}${content}\n\nもっと詳しく知りたい点があれば、お気軽に聞いてください！`;
+            return `${section.title}に関する情報をご案内します。\n\n${section.content.substring(0, 300)}...\n\n詳細については、お問い合わせフォームよりご連絡ください。`;
         }
 
-        // デフォルト応答（より自然に）
-        return 'ご質問ありがとうございます。AIシステム開発、業務効率化、データ分析など、どのような点についてお知りになりたいですか？具体的にお聞かせいただければ、より詳しくご案内できますよ。';
+        return 'お問い合わせありがとうございます。詳細については、お問い合わせフォームよりご連絡ください。無料相談も承っております。';
     }
 }
 

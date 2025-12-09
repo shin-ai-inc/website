@@ -169,7 +169,7 @@ const ShinAIChatbot = {
         if (!this.lastMessageTime) this.lastMessageTime = 0;
 
         if (now - this.lastMessageTime < 2000) {  // 2秒に1回まで
-            this.addMessage('ただいま処理中です。少々お待ちいただけますでしょうか。', 'bot');
+            this.addMessage('送信頻度が高すぎます。少しお待ちください。', 'bot');
             return;
         }
 
@@ -196,141 +196,39 @@ const ShinAIChatbot = {
                 this.sessionId = this.generateSessionId();
             }
 
-            // ==============================================
-            // API呼び出し（環境別エンドポイント設定）
-            // ==============================================
-            // CHATBOT_API_URLが明示的に設定されている場合はそれを優先
-            const apiBaseUrl = window.CHATBOT_API_URL
-                ? window.CHATBOT_API_URL  // 本番環境またはVercel API指定時
-                : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-                    ? 'http://localhost:3001'  // ローカル開発環境
-                    : null;  // フォールバック（本番環境でCHATBOT_API_URL未設定時）
+            // API呼び出し
+            const apiResponse = await fetch('http://localhost:3001/api/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: text,
+                    sessionId: this.sessionId
+                })
+            });
 
-            // 本番環境でAPIが設定されていない場合の警告
-            if (!apiBaseUrl && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-                console.error('[ShinAI Chatbot] ⚠️ 本番環境でCHATBOT_API_URLが設定されていません');
-            }
-
-            let response = null;
-
-            // API利用可能時はAPI経由でレスポンス生成
-            if (apiBaseUrl) {
-                try {
-                    // AbortController でタイムアウト実装
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒タイムアウト（Vercel対応）
-
-                    console.log('[ShinAI Chatbot] API呼び出し開始:', `${apiBaseUrl}/api/chatbot`);
-
-                    const apiResponse = await fetch(`${apiBaseUrl}/api/chatbot`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: text,
-                            sessionId: this.sessionId
-                        }),
-                        signal: controller.signal,
-                        mode: 'cors', // CORS明示的有効化
-                        credentials: 'omit' // クレデンシャル不要
-                    });
-
-                    clearTimeout(timeoutId);
-
-                    console.log('[ShinAI Chatbot] API応答ステータス:', apiResponse.status);
-
-                    if (!apiResponse.ok) {
-                        throw new Error(`HTTP ${apiResponse.status}: ${apiResponse.statusText}`);
-                    }
-
-                    const data = await apiResponse.json();
-                    console.log('[ShinAI Chatbot] API応答データ:', data);
-
-                    if (data.success) {
-                        response = data.response;
-                        console.log('[ShinAI Chatbot] LLM応答取得成功');
-                    } else {
-                        console.warn('[ShinAI Chatbot] API応答がsuccessではない:', data);
-                    }
-                } catch (apiError) {
-                    console.warn('[ShinAI Chatbot] API利用不可:', apiError);
-                    console.error('[ShinAI Chatbot] Error details:', {
-                        name: apiError.name,
-                        message: apiError.message,
-                        apiBaseUrl: apiBaseUrl,
-                        stack: apiError.stack
-                    });
-
-                    // エラー種別に応じた詳細ログ
-                    if (apiError.name === 'AbortError') {
-                        console.warn('[ShinAI Chatbot] APIタイムアウト（15秒超過）');
-                    } else if (apiError.message && apiError.message.includes('Failed to fetch')) {
-                        console.warn('[ShinAI Chatbot] ネットワークエラー（CORS、ブロッカー、またはサーバー未起動の可能性）');
-                    }
-                }
-            } else {
-                console.log('[ShinAI Chatbot] apiBaseUrlが未設定、フォールバックモード使用');
-            }
-
-            // APIが応答を返さなかった場合の処理
-            if (!response) {
-                console.error('[ShinAI Chatbot] APIが応答を返しませんでした');
-
-                // ローカル開発環境の判定（file://プロトコル対応）
-                const isLocalDevelopment =
-                    window.location.protocol === 'file:' ||
-                    window.location.hostname === 'localhost' ||
-                    window.location.hostname === '127.0.0.1' ||
-                    window.location.hostname === '' ||
-                    (apiBaseUrl && apiBaseUrl.includes('localhost'));
-
-                // ローカル開発環境でのみ、最小限のフォールバック応答を提供
-                if (isLocalDevelopment) {
-                    console.warn('[ShinAI Chatbot] ⚠️ ローカル開発モード: フォールバック応答を使用');
-                    console.info('[ShinAI Chatbot] 💡 本番環境ではAPIサーバーが必須です');
-
-                    // 最小限の開発用フォールバック
-                    response = this.getLocalDevelopmentFallback(text);
-                } else {
-                    // 本番環境ではエラーメッセージのみ
-                    response = 'ただいま一時的にご利用いただけません。しばらく経ってから再度お試しください。';
-                }
-            }
+            const data = await apiResponse.json();
 
             // ローディング非表示
             setTimeout(() => {
                 this.hideTypingIndicator();
-                this.displayTypingMessage(response);
+
+                if (data.success) {
+                    // AIレスポンス表示（タイピングエフェクト）
+                    this.displayTypingMessage(data.response);
+                } else {
+                    // エラーメッセージ表示
+                    this.addMessage('申し訳ありません。一時的にサービスが利用できません。', 'bot');
+                    console.warn('[ShinAI Chatbot] API Error:', data.error);
+                }
             }, this.loadingDelay);
 
         } catch (error) {
             console.error('[ShinAI Chatbot] エラー:', error);
             this.hideTypingIndicator();
-            this.displayTypingMessage('ただいま一時的にご利用いただけません。しばらく経ってから再度お試しください。');
+            this.addMessage('申し訳ありません。正常に応答できませんでした。お問い合わせフォームよりご連絡ください。', 'bot');
         }
-    },
-
-    /**
-     * ローカル開発環境専用の最小限フォールバック
-     * 注意: 本番環境では使用されません（APIサーバーが必須）
-     */
-    getLocalDevelopmentFallback: function(query) {
-        const q = query.toLowerCase();
-
-        // 挨拶への応答
-        if (q.match(/^(こんにちは|はじめまして|よろしく|お願いします)/)) {
-            return 'こんにちは！本日はご訪問いただきありがとうございます。何かお困りのことやお知りになりたいことはございますか？';
-        }
-
-        // 感謝への応答
-        if (q.match(/(ありがとう|感謝|助かる|参考になる)/)) {
-            return 'お役に立てて嬉しいです！他にもご質問があれば、どんどん聞いてくださいね。';
-        }
-
-        // デフォルト応答
-        return 'ご質問ありがとうございます。詳しいご相談は、お問い合わせフォームより承っております。お気軽にご連絡ください。';
     },
 
     /**

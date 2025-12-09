@@ -65,17 +65,13 @@ const homepageRateLimiter = new HomepageRateLimiter();
 // Middleware Configuration
 // ============================================
 
-// CORS configuration - MUST come before helmet
+// Security headers
+app.use(helmet());
+
+// CORS configuration
 const allowedOrigins = process.env.FRONTEND_URL
     ? [process.env.FRONTEND_URL]
-    : [
-        'https://shin-ai-inc.github.io',  // GitHub Pages (Production)
-        'http://localhost:3000',
-        'http://localhost:5500',
-        'http://localhost:8080',  // Python HTTP Server
-        'http://127.0.0.1:5500',
-        'http://127.0.0.1:8080'
-      ];
+    : ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'];
 
 app.use(cors({
     origin: function(origin, callback) {
@@ -83,21 +79,11 @@ app.use(cors({
         if (!origin) return callback(null, true);
 
         if (allowedOrigins.indexOf(origin) === -1) {
-            console.log('[CORS] Rejected origin:', origin);
-            console.log('[CORS] Allowed origins:', allowedOrigins);
             return callback(new Error('CORS policy violation'), false);
         }
         return callback(null, true);
     },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200
-}));
-
-// Security headers - Configure helmet to work with CORS
-app.use(helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
+    credentials: true
 }));
 
 // JSON body parser
@@ -127,15 +113,6 @@ app.get('/api/chatbot/health', (req, res) => {
         timestamp: new Date().toISOString(),
         service: 'chatbot-api'
     });
-});
-
-/**
- * CORS Preflight Handler for /api/chatbot
- * Handles OPTIONS requests from browser
- */
-app.options('/api/chatbot', (req, res) => {
-    // CORS headers already set by cors() middleware
-    res.status(200).end();
 });
 
 /**
