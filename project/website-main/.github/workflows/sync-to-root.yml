@@ -31,9 +31,10 @@ jobs:
           # Copy HTML files
           cp -f project/website-main/*.html ./ || true
 
-          # Copy directories (api, assets)
+          # Copy directories (api, assets, .github)
           cp -rf project/website-main/api ./api || true
           cp -rf project/website-main/assets ./assets || true
+          cp -rf project/website-main/.github ./.github || true
 
           # Copy .gitignore from project/website-main
           cp -f project/website-main/.gitignore ./.gitignore || true
@@ -61,6 +62,7 @@ jobs:
           - HTML files (index.html, about.html, etc.)
           - api/ directory
           - assets/ directory
+          - .github/ directory (workflows)
           - .gitignore
 
           🔗 Source: project/website-main/
