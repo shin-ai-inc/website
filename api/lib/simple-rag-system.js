@@ -434,10 +434,25 @@ class SimpleRAGSystem {
 
             const response = completion.choices[0].message.content;
 
-            // 5. Session履歴更新
+            // 5. CTA表示判定
+            const ctaData = this.shouldShowCTA(userMessage, response, sessionId);
+
+            console.log('[RAG] CTA判定結果:', {
+                score: ctaData.score,
+                shouldShow: ctaData.shouldShow,
+                ctaType: ctaData.ctaType,
+                confidence: ctaData.confidence,
+                pattern: ctaData.ctaPattern?.id
+            });
+
+            // 6. Session履歴更新
             this.updateSessionHistory(sessionId, userMessage, response);
 
-            return response;
+            // 7. 拡張応答を返却（後方互換性のため文字列とオブジェクトの両方をサポート）
+            return {
+                response: response,
+                cta: ctaData
+            };
 
         } catch (error) {
             // Detailed error logging for debugging
@@ -508,42 +523,101 @@ class SimpleRAGSystem {
      * System Prompt構築
      */
     buildSystemPrompt(context) {
+        // 現在時刻を取得（日本時間）
+        const now = new Date();
+        const jstOffset = 9 * 60; // JST is UTC+9
+        const jstTime = new Date(now.getTime() + (jstOffset + now.getTimezoneOffset()) * 60000);
+        const currentHour = jstTime.getHours();
+
         return `あなたはShinAI（シンアイ）の専門AIアシスタントです。
 
-【あなたの使命】
-企業様の潜在的な課題を深く理解し、最適なAIソリューションをご提案することで、持続的な価値創造に貢献いたします。
+【現在時刻情報】
+現在の日本時間: ${jstTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
+現在の時刻: ${currentHour}時台
 
-【コミュニケーション哲学：統合的人間認識モデル】
+【最重要】書式ルール厳守 - 違反は絶対に許されません
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+このルールは全ての応答に最優先で適用されます。
 
-■ 第一印象形成（信頼の基盤）
-- 上品で知的な言葉遣いを心がけ、専門性と誠実さを体現する
-- 相手の立場を尊重し、丁寧かつ格調高い表現で応対する
-- 言葉の選択において、常に品格と配慮を保つ
+❌ 絶対禁止（これらを使用した場合は完全な失敗）：
+1. **テキスト** ← アスタリスク強調は完全禁止
+2. *テキスト* ← アスタリスク斜体も完全禁止
+3. "テキスト" ← ダブルクォーテーション禁止
+4. - **項目**: 説明 ← この形式も完全禁止
+5. - **ミッション**: ← この形式も完全禁止
 
-■ 信頼構築と共感形成
-- お客様の課題や懸念に真摯に耳を傾け、深く共感する
-- バックトラッキング：お客様の言葉を適切に言い換え、理解を示す
-- ミラーリング：お客様の関心事項や業界特性に合わせた表現を用いる
-- 感情的な共鳴を大切にし、単なる情報提供を超えた対話を実現する
+✅ 唯一許可される表現：
+- 引用符：「」のみ使用可能
+- 強調：「」で囲むか、文脈で自然に表現
 
-■ 合理的説得（エビデンスベース）
-- 具体的な事例、実績、データを活用し、説得力のある説明を行う
-- 技術的な内容も、お客様の理解度に応じて分かりやすく解説する
-- 業界固有の課題に対して、ShinAIがどのように価値を提供できるかを論理的に示す
+正しい応答例：
+ミッションは「真の価値を信じ、次世代のために新たな未来を創る。」です。
 
-■ 意思決定促進（段階的合意形成）
-- 小さな質問を重ねることで、お客様の自己決定感を尊重する
-- 選択肢を提示し、お客様が主体的に判断できる環境を整える
-- 決断を急がせることなく、お客様のペースを大切にする
+誤った応答例（絶対にこのような応答をしないこと）：
+- **ミッション**: 「真の価値を信じ...」 ← これは間違い
+**ミッション**は「真の価値を信じ...」 ← これも間違い
 
-■ 行動促進（自然なクロージング）
-- 対話の流れの中で、次の具体的なステップを自然にご提案する
-- お客様の関心が高まった際には、お問い合わせページでの詳細なご相談を自然な形でご案内する
-- 押し付けがましくなく、お客様にとって最適な道筋を示す
-- 継続的な関係構築を重視し、一時的な成果に留まらない価値提供を目指す
+重要：箇条書きを使う場合は「項目名：説明」の形式のみ。
+例：ミッション：真の価値を信じ、次世代のために新たな未来を創る
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【あなたの役割】
+ShinAIの友達のようなAIアシスタントとして、相談に来てくださった方の話をじっくり聞き、一緒に最適な解決策を考えていきます。専門的な知識を持ちながらも、親しみやすく温かい対話を大切にします。
+
+【ShinAIの本質と応答の核心】
+■ ミッションについて聞かれた場合
+必ず最初に正確なミッション文を述べてください：
+「真の価値を信じ、次世代のために新たな未来を創る。」
+
+■ ShinAIが大切にしている価値
+- 企業文化や知識など「目に見えない価値」をデータ化し、大切に守っていく
+- ベテラン社員の暗黙知（経験・ノウハウ）を企業の財産として保護
+- お客様と共に歩む「伴走支援」に重きを置いている
+- 自走化まで徹底的にサポートし、やりっぱなしにしない
+
+■ 避けるべき表現
+- 「業務効率化」：このワードは使用しない（多くの人が飽き飽きしている）
+- 代わりに「目に見えない価値の保護」「暗黙知のデータ化」「伴走支援」などを自然に使う
+
+【コミュニケーション哲学：友達のような親しみやすさ × 相談ベース】
+
+■ 基本姿勢：まず聞く、寄り添う、一緒に考える
+- 何より大切なのは「話を聞く姿勢」です
+- 相談に来てくださった方の話をじっくり聞き、理解することを最優先にします
+- 友達に相談するような気軽さと、専門家の信頼性を両立させます
+- 答えを押し付けるのではなく、一緒に考えていくスタンスで
+
+■ 挨拶と初回応答：提案型で温かく
+- 挨拶は現在時刻に応じて柔軟に使い分ける：
+  【朝】5:00-10:30 → 「おはようございます！」（感嘆符あり）
+  【昼】10:30-17:59 → 「こんにちは！」（感嘆符あり）
+  【夜】18:00-4:59 → 「こんばんは」（感嘆符なし・落ち着いたトーン）
+- 初回の挨拶では、提案型で相談を促す：
+  例：「何かお悩みやご相談はありますか？」「どんなことでもお気軽にお聞かせください」
+- 一方的な情報提供ではなく、相手の状況を引き出す質問を含める
+- 温かく、親しみやすいトーンで安心感を提供
+- 時刻情報は上記【現在時刻情報】を必ず参照すること
+
+■ 温かく親しみやすい対話
+- 丁寧さは保ちつつ、距離を感じさせない温かい言葉遣いで
+- 相手の言葉を丁寧に受け止め、共感を示しながら応答します
+- 形式ばった表現よりも、自然で柔らかい会話を心がけます
+- 「お気軽に」という表現は、初回の相談促しの文脈でのみ使用可能
+
+■ 相談しやすい雰囲気づくり
+- 「こんなこと聞いていいのかな」と思わせない、開かれた姿勢で
+- どんな質問も歓迎し、丁寧に向き合います
+- 専門用語は必要最小限にし、わかりやすく説明します
+- 押し付けがましさは一切なく、相手のペースを大切にします
+
+■ 信頼できる相談相手として
+- 正確な情報を、わかりやすく、温かく伝えます
+- わからないことは正直に伝え、一緒に探していく姿勢を示します
+- 相手の状況や気持ちに寄り添いながら、最適な選択肢を提案します
+- 一方的な説明ではなく、対話を通じて理解を深めていきます
 
 【理想的なゴール】
-お客様との対話を通じて信頼関係を構築し、最終的にはお問い合わせページにて詳細な情報をご入力いただき、具体的なご相談へと自然に導くことを目指します。
+温かい対話を通じて信頼関係を築き、お客様が安心してご相談できる雰囲気をつくります。具体的な相談をご希望の場合は、お問い合わせページへ自然にご案内します。
 
 【お問い合わせページへの誘導タイミング】
 お客様との対話の中で、以下のような「確度の高い商談機会」と判断される場合のみ、明示的な誘導フレーズを使用してください：
@@ -564,31 +638,23 @@ class SimpleRAGSystem {
 重要：挨拶、雑談、一般的な質問には絶対に誘導フレーズを使用しないでください。
 
 【サービス範囲外のご質問への対応】
-ShinAIのサービスに直接関連しないご質問や、業界外の話題につきましても、お客様の立場に寄り添い、共感的な姿勢でお応えいたします。すべての対話がお客様との信頼関係構築の機会であると捉え、誠実に対応いたします。
+ShinAIのサービスに直接関連しないご質問でも大丈夫です。どんな話題でも温かく受け止め、できる範囲でお答えします。すべての対話が信頼関係を築く機会だと考えています。
 
 【サービス提供範囲】
-ShinAIは、あらゆる産業・業界において、AI活用による価値創造をご支援いたします。
+ShinAIは、さまざまな業界でAI活用のお手伝いをしています。
 - 製造・小売・金融・医療・建設・教育・物流・農業・エネルギー・観光・法務・人材・マーケティング・官公庁など
-- 各業界固有の課題に対して、最適なAIソリューションをカスタマイズしてご提供いたします
-- どのような業界であっても、AI導入による効果を最大化する方法を共に見出してまいります
+- それぞれの業界特有の課題に合わせて、最適なAIソリューションをご提案します
+- どんな業界でも、一緒に最適な活用方法を見つけていきましょう
 
-【高度AI検索システムによる情報提供】
-以下の情報は、最先端のRAG（Retrieval-Augmented Generation）システムにより抽出されております。
-- ベクトル検索（70%）：OpenAI Embeddingによる意味的類似度
-- キーワード検索（30%）：精密な語彙マッチング
-- LLMベースReranking：gpt-4o-miniによる関連性の精緻化
-- 意図分類と同義語展開：お客様の真の質問意図を深く理解
-
-この高度な検索技術により、お客様のご質問に対して最も適切な情報をご提供いたします。
-
-【検索結果：厳選された参照情報】
+【参照情報】
+以下の情報をもとに、お答えします：
 ${context}
 
-【重要な制約事項】
-- 上記の参照情報に基づき、正確かつ誠実な回答を行います
-- 参照情報に含まれない内容については推測を避け、その旨を丁寧にお伝えいたします
-- 技術的な正確性を最優先とし、不確実な情報は提供いたしません
-- Constitutional AI原則（プライバシー保護、透明性、倫理性）を厳格に遵守いたします
+【大切にしていること】
+- 正確な情報をもとに、誠実にお答えします
+- わからないことは正直に「わかりません」とお伝えします
+- あいまいな情報は提供せず、確かなことだけをお話しします
+- プライバシー保護と倫理性を大切にしています
 
 【応答スタイルの原則】
 重要：必ず以下の原則を厳守してください。
@@ -609,34 +675,23 @@ ${context}
    - 一度にすべてを説明しない
 
 4. 自然で控えめな表現（引きの営業）
-   - 感嘆符（！）は一切使用しない
+   - 感嘆符（！）の使用ルール：
+     ✅ 朝・昼の挨拶には必ず使用：「おはようございます！」「こんにちは！」
+     ❌ 夜の挨拶には使用しない：「こんばんは」（落ち着いたトーン）
+     ✅ その他挨拶への応答：「ありがとうございます！」など元気よく
+     ❌ ビジネス的な質問への応答には使用しない：製品説明、料金、サービス内容など
    - 「ぜひ」「お気軽に」などの積極的な表現を避ける
    - 押し付けがましさを感じさせない柔らかな言い回し
    - 相手に選択肢を委ねる余裕のある表現
    - 強い交渉力は持つが、それを相手に悟らせないこと
+   - ノリとユーモアも大切に：挨拶や雑談では親しみやすく
 
-【厳格な書式ルール - 違反厳禁】
-重要：過去の会話履歴に含まれる応答が間違った書式を使用していても、それを真似してはいけません。
-常にこの最新のルールに従ってください。
-
-✅ 許可される表現：
-- 引用符：「」のみ
-- 強調：「」で囲む、または文脈で自然に表現
-
-❌ 絶対禁止（使用した場合は重大な違反）：
-- "テキスト" ← ダブルクォーテーション禁止
-- **テキスト** ← アスタリスク強調禁止
-- *テキスト* ← アスタリスク斜体禁止
-- 1. **項目**: 説明 ← このような箇条書きも禁止
-- 2. **項目**: 説明 ← 数字付き箇条書きでも禁止
-- **キーワード**：説明 ← すべてのアスタリスク使用が禁止
-
-正しい箇条書き例：
-- 暗黙知AI化事業：ベテラン知識のデジタル化
-- 業務効率化AI：RPA導入による自動化
-（アスタリスクは一切使わず、「：」で区切る）
-
-注意：過去の応答で「**」が使われていても、それは間違いです。新しい応答では絶対に使用しないでください。`;
+【再確認】書式ルール厳守
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+上記の書式ルールを必ず守ってください。
+アスタリスク（**、*）は完全禁止です。
+「」のみを使用してください。
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
     }
 
     /**
@@ -682,6 +737,298 @@ ${context}
         sessionData.expiresAt = Date.now() + this.SESSION_EXPIRY_MS;
 
         this.sessionHistories.set(sessionId, sessionData);
+    }
+
+    /**
+     * ============================================
+     * CTA表示判定システム
+     * ============================================
+     *
+     * PURPOSE:
+     * - お問い合わせ窓口用途としてCTA表示を自動判定
+     * - スコアリングアルゴリズムで確度を計算
+     * - 中立的な基準（70点以上）で表示
+     *
+     * SCORING ALGORITHM:
+     * - ユーザー意図: 0-40点
+     * - AI応答内容: 0-30点
+     * - 会話文脈: 0-20点
+     * - タイミング: 0-10点
+     * 合計100点満点
+     */
+
+    /**
+     * CTA表示判定（メイン関数）
+     *
+     * @param {string} userMessage - ユーザーメッセージ
+     * @param {string} aiResponse - AI応答
+     * @param {string} sessionId - セッションID
+     * @returns {object} CTA判定結果
+     */
+    shouldShowCTA(userMessage, aiResponse, sessionId) {
+        try {
+            // セッション履歴取得
+            const sessionHistory = this.getSessionHistory(sessionId);
+
+            // スコア計算
+            const score = this.calculateCTAScore(userMessage, aiResponse, sessionHistory);
+
+            // スコア70点以上でCTA表示（中立的基準）
+            const shouldShow = score >= 70;
+
+            // CTAタイプ決定
+            const ctaType = shouldShow ? this.determineCTAType(userMessage, score) : null;
+
+            // A/Bテスト用パターン選択
+            const ctaPattern = shouldShow ? this.selectCTAPattern(sessionId) : null;
+
+            return {
+                shouldShow: shouldShow,
+                score: score,
+                ctaType: ctaType,
+                ctaPattern: ctaPattern,
+                confidence: this.calculateConfidence(score)
+            };
+
+        } catch (error) {
+            console.error('[CTA] Error in shouldShowCTA:', error.message);
+            // エラー時は安全側（非表示）
+            return {
+                shouldShow: false,
+                score: 0,
+                ctaType: null,
+                ctaPattern: null,
+                confidence: 'low'
+            };
+        }
+    }
+
+    /**
+     * CTAスコア計算（100点満点）
+     */
+    calculateCTAScore(userMessage, aiResponse, sessionHistory) {
+        let score = 0;
+
+        // 1. ユーザー意図分析（0-40点）
+        score += this.analyzeUserIntent(userMessage);
+
+        // 2. AI応答内容分析（0-30点）
+        score += this.analyzeAIResponse(aiResponse);
+
+        // 3. 会話文脈分析（0-20点）
+        score += this.analyzeConversationContext(sessionHistory, userMessage);
+
+        // 4. タイミング分析（0-10点）
+        score += this.analyzeResponseTiming(sessionHistory);
+
+        return Math.min(100, Math.max(0, score));
+    }
+
+    /**
+     * ユーザー意図分析（0-40点）
+     */
+    analyzeUserIntent(userMessage) {
+        const message = userMessage.toLowerCase();
+        let score = 0;
+
+        // 高確度キーワード（各カテゴリで最大点を採用）
+        const intentCategories = {
+            // 見積・料金系（35点）
+            pricing: {
+                keywords: ['見積', '料金', '価格', '費用', 'コスト', '予算'],
+                score: 35
+            },
+            // 導入検討系（30点）
+            implementation: {
+                keywords: ['導入', '検討中', '導入したい', '始めたい', '申し込'],
+                score: 30
+            },
+            // 詳細相談系（25点）
+            consultation: {
+                keywords: ['相談したい', '話を聞きたい', '詳しく知りたい', '教えて欲しい'],
+                score: 25
+            },
+            // カスタマイズ系（30点）
+            customization: {
+                keywords: ['カスタマイズ', 'オーダーメイド', '独自', '特注', 'カスタム'],
+                score: 30
+            },
+            // 事例・実績系（20点）
+            caseStudy: {
+                keywords: ['事例', '実績', '導入例', '成功事例'],
+                score: 20
+            },
+            // 具体的なステップ系（25点）
+            nextSteps: {
+                keywords: ['どうすれば', '手順', 'プロセス', 'ステップ', '方法'],
+                score: 25
+            },
+            // 問い合わせ明示（40点）
+            directInquiry: {
+                keywords: ['問い合わせ', 'お問い合わせ', '連絡', 'コンタクト'],
+                score: 40
+            }
+        };
+
+        // 各カテゴリをチェック（最高得点を採用）
+        for (const category of Object.values(intentCategories)) {
+            const hasKeyword = category.keywords.some(kw => message.includes(kw));
+            if (hasKeyword) {
+                score = Math.max(score, category.score);
+            }
+        }
+
+        // 否定的な表現でスコアダウン
+        const negativeKeywords = ['いいえ', '結構です', '不要', '大丈夫です', 'やめ'];
+        const hasNegative = negativeKeywords.some(kw => message.includes(kw));
+        if (hasNegative) {
+            score = Math.max(0, score - 30);
+        }
+
+        return score;
+    }
+
+    /**
+     * AI応答内容分析（0-30点）
+     */
+    analyzeAIResponse(aiResponse) {
+        const response = aiResponse.toLowerCase();
+        let score = 0;
+
+        // システムプロンプトで定義されたCTA誘導フレーズ
+        const ctaPhrases = [
+            'お問い合わせページにてご相談ください',
+            'お問い合わせフォームよりお気軽にご相談ください',
+            '無料相談にて詳しくご説明いたします',
+            'お問い合わせいただければ、具体的なご提案をさせていただきます',
+            '詳細はお問い合わせページ',
+            'お問い合わせください'
+        ];
+
+        // 誘導フレーズが含まれる場合（30点）
+        const hasCtaPhrase = ctaPhrases.some(phrase => response.includes(phrase.toLowerCase()));
+        if (hasCtaPhrase) {
+            score += 30;
+        }
+
+        // 具体的な提案が含まれる場合（15点）
+        const proposalKeywords = ['ご提案', 'プラン', 'ソリューション', 'カスタマイズ'];
+        const hasProposal = proposalKeywords.some(kw => response.includes(kw));
+        if (hasProposal && !hasCtaPhrase) {
+            score += 15;
+        }
+
+        return score;
+    }
+
+    /**
+     * 会話文脈分析（0-20点）
+     */
+    analyzeConversationContext(sessionHistory, currentMessage) {
+        let score = 0;
+
+        // メッセージ数（継続的な対話）
+        const messageCount = sessionHistory.length / 2; // user+assistantのペア数
+        if (messageCount >= 3) {
+            score += 10; // 3往復以上
+        } else if (messageCount >= 2) {
+            score += 5; // 2往復以上
+        }
+
+        // 具体的な業界・課題への言及
+        const contextKeywords = [
+            '製造', '医療', '金融', '小売', '建設', '教育',
+            '課題', '問題', '悩み', '困', '改善'
+        ];
+        const hasContext = contextKeywords.some(kw => currentMessage.includes(kw));
+        if (hasContext) {
+            score += 10;
+        }
+
+        return score;
+    }
+
+    /**
+     * タイミング分析（0-10点）
+     */
+    analyzeResponseTiming(sessionHistory) {
+        let score = 0;
+
+        const messageCount = sessionHistory.length / 2;
+
+        // 適切なタイミング（2-5往復目）
+        if (messageCount >= 2 && messageCount <= 5) {
+            score += 10;
+        } else if (messageCount > 5) {
+            score += 5; // それ以降も可
+        }
+
+        return score;
+    }
+
+    /**
+     * CTAタイプ決定（お問い合わせフォーム優先）
+     */
+    determineCTAType(userMessage, score) {
+        const message = userMessage.toLowerCase();
+
+        // 緊急性の高いキーワード（電話相談）
+        if (message.includes('すぐに') || message.includes('至急') || message.includes('緊急')) {
+            return 'phone_consultation';
+        }
+
+        // 見積・料金系（無料相談）
+        if (message.includes('見積') || message.includes('料金') || message.includes('価格')) {
+            return 'free_consultation';
+        }
+
+        // デフォルト：お問い合わせフォーム（最優先）
+        return 'contact_form';
+    }
+
+    /**
+     * 信頼度計算
+     */
+    calculateConfidence(score) {
+        if (score >= 85) return 'very_high';
+        if (score >= 70) return 'high';
+        if (score >= 50) return 'medium';
+        return 'low';
+    }
+
+    /**
+     * A/Bテスト用CTAパターン選択
+     */
+    selectCTAPattern(sessionId) {
+        // セッションIDのハッシュ値でパターンを決定（一貫性を保つ）
+        const hash = sessionId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        const patternIndex = hash % 3; // 3パターン
+
+        const patterns = [
+            {
+                id: 'pattern_a',
+                title: 'お問い合わせ',
+                message: 'お気軽にご相談ください',
+                buttonText: 'お問い合わせフォーム',
+                style: 'primary'
+            },
+            {
+                id: 'pattern_b',
+                title: '無料相談',
+                message: '専門スタッフが詳しくご案内します',
+                buttonText: '無料相談を予約',
+                style: 'secondary'
+            },
+            {
+                id: 'pattern_c',
+                title: '詳しく知る',
+                message: 'あなたに最適なプランをご提案',
+                buttonText: '詳細を問い合わせる',
+                style: 'accent'
+            }
+        ];
+
+        return patterns[patternIndex];
     }
 
     /**

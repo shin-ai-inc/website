@@ -231,20 +231,21 @@ app.post('/api/chatbot', async (req, res) => {
         }
 
         // ========================================
-        // Step 4: Response Generation (RAG統合)
+        // Step 4: Response Generation (RAG統合 + CTA判定)
         // ========================================
 
-        const response = await ragSystem.generateRAGResponse(message, sessionId);
+        const ragResponse = await ragSystem.generateRAGResponse(message, sessionId);
 
         // ========================================
-        // Step 5: Send Response
+        // Step 5: Send Response (CTA情報含む)
         // ========================================
 
         return fixedTimeResponse(requestStartTime, () => {
             res.json({
                 success: true,
-                response: response,
-                sessionId: sessionId
+                response: ragResponse.response,
+                sessionId: sessionId,
+                cta: ragResponse.cta // CTA判定結果を追加
             });
         });
 
