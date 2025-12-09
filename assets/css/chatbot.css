@@ -219,16 +219,14 @@ AUTHOR: ShinAI Development Team
     gap: 1.2rem;
 }
 
-/* メッセージバブル - LINE品質: 立体感とプロフェッショナルな仕上げ */
+/* メッセージバブル - AI/ユーザーの発言を明確に区別 */
 .chat-message {
     max-width: 80%;
-    padding: 0.875rem 1rem;
-    border-radius: 18px;
-    line-height: 1.6;
-    font-size: 0.9375rem;
+    padding: 1rem 1.2rem;
+    border-radius: 15px;
+    line-height: 1.5;
+    font-size: 1rem;
     animation: fadeInMessage 0.3s ease-out forwards;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-    position: relative;
 }
 
 /* メッセージ出現アニメーション - 自然な対話フローを演出 */
@@ -243,66 +241,20 @@ AUTHOR: ShinAI Development Team
     }
 }
 
-/* AIメッセージ - LINE品質: 洗練されたグレーとシャドウ */
+/* AIメッセージ - 控えめなグレー背景で信頼性を表現 */
 .bot {
-    border-bottom-left-radius: 4px;
-    background: #f0f0f0;
-    color: #1a1a1a;
+    border-bottom-left-radius: 3px;
+    background: var(--light-gray);
+    color: var(--dark);
     align-self: flex-start;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* ユーザーメッセージ - LINE品質: 鮮やかなグリーンとシャドウ */
+/* ユーザーメッセージ - ブランドカラーで明確に区別 */
 .user {
-    border-bottom-right-radius: 4px;
-    background: #06c755;
-    color: #ffffff;
+    border-bottom-right-radius: 3px;
+    background: var(--primary);
+    color: var(--white);
     align-self: flex-end;
-    box-shadow: 0 1px 2px rgba(6, 199, 85, 0.2), 0 2px 4px rgba(6, 199, 85, 0.15);
-}
-
-/* ========================================================
-   ▼ Message Embedded Button Component
-   メッセージ内埋め込みボタン - お問い合わせCTA
-
-   DESIGN NOTE:
-   - グラデーション背景でプロフェッショナルな印象
-   - ホバー時の微細なアニメーションで高級感
-   - シャドウで立体感と視認性を確保
-   ======================================================== */
-.chat-message a[href*="contact.html"] {
-    display: inline-block !important;
-    padding: 12px 24px !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    color: white !important;
-    text-decoration: none !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-    margin-top: 12px !important;
-    margin-bottom: 8px !important;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
-    transition: all 0.3s ease !important;
-}
-
-.chat-message a[href*="contact.html"]:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
-}
-
-.chat-message a[href*="contact.html"]:active {
-    transform: translateY(0) !important;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4) !important;
-}
-
-/* モバイル版: タップしやすいサイズに調整 */
-@media (max-width: 768px) {
-    .chat-message a[href*="contact.html"] {
-        padding: 14px 28px !important;
-        font-size: 1rem !important;
-        width: 100% !important;
-        text-align: center !important;
-        box-sizing: border-box !important;
-    }
 }
 
 /* ========================================================
@@ -323,21 +275,18 @@ AUTHOR: ShinAI Development Team
 
 .chatbot-input input {
     flex: 1;
-    border: 2px solid #e8e8e8;
-    background: #ffffff;
-    padding: 0.875rem 1.125rem;
-    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-full);
     outline: none;
-    transition: all 0.2s ease;
-    font-size: 0.9375rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-normal) ease;
+    font-size: 1rem;
 }
 
-/* フォーカス状態 - LINE品質: 鮮やかな青でフィードバック */
+/* フォーカス状態 - ブランドカラーで明確なフィードバック */
 .chatbot-input input:focus {
-    border-color: #3a5feb;
-    background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.1);
 }
 
 /* ========================================================
@@ -426,104 +375,41 @@ AUTHOR: ShinAI Development Team
 }
 
 /* ========================================================
-   ▼ Chatbot Loading Component (Enhanced UX)
+   ▼ Chatbot Loading Component
    ローディング表示 - AIの思考プロセスを可視化
 
    DESIGN NOTE:
-   - 滑らかな濃度変化でプロフェッショナルな印象
-   - より繊細なアニメーションタイミング
-   - モバイルでも視認性の高いサイズとコントラスト
-   - 目に優しい濃度カーブ（ease-in-out）
+   - 3つのドットアニメーションでAIの処理中を表現
+   - 段階的な遅延で流れるような動きを演出
+   - 控えめながら明確な視覚的フィードバック
    ======================================================== */
 .loading-dots {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 0.3rem 0;
+    gap: 4px;
 }
 
 .loading-dots i {
-    font-size: 6px;
-    animation: dotPulseEnhanced 1.8s ease-in-out infinite;
-    will-change: transform, opacity;
-}
-
-.loading-dots i:nth-child(1) {
-    animation-delay: 0s;
+    font-size: 5px;
+    animation: dotPulse 1.5s infinite;
 }
 
 .loading-dots i:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 0.2s;
 }
 
 .loading-dots i:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.4s;
 }
 
-/* 高度な濃度変化アニメーション */
-@keyframes dotPulseEnhanced {
-    0% {
-        transform: scale(0.8);
-        opacity: 0.2;
+@keyframes dotPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
     }
-    20% {
-        transform: scale(1.1);
-        opacity: 0.5;
-    }
-    40% {
-        transform: scale(1.4);
-        opacity: 0.9;
-    }
-    60% {
-        transform: scale(1.1);
-        opacity: 0.6;
-    }
-    80% {
-        transform: scale(0.9);
-        opacity: 0.3;
-    }
-    100% {
-        transform: scale(0.8);
-        opacity: 0.2;
-    }
-}
-
-/* モバイル版: より視認性の高いローディング */
-@media (max-width: 768px) {
-    .loading-dots {
-        gap: 8px;
-        padding: 0.4rem 0;
-    }
-
-    .loading-dots i {
-        font-size: 7px;
-    }
-
-    @keyframes dotPulseEnhanced {
-        0% {
-            transform: scale(0.9);
-            opacity: 0.25;
-        }
-        20% {
-            transform: scale(1.2);
-            opacity: 0.6;
-        }
-        40% {
-            transform: scale(1.5);
-            opacity: 1;
-        }
-        60% {
-            transform: scale(1.2);
-            opacity: 0.7;
-        }
-        80% {
-            transform: scale(1);
-            opacity: 0.4;
-        }
-        100% {
-            transform: scale(0.9);
-            opacity: 0.25;
-        }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
     }
 }
 
@@ -543,239 +429,87 @@ AUTHOR: ShinAI Development Team
 }
 
 /* ========================================================
-   ▼ Responsive Design Component - Professional Mobile UX
-   プロフェッショナルモバイル最適化 - 最高のユーザビリティ
+   ▼ Responsive Design Component - Mobile Optimization
+   モバイル最適化 - 小画面でのユーザビリティ確保
 
-   DESIGN PHILOSOPHY:
-   - 完全フルスクリーン: 画面領域の最大活用
-   - タッチ最適化: 最低44px×44pxタップターゲット
-   - 可読性重視: 16px以上のフォントサイズ
-   - スムーズスクロール: ネイティブアプリ品質
-   - キーボード対応: iOS/Android完全サポート
+   DESIGN NOTE:
+   - フルスクリーンモードで画面を最大活用
+   - タッチ操作に適したボタンサイズ調整
+   - 余白を最適化しつつ可読性を維持
    ======================================================== */
 @media (max-width: 768px) {
-    /* チャットボタン - モバイル最適化 */
     .chatbot {
-        bottom: 20px;
-        right: 20px;
+        bottom: 16px;
+        right: 16px;
     }
 
     .chatbot-button {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
     }
 
-    /* チャットウィンドウ - 完全フルスクリーン */
+    /* モバイルでは下部フルスクリーン展開 */
     .chatbot-window {
         position: fixed;
-        top: 0;
         right: 0;
         left: 0;
         bottom: 0;
         width: 100%;
-        max-width: 100%;
-        height: 100vh;
-        height: 100dvh; /* Dynamic Viewport Height (iOS Safari対応) */
-        border-radius: 0;
-        transform-origin: center;
-        box-shadow: none;
-        margin: 0;
-        background: var(--white);
-        display: none;
-        flex-direction: column;
-        /* iOS Safari スクロール最適化 */
-        -webkit-overflow-scrolling: touch;
-        overflow: hidden;
+        height: 60%;
+        border-radius: 15px 15px 0 0;
+        transform-origin: bottom center;
     }
 
-    .chatbot-window.active {
-        display: flex !important;
-    }
-
-    /* ヘッダー - タッチ最適化 */
     .chatbot-header {
-        padding: 1rem 1.5rem;
-        border-radius: 0;
-        flex-shrink: 0;
-        /* iOS Safari ノッチ対応 */
-        padding-top: max(1rem, env(safe-area-inset-top));
-        min-height: 60px;
+        padding: 0.9rem 1.1rem;
     }
 
     .chatbot-header h3 {
-        font-size: 1.1rem;
-        gap: 0.75rem;
-        font-weight: 600;
-    }
-
-    /* 閉じるボタン - タッチ最適化（最低44px×44px） */
-    .chatbot-close {
-        width: 44px;
-        height: 44px;
         font-size: 1rem;
-        background: rgba(255, 255, 255, 0.25);
-        flex-shrink: 0;
+        gap: 0.6rem;
     }
 
-    .chatbot-close:active {
-        background: rgba(255, 255, 255, 0.4);
-        transform: scale(0.95);
+    .chatbot-close {
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
     }
 
-    /* メッセージエリア - スクロール最適化 */
     .chatbot-messages {
-        padding: 1.5rem 1.25rem;
-        gap: 1rem;
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        /* iOS Safari スムーススクロール */
-        -webkit-overflow-scrolling: touch;
-        /* スクロールバー非表示 */
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        /* 背景色を明示 */
-        background: var(--white);
+        padding: 1.1rem;
+        gap: 0.7rem;
     }
 
-    .chatbot-messages::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* メッセージバブル - プロフェッショナル品質 */
-    .chat-message {
-        max-width: 85%;
-        font-size: 1rem; /* 16px - 可読性確保 */
-        line-height: 1.6;
-        padding: 0.875rem 1rem;
-        border-radius: 18px;
-        word-wrap: break-word;
-        word-break: break-word;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-        margin-bottom: 0.75rem;
-    }
-
-    /* ボットメッセージ - 立体感 */
-    .bot {
-        border-bottom-left-radius: 4px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    /* ユーザーメッセージ - 立体感 */
-    .user {
-        border-bottom-right-radius: 4px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-    }
-
-    /* 入力エリア - キーボード最適化 */
     .chatbot-input {
-        padding: 1rem 1.25rem;
-        padding-bottom: max(1rem, env(safe-area-inset-bottom)); /* iOS ホームバー対応 */
+        padding: 0.85rem;
         background: var(--white);
         position: relative;
         z-index: 10;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-        flex-shrink: 0;
-        /* iOS キーボード対応 */
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        padding-bottom: 1.1rem;
     }
 
-    /* 入力フィールド - LINE品質: モバイル最適化 */
     .chatbot-input input {
-        height: 44px; /* タッチターゲット最適化 */
-        padding: 0.75rem 1rem;
-        font-size: 16px; /* iOS Safariズーム防止（16px以上必須） */
-        border-radius: 24px;
-        border: 2px solid #e8e8e8;
-        background: #ffffff;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        /* iOS デフォルトスタイルリセット */
-        -webkit-appearance: none;
-        appearance: none;
-        /* タッチフィードバック */
-        transition: all 0.2s ease;
+        height: 36px;
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
     }
 
-    .chatbot-input input:focus {
-        border-color: #3a5feb;
-        background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(58, 95, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1);
-        /* iOS キーボード表示時のズーム防止 */
-        font-size: 16px;
-    }
-
-    .chatbot-input input::placeholder {
-        color: rgba(0, 0, 0, 0.4);
-        font-size: 16px;
-    }
-
-    /* 送信ボタン - タッチ最適化 */
     .chatbot-send {
-        width: 44px; /* タッチターゲット最適化 */
-        height: 44px;
-        min-width: 44px;
-        margin-left: 0.75rem;
-        flex-shrink: 0;
-    }
-
-    .chatbot-send:active {
-        transform: scale(0.92);
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        margin-left: 0.4rem;
     }
 
     .chatbot-send i {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 
-    /* CTA ボタン - タッチ最適化 */
-    .chat-message a[href*="contact.html"] {
-        padding: 16px 32px !important;
-        font-size: 1rem !important;
-        min-height: 48px !important;
-        border-radius: 12px !important;
-        /* タッチフィードバック */
-        transition: all 0.2s ease !important;
-    }
-
-    .chat-message a[href*="contact.html"]:active {
-        transform: scale(0.97) !important;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
-    }
-
-    /* ========================================================
-       ▼ iOS Keyboard Optimization (Critical UX Fix)
-       モバイルキーボード表示時の致命的レイアウト問題を修正
-       ======================================================== */
-
-    /* iOS キーボード表示時のチャットウィンドウ高さ調整 */
-    .chatbot-window.active {
-        /* Visual Viewport対応: キーボード分を引いた高さに調整 */
-        min-height: 0;
-        max-height: 100vh;
-        max-height: 100dvh;
-    }
-
-    /* iOS キーボード表示時: メッセージエリアの最小高さ確保 */
-    .chatbot-window.active .chatbot-messages {
-        flex: 1 1 auto;
-        min-height: 200px; /* 最低限のメッセージ表示領域確保 */
-        max-height: calc(100vh - 180px); /* ヘッダー + 入力欄を引いた高さ */
-        max-height: calc(100dvh - 180px);
-    }
-
-    /* 入力フォーカス時: より積極的な領域確保 */
-    .chatbot-input input:focus {
-        /* iOS Safari: 入力フィールドが見えるようにスクロール */
-        scroll-margin-bottom: 20px;
-    }
-
-    /* iOS キーボードツールバー対策 */
-    @supports (-webkit-touch-callout: none) {
-        .chatbot-window.active {
-            /* iOS Safariのキーボードツールバー分を考慮 */
-            padding-bottom: env(safe-area-inset-bottom, 0);
-        }
+    .chat-message {
+        max-width: 85%;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
     }
 }
 
