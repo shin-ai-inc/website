@@ -71,7 +71,12 @@ app.use(helmet());
 // CORS configuration
 const allowedOrigins = process.env.FRONTEND_URL
     ? [process.env.FRONTEND_URL]
-    : ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'];
+    : [
+        'http://localhost:3000',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500',
+        'https://shin-ai-inc.github.io'  // GitHub Pages
+    ];
 
 app.use(cors({
     origin: function(origin, callback) {
@@ -79,6 +84,7 @@ app.use(cors({
         if (!origin) return callback(null, true);
 
         if (allowedOrigins.indexOf(origin) === -1) {
+            console.warn('[CORS] Request from unauthorized origin:', origin);
             return callback(new Error('CORS policy violation'), false);
         }
         return callback(null, true);
