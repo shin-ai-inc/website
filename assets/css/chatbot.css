@@ -449,16 +449,20 @@ AUTHOR: ShinAI Development Team
         font-size: 1.2rem;
     }
 
-    /* モバイルでは下部フルスクリーン展開 */
+    /* モバイルでは完全フルスクリーン展開 */
     .chatbot-window {
         position: fixed;
+        top: 0;
         right: 0;
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 60%;
-        border-radius: 15px 15px 0 0;
-        transform-origin: bottom center;
+        max-width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        border-radius: 0;
+        transform-origin: center;
+        overflow-x: hidden; /* 横スクロール防止 */
     }
 
     .chatbot-header {
@@ -479,6 +483,10 @@ AUTHOR: ShinAI Development Team
     .chatbot-messages {
         padding: 1.1rem;
         gap: 0.7rem;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden; /* 横スクロール防止 */
+        max-width: 100%;
     }
 
     .chatbot-input {
@@ -486,13 +494,20 @@ AUTHOR: ShinAI Development Team
         background: var(--white);
         position: relative;
         z-index: 10;
-        padding-bottom: 1.1rem;
+        padding-bottom: max(0.85rem, env(safe-area-inset-bottom)); /* iOS安全領域対応 */
+        flex-shrink: 0;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .chatbot-input input {
         height: 36px;
         padding: 0.5rem 0.7rem;
-        font-size: 0.9rem;
+        font-size: 16px; /* iOS zoom防止 */
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .chatbot-send {
@@ -500,6 +515,7 @@ AUTHOR: ShinAI Development Team
         height: 36px;
         min-width: 36px;
         margin-left: 0.4rem;
+        flex-shrink: 0;
     }
 
     .chatbot-send i {
@@ -508,8 +524,11 @@ AUTHOR: ShinAI Development Team
 
     .chat-message {
         max-width: 85%;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         padding: 0.5rem 0.7rem;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 }
 
