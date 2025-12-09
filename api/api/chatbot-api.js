@@ -235,17 +235,18 @@ app.post('/api/chatbot', async (req, res) => {
         // Step 4: Response Generation (RAG統合)
         // ========================================
 
-        const response = await ragSystem.generateRAGResponse(message, sessionId);
+        const ragResponse = await ragSystem.generateRAGResponse(message, sessionId);
 
         // ========================================
-        // Step 5: Send Response
+        // Step 5: Send Response (正しい構造で返却)
         // ========================================
 
         return fixedTimeResponse(requestStartTime, () => {
             res.json({
                 success: true,
-                response: response,
-                sessionId: sessionId
+                response: ragResponse.response || ragResponse,  // 文字列 or オブジェクトに対応
+                sessionId: sessionId,
+                cta: ragResponse.cta || null  // CTA情報（存在する場合）
             });
         });
 
