@@ -536,106 +536,197 @@ AUTHOR: ShinAI Development Team
 }
 
 /* ========================================================
-   ▼ Responsive Design Component - Mobile Optimization
-   モバイル最適化 - 小画面でのユーザビリティ確保
+   ▼ Responsive Design Component - Professional Mobile UX
+   プロフェッショナルモバイル最適化 - 最高のユーザビリティ
 
-   DESIGN NOTE:
-   - フルスクリーンモードで画面を最大活用
-   - タッチ操作に適したボタンサイズ調整
-   - 余白を最適化しつつ可読性を維持
+   DESIGN PHILOSOPHY:
+   - 完全フルスクリーン: 画面領域の最大活用
+   - タッチ最適化: 最低44px×44pxタップターゲット
+   - 可読性重視: 16px以上のフォントサイズ
+   - スムーズスクロール: ネイティブアプリ品質
+   - キーボード対応: iOS/Android完全サポート
    ======================================================== */
 @media (max-width: 768px) {
+    /* チャットボタン - モバイル最適化 */
     .chatbot {
-        bottom: 16px;
-        right: 16px;
+        bottom: 20px;
+        right: 20px;
     }
 
     .chatbot-button {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
-    /* モバイル版チャットボット最適化 - 既存ページ背景視認可能 */
+    /* チャットウィンドウ - 完全フルスクリーン */
     .chatbot-window {
         position: fixed;
-        top: 10vh;
+        top: 0;
         right: 0;
         left: 0;
         bottom: 0;
         width: 100%;
         max-width: 100%;
-        height: auto;
-        border-radius: 20px 20px 0 0;
-        transform-origin: bottom center;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        height: 100vh;
+        height: 100dvh; /* Dynamic Viewport Height (iOS Safari対応) */
+        border-radius: 0;
+        transform-origin: center;
+        box-shadow: none;
         margin: 0;
         background: var(--white);
-        display: none; /* デフォルトは非表示 */
+        display: none;
         flex-direction: column;
+        /* iOS Safari スクロール最適化 */
+        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
     }
 
-    /* モバイル版でもactiveクラスが必須 */
     .chatbot-window.active {
         display: flex !important;
     }
 
+    /* ヘッダー - タッチ最適化 */
     .chatbot-header {
-        padding: 1rem 1.2rem;
-        border-radius: 20px 20px 0 0;
+        padding: 1rem 1.5rem;
+        border-radius: 0;
         flex-shrink: 0;
+        /* iOS Safari ノッチ対応 */
+        padding-top: max(1rem, env(safe-area-inset-top));
+        min-height: 60px;
     }
 
     .chatbot-header h3 {
-        font-size: 0.95rem;
-        gap: 0.6rem;
+        font-size: 1.1rem;
+        gap: 0.75rem;
+        font-weight: 600;
     }
 
+    /* 閉じるボタン - タッチ最適化（最低44px×44px） */
     .chatbot-close {
-        width: 26px;
-        height: 26px;
-        font-size: 0.8rem;
-    }
-
-    .chatbot-messages {
-        padding: 1.1rem;
-        gap: 0.7rem;
-        flex: 1;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .chatbot-input {
-        padding: 0.85rem;
-        background: var(--white);
-        position: sticky;
-        bottom: 0;
-        z-index: 10;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.25);
         flex-shrink: 0;
     }
 
-    .chatbot-input input {
-        height: 36px;
-        padding: 0.5rem 0.7rem;
-        font-size: 0.9rem;
+    .chatbot-close:active {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(0.95);
     }
 
+    /* メッセージエリア - スクロール最適化 */
+    .chatbot-messages {
+        padding: 1.5rem 1.25rem;
+        gap: 1rem;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* iOS Safari スムーススクロール */
+        -webkit-overflow-scrolling: touch;
+        /* スクロールバー非表示 */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        /* 背景色を明示 */
+        background: var(--white);
+    }
+
+    .chatbot-messages::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* メッセージバブル - 可読性最適化 */
+    .chat-message {
+        max-width: 85%;
+        font-size: 1rem; /* 16px - 可読性確保 */
+        line-height: 1.6;
+        padding: 0.875rem 1rem;
+        border-radius: 16px;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    /* ボットメッセージ - 視認性向上 */
+    .bot {
+        border-bottom-left-radius: 4px;
+    }
+
+    /* ユーザーメッセージ - 視認性向上 */
+    .user {
+        border-bottom-right-radius: 4px;
+    }
+
+    /* 入力エリア - キーボード最適化 */
+    .chatbot-input {
+        padding: 1rem 1.25rem;
+        padding-bottom: max(1rem, env(safe-area-inset-bottom)); /* iOS ホームバー対応 */
+        background: var(--white);
+        position: relative;
+        z-index: 10;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        flex-shrink: 0;
+        /* iOS キーボード対応 */
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 入力フィールド - タップ・入力最適化 */
+    .chatbot-input input {
+        height: 44px; /* タッチターゲット最適化 */
+        padding: 0.75rem 1rem;
+        font-size: 16px; /* iOS Safariズーム防止（16px以上必須） */
+        border-radius: 22px;
+        border: 1.5px solid rgba(0, 0, 0, 0.12);
+        /* iOS デフォルトスタイルリセット */
+        -webkit-appearance: none;
+        appearance: none;
+        /* タッチフィードバック */
+        transition: all 0.2s ease;
+    }
+
+    .chatbot-input input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(58, 95, 235, 0.12);
+        /* iOS キーボード表示時のズーム防止 */
+        font-size: 16px;
+    }
+
+    .chatbot-input input::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 16px;
+    }
+
+    /* 送信ボタン - タッチ最適化 */
     .chatbot-send {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-        margin-left: 0.4rem;
+        width: 44px; /* タッチターゲット最適化 */
+        height: 44px;
+        min-width: 44px;
+        margin-left: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .chatbot-send:active {
+        transform: scale(0.92);
     }
 
     .chatbot-send i {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
-    .chat-message {
-        max-width: 85%;
-        font-size: 0.85rem;
-        padding: 0.5rem 0.7rem;
+    /* CTA ボタン - タッチ最適化 */
+    .chat-message a[href*="contact.html"] {
+        padding: 16px 32px !important;
+        font-size: 1rem !important;
+        min-height: 48px !important;
+        border-radius: 12px !important;
+        /* タッチフィードバック */
+        transition: all 0.2s ease !important;
+    }
+
+    .chat-message a[href*="contact.html"]:active {
+        transform: scale(0.97) !important;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
     }
 }
 
