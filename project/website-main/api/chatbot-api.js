@@ -69,6 +69,7 @@ const homepageRateLimiter = new HomepageRateLimiter();
 const allowedOrigins = process.env.FRONTEND_URL
     ? [process.env.FRONTEND_URL]
     : [
+        'https://shin-ai-inc.github.io',  // GitHub Pages (Production)
         'http://localhost:3000',
         'http://localhost:5500',
         'http://localhost:8080',  // Python HTTP Server
