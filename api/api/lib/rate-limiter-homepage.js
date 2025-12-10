@@ -55,12 +55,12 @@ class HomepageRateLimiter {
                 maxLength: 1000             // 最大1000文字 (一般的な問い合わせ50-200文字)
             },
 
-            // 不審行動検知閾値
+            // 不審行動検知閾値 (開発期間中は緩和設定)
             suspicion: {
-                rapidMessages: 5,           // 1分以内5メッセージで警告
-                identicalMessages: 3,       // 同一メッセージ3回で警告
-                longMessages: 5,            // 400文字超メッセージ5回で警告
-                autoBlockThreshold: this.isTestEnvironment ? Infinity : 80  // テスト環境では無効化
+                rapidMessages: 10,          // 1分以内10メッセージで警告（開発中: 5→10）
+                identicalMessages: 5,       // 同一メッセージ5回で警告（開発中: 3→5）
+                longMessages: 8,            // 400文字超メッセージ8回で警告（開発中: 5→8）
+                autoBlockThreshold: this.isTestEnvironment ? Infinity : 150  // 開発中: 80→150
             }
         };
 
