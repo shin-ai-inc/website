@@ -759,7 +759,98 @@ const allowedOrigins = [
 - 自動デプロイ: mainブランチプッシュ時
 - Node.js Runtime
 
-### 12.6 今後の拡張予定
+### 12.6 Phase 2.1実装記録 (2025-12-10)
+
+#### 12.6.1 CTAスコアリングアルゴリズム実装
+**ファイル**: `assets/js/chatbot.js` - `shouldShowCTA()` function
+
+**アルゴリズム構成**:
+- **Layer 1**: 明示的誘導フレーズ検出 (+100点)
+  - 「お問い合わせページ」「無料相談でお気軽に」等
+- **Layer 2**: サービス詳細要求検出 (+60点)
+  - 「導入支援」「カスタマイズ」「御社の」等
+- **Layer 3**: 技術的相談検出 (+50点)
+  - 「どのように実装」「課題解決」「最適な方法」等
+- **Layer 4**: 一般質問検出 (+30点)
+  - 「料金」「価格」「費用」「期間」「実績」等
+- **除外パターン**: 挨拶・雑談検出 (-100点)
+  - 挨拶応答パターンを検出し、CTA表示を抑制
+
+**判定基準**: スコア ≥ 70点 → CTA表示
+**コンソールログ**: デバッグ用スコアリング詳細出力
+
+#### 12.6.2 統合的人間認識・行動モデル v4.0 適用
+**ファイル**: `api/api/lib/simple-rag-system.js` - `buildSystemPrompt()` function
+
+**5ステップ説得モデル**:
+1. **第一印象形成** (First Impression)
+   - 時間帯中立の挨拶
+   - 温かく、押しつけがましくないトーン
+
+2. **信頼構築と共感形成** (Trust & Empathy)
+   - アクティブリスニング技法
+   - ペーシング（ユーザーのペースに合わせる）
+   - 共感的応答パターン
+
+3. **合理的説得** (Rational Persuasion)
+   - 直接回答の原則（質問に先に答える）
+   - 事実・データ基づいた価値提案
+   - 実績・証拠の提示
+
+4. **意思決定促進** (Decision Facilitation)
+   - 選択肢の提示
+   - メリット・デメリット明示
+   - 質問促進
+
+5. **行動促進** (Action Prompting)
+   - CTAスコアリングアルゴリズムと連動
+   - 適切なタイミングでお問い合わせ誘導
+   - 自然で強制的でない言語表現
+
+**RAGシステム仕様明示**:
+- ハイブリッド検索説明 (Vector 70% + Keyword 30%)
+- LLM Reranking (GPT-4o-mini)
+- Embedding Model (text-embedding-3-small)
+
+#### 12.6.3 ディレクトリ構造クリーンアップ
+**実施日**: 2025-12-10
+
+**削除対象**:
+- `project/website-main/` ディレクトリ全体 (91ファイル, 52,585行削除)
+- `.github/workflows/sync-to-root.yml` ワークフロー
+
+**理由**:
+- 重複したディレクトリ構造の解消
+- 古いバージョン（chatbot.js v4.4）が含まれていた
+- 最終自動同期: 2025-12-09, 以降更新なし
+
+**改善後の構造**:
+- ルートディレクトリのみが唯一のソース
+- 単一の真実の源 (Single Source of Truth)
+- デプロイメント簡素化
+
+#### 12.6.4 API URL統一
+**実施日**: 2025-12-10
+
+**統一URL**: `https://api-4skwx1wmn-massaa39s-projects.vercel.app`
+
+**対象ファイル** (全HTMLファイル):
+- `index.html`
+- `about.html`
+- `services.html`
+- `faq.html`
+- `industries.html`
+
+**更新箇所**:
+1. `window.CHATBOT_API_URL` 設定
+2. CSP (Content Security Policy) `connect-src` ディレクティブ
+
+**効果**:
+- 全ページで統一されたAPI接続
+- CORS設定の一貫性確保
+- デバッグの簡素化
+
+### 12.7 今後の拡張予定
 
 #### Phase 2.5: Knowledge Base大幅拡充
 - 導入事例集追加 (5件)
@@ -771,9 +862,14 @@ const allowedOrigins = [
 - マルチモーダルRAG (画像・PDF対応)
 - パーソナライゼーション (ユーザー履歴活用)
 
+#### Phase 3.1: 2層モデルアーキテクチャ検討
+- **表層**: gpt-4o-mini (ユーザー対面チャットボット)
+- **裏層**: gpt-5-nano (内部処理・ログ要約・意図分類)
+- コスト最適化と処理速度向上
+
 ---
 
 **最終更新日**: 2025-12-10
 **更新者**: Claude Sonnet 4.5 (AGI Assistant)
-**実装完了度**: Phase 2.0 完了 (85-95%精度達成)
+**実装完了度**: Phase 2.1 完了 (CTA最適化 + v4.0システムプロンプト)
 **Constitutional AI準拠**: 99.5%+
