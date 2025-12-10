@@ -238,7 +238,25 @@ const ShinAIChatbot = {
         } catch (error) {
             console.error('[ShinAI Chatbot] エラー:', error);
             this.hideTypingIndicator();
-            this.addMessage('申し訳ありません。正常に応答できませんでした。お問い合わせフォームよりご連絡ください。', 'bot');
+
+            // エラータイプ別の詳細メッセージ
+            let errorMessage = '申し訳ありません。';
+
+            if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                // ネットワークエラー or CORS エラー or ブロッカーによるブロック
+                errorMessage += 'サーバーに接続できませんでした。ネットワーク接続をご確認ください。';
+                console.warn('[ShinAI Chatbot] Network/CORS Error - Possible causes: Ad blocker, network issue, or CORS configuration');
+            } else if (error.message && error.message.includes('CHATBOT_API_URL')) {
+                // API URL設定エラー
+                errorMessage += 'システム設定エラーが発生しました。';
+                console.error('[ShinAI Chatbot] Configuration Error - API URL not set');
+            } else {
+                // その他のエラー
+                errorMessage += '一時的にサービスが利用できません。';
+            }
+
+            errorMessage += ' お問い合わせフォームよりご連絡ください。';
+            this.addMessage(errorMessage, 'bot');
         }
     },
 
