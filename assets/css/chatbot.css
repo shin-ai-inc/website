@@ -449,7 +449,7 @@ AUTHOR: ShinAI Development Team
         font-size: 1.2rem;
     }
 
-    /* モバイルでは完全フルスクリーン展開 */
+    /* モバイルでは完全フルスクリーン展開（ヘッダー回避対応） */
     .chatbot-window {
         position: fixed;
         top: 0;
@@ -464,6 +464,8 @@ AUTHOR: ShinAI Development Team
         transform-origin: center;
         overflow: hidden;
         overflow-x: hidden; /* 横スクロール防止 */
+        /* iOS Safari対応 - セーフエリア確保 */
+        padding-top: env(safe-area-inset-top, 0);
     }
 
     .chatbot-window.active {
@@ -478,6 +480,11 @@ AUTHOR: ShinAI Development Team
         display: flex;
         align-items: center;
         justify-content: space-between;
+        /* モバイルでヘッダー固定 - スクロール時も常に表示 */
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: linear-gradient(135deg, #3a5feb 0%, #5271ff 100%);
     }
 
     .chatbot-header h3 {
