@@ -57,7 +57,7 @@ class HomepageRateLimiter {
 
             // 不審行動検知閾値 (開発期間中は緩和設定)
             suspicion: {
-                rapidMessages: 10,          // 1分以内10メッセージで警告（開発中: 5→10）
+                rapidMessages: 20,          // 1分以内20メッセージで警告（開発中: 5→20）
                 identicalMessages: 5,       // 同一メッセージ5回で警告（開発中: 3→5）
                 longMessages: 8,            // 400文字超メッセージ8回で警告（開発中: 5→8）
                 autoBlockThreshold: this.isTestEnvironment ? Infinity : 150  // 開発中: 80→150
