@@ -315,14 +315,27 @@ const ShinAIChatbot = {
     },
 
     /**
-     * CTA表示判定
-     * LLMが明示的にお問い合わせを推奨している場合のみtrueを返す
+     * CTA表示判定 - スコアリングアルゴリズム
+     * ==============================================
+     * LLMの応答テキストを分析し、確度スコアに基づいてCTA表示を判定
      *
-     * 重要：単にキーワードが含まれるだけでは不十分
-     * 「お問い合わせページ」「無料相談」などの明示的な誘導フレーズが必要
+     * アルゴリズム構成:
+     * 1. 明示的誘導フレーズ検出（高確度: +100点）
+     * 2. サービス詳細要求検出（中確度: +60点）
+     * 3. 技術的相談検出（中確度: +50点）
+     * 4. 一般質問検出（低確度: +30点）
+     * 5. 除外パターン検出（確度低下: -100点）
+     *
+     * 判定基準: スコア ≥ 70点 → CTA表示
+     * ==============================================
      */
     shouldShowCTA: function(responseText) {
-        // 明示的な誘導フレーズのみを検出
+        let score = 0;
+        const text = responseText.toLowerCase();
+
+        // ==============================================
+        // スコアリング Layer 1: 明示的誘導フレーズ（+100点）
+        // ==============================================
         const explicitCTAPhrases = [
             'お問い合わせページ',
             '無料相談でお気軽に',
@@ -335,8 +348,109 @@ const ShinAIChatbot = {
             '無料相談をご利用'
         ];
 
-        // これらのフレーズが含まれる場合のみCTA表示
-        return explicitCTAPhrases.some(phrase => responseText.includes(phrase));
+        for (const phrase of explicitCTAPhrases) {
+            if (responseText.includes(phrase)) {
+                score += 100;
+                console.log('[CTA Scoring] 明示的誘導フレーズ検出:', phrase, '+100点');
+                break; // 1つでも見つかれば十分
+            }
+        }
+
+        // ==============================================
+        // スコアリング Layer 2: サービス詳細要求（+60点）
+        // ==============================================
+        const serviceInquiryPhrases = [
+            '導入支援',
+            'カスタマイズ',
+            '御社の',
+            '貴社の',
+            '具体的な事例',
+            '詳しくお聞かせ',
+            '詳細を伺',
+            '詳しく知りたい',
+            'もっと詳しく'
+        ];
+
+        for (const phrase of serviceInquiryPhrases) {
+            if (text.includes(phrase)) {
+                score += 60;
+                console.log('[CTA Scoring] サービス詳細要求検出:', phrase, '+60点');
+                break;
+            }
+        }
+
+        // ==============================================
+        // スコアリング Layer 3: 技術的相談・課題解決（+50点）
+        // ==============================================
+        const technicalConsultationPhrases = [
+            'どのように実装',
+            'どう進めれば',
+            '課題解決',
+            '最適な方法',
+            'アプローチ',
+            '設計',
+            'アーキテクチャ',
+            'ご提案'
+        ];
+
+        for (const phrase of technicalConsultationPhrases) {
+            if (text.includes(phrase)) {
+                score += 50;
+                console.log('[CTA Scoring] 技術的相談検出:', phrase, '+50点');
+                break;
+            }
+        }
+
+        // ==============================================
+        // スコアリング Layer 4: 一般質問（+30点）
+        // ==============================================
+        const generalInquiryPhrases = [
+            '料金',
+            '価格',
+            '費用',
+            '期間',
+            'スケジュール',
+            '実績',
+            '事例'
+        ];
+
+        for (const phrase of generalInquiryPhrases) {
+            if (text.includes(phrase)) {
+                score += 30;
+                console.log('[CTA Scoring] 一般質問検出:', phrase, '+30点');
+                break;
+            }
+        }
+
+        // ==============================================
+        // 除外パターン: CTA不要シーン（-100点）
+        // ==============================================
+        const excludePatterns = [
+            /^(こんにちは|こんばんは|おはよう|はじめまして|ありがとう)/,
+            /^(ようこそ|本日はご訪問)/,
+            /どういたしまして/,
+            /お役に立てれば幸いです$/,
+            /何かお知りになりたいことはございますか/
+        ];
+
+        for (const pattern of excludePatterns) {
+            if (pattern.test(responseText)) {
+                score -= 100;
+                console.log('[CTA Scoring] 除外パターン検出:', pattern, '-100点');
+                break;
+            }
+        }
+
+        // ==============================================
+        // 最終判定
+        // ==============================================
+        const threshold = 70; // 閾値: 70点以上でCTA表示
+        const shouldShow = score >= threshold;
+
+        console.log('[CTA Scoring] 最終スコア:', score, '点 / 閾値:', threshold, '点');
+        console.log('[CTA Scoring] CTA表示:', shouldShow ? 'YES ✅' : 'NO ❌');
+
+        return shouldShow;
     },
 
     /**
