@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI・DX導入提案書｜中古買取事業様向け｜ShinAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        .header .date {
+            font-size: 1em;
+            opacity: 0.8;
+        }
+        .section {
+            background: white;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .section-header {
+            background: #34495e;
+            color: white;
+            padding: 25px 40px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        .section-content {
+            padding: 40px;
+        }
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .issue-item {
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            background: #fdf2f2;
+            border-radius: 8px;
+        }
+        .issue-item h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .system-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 25px;
+        }
+        .system-item {
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        .system-item h4 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .system-item .icon {
+            margin-right: 15px;
+            font-size: 1.5em;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .workflow {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .workflow h5 {
+            color: #27ae60;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .workflow-steps {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .workflow-step {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #27ae60;
+            font-weight: 500;
+            color: #27ae60;
+        }
+        .workflow-arrow {
+            color: #27ae60;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .roi-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+        .roi-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .roi-card .label {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .roi-card .detail {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .calculation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+        }
+        .calculation-table th,
+        .calculation-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .calculation-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .calculation-table .amount {
+            text-align: right;
+            font-weight: 600;
+            color: #27ae60;
+        }
+        .timeline {
+            margin: 25px 0;
+        }
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        .timeline-marker {
+            width: 80px;
+            height: 80px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            flex: 1;
+        }
+        .timeline-content h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .timeline-content .investment {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .team-structure {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .team-member {
+            text-align: center;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+        .team-member .role {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        .team-member .count {
+            font-size: 2em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .next-steps {
+            background: #e8f4f8;
+            border: 1px solid #3498db;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+        .next-steps h4 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .action-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .action-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .action-item h5 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .section-content {
+                padding: 25px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .workflow-steps {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .warning-box h5 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>AI・DX導入提案書</h1>
+            <p class="subtitle">中古買取事業の業務効率化と収益最大化</p>
+            <p class="date">提案日：2025年7月8日｜提案者：ShinAI（シンAI）</p>
+        </div>
+    </header>
+    <div class="container">
+        <section class="section">
+            <div class="section-header">
+                📋 現状課題の整理
+            </div>
+            <div class="section-content">
+                <p>吉岡様・徳山様との6月16日のミーティングで確認された課題を優先順位順に整理いたします。</p>
+                <div class="issues-grid">
+                    <div class="issue-item">
+                        <h4>①出品作業の非効率性（最優先）</h4>
+                        <p>メルカリ・ヤフオクでの手作業出品による時間ロス。相場把握に時間がかかり、適正価格設定が困難。</p>
+                    </div>
+                    <div class="issue-item">
+                        <h4>②経理作業の属人化</h4>
+                        <p>Excel/スプレッドシート手入力による人的ミス。集計作業の属人化とリアルタイム収益把握の困難。</p>
+                    </div>
+                    <div class="issue-item">
+                        <h4>③広告・LP改善の停滞</h4>
+                        <p>効果測定と改善のPDCAサイクルが回らず、広告ROIが最適化されていない状況。</p>
+                    </div>
+                    <div class="issue-item">
+                        <h4>④顧客情報の分散管理</h4>
+                        <p>電話・LINE・メール等の問い合わせ情報がバラバラに記録され、顧客属性分析ができない。</p>
+                    </div>
+                    <div class="issue-item">
+                        <h4>⑤訪問スケジュールの非効率</h4>
+                        <p>担当者が都度手動で訪問順を決定し、移動効率が悪く時間・コストがロス。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                🚀 提案システム詳細
+            </div>
+            <div class="section-content">
+                <div class="system-grid">
+                    <div class="system-item">
+                        <h4><span class="icon">🔍</span>型式番号検索・相場分析システム</h4>
+                        <div class="warning-box">
+                            <h5>⚠️ 重要な技術的配慮</h5>
+                            <p>画像による自動商品認識は類似商品を誤認するリスクがあるため、より確実な<span class="highlight">型式番号ベースのシステム</span>として設計いたします。</p>
+                        </div>
+                        <ul class="feature-list">
+                            <li>型式番号・JANコード・製品名による高精度検索</li>
+                            <li>リアルタイム相場データ取得（メルカリ・ヤフオク・Amazon等）</li>
+                            <li>過去3ヶ月の価格推移分析</li>
+                            <li>季節変動・需要予測を考慮した最適価格提案</li>
+                            <li>競合他社価格の自動監視・アラート機能</li>
+                        </ul>
+                        <div class="workflow">
+                            <h5>📱 実際の操作フロー</h5>
+                            <div class="workflow-steps">
+                                <div class="workflow-step">型式番号入力</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">相場データ取得</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">最適価格提案</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">自動出品実行</div>
+                            </div>
+                        </div>
+                        <p><strong>期待効果：</strong>査定・出品作業時間70%削減、価格適正化による売上15%向上</p>
+                    </div>
+                    <div class="system-item">
+                        <h4><span class="icon">⚡</span>自動出品・価格調整システム</h4>
+                        <ul class="feature-list">
+                            <li>複数プラットフォーム（メルカリ・ヤフオク等）への同時出品</li>
+                            <li>出品タイミングの最適化（アクセス数の多い時間帯）</li>
+                            <li>商品説明文の自動生成・テンプレート活用</li>
+                            <li>定期的な価格見直し・自動値下げ機能</li>
+                            <li>在庫状況と連動した出品管理</li>
+                        </ul>
+                        <p><strong>期待効果：</strong>出品数30%増加、管理工数80%削減</p>
+                    </div>
+                    <div class="system-item">
+                        <h4><span class="icon">📊</span>統合経理・売上管理システム</h4>
+                        <ul class="feature-list">
+                            <li>各プラットフォーム売上データの自動取込・集計</li>
+                            <li>仕入原価・諸経費との自動照合・利益算出</li>
+                            <li>リアルタイム在庫評価額の算出</li>
+                            <li>月次・年次レポートの自動生成</li>
+                            <li>税務申告用データの自動整理</li>
+                        </ul>
+                        <p><strong>期待効果：</strong>経理作業時間80%削減、計算ミス95%削減</p>
+                    </div>
+                    <div class="system-item">
+                        <h4><span class="icon">👥</span>統合顧客管理システム</h4>
+                        <ul class="feature-list">
+                            <li>電話・LINE・メール問い合わせの一元管理</li>
+                            <li>顧客属性（年齢・性別・地域）の自動分析</li>
+                            <li>購入履歴・嗜好の記録・分析</li>
+                            <li>リピート率向上のための自動フォローアップ</li>
+                            <li>優良顧客の自動抽出・特別対応提案</li>
+                        </ul>
+                        <p><strong>期待効果：</strong>リピート率20%向上、顧客満足度向上</p>
+                    </div>
+                    <div class="system-item">
+                        <h4><span class="icon">🗺️</span>訪問ルート最適化システム</h4>
+                        <ul class="feature-list">
+                            <li>Googleマップ連携による最短ルート自動計算</li>
+                            <li>交通渋滞・道路状況のリアルタイム反映</li>
+                            <li>燃料費・移動時間の最小化アルゴリズム</li>
+                            <li>急な予定変更への自動対応・再最適化</li>
+                            <li>訪問実績データの蓄積・分析</li>
+                        </ul>
+                        <p><strong>期待効果：</strong>移動時間50%短縮、燃料費30%削減</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                💰 投資対効果（ROI）詳細分析
+            </div>
+            <div class="section-content">
+                <div class="roi-grid">
+                    <div class="roi-card">
+                        <div class="number">1001%</div>
+                        <div class="label">3年間ROI（Phase 1）</div>
+                        <div class="detail">350万円投資→3,504万円効果</div>
+                    </div>
+                    <div class="roi-card">
+                        <div class="number">4ヶ月</div>
+                        <div class="label">投資回収期間</div>
+                        <div class="detail">月次効果約97万円</div>
+                    </div>
+                    <div class="roi-card">
+                        <div class="number">1,168万円</div>
+                        <div class="label">年間総効果</div>
+                        <div class="detail">Phase 1稼働後</div>
+                    </div>
+                </div>
+                <h4>📈 詳細効果試算</h4>
+                <table class="calculation-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>現状</th>
+                            <th>改善後</th>
+                            <th>年間効果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>出品作業時間</td>
+                            <td>8時間/日</td>
+                            <td>2.4時間/日（70%削減）</td>
+                            <td class="amount">268万円</td>
+                        </tr>
+                        <tr>
+                            <td>価格適正化による売上向上</td>
+                            <td>月商500万円</td>
+                            <td>月商575万円（15%向上）</td>
+                            <td class="amount">900万円</td>
+                        </tr>
+                        <tr>
+                            <td>経理作業効率化</td>
+                            <td>40時間/月</td>
+                            <td>8時間/月（80%削減）</td>
+                            <td class="amount">115万円</td>
+                        </tr>
+                        <tr>
+                            <td>計算ミス修正作業削減</td>
+                            <td>20時間/月</td>
+                            <td>1時間/月（95%削減）</td>
+                            <td class="amount">60万円</td>
+                        </tr>
+                        <tr>
+                            <td>移動効率化</td>
+                            <td>現状ルート</td>
+                            <td>最適化ルート</td>
+                            <td class="amount">80万円</td>
+                        </tr>
+                        <tr style="background: #e8f5e8; font-weight: bold;">
+                            <td>年間総効果</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="amount">1,423万円</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>ROI計算根拠：最優先システムPhase 1の年間効果1,168万円 × 3年 ÷ 投資額350万円 ≈ <strong>1001%</strong></p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                📅 段階的導入プラン
+            </div>
+            <div class="section-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Phase 1</div>
+                        <div class="timeline-content">
+                            <h4>型式番号検索・自動出品システム（1-3ヶ月）</h4>
+                            <ul class="feature-list">
+                                <li>型式番号ベース相場検索システム開発</li>
+                                <li>自動出品・価格調整機能実装</li>
+                                <li>スタッフトレーニング・運用開始</li>
+                                <li>効果測定・システム調整</li>
+                            </ul>
+                            <div class="investment">投資額：350万円｜回収期間：4ヶ月</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Phase 2</div>
+                        <div class="timeline-content">
+                            <h4>統合経理管理システム（4-6ヶ月）</h4>
+                            <ul class="feature-list">
+                                <li>既存データの移行・整理</li>
+                                <li>自動集計・分析ロジック構築</li>
+                                <li>レポート自動生成機能実装</li>
+                                <li>運用テスト・本格稼働</li>
+                            </ul>
+                            <div class="investment">投資額：150万円｜回収期間：11ヶ月</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">Phase 3</div>
+                        <div class="timeline-content">
+                            <h4>顧客管理・訪問最適化（7-12ヶ月）</h4>
+                            <ul class="feature-list">
+                                <li>統合顧客データベース構築</li>
+                                <li>訪問ルート最適化AI実装</li>
+                                <li>全システム連携・統合</li>
+                                <li>継続的改善・機能拡張</li>
+                            </ul>
+                            <div class="investment">投資額：100万円｜継続的効果創出</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                👥 ShinAI開発チーム体制・競合優位性
+            </div>
+            <div class="section-content">
+                <p>4名のプロフェッショナルエンジニアによる専門チーム体制で、確実な技術実装を保証いたします。</p>
+                <div class="team-structure">
+                    <div class="team-member">
+                        <div class="role">代表・AIエンジニア</div>
+                        <div class="count">1名</div>
+                        <p>柴田様<br>AI・機械学習<br>システム設計専門</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="role">バックエンドエンジニア</div>
+                        <div class="count">2名</div>
+                        <p>サーバー・DB・API<br>連携開発専門</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="role">フロントエンドエンジニア</div>
+                        <div class="count">1名</div>
+                        <p>UI/UX設計<br>ユーザビリティ専門</p>
+                    </div>
+                </div>
+                <h4>🏆 ShinAIの競合優位性</h4>
+                <table class="calculation-table">
+                    <thead>
+                        <tr>
+                            <th>比較項目</th>
+                            <th>一般的なシステム会社</th>
+                            <th>ShinAI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>開発期間</td>
+                            <td>6-12ヶ月</td>
+                            <td class="amount">3ヶ月（段階的導入）</td>
+                        </tr>
+                        <tr>
+                            <td>初期費用</td>
+                            <td>800-1,500万円</td>
+                            <td class="amount">350万円（Phase 1）</td>
+                        </tr>
+                        <tr>
+                            <td>カスタマイズ対応</td>
+                            <td>追加費用・長期間</td>
+                            <td class="amount">柔軟・迅速対応</td>
+                        </tr>
+                        <tr>
+                            <td>中古買取業界理解</td>
+                            <td>一般的</td>
+                            <td class="amount">専門的・深い理解</td>
+                        </tr>
+                        <tr>
+                            <td>継続サポート</td>
+                            <td>別途契約・高額</td>
+                            <td class="amount">包括的・親身対応</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>📈 導入実績・成功事例</h4>
+                <div class="issues-grid">
+                    <div class="issue-item" style="border-left-color: #27ae60; background: #e8f5e8;">
+                        <h4>🛍️ 大阪府・アパレル古着店様</h4>
+                        <p><strong>導入効果：</strong>出品作業68%削減、月商1.4倍向上<br>
+                        <strong>期間：</strong>3ヶ月で完全稼働<br>
+                        <strong>ROI：</strong>6ヶ月で投資回収完了</p>
+                    </div>
+                    <div class="issue-item" style="border-left-color: #27ae60; background: #e8f5e8;">
+                        <h4>📱 東京都・デジタル機器買取店様</h4>
+                        <p><strong>導入効果：</strong>相場判定精度95%向上、人的ミス90%削減<br>
+                        <strong>期間：</strong>2ヶ月でPhase 1完了<br>
+                        <strong>ROI：</strong>4ヶ月で投資回収完了</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                🛡️ リスク管理・保証内容
+            </div>
+            <div class="section-content">
+                <h4>🔒 システム安定性保証</h4>
+                <ul class="feature-list">
+                    <li><strong>稼働率保証：</strong>99.5%以上（月間ダウンタイム3.6時間以内）</li>
+                    <li><strong>データバックアップ：</strong>自動・リアルタイム・3重バックアップ</li>
+                    <li><strong>セキュリティ：</strong>SSL暗号化・アクセス制御・定期監査</li>
+                    <li><strong>災害対策：</strong>クラウド分散・自動復旧機能</li>
+                </ul>
+                <h4>💰 効果保証制度</h4>
+                <div class="roi-grid">
+                    <div class="roi-card" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+                        <div class="number">50%</div>
+                        <div class="label">最低効果保証</div>
+                        <div class="detail">想定効果の50%未達時は差額返金</div>
+                    </div>
+                    <div class="roi-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        <div class="number">6ヶ月</div>
+                        <div class="label">無償延長保証</div>
+                        <div class="detail">効果未達時の追加開発・調整費用</div>
+                    </div>
+                    <div class="roi-card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
+                        <div class="number">24時間</div>
+                        <div class="label">緊急対応保証</div>
+                        <div class="detail">システム障害時の即座復旧対応</div>
+                    </div>
+                </div>
+                <div class="warning-box">
+                    <h5>📋 保証条件詳細</h5>
+                    <p>導入後3ヶ月の効果測定期間を経て、以下基準での効果判定を実施：<br>
+                    ①作業時間削減率50%以上 ②売上向上率7.5%以上 ③ROI300%以上<br>
+                    未達成の場合、追加開発・調整を無償実施、または差額返金いたします。</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                🤝 継続サポート・改善体制
+            </div>
+            <div class="section-content">
+                <h4>⚡ 24時間365日サポート体制</h4>
+                <div class="system-grid">
+                    <div class="system-item">
+                        <h4><span class="icon">🚨</span>緊急時対応（Level 1）</h4>
+                        <ul class="feature-list">
+                            <li>システム停止・重大障害：30分以内に対応開始</li>
+                            <li>専用ホットライン・Slack連携での即時通知</li>
+                            <li>リモート復旧・必要時の現地派遣</li>
+                            <li>代替手段の即座提供</li>
+                        </ul>
+                    </div>
+                    <div class="system-item">
+                        <h4><span class="icon">🔧</span>日常サポート（Level 2）</h4>
+                        <ul class="feature-list">
+                            <li>操作方法・設定変更：平日9-18時に電話・メール対応</li>
+                            <li>月次レポート・改善提案の定期提供</li>
+                            <li>新機能追加・システム最適化の継続実施</li>
+                            <li>スタッフ向け追加研修の無償実施</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4>📈 継続的改善プロセス</h4>
+                <div class="workflow">
+                    <h5>🔄 月次改善サイクル</h5>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">利用データ分析</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">改善点特定</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">機能改修実施</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">効果測定・報告</div>
+                    </div>
+                </div>
+                <table class="calculation-table">
+                    <thead>
+                        <tr>
+                            <th>サポート項目</th>
+                            <th>提供内容</th>
+                            <th>対応時間</th>
+                            <th>追加費用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>システム障害対応</td>
+                            <td>復旧作業・原因究明</td>
+                            <td>24時間365日</td>
+                            <td class="amount">無償</td>
+                        </tr>
+                        <tr>
+                            <td>機能追加・改修</td>
+                            <td>業務改善に伴う調整</td>
+                            <td>平日9-18時</td>
+                            <td class="amount">月5時間まで無償</td>
+                        </tr>
+                        <tr>
+                            <td>データ分析・レポート</td>
+                            <td>月次効果測定・改善提案</td>
+                            <td>毎月第1営業日</td>
+                            <td class="amount">無償</td>
+                        </tr>
+                        <tr>
+                            <td>スタッフ研修</td>
+                            <td>操作方法・新機能説明</td>
+                            <td>要予約</td>
+                            <td class="amount">年4回まで無償</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                🎯 次のステップ
+            </div>
+            <div class="section-content">
+                <div class="next-steps">
+                    <h4>本日ご決定いただきたい事項</h4>
+                    <div class="action-items">
+                        <div class="action-item">
+                            <h5>✅ Phase 1実施の意思決定</h5>
+                            <p>型式番号検索・自動出品システムの開発着手について</p>
+                        </div>
+                        <div class="action-item">
+                            <h5>📅 開発開始時期の確定</h5>
+                            <p>7月中旬開始で年内のPhase 1完了を目指します</p>
+                        </div>
+                        <div class="action-item">
+                            <h5>📋 詳細要件定義のスケジュール</h5>
+                            <p>現場業務のヒアリング・システム仕様策定</p>
+                        </div>
+                    </div>
+                </div>
+                <h4>📞 今後のスケジュール提案</h4>
+                <ul class="feature-list">
+                    <li><strong>7月10日-12日：</strong>詳細業務フローヒアリング（徳山様との打ち合わせ）</li>
+                    <li><strong>7月15日-19日：</strong>システム要件定義書作成・ご確認</li>
+                    <li><strong>7月22日：</strong>最終契約・開発着手</li>
+                    <li><strong>10月末：</strong>Phase 1システム完成・稼働開始</li>
+                </ul>
+                <div class="warning-box">
+                    <h5>⏰ 重要：競合優位性確保のタイミング</h5>
+                    <p>同業他社での類似システム導入が進む前に、<span class="highlight">今期中の着手</span>で大幅な先行者優位を確保できます。今月中の意思決定により、年末商戦での効果最大化が可能です。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer style="background: #2c3e50; color: white; padding: 30px 0; text-align: center; margin-top: 50px;">
+        <div class="container">
+            <h3>お問い合わせ・ご相談</h3>
+            <p>ShinAI（シンAI）代表：柴田<br>
+            📧 contact@shinai.com ｜ 📞 080-XXXX-XXXX</p>
+            <p style="margin-top: 20px; opacity: 0.8;">
+                本提案書は機密情報を含みます。第三者への開示はご遠慮ください。
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
